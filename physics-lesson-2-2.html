@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physics II – Lesson 2.2 Acceleration | Lincoln International Academy</title>
+<meta name="description" content="Interactive study page for Lesson 2.2: Acceleration – average acceleration, velocity-time graphs and the kinematic equations for constant acceleration.">
+<link rel="stylesheet" href="assets/lia.css">
+<style>
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{appearance:none;border:0;background:none;font:inherit;font-weight:700;padding:8px 18px;cursor:pointer;color:var(--ink);min-width:54px;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink)}
+.ctlrow{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:8px 0}
+.ctlrow label.l{font-weight:600;min-width:100px}
+svg.vt{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+svg.vt text{fill:var(--muted);font:600 11px system-ui,sans-serif}
+svg.vt .lbl{fill:var(--ink)}
+svg.vt .axis{stroke:var(--muted);stroke-width:1.4}
+svg.vt .grid{stroke:var(--line);stroke-width:1}
+select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.vartable{width:100%;max-width:520px}
+.vartable td{padding:6px 10px}
+.vartable td:first-child{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.1rem}
+.eqcard{background:var(--blue-soft);border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin-top:10px}
+tr.hl td{background:var(--accent-soft);font-weight:700}
+.subhead{margin:26px 0 10px;font-size:1rem;font-family:system-ui,sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--primary);border-bottom:2px solid var(--line);padding-bottom:4px}
+.fig{margin:10px 0 6px}
+.figcap{font-size:.82rem;color:var(--muted);text-align:center}
+.opt input{margin-right:10px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Student Learning Page</div>
+      <div class="school">Lincoln International Academy</div>
+    </div>
+    <div class="meta">
+      <div>Class<b>Physics II</b></div>
+      <div>Teacher<b>Eduardo Vásquez</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="lessonbar">
+  <div class="wrap">
+    <div>
+      <h1>Lesson 2.2 · Acceleration</h1>
+      <small>Chapter 2 · Motion in One Dimension · <a href="index.html">Go to Lesson 10.3 · Second Law of Thermodynamics →</a></small>
+    </div>
+    <div class="overall" aria-live="polite">
+      <span id="overallText">0 of 0 practice problems solved</span>
+      <div class="bar"><i id="overallBar"></i></div>
+    </div>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="Lesson sections">
+  <div class="wrap" role="tablist">
+    <button role="tab" id="t-review" data-tab="review" aria-selected="true">1 · Review</button>
+    <button role="tab" id="t-examples" data-tab="examples" aria-selected="false">2 · Worked Examples</button>
+    <button role="tab" id="t-practice" data-tab="practice" aria-selected="false">3 · Practice</button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===================== REVIEW ===================== -->
+<section class="panel active" id="review" aria-labelledby="t-review">
+
+  <div class="card">
+    <h2>What you should be able to do</h2>
+    <ul class="objectives">
+      <li><span>1</span><div><b>Describe motion</b> in terms of changing velocity.</div></li>
+      <li><span>2</span><div><b>Compare graphical representations</b> of accelerated and nonaccelerated motions.</div></li>
+      <li><span>3</span><div><b>Apply kinematic equations</b> to calculate distance, time, or velocity under conditions of constant acceleration.</div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <span class="pill">Part A</span>
+    <h2>Changes in velocity</h2>
+    <p>A bullet train has a top speed of about 300 km/h, but it stops to load passengers, so most of the time its velocity is either increasing or decreasing. When a shuttle bus slows from 9.0 m/s to 0 m/s the change in velocity is the same whether the driver brakes gently over 5.0 s or slams the brakes in 1.5 s — what differs is the <b>time interval</b> over which the change happens. That difference changes the comfort and safety of the passengers.</p>
+    <div class="callout blue">
+      <b class="t">Key term</b>
+      <b>Acceleration</b> — the rate at which velocity changes over time. An object accelerates if its speed, its direction, or both change.
+    </div>
+    <div class="eq big" id="eqAvg"></div>
+  </div>
+
+  <div class="card" id="busCard">
+    <span class="pill">Try it</span>
+    <h3>Same change in velocity, different time</h3>
+    <p>A shuttle bus slows from 9.0 m/s to rest. Drag the slider to change how long the stop takes.</p>
+    <div class="sliderrow"><label for="busT">Stopping time, Δ<i>t</i></label><input id="busT" type="range" min="0.5" max="10" step="0.5" value="5"><output id="busTO"></output></div>
+    <div class="readouts">
+      <div class="readout"><small>Δv</small><b>−9.0 m/s</b></div>
+      <div class="readout"><small>Acceleration</small><b id="busA">—</b></div>
+    </div>
+    <div class="status" id="busStatus" aria-live="polite"></div>
+    <p class="pnote" style="margin-top:10px">Units: acceleration is (m/s)/s = m/s², "how many m/s the velocity changes each second".</p>
+  </div>
+
+  <div class="card">
+    <span class="pill">Part B</span>
+    <h2>Direction and sign of acceleration</h2>
+    <p>Acceleration has <b>direction and magnitude</b>. Choose a positive direction (for example, to the right). Then:</p>
+    <ul>
+      <li>If velocity is constant, Δ<i>v</i> = 0 and <b>a = 0</b>.</li>
+      <li>If Δ<i>v</i> is positive, a is positive; if Δ<i>v</i> is negative, a is negative.</li>
+      <li>A negative acceleration does <b>not</b> always mean "slowing down." For an object moving in the negative direction, a negative acceleration means it is <em>speeding up</em>.</li>
+      <li>"Deceleration" is just the special case where the <em>speed</em> decreases.</li>
+    </ul>
+    <div class="callout warm"><b class="t">Rule of thumb</b>Same signs for velocity and acceleration → speeding up. Opposite signs → slowing down.</div>
+
+    <h3>Sign explorer</h3>
+    <p>Pick the sign of the initial velocity and of the acceleration, then press <b>Replay</b>.</p>
+    <div class="ctlrow">
+      <span class="l"><b>Initial velocity, v<sub>i</sub></b></span>
+      <div class="seg" id="segV" role="group" aria-label="Initial velocity sign">
+        <button type="button" data-v="-1" aria-pressed="false">−</button><button type="button" data-v="0" aria-pressed="false">0</button><button type="button" data-v="1" aria-pressed="true">+</button>
+      </div>
+      <span class="l" style="min-width:auto"><b>Acceleration, a</b></span>
+      <div class="seg" id="segA" role="group" aria-label="Acceleration sign">
+        <button type="button" data-a="-1" aria-pressed="true">−</button><button type="button" data-a="0" aria-pressed="false">0</button><button type="button" data-a="1" aria-pressed="false">+</button>
+      </div>
+      <button class="btn" id="signReplay" type="button">Replay</button>
+    </div>
+    <svg id="signSvg" class="flow" viewBox="0 0 440 150" style="max-width:640px" role="img" aria-label="A dot moving along a track with velocity and acceleration arrows">
+      <line x1="20" y1="90" x2="420" y2="90" stroke="var(--muted)" stroke-width="3"/>
+      <line x1="220" y1="82" x2="220" y2="98" stroke="var(--muted)" stroke-width="2"/>
+      <text x="220" y="116" text-anchor="middle" style="font-weight:400;fill:var(--muted)">origin</text>
+      <text x="32" y="116" style="font-weight:400;fill:var(--muted)">− direction</text>
+      <text x="408" y="116" text-anchor="end" style="font-weight:400;fill:var(--muted)">+ direction</text>
+      <g id="signDot"><circle r="10" fill="var(--hot)" cx="0" cy="90"/>
+        <line id="arrV" x1="0" y1="66" x2="0" y2="66" stroke="var(--accent)" stroke-width="4" marker-end="url(#ah1)"/>
+        <line id="arrA" x1="0" y1="50" x2="0" y2="50" stroke="var(--warm)" stroke-width="4" marker-end="url(#ah2)"/>
+      </g>
+      <defs>
+        <marker id="ah1" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--accent)"/></marker>
+        <marker id="ah2" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--warm)"/></marker>
+      </defs>
+      <text x="20" y="20" style="fill:var(--accent)">→ velocity (teal)</text>
+      <text x="20" y="38" style="fill:var(--warm)">→ acceleration (amber)</text>
+    </svg>
+    <div class="status" id="signStatus" aria-live="polite"></div>
+    <div class="tablewrap" style="margin-top:14px">
+      <table id="signTable">
+        <thead><tr><th><i>v</i><sub>i</sub></th><th><i>a</i></th><th>Motion</th></tr></thead>
+        <tbody>
+          <tr data-k="1,1"><td>+</td><td>+</td><td>speeding up</td></tr>
+          <tr data-k="-1,-1"><td>−</td><td>−</td><td>speeding up</td></tr>
+          <tr data-k="1,-1"><td>+</td><td>−</td><td>slowing down</td></tr>
+          <tr data-k="-1,1"><td>−</td><td>+</td><td>slowing down</td></tr>
+          <tr data-k="1,0 -1,0"><td>− or +</td><td>0</td><td>constant velocity</td></tr>
+          <tr data-k="0,1 0,-1"><td>0</td><td>− or +</td><td>speeding up from rest</td></tr>
+          <tr data-k="0,0"><td>0</td><td>0</td><td>remaining at rest</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="pill">Part C</span>
+    <h2>Velocity–time graphs</h2>
+    <p>The <b>slope</b> of a velocity–time graph is the acceleration. In the train graph (Figure 2.2):</p>
+    <ul>
+      <li><b>A</b> — line slopes <em>up</em>: velocity increases, acceleration positive.</li>
+      <li><b>B</b> — line is <em>horizontal</em>: slope zero, constant velocity, acceleration zero.</li>
+      <li><b>C</b> — line slopes <em>down</em>: velocity decreases, acceleration negative.</li>
+    </ul>
+    <p>The <b>area</b> between the line and the time axis is the displacement. For constant acceleration the average velocity is halfway between the initial and final velocities:</p>
+    <div class="eq" id="eqVavg"></div>
+  </div>
+
+  <div class="card" id="graphLab">
+    <span class="pill">Try it</span>
+    <h3>Velocity–time graph lab</h3>
+    <p>Set the initial velocity, a constant acceleration, and a time interval. The shaded area is the displacement; the dashed line is the average velocity.</p>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="gVi">Initial velocity v<sub>i</sub></label><input id="gVi" type="range" min="-10" max="20" step="0.5" value="4"><output id="gViO"></output></div>
+        <div class="sliderrow"><label for="gA">Acceleration a</label><input id="gA" type="range" min="-5" max="5" step="0.1" value="1.5"><output id="gAO"></output></div>
+        <div class="sliderrow"><label for="gT">Time interval Δt</label><input id="gT" type="range" min="1" max="10" step="0.5" value="6"><output id="gTO"></output></div>
+        <div class="readouts">
+          <div class="readout"><small>v<sub>f</sub> = v<sub>i</sub> + aΔt</small><b id="gVf">—</b></div>
+          <div class="readout"><small>v<sub>avg</sub></small><b id="gVavg">—</b></div>
+          <div class="readout"><small>Δx = ½(v<sub>i</sub>+v<sub>f</sub>)Δt</small><b id="gDx">—</b></div>
+        </div>
+        <div class="status" id="gStatus" aria-live="polite"></div>
+      </div>
+      <div id="gSvg"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="pill">Part D</span>
+    <h2>Kinematic equations for constant acceleration</h2>
+    <p>These equations are valid <b>only when acceleration is constant</b> (the problem often says "uniform acceleration"). They relate five quantities: <i>v<sub>i</sub></i>, <i>v<sub>f</sub></i>, <i>a</i>, Δ<i>x</i>, and Δ<i>t</i>. Each equation leaves out exactly one of the five.</p>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Equation</th><th>Leaves out</th><th>Use it when you don't know / need…</th></tr></thead>
+      <tbody>
+        <tr><td class="math">Δ<i>x</i> = ½(<i>v</i><sub>i</sub> + <i>v</i><sub>f</sub>)Δ<i>t</i></td><td><i>a</i></td><td>acceleration</td></tr>
+        <tr><td class="math"><i>v</i><sub>f</sub> = <i>v</i><sub>i</sub> + <i>a</i>Δ<i>t</i></td><td>Δ<i>x</i></td><td>displacement</td></tr>
+        <tr><td class="math">Δ<i>x</i> = <i>v</i><sub>i</sub>Δ<i>t</i> + ½<i>a</i>(Δ<i>t</i>)<sup>2</sup></td><td><i>v</i><sub>f</sub></td><td>final velocity</td></tr>
+        <tr><td class="math"><i>v</i><sub>f</sub><sup>2</sup> = <i>v</i><sub>i</sub><sup>2</sup> + 2<i>a</i>Δ<i>x</i></td><td>Δ<i>t</i></td><td>time</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="pnote" style="margin-top:8px">If the object starts from rest, <i>v</i><sub>i</sub> = 0 and the equations simplify: Δx = ½<i>v</i><sub>f</sub>Δt, <i>v</i><sub>f</sub> = <i>a</i>Δt, Δx = ½<i>a</i>(Δt)², <i>v</i><sub>f</sub><sup>2</sup> = 2<i>a</i>Δx.</p>
+
+    <details>
+      <summary>Where do the equations come from?</summary>
+      <ol>
+        <li>Average velocity for constant acceleration is <i>v</i><sub>avg</sub> = (<i>v</i><sub>i</sub> + <i>v</i><sub>f</sub>)/2, and <i>v</i><sub>avg</sub> = Δ<i>x</i>/Δ<i>t</i>, so <b>Δx = ½(v<sub>i</sub> + v<sub>f</sub>)Δt</b>.</li>
+        <li>Rearranging <i>a</i> = (<i>v</i><sub>f</sub> − <i>v</i><sub>i</sub>)/Δ<i>t</i> gives <b>v<sub>f</sub> = v<sub>i</sub> + aΔt</b>.</li>
+        <li>Substituting that <i>v</i><sub>f</sub> into the first equation gives <b>Δx = v<sub>i</sub>Δt + ½a(Δt)²</b>.</li>
+        <li>Solving the first equation for Δ<i>t</i> and substituting into <i>v</i><sub>f</sub> = <i>v</i><sub>i</sub> + <i>a</i>Δ<i>t</i> gives <b>v<sub>f</sub>² = v<sub>i</sub>² + 2aΔx</b>. Taking the square root gives ±; choose the sign by thinking about the direction of motion.</li>
+      </ol>
+    </details>
+
+    <h3>Which equation should I use?</h3>
+    <p>Tell the tool what the problem gives you, what it asks for, and which quantity is <em>not involved</em>.</p>
+    <table class="vartable" id="eqTable"></table>
+    <div class="status warn" id="eqStatus" aria-live="polite">Choose exactly 3 "Given", 1 "Want" and 1 "Not involved".</div>
+    <div class="eqcard" id="eqResult" hidden></div>
+  </div>
+
+  <div class="card" id="strobeLab">
+    <span class="pill">Try it</span>
+    <h3>Strobe photo (Figure 2.4): constant acceleration</h3>
+    <p>A ball is photographed every 0.10 s. With constant acceleration, the ball's velocity grows by the same amount each interval, so the <b>gaps</b> between images grow steadily.</p>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="sVi">Initial speed v<sub>i</sub></label><input id="sVi" type="range" min="0" max="5" step="0.5" value="0"><output id="sViO"></output></div>
+        <div class="sliderrow"><label for="sA">Acceleration a</label><input id="sA" type="range" min="0" max="12" step="0.2" value="9.8"><output id="sAO"></output></div>
+        <div class="pnote" id="sInfo"></div>
+      </div>
+      <div id="sSvg"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Remember when solving problems</h3>
+    <ol>
+      <li><b>Analyze</b> — list the givens and the unknown, convert units (km/h → m/s: ÷ 3.6; min → s: × 60) and choose a positive direction.</li>
+      <li><b>Plan</b> — choose the equation that has your unknown and leaves out the quantity you have no information about.</li>
+      <li><b>Solve</b> — rearrange first, then substitute. Keep the signs of vectors (velocity, acceleration, displacement).</li>
+      <li><b>Check</b> — do the sign and the size make sense? Does the object speed up or slow down as expected?</li>
+    </ol>
+    <div class="callout"><b class="t">Did you know?</b>The word <em>physics</em> comes from the ancient Greek word for "nature." Galileo developed the foundations of the modern study of motion using mathematics; in 1632 he published the first mathematical treatment of motion.</div>
+    <p class="pnote">Ready? Go to <button class="linkbtn" data-goto="examples">Worked Examples</button>, then <button class="linkbtn" data-goto="practice">Practice</button>.</p>
+  </div>
+</section>
+
+<!-- ===================== EXAMPLES ===================== -->
+<section class="panel" id="examples" aria-labelledby="t-examples">
+  <div class="card">
+    <h2>Step-by-step worked examples</h2>
+    <p>Each example follows <b>Analyze → Plan → Solve → Check</b>. Press <em>Next step</em> to reveal one step at a time. At most steps you'll answer a quick question first — that's where the thinking happens.</p>
+  </div>
+  <div id="exampleList"></div>
+</section>
+
+<!-- ===================== PRACTICE ===================== -->
+<section class="panel" id="practice" aria-labelledby="t-practice">
+  <div class="card">
+    <h2>Practice on your own</h2>
+    <p>Type your answer and press <b>Check</b> (or Enter) for immediate feedback. Stuck? Use <b>Hint</b>. After two tries you can open the full <b>Solution</b>.</p>
+    <ul>
+      <li>Keep the <b>sign</b> of velocity, acceleration and displacement: negative answers are expected in some problems (they are noted when only the magnitude is wanted).</li>
+      <li>Convert units first (km/h → m/s: ÷ 3.6, minutes → seconds: × 60, km → m: × 1000).</li>
+      <li>You may enter answers like <span class="math">2.2</span>, <span class="math">−3.5e-3</span> or <span class="math">1.38 x 10^4</span>. Answers within about 3 % are accepted, so small rounding differences are fine.</li>
+    </ul>
+  </div>
+  <div class="setpicker" id="setPicker" role="group" aria-label="Problem sets"></div>
+  <div id="problemList"></div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Lincoln International Academy · Physics II · Mr. Eduardo Vásquez<br>Problems adapted from <i>Holt McDougal Physics</i>, Chapter 2 §2 and Sample Problem Sets B, C, D, E and I (© Houghton Mifflin Harcourt).</div>
+    <div>Your progress is saved in this browser only. <button class="linkbtn" id="resetAll">Reset my progress</button></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+const $  = (s,e=document)=>e.querySelector(s);
+const $$ = (s,e=document)=>[...e.querySelectorAll(s)];
+const KEY='lia-physics2-lesson-2-2';
+let state={};
+try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+
+/* ---------- notation helpers ---------- */
+const vi='<i>v</i><sub>i</sub>', vf='<i>v</i><sub>f</sub>', dx='Δ<i>x</i>', dt='Δ<i>t</i>', A='<i>a</i>', sq='<sup>2</sup>';
+const F=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const EQ={
+  avg:`${A}<sub>avg</sub> = ${F('Δ<i>v</i>',dt)} = ${F(vf+' − '+vi,dt)}`,
+  disp:`${dx} = ½(${vi} + ${vf})${dt}`,
+  vel:`${vf} = ${vi} + ${A}${dt}`,
+  disp2:`${dx} = ${vi}${dt} + ½${A}(${dt})${sq}`,
+  vsq:`${vf}${sq} = ${vi}${sq} + 2${A}${dx}`
+};
+$('#eqAvg').innerHTML=EQ.avg;
+$('#eqVavg').innerHTML=`<i>v</i><sub>avg</sub> = ${F(dx,dt)} = ${F(vi+' + '+vf,'2')}`;
+const S=(x,sf=3)=>{
+  if(x===0) return '0';
+  const e=Math.floor(Math.log10(Math.abs(x)));
+  if(e>=4||e<=-3){ const m=+(x/Math.pow(10,e)).toPrecision(sf); return `${m} × 10<sup>${e}</sup>`; }
+  return String(+x.toPrecision(sf));
+};
+const kmh=x=>x/3.6;
+
+/* ---------- number parsing / judging ---------- */
+function parseNum(raw){
+  if(raw==null) return NaN;
+  let s=String(raw).trim().toLowerCase().replace(/,/g,'').replace(/\s+/g,'').replace(/[−–]/g,'-');
+  if(!s) return NaN;
+  const sup={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-'};
+  s=s.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g,m=>'^'+[...m].map(c=>sup[c]).join(''));
+  s=s.replace(/(km\/h|m\/s\^?2|m\/s²|m\/s|km|kph|ms|s|m)$/,'');
+  const m=s.match(/^([+-]?(?:\d+\.?\d*|\.\d+))(?:(?:x|×|\*)10\^?\(?([+-]?\d+)\)?|e([+-]?\d+))?$/);
+  if(!m) return NaN;
+  let v=parseFloat(m[1]);
+  const ex=m[2]!==undefined?m[2]:m[3];
+  if(ex!==undefined) v*=Math.pow(10,parseInt(ex,10));
+  return v;
+}
+function judge(v,part){
+  if(!isFinite(v)) return {state:'no',msg:'I couldn\'t read that as a number. Try something like 2.2, −3.5e-3 or 1.38 x 10^4.'};
+  const tol=part.tol??0.03, ans=part.ans, A_=Math.abs(ans);
+  const cmp=part.abs? Math.abs(v):v;
+  const rel=Math.abs(cmp-(part.abs?A_:ans))/A_;
+  if(rel<=tol) return {state:'ok',msg:'Correct!'};
+  for(const t of (part.traps||[])){ if(Math.abs(v-t.v)/Math.abs(t.v)<=0.02) return {state:'no',msg:t.msg}; }
+  if(!part.abs && Math.abs(v+ans)/A_<=tol) return {state:'near',msg:'Right size, wrong sign. Check the direction: velocity, acceleration and displacement are vectors (which way is positive?).'};
+  if(ans>0 && v<0) return {state:'no',msg:'This quantity should come out positive here. Check which value is "final" and which is "initial".'};
+  const av=Math.abs(v);
+  const facts=[[1000,'Right digits, wrong power of ten — check the unit conversion (m vs km).'],[3.6,'That looks like a km/h ↔ m/s mix-up. Divide km/h by 3.6 to get m/s (multiply to go back).'],[60,'Check your minutes ↔ seconds conversion (1 min = 60 s).'],[2,'Off by a factor of 2 — did you forget the ½ (or the 2) in the equation?']];
+  for(const [k,msg] of facts){
+    if(Math.abs(av*k-A_)/A_<=tol || Math.abs(av/k-A_)/A_<=tol) return {state:'near',msg};
+  }
+  if(rel<=0.12) return {state:'near',msg:'Close! Check your rounding or an intermediate value.'};
+  return {state:'no',msg:'Not quite. Re-read the question, check the equation you chose and the units, and try a hint if you need one.'};
+}
+
+/* ---------- v–t graph svg ---------- */
+function vtSVG(vi_,vf_,T,o={}){
+  const W=420,H=230,L=48,R=16,Tp=20,B=34;
+  const vmin=Math.min(0,vi_,vf_), vmax=Math.max(0,vi_,vf_), span=(vmax-vmin)||1;
+  const lo=vmin-(vmin<0?span*.12:0), hi=vmax+span*.15;
+  const X=t=>L+(t/T)*(W-L-R), Y=v=>Tp+(hi-v)/(hi-lo)*(H-Tp-B);
+  const f=v=>String(+v.toPrecision(3));
+  const avg=(vi_+vf_)/2;
+  let s=`<svg class="vt" viewBox="0 0 ${W} ${H}" role="img" aria-label="Velocity versus time graph">`;
+  s+=`<polygon points="${X(0)},${Y(0)} ${X(0)},${Y(vi_)} ${X(T)},${Y(vf_)} ${X(T)},${Y(0)}" fill="var(--accent)" opacity=".2"/>`;
+  s+=`<line class="axis" x1="${L}" y1="${Tp-6}" x2="${L}" y2="${H-B}"/><line class="axis" x1="${L}" y1="${Y(0)}" x2="${W-R}" y2="${Y(0)}"/>`;
+  if(o.avg!==false) s+=`<line x1="${X(0)}" y1="${Y(avg)}" x2="${X(T)}" y2="${Y(avg)}" stroke="var(--warm)" stroke-width="2" stroke-dasharray="6 5"/><text x="${W-R}" y="${Y(avg)-5}" text-anchor="end" style="fill:var(--warm)">v̄ = ${f(avg)}</text>`;
+  s+=`<line x1="${X(0)}" y1="${Y(vi_)}" x2="${X(T)}" y2="${Y(vf_)}" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round"/>`;
+  s+=`<circle cx="${X(0)}" cy="${Y(vi_)}" r="5" fill="var(--accent)"/><circle cx="${X(T)}" cy="${Y(vf_)}" r="5" fill="var(--accent)"/>`;
+  s+=`<text class="lbl" x="${L-6}" y="${Y(vi_)+4}" text-anchor="end">${f(vi_)}</text><text class="lbl" x="${X(T)-4}" y="${Y(vf_)+(vf_>=vi_?-9:16)}" text-anchor="end">${f(vf_)}</text>`;
+  s+=`<text x="${L+4}" y="${Tp-8}">v (m/s)</text><text x="${W-R}" y="${H-8}" text-anchor="end">t (s)</text>`;
+  s+=`<text x="${L}" y="${H-B+14}" text-anchor="middle">0</text><text x="${X(T)}" y="${H-B+14}" text-anchor="middle">${f(T)}</text>`;
+  if(o.areaLabel!==false) s+=`<text class="lbl" x="${(X(0)+X(T))/2}" y="${Y(avg>=0?avg/2:avg/2)+4}" text-anchor="middle" style="font-weight:700">Δx = area</text>`;
+  return s+'</svg>';
+}
+
+/* ---------- tabs ---------- */
+function showTab(name){
+  $$('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));
+  $$('section.panel').forEach(p=>p.classList.toggle('active',p.id===name));
+  if(location.hash!=='#'+name) history.replaceState(null,'','#'+name);
+  window.scrollTo({top:0});
+}
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.addEventListener('click',e=>{ const g=e.target.closest('[data-goto]'); if(g) showTab(g.dataset.goto); });
+
+/* ---------- bus widget ---------- */
+(function(){
+  const r=$('#busT');
+  function upd(){
+    const t=+r.value, a=-9/t;
+    $('#busTO').textContent=t.toFixed(1)+' s'; $('#busA').textContent=a.toFixed(2)+' m/s²';
+    const st=$('#busStatus');
+    if(t<=2){ st.className='status bad'; st.textContent='Abrupt stop: a large acceleration — passengers feel a sudden jolt (the 1.5 s dog-avoidance stop is about −6.0 m/s²).'; }
+    else if(t<=4){ st.className='status warn'; st.textContent='A firm stop.'; }
+    else { st.className='status'; st.textContent='A gradual stop: small acceleration, comfortable for passengers (5.0 s gives −1.8 m/s²).'; }
+  }
+  r.addEventListener('input',upd); upd();
+})();
+
+/* ---------- sign explorer ---------- */
+(function(){
+  let sv=1, sa=-1, raf=null, t0=0;
+  const dot=$('#signDot'), aV=$('#arrV'), aA=$('#arrA');
+  const desc=()=>{
+    if(sv===0&&sa===0) return 'remaining at rest';
+    if(sa===0) return 'constant velocity';
+    if(sv===0) return 'speeding up from rest';
+    return sv*sa>0?'speeding up':'slowing down';
+  };
+  function sel(){
+    $$('#signTable tbody tr').forEach(tr=>tr.classList.toggle('hl',tr.dataset.k.split(' ').includes(sv+','+sa)));
+    const extra=(sv*sa<0)?' It slows, stops briefly, then reverses and speeds up in the opposite direction.':'';
+    $('#signStatus').textContent=`v${sv<0?' negative':sv>0?' positive':' = 0'}, a${sa<0?' negative':sa>0?' positive':' = 0'} → ${desc()}.`+extra;
+    $('#signStatus').className='status';
+  }
+  function frame(now){
+    const t=Math.min((now-t0)/1000,2.8);
+    const v0=sv*45, a0=sa*28;
+    let x=Math.max(-190,Math.min(190,v0*t+.5*a0*t*t)), v=v0+a0*t;
+    dot.setAttribute('transform',`translate(${220+x},0)`);
+    aV.setAttribute('x2',Math.max(-60,Math.min(60,v*0.7))); aA.setAttribute('x2',Math.max(-60,Math.min(60,a0*1.6)));
+    if(sv===0&&Math.abs(v)<1e-6) aV.setAttribute('x2',0);
+    if(t<2.8) raf=requestAnimationFrame(frame); else raf=null;
+  }
+  function play(){ if(raf) cancelAnimationFrame(raf); t0=performance.now(); raf=requestAnimationFrame(frame); }
+  $$('#segV button').forEach(b=>b.addEventListener('click',()=>{ sv=+b.dataset.v; $$('#segV button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); sel(); play(); }));
+  $$('#segA button').forEach(b=>b.addEventListener('click',()=>{ sa=+b.dataset.a; $$('#segA button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); sel(); play(); }));
+  $('#signReplay').addEventListener('click',play);
+  sel(); aV.setAttribute('x1',0); aA.setAttribute('x1',0); play();
+})();
+
+/* ---------- graph lab ---------- */
+(function(){
+  const vi_=$('#gVi'), a_=$('#gA'), t_=$('#gT');
+  function upd(){
+    const Vi=+vi_.value, a=+a_.value, T=+t_.value, Vf=Vi+a*T, Dx=.5*(Vi+Vf)*T;
+    $('#gViO').textContent=Vi+' m/s'; $('#gAO').textContent=a.toFixed(1)+' m/s²'; $('#gTO').textContent=T+' s';
+    $('#gVf').textContent=(+Vf.toFixed(2))+' m/s'; $('#gVavg').textContent=(+((Vi+Vf)/2).toFixed(2))+' m/s'; $('#gDx').textContent=(+Dx.toFixed(2))+' m';
+    $('#gSvg').innerHTML=vtSVG(Vi,Vf,T);
+    const st=$('#gStatus');
+    if(a===0){ st.className='status'; st.textContent='Zero acceleration: the line is horizontal (constant velocity).'; }
+    else if(Vi===0){ st.className='status'; st.textContent=(a>0?'Speeding up from rest in the + direction.':'Speeding up from rest in the − direction.'); }
+    else if(Vi*a>0){ st.className='status'; st.textContent='v and a have the same sign → speeding up.'; }
+    else {
+      const ts=-Vi/a;
+      if(ts<T){ st.className='status warn'; st.textContent=`v and a have opposite signs → slowing down. The object stops at t = ${ts.toFixed(2)} s, then reverses. Δx is the net (signed) area.`; }
+      else { st.className='status'; st.textContent='v and a have opposite signs → slowing down (it hasn\'t stopped yet).'; }
+    }
+  }
+  [vi_,a_,t_].forEach(r=>r.addEventListener('input',upd)); upd();
+})();
+
+/* ---------- equation chooser ---------- */
+(function(){
+  const V=[['vi','<i>v</i><sub>i</sub> (initial velocity)'],['vf','<i>v</i><sub>f</sub> (final velocity)'],['a','<i>a</i> (acceleration)'],['dx','Δ<i>x</i> (displacement)'],['dt','Δ<i>t</i> (time interval)']];
+  const EQS={
+    a:{eq:EQ.disp,solve:{dx:`${dx} = ½(${vi} + ${vf})${dt}`,dt:`${dt} = ${F('2'+dx,vi+' + '+vf)}`,vf:`${vf} = ${F('2'+dx,dt)} − ${vi}`,vi:`${vi} = ${F('2'+dx,dt)} − ${vf}`}},
+    dx:{eq:EQ.vel,solve:{vf:`${vf} = ${vi} + ${A}${dt}`,vi:`${vi} = ${vf} − ${A}${dt}`,a:`${A} = ${F(vf+' − '+vi,dt)}`,dt:`${dt} = ${F(vf+' − '+vi,A)}`}},
+    vf:{eq:EQ.disp2,solve:{dx:`${dx} = ${vi}${dt} + ½${A}(${dt})${sq}`,a:`${A} = ${F('2('+dx+' − '+vi+dt+')','('+dt+')'+sq)}`,vi:`${vi} = ${F(dx,dt)} − ½${A}${dt}`,dt:'Quadratic in Δ<i>t</i>: ½<i>a</i>(Δ<i>t</i>)² + <i>v</i><sub>i</sub>Δ<i>t</i> − Δ<i>x</i> = 0 (use the quadratic formula, or find v<sub>f</sub> first and use another equation).'}},
+    dt:{eq:EQ.vsq,solve:{vf:`${vf} = ±√(${vi}${sq} + 2${A}${dx})`,vi:`${vi} = ±√(${vf}${sq} − 2${A}${dx})`,a:`${A} = ${F(vf+sq+' − '+vi+sq,'2'+dx)}`,dx:`${dx} = ${F(vf+sq+' − '+vi+sq,'2'+A)}`}}
+  };
+  const tbl=$('#eqTable'); const sel={};
+  V.forEach(([k,lab])=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${lab}</td><td><select aria-label="${lab.replace(/<[^>]+>/g,'')}" data-k="${k}"><option value="">— choose —</option><option value="g">Given</option><option value="w">Want (unknown)</option><option value="n">Not involved</option></select></td>`;
+    tbl.appendChild(tr);
+  });
+  function upd(){
+    const g=[],w=[],n=[];
+    $$('select',tbl).forEach(s=>{ sel[s.dataset.k]=s.value; ({g,w,n}[s.value]||[]).push(s.dataset.k); });
+    const st=$('#eqStatus'), res=$('#eqResult');
+    const chosen=g.length+w.length+n.length;
+    if(chosen<5){ st.className='status warn'; st.textContent='Choose exactly 3 "Given", 1 "Want" and 1 "Not involved".'; res.hidden=true; return; }
+    if(g.length!==3||w.length!==1||n.length!==1){ st.className='status bad'; st.textContent=`You have ${g.length} given, ${w.length} unknown, ${n.length} not involved. A solvable problem has 3 given, 1 unknown, and 1 quantity that is not involved.`; res.hidden=true; return; }
+    const e=EQS[n[0]];
+    st.className='status'; st.textContent='Use the equation that leaves out the quantity you don\'t have and don\'t need.';
+    res.hidden=false;
+    res.innerHTML=`<b>Equation to use</b> (it does not contain ${V.find(x=>x[0]===n[0])[1].split(' (')[0]}):<div class="eq">${e.eq}</div><b>Solved for the unknown:</b><div class="eq">${e.solve[w[0]]}</div>`;
+  }
+  $$('select',tbl).forEach(s=>s.addEventListener('change',upd));
+})();
+
+/* ---------- strobe lab ---------- */
+(function(){
+  const vi_=$('#sVi'), a_=$('#sA');
+  function upd(){
+    const Vi=+vi_.value, a=+a_.value, dtt=0.1, n=11;
+    $('#sViO').textContent=Vi+' m/s'; $('#sAO').textContent=a.toFixed(1)+' m/s²';
+    const pos=[...Array(n)].map((_,i)=>{const t=i*dtt; return Vi*t+.5*a*t*t;});
+    const max=pos[n-1]||1, H=250, top=14;
+    let s=`<svg class="vt" viewBox="0 0 260 ${H+10}" style="max-width:260px" role="img" aria-label="Positions of a falling ball every 0.1 s">`;
+    s+=`<line class="axis" x1="40" y1="${top-6}" x2="40" y2="${H}"/>`;
+    pos.forEach((p,i)=>{ const y=top+(max?p/max:0)*(H-top-12); s+=`<circle cx="130" cy="${y}" r="8" fill="var(--hot)" opacity=".9"/><text x="34" y="${y+4}" text-anchor="end">${(i*dtt).toFixed(1)} s</text>`; });
+    s+='</svg>';
+    $('#sSvg').innerHTML=s;
+    const gaps=pos.slice(1).map((p,i)=>p-pos[i]);
+    $('#sInfo').innerHTML=`Gap between images: <b>${(gaps[0]*100).toFixed(1)} cm</b> (first), <b>${(gaps[1]*100).toFixed(1)} cm</b> (second), … <b>${(gaps[gaps.length-1]*100).toFixed(1)} cm</b> (last).<br>Each gap grows by <i>a</i>(Δ<i>t</i>)² = <b>${(a*dtt*dtt*100).toFixed(2)} cm</b>, a constant — constant acceleration.${a===0?'<br>With a = 0 the gaps are all equal (constant velocity).':''}<br>Total distance after 1.00 s: <b>${(pos[n-1]).toFixed(2)} m</b>.`;
+  }
+  [vi_,a_].forEach(r=>r.addEventListener('input',upd)); upd();
+})();
+
+/* ---------- ask widgets (worked examples) ---------- */
+function mkMC(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  ask.opts.forEach((o,i)=>{
+    const b=document.createElement('button'); b.className='opt'; b.type='button'; b.innerHTML=o;
+    b.addEventListener('click',()=>{
+      if(i===ask.correct){ b.classList.add('right'); $$('.opt',host).forEach(x=>x.disabled=true); fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); onDone(); }
+      else { b.classList.add('wrong'); b.disabled=true; fb.className='fb no'; fb.innerHTML=(ask.wrong&&ask.wrong[i])||'Not quite — try another option.'; }
+    });
+    host.appendChild(b);
+  });
+  host.appendChild(fb);
+}
+function mkNum(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const row=document.createElement('div'); row.className='row';
+  const inp=document.createElement('input'); inp.type='text'; inp.setAttribute('aria-label','Your answer'); inp.placeholder='your answer'; inp.autocomplete='off';
+  const u=document.createElement('span'); u.className='math'; u.innerHTML=ask.unit||'';
+  const btn=document.createElement('button'); btn.className='btn'; btn.type='button'; btn.textContent='Check';
+  row.append(inp,u,btn); host.appendChild(row);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite'); host.appendChild(fb);
+  const go=()=>{
+    const j=judge(parseNum(inp.value),{ans:ask.ans,tol:ask.tol||0.02,traps:ask.traps,abs:ask.abs});
+    if(j.state==='ok'){ fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); inp.disabled=true; btn.disabled=true; onDone(); }
+    else { fb.className='fb '+j.state; fb.textContent=j.msg; }
+  };
+  btn.addEventListener('click',go); inp.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+}
+
+/* ---------- worked examples ---------- */
+const G=(...items)=>`<div class="givenlist">${items.map(i=>`<span>${i}</span>`).join('')}</div>`;
+const U=(x)=>`<span class="unk">${x}</span>`;
+const EX=[
+ { id:'E1', tag:'Sample Problem B', title:'Average acceleration: finding the time',
+   problem:'A shuttle bus slows down with an average acceleration of <b>−1.8 m/s²</b>. How long does it take the bus to slow from <b>9.0 m/s</b> to a complete stop?',
+   steps:[
+    {name:'Analyze', html:G(`${vi} = 9.0 m/s`,`${vf} = 0 m/s`,`${A}<sub>avg</sub> = −1.8 m/s²`)+G(U(`${dt} = ?`))+vtSVG(9,0,5,{areaLabel:false}),
+     ask:{type:'mc',q:'Why is <b>v<sub>f</sub> = 0 m/s</b>?',opts:['Because the bus is accelerating','Because the bus comes to a <em>complete stop</em>','Because acceleration is negative'],correct:1,why:'"Slow to a complete stop" means the final velocity is zero.',wrong:{0:'The acceleration doesn\'t set the final velocity; the stop does.',2:'The sign of a doesn\'t make v zero.'}}},
+    {name:'Solve', html:`<p>Rearrange the average-acceleration equation to solve for the time interval:</p>
+       <div class="eq">${A}<sub>avg</sub> = ${F('Δ<i>v</i>',dt)} &nbsp;→&nbsp; ${dt} = ${F('Δ<i>v</i>',A+'<sub>avg</sub>')} = ${F(vf+' − '+vi,A+'<sub>avg</sub>')} = ${F('0 m/s − 9.0 m/s','−1.8 m/s²')} = <span class="boxed">5.0 s</span></div>`,
+     ask:{type:'num',q:'Calculate (0 − 9.0) ÷ (−1.8).',ans:5,tol:0.01,unit:'s',why:'Dividing two negatives gives a positive time.'}},
+    {name:'Check your work', html:`<p>Time is positive ✔ and the bus takes 5.0 s — the gentle stop from the lesson. (The textbook shows the unit as m/s in the final line; it should be <b>s</b>.)</p>`,
+     ask:{type:'mc',q:'If the driver slams the brakes and stops in only 1.5 s, the magnitude of the acceleration is…',opts:['Smaller than 1.8 m/s²','Larger than 1.8 m/s²','The same'],correct:1,why:'|a| = 9.0 / 1.5 = 6.0 m/s²: same Δv in less time means a bigger acceleration.'}}
+   ]},
+ { id:'E2', tag:'Problem Set I', title:'Average acceleration: finding the final velocity (and converting units)',
+   problem:'In 1977 the fastest speed by a vessel on the water was achieved. If this vessel were to undergo an average acceleration of <b>1.80 m/s²</b>, it would go from rest to its top speed in <b>85.6 s</b>. What was the speed of the vessel?',
+   steps:[
+    {name:'Analyze', html:G(`${A}<sub>avg</sub> = 1.80 m/s²`,`${dt} = 85.6 s`,`${vi} = 0 m/s`)+G(U(`${vf} = ?`)),
+     ask:{type:'mc',q:'"From rest" tells us that…',opts:['v<sub>i</sub> = 0 m/s','v<sub>f</sub> = 0 m/s','a = 0 m/s²'],correct:0,why:'Starting from rest means the initial velocity is zero.'}},
+    {name:'Plan', html:`<p>Rearrange the definition of average acceleration for the final velocity:</p><div class="eq">${A}<sub>avg</sub> = ${F(vf+' − '+vi,dt)} &nbsp;→&nbsp; ${vf} = ${A}<sub>avg</sub>${dt} + ${vi}</div>`},
+    {name:'Solve', html:`<div class="eq">${vf} = (1.80 m/s²)(85.6 s) + 0 m/s = <span class="boxed">154 m/s</span></div>
+       <p>To convert to km/h, multiply by 3.6 (×3600 s/h ÷ 1000 m/km):</p><div class="eq">154 m/s × 3.6 = <span class="boxed">554 km/h</span></div>`,
+     ask:{type:'num',q:'Calculate 1.80 × 85.6.',ans:154.08,tol:0.01,unit:'m/s'}},
+    {name:'Check your work', html:`<p>554 km/h is a very high speed for a boat but it was a record-setting vessel. Units: (m/s²)(s) = m/s ✔.</p>`,
+     ask:{type:'mc',q:'To convert m/s to km/h you…',opts:['divide by 3.6','multiply by 3.6','multiply by 60'],correct:1,why:'1 m/s = 3.6 km/h, because 3600 s/h ÷ 1000 m/km = 3.6.'}}
+   ]},
+ { id:'E3', tag:'Sample Problem C', title:'Displacement from velocities and time',
+   problem:'A racing car reaches a speed of <b>42 m/s</b>. It then begins a uniform negative acceleration, using its parachute and braking system, and comes to rest <b>5.5 s</b> later. Find the distance the car travels during braking.',
+   steps:[
+    {name:'Analyze', html:G(`${vi} = 42 m/s`,`${vf} = 0 m/s`,`${dt} = 5.5 s`)+G(U(`${dx} = ?`))+vtSVG(42,0,5.5),
+     ask:{type:'mc',q:'Is the acceleration given in the problem?',opts:['Yes, it is −42 m/s','No — only that it is uniform (constant). We know v<sub>i</sub>, v<sub>f</sub> and Δt.'],correct:1,why:'"Uniform" tells us the kinematic equations apply. We\'ll pick one that doesn\'t need a.'}},
+    {name:'Plan', html:`<p>We have ${vi}, ${vf} and ${dt}, and we don't know (or need) ${A}. The equation that leaves out ${A} is:</p><div class="eq">${EQ.disp}</div><div class="callout"><b class="t">Tip</b>All kinematic equations in this chapter are valid only for constant acceleration.</div>`,
+     ask:{type:'mc',q:'Which equation leaves out the acceleration?',opts:[EQ.disp,EQ.vel,EQ.vsq],correct:0,why:'It contains Δx, v<sub>i</sub>, v<sub>f</sub> and Δt only.',wrong:{1:'This one contains a.',2:'This one contains a and doesn\'t contain Δt.'}}},
+    {name:'Solve', html:`<div class="eq">${dx} = ½(42 m/s + 0 m/s)(5.5 s) = <span class="boxed">120 m</span></div><p class="pnote">The calculator shows 115.5 m, but the data have two significant figures, so we report 120 m.</p>`,
+     ask:{type:'num',q:'Calculate ½ × 42 × 5.5.',ans:115.5,tol:0.01,unit:'m'}},
+    {name:'Check your work', html:`<p>On the graph, the displacement is the area of the triangle: ½ × 5.5 s × 42 m/s ≈ 115 m ✔. The average velocity was 21 m/s, and 21 × 5.5 ≈ 116 m.</p>`}
+   ]},
+ { id:'E4', tag:'Sample Problem D', title:'Finding acceleration from displacement',
+   problem:'A barge moving with a speed of <b>1.00 m/s</b> increases speed uniformly, so that in <b>30.0 s</b> it has traveled <b>60.2 m</b>. What is the magnitude of the barge\'s acceleration?',
+   steps:[
+    {name:'Analyze', html:G(`${vi} = 1.00 m/s`,`${dt} = 30.0 s`,`${dx} = 60.2 m`)+G(U(`${A} = ?`)),
+     ask:{type:'mc',q:'Which quantity is <b>not</b> given and not asked for?',opts:['Final velocity v<sub>f</sub>','Initial velocity v<sub>i</sub>','Displacement Δx'],correct:0,why:'We know v<sub>i</sub>, Δx, Δt and want a — v<sub>f</sub> is the quantity not involved.'}},
+    {name:'Plan', html:`<p>The equation that leaves out ${vf}:</p><div class="eq">${EQ.disp2}</div><p>Rearrange for ${A}:</p><div class="eq">${A} = ${F('2('+dx+' − '+vi+dt+')','('+dt+')'+sq)}</div>`,
+     ask:{type:'mc',q:'Starting from Δx = v<sub>i</sub>Δt + ½a(Δt)², the first step to isolate a is to…',opts:['Subtract v<sub>i</sub>Δt from both sides','Add v<sub>i</sub>Δt to both sides','Divide both sides by Δx'],correct:0,why:'Δx − v<sub>i</sub>Δt = ½a(Δt)². Then multiply by 2 and divide by (Δt)².'}},
+    {name:'Solve', html:`<div class="eq">${A} = ${F('2[60.2 m − (1.00 m/s)(30.0 s)]','(30.0 s)²')} = ${F('2(30.2 m)','9.00 × 10² s²')} = <span class="boxed">6.71 × 10<sup>−2</sup> m/s²</span></div>`,
+     ask:{type:'num',q:'Calculate 2(60.2 − 30.0) ÷ 900.',ans:0.06711,tol:0.01,unit:'m/s²'}},
+    {name:'Check your work', html:`<p>Final velocity: ${vf} = 1.00 + (0.0671)(30.0) ≈ 3.01 m/s. Average velocity ≈ (1.00 + 3.01)/2 ≈ 2.0 m/s, and 2.0 × 30.0 s ≈ 60 m ✔.</p>`,
+     ask:{type:'num',q:'What final velocity does that give? Compute 1.00 + 0.0671 × 30.0.',ans:3.013,tol:0.01,unit:'m/s'}}
+   ]},
+ { id:'E5', tag:'Sample Problem E', title:'Final velocity after any displacement',
+   problem:'A person pushing a stroller starts from rest, uniformly accelerating at a rate of <b>0.500 m/s²</b>. What is the velocity of the stroller after it has traveled <b>4.75 m</b>?',
+   steps:[
+    {name:'Analyze', html:G(`${vi} = 0 m/s`,`${A} = 0.500 m/s²`,`${dx} = 4.75 m`)+G(U(`${vf} = ?`))+`<p>Choose the origin at the stroller's starting point and the positive direction to the right.</p>`},
+    {name:'Plan', html:`<p>Time is not given, so use the equation that leaves out ${dt}:</p><div class="eq">${EQ.vsq}</div><p>Take the square root of both sides:</p><div class="eq">${vf} = ±√(${vi}${sq} + 2${A}${dx})</div>`,
+     ask:{type:'mc',q:'Which equation leaves out the time interval?',opts:[EQ.disp,EQ.vel,EQ.vsq],correct:2,why:'v<sub>f</sub>² = v<sub>i</sub>² + 2aΔx has no Δt.'}},
+    {name:'Solve', html:`<div class="eq">${vf} = ±√((0 m/s)² + 2(0.500 m/s²)(4.75 m)) = <span class="boxed">+2.18 m/s</span></div>`,
+     ask:{type:'num',q:'Calculate √(2 × 0.500 × 4.75).',ans:2.179,tol:0.01,unit:'m/s'}},
+    {name:'Check your work', html:`<p>The square root gives ±2.18 m/s. Think about the physical situation to choose the sign.</p>`,
+     ask:{type:'mc',q:'Which sign is correct, and why?',opts:['+2.18 m/s — the stroller starts from rest and speeds up with positive acceleration, so its velocity is positive','−2.18 m/s — square roots are always negative','Either one; the sign does not matter'],correct:0,why:'From the sign table: v<sub>i</sub> = 0 and a positive means speeding up from rest in the + direction. The stroller moves 2.18 m/s to the right.',wrong:{1:'The root is ±; we choose by reasoning about direction.',2:'The sign gives the direction, so it matters.'}}}
+   ]},
+ { id:'E6', tag:'Problem Set D', title:'Two moving objects (cockroaches)',
+   problem:'Two cockroaches are separated by <b>60.0 cm</b> and begin to run toward each other at the same moment, both starting from rest. The first has a constant acceleration of <b>0.20 m/s²</b>; the second has <b>0.12 m/s²</b> in the opposite direction. How much time passes before they bump into each other?',
+   steps:[
+    {name:'Analyze', html:G(`<i>d</i> = 0.600 m`,`<i>a</i><sub>1</sub> = 0.20 m/s²`,`<i>a</i><sub>2</sub> = 0.12 m/s²`,`${vi} = 0 for both`)+G(U(`${dt} = ?`)),
+     ask:{type:'mc',q:'When the roaches meet, how are their displacements Δx<sub>1</sub> and Δx<sub>2</sub> related to the starting separation <i>d</i>?',opts:['Δx<sub>1</sub> = Δx<sub>2</sub>','Δx<sub>1</sub> + Δx<sub>2</sub> = <i>d</i>','Δx<sub>1</sub> − Δx<sub>2</sub> = <i>d</i>'],correct:1,why:'Together they cover the whole gap between them. (They don\'t go the same distance because the accelerations differ.)'}},
+    {name:'Plan', html:`<p>Each roach: ${dx}<sub>1</sub> = ½<i>a</i><sub>1</sub>(${dt})² and ${dx}<sub>2</sub> = ½<i>a</i><sub>2</sub>(${dt})² (since ${vi} = 0). Add them:</p>
+       <div class="eq"><i>d</i> = ½(<i>a</i><sub>1</sub> + <i>a</i><sub>2</sub>)(${dt})${sq} &nbsp;→&nbsp; ${dt} = √${F('2<i>d</i>','<i>a</i><sub>1</sub> + <i>a</i><sub>2</sub>')}</div>`},
+    {name:'Solve', html:`<div class="eq">${dt} = √${F('2(0.60 m)','0.20 m/s² + 0.12 m/s²')} = √${F('1.2 m','0.32 m/s²')} = <span class="boxed">1.9 s</span></div>`,
+     ask:{type:'num',q:'Calculate 1.2 ÷ 0.32 (the value under the square root).',ans:3.75,tol:0.01,unit:'s²'}},
+    {name:'Check your work', html:`<p>Final speeds: 0.20 × 1.94 ≈ 0.39 m/s and 0.12 × 1.94 ≈ 0.23 m/s. Both are well below the cockroach's top speed of about 1.5 m/s ✔. Distances: ½(0.20)(1.94)² ≈ 0.38 m and ½(0.12)(1.94)² ≈ 0.23 m, which add up to 0.60 m ✔.</p>`}
+   ]}
+];
+
+(function buildExamples(){
+  const host=$('#exampleList');
+  EX.forEach((ex,idx)=>{
+    const card=document.createElement('div'); card.className='card example'; card.id=ex.id;
+    card.innerHTML=`<header><h3 style="margin:0">Example ${idx+1} · ${ex.title}</h3><span class="pill">${ex.tag}</span></header>
+      <div class="problem-box">${ex.problem}</div>
+      <div class="dots"></div><ol class="steps"></ol><div class="row ctrl"></div>`;
+    const dots=$('.dots',card), list=$('.steps',card), ctrl=$('.ctrl',card);
+    const next=document.createElement('button'); next.className='btn'; next.type='button'; next.textContent='Start: reveal step 1';
+    const restart=document.createElement('button'); restart.className='btn ghost'; restart.type='button'; restart.textContent='Restart example'; restart.hidden=true;
+    ctrl.append(next,restart);
+    ex.steps.forEach((s,i)=>{
+      const d=document.createElement('i'); dots.appendChild(d);
+      const li=document.createElement('li'); li.className='step';
+      li.innerHTML=`<h4><span class="n">${i+1}</span>${s.name}</h4><div class="body">${s.html}</div>`;
+      if(s.ask){ const a=document.createElement('div'); a.className='ask'; li.appendChild(a); }
+      list.appendChild(li);
+    });
+    let cur=-1, needAsk=false;
+    function reveal(){
+      cur++; const li=list.children[cur], s=ex.steps[cur];
+      li.classList.add('show'); dots.children[cur].classList.add('on');
+      if(s.ask){
+        needAsk=true; next.disabled=true;
+        (s.ask.type==='num'?mkNum:mkMC)($('.ask',li),s.ask,()=>{ needAsk=false; next.disabled=false; refresh(); });
+      }
+      refresh(); li.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    function refresh(){
+      if(cur>=ex.steps.length-1 && !needAsk){ next.hidden=true; restart.hidden=false; if(!state['ex_'+ex.id]){ state['ex_'+ex.id]=1; save(); } }
+      else { next.textContent=needAsk?'Answer the question above to continue':(cur<0?'Start: reveal step 1':`Next step: ${ex.steps[cur+1]?.name||''}`); }
+    }
+    next.addEventListener('click',reveal);
+    restart.addEventListener('click',()=>{
+      cur=-1; needAsk=false; next.hidden=false; next.disabled=false; restart.hidden=true;
+      [...list.children].forEach((li,i)=>{ li.classList.remove('show'); const a=$('.ask',li); if(a) a.innerHTML=''; dots.children[i].classList.remove('on'); });
+      refresh(); card.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    host.appendChild(card);
+  });
+})();
+
+/* ---------- practice problems ---------- */
+const T=(label,unit,ans,extra={})=>Object.assign({label,unit,ans},extra);
+const P=[]; const add=(set,sub,text,parts,h,sol,extra={})=>P.push(Object.assign({set,sub,text,parts,h,sol},extra));
+const MC=(set,text,opts,correct,why,hint,extra={})=>P.push(Object.assign({set,type:Array.isArray(correct)&&correct.length>1?'multi':'mc',text,opts,correct:[].concat(correct),why,h:[hint]},extra));
+const avgEq=`${A}<sub>avg</sub> = ${F('Δ<i>v</i>',dt)}`;
+
+/* ===== Textbook practice ===== */
+let sb='Average acceleration · Sample Problem B';
+add('tb',sb,'As the shuttle bus comes to a sudden stop to avoid hitting a dog, it accelerates uniformly at −4.1 m/s² as it slows from 9.0 m/s to 0.0 m/s. Find the time interval of acceleration for the bus.',
+ [T('Time interval, Δt','s',(0-9)/-4.1)],
+ [`Rearrange ${avgEq} for time: ${dt} = (${vf} − ${vi}) / ${A}.`,`${dt} = (0.0 − 9.0 m/s) ÷ (−4.1 m/s²).`],
+ [`${dt} = (${vf} − ${vi})/${A} = (0.0 − 9.0 m/s)/(−4.1 m/s²)`,`= <b>2.2 s</b>`]);
+add('tb',sb,'A car traveling at 7.0 m/s accelerates uniformly at 2.5 m/s² to reach a speed of 12.0 m/s. How long does it take for this acceleration to occur?',
+ [T('Time interval, Δt','s',(12-7)/2.5)],
+ [`${dt} = (${vf} − ${vi}) / ${A}.`,`${dt} = (12.0 − 7.0 m/s) ÷ 2.5 m/s².`],
+ [`${dt} = (${vf} − ${vi})/${A} = (12.0 m/s − 7.0 m/s)/(2.5 m/s²)`,`= <b>2.0 s</b>`]);
+add('tb',sb,'With an average acceleration of −1.2 m/s², how long will it take a cyclist to bring a bicycle with an initial speed of 6.5 m/s to a complete stop?',
+ [T('Time interval, Δt','s',(0-6.5)/-1.2)],
+ [`Complete stop → ${vf} = 0. ${dt} = (${vf} − ${vi}) / ${A}.`,`${dt} = (0 − 6.5) ÷ (−1.2).`],
+ [`${dt} = (0 − 6.5 m/s)/(−1.2 m/s²) = <b>5.4 s</b>`]);
+add('tb',sb,'Turner\'s treadmill runs with a velocity of −1.2 m/s and speeds up at regular intervals during a half-hour workout. After 25 min, the treadmill has a velocity of −6.5 m/s. What is the average acceleration of the treadmill during this period?',
+ [T('Average acceleration','m/s²',(-6.5+1.2)/1500)],
+ [`Convert 25 min to seconds (× 60). Then ${A} = (${vf} − ${vi}) / ${dt}. Keep the negative signs.`,`${A} = (−6.5 − (−1.2) m/s) ÷ 1500 s.`],
+ [`${dt} = 25 min × 60 s/min = 1500 s`,`${A} = (${vf} − ${vi})/${dt} = (−6.5 m/s − (−1.2 m/s))/(1500 s)`,`= <b>−3.5 × 10<sup>−3</sup> m/s²</b> (negative: speeding up in the negative direction)`]);
+add('tb',sb,'Suppose a treadmill has an average acceleration of 4.7 × 10<sup>−3</sup> m/s². (a) How much does its speed change after 5.0 min? (b) If the treadmill\'s initial speed is 1.7 m/s, what will its final speed be?',
+ [T('(a) Change in speed, Δv','m/s',4.7e-3*300),T('(b) Final speed, v<sub>f</sub>','m/s',1.7+4.7e-3*300)],
+ [`Convert 5.0 min to 300 s. Δ<i>v</i> = ${A}${dt}. Then ${vf} = ${vi} + Δ<i>v</i>.`,`Δv = (4.7 × 10⁻³)(300) ≈ 1.4 m/s.`],
+ [`${dt} = 5.0 min × 60 = 300 s`,`(a) Δ<i>v</i> = ${A}${dt} = (4.7 × 10<sup>−3</sup> m/s²)(300 s) = <b>1.4 m/s</b>`,`(b) ${vf} = ${vi} + Δ<i>v</i> = 1.7 + 1.4 = <b>3.1 m/s</b>`]);
+
+sb='Displacement with constant acceleration · Sample Problem C';
+add('tb',sb,'A car accelerates uniformly from rest to a speed of 6.6 m/s in 6.5 s. Find the distance the car travels during this time.',
+ [T('Displacement, Δx','m',.5*(0+6.6)*6.5)],
+ [`You know ${vi}, ${vf} and ${dt}; no acceleration needed: ${EQ.disp}.`,`${dx} = ½(0 + 6.6)(6.5).`],
+ [`${dx} = ½(${vi} + ${vf})${dt} = ½(0 + 6.6 m/s)(6.5 s) = <b>21 m</b> (21.45)`]);
+add('tb',sb,'When Maggie applies the brakes of her car, the car slows uniformly from 15.0 m/s to 0.0 m/s in 2.50 s. How many meters before a stop sign must she apply her brakes in order to stop at the sign?',
+ [T('Braking distance, Δx','m',.5*15*2.5)],
+ [`Use ${EQ.disp}: you know ${vi}, ${vf} and ${dt}.`,`${dx} = ½(15.0 + 0.0)(2.50).`],
+ [`${dx} = ½(15.0 m/s + 0.0 m/s)(2.50 s) = <b>18.8 m</b>`]);
+add('tb',sb,'A driver in a car traveling at a speed of 21.8 m/s sees a cat 101 m away on the road. How long will it take for the car to accelerate uniformly to a stop in exactly 99 m?',
+ [T('Time to stop, Δt','s',2*99/21.8)],
+ [`Solve ${EQ.disp} for time: ${dt} = 2${dx} / (${vi} + ${vf}).`,`${dt} = 2(99) ÷ (21.8 + 0). The 101 m is extra information.`],
+ [`${dt} = ${F('2'+dx,vi+' + '+vf)} = ${F('2(99 m)','21.8 m/s + 0 m/s')} = <b>9.1 s</b>`]);
+add('tb',sb,'A car enters the freeway with a speed of 6.4 m/s and accelerates uniformly for 3.2 km in 3.5 min. How fast (in m/s) is the car moving after this time?',
+ [T('Final speed, v<sub>f</sub>','m/s',2*3200/210-6.4)],
+ [`Convert: 3.2 km = 3200 m and 3.5 min = 210 s. Solve ${EQ.disp} for ${vf}: ${vf} = 2${dx}/${dt} − ${vi}.`,`${vf} = 2(3200)/210 − 6.4.`],
+ [`${dx} = 3200 m, ${dt} = 210 s`,`${vf} = ${F('2'+dx,dt)} − ${vi} = ${F('2(3200 m)','210 s')} − 6.4 m/s = 30.5 − 6.4 = <b>24 m/s</b>`]);
+
+sb='Velocity and displacement · Sample Problem D';
+add('tb',sb,'In 1986, the first flight around the globe without refueling was completed. The aircraft\'s average speed was 186 km/h. If the airplane landed at this speed and accelerated at −1.5 m/s², how long did it take the airplane to stop?',
+ [T('Time to stop, Δt','s',(0-kmh(186))/-1.5)],
+ [`Convert 186 km/h to m/s (÷ 3.6). Then ${dt} = (${vf} − ${vi})/${A} with ${vf} = 0.`,`${vi} = 51.7 m/s → ${dt} = (0 − 51.7)/(−1.5).`],
+ [`${vi} = 186 km/h ÷ 3.6 = 51.7 m/s`,`${dt} = (${vf} − ${vi})/${A} = (0 − 51.7 m/s)/(−1.5 m/s²) = <b>34 s</b>`]);
+add('tb',sb,'An automobile with an initial speed of 4.30 m/s accelerates uniformly at the rate of 3.00 m/s². Find the final speed and the displacement after 5.00 s.',
+ [T('Final speed, v<sub>f</sub>','m/s',4.3+3*5),T('Displacement, Δx','m',4.3*5+.5*3*25)],
+ [`${EQ.vel} gives the final speed; ${EQ.disp2} gives the displacement.`,`${vf} = 4.30 + (3.00)(5.00); ${dx} = (4.30)(5.00) + ½(3.00)(5.00)².`],
+ [`${vf} = ${vi} + ${A}${dt} = 4.30 + (3.00)(5.00) = <b>19.3 m/s</b>`,`${dx} = ${vi}${dt} + ½${A}(${dt})² = (4.30)(5.00) + ½(3.00)(5.00)² = 21.5 + 37.5 = <b>59.0 m</b>`]);
+add('tb',sb,'A car starts from rest and travels for 5.0 s with a constant acceleration of −1.5 m/s². What is the final velocity of the car? How far does the car travel in this time interval?',
+ [T('Final velocity, v<sub>f</sub>','m/s',-7.5),T('Displacement, Δx','m',.5*-1.5*25)],
+ [`From rest: ${vi} = 0. ${vf} = ${A}${dt} and ${dx} = ½${A}(${dt})². Keep the negative sign.`,`${vf} = (−1.5)(5.0); ${dx} = ½(−1.5)(5.0)².`],
+ [`${vf} = ${vi} + ${A}${dt} = 0 + (−1.5 m/s²)(5.0 s) = <b>−7.5 m/s</b>`,`${dx} = ½${A}(${dt})² = ½(−1.5)(5.0)² = <b>−19 m</b> (19 m in the negative direction)`]);
+add('tb',sb,'In 1991, four English teenagers built an electric car that could attain a speed of 30.0 m/s. Suppose it takes 8.0 s for this car to accelerate from 18.0 m/s to 30.0 m/s. What is the magnitude of the car\'s acceleration?',
+ [T('Acceleration','m/s²',(30-18)/8)],
+ [`${A} = (${vf} − ${vi}) / ${dt}.`,`(30.0 − 18.0) ÷ 8.0.`],
+ [`${A} = (${vf} − ${vi})/${dt} = (30.0 m/s − 18.0 m/s)/(8.0 s) = <b>1.5 m/s²</b>`]);
+
+sb='Final velocity after any displacement · Sample Problem E';
+add('tb',sb,'Find the velocity after the stroller in Sample Problem E (a = 0.500 m/s², starting from rest) has traveled 6.32 m.',
+ [T('Final velocity, v<sub>f</sub>','m/s',Math.sqrt(2*.5*6.32))],
+ [`No time given → ${EQ.vsq}. With ${vi} = 0: ${vf} = √(2${A}${dx}).`,`√(2 × 0.500 × 6.32).`],
+ [`${vf} = √(${vi}² + 2${A}${dx}) = √(0 + 2(0.500 m/s²)(6.32 m)) = <b>+2.51 m/s</b>`,`Positive: speeding up from rest with positive a.`]);
+add('tb',sb,'A car traveling initially at +7.0 m/s accelerates uniformly at the rate of +0.80 m/s² for a distance of 245 m. (a) What is its velocity at the end of the acceleration? (b) What is its velocity after it accelerates for 125 m? (c) What is its velocity after it accelerates for 67 m?',
+ [T('(a) v<sub>f</sub> after 245 m','m/s',Math.sqrt(49+2*.8*245)),T('(b) v<sub>f</sub> after 125 m','m/s',Math.sqrt(49+2*.8*125)),T('(c) v<sub>f</sub> after 67 m','m/s',Math.sqrt(49+2*.8*67),{tol:.05})],
+ [`${EQ.vsq}; take the positive root (the car speeds up in the + direction).`,`(a) √(7.0² + 2(0.80)(245)) = √441.`],
+ [`${vf} = √(${vi}² + 2${A}${dx})`,`(a) √(49 + 392) = <b>21 m/s</b>`,`(b) √(49 + 200) = <b>16 m/s</b>`,`(c) √(49 + 107) = <b>12 m/s</b>`]);
+add('tb',sb,'A car accelerates uniformly in a straight line from rest at the rate of 2.3 m/s². (a) What is the speed of the car after it has traveled 55 m? (b) How long does it take the car to travel 55 m?',
+ [T('(a) Speed after 55 m','m/s',Math.sqrt(2*2.3*55)),T('(b) Time to travel 55 m','s',Math.sqrt(2*2.3*55)/2.3)],
+ [`(a) ${vf} = √(2${A}${dx}). (b) With ${vf} known, ${dt} = (${vf} − ${vi})/${A}.`,`(a) √(2 × 2.3 × 55) = √253.`],
+ [`(a) ${vf} = √(2${A}${dx}) = √(2(2.3 m/s²)(55 m)) = <b>16 m/s</b>`,`(b) ${dt} = (${vf} − ${vi})/${A} = (15.9 m/s − 0)/(2.3 m/s²) = <b>6.9 s</b>`]);
+add('tb',sb,'A motorboat accelerates uniformly from a velocity of 6.5 m/s to the west to a velocity of 1.5 m/s to the west. If its acceleration was 2.7 m/s² to the east, how far did it travel during the acceleration? (Enter the distance as a positive number.)',
+ [T('Distance traveled','m',(1.5*1.5-6.5*6.5)/(2*2.7),{abs:true})],
+ [`Choose east as +. Then ${vi} = −6.5 m/s, ${vf} = −1.5 m/s, ${A} = +2.7 m/s². Use ${EQ.vsq} solved for ${dx}.`,`${dx} = (${vf}² − ${vi}²)/(2${A}) = (2.25 − 42.25)/5.4.`],
+ [`East = +: ${vi} = −6.5 m/s, ${vf} = −1.5 m/s, ${A} = +2.7 m/s²`,`${dx} = ${F(vf+sq+' − '+vi+sq,'2'+A)} = ${F('(−1.5)² − (−6.5)²','2(2.7)')} = −7.4 m`,`The boat moves <b>7.4 m</b> to the west.`]);
+add('tb',sb,'An aircraft has a liftoff speed of 33 m/s. What minimum constant acceleration does this require if the aircraft is to be airborne after a takeoff run of 240 m?',
+ [T('Minimum acceleration','m/s²',33*33/(2*240))],
+ [`From rest, ${vf}² = 2${A}${dx}, so ${A} = ${vf}² / (2${dx}).`,`33² ÷ (2 × 240).`],
+ [`${A} = ${F(vf+sq+' − '+vi+sq,'2'+dx)} = ${F('(33 m/s)² − 0','2(240 m)')} = <b>2.3 m/s²</b>`]);
+add('tb',sb,'A certain car is capable of accelerating at a uniform rate of 0.85 m/s². What is the magnitude of the car\'s displacement as it accelerates uniformly from a speed of 83 km/h to one of 94 km/h?',
+ [T('Displacement','m',(kmh(94)**2-kmh(83)**2)/(2*.85))],
+ [`Convert both speeds to m/s (÷ 3.6): 23.06 m/s and 26.11 m/s. Then ${dx} = (${vf}² − ${vi}²)/(2${A}).`,`(26.11² − 23.06²) ÷ 1.70.`],
+ [`${vi} = 83 ÷ 3.6 = 23.06 m/s; ${vf} = 94 ÷ 3.6 = 26.11 m/s`,`${dx} = ${F(vf+sq+' − '+vi+sq,'2'+A)} = ${F('(26.11)² − (23.06)²','2(0.85)')} = <b>88 m</b>`]);
+
+/* ===== Set I – average acceleration ===== */
+const s1='s1';
+add(s1,null,'If the vessel in the sample problem (a = 1.80 m/s², starting from rest) accelerates for 1.00 min, what will its speed be after that minute? Give the answer in m/s and in km/h.',
+ [T('Speed','m/s',1.8*60),T('Speed','km/h',1.8*60*3.6)],
+ [`${vf} = ${vi} + ${A}${dt}; convert 1.00 min to 60.0 s. For km/h multiply m/s by 3.6.`,`(1.80)(60.0) = 108 m/s.`],
+ [`${vf} = ${vi} + ${A}${dt} = 0 + (1.80 m/s²)(60.0 s) = <b>108 m/s</b>`,`108 m/s × 3.6 = <b>389 km/h</b>`]);
+add(s1,null,'In 1935, a French destroyer, <i>La Terrible</i>, attained one of the fastest speeds for any standard warship. Suppose it took 2.0 min at a constant acceleration of 0.19 m/s² for the ship to reach its top speed after starting from rest. Calculate the ship\'s final speed.',
+ [T('Final speed','m/s',.19*120)],
+ [`${vf} = ${vi} + ${A}${dt} with ${vi} = 0. Convert 2.0 min to seconds.`,`(0.19)(120).`],
+ [`${dt} = 2.0 min = 120 s`,`${vf} = 0 + (0.19 m/s²)(120 s) = <b>23 m/s</b>`]);
+add(s1,null,'In 1934, the wind speed on Mt. Washington reached a record high. Suppose a very sturdy glider is launched in this wind, so that in 45.0 s the glider reaches the speed of the wind. If the glider undergoes a constant acceleration of 2.29 m/s², what is the wind\'s speed? Assume that the glider is initially at rest.',
+ [T('Wind speed','m/s',2.29*45)],
+ [`${vf} = ${vi} + ${A}${dt}, with ${vi} = 0.`,`(2.29)(45.0).`],
+ [`${vf} = 0 + (2.29 m/s²)(45.0 s) = <b>103 m/s</b>`]);
+add(s1,null,'In 1992, Maurizio Damilano, of Italy, walked 29 752 m in 2.00 h. (a) Calculate Damilano\'s average speed in m/s. (b) Suppose Damilano slows down to 3.00 m/s at the midpoint of his journey, but then picks up the pace and accelerates to the speed calculated in (a). It takes him 30.0 s to accelerate. Find the magnitude of the average acceleration during this time interval.',
+ [T('(a) Average speed','m/s',29752/7200),T('(b) Average acceleration','m/s²',(29752/7200-3)/30)],
+ [`(a) speed = distance/time with time in seconds (2.00 h = 7200 s). (b) ${A} = (${vf} − ${vi})/${dt}.`,`(a) 29752 ÷ 7200 = 4.13 m/s. (b) (4.13 − 3.00) ÷ 30.0.`],
+ [`(a) 29 752 m ÷ 7200 s = <b>4.13 m/s</b>`,`(b) ${A} = (4.13 − 3.00 m/s)/(30.0 s) = <b>3.77 × 10<sup>−2</sup> m/s²</b>`]);
+add(s1,null,'South African frogs are capable of jumping as far as 10.0 m in one hop. Suppose one of these frogs makes exactly 15 of these jumps in 60.0 s. (a) What is the frog\'s average velocity? (b) If the frog lands with a velocity equal to its average velocity and comes to a full stop 0.25 s later, what is the frog\'s average acceleration?',
+ [T('(a) Average velocity','m/s',150/60),T('(b) Average acceleration','m/s²',-2.5/.25)],
+ [`(a) total displacement (15 × 10.0 m) ÷ 60.0 s. (b) ${A} = (0 − ${vi})/${dt}, with ${vi} equal to the answer to (a). Expect a negative sign.`,`(a) 150 ÷ 60 = 2.5 m/s. (b) (0 − 2.5) ÷ 0.25.`],
+ [`(a) ${dx} = 15 × 10.0 m = 150 m; v<sub>avg</sub> = 150 m / 60.0 s = <b>2.5 m/s</b>`,`(b) ${A} = (0 − 2.5 m/s)/(0.25 s) = <b>−10 m/s²</b>`]);
+add(s1,null,'In 1991 at Smith College, Ferdie Adoboe ran 1.00 × 10<sup>2</sup> m backward in 13.6 s. Suppose it takes her 2.00 s to achieve a velocity equal to her average velocity during the run (starting from rest). Find her average acceleration during the first 2.00 s. (Take forward as +; she is running backward.)',
+ [T('Average acceleration','m/s²',(-100/13.6)/2)],
+ [`Backward is the negative direction. Average velocity = −100 m ÷ 13.6 s. Then ${A} = (${vf} − 0)/2.00 s.`,`−7.35 m/s ÷ 2.00 s.`],
+ [`v<sub>avg</sub> = −100 m / 13.6 s = −7.35 m/s`,`${A} = (${vf} − ${vi})/${dt} = (−7.35 m/s − 0)/(2.00 s) = <b>−3.68 m/s²</b>`]);
+add(s1,null,'In the 1992 Summer Olympics, the German four-man kayak team covered 1 km in just under 3 minutes. Suppose that between the starting point and the 150 m mark the kayak steadily increases its speed from 0.0 m/s to 6.0 m/s, so that its average speed is 3.0 m/s. (a) How long does it take to cover the 150 m? (b) What is the magnitude of the average acceleration during that part of the course?',
+ [T('(a) Time for 150 m','s',50),T('(b) Average acceleration','m/s²',6/50)],
+ [`(a) time = distance ÷ average speed. (b) ${A} = Δ${'<i>v</i>'}/${dt}.`,`(a) 150 ÷ 3.0. (b) 6.0 ÷ (answer to a).`],
+ [`(a) ${dt} = Δx / v<sub>avg</sub> = 150 m / 3.0 m/s = <b>50 s</b>`,`(b) ${A} = (6.0 − 0.0 m/s)/(50 s) = <b>0.12 m/s²</b>`]);
+add(s1,null,'The highest speed ever achieved on a bicycle was reached by John Howard of the United States. The bicycle, which was accelerated by being towed by a vehicle, reached a velocity of +245 km/h. Suppose Howard wants to slow down, and applies the brakes on his now freely moving bicycle. If the average acceleration of the bicycle during braking is −3.0 m/s², how long will it take for the bicycle\'s velocity to decrease by 20.0 percent?',
+ [T('Time','s',(0.2*kmh(245))/3.0)],
+ [`Convert 245 km/h to m/s (÷ 3.6). A 20.0 % decrease means Δv = −0.200 ${vi}. Then ${dt} = Δv / ${A}.`,`${vi} = 68.06 m/s → Δv = −13.6 m/s.`],
+ [`${vi} = 245 ÷ 3.6 = 68.06 m/s; Δ<i>v</i> = −0.200(68.06) = −13.61 m/s`,`${dt} = Δ<i>v</i>/${A} = (−13.61 m/s)/(−3.0 m/s²) = <b>4.5 s</b>`]);
+add(s1,null,'In 1993, bicyclist Rebecca Twigg of the United States traveled 3.00 km in 217.347 s. Suppose Twigg travels the entire distance at her average speed and then accelerates at −1.72 m/s² to come to a complete stop after crossing the finish line. How long does it take Twigg to come to a stop?',
+ [T('Time to stop','s',(3000/217.347)/1.72)],
+ [`First her average speed: 3000 m ÷ 217.347 s. Then ${dt} = (0 − ${vi})/${A}.`,`${vi} = 13.80 m/s; ${dt} = −13.80 ÷ (−1.72).`],
+ [`${vi} = 3000 m / 217.347 s = 13.80 m/s`,`${dt} = (${vf} − ${vi})/${A} = (0 − 13.80 m/s)/(−1.72 m/s²) = <b>8.03 s</b>`]);
+add(s1,null,'During the Winter Olympic games at Lillehammer, Norway, in 1994, Dan Jansen of the United States skated 5.00 × 10<sup>2</sup> m in 35.76 s. Suppose it takes Jansen 4.00 s to increase his velocity from zero to his maximum velocity, which is 10.0 percent greater than his average velocity during the whole run. Calculate Jansen\'s average acceleration during the first 4.00 s.',
+ [T('Average acceleration','m/s²',1.1*(500/35.76)/4)],
+ [`Average velocity = 500 m ÷ 35.76 s. Maximum velocity = 1.100 × that. Then ${A} = ${vf}/${dt}.`,`${vf} = 1.100 × 13.98 = 15.38 m/s.`],
+ [`v<sub>avg</sub> = 500 / 35.76 = 13.98 m/s; ${vf} = 1.100 × 13.98 = 15.38 m/s`,`${A} = (15.38 − 0 m/s)/(4.00 s) = <b>3.85 m/s²</b>`]);
+
+/* ===== Set C – displacement ===== */
+const sc='sc';
+add(sc,null,'In 1993, Ileana Salvador of Italy walked 3.0 km in under 12.0 min. Suppose that during 115 m of her walk Salvador is observed to steadily increase her speed from 4.20 m/s to 5.00 m/s. How long does this increase in speed take?',
+ [T('Time','s',2*115/(4.2+5))],
+ [`Solve ${EQ.disp} for the time: ${dt} = 2${dx}/(${vi} + ${vf}).`,`2(115) ÷ (4.20 + 5.00).`],
+ [`${dt} = ${F('2'+dx,vi+' + '+vf)} = ${F('2(115 m)','4.20 m/s + 5.00 m/s')} = <b>25.0 s</b>`]);
+add(sc,null,'In a scientific test conducted in Arizona, a special cannon called HARP shot a projectile straight up to an altitude of 180.0 km. If the projectile\'s initial speed was 3.00 km/s, how long did it take the projectile to reach its maximum height?',
+ [T('Time','s',2*180000/3000)],
+ [`At maximum height ${vf} = 0. Convert to meters: 180.0 km = 1.800 × 10⁵ m, 3.00 km/s = 3000 m/s. ${dt} = 2${dx}/(${vi} + ${vf}).`,`2(1.8 × 10⁵) ÷ 3000.`],
+ [`${dt} = ${F('2'+dx,vi+' + '+vf)} = ${F('2(1.800 × 10<sup>5</sup> m)','3000 m/s + 0')} = <b>1.20 × 10<sup>2</sup> s</b>`]);
+add(sc,null,'A rocket-powered car capable of reaching a speed of 1.09 × 10³ km/h is tested on a flat, hard surface that is 25.0 km long. The car starts at rest and just reaches 1.09 × 10³ km/h when it passes the 20.0 km mark. (a) If the car\'s acceleration is constant, how long does it take to make the 20.0 km drive? (b) How long will it take the car to decelerate if it goes from its maximum speed to rest during the remaining 5.00 km stretch?',
+ [T('(a) Time for 20.0 km','s',2*20000/kmh(1090)),T('(b) Time to stop in 5.00 km','s',2*5000/kmh(1090))],
+ [`Convert 1090 km/h → 302.8 m/s and the distances to meters. Use ${dt} = 2${dx}/(${vi} + ${vf}).`,`(a) 2(20 000) ÷ 302.8. (b) 2(5000) ÷ 302.8.`],
+ [`1090 km/h ÷ 3.6 = 302.8 m/s`,`(a) ${dt} = 2(20 000 m)/(0 + 302.8 m/s) = <b>132 s</b>`,`(b) ${dt} = 2(5000 m)/(302.8 m/s + 0) = <b>33.0 s</b>`]);
+add(sc,null,'In 1990, Dave Campos of the United States rode a special motorcycle called the <i>Easyrider</i> at an average speed of 518 km/h. Suppose that at some point Campos steadily decreases his speed from 100.0 percent to 60.0 percent of his average speed during an interval of 2.00 min. What is the distance traveled during that time interval?',
+ [T('Distance','m',.5*(kmh(518)+.6*kmh(518))*120)],
+ [`${vi} = 518 km/h = 143.9 m/s; ${vf} = 0.600 ${vi}; ${dt} = 120 s. Use ${EQ.disp}.`,`½(143.9 + 86.3)(120).`],
+ [`${vi} = 518 ÷ 3.6 = 143.9 m/s; ${vf} = 0.600(143.9) = 86.3 m/s; ${dt} = 120 s`,`${dx} = ½(${vi} + ${vf})${dt} = ½(143.9 + 86.3)(120) = <b>1.38 × 10<sup>4</sup> m</b>`]);
+add(sc,null,'A German stuntman, Martin Blume, rode his motorcycle on the wall of a large vertical cylinder. Suppose that in a time interval of 30.0 s Blume increases his speed steadily from 30.0 km/h to 42.0 km/h while circling inside the cylindrical wall. How far does Blume travel in that time interval?',
+ [T('Distance','m',.5*(kmh(30)+kmh(42))*30)],
+ [`Convert to m/s (÷ 3.6): 8.33 m/s and 11.67 m/s. ${EQ.disp}.`,`½(8.33 + 11.67)(30.0).`],
+ [`${vi} = 30.0 ÷ 3.6 = 8.33 m/s; ${vf} = 42.0 ÷ 3.6 = 11.67 m/s`,`${dx} = ½(8.33 + 11.67)(30.0 s) = <b>3.00 × 10<sup>2</sup> m</b>`]);
+add(sc,null,'An automobile that set the world record for acceleration increased speed from rest to 96 km/h in 3.07 s. How far had the car traveled by the time the final speed was achieved?',
+ [T('Distance','m',.5*kmh(96)*3.07)],
+ [`96 km/h = 26.7 m/s. From rest: ${dx} = ½${vf}${dt}.`,`½(26.7)(3.07).`],
+ [`${vf} = 96 ÷ 3.6 = 26.7 m/s`,`${dx} = ½(0 + 26.7 m/s)(3.07 s) = <b>41 m</b>`]);
+add(sc,null,'In a car accident involving a sports car, skid marks as long as 290.0 m were left by the car as it decelerated to a complete stop. Suppose that it took 10.0 s for the car to stop. Estimate the speed of the car before the brakes were applied. Give your answer in m/s and in km/h.',
+ [T('Speed before braking','m/s',58),T('Speed before braking','km/h',58*3.6)],
+ [`Solve ${EQ.disp} for ${vi} with ${vf} = 0: ${vi} = 2${dx}/${dt}.`,`2(290.0) ÷ 10.0 = 58.0 m/s; × 3.6 for km/h.`],
+ [`${vi} = ${F('2'+dx,dt)} − ${vf} = ${F('2(290.0 m)','10.0 s')} − 0 = <b>58.0 m/s</b>`,`58.0 × 3.6 = <b>209 km/h</b> — well "in excess of" the 161 km/h (100 mph) in the police report.`]);
+add(sc,null,'Col. Joe Kittinger of the United States Air Force crossed the Atlantic Ocean in nearly 86 hours. The distance he traveled was 5.7 × 10³ km. Suppose Col. Kittinger is moving with a constant acceleration during most of his flight and that his final speed is 10.0 percent greater than his initial speed. Find the initial speed (m/s).',
+ [T('Initial speed','m/s',(5.7e6/(86*3600))/1.05)],
+ [`Convert: 5.7 × 10⁶ m and 86 h = 309 600 s. With ${vf} = 1.100 ${vi}: Δx = ½(2.100 ${vi})Δt.`,`${vi} = Δx / (1.05 Δt).`],
+ [`${dx} = 5.7 × 10<sup>6</sup> m; ${dt} = 86 × 3600 = 3.096 × 10<sup>5</sup> s`,`${dx} = ½(${vi} + 1.100${vi})${dt} = 1.05 ${vi}${dt}`,`${vi} = ${F('5.7 × 10<sup>6</sup> m','1.05(3.096 × 10<sup>5</sup> s)')} = <b>17.5 m/s</b>`]);
+add(sc,null,'A polar bear swims from an ice floe to shore. It dives into the water swimming at 2.60 m/s. By the time the bear arrives at the shore, its speed has decreased to 2.20 m/s. If the swim takes exactly 9.00 min and the bear has a constant deceleration, what is the distance traveled by the polar bear?',
+ [T('Distance','m',.5*(2.6+2.2)*540)],
+ [`9.00 min = 540 s. ${EQ.disp}.`,`½(2.60 + 2.20)(540).`],
+ [`${dt} = 9.00 min × 60 = 540 s`,`${dx} = ½(2.60 + 2.20 m/s)(540 s) = <b>1.30 × 10<sup>3</sup> m</b>`]);
+
+/* ===== Set D – velocity and displacement ===== */
+const sdd='sd';
+add(sdd,null,'A car with an initial speed of 6.5 m/s accelerates at a uniform rate of 0.92 m/s² for 3.6 s. Find the final speed and the displacement of the car during this time.',
+ [T('Final speed','m/s',6.5+.92*3.6),T('Displacement','m',6.5*3.6+.5*.92*3.6**2)],
+ [`${EQ.vel}, then ${EQ.disp2} (or ${EQ.disp}).`,`${vf} = 6.5 + (0.92)(3.6) ≈ 9.8 m/s.`],
+ [`${vf} = 6.5 + (0.92)(3.6) = <b>9.8 m/s</b>`,`${dx} = (6.5)(3.6) + ½(0.92)(3.6)² = 23.4 + 5.96 = <b>29 m</b>`]);
+add(sdd,null,'In 1976, Gerald Hoagland drove a car over 8.0 × 10² km in reverse; his average velocity was about −15.0 m/s. Suppose Hoagland decides to go forward: he applies the brakes, stops, and then accelerates until he moves forward at the same speed he had when he was moving backward. How long would the entire reversal process take if the average acceleration during this process is +2.5 m/s²?',
+ [T('Time','s',(15+15)/2.5)],
+ [`${vi} = −15.0 m/s and ${vf} = +15.0 m/s. ${dt} = (${vf} − ${vi})/${A}.`,`(15.0 − (−15.0)) ÷ 2.5.`],
+ [`${dt} = (${vf} − ${vi})/${A} = (+15.0 − (−15.0) m/s)/(2.5 m/s²) = <b>12 s</b>`]);
+add(sdd,null,'The first permanent public railway was built by George Stephenson. The average speed of the trains was 24.0 km/h. Suppose a train moving at this speed accelerates at −0.20 m/s² until it reaches a speed of 8.0 km/h. How long does it take the train to undergo this change in speed?',
+ [T('Time','s',(kmh(8)-kmh(24))/-0.2)],
+ [`Convert 24.0 km/h → 6.67 m/s and 8.0 km/h → 2.22 m/s. Then ${dt} = (${vf} − ${vi})/${A}.`,`(2.22 − 6.67) ÷ (−0.20).`],
+ [`${vi} = 6.67 m/s; ${vf} = 2.22 m/s`,`${dt} = (2.22 − 6.67 m/s)/(−0.20 m/s²) = <b>22 s</b>`]);
+add(sdd,null,'In one South African mine, mine-cage speeds of up to 65.0 km/h are attained. The mine has a depth of 2072 m. Two cages start their downward journey at the same moment. The first cage quickly attains the maximum speed and then descends uniformly at that speed all the way to the bottom. The second cage starts at rest and increases its speed with a constant acceleration of magnitude 4.00 × 10<sup>−2</sup> m/s². How long does the trip take for each cage? (Which cage reaches the bottom first?)',
+ [T('Cage 1 trip time','s',2072/kmh(65)),T('Cage 2 trip time','s',Math.sqrt(2*2072/.04))],
+ [`Cage 1: constant speed, time = distance ÷ speed (65.0 km/h = 18.06 m/s). Cage 2: from rest, ${dx} = ½${A}(${dt})².`,`Cage 2: ${dt} = √(2${dx}/${A}) = √(2 × 2072 ÷ 0.0400).`],
+ [`Cage 1: ${dt} = 2072 m / 18.06 m/s = <b>115 s</b>`,`Cage 2: ${dt} = √(2(2072 m)/(4.00 × 10<sup>−2</sup> m/s²)) = <b>322 s</b>`,`Cage 1 reaches the bottom first.`]);
+add(sdd,null,'In a 1986 bicycle race, Fred Markham rode a distance of 2.00 × 10² m with an average speed of 105.4 km/h. (a) Find the time it took Markham to cover 2.00 × 10² m. (b) Suppose a car moves from rest under constant acceleration. What is the magnitude of the car\'s acceleration if the car is to finish the race at exactly the same time Markham finishes?',
+ [T('(a) Time','s',200/kmh(105.4)),T('(b) Car\'s acceleration','m/s²',2*200/(200/kmh(105.4))**2)],
+ [`(a) time = distance ÷ speed with 105.4 km/h = 29.28 m/s. (b) From rest ${dx} = ½${A}(${dt})² → ${A} = 2${dx}/(${dt})².`,`(a) 200 ÷ 29.28 = 6.83 s.`],
+ [`(a) ${dt} = 200 m / 29.28 m/s = <b>6.83 s</b>`,`(b) ${A} = ${F('2'+dx,'('+dt+')'+sq)} = ${F('2(200 m)','(6.83 s)²')} = <b>8.57 m/s²</b>`]);
+add(sdd,null,'A butterfly flies at a speed of 6.0 m/s while another flying insect some distance ahead flies in the same direction with a constant speed. The butterfly then increases its speed at a constant rate of 1.4 m/s² and catches up to the other insect 3.0 s later. How far does the butterfly travel during the race?',
+ [T('Distance','m',6*3+.5*1.4*9)],
+ [`${EQ.disp2} with ${vi} = 6.0 m/s, ${A} = 1.4 m/s², ${dt} = 3.0 s.`,`(6.0)(3.0) + ½(1.4)(3.0)².`],
+ [`${dx} = ${vi}${dt} + ½${A}(${dt})² = (6.0)(3.0) + ½(1.4)(3.0)² = 18 + 6.3 = <b>24 m</b>`]);
+add(sdd,null,'Mary Rife set a women\'s world speed record for sailing. Her vessel, <i>Proud Mary</i>, reached a speed of 3.17 × 10² km/h. Suppose it takes 8.0 s for the boat to decelerate from 3.17 × 10² km/h to 2.00 × 10² km/h. What is the boat\'s acceleration, and what is the displacement of <i>Proud Mary</i> as it slows down?',
+ [T('Acceleration','m/s²',(kmh(200)-kmh(317))/8),T('Displacement','m',.5*(kmh(317)+kmh(200))*8)],
+ [`Convert: 317 km/h = 88.06 m/s, 200 km/h = 55.56 m/s. ${A} = (${vf} − ${vi})/${dt}; ${dx} = ½(${vi} + ${vf})${dt}.`,`${A} = (55.56 − 88.06)/8.0.`],
+ [`${vi} = 88.06 m/s; ${vf} = 55.56 m/s`,`${A} = (55.56 − 88.06 m/s)/(8.0 s) = <b>−4.1 m/s²</b>`,`${dx} = ½(88.06 + 55.56)(8.0) = <b>5.7 × 10<sup>2</sup> m</b>`]);
+add(sdd,null,'In 1994, a human-powered submarine achieved a maximum speed of 3.06 m/s. Suppose this submarine starts from rest and accelerates at 0.800 m/s² until it reaches maximum speed. The submarine then travels at constant speed for another 5.00 s. Calculate the total distance traveled by the submarine.',
+ [T('Total distance','m',3.06**2/(2*.8)+3.06*5)],
+ [`Two parts: (1) accelerating from rest: ${dx}<sub>1</sub> = ${vf}²/(2${A}). (2) constant speed: ${dx}<sub>2</sub> = ${vf}${dt}. Add them.`,`${dx}<sub>1</sub> = 3.06² ÷ 1.600 = 5.85 m.`],
+ [`(1) ${dx}<sub>1</sub> = ${vf}²/(2${A}) = (3.06)²/(2 × 0.800) = 5.85 m`,`(2) ${dx}<sub>2</sub> = (3.06 m/s)(5.00 s) = 15.3 m`,`Total = 5.85 + 15.3 = <b>21.2 m</b>`]);
+add(sdd,null,'The highest speed achieved by a standard nonracing sports car is 3.50 × 10² km/h. Assuming that the car accelerates at 4.00 m/s², how long would this car take to reach its maximum speed if it is initially at rest? What distance would the car travel during this time?',
+ [T('Time','s',kmh(350)/4),T('Distance','m',kmh(350)**2/(2*4))],
+ [`350 km/h = 97.2 m/s. ${dt} = (${vf} − ${vi})/${A}; ${dx} = ${vf}²/(2${A}).`,`97.2 ÷ 4.00 = 24.3 s.`],
+ [`${vf} = 350 ÷ 3.6 = 97.2 m/s`,`${dt} = 97.2 / 4.00 = <b>24.3 s</b>`,`${dx} = (97.2)²/(2 × 4.00) = <b>1.18 × 10<sup>3</sup> m</b>`]);
+add(sdd,null,'The Trans-Siberian railway is the longest single railroad in the world. Suppose the train is approaching the Moscow station at a velocity of +24.7 m/s when it begins a constant acceleration of −0.850 m/s². This acceleration continues for 28 s. What will be the train\'s final velocity when it reaches the station?',
+ [T('Final velocity','m/s',24.7-.85*28,{tol:.04})],
+ [`${EQ.vel}.`,`24.7 + (−0.850)(28).`],
+ [`${vf} = ${vi} + ${A}${dt} = 24.7 m/s + (−0.850 m/s²)(28 s) = 24.7 − 23.8 = <b>0.9 m/s</b>`]);
+add(sdd,null,'The world\'s fastest warship floats on a cushion of air and can move as fast as 1.7 × 10² km/h. Suppose that during a training exercise the ship accelerates at +2.67 m/s², so that after 15.0 s its displacement is +6.00 × 10² m. Calculate the ship\'s initial velocity just before the acceleration. Assume the ship moves in a straight line.',
+ [T('Initial velocity','m/s',(600-.5*2.67*225)/15)],
+ [`Use ${EQ.disp2} solved for ${vi}: ${vi} = (${dx} − ½${A}(${dt})²)/${dt}.`,`(600 − ½(2.67)(15.0)²) ÷ 15.0.`],
+ [`${vi} = ${F(dx+' − ½'+A+'('+dt+')'+sq,dt)} = ${F('600 m − ½(2.67)(15.0)² m','15.0 s')} = ${F('600 − 300','15.0')}`,`= <b>20.0 m/s</b>`]);
+add(sdd,null,'Captain Charles Yeager flew the first supersonic flight in 1947. Suppose Yeager accelerated at 7.20 m/s² for 25.0 s to reach a final speed of 3.00 × 10² m/s. What was his initial speed?',
+ [T('Initial speed','m/s',300-7.2*25)],
+ [`${EQ.vel} solved for ${vi}: ${vi} = ${vf} − ${A}${dt}.`,`300 − (7.20)(25.0).`],
+ [`${vi} = ${vf} − ${A}${dt} = 300 m/s − (7.20 m/s²)(25.0 s) = <b>1.20 × 10<sup>2</sup> m/s</b>`]);
+add(sdd,null,'Peter Rosendahl rode his unicycle a distance of 1.00 × 10² m in 12.11 s. If Rosendahl started at rest, what was the magnitude of his acceleration?',
+ [T('Acceleration','m/s²',2*100/12.11**2)],
+ [`From rest: ${dx} = ½${A}(${dt})² → ${A} = 2${dx}/(${dt})².`,`2(100) ÷ (12.11)².`],
+ [`${A} = ${F('2'+dx,'('+dt+')'+sq)} = ${F('2(100 m)','(12.11 s)²')} = <b>1.36 m/s²</b>`]);
+add(sdd,null,'Suppose that Peter Rosendahl began riding the unicycle with a speed of 3.00 m/s and traveled a distance of 1.00 × 10² m in 12.11 s. What would the magnitude of his acceleration be in this case?',
+ [T('Acceleration','m/s²',2*(100-3*12.11)/12.11**2)],
+ [`${EQ.disp2} solved for ${A}: ${A} = 2(${dx} − ${vi}${dt})/(${dt})².`,`2(100 − 3.00 × 12.11) ÷ 12.11².`],
+ [`${A} = ${F('2('+dx+' − '+vi+dt+')','('+dt+')'+sq)} = ${F('2[100 − (3.00)(12.11)]','(12.11)²')} = ${F('2(63.67)','146.7')} = <b>0.868 m/s²</b>`]);
+add(sdd,null,'A driver of a car traveling at 15.0 m/s applies the brakes, causing a uniform acceleration of −2.0 m/s². How long does it take the car to slow to a final speed of 10.0 m/s? How far has the car moved during the braking period?',
+ [T('Time','s',(10-15)/-2),T('Distance','m',.5*(15+10)*2.5)],
+ [`${dt} = (${vf} − ${vi})/${A}; then ${EQ.disp}.`,`(10.0 − 15.0) ÷ (−2.0) = 2.5 s.`],
+ [`${dt} = (10.0 − 15.0 m/s)/(−2.0 m/s²) = <b>2.5 s</b>`,`${dx} = ½(15.0 + 10.0)(2.5) = <b>31 m</b>`]);
+
+/* ===== Set E – final velocity ===== */
+const se='se';
+add(se,null,'In 1976, Kitty Hambleton of the United States drove a rocket-engine car to a maximum speed of 965 km/h. Suppose Kitty started at rest and underwent a constant acceleration with a magnitude of 4.0 m/s². What distance would she have had to travel in order to reach the maximum speed?',
+ [T('Distance','m',kmh(965)**2/(2*4))],
+ [`965 km/h = 268.1 m/s. No time → ${EQ.vsq}; ${dx} = (${vf}² − ${vi}²)/(2${A}).`,`268.1² ÷ 8.0.`],
+ [`${vf} = 965 ÷ 3.6 = 268.1 m/s`,`${dx} = ${F(vf+sq+' − '+vi+sq,'2'+A)} = ${F('(268.1)² − 0','2(4.0)')} = <b>9.0 × 10<sup>3</sup> m</b>`]);
+add(se,null,'With a cruising speed of 2.30 × 10³ km/h, the Concorde is the fastest commercial airplane. Suppose the landing speed of the Concorde is 20.0 percent of the cruising speed. If the plane accelerates at −5.80 m/s², how far does it travel between the time it lands and the time it comes to a complete stop?',
+ [T('Distance','m',(0-(0.2*kmh(2300))**2)/(2*-5.8))],
+ [`Landing speed = 0.200 × 2300 = 460 km/h = 127.8 m/s. ${dx} = (${vf}² − ${vi}²)/(2${A}) with ${vf} = 0.`,`(0 − 127.8²) ÷ (2 × −5.80).`],
+ [`${vi} = 0.200(2300 km/h) = 460 km/h = 127.8 m/s`,`${dx} = ${F('0 − (127.8)²','2(−5.80)')} = <b>1.41 × 10<sup>3</sup> m</b>`]);
+add(se,null,'The Boeing 747 has a maximum speed of about 9.70 × 10² km/h. After takeoff, the plane takes a certain time to reach its maximum speed. Suppose the plane has a constant acceleration with a magnitude of 4.8 m/s². What distance does the plane travel between the moment its speed is 50.0 percent of maximum and the moment its maximum speed is attained?',
+ [T('Distance','m',(kmh(970)**2-(.5*kmh(970))**2)/(2*4.8))],
+ [`970 km/h = 269.4 m/s; half is 134.7 m/s. ${dx} = (${vf}² − ${vi}²)/(2${A}).`,`(269.4² − 134.7²) ÷ 9.6.`],
+ [`${vf} = 269.4 m/s; ${vi} = 134.7 m/s`,`${dx} = ${F('(269.4)² − (134.7)²','2(4.8)')} = ${F('72 598 − 18 150','9.6')} = <b>5.7 × 10<sup>3</sup> m</b>`]);
+add(se,null,'A motorcycle rider travels with an initial speed of 8.0 m/s before speeding up. The rider then travels 40.0 m at a constant acceleration of 2.00 m/s². What is the rider\'s speed after the acceleration?',
+ [T('Final speed','m/s',Math.sqrt(64+2*2*40))],
+ [`${EQ.vsq}; take the positive root.`,`√(8.0² + 2(2.00)(40.0)).`],
+ [`${vf} = √(${vi}² + 2${A}${dx}) = √(64 + 160) = √224 = <b>15.0 m/s</b>`]);
+add(se,null,'The skid marks left by the decelerating jet-powered car <i>The Spirit of America</i> were 9.60 km long. If the car\'s acceleration was −2.00 m/s², what was the car\'s initial velocity?',
+ [T('Initial velocity','m/s',Math.sqrt(2*2*9600))],
+ [`Convert 9.60 km = 9600 m. ${vf} = 0: ${vi} = √(−2${A}${dx}).`,`√(2 × 2.00 × 9600).`],
+ [`0 = ${vi}² + 2(−2.00)(9600) → ${vi}² = 38 400`,`${vi} = <b>196 m/s</b> (≈ 705 km/h)`]);
+add(se,null,'A mushroom of mass 45.4 kg is attached to a rope and pulled horizontally along a smooth stretch of ground, so that it undergoes a constant acceleration of 0.30 m/s². If the mushroom is initially at rest, what will its velocity be after it has been displaced +64 m?',
+ [T('Final velocity','m/s',Math.sqrt(2*.3*64))],
+ [`The mass is not needed. ${vf} = √(2${A}${dx}) from rest.`,`√(2 × 0.30 × 64).`],
+ [`${vf} = √(2(0.30 m/s²)(64 m)) = √38.4 = <b>+6.2 m/s</b>`]);
+add(se,null,'Bengt Norberg of Sweden drove his car 44.8 km in 60.0 min on two side wheels. (a) Calculate the car\'s average speed. (b) Suppose Norberg is moving forward at the speed calculated in (a). He then accelerates at a rate of +0.35 m/s². After traveling 20.0 m, the car falls on all four wheels. What is the car\'s final speed while still traveling on two wheels?',
+ [T('(a) Average speed','m/s',44800/3600,{tol:.04}),T('(b) Final speed','m/s',Math.sqrt((44800/3600)**2+2*.35*20))],
+ [`(a) 44.8 km = 44 800 m and 60.0 min = 3600 s. (b) ${EQ.vsq} with ${vi} from (a).`,`(b) √(12.44² + 2(0.35)(20.0)).`],
+ [`(a) 44 800 m / 3600 s = <b>12.4 m/s</b>`,`(b) ${vf} = √(12.44² + 2(0.35)(20.0)) = √(154.9 + 14.0) = <b>13.0 m/s</b>`]);
+add(se,null,'Starting at a certain speed, a bicyclist travels 2.00 × 10² m. Suppose the bicyclist undergoes a constant acceleration of 1.20 m/s². If the final speed is 25.0 m/s, what was the bicyclist\'s initial speed?',
+ [T('Initial speed','m/s',Math.sqrt(625-2*1.2*200))],
+ [`${vi} = √(${vf}² − 2${A}${dx}).`,`√(25.0² − 2(1.20)(200)).`],
+ [`${vi} = √(${vf}² − 2${A}${dx}) = √(625 − 480) = √145 = <b>12.0 m/s</b>`]);
+add(se,null,'In 1994, Tony Lang of the United States rode his motorcycle a distance of 4.0 × 10² m in 11.5 s. He started from rest and crossed the finish line with a speed of about 2.50 × 10² km/h. Find the magnitude of Lang\'s acceleration as he traveled the 4.0 × 10² m distance.',
+ [T('Acceleration','m/s²',kmh(250)**2/(2*400))],
+ [`250 km/h = 69.4 m/s. From rest, ${vf}² = 2${A}${dx}, so ${A} = ${vf}²/(2${dx}). (The 11.5 s is extra information.)`,`69.4² ÷ 800.`],
+ [`${vf} = 250 ÷ 3.6 = 69.4 m/s`,`${A} = ${F(vf+sq,'2'+dx)} = ${F('(69.4)²','2(4.0 × 10² m)')} = <b>6.0 m/s²</b>`]);
+add(se,null,'The lightest car in the world was built in London and had a mass of less than 10 kg. Its maximum speed was 25.0 km/h. Suppose the driver applies the brakes while the car is moving at its maximum speed. The car stops after traveling 16.0 m. Calculate the car\'s acceleration.',
+ [T('Acceleration','m/s²',-(kmh(25)**2)/(2*16))],
+ [`25.0 km/h = 6.94 m/s. ${A} = (${vf}² − ${vi}²)/(2${dx}) with ${vf} = 0. Expect a negative sign.`,`(0 − 6.94²) ÷ (2 × 16.0).`],
+ [`${vi} = 25.0 ÷ 3.6 = 6.94 m/s`,`${A} = ${F('0 − (6.94)²','2(16.0)')} = <b>−1.51 m/s²</b>`]);
+
+/* ===== Concepts & graphs ===== */
+const sg='cg';
+add(sg,null,'Marissa\'s car accelerates uniformly at a rate of +2.60 m/s². How long does it take for Marissa\'s car to accelerate from a speed of 24.6 m/s to a speed of 26.8 m/s?',
+ [T('Time','s',(26.8-24.6)/2.6)],
+ [`${dt} = (${vf} − ${vi})/${A}.`,`(26.8 − 24.6) ÷ 2.60.`],
+ [`${dt} = (26.8 m/s − 24.6 m/s)/(2.60 m/s²) = <b>0.846 s</b>`]);
+MC(sg,'A bowling ball with a negative initial velocity slows down as it rolls down the lane toward the pins. Is the bowling ball\'s acceleration positive or negative as it rolls toward the pins?',
+ ['Positive','Negative','Zero'],[0],'Velocity is negative and the ball slows down, so the acceleration has the <em>opposite</em> sign: positive. (See the sign table: v<sub>i</sub> −, a + → slowing down.)','Use the sign table: when are v and a of opposite signs?');
+add(sg,null,'Nathan accelerates his skateboard uniformly along a straight path from rest to 12.5 m/s in 2.5 s. (a) What is Nathan\'s acceleration? (b) What is Nathan\'s displacement during this time interval? (c) What is Nathan\'s average velocity during this time interval?',
+ [T('(a) Acceleration','m/s²',12.5/2.5),T('(b) Displacement','m',.5*12.5*2.5),T('(c) Average velocity','m/s',12.5/2)],
+ [`(a) ${A} = (${vf} − ${vi})/${dt}. (b) ${EQ.disp}. (c) v<sub>avg</sub> = (${vi} + ${vf})/2.`,`(a) 12.5 ÷ 2.5 = 5.0 m/s².`],
+ [`(a) ${A} = (12.5 − 0 m/s)/(2.5 s) = <b>5.0 m/s²</b>`,`(b) ${dx} = ½(0 + 12.5 m/s)(2.5 s) = <b>16 m</b> (15.6)`,`(c) v<sub>avg</sub> = (0 + 12.5)/2 = <b>6.3 m/s</b> (6.25)`]);
+MC(sg,'Critical thinking: two cars move in the same direction in parallel lanes. At some instant, the instantaneous velocity of car A exceeds the instantaneous velocity of car B. Does this mean car A\'s acceleration is greater than car B\'s?',
+ ['Yes — a faster car always has the larger acceleration','No — velocity and acceleration are independent at an instant. A can be faster while accelerating less (or not at all), e.g. A at constant 30 m/s and B speeding up from 10 m/s.','Yes, but only if they have the same mass'],[1],'Acceleration is the <em>rate of change</em> of velocity, not the velocity itself. A car moving fast at constant speed has zero acceleration.','Compare "how fast" with "how fast it is changing".');
+const SHUTTLE=[[0,0],[25,3],[75,3],[200,0],[300,0],[500,-5],[600,-4]];
+function shuttleSVG(){
+  const W=470,H=250,L=44,R=14,Tp=14,B=28, X=t=>L+t/600*(W-L-R), Y=v=>Tp+(4-v)/10*(H-Tp-B);
+  let s=`<svg class="vt" viewBox="0 0 ${W} ${H}" role="img" aria-label="Velocity versus time graph of a shuttle bus">`;
+  for(let v=-6;v<=4;v+=2) s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${v}</text>`;
+  for(let t=0;t<=600;t+=100) s+=`<line class="grid" y1="${Tp}" y2="${H-B}" x1="${X(t)}" x2="${X(t)}"/><text x="${X(t)}" y="${H-B+14}" text-anchor="middle">${t}</text>`;
+  s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="${Y(0)}" y2="${Y(0)}"/><line class="axis" x1="${L}" x2="${L}" y1="${Tp}" y2="${H-B}"/>`;
+  s+=`<polyline fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linejoin="round" points="${SHUTTLE.map(p=>X(p[0])+','+Y(p[1])).join(' ')}"/>`;
+  SHUTTLE.forEach(p=>s+=`<circle cx="${X(p[0])}" cy="${Y(p[1])}" r="3.5" fill="var(--accent)"/>`);
+  s+=`<text x="${L+4}" y="${Tp+8}">v (m/s)</text><text x="${W-R}" y="${H-4}" text-anchor="end">t (s)</text></svg>`;
+  return `<div class="fig">${s}<div class="figcap">Velocity versus time of a shuttle bus (redrawn from Figure 2.7; values read from the graph are approximate).</div></div>`;
+}
+MC(sg,'Use the shuttle-bus graph. During which time intervals is the <b>velocity constant</b>?',
+ ['0–25 s and 500–600 s','25–75 s and 200–300 s','75–200 s and 300–500 s','The velocity is never constant'],[1],'A horizontal segment means constant velocity: about 3 m/s from 25 to 75 s, and 0 m/s (at rest) from 200 to 300 s.','Look for horizontal (zero-slope) parts of the graph.',{figure:shuttleSVG});
+add(sg,null,'Shuttle-bus graph: find the <b>average velocity</b> over each straight-line interval where the acceleration is constant and non-zero. For a straight line, v<sub>avg</sub> = (v<sub>i</sub> + v<sub>f</sub>)/2.',
+ [T('0 → 25 s','m/s',1.5),T('75 → 200 s','m/s',1.5),T('300 → 500 s','m/s',-2.5),T('500 → 600 s','m/s',-4.5)],
+ [`For each interval read ${vi} and ${vf} from the graph (e.g. 300 s: 0 m/s; 500 s: −5 m/s), then average them.`,`0–25 s: (0 + 3)/2 = 1.5 m/s.`],
+ [`0–25 s: (0 + 3.0)/2 = <b>1.5 m/s</b>`,`75–200 s: (3.0 + 0)/2 = <b>1.5 m/s</b>`,`300–500 s: (0 + (−5.0))/2 = <b>−2.5 m/s</b>`,`500–600 s: (−5.0 + (−4.0))/2 = <b>−4.5 m/s</b>`],{figure:shuttleSVG});
+add(sg,null,'Shuttle-bus graph: find the <b>acceleration</b> (the slope) during each interval. Keep the sign.',
+ [T('0 → 25 s','m/s²',3/25),T('75 → 200 s','m/s²',-3/125),T('300 → 500 s','m/s²',-5/200),T('500 → 600 s','m/s²',1/100)],
+ [`Slope = Δv/Δt = (${vf} − ${vi})/${dt} for each straight segment.`,`0–25 s: (3.0 − 0)/(25 − 0) = 0.12 m/s².`],
+ [`0–25 s: (3.0 − 0)/25 s = <b>0.12 m/s²</b>`,`75–200 s: (0 − 3.0)/125 s = <b>−0.024 m/s²</b>`,`300–500 s: (−5.0 − 0)/200 s = <b>−0.025 m/s²</b>`,`500–600 s: (−4.0 − (−5.0))/100 s = <b>+0.010 m/s²</b>`],{figure:shuttleSVG});
+MC(sg,'Shuttle-bus graph: at which times is the <b>acceleration zero</b>?',
+ ['Only at t = 0','During 25–75 s and during 200–300 s (horizontal parts)','Only at t = 500 s','Never'],[1],'Zero slope → zero acceleration. That is true whenever the line is horizontal, even if the velocity is not zero (3 m/s) .','Acceleration is the slope of the graph.',{figure:shuttleSVG});
+MC(sg,'Shuttle-bus graph: at which times is the <b>instantaneous velocity zero</b>?',
+ ['At t = 0 and from 200 s to 300 s','Only at 25 s and 75 s','At 500 s','At no time'],[0],'The line is on the time axis at the start (t = 0) and along the whole 200–300 s interval. At 500 s the velocity is −5 m/s (its most negative value).','Where does the line touch the horizontal axis?',{figure:shuttleSVG});
+MC(sg,'Is the shuttle bus always moving in the same direction?',
+ ['Yes — it always moves forward','No — velocity is positive from 0 to about 200 s, the bus is at rest from 200–300 s, then velocity is negative after about 300 s, so it reverses direction','No — it reverses direction at 75 s'],[1],'The sign of the velocity gives direction. It is positive, then negative, so the bus moves forward and later backward.','Look at the sign of the velocity.',{figure:shuttleSVG});
+MC(sg,'Conceptual challenge — Fly Ball: if a baseball has zero velocity at some instant, is its acceleration necessarily zero at that instant?',
+ ['Yes: zero velocity always means zero acceleration','No — e.g., at the top of its flight a thrown ball has v = 0 but gravity still gives it an acceleration of about −9.8 m/s²','Yes, but only on Earth'],[1],'Velocity and acceleration are different quantities. Acceleration is the rate at which velocity <em>changes</em>; at the top of the path the velocity is changing from + to −.','Think of a ball thrown straight up.');
+MC(sg,'Conceptual challenge — Runaway Train: a passenger train travels on a straight track with a <b>negative velocity</b> and a <b>positive acceleration</b>. Is it speeding up or slowing down?',
+ ['Speeding up','Slowing down','Moving at constant speed'],[1],'Opposite signs for v and a → slowing down.','Compare the signs of velocity and acceleration.');
+MC(sg,'Conceptual challenge — Hike-and-Bike Trail: Jennifer slows her bike as she approaches hikers. How can her acceleration be <b>positive</b> even though her speed is decreasing?',
+ ['It can\'t; slowing down always means negative acceleration','She is moving in the negative direction (negative velocity), so a positive acceleration opposes her motion and slows her down','Her mass is decreasing'],[1],'Positive acceleration reduces the speed of an object that moves in the negative direction.','Which direction is she moving relative to the chosen positive direction?');
+MC(sg,'A negative acceleration always means the object is slowing down.',
+ ['True','False — it also means <em>speeding up</em> if the object is moving in the negative direction'],[1],'Speeding up or slowing down depends on whether v and a have the <em>same</em> sign (speeding up) or <em>opposite</em> signs (slowing down).','Check the sign table (Figure 2.3).');
+MC(sg,'Which equation is best when you <b>don\'t know and don\'t need the time interval</b> (you know v<sub>i</sub>, a, Δx and want v<sub>f</sub>)?',
+ [EQ.disp,EQ.vel,EQ.disp2,EQ.vsq],[3],'Only v<sub>f</sub>² = v<sub>i</sub>² + 2aΔx leaves out Δt.','Each equation leaves out exactly one of the five quantities.');
+MC(sg,'The kinematic equations in this lesson are valid…',
+ ['for any motion','only when acceleration is constant (uniform)','only for objects moving at constant velocity','only when the object starts from rest'],[1],'The derivations assumed that a is constant, e.g. v<sub>avg</sub> = (v<sub>i</sub> + v<sub>f</sub>)/2 only works for constant acceleration.','Look for the words "uniform" or "constant" in the problem.');
+MC(sg,'A bus slows from 9.0 m/s to rest in 5.0 s in one stop and in 1.5 s in another. Which statement is correct?',
+ ['The accelerations are equal because Δv is the same','The 1.5 s stop has the larger magnitude of acceleration: same Δv in a shorter Δt','The 5.0 s stop has the larger acceleration'],[1],'|a| = |Δv|/Δt: 9.0/1.5 = 6.0 m/s² versus 9.0/5.0 = 1.8 m/s².','Use a = Δv/Δt.');
+
+const SETS=[
+ {id:'tb',name:'Textbook Practice',desc:'The Practice problems from Sample Problems B, C, D and E in the lesson (19 problems).'},
+ {id:'s1',name:'Set I · Average acceleration',desc:'Additional practice with a = Δv/Δt (10 problems).'},
+ {id:'sc',name:'Set C · Displacement',desc:'Displacement with constant acceleration: Δx = ½(v_i + v_f)Δt (9 problems).'},
+ {id:'sd',name:'Set D · Velocity & displacement',desc:'Mixed problems using v_f = v_i + aΔt and Δx = v_iΔt + ½a(Δt)² (15 problems).'},
+ {id:'se',name:'Set E · Final velocity',desc:'Problems using v_f² = v_i² + 2aΔx (10 problems).'},
+ {id:'cg',name:'Concepts & Graphs',desc:'Section 2 Formative Assessment, the shuttle-bus graph, and the Conceptual Challenges.'}
+];
+P.forEach((p,i)=>{ p.id=p.set+(i+1); });
+let curSet='tb';
+
+function setStats(sid){ const ps=P.filter(p=>p.set===sid); return {done:ps.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length,total:ps.length}; }
+function updateOverall(){
+  const done=P.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length;
+  $('#overallText').textContent=`${done} of ${P.length} practice problems solved`;
+  $('#overallBar').style.width=(100*done/P.length)+'%';
+  $$('#setPicker button').forEach(b=>{ const s=setStats(b.dataset.set); $('small',b).textContent=`${s.done}/${s.total}`; });
+}
+function buildPicker(){
+  const pk=$('#setPicker'); pk.innerHTML='';
+  SETS.forEach(s=>{
+    const b=document.createElement('button'); b.type='button'; b.dataset.set=s.id; b.setAttribute('aria-pressed',String(s.id===curSet));
+    b.innerHTML=`${s.name}<small></small>`; b.addEventListener('click',()=>{ curSet=s.id; buildPicker(); renderSet(); }); pk.appendChild(b);
+  });
+  updateOverall();
+}
+function renderSet(){
+  const host=$('#problemList'); host.innerHTML='';
+  const s=SETS.find(x=>x.id===curSet);
+  const head=document.createElement('div'); head.className='sethead'; head.innerHTML=`<p>${s.desc.replace(/_(\w+)/g,'<sub>$1</sub>')}</p>`; host.appendChild(head);
+  let last=null;
+  P.filter(p=>p.set===curSet).forEach((p,i)=>{
+    if(p.sub&&p.sub!==last){ const h=document.createElement('h3'); h.className='subhead'; h.textContent=p.sub; host.appendChild(h); last=p.sub; }
+    host.appendChild(renderProblem(p,i+1));
+  });
+}
+function renderProblem(p,n){
+  const st=state['p_'+p.id]=state['p_'+p.id]||{done:false,tries:0};
+  const el=document.createElement('div'); el.className='prob'+(st.done?' done':'');
+  el.innerHTML=`<div class="num"><span>Problem ${n}</span><span class="badge">${st.done?'✔ Solved':''}</span></div><p style="margin:6px 0 4px">${p.text}</p>`;
+  if(p.figure) el.insertAdjacentHTML('beforeend',p.figure());
+  const body=document.createElement('div'); el.appendChild(body);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  const hintHost=document.createElement('div'), solHost=document.createElement('div');
+  const acts=document.createElement('div'); acts.className='acts';
+  const check=document.createElement('button'); check.className='btn'; check.type='button'; check.textContent='Check';
+  const hint=document.createElement('button'); hint.className='btn ghost'; hint.type='button'; hint.textContent='Hint';
+  const sol=document.createElement('button'); sol.className='btn ghost'; sol.type='button';
+  let hintN=0, inputs=[], checkFn;
+
+  if(p.opts){
+    const multi=p.type==='multi';
+    p.opts.forEach((o,i)=>{
+      const lab=document.createElement('label'); lab.className='opt'; lab.style.display='block'; lab.style.cursor='pointer';
+      const inp=document.createElement('input'); inp.type=multi?'checkbox':'radio'; inp.name='q_'+p.id; inp.value=i;
+      lab.append(inp); lab.insertAdjacentHTML('beforeend',o); body.appendChild(lab); inputs.push(inp);
+    });
+    checkFn=()=>{
+      const sel=inputs.filter(i=>i.checked).map(i=>+i.value);
+      if(!sel.length){ fb.className='fb near'; fb.textContent='Select an answer first.'; return null; }
+      const ok=sel.length===p.correct.length&&p.correct.every(c=>sel.includes(c));
+      inputs.forEach(i=>i.parentElement.classList.remove('right','wrong'));
+      if(ok){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+p.why; return true; }
+      sel.forEach(v=>{ if(!p.correct.includes(v)) inputs[v].parentElement.classList.add('wrong'); });
+      fb.className='fb no'; fb.textContent='Not quite. Re-read the question and use the sign table, the graph or the equations to reason it out.';
+      return false;
+    };
+  } else {
+    p.parts.forEach((part,i)=>{
+      const row=document.createElement('div'); row.className='partrow';
+      const id=`in_${p.id}_${i}`;
+      row.innerHTML=`<label for="${id}">${part.label}</label>`;
+      const inp=document.createElement('input'); inp.type='text'; inp.id=id; inp.autocomplete='off'; inp.placeholder='your answer';
+      const u=document.createElement('span'); u.className='u'; u.textContent=part.unit;
+      const pf=document.createElement('span'); pf.className='fb'; pf.style.margin='0'; pf.setAttribute('aria-live','polite');
+      row.append(inp,u,pf); body.appendChild(row); inputs.push({inp,pf});
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') check.click(); });
+    });
+    checkFn=()=>{
+      let all=true, any=false;
+      inputs.forEach(({inp,pf},i)=>{
+        if(!inp.value.trim()){ pf.className='fb near'; pf.textContent='Enter a value.'; all=false; return; }
+        any=true;
+        const j=judge(parseNum(inp.value),p.parts[i]);
+        pf.className='fb '+j.state; pf.textContent=(j.state==='ok'?'✔ ':'')+j.msg;
+        if(j.state!=='ok') all=false;
+      });
+      fb.textContent=''; fb.className='fb';
+      return any?all:null;
+    };
+  }
+  function showSol(){
+    solHost.className='solbox';
+    solHost.innerHTML=p.sol?'<b>Worked solution</b><ol>'+p.sol.map(s=>`<li>${s}</li>`).join('')+'</ol>':'<b>Answer explained</b><p style="margin:4px 0 0">'+p.why+'</p>';
+  }
+  function syncSol(){
+    const open=!!solHost.innerHTML;
+    sol.disabled=!(st.done||st.tries>=2);
+    sol.textContent=sol.disabled?'Solution (after 2 tries)':(open?'Hide solution':'Show solution');
+  }
+  check.addEventListener('click',()=>{
+    const r=checkFn(); if(r===null) return;
+    st.tries++;
+    if(r){
+      if(!st.done){ st.done=true; el.classList.add('done'); $('.badge',el).textContent='✔ Solved'; }
+      if(p.parts){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+(st.tries===1?'First try — nice work.':'Well done for sticking with it.'); }
+    } else if(p.parts && st.tries>=2 && !st.done){ fb.className='fb near'; fb.textContent='Still stuck? Try another hint, or open the worked solution.'; }
+    save(); updateOverall(); syncSol();
+  });
+  hint.addEventListener('click',()=>{
+    const hs=p.h||[]; if(!hs.length) return;
+    hintN=Math.min(hintN+1,hs.length);
+    hintHost.className='hintbox'; hintHost.innerHTML=`<b>Hint ${hintN}${hs.length>1?' of '+hs.length:''}:</b> `+hs.slice(0,hintN).map((h,i)=>i===hintN-1?h:'<span class="pnote">'+h+'</span>').reverse().join('<br>');
+    hint.textContent=hintN<hs.length?'Another hint':'Hint';
+  });
+  sol.addEventListener('click',()=>{ if(sol.disabled) return; if(solHost.innerHTML){ solHost.innerHTML=''; solHost.className=''; } else showSol(); syncSol(); });
+  acts.append(check,hint,sol); el.append(acts,fb,hintHost,solHost);
+  syncSol();
+  return el;
+}
+
+$('#resetAll').addEventListener('click',()=>{ if(confirm('Clear all saved progress on this device?')){ state={}; save(); buildPicker(); renderSet(); } });
+buildPicker(); renderSet();
+const h=(location.hash||'').slice(1); if(['review','examples','practice'].includes(h)) showTab(h);
+window.LIA2={P,EX,parseNum,judge};
+})();
+</script>
+</body>
+</html>
