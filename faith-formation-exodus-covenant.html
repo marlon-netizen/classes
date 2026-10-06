@@ -160,6 +160,13 @@ table.cmp{width:100%;border-collapse:collapse;font-size:.95rem}
 table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
 table.cmp th{background:var(--blue-soft)}
 
+.overlay{position:fixed;inset:0;background:rgba(17,22,29,.6);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 16px}
+.overlay[hidden]{display:none}
+.modal{background:var(--surface);border-radius:16px;max-width:620px;width:100%;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.35);border-top:5px solid var(--warm)}
+.bigscore{font-family:Georgia,serif;font-size:2.6rem;font-weight:700;color:var(--primary);line-height:1.1;margin:4px 0 8px}
+.bigscore small{font-size:1rem;color:var(--muted);font-family:system-ui,sans-serif;font-weight:400}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden;min-width:70px}
+.meter i{display:block;height:100%;background:var(--accent)}
 footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.88rem}
 .sr{position:absolute;left:-9999px}
 @media print{header.top .theme,nav.sticky,.btn{display:none}.step{display:block}}
@@ -187,7 +194,7 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;colo
     <a href="#vocab">Vocabulary</a>
     <a href="#examples">Worked examples</a>
     <a href="#practice">Practice</a>
-    <a href="#reflect">Reflect</a>
+    <a href="#reflect">Notebook</a>
     <a href="#bible">Exodus in the Bible</a>
     <div class="progress-box" aria-live="polite"><span id="progText">0 of 8 activities</span><div class="bar"><i id="progBar"></i></div></div>
   </div>
@@ -280,34 +287,39 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;colo
   <div class="card act" id="act-scripture"><h3>7. Scripture Detective <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
   <div class="card act" id="act-cloze"><h3>8. Complete the Sentences <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
 
-  <div class="card act" id="act-written"><h3>Bonus: Write It Out <span class="done-mark">✓ Self-checked</span></h3><div class="mount"></div></div>
+  <div class="card soft" id="summaryCta" style="display:none">
+    <h3>All activities complete!</h3>
+    <p>Great work. See how you did on each activity.</p>
+    <button class="btn" type="button" id="openSummary">View my score summary</button>
+  </div>
 </section>
 
 <!-- ======================= REFLECT ======================= -->
 <section class="sec" id="reflect">
   <div class="eyebrow">Metacognition</div>
-  <h2>Reflect on Your Learning</h2>
+  <h2>Reflect in Your Notebook</h2>
+  <div class="callout warm"><strong>Get your notebook and a pencil.</strong> Your answers to these questions are for you and your teacher, so write them by hand in your notebook, not on this page.</div>
   <div class="card">
     <h3>Rules for Freedom</h3>
     <p>How do rules like the Ten Commandments help a person stay free rather than stuck?</p>
     <div class="callout"><strong>Start with:</strong> One rule in my life that helps me stay free is ____ because ____.</div>
-    <label class="sr" for="r0">Rules for freedom</label>
-    <textarea id="r0" data-k="r0" placeholder="Write your sentence here…"></textarea>
   </div>
   <div class="card">
     <h3>End-of-week questions</h3>
-    <p><strong>1.</strong> Which part of the Exodus story could I explain to someone else?</p>
-    <textarea data-k="r1" aria-label="Which part of the Exodus story could I explain to someone else?"></textarea>
-    <p style="margin-top:14px"><strong>2.</strong> What rule or routine in my life helps me be free rather than stuck?</p>
-    <textarea data-k="r2" aria-label="What rule or routine in my life helps me be free rather than stuck?"></textarea>
-    <p style="margin-top:14px"><strong>3.</strong> What question do I still have about the covenant?</p>
-    <textarea data-k="r3" aria-label="What question do I still have about the covenant?"></textarea>
-    <p class="ref" id="savedNote">Your answers are saved automatically on this device only. Your teacher cannot see them unless you show them.</p>
+    <ol>
+      <li>Which part of the Exodus story could I explain to someone else?</li>
+      <li>What rule or routine in my life helps me be free rather than stuck?</li>
+      <li>What question do I still have about the covenant?</li>
+    </ol>
   </div>
   <div class="card soft">
-    <h3>Exit ticket</h3>
-    <p>1. Which part of the Exodus story (Passover, Red Sea, or Sinai) is clearest to you?<br>2. How does Jesus fulfill the Old Covenant?</p>
-    <p class="ref">Tip: use what you learned in the Worked Examples to answer #2.</p>
+    <h3>Exit ticket ✏️</h3>
+    <p><strong>Write your answers in your notebook</strong> before you close this page:</p>
+    <ol>
+      <li>Which part of the Exodus story (Passover, Red Sea, or Sinai) is clearest to you?</li>
+      <li>How does Jesus fulfill the Old Covenant?</li>
+    </ol>
+    <p class="ref">Tip: look back at Worked Example 4 if you need help with question 2. Hand your notebook to your teacher when asked.</p>
   </div>
   <p style="text-align:center;font-family:Georgia,serif;font-size:1.3rem;margin:22px 0"><em>Order leads to life.</em></p>
 </section>
@@ -340,6 +352,18 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;colo
     <div class="row" style="margin-top:10px"><button class="btn ghost" id="resetAll" type="button">Reset my progress</button></div>
   </div>
 </footer>
+
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="sumTitle" hidden>
+  <div class="modal">
+    <div class="eyebrow">Faith Formation · Exodus and Covenant</div>
+    <h2 id="sumTitle">Your Score Summary</h2>
+    <div class="bigscore" id="sumBig"></div>
+    <p id="sumMsg"></p>
+    <table class="cmp" id="sumTable"></table>
+    <p class="ref">Scores count correct answers on your latest try of each activity (hints and wrong taps lower the score). Remember to write your exit ticket answers in your notebook.</p>
+    <div class="row"><button class="btn" type="button" id="closeSummary">Close</button><button class="btn ghost" type="button" id="reviewBtn">Practice again</button></div>
+  </div>
+</div>
 
 <script>
 (function(){
@@ -381,18 +405,48 @@ $('#themeBtn').addEventListener('click', () => {
 const savedTheme = store.get('ff_theme', null);
 if(savedTheme) document.documentElement.dataset.theme = savedTheme;
 
-/* ---------- progress ---------- */
-const TOTAL = 8;
-const done = new Set(store.get('ff_exodus_done', []));
+/* ---------- progress & scores ---------- */
+const ACTS = [
+  ['act-quiz','Vocabulary Quiz'],['act-seq3','Sequence Strip'],['act-plagues','Order the Plagues'],['act-journey','Story Timeline'],
+  ['act-match','Match the Term'],['act-sort','The Law: Two Directions'],['act-scripture','Scripture Detective'],['act-cloze','Complete the Sentences']
+];
+const TOTAL = ACTS.length;
+const scores = store.get('ff_exodus_scores', {});
 function paintProgress(){
-  $('#progText').textContent = Math.min(done.size,TOTAL) + ' of ' + TOTAL + ' activities';
-  $('#progBar').style.width = (Math.min(done.size,TOTAL)/TOTAL*100) + '%';
-  $$('.act').forEach(a => a.classList.toggle('done', done.has(a.id)));
+  const n = ACTS.filter(a => scores[a[0]]).length;
+  $('#progText').textContent = n + ' of ' + TOTAL + ' activities';
+  $('#progBar').style.width = (n/TOTAL*100) + '%';
+  $$('.act').forEach(a => a.classList.toggle('done', !!scores[a.id]));
+  $('#summaryCta').style.display = n===TOTAL ? '' : 'none';
 }
-function markDone(id){ if(!done.has(id)){ done.add(id); store.set('ff_exodus_done', Array.from(done)); } paintProgress(); }
+function record(id, correct, total){
+  const was = ACTS.filter(a => scores[a[0]]).length;
+  scores[id] = [correct, total];
+  store.set('ff_exodus_scores', scores);
+  paintProgress();
+  if(was===TOTAL-1 && ACTS.every(a => scores[a[0]])) setTimeout(openSummary, 900);
+}
+function openSummary(){
+  let c=0,t=0;
+  const rows = ACTS.map(([id,name]) => { const [a,b]=scores[id]||[0,0]; c+=a; t+=b; return h('tr',{}, h('td',{},name), h('td',{},a+' / '+b), h('td',{}, h('div',{class:'meter'}, h('i',{style:'width:'+(b?a/b*100:0)+'%'})))); });
+  const pct = t ? Math.round(c/t*100) : 0;
+  $('#sumBig').innerHTML = pct + '% <small>(' + c + ' of ' + t + ' correct)</small>';
+  $('#sumMsg').textContent = pct>=90 ? 'Outstanding! You understand the Passover, Exodus, Sinai and the New Covenant very well.'
+    : pct>=80 ? 'Secure! You have a solid understanding. Review the activities with lower scores to make it even stronger.'
+    : pct>=60 ? 'Good progress. Go back to the Worked Examples, then retry the activities with lower scores.'
+    : 'Keep going! Re-read the Learn section and the Worked Examples, then try the activities again.';
+  const tbl = $('#sumTable'); tbl.innerHTML='';
+  tbl.append(h('tr',{},h('th',{},'Activity'),h('th',{},'Score'),h('th',{},'')), ...rows);
+  $('#overlay').hidden = false; $('#closeSummary').focus();
+}
+function closeSummary(){ $('#overlay').hidden = true; }
+$('#openSummary').addEventListener('click', openSummary);
+$('#closeSummary').addEventListener('click', closeSummary);
+$('#reviewBtn').addEventListener('click', () => { closeSummary(); $('#practice').scrollIntoView(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeSummary(); });
 $('#resetAll').addEventListener('click', () => {
-  if(!confirm('Clear your saved progress and reflections on this device?')) return;
-  store.del('ff_exodus_done'); store.del('ff_exodus_refl'); location.reload();
+  if(!confirm('Clear your saved scores on this device?')) return;
+  store.del('ff_exodus_scores'); location.reload();
 });
 
 /* ---------- stage explorer ---------- */
@@ -537,7 +591,7 @@ function mountQuiz(id, questions, opts){
       if(answered<questions.length){ summary.textContent = 'Answered ' + answered + ' of ' + questions.length; return; }
       summary.textContent = 'Score: ' + correct + ' / ' + questions.length + (correct===questions.length ? ' – perfect!' : correct/questions.length>=.8 ? ' – secure (80% or higher).' : ' – review the explanations and try again.');
       again.style.display = '';
-      if(correct/questions.length >= (opts&&opts.pass||.8)) markDone(id);
+      record(id, correct, questions.length);
     }
     questions.forEach((q,qi) => {
       const order = shuffle(q.o.map((t,i) => ({t, ok:i===q.a})));
@@ -583,7 +637,7 @@ mountQuiz('act-scripture', [
   { q:'Exodus 20:1–17 – God speaks the Ten Commandments. Which stage is this?', o:['The Sinai Covenant','The Passover','The Exodus','The burning bush'], a:0, e:'The Law was given at Sinai.' },
   { q:'Luke 22:19–20 – Jesus takes the cup and says "the new covenant in my blood." Which stage is this?', o:['The New Covenant','The Old Covenant at Sinai','The Passover in Egypt','The Exodus'], a:0, e:'Jesus establishes the New Covenant at the Last Supper.' },
   { q:'Exodus 20:2 says "I am the LORD your God, who brought you out of the land of Egypt, out of the house of slavery." What does this teach about the Law?', o:['The Law is given to people who are already free, to help them stay free','The Law is the price Israel must pay to leave Egypt','The Law is for Egyptians only','The Law replaced God\'s promise'], a:0, e:'The commandments begin with God\'s act of freeing His people. Rules support freedom rather than take it away.' }
-], {pass:.8});
+]);
 
 /* ---------- sequence engine ---------- */
 function mountSequence(id, intro, items){
@@ -611,7 +665,7 @@ function mountSequence(id, intro, items){
           if(next<items.length) slots[next].classList.add('next');
           else {
             feedback(fb,'good','🎉 Complete! ' + (mistakes===0 ? 'No mistakes.' : mistakes + ' mistake' + (mistakes>1?'s':'') + ' along the way. Try again to get it without hints.') + ' ' + p.why);
-            again.style.display=''; markDone(id);
+            again.style.display=''; record(id, Math.max(0, items.length-mistakes), items.length);
           }
         } else {
           mistakes++;
@@ -679,7 +733,7 @@ mountSequence('act-journey', 'Put the whole story in order, from slavery to the 
         feedback(fb,'good','✓ Match!');
         if(matched===pairs.length){
           feedback(fb,'good','🎉 All matched' + (mistakes? ' with ' + mistakes + ' miss' + (mistakes>1?'es':'') : ' with no misses') + '.');
-          again.style.display=''; markDone(id);
+          again.style.display=''; record(id, Math.max(0, pairs.length-mistakes), pairs.length);
         }
       } else {
         mistakes++; b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'),600);
@@ -718,7 +772,7 @@ mountSequence('act-journey', 'Put the whole story in order, from slavery to the 
       if(i>=deck.length){
         card.textContent='Finished!'; bG.disabled=bN.disabled=true;
         feedback(fb,'good','Score: ' + right + ' / ' + deck.length + '. The Ten Commandments teach love of God (the first three) and love of neighbor (the rest).');
-        again.style.display=''; markDone(id); count.textContent=''; return;
+        again.style.display=''; record(id, right, deck.length); count.textContent=''; return;
       }
       card.textContent=deck[i][0]; count.textContent='Card ' + (i+1) + ' of ' + deck.length;
     }
@@ -749,7 +803,7 @@ mountSequence('act-journey', 'Put the whole story in order, from slavery to the 
   ];
   function render(){
     mount.innerHTML='';
-    let ok=new Set();
+    let ok=new Set(), wrong=0;
     const fb=h('div',{class:'fb','aria-live':'polite'});
     const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
     again.addEventListener('click',render);
@@ -761,9 +815,9 @@ mountSequence('act-journey', 'Put the whole story in order, from slavery to the 
         if(+sel.value===s[2]){
           sel.className='good'; sel.disabled=true; ok.add(k);
           feedback(fb,'good','✓ ' + s[4]);
-          if(ok.size===S.length){ feedback(fb,'good','🎉 All sentences complete!'); again.style.display=''; markDone(id); }
+          if(ok.size===S.length){ feedback(fb,'good','🎉 All sentences complete!'); again.style.display=''; record(id, Math.max(0, S.length-wrong), S.length); }
         } else {
-          sel.className='bad shake'; setTimeout(()=>sel.classList.remove('shake'),600);
+          wrong++; sel.className='bad shake'; setTimeout(()=>sel.classList.remove('shake'),600);
           feedback(fb,'bad','Not quite – try another word. Think about what you learned in the story.');
         }
       });
@@ -772,48 +826,6 @@ mountSequence('act-journey', 'Put the whole story in order, from slavery to the 
     mount.append(h('p',{},'Choose the word that completes each sentence.'),box,fb,h('div',{class:'row',style:'margin-top:10px'},again));
   }
   render();
-})();
-
-/* ---------- written (self-check) ---------- */
-(function(){
-  const id='act-written', mount=$('#'+id+' .mount');
-  const prompts=[
-    { q:'What did the lamb\'s blood signify?',
-      concepts:[
-        ['It was a sign of protection / the firstborn were spared', /protect|spare|safe|pass(ed)? over|saved/i],
-        ['It showed trust and obedience to God\'s instructions', /obey|obedien|trust|faith|follow|instruction|listen/i],
-        ['(Extra) It points to Jesus, the Lamb of God', /jesus|christ|lamb of god|new covenant/i]
-      ],
-      model:'The lamb\'s blood on the doorposts was a sign of protection. God passed over the houses that were marked, so the firstborn were spared, and the sign showed that the family trusted and obeyed God\'s instructions. It also points ahead to Jesus, the Lamb of God.' },
-    { q:'Why did God give such exact instructions for the Passover?',
-      concepts:[
-        ['The instructions protected the people', /protect|safe|spare|saved|life|lives/i],
-        ['The order / exact steps mattered (virtue of Order)', /order|exact|step|sequence|precise|instruction/i],
-        ['They led the people to freedom', /free|freedom|deliver|escape|leave|slavery/i]
-      ],
-      model:'God gave exact instructions because the steps protected His people and led them to freedom. Doing them in order kept families safe, like a fire drill, and shows the virtue of Order.' }
-  ];
-  const doneSet=new Set();
-  prompts.forEach((p,k)=>{
-    const ta=h('textarea',{'aria-label':p.q,placeholder:'Write 2–3 sentences in your own words…'});
-    const out=h('div',{'aria-live':'polite'});
-    const btn=h('button',{class:'btn',type:'button'},'Check my answer');
-    btn.addEventListener('click',()=>{
-      out.innerHTML='';
-      const txt=ta.value.trim();
-      if(txt.split(/\s+/).filter(Boolean).length<12){ out.append(h('div',{class:'fb show info'},'Write at least a couple of full sentences first, then check.')); return; }
-      const res=p.concepts.map(c=>[c[0],c[1].test(txt)]);
-      const core=res.slice(0,2).every(r=>r[1]) || (p.concepts.length===3 && res.filter(r=>r[1]).length>=2);
-      out.append(
-        h('ul',{class:'checks'}, res.map(r=>h('li',{}, h('span',{class:r[1]?'y':'n'}, r[1]?'✓ ':'○ '), r[0]))),
-        h('div',{class:'fb show ' + (core?'good':'info')}, core ? 'Nice! Your answer covers the main ideas. Compare it with the model answer below.' : 'You are missing some key ideas (○). Add them, then check again.'),
-        h('div',{class:'model'}, h('strong',{},'Model answer: '), p.model)
-      );
-      if(core){ doneSet.add(k); if(doneSet.size===prompts.length) document.getElementById(id).classList.add('done'); }
-    });
-    mount.append(h('div',{class:'qblock'}, h('div',{class:'qhead'},(k+1)+'. '+p.q), ta, h('div',{class:'row',style:'margin-top:8px'},btn), out));
-  });
-  mount.prepend(h('p',{class:'ref'},'This tool looks for key ideas in your writing. It is a self-check and does not replace your teacher\'s feedback.'));
 })();
 
 /* ---------- Exodus reference ---------- */
@@ -829,18 +841,6 @@ const BIBLE = [
   ['Exodus 25–40: The Tabernacle and the golden calf','God gives plans for the Tabernacle, a dwelling place among His people. Israel sins with the golden calf (Exodus 32), but God forgives and renews the covenant (Exodus 34).']
 ];
 BIBLE.forEach(([t,b]) => $('#bibleList').append(h('details',{class:'acc'}, h('summary',{},t), h('div',{class:'body'},b))));
-
-/* ---------- reflections ---------- */
-(function(){
-  const saved = store.get('ff_exodus_refl', {});
-  $$('textarea[data-k]').forEach(t => {
-    if(saved[t.dataset.k]) t.value = saved[t.dataset.k];
-    t.addEventListener('input', () => {
-      saved[t.dataset.k] = t.value; store.set('ff_exodus_refl', saved);
-      $('#savedNote').textContent = 'Saved on this device.';
-    });
-  });
-})();
 
 paintProgress();
 })();
