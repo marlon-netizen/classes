@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Respect On and Off Screen | Growing in Values</title>
+<meta name="description" content="Interactive study page for Growing in Values (8th grade): respecting national symbols and human rights on and off screen, with worked examples and practice.">
+<style>
+:root{
+  --bg:#f3f0e9; --surface:#fffdf9; --surface-2:#f8f5ee; --ink:#1e2937; --muted:#5a6575;
+  --line:#ddd6c7; --primary:#1d4e5f; --primary-ink:#ffffff; --accent:#4d7a5a; --accent-soft:#e4efe6;
+  --blue-soft:#e2eef1; --warm:#b56a4a; --warm-soft:#f6e9e0; --good:#2c7a57; --good-soft:#e1f1e8;
+  --bad:#a94a3f; --bad-soft:#f6e4e1; --shadow:0 1px 2px rgba(30,41,55,.06),0 4px 14px rgba(30,41,55,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+    --line:#2d3947; --primary:#8cc3d2; --primary-ink:#0f1722; --accent:#8cc79b; --accent-soft:#1a2f23;
+    --blue-soft:#172b31; --warm:#dc9b7d; --warm-soft:#2f211b; --good:#5cc08f; --good-soft:#183024;
+    --bad:#e08a7d; --bad-soft:#331e1c; --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+  --line:#2d3947; --primary:#8cc3d2; --primary-ink:#0f1722; --accent:#8cc79b; --accent-soft:#1a2f23;
+  --blue-soft:#172b31; --warm:#dc9b7d; --warm-soft:#2f211b; --good:#5cc08f; --good-soft:#183024;
+  --bad:#e08a7d; --bad-soft:#331e1c; --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:#16414f;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:Georgia,serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em;margin:0}
+.crumbs{margin:.25rem 0 0;font-size:1.05rem;color:#d9d3c4}
+.crumbs strong{color:#fff}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font-size:.8rem;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#f3f0e9;border:1px solid rgba(255,255,255,.2)}
+.theme{background:transparent;border:1px solid rgba(255,255,255,.35);color:#f3f0e9;border-radius:8px;padding:4px 10px;font-size:.85rem}
+
+/* nav */
+nav.sticky{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+nav.sticky .wrap{display:flex;gap:4px;align-items:center;overflow-x:auto;padding-top:6px;padding-bottom:6px}
+nav.sticky a{white-space:nowrap;text-decoration:none;color:var(--ink);padding:6px 12px;border-radius:8px;font-size:.92rem}
+nav.sticky a:hover{background:var(--blue-soft)}
+.progress-box{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);white-space:nowrap}
+.bar{width:110px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+section.sec{padding:34px 0 6px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--warm);font-weight:700;margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow);margin:0 0 18px}
+.card.soft{background:var(--blue-soft)}
+.card.warm{background:var(--warm-soft)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 10px 10px 0;margin:0 0 1em}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.ref{font-size:.82rem;color:var(--muted);font-style:italic}
+.tag{display:inline-block;font-size:.75rem;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary);font-weight:600;margin-right:6px}
+
+/* stage explorer */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:600}
+.tab[aria-selected="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.tabpanel ul{margin:.3em 0 1em;padding-left:1.2em}
+.tabpanel li{margin-bottom:.35em}
+
+/* flip cards */
+.flip{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-height:150px;text-align:left;box-shadow:var(--shadow);width:100%}
+.flip .front{font-family:Georgia,serif;font-size:1.3rem;font-weight:700}
+.flip .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+.flip .back{display:none}
+.flip.on{background:var(--accent-soft);border-color:var(--accent)}
+.flip.on .front{font-size:1.05rem;color:var(--accent)}
+.flip.on .back{display:block;margin-top:8px}
+.flip.on .hint{display:none}
+
+/* accordion */
+details.acc{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:8px}
+details.acc summary{padding:11px 14px;cursor:pointer;font-weight:600}
+details.acc .body{padding:0 14px 12px}
+
+/* activity shell */
+.act{position:relative}
+.act h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.act .done-mark{display:none;font-size:.78rem;background:var(--good-soft);color:var(--good);padding:2px 10px;border-radius:99px;font-family:system-ui,sans-serif;font-weight:700}
+.act.done .done-mark{display:inline-block}
+.btn{background:var(--primary);color:var(--primary-ink);border:0;border-radius:9px;padding:8px 16px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--primary);border:1px solid var(--primary)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.opt:focus-visible,.tab:focus-visible,.flip:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+.opt{display:block;width:100%;text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 8px}
+.opt:hover:not(:disabled){border-color:var(--primary)}
+.opt.good{background:var(--good-soft);border-color:var(--good);color:var(--ink)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt.sel{border-color:var(--primary);background:var(--blue-soft)}
+.opt:disabled{cursor:default}
+.fb{min-height:1.4em;margin:8px 0 0;padding:0;border-radius:8px;font-size:.95rem}
+.fb.show{padding:9px 13px}
+.fb.good{background:var(--good-soft);color:var(--ink);border-left:4px solid var(--good)}
+.fb.bad{background:var(--bad-soft);color:var(--ink);border-left:4px solid var(--bad)}
+.fb.info{background:var(--blue-soft);border-left:4px solid var(--primary)}
+.shake{animation:shake .35s}
+@keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}html{scroll-behavior:auto}.bar i{transition:none}}
+.score{font-weight:700;color:var(--primary)}
+.qhead{font-weight:700;margin-bottom:8px}
+.qblock{border-top:1px dashed var(--line);padding-top:14px;margin-top:14px}
+.qblock:first-of-type{border-top:0;padding-top:0;margin-top:0}
+
+/* worked example */
+.steps{list-style:none;margin:12px 0 0;padding:0}
+.step{display:none;border:1px solid var(--line);border-left:5px solid var(--primary);background:var(--surface-2);border-radius:10px;padding:11px 14px;margin-bottom:9px}
+.step.show{display:block;animation:fade .3s}
+.step b.t{display:block;color:var(--primary);margin-bottom:2px}
+.step.final{border-left-color:var(--good);background:var(--good-soft)}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.problem{background:var(--warm-soft);border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+
+/* sequence */
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}
+.slot{min-height:78px;border:2px dashed var(--line);border-radius:10px;padding:8px 10px;font-size:.92rem;background:var(--surface-2)}
+.slot small{display:block;color:var(--muted);font-weight:700;margin-bottom:2px}
+.slot.filled{border-style:solid;border-color:var(--good);background:var(--good-soft)}
+.slot.next{border-color:var(--primary)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pool .opt{width:auto;margin:0}
+
+/* matching / sort */
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
+@media(max-width:560px){.match{grid-template-columns:1fr}}
+.match .opt.done{background:var(--good-soft);border-color:var(--good);opacity:.85}
+.sortcard{font-family:Georgia,serif;font-size:1.15rem;text-align:center;background:var(--warm-soft);border-radius:12px;padding:20px 12px;margin:10px 0}
+
+/* cloze */
+.cloze p{line-height:2.2}
+select{font:inherit;padding:4px 8px;border-radius:8px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+select.good{border-color:var(--good);background:var(--good-soft)}
+select.bad{border-color:var(--bad);background:var(--bad-soft)}
+textarea{width:100%;min-height:96px;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);resize:vertical}
+.checks{list-style:none;padding:0;margin:8px 0}
+.checks li{padding:4px 0}
+.checks .y{color:var(--good);font-weight:700}
+.checks .n{color:var(--warm);font-weight:700}
+.model{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 10px 10px 0;margin-top:8px}
+
+table.cmp{width:100%;border-collapse:collapse;font-size:.95rem}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.cmp th{background:var(--blue-soft)}
+
+.overlay{position:fixed;inset:0;background:rgba(17,22,29,.6);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 16px}
+.overlay[hidden]{display:none}
+.modal{background:var(--surface);border-radius:16px;max-width:620px;width:100%;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.35);border-top:5px solid var(--warm)}
+.bigscore{font-family:Georgia,serif;font-size:2.6rem;font-weight:700;color:var(--primary);line-height:1.1;margin:4px 0 8px}
+.bigscore small{font-size:1rem;color:var(--muted);font-family:system-ui,sans-serif;font-weight:400}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden;min-width:70px}
+.meter i{display:block;height:100%;background:var(--accent)}
+footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.88rem}
+.sr{position:absolute;left:-9999px}
+@media print{header.top .theme,nav.sticky,.btn{display:none}.step{display:block}}
+
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <p class="school">Lincoln International Academy</p>
+      <p class="crumbs">Class: <strong>Growing in Values</strong> &nbsp;·&nbsp; Teacher: <strong>Nathaly López</strong></p>
+    </div>
+    <div class="meta">
+      <span class="pill">8th Grade · Q02 Week 1</span>
+      <span class="pill">Unit 2: Community, respect and responsibility</span>
+      <button class="theme" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Light / Dark</button>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky" aria-label="Page sections">
+  <div class="wrap">
+    <a href="#learn">Learn</a>
+    <a href="#vocab">Vocabulary</a>
+    <a href="#examples">Worked examples</a>
+    <a href="#practice">Practice</a>
+    <a href="#reflect">Notebook</a>
+    <a href="#rights">Rights reference</a>
+    <div class="progress-box" aria-live="polite"><span id="progText">0 of 8 activities</span><div class="bar"><i id="progBar"></i></div></div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ======================= LEARN ======================= -->
+<section class="sec" id="learn">
+  <div class="eyebrow">Symbols and rights: respect on and off screen</div>
+  <h2>How can we respect our national symbols and everyone's human rights?</h2>
+
+  <div class="card soft">
+    <h3>Guiding question</h3>
+    <p><strong>"How can we show respect for our national symbols and, at the same time, respect everyone's human rights?"</strong></p>
+    <div class="callout">
+      <strong>Learning target:</strong> I can judge whether a real or fictional case shows respect for our national symbols and for human rights, argue my position respectfully in a debate, and help create a class "Decalogo del Respeto" that protects those rights at school.
+    </div>
+  </div>
+
+  <h3>Key ideas</h3>
+  <p>Select each idea to read it. Then try the worked examples.</p>
+  <div class="card">
+    <div class="tabs" role="tablist" aria-label="Key ideas" id="stageTabs"></div>
+    <div id="stagePanel" class="tabpanel" role="tabpanel" aria-live="polite"></div>
+  </div>
+
+  <div class="card warm">
+    <h3>Real-life connections</h3>
+    <ul>
+      <li><strong>Civic acts:</strong> when a school ceremony honors the flag and anthem, how we behave shows whether we respect the community that shares them.</li>
+      <li><strong>Social media:</strong> a post can reach hundreds of people in minutes. It can honor a symbol or hurt people, and it is hard to take back.</li>
+      <li><strong>At school:</strong> shared rules, like a Decalogo del Respeto, protect everyone's dignity so that disagreements stay respectful.</li>
+    </ul>
+    <p class="ref">Note: rules about how national symbols may be used differ from country to country. Ask your teacher about the rules in your country.</p>
+  </div>
+</section>
+
+<!-- ======================= VOCAB ======================= -->
+<section class="sec" id="vocab">
+  <div class="eyebrow">Key vocabulary</div>
+  <h2>Words to Know</h2>
+  <p>Tap a card to flip it. Say the meaning in your own words before you flip!</p>
+  <div class="grid g3" id="flips"></div>
+</section>
+
+<!-- ======================= EXAMPLES ======================= -->
+<section class="sec" id="examples">
+  <div class="eyebrow">Step by step</div>
+  <h2>Worked Examples</h2>
+  <p>Each example shows how to think through a type of task from class. Press <strong>Show next step</strong> and try to predict the next step before you reveal it.</p>
+  <div id="exampleList"></div>
+</section>
+
+<!-- ======================= PRACTICE ======================= -->
+<section class="sec" id="practice">
+  <div class="eyebrow">Your turn</div>
+  <h2>Practice with Instant Feedback</h2>
+  <p>You get feedback right after every answer. Mistakes are part of learning, so use the hints and try again. Your scores are saved on this device only.</p>
+
+  <div class="card act" id="act-quiz"><h3>1. Vocabulary Quiz <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-vote"><h3>2. Spot the Respect <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-cases"><h3>3. Case Analysis <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-match"><h3>4. Match the Right <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-debate"><h3>5. Debate Lab <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-seq"><h3>6. Steps of a Case Analysis <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-slogan"><h3>7. Designer of the Homeland <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-cloze"><h3>8. Complete the Sentences <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+
+  <div class="card soft" id="summaryCta" style="display:none">
+    <h3>All activities complete!</h3>
+    <p>Great work. See how you did on each activity.</p>
+    <button class="btn" type="button" id="openSummary">View my score summary</button>
+  </div>
+</section>
+
+<!-- ======================= NOTEBOOK ======================= -->
+<section class="sec" id="reflect">
+  <div class="eyebrow">Write it by hand</div>
+  <h2>Exit Ticket and Notebook Work</h2>
+  <div class="callout warm"><strong>Get your notebook or a sheet of paper and a pencil.</strong> Your answers here are not typed on this page, because your teacher will not see them here. Write them by hand.</div>
+
+  <div class="card soft">
+    <h3>Exit ticket ✏️</h3>
+    <p><strong>Write your answers in your notebook or on a paper sheet</strong> before you close this page:</p>
+    <ol>
+      <li>Name one national symbol and one human right. Explain in one or two sentences how they are connected.</li>
+      <li>Write one rule you would add to the class Decalogo del Respeto for the correct, respectful use of symbols at school.</li>
+    </ol>
+    <p class="ref">Tip: look back at Worked Examples 5 and 6 if you need help. Hand your paper to your teacher when asked.</p>
+  </div>
+
+  <div class="card">
+    <h3>Homework: Human Rights Watch</h3>
+    <p>During the week, observe <strong>one</strong> real situation at home, at school or in your community where a human right (for example respect, dignity, identity, or free and respectful expression) was either respected or not respected. In your notebook, write a short journal entry (5–6 lines) that answers:</p>
+    <ol>
+      <li>What happened?</li>
+      <li>Who was involved?</li>
+      <li>Which right was at stake?</li>
+      <li>Was it respected? Why or why not?</li>
+      <li>What did you do, or what would you do about it?</li>
+    </ol>
+    <p>Keep your commitment to the class Decalogo del Respeto during the week. Sharing your entry at the start of the next session is voluntary. Do not use real classmates' names.</p>
+  </div>
+
+  <div class="card">
+    <h3>Self-check (think, then write one sentence in your notebook)</h3>
+    <ul>
+      <li>I listened respectfully during the debate.</li>
+      <li>I contributed an idea to my team's case analysis or Decalogo line.</li>
+      <li>I took part in the "Designer of the Homeland" task.</li>
+      <li>I can explain one human right discussed today.</li>
+    </ul>
+    <p>Then finish this sentence: <em>"My commitment to the Decalogo del Respeto this week is ____."</em></p>
+  </div>
+  <p style="text-align:center;font-family:Georgia,serif;font-size:1.3rem;margin:22px 0"><em>Respect for symbols and respect for people go together.</em></p>
+</section>
+
+<!-- ======================= RIGHTS REFERENCE ======================= -->
+<section class="sec" id="rights">
+  <div class="eyebrow">Additional reference</div>
+  <h2>Human Rights Quick Reference</h2>
+  <p>These ideas come from the Universal Declaration of Human Rights (United Nations, 1948). The summaries are in simple words and are not word-for-word quotes. You can read the full text on the UN website.</p>
+  <div class="card soft">
+    <table class="cmp">
+      <tr><th>Article</th><th>In simple words</th><th>Link to our topic</th></tr>
+      <tr><td>Article 1</td><td>All people are born free and equal in dignity and rights.</td><td>Everyone's dignity deserves respect, online and offline.</td></tr>
+      <tr><td>Article 2</td><td>Rights belong to everyone without discrimination.</td><td>A symbol must never be used to exclude or mock a group.</td></tr>
+      <tr><td>Article 12</td><td>No one should suffer attacks on their privacy, honor or reputation.</td><td>Do not post humiliating images or comments about others.</td></tr>
+      <tr><td>Article 19</td><td>Everyone has the right to hold opinions and to express them.</td><td>You can share your views, and debate respectfully.</td></tr>
+      <tr><td>Article 29</td><td>We have duties to our community, and rights can be limited to protect the rights of others.</td><td>Freedom of expression comes with responsibility.</td></tr>
+    </table>
+    <p class="ref" style="margin-top:10px">Full text: <a href="https://www.un.org/en/about-us/universal-declaration-of-human-rights" target="_blank" rel="noopener">un.org – Universal Declaration of Human Rights</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Lincoln International Academy · Growing in Values · Ms. Nathaly López · 8th Grade, Q02 Week 1.
+    <br>Based on the lesson plan "Symbols and rights: respect on and off screen."
+    <div class="row" style="margin-top:10px"><button class="btn ghost" id="resetAll" type="button">Reset my scores</button></div>
+  </div>
+</footer>
+
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="sumTitle" hidden>
+  <div class="modal">
+    <div class="eyebrow">Growing in Values · Respect on and off screen</div>
+    <h2 id="sumTitle">Your Score Summary</h2>
+    <div class="bigscore" id="sumBig"></div>
+    <p id="sumMsg"></p>
+    <table class="cmp" id="sumTable"></table>
+    <p class="ref">Scores count correct answers on your latest try of each activity (hints and wrong taps lower the score). Remember to write your exit ticket answers in your notebook or on a paper sheet.</p>
+    <div class="row"><button class="btn" type="button" id="closeSummary">Close</button><button class="btn ghost" type="button" id="reviewBtn">Practice again</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- helpers ---------- */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+function h(tag, attrs, ...kids){
+  const el = document.createElement(tag);
+  for(const k in (attrs||{})){
+    if(k==='class') el.className = attrs[k];
+    else if(k==='html') el.innerHTML = attrs[k];
+    else if(k.startsWith('on')) el.addEventListener(k.slice(2), attrs[k]);
+    else el.setAttribute(k, attrs[k]);
+  }
+  kids.flat().forEach(c => { if(c!=null) el.append(c.nodeType ? c : document.createTextNode(c)); });
+  return el;
+}
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+function feedback(el, kind, text){ el.className = 'fb show ' + kind; el.textContent = text; }
+
+/* ---------- theme ---------- */
+$('#themeBtn').addEventListener('click', () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme==='dark' || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme = dark ? 'light' : 'dark';
+  store.set('gv_theme', root.dataset.theme);
+});
+const savedTheme = store.get('gv_theme', null);
+if(savedTheme) document.documentElement.dataset.theme = savedTheme;
+
+/* ---------- progress & scores ---------- */
+const ACTS = [
+  ['act-quiz','Vocabulary Quiz'],['act-vote','Spot the Respect'],['act-cases','Case Analysis'],['act-match','Match the Right'],
+  ['act-debate','Debate Lab'],['act-seq','Steps of a Case Analysis'],['act-slogan','Designer of the Homeland'],['act-cloze','Complete the Sentences']
+];
+const TOTAL = ACTS.length;
+const scores = store.get('gv_q02w01_scores', {});
+function paintProgress(){
+  const n = ACTS.filter(a => scores[a[0]]).length;
+  $('#progText').textContent = n + ' of ' + TOTAL + ' activities';
+  $('#progBar').style.width = (n/TOTAL*100) + '%';
+  $$('.act').forEach(a => a.classList.toggle('done', !!scores[a.id]));
+  $('#summaryCta').style.display = n===TOTAL ? '' : 'none';
+}
+function record(id, correct, total){
+  const was = ACTS.filter(a => scores[a[0]]).length;
+  scores[id] = [correct, total];
+  store.set('gv_q02w01_scores', scores);
+  paintProgress();
+  if(was===TOTAL-1 && ACTS.every(a => scores[a[0]])) setTimeout(openSummary, 900);
+}
+function openSummary(){
+  let c=0,t=0;
+  const rows = ACTS.map(([id,name]) => { const [a,b]=scores[id]||[0,0]; c+=a; t+=b; return h('tr',{}, h('td',{},name), h('td',{},a+' / '+b), h('td',{}, h('div',{class:'meter'}, h('i',{style:'width:'+(b?a/b*100:0)+'%'})))); });
+  const pct = t ? Math.round(c/t*100) : 0;
+  $('#sumBig').innerHTML = pct + '% <small>(' + c + ' of ' + t + ' correct)</small>';
+  $('#sumMsg').textContent = pct>=90 ? 'Outstanding! You can analyze cases, argue respectfully and connect symbols with human rights.'
+    : pct>=80 ? 'Secure! You have a solid understanding. Review the activities with lower scores to make it even stronger.'
+    : pct>=60 ? 'Good progress. Go back to the Worked Examples, then retry the activities with lower scores.'
+    : 'Keep going! Re-read the Key ideas and the Worked Examples, then try the activities again.';
+  const tbl = $('#sumTable'); tbl.innerHTML='';
+  tbl.append(h('tr',{},h('th',{},'Activity'),h('th',{},'Score'),h('th',{},'')), ...rows);
+  $('#overlay').hidden = false; $('#closeSummary').focus();
+}
+function closeSummary(){ $('#overlay').hidden = true; }
+$('#openSummary').addEventListener('click', openSummary);
+$('#closeSummary').addEventListener('click', closeSummary);
+$('#reviewBtn').addEventListener('click', () => { closeSummary(); $('#practice').scrollIntoView(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeSummary(); });
+$('#resetAll').addEventListener('click', () => {
+  if(!confirm('Clear your saved scores on this device?')) return;
+  store.del('gv_q02w01_scores'); location.reload();
+});
+
+/* ---------- key ideas ---------- */
+const IDEAS = [
+  { tab:'1. Human rights', title:'Human rights protect every person',
+    pts:['A human right is a basic protection every person has, for example <b>dignity</b>, <b>identity</b>, and <b>free and respectful expression</b>.',
+         'Rights belong to everyone equally: at home, at school, in the community and online.',
+         'Because rights belong to everyone, my rights end where I would harm someone else\'s rights.'],
+    key:'Every person has dignity, and that does not change on or off screen.' },
+  { tab:'2. National symbols', title:'National symbols represent a shared community',
+    pts:['National symbols include the <b>flag</b>, the <b>anthem</b>, the <b>coat of arms or emblem</b>, and the honors given to national heroes.',
+         'They stand for the history, values and identity that people share.',
+         'Respectful use means using them correctly (right colors and form), in the right moment (for example, standing quietly at a civic act), and without mocking them or the people they represent.'],
+    key:'Symbols represent people. That is why respecting symbols and respecting people are linked, not separate.' },
+  { tab:'3. On and off screen', title:'Respect does not stop at the screen',
+    pts:['Off screen: at a civic act we stand, listen and keep silence during the anthem.',
+         'On screen: before posting, ask <i>Is it respectful? Who could it hurt? Can I take it back?</i>',
+         'A meme that alters a flag, or a video that mocks a ceremony, can spread fast and hurt the community. A respectful tribute post can start a respectful conversation.'],
+    key:'Your behavior online counts the same as your behavior in the school courtyard.' },
+  { tab:'4. Rights and responsibilities', title:'Freedom of expression has responsibilities',
+    pts:['You have the right to hold opinions and to share them (Article 19).',
+         'That right comes with duties to the community, and can be limited to protect the rights of others (Article 29). Attacks on someone\'s honor or reputation are not protected expression (Article 12).',
+         'In a debate, respect means: one voice at a time, no interrupting, criticize ideas not people, and listen before you answer.'],
+    key:'Disagreeing is allowed. Disrespecting people is not.' },
+  { tab:'5. Decalogo del Respeto', title:'A class code of respect',
+    pts:['The Decalogo del Respeto is a set of ten short rules the class creates together for the correct, respectful use of symbols and rights at school.',
+         'A good line is <b>short</b>, <b>clear</b>, <b>positive</b>, and says <b>who it protects</b>.',
+         'Example: "Stand quietly during the anthem so everyone\'s moment of respect is protected."'],
+    key:'Shared rules protect everyone\'s dignity and keep disagreements respectful.' }
+];
+(function(){
+  const tabs = $('#stageTabs'), panel = $('#stagePanel');
+  function show(i){
+    $$('.tab', tabs).forEach((b,j) => b.setAttribute('aria-selected', j===i));
+    const s = IDEAS[i];
+    panel.innerHTML = '';
+    panel.append(h('h3', {}, s.title), h('ul', {}, s.pts.map(p => h('li', {html:p}))), h('div', {class:'callout'}, h('strong', {}, 'Key idea: '), s.key));
+  }
+  IDEAS.forEach((s,i) => tabs.append(h('button', {class:'tab', role:'tab', type:'button', 'aria-selected':'false', onclick:()=>show(i)}, s.tab)));
+  show(0);
+})();
+
+/* ---------- vocabulary cards ---------- */
+const VOCAB = [
+  ['Human rights','Basic protections every person has, such as dignity, identity, and free and respectful expression.'],
+  ['Dignity','The worth every person has, no matter who they are, what they own or what they achieve.'],
+  ['National symbols','Things that represent a country and its shared identity, such as the flag, the anthem and the coat of arms.'],
+  ['Respect','Treating people, and the things that matter to them, with care and consideration.'],
+  ['Freedom of expression','The right to share your ideas and opinions, while respecting the rights of others.'],
+  ['Responsibility','Thinking about the effect of your words and actions on others, and answering for them.'],
+  ['Civic act','A public ceremony where a community honors its shared symbols and values, such as a flag ceremony.']
+];
+VOCAB.forEach(([t,d]) => {
+  const b = h('button', {class:'flip', type:'button', 'aria-pressed':'false'},
+    h('div', {class:'front'}, t), h('div', {class:'hint'}, 'Tap to see the meaning'), h('div', {class:'back'}, d));
+  b.addEventListener('click', () => { const on = b.classList.toggle('on'); b.setAttribute('aria-pressed', on); });
+  $('#flips').append(b);
+});
+
+/* ---------- worked examples ---------- */
+const EXAMPLES = [
+  { title:'Example 1: Analyze Case 2, "The ceremony video"',
+    problem:'<i>During the Monday civic act, a group of students records a video making jokes and funny faces while the anthem plays, and posts it that afternoon. Classmates have mixed reactions when they see it online.</i><br>Is this respectful? Use the four questions of the case analysis worksheet.',
+    steps:[
+      ['What happened? (facts only)','Students filmed themselves joking and making faces during the anthem at a civic act, and then posted the video online.'],
+      ['Who is affected, and how?','The school community that shares the anthem and the ceremony (their moment of respect was mocked); classmates who see the video; and the students themselves, whose post now stays public.'],
+      ['Which rights or values are involved?','Respect for a shared symbol, the dignity and identity of the community, and <b>responsible</b> use of freedom of expression (Articles 19 and 29).'],
+      ['Is it respectful? Why or why not?','<b>No.</b> Humor is not the problem; the problem is making fun of a shared symbol at the very moment meant to honor it, and then spreading it to many people.'],
+      ['Propose an action.','The students can remove the post, apologize, and next time keep silence at the ceremony and share only respectful content.', true]
+    ]},
+  { title:'Example 2: Analyze Case 3, "The tribute post"',
+    problem:'<i>A student publishes a short, respectful post honoring a national hero for their birthday, using the correct colors and a message about the values the hero represents. The post generates a respectful conversation in the comments.</i>',
+    steps:[
+      ['What happened?','A student honored a national hero with a post that used the correct colors and explained the hero\'s values.'],
+      ['Who is affected, and how?','Followers and classmates who read the post and join the conversation. Their experience is positive: they learn about the hero\'s values.'],
+      ['Which rights or values are involved?','Respect for national symbols and identity, and free and respectful expression. The student uses their right without harming anyone.'],
+      ['Is it respectful? Why or why not?','<b>Yes.</b> The symbol is used correctly, the message explains a value, and the comments stay respectful. Respect can be creative and meaningful.'],
+      ['Propose an action.','Nothing to fix. The student could invite classmates to share their own respectful tributes.', true]
+    ]},
+  { title:'Example 3: A harder case, "The altered flag"',
+    problem:'<i>A local shop posts an online ad where the national flag\'s colors are redrawn around the shop\'s logo to "go viral" for a sale. Some people share it saying it is creative; others say it disrespects a national symbol.</i><br>When opinions are mixed, how do you decide?',
+    steps:[
+      ['List both sides fairly.','Supporters: it is creative and attracts attention. Critics: it changes a shared symbol.'],
+      ['Ask a key question: what is the symbol being used for?','It is used to sell a product. The flag represents everyone, not one business, so using it as a prop for profit treats a shared symbol like an advertisement.'],
+      ['Ask: does the change alter the symbol or its meaning?','Yes. Redrawing the colors around a logo changes the symbol itself.'],
+      ['Ask: who is affected?','Everyone who feels the flag represents them, including people for whom it carries deep meaning.'],
+      ['Decide and give a reason.','The use is <b>probably not respectful</b>: it alters a shared symbol for profit. A respectful way to be creative: use the symbol correctly and focus the ad on the shop\'s own message. Also check your country\'s rules on using national symbols in advertising.', true]
+    ]},
+  { title:'Example 4: Build a respectful argument for the debate',
+    problem:'<b>Debate question:</b> "Does freedom of expression justify any use of national symbols on social media?" Build a strong answer.',
+    steps:[
+      ['Claim: take a position.','"Freedom of expression is important, but it does not justify every use of national symbols."'],
+      ['Reason: tie it to a right or value.','Article 19 protects expression, but Article 29 says rights can be limited to protect the rights of others. A post that mocks a symbol or the people it represents can harm their dignity.'],
+      ['Example: connect it to a case.','In the "ceremony video" case, the joke mocked a moment that matters to the whole community.'],
+      ['Acknowledge the other side.','"I understand that humor and criticism are part of free expression."'],
+      ['Say it respectfully.','Use "I think…, because…" and "I see it differently…" instead of insults. Take turns, do not interrupt, and criticize ideas, not people.'],
+      ['Put it together.','<i>"I think freedom of expression does not justify every use of national symbols online, because rights come with responsibility to others. I understand humor matters, but mocking a ceremony can hurt the community\'s dignity."</i>', true]
+    ]},
+  { title:'Example 5: Write a line for the Decalogo del Respeto',
+    problem:'Write one rule for the correct, respectful use of symbols at school.',
+    steps:[
+      ['Start with a first draft.','"Do not be disrespectful to the flag."'],
+      ['Problem: is it clear and specific?','"Disrespectful" is vague. What exactly should someone do?'],
+      ['Make it positive and specific.','Say what to do: "Stand quietly and face the flag during the anthem."'],
+      ['Add who it protects and why.','"…so everyone\'s moment of respect is protected."'],
+      ['Check it: short, clear, positive, protects someone.','Short ✓ Clear ✓ Positive ✓ Protects the community ✓'],
+      ['Final rule.','<i>"Stand quietly during the anthem so everyone\'s moment of respect is protected."</i>', true]
+    ]},
+  { title:'Example 6: Design a "Designer of the Homeland" piece',
+    problem:'Design a poster that connects <b>one</b> national symbol with <b>one</b> human right, with a slogan of <b>8 words or fewer</b> and the designers\' names.',
+    steps:[
+      ['Choose one symbol and use it respectfully.','For example: the flag colors, in the correct order and shape.'],
+      ['Choose one human right or value.','For example: respect, dignity, identity, or free and respectful expression.'],
+      ['Connect them with an image idea.','Flag colors + a handshake, or a shield with the word "dignity" in the center.'],
+      ['Write a slogan and count the words.','"Our colors, everyone\'s respect." Count: Our (1) colors (2) everyone\'s (3) respect (4). That is 4 words, so it meets the limit.'],
+      ['Prepare your explanation.','Be ready to say why you chose this symbol and this right, and how they are connected: "The handshake shows that our shared colors include everyone."'],
+      ['Check the brief.','One symbol ✓ One right ✓ Slogan ≤ 8 words ✓ Designers\' names ✓', true]
+    ]}
+];
+EXAMPLES.forEach(ex => {
+  const list = h('ol', {class:'steps'});
+  const items = ex.steps.map(([t,b,fin]) => {
+    const li = h('li', {class:'step' + (fin?' final':'')}, h('b',{class:'t'}, t), h('span',{html:b}));
+    list.append(li); return li;
+  });
+  let n = 0;
+  const next = h('button', {class:'btn', type:'button'}, 'Show next step');
+  const all = h('button', {class:'btn ghost', type:'button'}, 'Show all');
+  const reset = h('button', {class:'btn ghost', type:'button'}, 'Hide steps');
+  const status = h('span', {class:'ref', 'aria-live':'polite'}, '');
+  function paint(){
+    items.forEach((li,i) => li.classList.toggle('show', i<n));
+    next.disabled = n>=items.length;
+    status.textContent = n + ' of ' + items.length + ' steps shown';
+  }
+  next.addEventListener('click', () => { if(n<items.length) n++; paint(); items[n-1].scrollIntoView({block:'nearest', behavior:'smooth'}); });
+  all.addEventListener('click', () => { n=items.length; paint(); });
+  reset.addEventListener('click', () => { n=0; paint(); });
+  paint();
+  $('#exampleList').append(h('div', {class:'card'},
+    h('h3', {}, ex.title),
+    h('div', {class:'problem', html:'<b>Task:</b> ' + ex.problem}),
+    h('div', {class:'row', style:'margin-top:12px'}, next, all, reset, status),
+    list));
+});
+
+/* ---------- multiple-choice quiz engine ---------- */
+function mountQuiz(id, intro, questions){
+  const mount = $('#'+id+' .mount');
+  function render(){
+    mount.innerHTML = '';
+    let answered = 0, correct = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = h('button', {class:'btn ghost', type:'button', style:'display:none'}, 'Try again');
+    again.addEventListener('click', render);
+    function paintSummary(){
+      if(answered<questions.length){ summary.textContent = 'Answered ' + answered + ' of ' + questions.length; return; }
+      summary.textContent = 'Score: ' + correct + ' / ' + questions.length + (correct===questions.length ? ' – perfect!' : correct/questions.length>=.8 ? ' – secure (80% or higher).' : ' – review the explanations and try again.');
+      again.style.display = '';
+      record(id, correct, questions.length);
+    }
+    if(intro) mount.append(h('p', {html:intro}));
+    questions.forEach((q,qi) => {
+      const order = shuffle(q.o.map((t,i) => ({t, ok:i===q.a})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const btns = order.map(o => {
+        const b = h('button', {class:'opt', type:'button'}, o.t);
+        b.addEventListener('click', () => {
+          if(b.disabled) return;
+          answered++;
+          btns.forEach(x => x.disabled = true);
+          if(o.ok){ correct++; b.classList.add('good'); feedback(fb,'good','✓ Correct. ' + q.e); }
+          else {
+            b.classList.add('bad','shake');
+            btns[order.findIndex(x=>x.ok)].classList.add('good');
+            feedback(fb,'bad','✗ Not quite. ' + q.e);
+          }
+          paintSummary();
+        });
+        return b;
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, (qi+1) + '. ' + q.q), btns, fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  }
+  render();
+}
+
+mountQuiz('act-quiz', '', [
+  { q:'What is a human right?', o:['A basic protection every person has, such as dignity, identity and free and respectful expression','A privilege only adults can have','A rule that only applies at school','A reward for good behavior'], a:0, e:'Human rights belong to every person equally.' },
+  { q:'What does dignity mean?', o:['The worth every person has, no matter who they are','Being popular with many people','Winning every argument','Owning expensive things'], a:0, e:'Dignity does not depend on status, popularity or achievements.' },
+  { q:'Which of these is a national symbol?', o:['The national anthem','A shop\'s logo','A viral meme','A school mascot'], a:0, e:'Flags, anthems and coats of arms represent the whole country.' },
+  { q:'How are respecting national symbols and respecting people related?', o:['They are linked, not separate','They are unrelated','Only symbols matter','Only people matter'], a:0, e:'Symbols represent a shared community, so mocking a symbol can hurt the people who see themselves in it.' },
+  { q:'What does freedom of expression mean?', o:['The right to share your ideas and opinions while respecting others\' rights','The right to say anything, even if it harms others','The right to stay silent in class','The right to post without any consequences'], a:0, e:'Article 19 protects expression, and Article 29 reminds us it comes with responsibilities.' },
+  { q:'Which is a good responsibility to practice before posting online?', o:['Think about who could be affected and whether it is respectful','Post first and delete later if needed','Count how many likes it will get','Make sure it is funny, no matter who is the target'], a:0, e:'Posts can spread quickly and be hard to take back.' },
+  { q:'What is the Decalogo del Respeto in this class?', o:['A set of ten rules the class creates for the respectful use of symbols and rights at school','A national law','A list of punishments','A homework schedule'], a:0, e:'The class writes it together and commits to follow it.' },
+  { q:'What is a civic act?', o:['A public ceremony where a community honors shared symbols and values','A private family dinner','A sports practice','A class quiz'], a:0, e:'A flag ceremony at school is an example.' }
+]);
+
+mountQuiz('act-cases', 'Read each case from the lesson (Appendix A), then answer the three analysis questions about it.<div class="problem" style="margin:10px 0"><b>Case 1 – The altered flag (fictional):</b> A local shop posts an online ad where the national flag\'s colors are redrawn around the shop\'s logo to "go viral" for a sale. Some share it saying it is creative; others say it disrespects a national symbol.<br><br><b>Case 2 – The ceremony video (fictional):</b> During the Monday civic act, students record a video making jokes and funny faces while the anthem plays, and post it that afternoon. Classmates have mixed reactions.<br><br><b>Case 3 – The tribute post (respectful example):</b> A student publishes a short, respectful post honoring a national hero for their birthday, using the correct colors and a message about the values the hero represents. The post generates a respectful conversation.</div>', [
+  { q:'Case 1: Who is affected?', o:['Everyone who feels the flag represents them, and the viewers of the ad','Only the shop owner','Nobody, it is just an ad','Only the people who share it'], a:0, e:'A national symbol belongs to the whole community, so changing it affects everyone connected to it.' },
+  { q:'Case 1: Which value is most involved?', o:['Respect for a shared national symbol and identity','The right to a discount','Winning an argument','Privacy of the shop owner'], a:0, e:'The flag is being altered to sell a product.' },
+  { q:'Case 1: Is it respectful?', o:['Probably not: it alters a shared symbol for profit','Yes, because it went viral','Yes, because it is creative, so nothing else matters','It cannot be judged at all'], a:0, e:'Creativity is valuable, but it does not outweigh changing a shared symbol into an advertising prop. Also check your country\'s rules on this.' },
+  { q:'Case 2: Who is affected?', o:['The school community, classmates who see the video, and the students themselves','Only the teacher','Only the anthem','No one, since it was a joke'], a:0, e:'Jokes can still affect people who value the ceremony, and the post stays public.' },
+  { q:'Case 2: Which right or value is involved?', o:['Respect and dignity of the community, with responsible use of freedom of expression','The right to be funny without limits','The right to skip school','Only the right to privacy'], a:0, e:'Expression is a right, but with duties to others (Article 29).' },
+  { q:'Case 2: Is it respectful?', o:['No: it mocks a shared symbol at a moment meant for respect and spreads it online','Yes, because the students are free to post anything','Yes, because it was recorded privately','Only if it gets many likes'], a:0, e:'The issue is the mockery of a shared ceremony, not humor itself.' },
+  { q:'Case 3: Who is affected?', o:['Followers and classmates who read and join the respectful conversation','No one','Only the national hero','Only the student\'s family'], a:0, e:'People are positively affected by learning about the hero\'s values.' },
+  { q:'Case 3: Which right or value is involved?', o:['Respect for national symbols and identity, and free, respectful expression','Respect for rules about school uniforms','Freedom to mock others','Right to ignore the symbol'], a:0, e:'The student uses expression to honor, not to harm.' },
+  { q:'Case 3: Is it respectful?', o:['Yes: correct colors, a message about values, and respectful comments','No, because any post about a symbol is wrong','No, because it is on social media','It depends on how many likes it gets'], a:0, e:'Respect can be creative and positive.' }
+]);
+
+mountQuiz('act-slogan', 'Brief: connect <b>one</b> national symbol with <b>one</b> human right using a slogan of <b>8 words or fewer</b>, used respectfully, with the designers\' names.', [
+  { q:'Which slogan best meets the brief?', o:['"Our colors, everyone\'s respect."','"Buy now and get 20% off!"','"Whatever, it\'s just a flag."','"The flag is red, white and blue and it is very big and beautiful today."'], a:0, e:'It names a symbol (our colors), connects it to a right (respect), and has only 4 words.' },
+  { q:'How many words are in this slogan: "Under one flag, every person\'s dignity."?', o:['5','6','7','8'], a:1, e:'Under (1) one (2) flag (3) every (4) person\'s (5) dignity (6) = 6 words.' },
+  { q:'Which slogan is TOO LONG for the brief?', o:['"Our flag protects the dignity of every single person in our school"','"Shield of dignity for all."','"Proud symbols, respected people."','"One anthem, many voices."'], a:0, e:'It has 12 words. The limit is 8.' },
+  { q:'Which design uses the symbol respectfully?', o:['Flag colors in the correct order with a handshake','A torn flag with a joke caption','The flag with a store\'s logo on it','The flag colors rearranged as a meme'], a:0, e:'Respectful use keeps the symbol correct and does not mock or alter it.' },
+  { q:'Which explanation best connects the symbol and the right?', o:['"We chose the shield because it protects people, like dignity protects every person."','"We chose it because it looked cool."','"We chose it because the teacher said so."','"We have no reason."'], a:0, e:'A good explanation links the meaning of the symbol with the right.' }
+]);
+
+/* ---------- sequence engine ---------- */
+function mountSequence(id, intro, items){
+  const mount = $('#'+id+' .mount');
+  function render(){
+    mount.innerHTML = '';
+    let next = 0, mistakes = 0;
+    const slots = items.map((_,i) => h('div', {class:'slot' + (i===0?' next':'')}, h('small', {}, 'Step ' + (i+1)), h('span', {}, '?')));
+    const fb = h('div', {class:'fb', 'aria-live':'polite'});
+    let pool = shuffle(items.map((it,i) => ({...it, i})));
+    while(items.length>1 && pool.every((p,k) => p.i===k)) pool = shuffle(pool);
+    const poolEl = h('div', {class:'pool'});
+    const again = h('button', {class:'btn ghost', type:'button', style:'display:none'}, 'Try again');
+    again.addEventListener('click', render);
+    pool.forEach(p => {
+      const b = h('button', {class:'opt', type:'button'}, p.t);
+      b.addEventListener('click', () => {
+        if(b.disabled) return;
+        if(p.i===next){
+          b.disabled = true; b.style.display='none';
+          slots[next].classList.remove('next'); slots[next].classList.add('filled');
+          slots[next].lastChild.textContent = p.t;
+          feedback(fb,'good','✓ Yes! ' + p.why);
+          next++;
+          if(next<items.length) slots[next].classList.add('next');
+          else {
+            feedback(fb,'good','🎉 Complete! ' + (mistakes===0 ? 'No mistakes.' : mistakes + ' mistake' + (mistakes>1?'s':'') + ' along the way. Try again to get it without hints.') + ' ' + p.why);
+            again.style.display=''; record(id, Math.max(0, items.length-mistakes), items.length);
+          }
+        } else {
+          mistakes++;
+          b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'), 600);
+          feedback(fb,'bad','Not yet. Hint for step ' + (next+1) + ': ' + items[next].hint);
+        }
+      });
+      poolEl.append(b);
+    });
+    mount.append(h('p', {}, intro), h('div', {class:'slots'}, slots), h('p', {class:'ref'}, 'Tap the step that belongs in the next empty box.'), poolEl, fb, h('div', {class:'row', style:'margin-top:10px'}, again));
+  }
+  render();
+}
+mountSequence('act-seq', 'Put the steps of a case analysis in the best order.', [
+  { t:'Read the case carefully', hint:'Before judging anything, you need to know the whole case.', why:'Start by reading carefully, without jumping to conclusions.' },
+  { t:'Describe what happened (facts only)', hint:'State the facts, not opinions.', why:'Facts first: who did what, where and when.' },
+  { t:'Identify who is affected, and how', hint:'Think about everyone touched by the action, not only the people in it.', why:'Looking at everyone affected shows the real impact.' },
+  { t:'Name the right(s) or value(s) involved', hint:'Now connect the impact to dignity, identity, expression, respect…', why:'Naming the right explains why the case matters.' },
+  { t:'Decide: respectful or not, and explain why', hint:'You can only decide after the facts, the people and the rights are clear.', why:'Your judgment is stronger when it is based on the previous steps.' },
+  { t:'Propose a personal action', hint:'The last step looks forward: what can be done next?', why:'Analysis leads to action, such as apologizing, reporting, or supporting someone.' }
+]);
+
+/* ---------- match engine ---------- */
+function mountMatch(id, intro, pairs){
+  const mount=$('#'+id+' .mount');
+  function render(){
+    mount.innerHTML='';
+    let sel=null, matched=0, mistakes=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    const L=pairs.map((p,i)=>h('button',{class:'opt',type:'button','data-i':i},p[0]));
+    const R=shuffle(pairs.map((p,i)=>({i,t:p[1]}))).map(p=>h('button',{class:'opt',type:'button','data-i':p.i},p.t));
+    L.forEach(b=>b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      L.forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); sel=b;
+      feedback(fb,'info','Now choose the matching one on the right.');
+    }));
+    R.forEach(b=>b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      if(!sel){ feedback(fb,'info','First tap an item on the left.'); return; }
+      if(sel.dataset.i===b.dataset.i){
+        sel.classList.remove('sel'); sel.classList.add('done'); b.classList.add('done'); sel=null; matched++;
+        feedback(fb,'good','✓ Match!');
+        if(matched===pairs.length){
+          feedback(fb,'good','🎉 All matched' + (mistakes? ' with ' + mistakes + ' miss' + (mistakes>1?'es':'') : ' with no misses') + '.');
+          again.style.display=''; record(id, Math.max(0, pairs.length-mistakes), pairs.length);
+        }
+      } else {
+        mistakes++; b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'),600);
+        feedback(fb,'bad','Not that one. Think about which right is really at stake, then try again.');
+      }
+    }));
+    mount.append(h('p',{},intro),h('div',{class:'match'},h('div',{},L),h('div',{},R)),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  }
+  render();
+}
+mountMatch('act-match','Tap a right on the left, then tap the situation where it is at stake.',[
+  ['Dignity','A classmate is treated as less valuable because of how they look or what they own'],
+  ['Free and respectful expression','A student shares a different opinion in a debate while listening to others'],
+  ['Privacy and honor (Art. 12)','Someone posts an embarrassing photo of a classmate without asking'],
+  ['Equality / non-discrimination (Art. 2)','A student is left out of a group because of their family\'s origin'],
+  ['Identity','A student\'s name, language and culture are respected at school'],
+  ['Responsibility to the community (Art. 29)','Before posting, a student thinks about how the post could affect others']
+]);
+
+/* ---------- sort engine ---------- */
+function mountSort(id, intro, choices, cards){
+  const mount=$('#'+id+' .mount');
+  function render(){
+    mount.innerHTML='';
+    const deck=shuffle(cards); let i=0, right=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const card=h('div',{class:'sortcard'});
+    const btns=choices.map(c=>h('button',{class:'btn',type:'button'},c.label));
+    const count=h('p',{class:'ref'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    function paint(){
+      if(i>=deck.length){
+        card.textContent='Finished!'; btns.forEach(b=>b.disabled=true); count.textContent='';
+        return;
+      }
+      card.textContent=deck[i][0]; count.textContent='Card ' + (i+1) + ' of ' + deck.length;
+    }
+    function pick(k){
+      if(i>=deck.length) return;
+      const c=deck[i]; const ok=c[1]===k;
+      if(ok) right++;
+      const msg=(ok?'✓ Correct. ':'✗ Not quite. ') + c[2];
+      i++;
+      if(i>=deck.length){
+        paint();
+        feedback(fb, right===deck.length?'good':'info', msg + ' — Score: ' + right + ' / ' + deck.length + '.');
+        again.style.display=''; record(id, right, deck.length);
+      } else { feedback(fb, ok?'good':'bad', msg); paint(); }
+    }
+    btns.forEach((b,j)=>b.addEventListener('click',()=>pick(choices[j].k)));
+    mount.append(h('p',{html:intro}),count,card,h('div',{class:'row'},btns),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+    paint();
+  }
+  render();
+}
+mountSort('act-vote','Like the class color-card vote: decide if each situation shows <b>respect</b> (green), <b>disrespect</b> (red), or <b>it depends</b> (yellow). Use the reason in the feedback to learn.',
+  [{k:'G',label:'🟢 Respectful'},{k:'R',label:'🔴 Disrespectful'},{k:'Y',label:'🟡 It depends'}],
+  [
+    ['A student posts a respectful tribute honoring a national hero, with the correct colors and a message about their values.','G','The symbol is used correctly and the message explains values.'],
+    ['Students chant insults during a civic ceremony and a video of it is posted online.','R','Insults at a ceremony disrespect the community and the people present, and the video spreads it.'],
+    ['A meme redraws the national flag to sell a product.','R','Altering a shared symbol to sell something treats it like an ad prop. Check your country\'s rules too.'],
+    ['During the anthem at a civic act, classmates stand quietly and listen.','G','Quiet attention is the respectful behavior expected at a civic act.'],
+    ['A student posts a flag meme to mock a classmate\'s family origin.','R','This attacks a person\'s dignity and equality (Articles 1, 2 and 12), and uses a symbol to exclude.'],
+    ['A student respectfully disagrees in class with how symbols are used online, and explains why.','G','This is free and respectful expression: ideas are criticized, not people.'],
+    ['A student shares a news video of a protest where a flag is burned in order to discuss it in class.','Y','It depends on purpose and how it is shared: informing and discussing respectfully is different from sharing it to mock or provoke.']
+  ]);
+mountSort('act-debate','Guided debate practice. Is each statement a <b>strong, respectful argument</b> or a <b>weak or disrespectful</b> one?',
+  [{k:'S',label:'💪 Strong, respectful'},{k:'W',label:'⚠️ Weak or disrespectful'}],
+  [
+    ['"I can criticize an idea without insulting the person who holds it."','S','Criticizing ideas, not people, keeps a debate respectful.'],
+    ['"Free speech means I can say anything, no matter who gets hurt."','W','It ignores the rights of others. Rights come with responsibilities (Article 29).'],
+    ['"I see it differently: the flag represents everyone, so altering it for profit excludes people."','S','It states a position politely and gives a reason.'],
+    ['"Anyone who disagrees with me is just ignorant."','W','It attacks the person instead of answering the idea.'],
+    ['"I hear your point about creativity. My concern is the meaning of the symbol."','S','It acknowledges the other side before responding.'],
+    ['"Let me talk over you so you can\'t finish your point."','W','Interrupting breaks the rule of one voice at a time.'],
+    ['"Rights come with responsibilities toward other people."','S','This links expression with duties to others.'],
+    ['"It\'s only a joke, so nobody can be offended."','W','Impact matters, not only intention. Others may still be hurt.']
+  ]);
+
+/* ---------- cloze engine ---------- */
+function mountCloze(id, intro, S){
+  const mount=$('#'+id+' .mount');
+  function render(){
+    mount.innerHTML='';
+    const ok=new Set(); let wrong=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    const box=h('div',{class:'cloze'});
+    S.forEach((s,k)=>{
+      const sel=h('select',{'aria-label':'Choose the words for sentence ' + (k+1)}, h('option',{value:''},'— choose —'), s[1].map((o,j)=>h('option',{value:j},o)));
+      sel.addEventListener('change',()=>{
+        if(sel.value===''){ sel.className=''; return; }
+        if(+sel.value===s[2]){
+          sel.className='good'; sel.disabled=true; ok.add(k);
+          feedback(fb,'good','✓ ' + s[4]);
+          if(ok.size===S.length){ feedback(fb,'good','🎉 All sentences complete!'); again.style.display=''; record(id, Math.max(0, S.length-wrong), S.length); }
+        } else {
+          wrong++; sel.className='bad shake'; setTimeout(()=>sel.classList.remove('shake'),600);
+          feedback(fb,'bad','Not quite – try another choice. Think about what you learned in class.');
+        }
+      });
+      box.append(h('p',{}, s[0], sel, s[3]));
+    });
+    mount.append(h('p',{},intro),box,fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  }
+  render();
+}
+mountCloze('act-cloze','Choose the words that complete each sentence.',[
+  ['Respecting national symbols and respecting people are ',['linked','opposites','unrelated'],0,', not separate.','Symbols represent a shared community of people.'],
+  ['Every person has ',['dignity','popularity','status'],0,', a worth that does not depend on what they own or achieve.','Dignity belongs to everyone equally (Article 1).'],
+  ['Freedom of expression comes with ',['responsibilities','permission to insult','prizes'],0,' toward other people.','Article 29: rights can be limited to protect the rights of others.'],
+  ['During a civic act, a respectful student ',['stands quietly','records jokes','chats loudly'],0,' while the anthem plays.','Quiet attention shows respect for the symbol and the community.'],
+  ['In a guided debate, I take turns and ',['listen','interrupt','mock'],0,' before I answer.','Listening is part of a respectful debate.'],
+  ['A good Decalogo line is short, clear, positive and says who it ',['protects','blames','ignores'],0,'.','A good rule names the people whose dignity it protects.']
+]);
+
+paintProgress();
+})();
+</script>
+</body>
+</html>
