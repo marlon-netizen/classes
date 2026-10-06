@@ -1,0 +1,1456 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AP Statistics – Lessons 2.8–2.12 | Lincoln International Academy</title>
+<meta name="description" content="Interactive study page for AP Statistics Unit 2: random variables, probability distributions, binomial and normal distributions, sampling distributions and the Central Limit Theorem.">
+<style>
+:root{
+  --bg:#f3f1f6; --surface:#fdfcff; --surface-2:#f6f3f9; --ink:#241f2e; --muted:#645d72;
+  --line:#dcd6e4; --primary:#4a2c6b; --primary-ink:#ffffff; --accent:#3f7d5c; --accent-soft:#e1efe7; --blue-soft:#ece6f4;
+  --warm:#b5683f; --warm-soft:#f7e9e0; --good:#2f7a52; --good-soft:#e1f0e7; --bad:#a8453f; --bad-soft:#f5e3e1;
+  --hot:#b5683f; --cold:#6a5a9a; --work:#3f7d5c; --bar:#cfc5df;
+  --shadow:0 1px 2px rgba(36,31,46,.06),0 4px 14px rgba(36,31,46,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16121d; --surface:#1e1927; --surface-2:#251f30; --ink:#ece8f2; --muted:#a79fb6;
+    --line:#352d44; --primary:#c3a6ec; --primary-ink:#1a1224; --accent:#6dc296; --accent-soft:#1b2f26; --blue-soft:#2a2140;
+    --warm:#e09a73; --warm-soft:#33241d; --good:#6dc296; --good-soft:#1b2f26; --bad:#e58c85; --bad-soft:#38201f;
+    --hot:#e09a73; --cold:#9c8bd0; --work:#6dc296; --bar:#46395e; --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:#2b1c3d;color:#f4f1f6;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:Georgia,serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:#e0b79c;margin-bottom:2px}
+.meta{display:flex;gap:26px;flex-wrap:wrap}
+.meta div{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#b9aecb}
+.meta b{display:block;font-size:1.05rem;text-transform:none;letter-spacing:0;color:#f4f1f6;font-weight:600}
+.lessonbar{background:var(--surface);border-bottom:1px solid var(--line)}
+.lessonbar .wrap{padding-top:14px;padding-bottom:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center}
+.lessonbar h1{font-size:clamp(1.15rem,2.6vw,1.45rem);margin:0}
+.lessonbar small{color:var(--muted)}
+.overall{display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--muted)}
+.bar{width:150px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+
+/* nav */
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:8px}
+nav.tabs button{appearance:none;border:0;background:none;font:inherit;font-weight:600;color:var(--muted);padding:10px 16px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;border-radius:8px 8px 0 0}
+nav.tabs button:hover{color:var(--ink);background:var(--surface-2)}
+nav.tabs button[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--warm)}
+:root[data-theme="dark"] nav.tabs button[aria-selected="true"]{color:var(--primary)}
+
+main{padding:26px 0 60px}
+section.panel{display:none}
+section.panel.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card>h3:first-child,.card>h2:first-child{margin-top:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.callout.blue{border-color:var(--primary);background:var(--blue-soft)}
+.callout b.t{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;color:var(--muted)}
+.law{font-family:Georgia,serif;font-size:1.15rem;font-style:italic}
+.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary)}
+.objectives{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.objectives li{display:flex;gap:12px;align-items:flex-start}
+.objectives li span{flex:none;width:26px;height:26px;border-radius:50%;background:var(--primary);color:var(--primary-ink);font-weight:700;font-size:.85rem;display:grid;place-items:center;margin-top:2px}
+
+/* math */
+.eq{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.2rem;text-align:center;padding:10px 6px;overflow-x:auto}
+.eq.big{font-size:1.35rem}
+.eq i,.math i{font-style:italic}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.15}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em .08em}
+.frac>span:last-child{padding:.08em .25em 0}
+sub{font-size:.7em;line-height:0}
+.math{font-family:"Cambria Math",Cambria,Georgia,serif;white-space:nowrap}
+
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left}
+th{background:var(--surface-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+
+/* controls */
+button.btn,.btn{appearance:none;font:inherit;font-weight:600;font-size:.92rem;border-radius:8px;padding:8px 16px;cursor:pointer;border:1px solid var(--primary);background:var(--primary);color:var(--primary-ink);transition:filter .15s,transform .05s}
+button.btn:hover{filter:brightness(1.12)} button.btn:active{transform:translateY(1px)}
+button.btn.ghost{background:transparent;color:var(--primary)}
+button.btn.ghost:hover{background:var(--blue-soft);filter:none}
+button.btn[disabled]{opacity:.45;cursor:not-allowed}
+:root[data-theme="dark"] button.btn.ghost{color:var(--primary)}
+input[type=text]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:150px}
+input[type=text]:focus,button:focus-visible,input[type=range]:focus-visible,summary:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:1px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.sliderrow{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:center;margin:8px 0}
+.sliderrow output{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+@media (max-width:560px){.sliderrow{grid-template-columns:1fr 80px}.sliderrow label{grid-column:1/-1}}
+
+details{border:1px solid var(--line);border-radius:8px;padding:2px 14px;margin:10px 0;background:var(--surface-2)}
+summary{cursor:pointer;font-weight:600;padding:8px 0}
+details[open]>summary{margin-bottom:4px}
+
+/* readouts */
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+.readout{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.readout small{display:block;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
+.readout b{font-size:1.4rem;font-family:Georgia,serif;font-variant-numeric:tabular-nums}
+.status{padding:9px 14px;border-radius:8px;font-weight:600;font-size:.92rem;margin-top:8px;background:var(--good-soft);color:var(--good)}
+.status.warn{background:var(--warm-soft);color:var(--warm)}
+.status.bad{background:var(--bad-soft);color:var(--bad)}
+svg.flow{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+svg.flow text{fill:var(--ink);font:600 12px system-ui,sans-serif}
+svg.flow .res-t{fill:#fff}
+.effbar{position:relative;height:16px;background:var(--line);border-radius:99px;margin:26px 0 30px}
+.effbar i.fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--accent);transition:width .15s}
+.effbar span.tick{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);opacity:.55}
+.effbar span.tick em{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-style:normal;font-size:.68rem;color:var(--muted);white-space:nowrap}
+.effbar span.tick.hi em{top:-20px}
+
+canvas{width:100%;max-width:520px;height:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);display:block}
+.meter{height:14px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0}
+.meter i{display:block;height:100%;background:var(--warm);width:0;transition:width .2s}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+
+/* dice */
+.hist{display:flex;align-items:flex-end;gap:4px;height:170px;border-bottom:2px solid var(--line);padding:0 2px;margin-top:12px}
+.hist div{flex:1;position:relative;background:var(--accent);border-radius:4px 4px 0 0;min-height:1px;transition:height .25s}
+.hist div b{position:absolute;top:-19px;left:0;right:0;text-align:center;font-size:.7rem;color:var(--muted);font-weight:600}
+.hist div.ghost{background:transparent;border:1.5px dashed var(--warm);border-bottom:0}
+.histx{display:flex;gap:4px;font-size:.78rem;color:var(--muted);text-align:center;padding:0 2px}
+.histx span{flex:1}
+.dice{font-size:2.2rem;letter-spacing:.2em;min-height:1.4em}
+
+/* stepper */
+.example{margin-bottom:22px}
+.example header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px}
+.problem-box{background:var(--blue-soft);border-radius:10px;padding:14px 16px;margin:10px 0 16px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.step{display:none;border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden;background:var(--surface)}
+.step.show{display:block;animation:fade .3s}
+.step>h4{margin:0;padding:9px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;font-family:system-ui,sans-serif;text-transform:uppercase;letter-spacing:.09em;font-size:.82rem;color:var(--primary)}
+.step>h4 .n{width:24px;height:24px;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-size:.8rem;letter-spacing:0}
+.step .body{padding:12px 16px}
+.step .ask{border-top:1px dashed var(--line);padding:12px 16px;background:var(--warm-soft)}
+.step .ask p{margin:0 0 8px;font-weight:600}
+.opt{display:block;width:100%;text-align:left;font:inherit;padding:9px 12px;margin:6px 0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--good);background:var(--good-soft);color:var(--ink)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin-top:8px;font-size:.93rem}
+.fb.ok{color:var(--good)} .fb.no{color:var(--bad)} .fb.near{color:var(--warm)}
+.fb b{font-weight:700}
+.dots{display:flex;gap:6px;margin:6px 0 14px}
+.dots i{width:28px;height:6px;border-radius:99px;background:var(--line)} .dots i.on{background:var(--accent)}
+.givenlist{display:flex;gap:10px 28px;flex-wrap:wrap;margin:4px 0}
+.givenlist span{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.1rem}
+.unk{color:var(--bad);font-style:italic}
+.boxed{display:inline-block;border:1.5px solid var(--bad);padding:2px 10px;border-radius:4px}
+
+/* practice */
+.setpicker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.setpicker button{appearance:none;font:inherit;font-weight:600;background:var(--surface);border:1px solid var(--line);color:var(--ink);padding:9px 14px;border-radius:99px;cursor:pointer}
+.setpicker button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.setpicker button small{opacity:.75;font-weight:500;margin-left:4px}
+.prob{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 20px;margin-bottom:14px;box-shadow:var(--shadow);position:relative}
+.prob.done{border-color:var(--good)}
+.prob .num{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;display:flex;justify-content:space-between}
+.prob .num .badge{color:var(--good)}
+.partrow{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin:8px 0}
+.partrow label{min-width:210px;font-size:.93rem}
+.partrow .u{color:var(--muted);min-width:34px}
+.partrow .ptag{font-weight:700}
+.prob .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.hintbox,.solbox{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.95rem}
+.hintbox{background:var(--warm-soft)} .solbox{background:var(--blue-soft)}
+.solbox ol{margin:6px 0 0;padding-left:20px}
+.pnote{color:var(--muted);font-size:.86rem}
+.sethead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.sethead p{margin:0;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.linkbtn{background:none;border:0;color:var(--accent);font:inherit;text-decoration:underline;cursor:pointer;padding:0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+
+.ov{text-decoration:overline}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.seg{display:inline-flex;flex-wrap:wrap;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{appearance:none;border:0;background:none;font:inherit;font-weight:700;padding:8px 14px;cursor:pointer;color:var(--ink);border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink)}
+.ctlrow{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin:8px 0}
+select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+svg.ch{width:100%;max-width:560px;height:auto;display:block;margin:6px auto}
+svg.ch text{fill:var(--muted);font:600 11px system-ui,sans-serif}
+svg.ch text.vl{font-size:10px;font-weight:600;fill:var(--ink)}
+svg.ch .axis{stroke:var(--muted);stroke-width:1.4}
+svg.ch .grid{stroke:var(--line);stroke-width:1}
+table.dtable{width:auto;min-width:260px}
+table.dtable td,table.dtable th{padding:6px 10px}
+table.dtable.small{font-size:.92rem;margin:8px 0}
+table.dtable.small th{text-transform:none;letter-spacing:0;font-size:.85rem;color:var(--ink)}
+table.dtable.small td{text-align:center}
+.opt input{margin-right:10px}
+.subhead{margin:26px 0 10px}
+.objectives li span{width:auto;min-width:42px;height:26px;border-radius:99px;padding:0 8px;font-size:.78rem}
+
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Student Learning Page</div>
+      <div class="school">Lincoln International Academy</div>
+    </div>
+    <div class="meta">
+      <div>Class<b>AP Statistics</b></div>
+      <div>Teacher<b>Eduardo Vásquez</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="lessonbar">
+  <div class="wrap">
+    <div>
+      <h1>Unit 2 · Lessons 2.8–2.12 · Random Variables &amp; Probability Distributions</h1>
+      <small>Quarter 2 · Discrete random variables · Binomial · Normal · Sampling distributions &amp; the CLT</small>
+    </div>
+    <div class="overall" aria-live="polite">
+      <span id="overallText">0 of 0 practice problems solved</span>
+      <div class="bar"><i id="overallBar"></i></div>
+    </div>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="Lesson sections">
+  <div class="wrap" role="tablist">
+    <button role="tab" id="t-review" data-tab="review" aria-selected="true">1 · Review</button>
+    <button role="tab" id="t-examples" data-tab="examples" aria-selected="false">2 · Worked Examples</button>
+    <button role="tab" id="t-practice" data-tab="practice" aria-selected="false">3 · Practice</button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===================== REVIEW ===================== -->
+<section class="panel active" id="review" aria-labelledby="t-review">
+
+  <div class="card">
+    <h2>What you should be able to do</h2>
+    <ul class="objectives">
+      <li><span>2.8</span><div><b>Introduction to random variables and probability distributions.</b> Construct a probability distribution for a discrete random variable.</div></li>
+      <li><span>2.9</span><div><b>Parameters of random variables.</b> Calculate and interpret the mean and standard deviation of a discrete random variable.</div></li>
+      <li><span>2.10</span><div><b>The binomial distribution.</b> Justify why a random variable is or is not binomial; calculate and interpret its mean, standard deviation and probabilities.</div></li>
+      <li><span>2.11</span><div><b>The normal distribution.</b> Describe a normal distribution; use the empirical rule, areas, intervals and z-scores to calculate probabilities and compare relative positions.</div></li>
+      <li><span>2.12</span><div><b>Sampling distributions and the Central Limit Theorem.</b> Describe sampling distributions with simulations.</div></li>
+    </ul>
+    <div class="chips" style="margin-top:14px">
+      <span class="pill">3.A Construct tabular &amp; graphical representations</span>
+      <span class="pill">3.B Calculate summary statistics</span>
+      <span class="pill">3.C Calculate probabilities</span>
+      <span class="pill">3.D Means, SDs &amp; parameters</span>
+      <span class="pill">4.B Justify a claim</span>
+      <span class="pill">4.C Compare relative positions</span>
+      <span class="pill">4.D Interpret results</span>
+    </div>
+    <p class="pnote" style="margin-top:10px">Jump to: <a href="#l28">2.8</a> · <a href="#l29">2.9</a> · <a href="#l210">2.10</a> · <a href="#l211">2.11</a> · <a href="#l212">2.12</a></p>
+  </div>
+
+  <!-- ============ 2.8 ============ -->
+  <div class="card" id="l28">
+    <span class="pill">Lesson 2.8</span>
+    <h2>Introduction to random variables and probability distributions</h2>
+    <p>A <b>random variable</b> is a numerical outcome of a random process. A <b>discrete</b> random variable takes a countable list of separate values (counts such as 0, 1, 2, …). A <b>continuous</b> random variable can take any value in an interval (times, heights, weights).</p>
+    <p>The <b>probability distribution</b> of a discrete random variable <i>X</i> lists every possible value <i>x</i> with its probability <i>P</i>(<i>X</i> = <i>x</i>). It can be shown as a table, a formula, or a probability histogram.</p>
+    <div class="callout blue"><b class="t">Two requirements</b>
+      (1) 0 ≤ <i>P</i>(<i>x</i>) ≤ 1 for every value &nbsp; (2) the probabilities add to exactly 1: Σ<i>P</i>(<i>x</i>) = 1.</div>
+    <ul>
+      <li><b>Complement rule:</b> <i>P</i>(<i>X</i> ≥ 3) = 1 − <i>P</i>(<i>X</i> ≤ 2) (for integer values).</li>
+      <li><b>Cumulative distribution:</b> <i>F</i>(<i>x</i>) = <i>P</i>(<i>X</i> ≤ <i>x</i>) adds up the probabilities from the smallest value to <i>x</i>. Then <i>P</i>(<i>X</i> = <i>x</i>) = <i>F</i>(<i>x</i>) − <i>F</i>(<i>x</i> − 1).</li>
+      <li><b>Estimating a distribution:</b> from long-run relative frequencies in data or a <em>simulation</em> (number of trials with that outcome ÷ total trials).</li>
+    </ul>
+
+    <h3>Distribution builder</h3>
+    <p>Pick a situation or type your own probabilities (decimals or fractions such as <span class="math">3/8</span>). The tool checks the two requirements and answers probability questions.</p>
+    <div class="ctlrow">
+      <span class="l"><b>Situation</b></span>
+      <div class="seg" id="dPresets" role="group" aria-label="Situation">
+        <button type="button" data-p="coins" aria-pressed="true">3 coin flips</button><button type="button" data-p="dice" aria-pressed="false">Two dice (sum)</button><button type="button" data-p="custom" aria-pressed="false">Custom (one missing)</button>
+      </div>
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="tablewrap"><table id="dTable" class="dtable"></table></div>
+        <div class="readouts">
+          <div class="readout"><small>Σ P(x)</small><b id="dSum">—</b></div>
+          <div class="readout"><small>Valid?</small><b id="dValid">—</b></div>
+        </div>
+        <div class="status warn" id="dStatus" aria-live="polite"></div>
+        <button class="btn ghost" id="dFill" type="button" style="margin-top:8px">Fill the empty cell with 1 − (sum of the others)</button>
+      </div>
+      <div>
+        <div id="dChart"></div>
+        <div class="ctlrow">
+          <b>Find</b> <i>P</i>(<i>X</i>
+          <select id="dOp" aria-label="Comparison"><option value="eq">=</option><option value="le">≤</option><option value="lt">&lt;</option><option value="ge" selected>≥</option><option value="gt">&gt;</option></select>
+          <select id="dK" aria-label="Value of x"></select>) = <b id="dAns">—</b>
+        </div>
+      </div>
+    </div>
+    <details>
+      <summary>Essential questions to answer in your notebook</summary>
+      <ul>
+        <li>What is a random variable, and what kind of outcomes does it have?</li>
+        <li>What does a probability distribution for a discrete random variable show, and what must the sum of its probabilities equal?</li>
+        <li>What methods can be used to determine or estimate a discrete probability distribution?</li>
+        <li>In what visual or mathematical formats can a discrete probability distribution be represented?</li>
+        <li>What information does a cumulative probability distribution provide?</li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- ============ 2.9 ============ -->
+  <div class="card" id="l29">
+    <span class="pill">Lesson 2.9</span>
+    <h2>Parameters of random variables</h2>
+    <p>A <b>parameter</b> describes a population or probability distribution. The center and spread of a discrete random variable are:</p>
+    <div class="eq big">
+      μ<sub><i>X</i></sub> = <i>E</i>(<i>X</i>) = Σ <i>x</i><sub><i>i</i></sub> · <i>P</i>(<i>x</i><sub><i>i</i></sub>)
+      &nbsp;&nbsp;&nbsp;
+      σ<sub><i>X</i></sub> = √( Σ (<i>x</i><sub><i>i</i></sub> − μ<sub><i>X</i></sub>)² · <i>P</i>(<i>x</i><sub><i>i</i></sub>) )
+    </div>
+    <div class="callout warm"><b class="t">AP-style interpretations (always in context, with units)</b>
+      <b>Mean:</b> "If this random process were repeated a very large number of times, the <em>average</em> value of <i>X</i> would be about μ <em>(units)</em>."<br>
+      <b>Standard deviation:</b> "The values of <i>X</i> typically vary by about σ <em>(units)</em> from the mean of μ <em>(units)</em>."
+    </div>
+    <ul>
+      <li>The expected value does <b>not</b> have to be a possible value of <i>X</i> (an average of 1.7 children is fine).</li>
+      <li>It describes the <em>long run</em>, not a single repetition.</li>
+      <li>The variance is σ²; take its square root to get σ.</li>
+    </ul>
+
+    <h3>Mean &amp; standard deviation lab</h3>
+    <div class="ctlrow">
+      <span class="l"><b>Situation</b></span>
+      <div class="seg" id="mPresets" role="group" aria-label="Situation">
+        <button type="button" data-p="game" aria-pressed="true">Carnival game (net $)</button><button type="button" data-p="sib" aria-pressed="false">Siblings</button><button type="button" data-p="pol" aria-pressed="false">Insurance policy (profit $)</button>
+      </div>
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="tablewrap"><table id="mTable" class="dtable"></table></div>
+        <div class="readouts">
+          <div class="readout"><small>Mean μ</small><b id="mMu">—</b></div>
+          <div class="readout"><small>Variance σ²</small><b id="mVar">—</b></div>
+          <div class="readout"><small>Std. dev. σ</small><b id="mSd">—</b></div>
+        </div>
+        <div class="status" id="mStatus" aria-live="polite"></div>
+      </div>
+      <div>
+        <h4>Long-run behavior (simulation)</h4>
+        <div id="mChart"></div>
+        <div class="row">
+          <button class="btn" data-sim="10" type="button">+10 plays</button>
+          <button class="btn" data-sim="100" type="button">+100</button>
+          <button class="btn" data-sim="1000" type="button">+1000</button>
+          <button class="btn ghost" id="mReset" type="button">Reset</button>
+        </div>
+        <div class="pnote" id="mSimInfo">No plays yet. The dashed line is μ; the solid line is the running average of the plays.</div>
+      </div>
+    </div>
+    <details>
+      <summary>Essential questions to answer in your notebook</summary>
+      <ul>
+        <li>What is a parameter, and what are its core characteristics in a probability distribution or population?</li>
+        <li>What notation represents the expected value, and how is it calculated for a discrete random variable? How is it interpreted in the long run?</li>
+        <li>What notation represents the standard deviation of a probability distribution, and how is it calculated and interpreted over the long run?</li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- ============ 2.10 ============ -->
+  <div class="card" id="l210">
+    <span class="pill">Lesson 2.10</span>
+    <h2>The binomial distribution</h2>
+    <p>A <b>binomial random variable</b> <i>X</i> counts the number of successes in <i>n</i> trials. Justify it with <b>BINS</b>:</p>
+    <div class="grid2">
+      <ul style="margin:0">
+        <li><b>B</b>inary — each trial is a success or a failure.</li>
+        <li><b>I</b>ndependent — trials do not affect each other (when sampling without replacement, check the <b>10 % condition</b>: <i>n</i> ≤ 10 % of the population).</li>
+      </ul>
+      <ul style="margin:0">
+        <li><b>N</b>umber of trials is fixed in advance.</li>
+        <li><b>S</b>ame probability <i>p</i> of success on every trial.</li>
+      </ul>
+    </div>
+    <div class="eq big">
+      <i>P</i>(<i>X</i> = <i>k</i>) = <span class="frac"><span><i>n</i>!</span><span><i>k</i>!(<i>n</i> − <i>k</i>)!</span></span> <i>p</i><sup><i>k</i></sup>(1 − <i>p</i>)<sup><i>n</i>−<i>k</i></sup>
+    </div>
+    <div class="eq big">μ<sub><i>X</i></sub> = <i>np</i> &nbsp;&nbsp;&nbsp; σ<sub><i>X</i></sub> = √(<i>np</i>(1 − <i>p</i>))</div>
+    <div class="callout"><b class="t">Calculator</b><span class="math">binompdf(n, p, k)</span> = <i>P</i>(<i>X</i> = <i>k</i>) &nbsp;·&nbsp; <span class="math">binomcdf(n, p, k)</span> = <i>P</i>(<i>X</i> ≤ <i>k</i>). For "at least": <i>P</i>(<i>X</i> ≥ <i>k</i>) = 1 − binomcdf(<i>n</i>, <i>p</i>, <i>k</i> − 1).</div>
+
+    <h3>Binomial explorer</h3>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="bN">Number of trials n</label><input id="bN" type="range" min="1" max="40" step="1" value="12"><output id="bNO"></output></div>
+        <div class="sliderrow"><label for="bP">Probability p</label><input id="bP" type="range" min="0.01" max="0.99" step="0.01" value="0.35"><output id="bPO"></output></div>
+        <div class="ctlrow">
+          <b>Highlight</b> <i>P</i>(<i>X</i>
+          <select id="bOp" aria-label="Comparison"><option value="eq">=</option><option value="le" selected>≤</option><option value="ge">≥</option></select>
+          <select id="bK" aria-label="Value of k"></select>)
+        </div>
+        <div class="readouts">
+          <div class="readout"><small>Probability</small><b id="bProb">—</b></div>
+          <div class="readout"><small>Mean np</small><b id="bMu">—</b></div>
+          <div class="readout"><small>Std. dev. σ</small><b id="bSd">—</b></div>
+        </div>
+        <div class="row"><button class="btn" id="bSim" type="button">Simulate 1000 repetitions</button></div>
+        <div class="pnote" id="bSimInfo"></div>
+      </div>
+      <div id="bChart"></div>
+    </div>
+    <details>
+      <summary>Essential questions to answer in your notebook</summary>
+      <ul>
+        <li>What is a binomial random variable, and what four conditions must its trials meet?</li>
+        <li>What are the formulas for the mean and standard deviation of a binomial random variable, and how are they interpreted?</li>
+        <li>What is the binomial probability function, and how do you calculate the probability of exactly <i>x</i> successes in <i>n</i> independent trials?</li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- ============ 2.11 ============ -->
+  <div class="card" id="l211">
+    <span class="pill">Lesson 2.11</span>
+    <h2>The normal distribution</h2>
+    <p>A <b>normal distribution</b> <i>N</i>(μ, σ) is a symmetric, unimodal, bell-shaped density curve described by its mean μ (center) and standard deviation σ (spread). It is the model for a <b>continuous</b> random variable: probabilities are <b>areas under the curve</b> (total area = 1), and <i>P</i>(<i>X</i> = <i>a</i>) = 0 for any single value, so &lt; and ≤ give the same probability.</p>
+    <div class="grid2">
+      <div class="callout blue"><b class="t">Empirical rule (68–95–99.7)</b>About 68 % of values lie within 1σ of μ, 95 % within 2σ, and 99.7 % within 3σ.</div>
+      <div class="callout"><b class="t">z-score</b><div class="eq" style="padding:2px">
+        <i>z</i> = <span class="frac"><span><i>x</i> − μ</span><span>σ</span></span></div>Number of standard deviations <i>x</i> is above (+) or below (−) the mean. Use z-scores to compare values from different distributions.</div>
+    </div>
+    <div class="callout warm"><b class="t">Calculator</b>
+      <span class="math">normalcdf(lower, upper, μ, σ)</span> gives an area (use ±1E99 for "no bound"). <span class="math">invNorm(area, μ, σ)</span> gives the value with that <em>area to its left</em> (a percentile).</div>
+
+    <h3>Normal curve explorer</h3>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="nMu">Mean μ</label><input id="nMu" type="range" min="50" max="150" step="1" value="100"><output id="nMuO"></output></div>
+        <div class="sliderrow"><label for="nSd">Std. dev. σ</label><input id="nSd" type="range" min="5" max="30" step="1" value="15"><output id="nSdO"></output></div>
+        <div class="ctlrow"><b>Area</b>
+          <select id="nMode" aria-label="Region type"><option value="between">between a and b</option><option value="below">below b</option><option value="above">above a</option></select>
+          <label><input type="checkbox" id="nEmp"> show 68–95–99.7</label></div>
+        <div class="sliderrow"><label for="nA">Lower bound a</label><input id="nA" type="range" step="0.5"><output id="nAO"></output></div>
+        <div class="sliderrow"><label for="nB">Upper bound b</label><input id="nB" type="range" step="0.5"><output id="nBO"></output></div>
+        <div class="readouts">
+          <div class="readout"><small>Area (probability)</small><b id="nArea">—</b></div>
+          <div class="readout"><small>z for a</small><b id="nZa">—</b></div>
+          <div class="readout"><small>z for b</small><b id="nZb">—</b></div>
+        </div>
+        <div class="pnote math" id="nCalc"></div>
+        <h4 style="margin-top:14px">Percentile finder (invNorm)</h4>
+        <div class="sliderrow"><label for="nPct">Percentile (area to the left)</label><input id="nPct" type="range" min="1" max="99" step="1" value="90"><output id="nPctO"></output></div>
+        <div class="status" id="nInv" aria-live="polite"></div>
+      </div>
+      <div id="nChart"></div>
+    </div>
+    <details>
+      <summary>Essential questions to answer in your notebook</summary>
+      <ul>
+        <li>What is a continuous random variable, and how are probabilities associated with its domain?</li>
+        <li>What two parameters identify a normal distribution, and how does the size of the standard deviation affect the shape of the curve?</li>
+        <li>What percentages of observations fall within one, two and three standard deviations of the mean?</li>
+        <li>How can intervals associated with a given area in a normal distribution be determined using inequalities, bounds, and a defined percentage?</li>
+      </ul>
+    </details>
+  </div>
+
+  <!-- ============ 2.12 ============ -->
+  <div class="card" id="l212">
+    <span class="pill">Lesson 2.12</span>
+    <h2>Sampling distributions and the Central Limit Theorem</h2>
+    <p>A <b>statistic</b> (like the sample mean <span class="ov"><i>x</i></span>) changes from sample to sample. Its <b>sampling distribution</b> is the distribution of values the statistic takes over <em>all possible random samples</em> of the same size from the same population. We can <b>simulate</b> it: take many random samples, compute the statistic for each, and graph the results.</p>
+    <div class="callout blue"><b class="t">Central Limit Theorem (CLT)</b>
+      For a random sample of size <i>n</i> from a population with mean μ and standard deviation σ, the sampling distribution of <span class="ov"><i>x</i></span> becomes approximately <b>normal</b> as <i>n</i> gets large (rule of thumb: <i>n</i> ≥ 30), <b>whatever the shape of the population</b>. Its center is μ and its spread is σ/√<i>n</i>.</div>
+    <ul>
+      <li>If the <em>population</em> is already normal, the sampling distribution of <span class="ov"><i>x</i></span> is normal for any <i>n</i>.</li>
+      <li>Larger samples → <b>less variability</b> in <span class="ov"><i>x</i></span> (σ/√<i>n</i> shrinks), but the same center.</li>
+      <li>Conditions: random sample; if sampling without replacement, <i>n</i> ≤ 10 % of the population.</li>
+    </ul>
+
+    <h3>CLT simulator</h3>
+    <p>Pick a population, choose the sample size <i>n</i>, and draw many samples. Watch the histogram of sample means.</p>
+    <div class="ctlrow">
+      <span class="l"><b>Population</b></span>
+      <div class="seg" id="cPop" role="group" aria-label="Population shape">
+        <button type="button" data-p="expo" aria-pressed="true">Right-skewed</button><button type="button" data-p="unif" aria-pressed="false">Uniform</button><button type="button" data-p="bimo" aria-pressed="false">Bimodal</button><button type="button" data-p="norm" aria-pressed="false">Normal</button>
+      </div>
+    </div>
+    <div class="sliderrow"><label for="cN">Sample size n</label><input id="cN" type="range" min="1" max="100" step="1" value="5"><output id="cNO"></output></div>
+    <div class="grid2">
+      <div><h4>Population</h4><div id="cPopChart"></div></div>
+      <div><h4>Sampling distribution of <span class="ov"><i>x</i></span></h4><div id="cChart"></div></div>
+    </div>
+    <div class="row">
+      <button class="btn" data-draw="1" type="button">Draw 1 sample</button>
+      <button class="btn" data-draw="100" type="button">Draw 100</button>
+      <button class="btn" data-draw="1000" type="button">Draw 1,000</button>
+      <button class="btn ghost" id="cClear" type="button">Clear</button>
+      <label><input type="checkbox" id="cOver" checked> show normal curve for comparison</label>
+    </div>
+    <div class="readouts">
+      <div class="readout"><small>Samples drawn</small><b id="cCount">0</b></div>
+      <div class="readout"><small>Mean of the x̄'s</small><b id="cMean">—</b></div>
+      <div class="readout"><small>SD of the x̄'s</small><b id="cSd">—</b></div>
+      <div class="readout"><small>Theory: μ · σ/√n</small><b id="cTheory">—</b></div>
+    </div>
+    <div class="pnote" id="cLast"></div>
+    <details>
+      <summary>Essential questions to answer in your notebook</summary>
+      <ul>
+        <li>What is a sampling distribution of a statistic?</li>
+        <li>How can the sampling distribution of a statistic be simulated using random samples from a population?</li>
+        <li>What is a randomization distribution, and how is it generated through simulation?</li>
+        <li>What does the central limit theorem state about the shape of the sampling distribution of a sample mean, and how does sample size affect this approximation?</li>
+      </ul>
+    </details>
+  </div>
+
+  <div class="card">
+    <h3>AP exam reminders</h3>
+    <ol>
+      <li><b>Define</b> the random variable in words ("Let <i>X</i> = the number of …").</li>
+      <li><b>Name the distribution</b> and justify with its conditions (BINS, normal, CLT).</li>
+      <li><b>Show setup</b>: formula with numbers, or calculator syntax with all inputs (normalcdf(…), binompdf(…)).</li>
+      <li><b>Answer in context</b> with units, and write interpretations in a full sentence.</li>
+    </ol>
+    <p class="pnote">Ready? Go to <button class="linkbtn" data-goto="examples">Worked Examples</button>, then <button class="linkbtn" data-goto="practice">Practice</button>.</p>
+  </div>
+</section>
+
+<!-- ===================== EXAMPLES ===================== -->
+<section class="panel" id="examples" aria-labelledby="t-examples">
+  <div class="card">
+    <h2>Step-by-step worked examples (AP level)</h2>
+    <p>Each example is solved as it would be on the AP exam: define, justify, set up, calculate, interpret. Press <em>Next step</em> to reveal one step at a time; at most steps you answer a quick question first.</p>
+  </div>
+  <div id="exampleList"></div>
+</section>
+
+<!-- ===================== PRACTICE ===================== -->
+<section class="panel" id="practice" aria-labelledby="t-practice">
+  <div class="card">
+    <h2>Practice on your own</h2>
+    <p>Type your answer and press <b>Check</b> (or Enter) for immediate feedback. Use <b>Hint</b> if you are stuck; after two tries you can open the full <b>Solution</b>.</p>
+    <ul>
+      <li>Probabilities may be given as decimals (<span class="math">0.0808</span>), fractions (<span class="math">7/36</span>) or percents (<span class="math">8.08%</span>). Answers are accepted within normal rounding (calculator or table).</li>
+      <li>Interpretation and justification questions are multiple choice or multi-select, so you can practice choosing the best statistical argument.</li>
+    </ul>
+  </div>
+  <div class="setpicker" id="setPicker" role="group" aria-label="Problem sets"></div>
+  <div id="problemList"></div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Lincoln International Academy · AP Statistics · Mr. Eduardo Vásquez<br>Aligned with <i>Stats: Modeling the World</i> (6th ed.), Unit 2, lessons 2.8–2.12 of the 2026–2027 yearly plan. Problems written for this page.</div>
+    <div>Your progress is saved in this browser only. <button class="linkbtn" id="resetAll">Reset my progress</button></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+const $  = (s,e=document)=>e.querySelector(s);
+const $$ = (s,e=document)=>[...e.querySelectorAll(s)];
+const KEY='lia-apstats-unit2-lessons-2-8-to-2-12';
+let state={};
+try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+
+/* ================= math ================= */
+function erfc(x){
+  const z=Math.abs(x), t=1/(1+.5*z);
+  const r=t*Math.exp(-z*z-1.26551223+t*(1.00002368+t*(.37409196+t*(.09678418+t*(-.18628806+t*(.27886807+t*(-1.13520398+t*(1.48851587+t*(-.82215223+t*.17087277)))))))));
+  return x>=0?r:2-r;
+}
+const Phi=z=>0.5*erfc(-z/Math.SQRT2);
+const npdf=(x,m,s)=>Math.exp(-0.5*((x-m)/s)**2)/(s*Math.sqrt(2*Math.PI));
+function PhiInv(p){
+  if(p<=0) return -Infinity; if(p>=1) return Infinity;
+  const a=[-3.969683028665376e+01,2.209460984245205e+02,-2.759285104469687e+02,1.383577518672690e+02,-3.066479806614716e+01,2.506628277459239e+00];
+  const b=[-5.447609879822406e+01,1.615858368580409e+02,-1.556989798598866e+02,6.680131188771972e+01,-1.328068155288572e+01];
+  const c=[-7.784894002430293e-03,-3.223964580411365e-01,-2.400758277161838e+00,-2.549732539343734e+00,4.374664141464968e+00,2.938163982698783e+00];
+  const d=[7.784695709041462e-03,3.224671290700398e-01,2.445134137142996e+00,3.754408661907416e+00];
+  let x; const pl=0.02425;
+  if(p<pl){ const q=Math.sqrt(-2*Math.log(p)); x=(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1); }
+  else if(p>1-pl){ const q=Math.sqrt(-2*Math.log(1-p)); x=-(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5])/((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1); }
+  else { const q=p-0.5, r=q*q; x=(((((a[0]*r+a[1])*r+a[2])*r+a[3])*r+a[4])*r+a[5])*q/(((((b[0]*r+b[1])*r+b[2])*r+b[3])*r+b[4])*r+1); }
+  const e=Phi(x)-p, u=e*Math.sqrt(2*Math.PI)*Math.exp(x*x/2);
+  return x-u/(1+x*u/2);
+}
+const nc=(a,b,m,s)=>Phi((b-m)/s)-Phi((a-m)/s);          // normalcdf
+const invN=(p,m,s)=>m+s*PhiInv(p);                       // invNorm
+function bpmf(n,p){
+  const lf=[0]; for(let i=1;i<=n;i++) lf[i]=lf[i-1]+Math.log(i);
+  const out=[];
+  for(let k=0;k<=n;k++){
+    if(p<=0) out.push(k===0?1:0); else if(p>=1) out.push(k===n?1:0);
+    else out.push(Math.exp(lf[n]-lf[k]-lf[n-k]+k*Math.log(p)+(n-k)*Math.log(1-p)));
+  }
+  return out;
+}
+const bpdf=(n,p,k)=>bpmf(n,p)[k]||0;
+const bcdf=(n,p,k)=>{ if(k<0) return 0; const a=bpmf(n,p); let s=0; for(let i=0;i<=Math.min(k,n);i++) s+=a[i]; return s; };
+const gauss=()=>Math.sqrt(-2*Math.log(1-Math.random()))*Math.cos(2*Math.PI*Math.random());
+const r4=x=>String(+x.toPrecision(4));
+const r3=x=>String(+x.toPrecision(3));
+const fx=(x,d=4)=>x.toFixed(d);
+
+/* ================= notation ================= */
+const F=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const XB='<span class="ov"><i>x</i></span>';
+const X='<i>X</i>';
+
+/* ================= parsing / judging ================= */
+function parseNum(raw){
+  if(raw==null) return NaN;
+  let s=String(raw).trim().toLowerCase().replace(/,/g,'').replace(/\s+/g,'').replace(/[−–]/g,'-').replace(/^\$/,'');
+  if(!s) return NaN;
+  let pct=false; if(s.endsWith('%')){ pct=true; s=s.slice(0,-1); }
+  const sup={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-'};
+  s=s.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g,m=>'^'+[...m].map(c=>sup[c]).join(''));
+  s=s.replace(/[a-df-z]+$/,'');
+  let fr=s.match(/^([+-]?(?:\d+\.?\d*|\.\d+))\/(\d+\.?\d*|\.\d+)$/);
+  if(fr){ const v=parseFloat(fr[1])/parseFloat(fr[2]); return pct?v/100:v; }
+  const m=s.match(/^([+-]?(?:\d+\.?\d*|\.\d+))(?:(?:x|×|\*)10\^?\(?([+-]?\d+)\)?|e([+-]?\d+))?$/);
+  if(!m) return NaN;
+  let v=parseFloat(m[1]); const ex=m[2]!==undefined?m[2]:m[3];
+  if(ex!==undefined) v*=Math.pow(10,parseInt(ex,10));
+  return pct?v/100:v;
+}
+function judge(v,part){
+  if(!isFinite(v)) return {state:'no',msg:'I couldn\'t read that as a number. Try a decimal (0.0808), a fraction (7/36), a percent (8.08%) or scientific notation (1.5e6).'};
+  const tol=part.tol??0.02, ans=part.ans, A=Math.abs(ans), floor=part.floor??0;
+  const lim=Math.max(tol*A,floor);
+  const cmp=part.abs?Math.abs(v):v, tgt=part.abs?A:ans;
+  if(Math.abs(cmp-tgt)<=lim) return {state:'ok',msg:'Correct!'};
+  for(const t of (part.traps||[])){ if(Math.abs(v-t.v)<=Math.max(0.02*Math.abs(t.v),floor)) return {state:'no',msg:t.msg}; }
+  if(part.prob){
+    if(v>1&&v<=100) return {state:'near',msg:'A probability can\'t exceed 1. If you meant a percent, type the % sign.'};
+    if(v>1||v<0) return {state:'no',msg:'A probability must be between 0 and 1.'};
+    if(Math.abs(v-(1-ans))<=Math.max(tol*(1-ans),floor)) return {state:'near',msg:'That is the complement, 1 − (the answer). Re-check the direction of the inequality (at least / at most / more than / fewer than).'};
+  }
+  if(part.sd&&Math.abs(v-ans*ans)<=Math.max(tol*ans*ans,floor)) return {state:'near',msg:'That looks like the variance σ². Take the square root to get the standard deviation.'};
+  if(!part.abs&&ans!==0&&Math.abs(v+ans)<=lim) return {state:'near',msg:'Right size, wrong sign. Check which direction is positive and which value is above or below the mean.'};
+  for(const k of [10,100,1000]){
+    if(Math.abs(v*k-ans)<=lim||Math.abs(v/k-ans)<=lim) return {state:'near',msg:'Right digits, wrong decimal place — check percent vs proportion or your units.'};
+  }
+  if(A>0&&Math.abs(cmp-tgt)/A<=0.12) return {state:'near',msg:'Close! Check rounding or an intermediate value (use more decimals until the last step).'};
+  return {state:'no',msg:'Not quite. Re-read the question, check your setup (which distribution? which inequality?), and try a hint if you need one.'};
+}
+
+/* ================= charts ================= */
+function barChart(labels,vals,o={}){
+  const W=o.W||520,H=o.H||250,L=46,R=12,T=18,B=36,n=labels.length;
+  const mx=Math.max(...vals,1e-9)*1.18, bw=(W-L-R)/n, hl=o.hl||null;
+  const Y=v=>T+(1-v/mx)*(H-T-B);
+  let s=`<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="${o.aria||'Bar chart of a probability distribution'}">`;
+  for(let i=0;i<=4;i++){ const v=mx*i/4; s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${v.toFixed(mx<.1?3:2)}</text>`; }
+  vals.forEach((v,i)=>{
+    const on=hl?hl.has(i):true;
+    const x=L+i*bw+bw*.12, w=bw*.76, y=Y(v);
+    s+=`<rect x="${x}" y="${y}" width="${w}" height="${Math.max(0,H-B-y)}" rx="2" fill="${on?'var(--accent)':'var(--bar)'}"/>`;
+    if(n<=13&&v>0) s+=`<text x="${x+w/2}" y="${y-4}" text-anchor="middle" class="vl">${v.toFixed(v<.01?4:3)}</text>`;
+    const step=Math.ceil(n/14);
+    if(i%step===0) s+=`<text x="${x+w/2}" y="${H-B+15}" text-anchor="middle">${labels[i]}</text>`;
+  });
+  s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}"/><line class="axis" x1="${L}" x2="${L}" y1="${T}" y2="${H-B}"/>`;
+  if(o.marker!==undefined){ const mxp=L+(o.marker+.5)*bw; s+=`<line x1="${mxp}" x2="${mxp}" y1="${T}" y2="${H-B}" stroke="var(--warm)" stroke-width="2" stroke-dasharray="6 4"/><text x="${mxp+4}" y="${T+10}" style="fill:var(--warm)">μ = ${r3(o.marker)}</text>`; }
+  s+=`<text x="${W-R}" y="${H-4}" text-anchor="end">${o.xlab||'x'}</text><text x="${L+4}" y="${T-6}">P(x)</text>`;
+  return s+'</svg>';
+}
+function normSVG(mu,sd,a,b,mode,emp){
+  const W=540,H=270,L=16,R=16,T=30,B=42, xmin=mu-4*sd, xmax=mu+4*sd, ymax=npdf(mu,mu,sd)*1.15;
+  const X=x=>L+(x-xmin)/(xmax-xmin)*(W-L-R), Y=y=>T+(1-y/ymax)*(H-T-B);
+  const poly=(lo,hi,fill,op)=>{ lo=Math.max(lo,xmin); hi=Math.min(hi,xmax); if(hi<=lo) return ''; let p=`${X(lo)},${Y(0)}`; for(let i=0;i<=80;i++){ const x=lo+(hi-lo)*i/80; p+=` ${X(x)},${Y(npdf(x,mu,sd))}`; } p+=` ${X(hi)},${Y(0)}`; return `<polygon points="${p}" fill="${fill}" opacity="${op}"/>`; };
+  let s=`<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Normal curve with shaded area">`;
+  if(emp){
+    s+=poly(mu-3*sd,mu+3*sd,'var(--cold)',.18)+poly(mu-2*sd,mu+2*sd,'var(--cold)',.22)+poly(mu-sd,mu+sd,'var(--cold)',.3);
+    s+=`<text x="${X(mu)}" y="${T-14}" text-anchor="middle" style="fill:var(--ink)">68 %</text><text x="${X(mu)}" y="${T-2}" text-anchor="middle">95 % · 99.7 %</text>`;
+  }
+  const lo=mode==='below'?xmin:a, hi=mode==='above'?xmax:b;
+  s+=poly(Math.min(lo,hi),Math.max(lo,hi),'var(--accent)',.6);
+  let d=''; for(let i=0;i<=200;i++){ const x=xmin+(xmax-xmin)*i/200; d+=(i?'L':'M')+X(x)+','+Y(npdf(x,mu,sd)); }
+  s+=`<path d="${d}" fill="none" stroke="var(--primary)" stroke-width="3"/>`;
+  s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="${Y(0)}" y2="${Y(0)}"/>`;
+  for(let k=-3;k<=3;k++){ const x=mu+k*sd; s+=`<line class="grid" x1="${X(x)}" x2="${X(x)}" y1="${Y(0)}" y2="${Y(0)+5}" stroke="var(--muted)"/><text x="${X(x)}" y="${Y(0)+18}" text-anchor="middle">${+x.toFixed(1)}</text><text x="${X(x)}" y="${Y(0)+31}" text-anchor="middle" style="font-weight:400">${k===0?'μ':(k>0?'+':'−')+Math.abs(k)+'σ'}</text>`; }
+  const vl=(x,l)=>`<line x1="${X(x)}" x2="${X(x)}" y1="${Y(npdf(x,mu,sd))}" y2="${Y(0)}" stroke="var(--warm)" stroke-width="2.5"/><text x="${X(x)}" y="${Y(npdf(x,mu,sd))-6}" text-anchor="middle" style="fill:var(--warm)">${l}</text>`;
+  if(mode!=='below') s+=vl(a,'a'); if(mode!=='above') s+=vl(b,'b');
+  return s+'</svg>';
+}
+function histSVG(counts,lo,hi,o={}){
+  const W=o.W||520,H=o.H||240,L=40,R=12,T=14,B=34,n=counts.length, bw=(W-L-R)/n;
+  let mx=Math.max(...counts,1); if(o.curve) mx=Math.max(mx,...o.curve.map(c=>c))*1.12; else mx*=1.12;
+  const Y=v=>T+(1-v/mx)*(H-T-B), X=x=>L+(x-lo)/(hi-lo)*(W-L-R);
+  let s=`<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="${o.aria||'Histogram'}">`;
+  counts.forEach((c,i)=>{ const x=L+i*bw; s+=`<rect x="${x+.5}" y="${Y(c)}" width="${Math.max(bw-1,1)}" height="${Math.max(0,H-B-Y(c))}" fill="var(--accent)" opacity=".85"/>`; });
+  if(o.curve){ let d=''; o.curve.forEach((c,i)=>{ d+=(i?'L':'M')+(L+(i+.5)*bw)+','+Y(c); }); s+=`<path d="${d}" fill="none" stroke="var(--warm)" stroke-width="2.5"/>`; }
+  s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}"/>`;
+  for(let i=0;i<=5;i++){ const x=lo+(hi-lo)*i/5; s+=`<text x="${X(x)}" y="${H-B+15}" text-anchor="middle">${+x.toFixed(2)}</text>`; }
+  if(o.mark!==undefined) s+=`<line x1="${X(o.mark)}" x2="${X(o.mark)}" y1="${T}" y2="${H-B}" stroke="var(--primary)" stroke-width="1.8" stroke-dasharray="5 4"/>`;
+  s+=`<text x="${W-R}" y="${H-3}" text-anchor="end">${o.xlab||''}</text>`;
+  return s+'</svg>';
+}
+
+/* ================= tabs ================= */
+function showTab(name){
+  $$('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));
+  $$('section.panel').forEach(p=>p.classList.toggle('active',p.id===name));
+  if(location.hash!=='#'+name) history.replaceState(null,'','#'+name);
+  window.scrollTo({top:0});
+}
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.addEventListener('click',e=>{ const g=e.target.closest('[data-goto]'); if(g) showTab(g.dataset.goto); });
+
+/* ================= 2.8 distribution builder ================= */
+(function(){
+  const PRE={
+    coins:{x:[0,1,2,3],p:['1/8','3/8','3/8','1/8'],lab:'X = number of heads in 3 flips'},
+    dice:{x:[2,3,4,5,6,7,8,9,10,11,12],p:['1/36','2/36','3/36','4/36','5/36','6/36','5/36','4/36','3/36','2/36','1/36'],lab:'X = sum of two dice'},
+    custom:{x:[0,1,2,3,4],p:['0.30','0.25','0.20','','0.10'],lab:'X = number of …'}
+  };
+  let cur='coins'; const tbl=$('#dTable');
+  const val=s=>{ const t=String(s).trim(); return t===''?NaN:parseNum(t); };
+  function build(){
+    const pr=PRE[cur]; tbl.innerHTML='<thead><tr><th><i>x</i></th><th><i>P</i>(<i>X</i> = <i>x</i>)</th><th><i>P</i>(<i>X</i> ≤ <i>x</i>)</th></tr></thead>';
+    const tb=document.createElement('tbody');
+    pr.x.forEach((x,i)=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td>${x}</td><td><input type="text" aria-label="P(X = ${x})" value="${pr.p[i]}" style="width:90px"></td><td class="cum">—</td>`; tb.appendChild(tr); });
+    tbl.appendChild(tb);
+    $$('input',tb).forEach(i=>i.addEventListener('input',upd));
+    const k=$('#dK'); k.innerHTML=pr.x.map((x,i)=>`<option value="${i}">${x}</option>`).join(''); k.value=Math.min(2,pr.x.length-1);
+    upd();
+  }
+  function upd(){
+    const pr=PRE[cur], inputs=$$('tbody input',tbl), v=inputs.map(i=>val(i.value));
+    const fin=v.map(x=>isFinite(x)?x:0), sum=fin.reduce((a,b)=>a+b,0), blanks=v.filter(x=>!isFinite(x)).length;
+    let c=0; $$('tbody .cum',tbl).forEach((td,i)=>{ c+=fin[i]; td.textContent=blanks?'—':c.toFixed(4).replace(/\.?0+$/,'')||'0'; });
+    $('#dSum').textContent=(+sum.toFixed(6));
+    const bad=v.some(x=>isFinite(x)&&(x<0||x>1));
+    const st=$('#dStatus'), ok=!blanks&&!bad&&Math.abs(sum-1)<1e-6;
+    $('#dValid').textContent=ok?'Yes ✔':'No';
+    $('#dFill').hidden=!(blanks===1);
+    if(bad){ st.className='status bad'; st.textContent='Each probability must be between 0 and 1.'; }
+    else if(blanks===1){ st.className='status warn'; st.textContent=`One probability is missing. The others add to ${+sum.toFixed(6)}, so the missing one must be 1 − ${+sum.toFixed(6)} = ${+(1-sum).toFixed(6)}.`; }
+    else if(blanks>1){ st.className='status warn'; st.textContent='Fill in all probabilities (or leave just one blank).'; }
+    else if(ok){ st.className='status'; st.textContent='Valid probability distribution: every P(x) is between 0 and 1 and they add to 1.'; }
+    else { st.className='status bad'; st.textContent=`Not valid: the probabilities add to ${+sum.toFixed(6)}, but they must add to exactly 1.`; }
+    const op=$('#dOp').value, k=+$('#dK').value, hl=new Set();
+    fin.forEach((_,i)=>{ if({eq:i===k,le:i<=k,lt:i<k,ge:i>=k,gt:i>k}[op]) hl.add(i); });
+    $('#dAns').textContent=fx([...hl].reduce((a,i)=>a+fin[i],0),4);
+    $('#dChart').innerHTML=barChart(pr.x,fin,{hl,xlab:'x',aria:'Probability histogram'});
+  }
+  $$('#dPresets button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.p; $$('#dPresets button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); build(); }));
+  $('#dOp').addEventListener('change',upd); $('#dK').addEventListener('change',upd);
+  $('#dFill').addEventListener('click',()=>{
+    const inputs=$$('tbody input',tbl), v=inputs.map(i=>val(i.value)), idx=v.findIndex(x=>!isFinite(x));
+    if(idx<0) return; const s=v.reduce((a,b)=>a+(isFinite(b)?b:0),0); inputs[idx].value=String(+(1-s).toFixed(6)); upd();
+  });
+  build();
+})();
+
+/* ================= 2.9 mean & SD lab ================= */
+(function(){
+  const PRE={
+    game:{x:['-2','1','8'],p:['0.7','0.2','0.1'],lab:'Net gain ($)'},
+    sib:{x:['0','1','2','3','4'],p:['0.2','0.35','0.28','0.12','0.05'],lab:'Siblings'},
+    pol:{x:['300','-4700','-29700'],p:['0.975','0.02','0.005'],lab:'Profit ($)'}
+  };
+  let cur='game', hist=[], cnt=0, sum=0; const tbl=$('#mTable');
+  function build(){
+    const pr=PRE[cur];
+    tbl.innerHTML='<thead><tr><th><i>x</i></th><th><i>P</i>(<i>x</i>)</th><th><i>x</i>·<i>P</i>(<i>x</i>)</th><th>(<i>x</i>−μ)²·<i>P</i>(<i>x</i>)</th></tr></thead>';
+    const tb=document.createElement('tbody');
+    pr.x.forEach((x,i)=>{ const tr=document.createElement('tr'); tr.innerHTML=`<td><input type="text" aria-label="x value ${i+1}" value="${x}" style="width:84px"></td><td><input type="text" aria-label="probability ${i+1}" value="${pr.p[i]}" style="width:78px"></td><td class="c1">—</td><td class="c2">—</td>`; tb.appendChild(tr); });
+    tbl.appendChild(tb); $$('input',tb).forEach(i=>i.addEventListener('input',()=>{ resetSim(); upd(); }));
+    resetSim(); upd();
+  }
+  function get(){ const rows=$$('tbody tr',tbl); return rows.map(r=>{ const i=$$('input',r); return [parseNum(i[0].value),parseNum(i[1].value)]; }); }
+  function stats(){
+    const d=get(); if(d.some(r=>!isFinite(r[0])||!isFinite(r[1]))) return null;
+    const s=d.reduce((a,r)=>a+r[1],0); if(Math.abs(s-1)>1e-6) return {bad:s};
+    const mu=d.reduce((a,r)=>a+r[0]*r[1],0), v=d.reduce((a,r)=>a+(r[0]-mu)**2*r[1],0);
+    return {d,mu,v,sd:Math.sqrt(v)};
+  }
+  function upd(){
+    const st=stats(), s=$('#mStatus');
+    $$('#mTable tbody tr').forEach(r=>{ r.querySelector('.c1').textContent='—'; r.querySelector('.c2').textContent='—'; });
+    if(!st||st.bad!==undefined){ $('#mMu').textContent='—'; $('#mVar').textContent='—'; $('#mSd').textContent='—'; s.className='status warn'; s.textContent=st?`The probabilities add to ${+st.bad.toFixed(6)}; they must add to 1 before μ and σ make sense.`:'Enter numbers for every x and P(x).'; chart(); return; }
+    $$('#mTable tbody tr').forEach((r,i)=>{ r.querySelector('.c1').textContent=+(st.d[i][0]*st.d[i][1]).toFixed(4); r.querySelector('.c2').textContent=+((st.d[i][0]-st.mu)**2*st.d[i][1]).toFixed(4); });
+    $('#mMu').textContent=+st.mu.toFixed(4); $('#mVar').textContent=+st.v.toFixed(4); $('#mSd').textContent=+st.sd.toFixed(4);
+    s.className='status'; s.innerHTML=`"If this process were repeated a very large number of times, the average value of <i>X</i> would be about ${+st.mu.toFixed(3)}. The values of <i>X</i> typically vary by about ${+st.sd.toFixed(3)} from the mean."`;
+    chart();
+  }
+  function resetSim(){ hist=[]; cnt=0; sum=0; }
+  function sim(n){
+    const st=stats(); if(!st||st.bad!==undefined) return;
+    for(let i=0;i<n;i++){ let u=Math.random(),c=0,val=st.d[st.d.length-1][0]; for(const r of st.d){ c+=r[1]; if(u<c){ val=r[0]; break; } } sum+=val; cnt++; if(cnt<=1500||cnt%10===0) hist.push([cnt,sum/cnt]); }
+    chart();
+  }
+  function chart(){
+    const st=stats(), W=520,H=240,L=50,R=12,T=14,B=32, el=$('#mChart');
+    if(!st||st.bad!==undefined){ el.innerHTML=''; $('#mSimInfo').textContent='Enter a valid distribution to run the simulation.'; return; }
+    const sd=st.sd||1, lo=st.mu-3*sd, hi=st.mu+3*sd, maxN=Math.max(cnt,10), lm=Math.log10(maxN);
+    const X=n=>L+(Math.log10(n)/lm)*(W-L-R), Y=v=>T+(1-(Math.min(hi,Math.max(lo,v))-lo)/(hi-lo))*(H-T-B);
+    let s=`<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Running average of simulated plays">`;
+    for(let i=0;i<=4;i++){ const v=lo+(hi-lo)*i/4; s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${+v.toFixed(2)}</text>`; }
+    s+=`<line x1="${L}" x2="${W-R}" y1="${Y(st.mu)}" y2="${Y(st.mu)}" stroke="var(--warm)" stroke-width="2" stroke-dasharray="6 4"/><text x="${W-R}" y="${Y(st.mu)-5}" text-anchor="end" style="fill:var(--warm)">μ = ${+st.mu.toFixed(3)}</text>`;
+    if(hist.length>1) s+=`<polyline fill="none" stroke="var(--accent)" stroke-width="2.5" points="${hist.map(h=>X(Math.max(h[0],1))+','+Y(h[1])).join(' ')}"/>`;
+    for(let e=0;e<=Math.floor(lm);e++){ const n=Math.pow(10,e); s+=`<text x="${X(n)}" y="${H-B+15}" text-anchor="middle">${n}</text>`; }
+    s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}"/><text x="${W-R}" y="${H-3}" text-anchor="end">number of plays (log scale)</text></svg>`;
+    el.innerHTML=s;
+    $('#mSimInfo').innerHTML=cnt?`After <b>${cnt}</b> plays the running average is <b>${+(sum/cnt).toFixed(3)}</b> (μ = ${+st.mu.toFixed(3)}). Early averages swing wildly; in the long run they settle near μ.`:'No plays yet. The dashed line is μ; the solid line is the running average of the plays.';
+  }
+  $$('[data-sim]').forEach(b=>b.addEventListener('click',()=>sim(+b.dataset.sim)));
+  $('#mReset').addEventListener('click',()=>{ resetSim(); chart(); });
+  $$('#mPresets button').forEach(b=>b.addEventListener('click',()=>{ cur=b.dataset.p; $$('#mPresets button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); build(); }));
+  build();
+})();
+
+/* ================= 2.10 binomial explorer ================= */
+(function(){
+  const N=$('#bN'),Pp=$('#bP'),K=$('#bK'),Op=$('#bOp');
+  function fillK(){ const n=+N.value, old=+K.value||0; K.innerHTML=[...Array(n+1)].map((_,i)=>`<option value="${i}">${i}</option>`).join(''); K.value=Math.min(old,n); }
+  const sel=(op,k)=>i=>op==='eq'?i===k:op==='le'?i<=k:i>=k;
+  function upd(){
+    const n=+N.value,p=+Pp.value,k=+K.value,op=Op.value, pm=bpmf(n,p), f=sel(op,k);
+    $('#bNO').textContent=n; $('#bPO').textContent=p.toFixed(2);
+    const hl=new Set(), pr=pm.reduce((a,v,i)=>{ if(f(i)){ hl.add(i); return a+v; } return a; },0);
+    $('#bProb').textContent=fx(pr,4); $('#bMu').textContent=r4(n*p); $('#bSd').textContent=r4(Math.sqrt(n*p*(1-p)));
+    $('#bChart').innerHTML=barChart(pm.map((_,i)=>i),pm,{hl,marker:n*p,xlab:'number of successes k',aria:'Binomial distribution'});
+    $('#bSimInfo').textContent='';
+  }
+  N.addEventListener('input',()=>{ fillK(); upd(); }); Pp.addEventListener('input',upd); K.addEventListener('change',upd); Op.addEventListener('change',upd);
+  $('#bSim').addEventListener('click',()=>{
+    const n=+N.value,p=+Pp.value,k=+K.value,f=sel(Op.value,k); let hit=0; const reps=1000;
+    for(let r=0;r<reps;r++){ let x=0; for(let i=0;i<n;i++) if(Math.random()<p) x++; if(f(x)) hit++; }
+    $('#bSimInfo').innerHTML=`In ${reps} simulated repetitions, the event happened ${hit} times: simulated probability ≈ <b>${(hit/reps).toFixed(3)}</b> vs. exact <b>${$('#bProb').textContent}</b>.`;
+  });
+  fillK(); K.value=4; upd();
+})();
+
+/* ================= 2.11 normal explorer ================= */
+(function(){
+  const Mu=$('#nMu'),Sd=$('#nSd'),A_=$('#nA'),B_=$('#nB'),Mode=$('#nMode'),Emp=$('#nEmp'),Pc=$('#nPct');
+  let za=-1, zb=1;
+  function sliders(){
+    const mu=+Mu.value, sd=+Sd.value, lo=mu-4*sd, hi=mu+4*sd, step=sd/20;
+    [A_,B_].forEach(s=>{ s.min=lo; s.max=hi; s.step=step; });
+    A_.value=mu+za*sd; B_.value=mu+zb*sd;
+  }
+  function upd(){
+    const mu=+Mu.value, sd=+Sd.value, mode=Mode.value;
+    const a=+A_.value, b=+B_.value; za=(a-mu)/sd; zb=(b-mu)/sd;
+    $('#nMuO').textContent=mu; $('#nSdO').textContent=sd; $('#nAO').textContent=+a.toFixed(1); $('#nBO').textContent=+b.toFixed(1);
+    A_.disabled=mode==='below'; B_.disabled=mode==='above';
+    const lo=Math.min(a,b), hi=Math.max(a,b);
+    let area, calc;
+    if(mode==='between'){ area=nc(lo,hi,mu,sd); calc=`normalcdf(${+lo.toFixed(1)}, ${+hi.toFixed(1)}, ${mu}, ${sd})`; }
+    else if(mode==='below'){ area=Phi(zb); calc=`normalcdf(−1E99, ${+b.toFixed(1)}, ${mu}, ${sd})`; }
+    else { area=1-Phi(za); calc=`normalcdf(${+a.toFixed(1)}, 1E99, ${mu}, ${sd})`; }
+    $('#nArea').textContent=fx(area,4); $('#nZa').textContent=mode==='below'?'—':fx(za,2); $('#nZb').textContent=mode==='above'?'—':fx(zb,2); $('#nCalc').textContent=calc;
+    $('#nChart').innerHTML=normSVG(mu,sd,Math.min(a,b),Math.max(a,b),mode,Emp.checked);
+    const p=+Pc.value/100; $('#nPctO').textContent=Pc.value+'th';
+    $('#nInv').textContent=`invNorm(${p.toFixed(2)}, ${mu}, ${sd}) = ${(+invN(p,mu,sd).toFixed(2))}   (z = ${PhiInv(p).toFixed(3)})`;
+  }
+  [A_,B_,Mode,Emp,Pc].forEach(e=>e.addEventListener('input',upd));
+  Mode.addEventListener('change',upd); Emp.addEventListener('change',upd);
+  [Mu,Sd].forEach(s=>s.addEventListener('input',()=>{ sliders(); upd(); }));
+  sliders(); upd();
+})();
+
+/* ================= 2.12 CLT simulator ================= */
+(function(){
+  const POPS={
+    expo:{mu:5,sd:5,lo:0,hi:25,pdf:x=>x<0?0:Math.exp(-x/5)/5,draw:()=>-5*Math.log(1-Math.random())},
+    unif:{mu:5,sd:10/Math.sqrt(12),lo:0,hi:10,pdf:x=>(x>=0&&x<=10)?.1:0,draw:()=>10*Math.random()},
+    bimo:{mu:5,sd:Math.sqrt(9.49),lo:-1,hi:11,pdf:x=>.5*npdf(x,2,.7)+.5*npdf(x,8,.7),draw:()=>(Math.random()<.5?2:8)+.7*gauss()},
+    norm:{mu:5,sd:2,lo:-1,hi:11,pdf:x=>npdf(x,5,2),draw:()=>5+2*gauss()}
+  };
+  let pop='expo', means=[];
+  const Nn=$('#cN');
+  function popChart(){
+    const P=POPS[pop], W=520,H=180,L=14,R=14,T=10,B=28, pts=120, ys=[...Array(pts+1)].map((_,i)=>P.pdf(P.lo+(P.hi-P.lo)*i/pts)), mx=Math.max(...ys)*1.15;
+    const X=x=>L+(x-P.lo)/(P.hi-P.lo)*(W-L-R), Y=v=>T+(1-v/mx)*(H-T-B);
+    let d=`M${X(P.lo)},${Y(0)}`; ys.forEach((y,i)=>{ d+=` L${X(P.lo+(P.hi-P.lo)*i/pts)},${Y(y)}`; }); d+=` L${X(P.hi)},${Y(0)} Z`;
+    let s=`<svg class="ch" viewBox="0 0 ${W} ${H}" role="img" aria-label="Population distribution"><path d="${d}" fill="var(--primary)" opacity=".3" stroke="var(--primary)" stroke-width="2"/><line class="axis" x1="${L}" x2="${W-R}" y1="${Y(0)}" y2="${Y(0)}"/><line x1="${X(P.mu)}" x2="${X(P.mu)}" y1="${T}" y2="${Y(0)}" stroke="var(--warm)" stroke-width="2" stroke-dasharray="5 4"/>`;
+    for(let i=0;i<=5;i++){ const x=P.lo+(P.hi-P.lo)*i/5; s+=`<text x="${X(x)}" y="${H-10}" text-anchor="middle">${+x.toFixed(1)}</text>`; }
+    s+=`<text x="${X(P.mu)+4}" y="${T+10}" style="fill:var(--warm)">μ = ${P.mu}, σ = ${r3(P.sd)}</text></svg>`;
+    $('#cPopChart').innerHTML=s;
+  }
+  function render(){
+    const P=POPS[pop], n=+Nn.value, se=P.sd/Math.sqrt(n), hw=3.8*se, lo=Math.max(P.lo,P.mu-hw), hi=Math.min(P.hi,P.mu+hw), bins=30, bwid=(hi-lo)/bins;
+    const counts=new Array(bins).fill(0); means.forEach(m=>{ const i=Math.floor((m-lo)/bwid); if(i>=0&&i<bins) counts[i]++; });
+    let curve=null; if($('#cOver').checked&&means.length) curve=counts.map((_,i)=>means.length*bwid*npdf(lo+(i+.5)*bwid,P.mu,se));
+    $('#cChart').innerHTML=histSVG(counts,lo,hi,{curve,mark:P.mu,xlab:'sample mean',aria:'Histogram of sample means'});
+    $('#cNO').textContent=n; $('#cCount').textContent=means.length;
+    if(means.length){ const m=means.reduce((a,b)=>a+b,0)/means.length; const sdv=means.length>1?Math.sqrt(means.reduce((a,b)=>a+(b-m)**2,0)/(means.length-1)):NaN; $('#cMean').textContent=fx(m,3); $('#cSd').textContent=isFinite(sdv)?fx(sdv,3):'—'; } else { $('#cMean').textContent='—'; $('#cSd').textContent='—'; }
+    $('#cTheory').textContent=`${P.mu} · ${fx(se,3)}`;
+  }
+  function draw(k){
+    const P=POPS[pop], n=+Nn.value; let last=null;
+    for(let j=0;j<k;j++){ let s=0; const smp=[]; for(let i=0;i<n;i++){ const v=P.draw(); s+=v; if(k===1&&i<8) smp.push(v); } means.push(s/n); if(k===1) last=smp; }
+    $('#cLast').innerHTML=last?`Sample of ${n}${n>8?' (first 8 values shown)':''}: ${last.map(v=>v.toFixed(1)).join(', ')}${n>8?', …':''} → ${XB} = <b>${means[means.length-1].toFixed(2)}</b>`:'';
+    render();
+  }
+  $$('[data-draw]').forEach(b=>b.addEventListener('click',()=>draw(+b.dataset.draw)));
+  $('#cClear').addEventListener('click',()=>{ means=[]; $('#cLast').textContent=''; render(); });
+  $('#cOver').addEventListener('change',render);
+  Nn.addEventListener('input',()=>{ means=[]; $('#cLast').textContent=''; render(); });
+  $$('#cPop button').forEach(b=>b.addEventListener('click',()=>{ pop=b.dataset.p; $$('#cPop button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); means=[]; $('#cLast').textContent=''; popChart(); render(); }));
+  popChart(); render();
+})();
+
+/* ================= ask widgets (worked examples) ================= */
+function mkMC(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  ask.opts.forEach((o,i)=>{
+    const b=document.createElement('button'); b.className='opt'; b.type='button'; b.innerHTML=o;
+    b.addEventListener('click',()=>{
+      if(i===ask.correct){ b.classList.add('right'); $$('.opt',host).forEach(x=>x.disabled=true); fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); onDone(); }
+      else { b.classList.add('wrong'); b.disabled=true; fb.className='fb no'; fb.innerHTML=(ask.wrong&&ask.wrong[i])||'Not quite — try another option.'; }
+    });
+    host.appendChild(b);
+  });
+  host.appendChild(fb);
+}
+function mkNum(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const row=document.createElement('div'); row.className='row';
+  const inp=document.createElement('input'); inp.type='text'; inp.setAttribute('aria-label','Your answer'); inp.placeholder='your answer'; inp.autocomplete='off';
+  const u=document.createElement('span'); u.className='math'; u.innerHTML=ask.unit||'';
+  const btn=document.createElement('button'); btn.className='btn'; btn.type='button'; btn.textContent='Check';
+  row.append(inp,u,btn); host.appendChild(row);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite'); host.appendChild(fb);
+  const go=()=>{
+    const j=judge(parseNum(inp.value),{ans:ask.ans,tol:ask.tol||0.02,floor:ask.floor,traps:ask.traps,abs:ask.abs,prob:ask.prob,sd:ask.sd});
+    if(j.state==='ok'){ fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); inp.disabled=true; btn.disabled=true; onDone(); }
+    else { fb.className='fb '+j.state; fb.textContent=j.msg; }
+  };
+  btn.addEventListener('click',go); inp.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+}
+
+/* ================= worked examples ================= */
+const G=(...items)=>`<div class="givenlist">${items.map(i=>`<span>${i}</span>`).join('')}</div>`;
+const U=x=>`<span class="unk">${x}</span>`;
+const dt=(xs,ps,top='<i>x</i>')=>`<div class="tablewrap"><table class="dtable small"><tr><th>${top}</th>${xs.map(x=>`<td>${x}</td>`).join('')}</tr><tr><th><i>P</i>(<i>X</i> = ${top})</th>${ps.map(x=>`<td>${x}</td>`).join('')}</tr></table></div>`;
+const PX=k=>`<i>P</i>(${k})`;
+const EX=[
+ { id:'E1', tag:'Lesson 2.8 · Discrete distributions', title:'Completing and using a probability distribution',
+   problem:'A school counselor records <i>X</i>, the number of AP exams a randomly selected senior plans to take. The probability distribution of <i>X</i> is shown below.'+dt([0,1,2,3,4],['0.38','0.27','0.19','?','0.05'])+'(a) Find <i>P</i>(<i>X</i> = 3). (b) Find <i>P</i>(<i>X</i> ≥ 2). (c) Is it correct to say that a randomly chosen senior is more likely to take 2 or more exams than exactly 1 exam? Support your answer.',
+   steps:[
+    {name:'Analyze', html:`<p><b>Define the variable:</b> <i>X</i> = number of AP exams a randomly selected senior plans to take. It is <b>discrete</b>: it takes the separate values 0, 1, 2, 3, 4.</p>`+G('<i>P</i>(0) = 0.38','<i>P</i>(1) = 0.27','<i>P</i>(2) = 0.19','<i>P</i>(4) = 0.05')+G(U('<i>P</i>(3) = ?')),
+     ask:{type:'mc',q:'What must be true of the probabilities in any probability distribution of a discrete random variable?',opts:['Each is between 0 and 1 and they add to exactly 1','They must all be equal','They must add to 100, not 1','They must decrease as <i>x</i> increases'],correct:0,why:'This is the requirement that lets us find the missing probability.',wrong:{1:'Only for a uniform distribution.',2:'100 % = 1 as a proportion; the sum of probabilities is 1.',3:'Not required.'}}},
+    {name:'Plan', html:`<p>Because ΣP(<i>x</i>) = 1, the missing probability is 1 minus the sum of the others. For part (b), "2 or more" means the values 2, 3 and 4, so add their probabilities (or use the complement, 1 − <i>P</i>(<i>X</i> ≤ 1)).</p>`,
+     ask:{type:'mc',q:'Which expression equals <i>P</i>(<i>X</i> ≥ 2)?',opts:['<i>P</i>(2) + <i>P</i>(3) + <i>P</i>(4)','1 − <i>P</i>(2)','<i>P</i>(<i>X</i> ≤ 2)','1 − <i>P</i>(<i>X</i> ≤ 2)'],correct:0,why:'"At least 2" includes 2, 3 and 4. (The complement form is 1 − P(X ≤ 1).)',wrong:{1:'That would be everything except X = 2.',2:'That includes 0 and 1 and double-counts.',3:'That equals P(X ≥ 3), not P(X ≥ 2).'}}},
+    {name:'Solve (a)', html:`<div class="eq"><i>P</i>(3) = 1 − (0.38 + 0.27 + 0.19 + 0.05) = 1 − 0.89 = <span class="boxed">0.11</span></div>`,
+     ask:{type:'num',q:'Calculate 1 − (0.38 + 0.27 + 0.19 + 0.05).',ans:0.11,tol:0.01,floor:0.0005,prob:true,why:'<i>P</i>(<i>X</i> = 3) = 0.11.'}},
+    {name:'Solve (b)', html:`<div class="eq"><i>P</i>(<i>X</i> ≥ 2) = <i>P</i>(2) + <i>P</i>(3) + <i>P</i>(4) = 0.19 + 0.11 + 0.05 = <span class="boxed">0.35</span></div>`,
+     ask:{type:'num',q:'Check the complement approach: compute 1 − <i>P</i>(<i>X</i> ≤ 1) = 1 − (0.38 + 0.27).',ans:0.35,tol:0.01,floor:0.0005,prob:true,why:'Both methods agree: 0.35.'}},
+    {name:'Interpret and justify (c)', html:`<p><i>P</i>(<i>X</i> ≥ 2) = 0.35, while <i>P</i>(<i>X</i> = 1) = 0.27. Since 0.35 &gt; 0.27, the statement is <b>correct</b>: a randomly selected senior is more likely to plan 2 or more AP exams (35 %) than exactly 1 exam (27 %).</p><p class="pnote">On the AP exam, a justification must cite the calculated values and compare them in context.</p>`,
+     ask:{type:'mc',q:'Which is the best statistical justification for (c)?',opts:['"Yes, because 2 is bigger than 1."','"Yes: <i>P</i>(<i>X</i> ≥ 2) = 0.35 is greater than <i>P</i>(<i>X</i> = 1) = 0.27."','"No, because 0 exams has the highest probability."'],correct:1,why:'It uses calculated probabilities and a comparison in context.',wrong:{0:'This does not use the probabilities.',2:'P(X = 0) = 0.38 is the largest single probability, but the question compares "2 or more" with "exactly 1".'}}}
+   ]},
+ { id:'E2', tag:'Lesson 2.9 · Mean & SD', title:'Expected value and standard deviation of a game',
+   problem:'At a school carnival, a player pays $2 to play a game. The game pays $0 with probability 0.70, $3 with probability 0.20, and $10 with probability 0.10. Let <i>X</i> = the player\'s <b>net</b> gain (winnings minus the $2 cost). (a) Find and interpret the mean of <i>X</i>. (b) Find and interpret the standard deviation of <i>X</i>.',
+   steps:[
+    {name:'Analyze', html:`<p>Net gain = payout − 2. Possible values: 0 − 2 = <b>−2</b>, 3 − 2 = <b>1</b>, 10 − 2 = <b>8</b>.</p>`+dt([-2,1,8],['0.70','0.20','0.10']),
+     ask:{type:'mc',q:'Why must we use the <b>net</b> gain values (−2, 1, 8) rather than the payouts (0, 3, 10)?',opts:['The question defines <i>X</i> as winnings minus the cost, so the values must include the $2 paid','Payouts are not random','Probabilities change when you subtract'],correct:0,why:'Using payouts would give the average payout, not the average profit.'}},
+    {name:'Solve the mean', html:`<div class="eq">μ<sub><i>X</i></sub> = Σ<i>x</i>·<i>P</i>(<i>x</i>) = (−2)(0.70) + (1)(0.20) + (8)(0.10) = −1.40 + 0.20 + 0.80 = <span class="boxed">−0.40</span></div>`,
+     ask:{type:'num',q:'Calculate (−2)(0.70) + (1)(0.20) + (8)(0.10).',ans:-0.4,tol:0.01,floor:0.005,unit:'dollars',why:'μ<sub><i>X</i></sub> = −$0.40.'}},
+    {name:'Solve the standard deviation', html:`<div class="eq">σ<sub><i>X</i></sub><sup>2</sup> = (−2 + 0.4)²(0.70) + (1 + 0.4)²(0.20) + (8 + 0.4)²(0.10) = 1.792 + 0.392 + 7.056 = 9.24</div><div class="eq">σ<sub><i>X</i></sub> = √9.24 ≈ <span class="boxed">3.04</span></div>`,
+     ask:{type:'num',q:'The variance is 9.24. Find the standard deviation σ.',ans:3.0397,tol:0.01,unit:'dollars',sd:true,why:'σ ≈ $3.04.',traps:[{v:9.24,msg:'That is the variance. Take the square root.'}]}},
+    {name:'Interpret in context', html:`<p><b>Mean:</b> If a player played this game a very large number of times, the player\'s average net gain would be about −$0.40 per game (an average loss of 40 cents).</p><p><b>Standard deviation:</b> The player\'s net gain typically varies by about $3.04 from the mean of −$0.40.</p>`,
+     ask:{type:'mc',q:'A student claims: "Since the mean is −$0.40, I\'ll lose exactly 40 cents every time I play." What is wrong?',opts:['Nothing, the claim is correct','The mean describes the long-run average over many plays; on a single play the net gain is −$2, $1, or $8','The mean should be positive','The standard deviation says I\'ll win'],correct:1,why:'Expected value is a long-run average. No single play has a net gain of exactly −$0.40.'}}
+   ]},
+ { id:'E3', tag:'Lesson 2.10 · Binomial', title:'Binomial probabilities, mean and standard deviation',
+   problem:'A basketball player makes 70 % of her free throws, and the shots are independent. She attempts 8 free throws in a game. Let <i>X</i> = the number of free throws she makes. (a) Justify that <i>X</i> is binomial. (b) Find <i>P</i>(<i>X</i> = 6). (c) Find <i>P</i>(<i>X</i> ≥ 6). (d) Find and interpret the mean and standard deviation of <i>X</i>.',
+   steps:[
+    {name:'Justify the model', html:`<ul><li><b>B</b>inary: each shot is made (success) or missed (failure).</li><li><b>I</b>ndependent: stated in the problem.</li><li><b>N</b>umber of trials is fixed: <i>n</i> = 8.</li><li><b>S</b>ame probability: <i>p</i> = 0.70 on each shot.</li></ul><p>So <i>X</i> ~ Binomial(<i>n</i> = 8, <i>p</i> = 0.70).</p>`,
+     ask:{type:'mc',q:'Which condition would be violated if her chance of making a shot decreased as she got tired?',opts:['Binary','Independent','Number of trials fixed','Same probability of success on each trial'],correct:3,why:'A changing probability of success breaks the "same probability" condition (S).'}},
+    {name:'Plan', html:`<div class="eq"><i>P</i>(<i>X</i> = <i>k</i>) = <span class="frac"><span>8!</span><span><i>k</i>!(8 − <i>k</i>)!</span></span>(0.70)<sup><i>k</i></sup>(0.30)<sup>8−<i>k</i></sup></div><p>Calculator: <span class="math">binompdf(8, 0.7, 6)</span> and <span class="math">1 − binomcdf(8, 0.7, 5)</span>.</p>`,
+     ask:{type:'mc',q:'Which calculator command gives <i>P</i>(<i>X</i> ≥ 6)?',opts:['binompdf(8, 0.7, 6)','binomcdf(8, 0.7, 6)','1 − binomcdf(8, 0.7, 5)','1 − binomcdf(8, 0.7, 6)'],correct:2,why:'P(X ≥ 6) = 1 − P(X ≤ 5).',wrong:{0:'That is P(X = 6) only.',1:'That is P(X ≤ 6).',3:'That is P(X ≥ 7).'}}},
+    {name:'Solve (b)', html:`<div class="eq"><i>P</i>(<i>X</i> = 6) = ${F('8!','6!·2!')}(0.7)<sup>6</sup>(0.3)<sup>2</sup> = 28(0.117649)(0.09) = <span class="boxed">0.2965</span></div>`,
+     ask:{type:'num',q:'Calculate 28 × 0.117649 × 0.09.',ans:bpdf(8,.7,6),tol:0.01,floor:0.001,prob:true,why:'≈ 0.2965.'}},
+    {name:'Solve (c)', html:`<div class="eq"><i>P</i>(<i>X</i> ≥ 6) = <i>P</i>(6) + <i>P</i>(7) + <i>P</i>(8) = 0.2965 + 0.1977 + 0.0576 = <span class="boxed">0.5518</span></div>`,
+     ask:{type:'num',q:'Use the calculator: compute 1 − binomcdf(8, 0.7, 5).',ans:1-bcdf(8,.7,5),tol:0.01,floor:0.001,prob:true,why:'≈ 0.5518.'}},
+    {name:'Mean, SD and interpretation (d)', html:`<div class="eq">μ<sub><i>X</i></sub> = <i>np</i> = 8(0.70) = <span class="boxed">5.6</span> &nbsp;&nbsp; σ<sub><i>X</i></sub> = √(<i>np</i>(1 − <i>p</i>)) = √(8(0.7)(0.3)) = √1.68 ≈ <span class="boxed">1.30</span></div><p><b>Mean:</b> If she attempted 8 free throws in a very large number of games, the average number made would be about 5.6. <b>SD:</b> The number made typically varies by about 1.30 shots from the mean of 5.6.</p>`,
+     ask:{type:'num',q:'Calculate σ = √(8 × 0.7 × 0.3).',ans:Math.sqrt(1.68),tol:0.01,sd:true,why:'σ ≈ 1.296.',traps:[{v:1.68,msg:'That is the variance; take the square root.'}]}}
+   ]},
+ { id:'E4', tag:'Lesson 2.10 · Binomial', title:'Justifying why a variable is not binomial',
+   problem:'A teacher randomly selects 6 students <b>without replacement</b> from a class of 15 students, 40 % of whom wear glasses. Let <i>X</i> = the number of selected students who wear glasses. A classmate says <i>X</i> has a binomial distribution with <i>n</i> = 6 and <i>p</i> = 0.40. Is the classmate correct? Justify.',
+   steps:[
+    {name:'Check each condition', html:`<ul><li><b>B</b>inary: wears glasses / does not ✔</li><li><b>N</b>umber of trials fixed: 6 students selected ✔</li><li><b>S</b>ame probability: on the first pick <i>p</i> = 6/15 = 0.40, but after removing one student the probability changes ✘?</li><li><b>I</b>ndependent: selecting without replacement from a small group ✘?</li></ul>`,
+     ask:{type:'mc',q:'Selecting without replacement makes trials independent only approximately. What rule of thumb checks this?',opts:['The 10 % condition: <i>n</i> should be at most 10 % of the population','The sample size must be at least 30','The probability of success must be at least 0.5','The Large Counts condition np ≥ 10'],correct:0,why:'If the sample is no more than 10 % of the population, removing a few individuals barely changes the probabilities.'}},
+    {name:'Apply the 10 % condition', html:`<p>The sample is 6 students out of a population of 15, which is <b>40 %</b> of the class — far more than 10 %. Each selection noticeably changes the makeup of the remaining students.</p>`,
+     ask:{type:'num',q:'What percentage of the class is the sample of 6 students?',ans:40,tol:0.01,unit:'%',why:'6/15 = 0.40 = 40 %, which exceeds 10 %.'}},
+    {name:'Write the justification', html:`<p><b>Model answer:</b> "No. <i>X</i> is not binomial because the trials are not independent. The students are selected without replacement, and the sample (6) is 40 % of the population (15), which is greater than 10 % of the population. For example, if the first student selected wears glasses, the probability the second wears glasses is 5/14 ≈ 0.357, not 0.40."</p>`,
+     ask:{type:'mc',q:'Which statement completes a <b>full</b> justification?',opts:['"It isn\'t binomial because glasses are not random."','"Not independent: sampling without replacement and 6 &gt; 10 % of 15, so the probability of success changes from pick to pick."','"It isn\'t binomial because <i>n</i> is too small."'],correct:1,why:'It names the violated condition and supports it with evidence from the context.'}},
+    {name:'Check / extend', html:`<p>If the class were a school of 600 students, then 6 is only 1 % of 600, and the 10 % condition would be met: <i>X</i> would be <em>approximately</em> binomial.</p>`,
+     ask:{type:'mc',q:'In a school of 600 students (40 % wear glasses), a random sample of 6 is selected. Is a binomial model reasonable?',opts:['Yes — 6 is less than 10 % of 600, so the trials are approximately independent','No — sampling without replacement always rules out a binomial model','No — the probability must be 0.5'],correct:0,why:'The 10 % condition is satisfied.'}}
+   ]},
+ { id:'E5', tag:'Lesson 2.11 · Normal', title:'Normal probabilities and percentiles',
+   problem:'The heights of adult women in a large city are approximately normally distributed with mean 64.5 inches and standard deviation 2.5 inches. (a) What proportion of women are taller than 68 inches? (b) How tall must a woman be to be at the 90th percentile?',
+   steps:[
+    {name:'Define and sketch', html:`<p>Let <i>X</i> = height (in.) of a randomly selected adult woman. <i>X</i> ~ <i>N</i>(μ = 64.5, σ = 2.5). Shade the area to the <b>right</b> of 68.</p>`+G('μ = 64.5','σ = 2.5')+G(U('(a) <i>P</i>(<i>X</i> &gt; 68) = ?'),U('(b) 90th percentile = ?')),
+     ask:{type:'mc',q:'Before calculating, is the answer to (a) closer to 0.08 or to 0.50? (Is 68 far above the mean?)',opts:['About 0.50 — 68 is near the mean','A small proportion — 68 is more than 1 SD above the mean','About 0.92'],correct:1,why:'68 is 3.5 in. = 1.4 SDs above the mean, so only a small tail lies above it.'}},
+    {name:'Solve (a)', html:`<p><i>z</i> = ${F('68 − 64.5','2.5')} = 1.40. Calculator: <span class="math">normalcdf(68, 1E99, 64.5, 2.5)</span>.</p><div class="eq"><i>P</i>(<i>X</i> &gt; 68) = <i>P</i>(<i>Z</i> &gt; 1.40) = 1 − 0.9192 = <span class="boxed">0.0808</span></div>`,
+     ask:{type:'num',q:'What is the z-score for 68 inches?',ans:1.4,tol:0.01,why:'<i>z</i> = (68 − 64.5)/2.5 = 1.40.'}},
+    {name:'Solve (b)', html:`<p>We need the value with 90 % of the distribution to its left. <span class="math">invNorm(0.90, 64.5, 2.5)</span>: <i>z</i> = 1.2816, so</p><div class="eq"><i>x</i> = μ + <i>z</i>σ = 64.5 + (1.2816)(2.5) = <span class="boxed">67.70 inches</span></div>`,
+     ask:{type:'num',q:'Calculate 64.5 + 1.2816 × 2.5.',ans:64.5+1.2816*2.5,tol:0.005,unit:'inches',why:'≈ 67.7 in.'}},
+    {name:'Check and interpret', html:`<p>The 90th percentile (67.7) is above the mean (64.5) ✔ and below 68 — consistent with part (a), since 68 is above the 91.9th percentile.</p><p><b>Interpretation:</b> About 8.08 % of adult women in this city are taller than 68 inches; a woman who is 67.7 inches tall is taller than about 90 % of adult women.</p>`,
+     ask:{type:'mc',q:'If 68 in. is at the 91.9th percentile, which statement about 67.7 in. must be true?',opts:['67.7 is below the 91.9th percentile, which agrees with 67.7 being the 90th','67.7 should be above 68','The two answers contradict each other'],correct:0,why:'Lower percentile → smaller value.'}}
+   ]},
+ { id:'E6', tag:'Lesson 2.11 · Normal', title:'Finding an unknown mean from a percentile',
+   problem:'A machine fills soup cans. The amount of soup is normally distributed with standard deviation σ = 0.4 oz. The company wants only <b>2 %</b> of cans to contain less than 12 oz. To what value should the mean fill amount μ be set?',
+   steps:[
+    {name:'Analyze', html:`<p><i>X</i> ~ <i>N</i>(μ, 0.4) with μ unknown. Condition: <i>P</i>(<i>X</i> &lt; 12) = 0.02, so 12 oz is the <b>2nd percentile</b>: it lies below the mean.</p>`+G('σ = 0.4','<i>P</i>(<i>X</i> &lt; 12) = 0.02')+G(U('μ = ?')),
+     ask:{type:'mc',q:'Will the z-score of 12 oz be positive or negative?',opts:['Positive','Negative — 12 oz is below the mean (only 2 % are below it)','Zero'],correct:1,why:'The 2nd percentile is far below the center.'}},
+    {name:'Find the z-score', html:`<p>Use the standard normal: <span class="math">invNorm(0.02) = −2.054</span>.</p>`,
+     ask:{type:'num',q:'Enter the z-score with 2 % of the area to its left (invNorm(0.02)).',ans:PhiInv(.02),tol:0.01,why:'<i>z</i> ≈ −2.054.'}},
+    {name:'Solve for μ', html:`<p>Set <i>z</i> = ${F('12 − μ','0.4')} = −2.054 and solve:</p><div class="eq">12 − μ = (−2.054)(0.4) = −0.8216 &nbsp;→&nbsp; μ = 12 + 0.8216 = <span class="boxed">12.82 oz</span></div>`,
+     ask:{type:'num',q:'Calculate 12 + 2.054 × 0.4.',ans:12+2.0537*.4,tol:0.003,unit:'oz',why:'μ ≈ 12.82 oz.'}},
+    {name:'Check', html:`<p>With μ = 12.82 and σ = 0.4, <i>P</i>(<i>X</i> &lt; 12) = normalcdf(−1E99, 12, 12.82, 0.4) ≈ 0.020 ✔. The mean must be about 2 standard deviations above 12 oz.</p>`,
+     ask:{type:'mc',q:'If the company wanted only <b>0.1 %</b> of cans below 12 oz, the mean fill setting would need to be…',opts:['Smaller than 12.82 oz','Larger than 12.82 oz','The same'],correct:1,why:'A smaller tail requires placing 12 oz even farther (more SDs) below the mean.'}}
+   ]},
+ { id:'E7', tag:'Lesson 2.12 · Sampling distributions & CLT', title:'Using the Central Limit Theorem',
+   problem:'The delivery times for a pizza chain have a right-skewed distribution with mean 34 minutes and standard deviation 12 minutes. A random sample of 40 deliveries is selected (there are many thousands of deliveries). (a) Describe the sampling distribution of the sample mean delivery time <span class="ov"><i>x</i></span>. (b) Find the probability that the sample mean is greater than 37 minutes. (c) Interpret this probability.',
+   steps:[
+    {name:'Describe the sampling distribution', html:`<p><b>Shape:</b> The population is skewed, but the sample is random and <i>n</i> = 40 ≥ 30, so by the <b>Central Limit Theorem</b> the sampling distribution of ${XB} is approximately normal.</p><p><b>Center:</b> μ<sub>${XB}</sub> = μ = 34 min. <b>Spread:</b> σ<sub>${XB}</sub> = σ/√<i>n</i> = 12/√40 ≈ 1.897 min. (The 10 % condition holds: 40 is far less than 10 % of the deliveries.)</p>`,
+     ask:{type:'mc',q:`Which phrase correctly justifies a normal model for ${XB} here?`,opts:['The population is skewed, so ${XB} is skewed','The population is skewed, but <i>n</i> = 40 ≥ 30 so the CLT says ${XB} is approximately normal','The population must be normal first','Because the mean is 34'].map(t=>t.replace('${XB}',XB)),correct:1,why:'The CLT applies to random samples that are large enough, regardless of the population shape.'}},
+    {name:'Standard deviation of the sample mean', html:`<div class="eq">σ<sub>${XB}</sub> = ${F('σ','√<i>n</i>')} = ${F('12','√40')} ≈ <span class="boxed">1.897 minutes</span></div>`,
+     ask:{type:'num',q:'Calculate 12 ÷ √40.',ans:12/Math.sqrt(40),tol:0.01,unit:'minutes',why:'≈ 1.897.'}},
+    {name:'Find the probability', html:`<p><i>z</i> = ${F('37 − 34','1.897')} = 1.58. <span class="math">normalcdf(37, 1E99, 34, 12/√40)</span></p><div class="eq"><i>P</i>(${XB} &gt; 37) = <i>P</i>(<i>Z</i> &gt; 1.58) ≈ <span class="boxed">0.0569</span></div>`,
+     ask:{type:'num',q:'Find <i>P</i>(${XB} > 37) using <i>N</i>(34, 1.897).'.replace('${XB}',XB),ans:1-Phi((37-34)/(12/Math.sqrt(40))),tol:0.03,floor:0.002,prob:true,why:'≈ 0.057.',traps:[{v:1-Phi(3/12),msg:'You used σ = 12 (the spread of individual deliveries). For a sample mean use σ/√n.'}]}},
+    {name:'Interpret (c)', html:`<p>"If we took many random samples of 40 deliveries, about 5.7 % of the sample means would be greater than 37 minutes."</p><p class="pnote">Contrast: an <em>individual</em> delivery over 37 minutes is much more likely, because individual times vary more (σ = 12) than sample means (σ/√40 = 1.9).</p>`,
+     ask:{type:'mc',q:'Why is it much less likely for a sample <b>mean</b> to exceed 37 than for one <b>delivery</b>?',opts:['Sample means vary less than individual values: σ/√<i>n</i> &lt; σ','Sample means are always smaller','Because the sample is random'],correct:0,why:'Averaging reduces variability, so sample means cluster more tightly around μ.'}}
+   ]}
+];
+
+(function buildExamples(){
+  const host=$('#exampleList');
+  EX.forEach((ex,idx)=>{
+    const card=document.createElement('div'); card.className='card example'; card.id=ex.id;
+    card.innerHTML=`<header><h3 style="margin:0">Example ${idx+1} · ${ex.title}</h3><span class="pill">${ex.tag}</span></header>
+      <div class="problem-box">${ex.problem}</div>
+      <div class="dots"></div><ol class="steps"></ol><div class="row ctrl"></div>`;
+    const dots=$('.dots',card), list=$('.steps',card), ctrl=$('.ctrl',card);
+    const next=document.createElement('button'); next.className='btn'; next.type='button'; next.textContent='Start: reveal step 1';
+    const restart=document.createElement('button'); restart.className='btn ghost'; restart.type='button'; restart.textContent='Restart example'; restart.hidden=true;
+    ctrl.append(next,restart);
+    ex.steps.forEach((s,i)=>{
+      const d=document.createElement('i'); dots.appendChild(d);
+      const li=document.createElement('li'); li.className='step';
+      li.innerHTML=`<h4><span class="n">${i+1}</span>${s.name}</h4><div class="body">${s.html}</div>`;
+      if(s.ask){ const a=document.createElement('div'); a.className='ask'; li.appendChild(a); }
+      list.appendChild(li);
+    });
+    let cur=-1, needAsk=false;
+    function reveal(){
+      cur++; const li=list.children[cur], s=ex.steps[cur];
+      li.classList.add('show'); dots.children[cur].classList.add('on');
+      if(s.ask){ needAsk=true; next.disabled=true; (s.ask.type==='num'?mkNum:mkMC)($('.ask',li),s.ask,()=>{ needAsk=false; next.disabled=false; refresh(); }); }
+      refresh(); li.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    function refresh(){
+      if(cur>=ex.steps.length-1 && !needAsk){ next.hidden=true; restart.hidden=false; if(!state['ex_'+ex.id]){ state['ex_'+ex.id]=1; save(); } }
+      else { next.textContent=needAsk?'Answer the question above to continue':(cur<0?'Start: reveal step 1':`Next step: ${ex.steps[cur+1]?.name||''}`); }
+    }
+    next.addEventListener('click',reveal);
+    restart.addEventListener('click',()=>{
+      cur=-1; needAsk=false; next.hidden=false; next.disabled=false; restart.hidden=true;
+      [...list.children].forEach((li,i)=>{ li.classList.remove('show'); const a=$('.ask',li); if(a) a.innerHTML=''; dots.children[i].classList.remove('on'); });
+      refresh(); card.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    host.appendChild(card);
+  });
+})();
+
+/* ================= practice problems ================= */
+const T=(label,unit,ans,extra={})=>Object.assign({label,unit,ans},extra);
+const Pr=(label,ans,extra={})=>T(label,'',ans,Object.assign({prob:true,floor:0.0015},extra));
+const P=[]; const add=(set,text,parts,h,sol,extra={})=>P.push(Object.assign({set,text,parts,h,sol},extra));
+const MC=(set,text,opts,correct,why,hint,extra={})=>P.push(Object.assign({set,type:correct.length>1?'multi':'mc',text,opts,correct,why,h:[hint]},extra));
+const cdf=(n,p,k)=>bcdf(n,p,k);
+
+/* ---------- 2.8 ---------- */
+add('d',`A restaurant records <i>X</i>, the number of desserts ordered by a randomly selected table.${dt([0,1,2,3,4],['0.35','0.30','0.20','0.10','<i>k</i>'])}(a) What is the value of <i>k</i>? (b) Find <i>P</i>(<i>X</i> ≥ 2).`,
+ [Pr('(a) k',0.05,{floor:0.0005}),Pr('(b) P(X ≥ 2)',0.35,{floor:0.0005})],
+ ['The probabilities must add to 1, so <i>k</i> = 1 − (sum of the others). "At least 2" means 2, 3 or 4.','k = 1 − (0.35 + 0.30 + 0.20 + 0.10).'],
+ ['(a) <i>k</i> = 1 − (0.35 + 0.30 + 0.20 + 0.10) = 1 − 0.95 = <b>0.05</b>','(b) <i>P</i>(<i>X</i> ≥ 2) = 0.20 + 0.10 + 0.05 = <b>0.35</b>']);
+add('d',`A school records the number of absences in a month for 200 randomly selected students: 0 absences: 84 students; 1: 60; 2: 32; 3: 16; 4: 8. Let <i>X</i> = the number of absences for a randomly selected student of this group. Estimate (a) <i>P</i>(<i>X</i> = 2) and (b) <i>P</i>(<i>X</i> ≤ 1).`,
+ [Pr('(a) P(X = 2)',0.16),Pr('(b) P(X ≤ 1)',0.72)],
+ ['Relative frequency: count ÷ 200. "≤ 1" means 0 or 1 absences.','(84 + 60)/200.'],
+ ['(a) 32/200 = <b>0.16</b>','(b) (84 + 60)/200 = 144/200 = <b>0.72</b>']);
+add('d',`Two fair six-sided dice are rolled. Let <i>X</i> = the larger of the two numbers (if both are the same, <i>X</i> is that number). Find (a) <i>P</i>(<i>X</i> = 4) and (b) <i>P</i>(<i>X</i> ≥ 5).`,
+ [Pr('(a) P(X = 4)',7/36),Pr('(b) P(X ≥ 5)',20/36)],
+ ['There are 36 equally likely outcomes. For X = 4 both dice are ≤ 4 and at least one is 4: count 4² − 3² outcomes. For (b) use the complement: 1 − P(X ≤ 4).','P(X ≤ 4) = 4²/36 = 16/36.'],
+ ['(a) Outcomes with max ≤ 4: 16; with max ≤ 3: 9. So 16 − 9 = 7 outcomes: <i>P</i>(4) = 7/36 = <b>0.194</b>','(b) <i>P</i>(<i>X</i> ≥ 5) = 1 − 16/36 = 20/36 = <b>0.556</b>']);
+add('d',`The cumulative distribution <i>F</i>(<i>x</i>) = <i>P</i>(<i>X</i> ≤ <i>x</i>) of a discrete random variable <i>X</i> is shown.${dt([1,2,3,4],['0.12','0.40','0.78','1.00'],'<i>x</i>').replace('<i>P</i>(<i>X</i> = <i>x</i>)','<i>F</i>(<i>x</i>)')}Find (a) <i>P</i>(<i>X</i> = 3) and (b) <i>P</i>(<i>X</i> &gt; 2).`,
+ [Pr('(a) P(X = 3)',0.38,{floor:0.0005}),Pr('(b) P(X > 2)',0.60,{floor:0.0005})],
+ ['<i>P</i>(<i>X</i> = 3) = <i>F</i>(3) − <i>F</i>(2). "Greater than 2" is the complement of "at most 2".','F(3) − F(2) = 0.78 − 0.40.'],
+ ['(a) <i>P</i>(<i>X</i> = 3) = 0.78 − 0.40 = <b>0.38</b>','(b) <i>P</i>(<i>X</i> &gt; 2) = 1 − <i>F</i>(2) = 1 − 0.40 = <b>0.60</b>']);
+MC('d','Which of the following tables is a valid probability distribution for a discrete random variable <i>X</i> with values 0, 1, 2, 3?',
+ ['<i>P</i>: 0.25, 0.35, 0.30, 0.20','<i>P</i>: 0.40, 0.35, 0.30, −0.05','<i>P</i>: 0.10, 0.40, 0.30, 0.20','<i>P</i>: 0.10, 0.30, 0.30, 0.20'],[2],
+ 'Check both requirements: every probability is between 0 and 1, and the sum is exactly 1. Option A adds to 1.10, B has a negative probability, D adds to 0.90, but C adds to 1.00.','Add each row and check for negative values.');
+add('d',`A basketball player makes 60 % of her free throws. In a simulation, each trial represents 3 shots and records <i>X</i> = the number made. After 20 trials the counts were: 0 made: 1 trial; 1 made: 3; 2 made: 8; 3 made: 8. Use the simulation to estimate (a) <i>P</i>(<i>X</i> ≥ 2) and (b) <i>P</i>(<i>X</i> = 3).`,
+ [Pr('(a) P(X ≥ 2)',0.8),Pr('(b) P(X = 3)',0.4)],
+ ['Estimated probability = (number of trials with the event) ÷ (total number of trials = 20).','(8 + 8)/20.'],
+ ['(a) (8 + 8)/20 = <b>0.80</b>','(b) 8/20 = <b>0.40</b>','With only 20 trials the estimate is rough; more trials give a better estimate.']);
+MC('d','Which of the following random variables are <b>discrete</b>? (Select all that apply.)',
+ ['The number of text messages a student sends today','The time (in seconds) it takes a student to run 400 m','The height of a randomly selected student','The number of customers in line at a bank at noon','The weight of a randomly selected apple'],[0,3],
+ 'Discrete variables are counts of separate values (0, 1, 2, …). Times, heights and weights can take any value in an interval, so they are continuous.','Can you list the possible values one by one?');
+add('d',`For a discrete random variable <i>X</i>: <i>P</i>(0) = 0.18, <i>P</i>(1) = 0.27, <i>P</i>(2) = 0.34, <i>P</i>(<i>X</i> ≥ 4) = 0.06, and <i>X</i> takes only the values 0, 1, 2, 3, 4, 5. Find (a) <i>P</i>(<i>X</i> = 3) and (b) <i>P</i>(<i>X</i> ≤ 2).`,
+ [Pr('(a) P(X = 3)',0.15,{floor:0.0005}),Pr('(b) P(X ≤ 2)',0.79,{floor:0.0005})],
+ ['The total is 1. The values 0, 1, 2, 3 and "4 or more" cover every possibility.','1 − (0.18 + 0.27 + 0.34 + 0.06).'],
+ ['(a) <i>P</i>(3) = 1 − (0.18 + 0.27 + 0.34 + 0.06) = <b>0.15</b>','(b) <i>P</i>(<i>X</i> ≤ 2) = 0.18 + 0.27 + 0.34 = <b>0.79</b>']);
+MC('d','<i>X</i> takes only the integer values 0, 1, 2, 3, 4, 5. Which expression equals <i>P</i>(<i>X</i> &gt; 2)?',
+ ['1 − <i>P</i>(<i>X</i> ≤ 2)','1 − <i>P</i>(<i>X</i> &lt; 2)','1 − <i>P</i>(<i>X</i> ≤ 3)','<i>P</i>(<i>X</i> ≥ 2)'],[0],
+ 'The complement of "greater than 2" is "less than or equal to 2".','Write the complement event.');
+
+/* ---------- 2.9 ---------- */
+add('m',`The distribution of <i>X</i> is below.${dt([0,1,2,3],['0.1','0.3','0.4','0.2'])}Find (a) the mean μ<sub><i>X</i></sub> and (b) the standard deviation σ<sub><i>X</i></sub>.`,
+ [T('(a) Mean μ','',1.7,{floor:0.01}),T('(b) Standard deviation σ','',0.9,{sd:true})],
+ ['μ = Σx·P(x). Then σ² = Σ(x − μ)²·P(x) and σ = √σ².','μ = 0(0.1)+1(0.3)+2(0.4)+3(0.2).'],
+ ['(a) μ = 0(0.1) + 1(0.3) + 2(0.4) + 3(0.2) = <b>1.7</b>','(b) σ² = (−1.7)²(0.1) + (−0.7)²(0.3) + (0.3)²(0.4) + (1.3)²(0.2) = 0.289 + 0.147 + 0.036 + 0.338 = 0.81','σ = √0.81 = <b>0.9</b>']);
+add('m',`A raffle sells 500 tickets for $5 each. There is 1 grand prize of $1000, 2 second prizes of $200, and 5 third prizes of $50. Let <i>X</i> = the <b>net</b> gain (prize minus the $5 ticket price) of a person who buys one ticket. Find (a) the expected net gain and (b) the standard deviation of the net gain.`,
+ [T('(a) Mean μ','dollars',-1.7),T('(b) Standard deviation σ','dollars',46.63,{sd:true,tol:0.01})],
+ ['Net values: 995, 195, 45 and −5 with probabilities 1/500, 2/500, 5/500 and 492/500.','μ = [995(1) + 195(2) + 45(5) + (−5)(492)]/500.'],
+ ['<i>X</i>: 995 (1/500), 195 (2/500), 45 (5/500), −5 (492/500)','(a) μ = (995 + 390 + 225 − 2460)/500 = −850/500 = <b>−$1.70</b>','(b) Σx²P = (995² + 2·195² + 5·45² + 492·5²)/500 = 2177; σ² = 2177 − (1.7)² = 2174.11; σ = <b>$46.63</b>']);
+add('m',`An insurance company charges $300 per year for a policy. The company pays $5000 for a minor claim (probability 0.02) and $30,000 for a major claim (probability 0.005); otherwise it pays nothing. Let <i>X</i> = the company\'s profit on one policy (premium minus claim payment). (a) Find the expected profit per policy. (b) If the company sells 10,000 such policies, what total profit should it expect?`,
+ [T('(a) Expected profit per policy','dollars',50),T('(b) Expected total profit','dollars',500000)],
+ ['Profit values are 300, 300 − 5000 = −4700, and 300 − 30000 = −29700. The probability of no claim is 1 − 0.02 − 0.005.','μ = 300(0.975) + (−4700)(0.02) + (−29700)(0.005).'],
+ ['<i>X</i>: 300 (0.975), −4700 (0.02), −29700 (0.005)','(a) μ = 292.5 − 94 − 148.5 = <b>$50</b>','(b) Expected total = 10,000 × $50 = <b>$500,000</b>']);
+MC('m','The number of children in households in a community has mean μ<sub><i>X</i></sub> = 1.7. Which is the correct interpretation?',
+ ['Each household has exactly 1.7 children','If many households were randomly selected, the average number of children per household would be about 1.7','Most households have 1 or 2 children','The most likely number of children is 1.7'],[1],
+ 'The expected value is a long-run average. It does not need to be a possible value of <i>X</i>, and it is not the mode.','Use "if the process were repeated a very large number of times, the average would be…".');
+add('m',`Let <i>X</i> = the number of defective items in a randomly selected small shipment.${dt([0,1,2,3,4],['0.62','0.25','0.08','0.04','0.01'])}Find (a) μ<sub><i>X</i></sub> and (b) σ<sub><i>X</i></sub>.`,
+ [T('(a) Mean μ','',0.57,{floor:0.005}),T('(b) Standard deviation σ','',Math.sqrt(0.7651),{sd:true})],
+ ['μ = Σx·P(x). For σ, compute each (x − μ)²·P(x), add them, and take the square root.','μ = 0(0.62) + 1(0.25) + 2(0.08) + 3(0.04) + 4(0.01).'],
+ ['(a) μ = 0.25 + 0.16 + 0.12 + 0.04 = <b>0.57</b>','(b) σ² = 0.62(0.3249) + 0.25(0.1849) + 0.08(2.0449) + 0.04(5.9049) + 0.01(11.7649) = 0.7651','σ = √0.7651 = <b>0.875</b>']);
+MC('m','For a random variable <i>X</i> = the number of goals a team scores in a game, σ<sub><i>X</i></sub> = 1.2 goals and μ<sub><i>X</i></sub> = 2.1 goals. Which interpretation of σ is correct?',
+ ['The number of goals typically varies by about 1.2 goals from the mean of 2.1 goals','The team scores 1.2 goals in every game','About 1.2 % of games have 2.1 goals','The team will score between 0.9 and 3.3 goals in every game'],[0],
+ 'Standard deviation measures the typical distance of values from the mean — not an exact range for every observation.','Look for the phrase "typically varies by about … from the mean".');
+add('m',`In a game, you roll a fair six-sided die. If the result is 6 you win $9; if the result is 4 or 5 you win $3; otherwise you lose $4. Let <i>X</i> = your gain on one roll. Find the expected gain.`,
+ [T('Expected gain','dollars',0.5,{floor:0.01})],
+ ['Values 9 (prob 1/6), 3 (prob 2/6), −4 (prob 3/6).','(9 + 6 − 12)/6.'],
+ ['μ = 9(1/6) + 3(2/6) + (−4)(3/6) = (9 + 6 − 12)/6 = 3/6 = <b>$0.50</b>','The game is favorable to the player by 50 cents per roll in the long run.']);
+add('m',`<i>X</i> takes the values 10, 20 and 30 with probabilities <i>P</i>(10) = 0.25, <i>P</i>(20) = <i>a</i> and <i>P</i>(30) = <i>b</i>. The mean is μ<sub><i>X</i></sub> = 21.5. Find <i>a</i> and <i>b</i>.`,
+ [Pr('a',0.35,{floor:0.003}),Pr('b',0.40,{floor:0.003})],
+ ['Two equations: a + b = 1 − 0.25 = 0.75 and 10(0.25) + 20a + 30b = 21.5.','Substitute b = 0.75 − a: 2.5 + 20a + 22.5 − 30a = 21.5.'],
+ ['a + b = 0.75 and 2.5 + 20a + 30b = 21.5 → 20a + 30b = 19','Substitute <i>b</i> = 0.75 − <i>a</i>: 20<i>a</i> + 22.5 − 30<i>a</i> = 19 → −10<i>a</i> = −3.5 → <i>a</i> = <b>0.35</b>','<i>b</i> = 0.75 − 0.35 = <b>0.40</b>']);
+MC('m','The expected net gain of a game of chance is −$0.40 per play. Which is the best conclusion?',
+ ['A player loses exactly $0.40 on every play','Over a large number of plays, the player\'s average loss per play will be about $0.40','The player will lose money on every play','The game is fair'],[1],
+ 'Expected value describes the long-run average, not a single play.','What does "expected value" tell us about many repetitions?');
+
+/* ---------- 2.10 ---------- */
+MC('b','Which of the following random variables have a binomial distribution (or a very good approximation)? (Select all that apply.)',
+ ['The number of heads in 20 flips of a fair coin','The number of cards drawn from a standard deck until the first ace appears','The number of defective bulbs in a random sample of 12 from a very large production run in which 3 % are defective','The number of left-handed students in a random sample of 8 students from a class of 20 (10 % left-handed)','The sum of the numbers on two rolled dice'],[0,2],
+ 'Option 2 has no fixed number of trials; option 4 samples more than 10 % of a small population without replacement (not independent); option 5 is not a count of successes. Options 1 and 3 satisfy BINS.','Check B-I-N-S for each scenario.');
+add('b',`A multiple-choice test has 12 questions, each with 4 choices. A student guesses randomly on every question. Let <i>X</i> = the number of correct answers. Find (a) <i>P</i>(<i>X</i> = 3) and (b) <i>P</i>(<i>X</i> ≥ 3).`,
+ [Pr('(a) P(X = 3)',bpdf(12,.25,3)),Pr('(b) P(X ≥ 3)',1-cdf(12,.25,2))],
+ ['<i>X</i> ~ Binomial(12, 0.25). (a) binompdf(12, 0.25, 3). (b) 1 − binomcdf(12, 0.25, 2).',`P(X ≤ 2) = ${r4(cdf(12,.25,2))}.`],
+ [`(a) binompdf(12, 0.25, 3) = 220(0.25)³(0.75)⁹ = <b>${r4(bpdf(12,.25,3))}</b>`,`(b) 1 − binomcdf(12, 0.25, 2) = 1 − ${r4(cdf(12,.25,2))} = <b>${r4(1-cdf(12,.25,2))}</b>`]);
+add('b',`Let <i>X</i> have a binomial distribution with <i>n</i> = 150 trials and probability of success <i>p</i> = 0.04. Find the mean and the standard deviation of <i>X</i>.`,
+ [T('Mean μ','',6),T('Standard deviation σ','',2.4,{sd:true})],
+ ['μ = np and σ = √(np(1 − p)).','σ = √(150 × 0.04 × 0.96).'],
+ ['μ = <i>np</i> = 150(0.04) = <b>6</b>','σ = √(150(0.04)(0.96)) = √5.76 = <b>2.4</b>']);
+add('b',`A marksman hits the target with probability 0.80 on each independent shot. He takes 6 shots. Find (a) the probability that he hits the target at most 4 times and (b) the probability that he hits it all 6 times.`,
+ [Pr('(a) P(X ≤ 4)',cdf(6,.8,4)),Pr('(b) P(X = 6)',Math.pow(.8,6))],
+ ['<i>X</i> ~ Binomial(6, 0.8). (a) binomcdf(6, 0.8, 4). (b) all successes: (0.8)⁶.',`(0.8)^6 = ${r4(Math.pow(.8,6))}.`],
+ [`(a) binomcdf(6, 0.8, 4) = <b>${r4(cdf(6,.8,4))}</b>`,`(b) <i>P</i>(<i>X</i> = 6) = (0.8)⁶ = <b>${r4(Math.pow(.8,6))}</b>`]);
+add('b',`An airline knows that 5 % of passengers with reservations do not show up. The airline sells 52 tickets for a flight with 50 seats. Assume passengers show up independently. What is the probability that more than 50 passengers show up (so that someone is bumped)?`,
+ [Pr('P(X > 50)',bpdf(52,.95,51)+bpdf(52,.95,52))],
+ ['Let <i>X</i> = the number who show up, <i>X</i> ~ Binomial(52, 0.95). "More than 50" means 51 or 52.','binompdf(52, 0.95, 51) + binompdf(52, 0.95, 52).'],
+ [`<i>X</i> ~ Binomial(<i>n</i> = 52, <i>p</i> = 0.95)`,`<i>P</i>(<i>X</i> &gt; 50) = <i>P</i>(51) + <i>P</i>(52) = ${r4(bpdf(52,.95,51))} + ${r4(bpdf(52,.95,52))} = <b>${r4(bpdf(52,.95,51)+bpdf(52,.95,52))}</b>`]);
+MC('b','In a binomial setting with <i>n</i> = 150 and <i>p</i> = 0.04, μ<sub><i>X</i></sub> = 6. Which is the correct interpretation?',
+ ['In every sample of 150 there will be exactly 6 successes','If many random samples of 150 were taken, the average number of successes per sample would be about 6','The probability of success is 6','Six samples out of 150 will have no successes'],[1],
+ 'The mean is a long-run average over repeated samples.','Use the long-run language: "if this process were repeated many times…".');
+add('b',`<i>X</i> ~ Binomial(<i>n</i> = 20, <i>p</i> = 0.30). Find <i>P</i>(4 ≤ <i>X</i> ≤ 8).`,
+ [Pr('P(4 ≤ X ≤ 8)',cdf(20,.3,8)-cdf(20,.3,3))],
+ ['Subtract cumulative probabilities: P(X ≤ 8) − P(X ≤ 3).','binomcdf(20, 0.3, 8) − binomcdf(20, 0.3, 3).'],
+ [`<i>P</i>(4 ≤ <i>X</i> ≤ 8) = binomcdf(20, 0.3, 8) − binomcdf(20, 0.3, 3) = ${r4(cdf(20,.3,8))} − ${r4(cdf(20,.3,3))} = <b>${r4(cdf(20,.3,8)-cdf(20,.3,3))}</b>`]);
+add('b',`A company claims that 90 % of its customers are satisfied. In a random sample of 25 customers (from a very large customer base), only 19 say they are satisfied. Assuming the company\'s claim is true, find the probability of getting <b>19 or fewer</b> satisfied customers in a sample of 25.`,
+ [Pr('P(X ≤ 19)',cdf(25,.9,19),{tol:0.03})],
+ ['<i>X</i> ~ Binomial(25, 0.90) if the claim is true. Use binomcdf.','binomcdf(25, 0.9, 19).'],
+ [`<i>P</i>(<i>X</i> ≤ 19) = binomcdf(25, 0.9, 19) = <b>${r4(cdf(25,.9,19))}</b>`,'This is a small probability (< 5 %), so the sample result provides some evidence against the claim.']);
+MC('b','A fair die is rolled repeatedly until the first 6 appears. Let <i>X</i> = the number of rolls needed. Why is <i>X</i> <b>not</b> binomial?',
+ ['The trials are not independent','The number of trials is not fixed in advance','There are more than two outcomes on each roll','The probability of success changes'],[1],
+ 'The binomial setting counts successes in a <em>fixed</em> number of trials. Here the number of trials varies (it is a geometric setting).','Which letter of BINS fails?');
+add('b',`A simulation repeated a binomial process (<i>n</i> = 10 trials, <i>p</i> = 0.3) 100 times and recorded the number of successes each time: 0: 3 times; 1: 11; 2: 21; 3: 27; 4: 19; 5: 10; 6: 6; 7: 2; 8: 1. Use the simulation to estimate <i>P</i>(<i>X</i> ≥ 5).`,
+ [Pr('Estimated P(X ≥ 5)',0.19,{floor:0.005})],
+ ['Add the counts for 5 or more successes and divide by 100.','10 + 6 + 2 + 1 = 19.'],
+ ['Total number of repetitions = 3 + 11 + 21 + 27 + 19 + 10 + 6 + 2 + 1 = 100','Estimate = (10 + 6 + 2 + 1)/100 = <b>0.19</b>',`(The exact binomial probability is ${r4(1-cdf(10,.3,4))}; simulation estimates vary.)`]);
+
+/* ---------- 2.11 ---------- */
+add('n',`Scores on a standardized test are approximately normal with mean 500 and standard deviation 100. What proportion of students score above 650?`,
+ [Pr('P(X > 650)',1-Phi(1.5))],
+ ['<i>z</i> = (650 − 500)/100. Then find the area to the right: normalcdf(650, 1E99, 500, 100).','z = 1.5.'],
+ ['<i>z</i> = (650 − 500)/100 = 1.50',`<i>P</i>(<i>X</i> &gt; 650) = 1 − 0.9332 = <b>${r4(1-Phi(1.5))}</b>`]);
+add('n',`The heights of 10-year-old boys are approximately normal with mean 138 cm and standard deviation 7.5 cm. What proportion are between 130 cm and 150 cm tall?`,
+ [Pr('P(130 < X < 150)',nc(130,150,138,7.5))],
+ ['normalcdf(130, 150, 138, 7.5), or find both z-scores and subtract areas.','z = −1.07 and 1.60.'],
+ ['<i>z</i><sub>130</sub> = (130 − 138)/7.5 = −1.07; <i>z</i><sub>150</sub> = (150 − 138)/7.5 = 1.60',`<i>P</i> = 0.9452 − 0.1423 ≈ <b>${r4(nc(130,150,138,7.5))}</b>`]);
+add('n',`Scores on a test are approximately normal with mean 65 and standard deviation 8. A scholarship goes to the <b>top 5 %</b> of scores. What is the minimum score needed?`,
+ [T('Minimum score','',invN(.95,65,8),{tol:0.005})],
+ ['The top 5 % means 95 % of scores are below the cutoff: invNorm(0.95, 65, 8).','z = 1.645.'],
+ ['<i>z</i> for the 95th percentile ≈ 1.645',`<i>x</i> = 65 + 1.645(8) = <b>${r4(invN(.95,65,8))}</b>`]);
+add('n',`Alex scored 82 on a biology test (class mean 75, standard deviation 6). On a chemistry test, Alex scored 88 (class mean 80, standard deviation 10). Find the z-score of each score.`,
+ [T('z-score, biology','',7/6),T('z-score, chemistry','',0.8)],
+ ['z = (score − mean)/standard deviation.','Biology: 7/6.'],
+ ['Biology: <i>z</i> = (82 − 75)/6 = <b>1.17</b>','Chemistry: <i>z</i> = (88 − 80)/10 = <b>0.80</b>','Alex performed relatively better in biology (higher z-score).']);
+MC('n','Using the z-scores of Alex\'s two tests (biology <i>z</i> = 1.17, chemistry <i>z</i> = 0.80), in which subject did Alex perform better <b>relative to the class</b>?',
+ ['Chemistry, because 88 is greater than 82','Biology, because the z-score of 1.17 is larger: the score is more standard deviations above the mean','They are equal','Cannot be determined'],[1],
+ 'Compare relative standing with z-scores, not raw scores.','Which score is farther above its own class mean in SD units?');
+add('n',`The lifetimes of a certain type of bulb are approximately normal with mean 1200 hours and standard deviation 80 hours. Use the empirical rule to find (a) the proportion of bulbs lasting between 1040 and 1360 hours and (b) the proportion lasting more than 1440 hours.`,
+ [Pr('(a) P(1040 < X < 1360)',0.95,{floor:0.01}),Pr('(b) P(X > 1440)',0.0015,{floor:0.002})],
+ ['Convert the endpoints to numbers of SDs from the mean: 1040 = 1200 − 2(80), 1360 = 1200 + 2(80), 1440 = 1200 + 3(80).','Within 2σ: 95 %. Beyond +3σ: half of the 0.3 %.'],
+ ['(a) 1040 and 1360 are 2σ below and above the mean → about <b>95 %</b> (0.95)','(b) 1440 is 3σ above the mean. 99.7 % lie within 3σ, so 0.3 % lie outside, and half of that, <b>0.15 %</b> (0.0015), is above 1440.']);
+add('n',`A normal distribution has standard deviation 4 and 15 % of its values are less than 20. Find the mean μ.`,
+ [T('Mean μ','',20-PhiInv(.15)*4,{tol:0.003})],
+ ['The 15th percentile has z = invNorm(0.15) ≈ −1.036. Solve z = (20 − μ)/4 for μ.','μ = 20 − (−1.036)(4).'],
+ [`<i>z</i> = invNorm(0.15) = ${r4(PhiInv(.15))}`,`−1.036 = (20 − μ)/4 → μ = 20 + 1.036(4) = <b>${r4(20-PhiInv(.15)*4)}</b>`]);
+add('n',`A normal distribution has mean 70 and the 90th percentile is 82. Find the standard deviation σ.`,
+ [T('Standard deviation σ','',12/PhiInv(.9),{tol:0.01})],
+ ['The 90th percentile has z = 1.2816, so 82 = 70 + 1.2816σ.','σ = 12/1.2816.'],
+ ['<i>z</i> = invNorm(0.90) = 1.2816',`82 = 70 + 1.2816σ → σ = 12/1.2816 = <b>${r4(12/PhiInv(.9))}</b>`]);
+add('n',`A normal distribution has 10 % of its values below 12 and 20 % of its values above 30. Find the mean μ and the standard deviation σ.`,
+ [T('Mean μ','',12-PhiInv(.1)*(18/(PhiInv(.8)-PhiInv(.1))),{tol:0.01}),T('Standard deviation σ','',18/(PhiInv(.8)-PhiInv(.1)),{tol:0.01})],
+ ['Two equations: 12 = μ + z₁σ with z₁ = invNorm(0.10) = −1.2816, and 30 = μ + z₂σ with z₂ = invNorm(0.80) = 0.8416.','Subtract: 18 = (0.8416 + 1.2816)σ.'],
+ ['<i>z</i><sub>1</sub> = −1.2816 (10th percentile), <i>z</i><sub>2</sub> = 0.8416 (80th percentile)','30 − 12 = (0.8416 − (−1.2816))σ → σ = 18/2.1232 = <b>8.478</b>','μ = 12 + 1.2816(8.478) = <b>22.86</b>']);
+MC('n','For a normal random variable <i>X</i>, why is <i>P</i>(<i>X</i> = 70) equal to 0?',
+ ['Because 70 is not close to the mean','Because probability for a continuous variable is area under the curve, and a single value has no width, so its area is 0','Because normal distributions are discrete','Because the standard deviation is positive'],[1],
+ 'For continuous distributions probabilities are areas over intervals. Therefore <i>P</i>(<i>X</i> ≤ 70) and <i>P</i>(<i>X</i> &lt; 70) are equal.','What does "area of a single vertical line" equal?');
+MC('n','Two normal distributions have the same mean. Distribution A has σ = 5 and distribution B has σ = 10. Which statement is correct?',
+ ['A is taller and narrower; B is shorter and wider','A is shorter and wider','They have the same shape','B has a smaller mean'],[0],
+ 'A smaller standard deviation concentrates the area near the mean, giving a taller, narrower curve. The total area is 1 for both.','Total area stays 1 — how does the curve change if the spread shrinks?');
+add('n',`A machine fills bottles with an amount of liquid that is approximately normal with mean 500 mL and standard deviation 4 mL. (a) What proportion of bottles contain less than 492 mL? (b) In a batch of 1000 bottles, how many would you expect to contain less than 492 mL?`,
+ [Pr('(a) P(X < 492)',Phi(-2)),T('(b) Expected number of bottles','',1000*Phi(-2),{tol:0.02})],
+ ['z = (492 − 500)/4 = −2. Expected count = proportion × 1000.','P(Z < −2) = 0.0228.'],
+ ['(a) <i>z</i> = −2.00; <i>P</i>(<i>X</i> &lt; 492) = <b>0.0228</b>','(b) 1000(0.0228) ≈ <b>22.8</b> bottles (about 23)']);
+add('n',`Scores on an exam are approximately normal with mean 250 and standard deviation 30. Find the interval centered at the mean that contains the <b>middle 90 %</b> of scores.`,
+ [T('Lower bound','',invN(.05,250,30),{tol:0.003}),T('Upper bound','',invN(.95,250,30),{tol:0.003})],
+ ['The middle 90 % leaves 5 % in each tail. Use invNorm(0.05, 250, 30) and invNorm(0.95, 250, 30).','z = ±1.645.'],
+ ['Each tail has 5 %: <i>z</i> = ±1.645','Lower: 250 − 1.645(30) = <b>200.65</b>; Upper: 250 + 1.645(30) = <b>299.35</b>']);
+
+/* ---------- 2.12 ---------- */
+MC('c','Which statement best defines the <b>sampling distribution</b> of the sample mean ${XB}?'.replace('${XB}',XB),
+ ['The distribution of the values in one particular sample','The distribution of the values of ${XB} over all possible random samples of the same size from the population'.replace('${XB}',XB),'The distribution of the whole population','The distribution of the sample size'],[1],
+ 'A statistic varies from sample to sample. Its sampling distribution describes that variation.','What is being graphed: individual values or values of the statistic?');
+add('c',`A population is strongly skewed to the right with mean μ = 50 and standard deviation σ = 20. Random samples of size <i>n</i> = 100 are taken (the population is very large). Find the mean and the standard deviation of the sampling distribution of ${XB}.`,
+ [T('Mean of x̄','',50),T('Standard deviation of x̄','',2,{sd:true})],
+ ['The mean of the sampling distribution equals μ. Its standard deviation is σ/√n.','20/√100.'],
+ ['μ<sub>x̄</sub> = μ = <b>50</b>','σ<sub>x̄</sub> = σ/√<i>n</i> = 20/√100 = <b>2</b>']);
+MC('c','For the situation above (skewed population, <i>n</i> = 100), what is the shape of the sampling distribution of ${XB}?'.replace('${XB}',XB),
+ ['Skewed to the right, like the population','Approximately normal, by the Central Limit Theorem (random sample, <i>n</i> ≥ 30)','Uniform','Impossible to know'],[1],
+ 'The CLT: for large <i>n</i> the sampling distribution of ${XB} is approximately normal regardless of the population shape.'.replace('${XB}',XB),'Check the sample size against the rule of thumb n ≥ 30.');
+add('c',`Using the sampling distribution above (approximately normal with mean 50 and standard deviation 2), find <i>P</i>(${XB} &gt; 53).`,
+ [Pr('P(x̄ > 53)',1-Phi(1.5))],
+ ['<i>z</i> = (53 − 50)/2. Then find the area to the right: normalcdf(53, 1E99, 50, 2).','z = 1.5.'],
+ ['<i>z</i> = (53 − 50)/2 = 1.50',`<i>P</i>(${XB} &gt; 53) = 1 − 0.9332 = <b>${r4(1-Phi(1.5))}</b>`]);
+add('c',`For the same sampling distribution (<i>N</i>(50, 2)), find <i>P</i>(48 &lt; ${XB} &lt; 52).`,
+ [Pr('P(48 < x̄ < 52)',nc(48,52,50,2))],
+ ['48 and 52 are one standard deviation (2) below and above the mean. normalcdf(48, 52, 50, 2).','Empirical rule: about 68 %.'],
+ [`48 and 52 are 1σ<sub>x̄</sub> from the mean: <i>P</i> = <b>${r4(nc(48,52,50,2))}</b> (the empirical rule says about 0.68).`]);
+add('c',`The weights of packages are approximately normal with mean 100 and standard deviation 15. (a) For a random sample of <i>n</i> = 9 packages, find <i>P</i>(${XB} &lt; 95). (b) For comparison, find the probability that a single randomly selected package weighs less than 95.`,
+ [Pr('(a) P(x̄ < 95)',Phi(-1)),Pr('(b) P(X < 95)',Phi(-1/3))],
+ ['Because the population is normal, ${XB} is normal for any <i>n</i>, with σ<sub>x̄</sub> = 15/√9 = 5. For a single package use σ = 15.'.replace('${XB}',XB),'(a) z = (95 − 100)/5 = −1. (b) z = (95 − 100)/15.'],
+ ['(a) σ<sub>x̄</sub> = 15/√9 = 5; <i>z</i> = −1.00; <i>P</i> = <b>0.1587</b>','(b) <i>z</i> = (95 − 100)/15 = −0.33; <i>P</i> = <b>0.3694</b>','Sample means vary less than individual packages, so it is less likely for a mean to fall that far below 100.']);
+add('c',`A population has σ = 24. Samples of size 16 are replaced by samples of size 64. What is the standard deviation of the sampling distribution of ${XB} for the larger sample size?`,
+ [T('New σ of x̄','',3,{sd:true})],
+ ['σ<sub>x̄</sub> = σ/√<i>n</i>. Quadrupling the sample size halves the standard deviation.','24/√64.'],
+ ['For <i>n</i> = 16: 24/4 = 6','For <i>n</i> = 64: 24/√64 = 24/8 = <b>3</b>','Quadrupling <i>n</i> cuts the spread of ${XB} in half.'.replace('${XB}',XB)]);
+add('c',`A simulation took 200 random samples of size <i>n</i> = 25 from a population and computed ${XB} for each. The 200 sample means had mean 10.1 and standard deviation 0.9. Use the simulation to estimate the population standard deviation σ.`,
+ [T('Estimated σ','',4.5,{tol:0.03})],
+ ['The standard deviation of the sample means estimates σ/√n. So σ ≈ (SD of the means) × √n.','0.9 × √25.'],
+ ['σ<sub>x̄</sub> ≈ 0.9 and σ<sub>x̄</sub> = σ/√<i>n</i> → σ ≈ 0.9·√25 = 0.9(5) = <b>4.5</b>','The center of the simulated means (10.1) estimates the population mean μ.']);
+MC('c','A random sample of <i>n</i> = 12 is taken from a population that is strongly skewed. Can we use a normal model for the sampling distribution of ${XB}?'.replace('${XB}',XB),
+ ['Yes, the CLT always applies','No — the sample is small (<i>n</i> &lt; 30) and the population is not normal, so we cannot assume ${XB} is approximately normal'.replace('${XB}',XB),'Yes, because the sample is random','No, because the mean is unknown'],[1],
+ 'The CLT needs a large sample when the population is not normal. With a small sample, ${XB} keeps some of the skew of the population.'.replace('${XB}',XB),'Check n and the population shape.');
+MC('c','As the sample size <i>n</i> increases, what happens to the sampling distribution of ${XB}?'.replace('${XB}',XB),
+ ['The center changes and the spread stays the same','The center stays at μ, the spread decreases (σ/√<i>n</i>), and the shape becomes more normal','The center and spread both increase','Nothing changes'],[1],
+ 'This is the core of the CLT and the "law of large numbers" idea: bigger samples give less variable, more nearly normal sample means.','Use the CLT simulator in the Review tab to check.');
+
+/* ---------- AP-style mixed ---------- */
+add('x',`A basketball player makes 60 % of her free throws (independent shots). She attempts 3 free throws. Let <i>X</i> = the number made. (a) Find <i>P</i>(<i>X</i> = 0). (b) Find <i>P</i>(<i>X</i> = 2). (c) Find <i>P</i>(<i>X</i> ≥ 2). (d) Find the mean of <i>X</i>. (e) Find the standard deviation of <i>X</i>.`,
+ [Pr('(a) P(X = 0)',bpdf(3,.6,0),{floor:0.001}),Pr('(b) P(X = 2)',bpdf(3,.6,2),{floor:0.001}),Pr('(c) P(X ≥ 2)',1-cdf(3,.6,1),{floor:0.001}),T('(d) Mean','',1.8),T('(e) Std. dev.','',Math.sqrt(3*.6*.4),{sd:true})],
+ ['<i>X</i> ~ Binomial(3, 0.6). Use binompdf; for (c) add P(2) + P(3); μ = np; σ = √(np(1 − p)).','P(0) = (0.4)³.'],
+ [`(a) (0.4)³ = <b>${r4(bpdf(3,.6,0))}</b>`,`(b) 3(0.6)²(0.4) = <b>${r4(bpdf(3,.6,2))}</b>`,`(c) 0.432 + 0.216 = <b>${r4(1-cdf(3,.6,1))}</b>`,'(d) μ = 3(0.6) = <b>1.8</b>',`(e) σ = √(3(0.6)(0.4)) = √0.72 = <b>${r4(Math.sqrt(.72))}</b>`]);
+add('x',`The weight of cereal in a box is approximately normal with mean 12.1 oz and standard deviation 0.25 oz. (a) What is the probability that a randomly selected box contains less than 12 oz? (b) If 10 boxes are selected at random (independently), what is the probability that <b>exactly 2</b> contain less than 12 oz? (c) What is the probability that the <b>mean</b> weight of 16 randomly selected boxes is less than 12 oz?`,
+ [Pr('(a) P(X < 12)',Phi(-.4)),Pr('(b) P(exactly 2 of 10)',bpdf(10,Phi(-.4),2)),Pr('(c) P(x̄ < 12), n = 16',Phi((12-12.1)/(.25/4)))],
+ ['(a) normalcdf(−1E99, 12, 12.1, 0.25). (b) Let Y = number of boxes under 12 oz; Y ~ Binomial(10, p) with p from part (a). (c) The sampling distribution of x̄ is normal with σ = 0.25/√16.','z for (a) = −0.4; for (c) z = (12 − 12.1)/0.0625.'],
+ [`(a) <i>z</i> = (12 − 12.1)/0.25 = −0.40; <i>P</i> = <b>${r4(Phi(-.4))}</b>`,`(b) <i>Y</i> ~ Binomial(10, ${r4(Phi(-.4))}); binompdf(10, ${r4(Phi(-.4))}, 2) = <b>${r4(bpdf(10,Phi(-.4),2))}</b>`,`(c) σ<sub>x̄</sub> = 0.25/√16 = 0.0625; <i>z</i> = −1.60; <i>P</i> = <b>${r4(Phi(-1.6))}</b>`]);
+add('x',`A store sells an extended warranty for $50. With probability 0.05 a repair costing $300 is needed, with probability 0.01 a repair costing $1000 is needed, and otherwise no repair is needed. Let <i>X</i> = the store\'s profit on one warranty (price minus repair cost). Find (a) the expected profit and (b) the standard deviation of the profit.`,
+ [T('(a) Mean profit','dollars',25),T('(b) Std. dev. of profit','dollars',Math.sqrt(13875),{sd:true,tol:0.01})],
+ ['<i>X</i> = 50 (prob 0.94), −250 (prob 0.05), −950 (prob 0.01).','μ = 50(0.94) + (−250)(0.05) + (−950)(0.01).'],
+ ['(a) μ = 47 − 12.5 − 9.5 = <b>$25</b>','(b) σ² = 0.94(50 − 25)² + 0.05(−250 − 25)² + 0.01(−950 − 25)² = 587.5 + 3781.25 + 9506.25 = 13,875','σ = √13,875 = <b>$117.8</b>']);
+add('x',`A pharmacy fills prescriptions with an error rate of 8 % (errors are independent). In a random sample of 50 prescriptions, let <i>X</i> = the number with errors. (a) Find <i>P</i>(<i>X</i> ≤ 2). (b) Find the mean and standard deviation of <i>X</i>. (c) Compute the z-score of 9 errors, (9 − μ)/σ.`,
+ [Pr('(a) P(X ≤ 2)',cdf(50,.08,2)),T('(b) Mean','',4),T('(b) Std. dev.','',Math.sqrt(50*.08*.92),{sd:true}),T('(c) z-score of 9','',(9-4)/Math.sqrt(50*.08*.92),{tol:0.02})],
+ ['<i>X</i> ~ Binomial(50, 0.08). μ = np; σ = √(np(1 − p)).','σ = √(50 × 0.08 × 0.92) = √3.68.'],
+ [`(a) binomcdf(50, 0.08, 2) = <b>${r4(cdf(50,.08,2))}</b>`,`(b) μ = 50(0.08) = <b>4</b>; σ = √3.68 = <b>${r4(Math.sqrt(3.68))}</b>`,`(c) <i>z</i> = (9 − 4)/${r4(Math.sqrt(3.68))} = <b>${r4(5/Math.sqrt(3.68))}</b>. Nine errors is about 2.6 standard deviations above the mean, which would be unusual.`]);
+add('x',`Scores on a certification exam are approximately normal with mean 78 and standard deviation 9. (a) What score marks the top 10 %? (b) Find the bounds of the middle 50 % of scores.`,
+ [T('(a) Cutoff for top 10 %','',invN(.9,78,9),{tol:0.003}),T('(b) Lower bound (Q1)','',invN(.25,78,9),{tol:0.003}),T('(b) Upper bound (Q3)','',invN(.75,78,9),{tol:0.003})],
+ ['(a) invNorm(0.90, 78, 9). (b) The middle 50 % lies between the 25th and 75th percentiles: invNorm(0.25, 78, 9) and invNorm(0.75, 78, 9).','z = 1.2816 and ±0.6745.'],
+ [`(a) 78 + 1.2816(9) = <b>${r4(invN(.9,78,9))}</b>`,`(b) 78 ± 0.6745(9): <b>${r4(invN(.25,78,9))}</b> to <b>${r4(invN(.75,78,9))}</b>`]);
+MC('x','A researcher wants the sampling distribution of ${XB} to have half the variability (half the standard deviation) it has with <i>n</i> = 50. What sample size should be used?'.replace('${XB}',XB),
+ ['<i>n</i> = 100','<i>n</i> = 200','<i>n</i> = 25','<i>n</i> = 75'],[1],
+ 'σ<sub>x̄</sub> = σ/√<i>n</i>. To cut it in half, √<i>n</i> must double, so <i>n</i> must quadruple: 4 × 50 = 200.','How does σ/√n change when n is multiplied by 4?');
+
+const SETS=[
+ {id:'d',name:'2.8 Distributions',desc:'Discrete random variables and probability distributions: missing probabilities, cumulative distributions, simulation estimates.'},
+ {id:'m',name:'2.9 Mean & SD',desc:'Expected value and standard deviation of discrete random variables, with interpretation in context.'},
+ {id:'b',name:'2.10 Binomial',desc:'Justifying the binomial model; binompdf / binomcdf; mean and standard deviation of binomial variables.'},
+ {id:'n',name:'2.11 Normal',desc:'Empirical rule, z-scores, normalcdf and invNorm, finding unknown parameters.'},
+ {id:'c',name:'2.12 Sampling & CLT',desc:'Sampling distributions, the Central Limit Theorem, and the effect of sample size.'},
+ {id:'x',name:'AP-Style Mixed',desc:'Multi-part free-response style problems combining lessons 2.8–2.12.'}
+];
+P.forEach((p,i)=>{ p.id=p.set+(i+1); });
+let curSet='d';
+
+function setStats(sid){ const ps=P.filter(p=>p.set===sid); return {done:ps.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length,total:ps.length}; }
+function updateOverall(){
+  const done=P.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length;
+  $('#overallText').textContent=`${done} of ${P.length} practice problems solved`;
+  $('#overallBar').style.width=(100*done/P.length)+'%';
+  $$('#setPicker button').forEach(b=>{ const s=setStats(b.dataset.set); $('small',b).textContent=`${s.done}/${s.total}`; });
+}
+function buildPicker(){
+  const pk=$('#setPicker'); pk.innerHTML='';
+  SETS.forEach(s=>{
+    const b=document.createElement('button'); b.type='button'; b.dataset.set=s.id; b.setAttribute('aria-pressed',String(s.id===curSet));
+    b.innerHTML=`${s.name}<small></small>`; b.addEventListener('click',()=>{ curSet=s.id; buildPicker(); renderSet(); }); pk.appendChild(b);
+  });
+  updateOverall();
+}
+function renderSet(){
+  const host=$('#problemList'); host.innerHTML='';
+  const s=SETS.find(x=>x.id===curSet);
+  const head=document.createElement('div'); head.className='sethead'; head.innerHTML=`<p>${s.desc}</p>`; host.appendChild(head);
+  P.filter(p=>p.set===curSet).forEach((p,i)=>host.appendChild(renderProblem(p,i+1)));
+}
+function renderProblem(p,n){
+  const st=state['p_'+p.id]=state['p_'+p.id]||{done:false,tries:0};
+  const el=document.createElement('div'); el.className='prob'+(st.done?' done':'');
+  el.innerHTML=`<div class="num"><span>Problem ${n}</span><span class="badge">${st.done?'✔ Solved':''}</span></div><p style="margin:6px 0 4px">${p.text}</p>`;
+  const body=document.createElement('div'); el.appendChild(body);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  const hintHost=document.createElement('div'), solHost=document.createElement('div');
+  const acts=document.createElement('div'); acts.className='acts';
+  const check=document.createElement('button'); check.className='btn'; check.type='button'; check.textContent='Check';
+  const hint=document.createElement('button'); hint.className='btn ghost'; hint.type='button'; hint.textContent='Hint';
+  const sol=document.createElement('button'); sol.className='btn ghost'; sol.type='button';
+  let hintN=0, inputs=[], checkFn;
+  if(p.opts){
+    const multi=p.type==='multi';
+    p.opts.forEach((o,i)=>{
+      const lab=document.createElement('label'); lab.className='opt'; lab.style.display='block'; lab.style.cursor='pointer';
+      const inp=document.createElement('input'); inp.type=multi?'checkbox':'radio'; inp.name='q_'+p.id; inp.value=i;
+      lab.append(inp); lab.insertAdjacentHTML('beforeend',o); body.appendChild(lab); inputs.push(inp);
+    });
+    checkFn=()=>{
+      const sel=inputs.filter(i=>i.checked).map(i=>+i.value);
+      if(!sel.length){ fb.className='fb near'; fb.textContent=multi?'Select at least one option.':'Select an answer first.'; return null; }
+      const ok=sel.length===p.correct.length&&p.correct.every(c=>sel.includes(c));
+      inputs.forEach(i=>i.parentElement.classList.remove('right','wrong'));
+      if(ok){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+p.why; return true; }
+      sel.forEach(v=>{ if(!p.correct.includes(v)) inputs[v].parentElement.classList.add('wrong'); });
+      fb.className='fb no'; fb.textContent=multi?'Not yet — check each option against the definition and try again.':'Not quite. Re-read the question and think about which condition or definition applies.';
+      return false;
+    };
+  } else {
+    p.parts.forEach((part,i)=>{
+      const row=document.createElement('div'); row.className='partrow';
+      const id=`in_${p.id}_${i}`;
+      row.innerHTML=`<label for="${id}">${part.label}</label>`;
+      const inp=document.createElement('input'); inp.type='text'; inp.id=id; inp.autocomplete='off'; inp.placeholder=part.prob?'e.g. 0.0808':'your answer';
+      const u=document.createElement('span'); u.className='u'; u.textContent=part.unit||'';
+      const pf=document.createElement('span'); pf.className='fb'; pf.style.margin='0'; pf.setAttribute('aria-live','polite');
+      row.append(inp,u,pf); body.appendChild(row); inputs.push({inp,pf});
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') check.click(); });
+    });
+    checkFn=()=>{
+      let all=true, any=false;
+      inputs.forEach(({inp,pf},i)=>{
+        if(!inp.value.trim()){ pf.className='fb near'; pf.textContent='Enter a value.'; all=false; return; }
+        any=true;
+        const j=judge(parseNum(inp.value),p.parts[i]);
+        pf.className='fb '+j.state; pf.textContent=(j.state==='ok'?'✔ ':'')+j.msg;
+        if(j.state!=='ok') all=false;
+      });
+      fb.textContent=''; fb.className='fb';
+      return any?all:null;
+    };
+  }
+  function showSol(){
+    solHost.className='solbox';
+    solHost.innerHTML=p.sol?'<b>Worked solution</b><ol>'+p.sol.map(s=>`<li>${s}</li>`).join('')+'</ol>':'<b>Answer explained</b><p style="margin:4px 0 0">'+p.why+'</p>';
+  }
+  function syncSol(){
+    const open=!!solHost.innerHTML;
+    sol.disabled=!(st.done||st.tries>=2);
+    sol.textContent=sol.disabled?'Solution (after 2 tries)':(open?'Hide solution':'Show solution');
+  }
+  check.addEventListener('click',()=>{
+    const r=checkFn(); if(r===null) return;
+    st.tries++;
+    if(r){
+      if(!st.done){ st.done=true; el.classList.add('done'); $('.badge',el).textContent='✔ Solved'; }
+      if(p.parts){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+(st.tries===1?'First try — nice work.':'Well done for sticking with it.'); }
+    } else if(p.parts && st.tries>=2 && !st.done){ fb.className='fb near'; fb.textContent='Still stuck? Try another hint, or open the worked solution.'; }
+    save(); updateOverall(); syncSol();
+  });
+  hint.addEventListener('click',()=>{
+    const hs=p.h||[]; if(!hs.length) return;
+    hintN=Math.min(hintN+1,hs.length);
+    hintHost.className='hintbox'; hintHost.innerHTML=`<b>Hint ${hintN}${hs.length>1?' of '+hs.length:''}:</b> `+hs.slice(0,hintN).map((h,i)=>i===hintN-1?h:'<span class="pnote">'+h+'</span>').reverse().join('<br>');
+    hint.textContent=hintN<hs.length?'Another hint':'Hint';
+  });
+  sol.addEventListener('click',()=>{ if(sol.disabled) return; if(solHost.innerHTML){ solHost.innerHTML=''; solHost.className=''; } else showSol(); syncSol(); });
+  acts.append(check,hint,sol); el.append(acts,fb,hintHost,solHost);
+  syncSol();
+  return el;
+}
+
+$('#resetAll').addEventListener('click',()=>{ if(confirm('Clear all saved progress on this device?')){ state={}; save(); buildPicker(); renderSet(); } });
+buildPicker(); renderSet();
+const h=(location.hash||'').slice(1); if(['review','examples','practice'].includes(h)) showTab(h);
+window.LIA3={P,EX,parseNum,judge,Phi,PhiInv,bpdf,bcdf};
+})();
+
+</script>
+</body>
+</html>
