@@ -201,6 +201,7 @@ table.res th{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;colo
       <small>Chapter 2 · Motion in One Dimension · <a href="physics-lesson-2-2.html">← Back to the Lesson 2.2 study page</a></small>
     </div>
     <div class="overall" aria-live="polite">
+      <span id="saveStatus" style="font-weight:600"></span>
       <span id="overallText">0 of 0 answers finished</span>
       <div class="bar"><i id="overallBar"></i></div>
       <button class="btn big" type="button" id="submitTop">SUBMIT</button>
@@ -242,9 +243,42 @@ const ms2='m/s<sup>2</sup>';
 const MAX=3;
 const KEY='lincoln-physics-2-2-practice-v1';
 
-let state={};
-try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
-const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+/* Saving: try localStorage, sessionStorage and window.name together so answers survive a refresh
+   even when the browser (or an embedding page) blocks one of them. The newest copy wins on load. */
+const NAMEPFX='LIA22:';
+let state={}, storeMode='none';
+function readStores(){
+  const out=[];
+  try{ const v=localStorage.getItem(KEY); if(v) out.push(['local',JSON.parse(v)]); }catch(e){}
+  try{ const v=sessionStorage.getItem(KEY); if(v) out.push(['session',JSON.parse(v)]); }catch(e){}
+  try{ if(window.name.indexOf(NAMEPFX)===0) out.push(['tab',JSON.parse(window.name.slice(NAMEPFX.length))]); }catch(e){}
+  return out;
+}
+(function(){
+  const found=readStores().filter(x=>x[1]&&typeof x[1]==='object').sort((a,b)=>(b[1]._ts||0)-(a[1]._ts||0));
+  if(found.length) state=found[0][1];
+})();
+function save(){
+  state._ts=Date.now();
+  const json=JSON.stringify(state); let mode='none';
+  try{ localStorage.setItem(KEY,json); if(localStorage.getItem(KEY)===json) mode='local'; }catch(e){}
+  try{ sessionStorage.setItem(KEY,json); if(mode==='none') mode='session'; }catch(e){}
+  try{ window.name=NAMEPFX+json; if(mode==='none') mode='tab'; }catch(e){}
+  storeMode=mode; showSaveStatus();
+}
+function clearSaved(){
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  try{ sessionStorage.removeItem(KEY); }catch(e){}
+  try{ window.name=''; }catch(e){}
+}
+function showSaveStatus(){
+  const el=document.getElementById('saveStatus'); if(!el) return;
+  if(storeMode==='local'){ el.textContent='💾 Progress saved on this device'; el.style.color='var(--good)'; }
+  else if(storeMode==='none'){ el.textContent='⚠ Saving is blocked in this browser'; el.style.color='var(--bad)'; }
+  else{ el.textContent='⚠ Saved for this tab only — keep this tab open'; el.style.color='var(--warm)'; }
+}
+window.addEventListener('pagehide',()=>save());
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') save(); });
 
 /* ---------- item definitions (answers never displayed) ---------- */
 const ITEMS={};
@@ -652,7 +686,7 @@ function updateProgress(){
   $('#overallText').textContent=`${done} of ${total} answers finished`;
   $('#overallBar').style.width=(done/total*100)+'%';
 }
-updateProgress();
+updateProgress(); if(Object.keys(state).length) save(); else { try{ localStorage.setItem(KEY+'-t','1'); localStorage.removeItem(KEY+'-t'); storeMode='local'; }catch(e){ storeMode='tab'; } showSaveStatus(); }
 if(state._tab && SHEETS.some(x=>x.id===state._tab)){ show(state._tab); window.scrollTo({top:0}); }
 
 /* ---------- submit, name, results ---------- */
@@ -709,7 +743,7 @@ function renderResults(){
   $('#resBack').onclick=()=>{ state._view=''; save(); document.body.classList.remove('show-results'); window.scrollTo({top:0}); };
   $('#resReset').onclick=()=>{
     if(confirm('Erase all answers and attempts on this computer and start over?')){
-      try{ localStorage.removeItem(KEY); }catch(e){}
+      clearSaved();
       location.reload();
     }
   };
