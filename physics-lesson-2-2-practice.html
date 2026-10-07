@@ -582,6 +582,7 @@ SHEETS.forEach((sh,i)=>{
 function show(id){
   $$('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.id===id?'true':'false'));
   $$('section.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+id));
+  state._tab=id; save();
   window.scrollTo({top:0});
 }
 tabs.addEventListener('click',e=>{ const b=e.target.closest('button'); if(b) show(b.dataset.id); });
@@ -604,6 +605,8 @@ function buildItem(it){
     `<div class="row">${field}<button class="btn" type="button">Check</button><span class="dots" aria-hidden="true"><i></i><i></i><i></i><span></span></span></div><div class="fb" aria-live="polite"></div>`;
   const input=$('input,select,textarea',wrap), btn=$('button',wrap);
   btn.addEventListener('click',()=>attempt(it,wrap));
+  const draft=()=>{ const st=state[it.id]||(state[it.id]={n:0,done:null,val:''}); if(!st.done){ st.val=input.value; save(); } };
+  input.addEventListener('input',draft); input.addEventListener('change',draft);
   if(it.type==='num') input.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); attempt(it,wrap); } });
   paint(it,wrap);
   return wrap;
@@ -650,6 +653,7 @@ function updateProgress(){
   $('#overallBar').style.width=(done/total*100)+'%';
 }
 updateProgress();
+if(state._tab && SHEETS.some(x=>x.id===state._tab)){ show(state._tab); window.scrollTo({top:0}); }
 
 /* ---------- submit, name, results ---------- */
 const dlg=$('#nameDialog'), nameIn=$('#studentName'), nameErr=$('#nameErr');
@@ -668,7 +672,7 @@ $('#nameForm').addEventListener('submit',e=>{
   e.preventDefault();
   const n=nameIn.value.trim().replace(/\s+/g,' ');
   if(n.length<2){ nameErr.textContent='Please type your name.'; nameIn.focus(); return; }
-  state._name=n; state._when=new Date().toISOString(); save();
+  state._name=n; state._when=new Date().toISOString(); state._view='results'; save();
   dlg.close(); renderResults();
 });
 
@@ -702,7 +706,7 @@ function renderResults(){
   document.body.classList.add('show-results');
   window.scrollTo({top:0});
   $('#resPrint').onclick=()=>window.print();
-  $('#resBack').onclick=()=>{ document.body.classList.remove('show-results'); window.scrollTo({top:0}); };
+  $('#resBack').onclick=()=>{ state._view=''; save(); document.body.classList.remove('show-results'); window.scrollTo({top:0}); };
   $('#resReset').onclick=()=>{
     if(confirm('Erase all answers and attempts on this computer and start over?')){
       try{ localStorage.removeItem(KEY); }catch(e){}
@@ -710,6 +714,7 @@ function renderResults(){
     }
   };
 }
+if(state._view==='results' && state._name) renderResults();
 })();
 </script>
 </body>
