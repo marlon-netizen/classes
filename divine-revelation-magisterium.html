@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Divine Revelation and the Magisterium | Faith Formation</title>
+<meta name="description" content="Interactive study page for Faith Formation (8th grade): Divine Revelation, Scripture and Tradition, and the Magisterium, with worked examples and practice.">
+<style>
+:root{
+  --bg:#f3f0e9; --surface:#fffdf9; --surface-2:#f8f5ee; --ink:#1e2937; --muted:#5a6575;
+  --line:#ddd6c7; --primary:#3b4a73; --primary-ink:#ffffff; --accent:#2b7a76; --accent-soft:#e1efed;
+  --blue-soft:#e6e9f4; --warm:#a65e4e; --warm-soft:#f5e8e3; --good:#2c7a57; --good-soft:#e1f1e8;
+  --bad:#a94a3f; --bad-soft:#f6e4e1; --shadow:0 1px 2px rgba(30,41,55,.06),0 4px 14px rgba(30,41,55,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+    --line:#2d3947; --primary:#a9b8e6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+    --blue-soft:#1d2236; --warm:#d9998a; --warm-soft:#2f2220; --good:#5cc08f; --good-soft:#183024;
+    --bad:#e08a7d; --bad-soft:#331e1c; --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+  --line:#2d3947; --primary:#a9b8e6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+  --blue-soft:#1d2236; --warm:#d9998a; --warm-soft:#2f2220; --good:#5cc08f; --good-soft:#183024;
+  --bad:#e08a7d; --bad-soft:#331e1c; --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:#2a3454;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:Georgia,serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em;margin:0}
+.crumbs{margin:.25rem 0 0;font-size:1.05rem;color:#d9d3c4}
+.crumbs strong{color:#fff}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font-size:.8rem;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#f3f0e9;border:1px solid rgba(255,255,255,.2)}
+.theme{background:transparent;border:1px solid rgba(255,255,255,.35);color:#f3f0e9;border-radius:8px;padding:4px 10px;font-size:.85rem}
+
+/* nav */
+nav.sticky{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+nav.sticky .wrap{display:flex;gap:4px;align-items:center;overflow-x:auto;padding-top:6px;padding-bottom:6px}
+nav.sticky a{white-space:nowrap;text-decoration:none;color:var(--ink);padding:6px 12px;border-radius:8px;font-size:.92rem}
+nav.sticky a:hover{background:var(--blue-soft)}
+.progress-box{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);white-space:nowrap}
+.bar{width:110px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+section.sec{padding:34px 0 6px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--warm);font-weight:700;margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow);margin:0 0 18px}
+.card.soft{background:var(--blue-soft)}
+.card.warm{background:var(--warm-soft)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 10px 10px 0;margin:0 0 1em}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.ref{font-size:.82rem;color:var(--muted);font-style:italic}
+.tag{display:inline-block;font-size:.75rem;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary);font-weight:600;margin-right:6px}
+
+/* stage explorer */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:600}
+.tab[aria-selected="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.tabpanel ul{margin:.3em 0 1em;padding-left:1.2em}
+.tabpanel li{margin-bottom:.35em}
+
+/* flip cards */
+.flip{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-height:150px;text-align:left;box-shadow:var(--shadow);width:100%}
+.flip .front{font-family:Georgia,serif;font-size:1.3rem;font-weight:700}
+.flip .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+.flip .back{display:none}
+.flip.on{background:var(--accent-soft);border-color:var(--accent)}
+.flip.on .front{font-size:1.05rem;color:var(--accent)}
+.flip.on .back{display:block;margin-top:8px}
+.flip.on .hint{display:none}
+
+/* accordion */
+details.acc{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:8px}
+details.acc summary{padding:11px 14px;cursor:pointer;font-weight:600}
+details.acc .body{padding:0 14px 12px}
+
+/* activity shell */
+.act{position:relative}
+.act h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.act .done-mark{display:none;font-size:.78rem;background:var(--good-soft);color:var(--good);padding:2px 10px;border-radius:99px;font-family:system-ui,sans-serif;font-weight:700}
+.act.done .done-mark{display:inline-block}
+.btn{background:var(--primary);color:var(--primary-ink);border:0;border-radius:9px;padding:8px 16px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--primary);border:1px solid var(--primary)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.opt:focus-visible,.tab:focus-visible,.flip:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+.opt{display:block;width:100%;text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 8px}
+.opt:hover:not(:disabled){border-color:var(--primary)}
+.opt.good{background:var(--good-soft);border-color:var(--good);color:var(--ink)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt.sel{border-color:var(--primary);background:var(--blue-soft)}
+.opt:disabled{cursor:default}
+.fb{min-height:1.4em;margin:8px 0 0;padding:0;border-radius:8px;font-size:.95rem}
+.fb.show{padding:9px 13px}
+.fb.good{background:var(--good-soft);color:var(--ink);border-left:4px solid var(--good)}
+.fb.bad{background:var(--bad-soft);color:var(--ink);border-left:4px solid var(--bad)}
+.fb.info{background:var(--blue-soft);border-left:4px solid var(--primary)}
+.shake{animation:shake .35s}
+@keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}html{scroll-behavior:auto}.bar i{transition:none}}
+.score{font-weight:700;color:var(--primary)}
+.qhead{font-weight:700;margin-bottom:8px}
+.qblock{border-top:1px dashed var(--line);padding-top:14px;margin-top:14px}
+.qblock:first-of-type{border-top:0;padding-top:0;margin-top:0}
+
+/* worked example */
+.steps{list-style:none;margin:12px 0 0;padding:0}
+.step{display:none;border:1px solid var(--line);border-left:5px solid var(--primary);background:var(--surface-2);border-radius:10px;padding:11px 14px;margin-bottom:9px}
+.step.show{display:block;animation:fade .3s}
+.step b.t{display:block;color:var(--primary);margin-bottom:2px}
+.step.final{border-left-color:var(--good);background:var(--good-soft)}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.problem{background:var(--warm-soft);border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+
+/* sequence */
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}
+.slot{min-height:78px;border:2px dashed var(--line);border-radius:10px;padding:8px 10px;font-size:.92rem;background:var(--surface-2)}
+.slot small{display:block;color:var(--muted);font-weight:700;margin-bottom:2px}
+.slot.filled{border-style:solid;border-color:var(--good);background:var(--good-soft)}
+.slot.next{border-color:var(--primary)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pool .opt{width:auto;margin:0}
+
+/* matching / sort */
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
+@media(max-width:560px){.match{grid-template-columns:1fr}}
+.match .opt.done{background:var(--good-soft);border-color:var(--good);opacity:.85}
+.sortcard{font-family:Georgia,serif;font-size:1.15rem;text-align:center;background:var(--warm-soft);border-radius:12px;padding:20px 12px;margin:10px 0}
+
+/* cloze */
+.cloze p{line-height:2.2}
+select{font:inherit;padding:4px 8px;border-radius:8px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+select.good{border-color:var(--good);background:var(--good-soft)}
+select.bad{border-color:var(--bad);background:var(--bad-soft)}
+textarea{width:100%;min-height:96px;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);resize:vertical}
+.checks{list-style:none;padding:0;margin:8px 0}
+.checks li{padding:4px 0}
+.checks .y{color:var(--good);font-weight:700}
+.checks .n{color:var(--warm);font-weight:700}
+.model{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 10px 10px 0;margin-top:8px}
+
+table.cmp{width:100%;border-collapse:collapse;font-size:.95rem}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.cmp th{background:var(--blue-soft)}
+
+.overlay{position:fixed;inset:0;background:rgba(17,22,29,.6);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 16px}
+.overlay[hidden]{display:none}
+.modal{background:var(--surface);border-radius:16px;max-width:620px;width:100%;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.35);border-top:5px solid var(--warm)}
+.bigscore{font-family:Georgia,serif;font-size:2.6rem;font-weight:700;color:var(--primary);line-height:1.1;margin:4px 0 8px}
+.bigscore small{font-size:1rem;color:var(--muted);font-family:system-ui,sans-serif;font-weight:400}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden;min-width:70px}
+.meter i{display:block;height:100%;background:var(--accent)}
+footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.88rem}
+.sr{position:absolute;left:-9999px}
+@media print{header.top .theme,nav.sticky,.btn{display:none}.step{display:block}}
+
+.cmap{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:8px;font-size:.88rem}
+.cmap .n{border:2px solid var(--primary);background:var(--surface);border-radius:10px;padding:6px 12px;text-align:center;font-weight:600}
+.cmap .n.root{background:var(--primary);color:var(--primary-ink)}
+.cmap .row2{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.cmap .lnk{color:var(--muted);font-style:italic}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <p class="school">Lincoln International Academy</p>
+      <p class="crumbs">Class: <strong>Faith Formation</strong> &nbsp;·&nbsp; Teacher: <strong>Nathaly López</strong></p>
+    </div>
+    <div class="meta">
+      <span class="pill">8th Grade · Q02 Week 1</span>
+      <span class="pill">Virtue: Order</span>
+      <button class="theme" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Light / Dark</button>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky" aria-label="Page sections">
+  <div class="wrap">
+    <a href="#learn">Learn</a>
+    <a href="#vocab">Vocabulary</a>
+    <a href="#examples">Worked examples</a>
+    <a href="#practice">Practice</a>
+    <a href="#reflect">Notebook</a>
+    <a href="#sources">Sources</a>
+    <div class="progress-box" aria-live="polite"><span id="progText">0 of 8 activities</span><div class="bar"><i id="progBar"></i></div></div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ======================= LEARN ======================= -->
+<section class="sec" id="learn">
+  <div class="eyebrow">Divine Revelation and the Magisterium</div>
+  <h2>How God Hands On His Truth in an Ordered Way</h2>
+
+  <div class="card soft">
+    <h3>The Founder's Letter</h3>
+    <p>Imagine a founder leaves behind a letter. Years later, people disagree about what it means. <strong>Who decides what the message means?</strong></p>
+    <p>Keep this question in mind. The Church faces a similar question about God's Word, and the answer shows how God is a God of order, not confusion.</p>
+    <div class="callout">
+      <strong>Standards</strong><br>
+      A.6.8.1 Revelation is complete in Jesus Christ.<br>
+      A.6.8.2 Human writers of Scripture are true authors.<br>
+      A.6.8.4 Scripture is read within the living Tradition.<br>
+      D.3.8.2 The pope and bishops in communion make up the Magisterium.
+    </div>
+  </div>
+
+  <div class="card warm">
+    <h3>The Virtue of Order</h3>
+    <p><strong>God does not leave us to guess.</strong> He hands on His truth in an ordered way: He reveals Himself, the Apostles pass it on, it is written down, and the Church guards and explains it. "God is not a God of disorder but of peace" (1 Corinthians 14:33).</p>
+  </div>
+
+  <h3>Key ideas</h3>
+  <p>Select each idea to read it. Then try the worked examples.</p>
+  <div class="card">
+    <div class="tabs" role="tablist" aria-label="Key ideas" id="stageTabs"></div>
+    <div id="stagePanel" class="tabpanel" role="tabpanel" aria-live="polite"></div>
+  </div>
+
+  <div class="card">
+    <h3>The Analogy of Authority</h3>
+    <p>A national constitution can help us understand how God's Word is handed on.</p>
+    <table class="cmp">
+      <tr><th>Feature</th><th>National Constitution</th><th>Divine Revelation</th></tr>
+      <tr><td>Written text</td><td>The Constitution</td><td>Sacred Scripture</td></tr>
+      <tr><td>Context</td><td>Founding Fathers' intent</td><td>Sacred Tradition</td></tr>
+      <tr><td>Interpreter</td><td>Supreme Court</td><td>The Magisterium</td></tr>
+    </table>
+    <div class="callout warm" style="margin-top:12px"><strong>Limits of the analogy:</strong> a constitution is a human document and a court is a human institution. Christians also trust the guidance of the Holy Spirit, who is with the Church. The Magisterium does not stand above God's Word; it serves it.</div>
+  </div>
+</section>
+
+<!-- ======================= VOCAB ======================= -->
+<section class="sec" id="vocab">
+  <div class="eyebrow">Key vocabulary</div>
+  <h2>Words to Know</h2>
+  <p>Tap a card to flip it. Say the meaning in your own words before you flip!</p>
+  <div class="grid g3" id="flips"></div>
+</section>
+
+<!-- ======================= EXAMPLES ======================= -->
+<section class="sec" id="examples">
+  <div class="eyebrow">Step by step</div>
+  <h2>Worked Examples</h2>
+  <p>Each example shows how to think through a type of question. Press <strong>Show next step</strong> and try to predict the next step before you reveal it.</p>
+  <div id="exampleList"></div>
+</section>
+
+<!-- ======================= PRACTICE ======================= -->
+<section class="sec" id="practice">
+  <div class="eyebrow">Your turn</div>
+  <h2>Practice with Instant Feedback</h2>
+  <p>You get feedback right after every answer. Mistakes are part of learning, so use the explanations and try again. Your scores are saved on this device only.</p>
+
+  <div class="card act" id="act-quiz"><h3>1. Mastery Challenge (12 questions) <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-match"><h3>2. Match the Term <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-sort"><h3>3. Scripture, Tradition or Magisterium? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-tf"><h3>4. True or False <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-analogy"><h3>5. The Analogy of Authority <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-seq"><h3>6. How the Faith Is Handed On <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-apply"><h3>7. Apply It <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-cloze"><h3>8. Complete the Sentences <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+
+  <div class="card soft" id="summaryCta" style="display:none">
+    <h3>All activities complete!</h3>
+    <p>Great work. See how you did on each activity.</p>
+    <button class="btn" type="button" id="openSummary">View my score summary</button>
+  </div>
+</section>
+
+<!-- ======================= NOTEBOOK ======================= -->
+<section class="sec" id="reflect">
+  <div class="eyebrow">Write it by hand</div>
+  <h2>Exit Ticket and Notebook Work</h2>
+  <div class="callout warm"><strong>Get your notebook or a sheet of paper and a pencil.</strong> Your answers here are not typed on this page. Write them by hand.</div>
+
+  <div class="card soft">
+    <h3>Exit ticket ✏️ Rate your confidence (1–4)</h3>
+    <p><strong>Write your answers in your notebook or on a paper sheet.</strong> Copy each statement and rate yourself from 1 to 4 (1 = I need help · 2 = I know a little · 3 = I can explain it with help · 4 = I can explain it to a friend):</p>
+    <ol>
+      <li>I can explain how Revelation is complete in Jesus Christ.</li>
+      <li>I can explain why the human writers of Scripture are true authors.</li>
+      <li>I can explain why Scripture is read within the living Tradition.</li>
+      <li>I can explain that the Pope and the bishops in communion make up the Magisterium.</li>
+    </ol>
+    <p class="ref">For any statement you rated 1 or 2, go back to its Worked Example and try the matching practice activity again.</p>
+  </div>
+
+  <div class="card">
+    <h3>Quick write</h3>
+    <p>Imagine a friend asks you: <em>"Who decides what the Bible really means?"</em> In your notebook, answer in 2–3 sentences.</p>
+    <div class="callout"><strong>Start with:</strong> The Magisterium helps us because ____.</div>
+  </div>
+
+  <div class="card">
+    <h3>Reflection questions</h3>
+    <ol>
+      <li>Which idea did I think differently about before this week?</li>
+      <li>How would I explain the Magisterium to a friend?</li>
+    </ol>
+  </div>
+
+  <div class="card">
+    <h3>Concept map (notebook)</h3>
+    <p>Draw a concept map with the three big ideas: <strong>Revelation</strong>, <strong>Scripture and Tradition</strong>, and the <strong>Magisterium</strong>. Add linking words on the arrows. A strong map is <em>complete</em> (all ideas), <em>accurate</em> (correct links), and shows <em>application</em> (an example). See Worked Example 4.</p>
+  </div>
+  <p style="text-align:center;font-family:Georgia,serif;font-size:1.3rem;margin:22px 0"><em>God does not leave us to guess.</em></p>
+</section>
+
+<!-- ======================= SOURCES ======================= -->
+<section class="sec" id="sources">
+  <div class="eyebrow">Additional reference</div>
+  <h2>Where to Read More</h2>
+  <p>The summaries on this page are in simple words and are not word-for-word quotes. Ask your teacher for a Catholic Bible and the Catechism to read the original texts.</p>
+  <div class="card soft">
+    <table class="cmp">
+      <tr><th>Source</th><th>Idea</th></tr>
+      <tr><td>Hebrews 1:1–2</td><td>God spoke in many ways through the prophets, and in these last days through His Son.</td></tr>
+      <tr><td>Luke 1:1–4</td><td>Luke writes an orderly account after investigating, a human author at work.</td></tr>
+      <tr><td>2 Timothy 3:16 · 2 Peter 1:20–21</td><td>Scripture is inspired by God and spoken by people moved by the Holy Spirit.</td></tr>
+      <tr><td>Acts 8:26–31</td><td>An official reading Scripture says he needs someone to guide him.</td></tr>
+      <tr><td>2 Peter 3:15–16</td><td>Some people twist hard-to-understand passages of Scripture.</td></tr>
+      <tr><td>John 14:26 · John 16:13</td><td>Jesus promises the Holy Spirit to guide the Church into all truth.</td></tr>
+      <tr><td>Dei Verbum (Vatican II) nos. 4, 7–10, 11–12</td><td>Revelation completed in Christ; Scripture and Tradition; inspiration and authorship; the Magisterium serves the Word.</td></tr>
+      <tr><td>Catechism of the Catholic Church (CCC) 65–67, 80–82, 85–87, 105–108, 111–114</td><td>Completeness of Revelation; Scripture and Tradition; the Magisterium; inspiration; how to read Scripture.</td></tr>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Lincoln International Academy · Faith Formation · Ms. Nathaly López · 8th Grade, Q02 Week 1 (Virtue: Order).
+    <br>Based on the class presentation "Divine Revelation and the Magisterium: How God hands on His truth in an ordered way."
+    <div class="row" style="margin-top:10px"><button class="btn ghost" id="resetAll" type="button">Reset my scores</button></div>
+  </div>
+</footer>
+
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="sumTitle" hidden>
+  <div class="modal">
+    <div class="eyebrow">Faith Formation · Divine Revelation and the Magisterium</div>
+    <h2 id="sumTitle">Your Score Summary</h2>
+    <div class="bigscore" id="sumBig"></div>
+    <p id="sumMsg"></p>
+    <table class="cmp" id="sumTable"></table>
+    <p class="ref">Scores count correct answers on your latest try of each activity (wrong taps lower the score). Remember to write your exit ticket answers in your notebook or on a paper sheet.</p>
+    <div class="row"><button class="btn" type="button" id="closeSummary">Close</button><button class="btn ghost" type="button" id="reviewBtn">Practice again</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- helpers ---------- */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+function h(tag, attrs, ...kids){
+  const el = document.createElement(tag);
+  for(const k in (attrs||{})){
+    if(k==='class') el.className = attrs[k];
+    else if(k==='html') el.innerHTML = attrs[k];
+    else if(k.startsWith('on')) el.addEventListener(k.slice(2), attrs[k]);
+    else el.setAttribute(k, attrs[k]);
+  }
+  kids.flat().forEach(c => { if(c!=null) el.append(c.nodeType ? c : document.createTextNode(c)); });
+  return el;
+}
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+function feedback(el, kind, text){ el.className = 'fb show ' + kind; el.textContent = text; }
+
+/* ---------- theme ---------- */
+$('#themeBtn').addEventListener('click', () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme==='dark' || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme = dark ? 'light' : 'dark';
+  store.set('dr_theme', root.dataset.theme);
+});
+const savedTheme = store.get('dr_theme', null);
+if(savedTheme) document.documentElement.dataset.theme = savedTheme;
+
+/* ---------- progress & scores ---------- */
+const ACTS = [
+  ['act-quiz','Mastery Challenge'],['act-match','Match the Term'],['act-sort','Scripture, Tradition or Magisterium?'],['act-tf','True or False'],
+  ['act-analogy','The Analogy of Authority'],['act-seq','How the Faith Is Handed On'],['act-apply','Apply It'],['act-cloze','Complete the Sentences']
+];
+const TOTAL = ACTS.length;
+const scores = store.get('dr_q02w01_scores', {});
+function paintProgress(){
+  const n = ACTS.filter(a => scores[a[0]]).length;
+  $('#progText').textContent = n + ' of ' + TOTAL + ' activities';
+  $('#progBar').style.width = (n/TOTAL*100) + '%';
+  $$('.act').forEach(a => a.classList.toggle('done', !!scores[a.id]));
+  $('#summaryCta').style.display = n===TOTAL ? '' : 'none';
+}
+function record(id, correct, total){
+  const was = ACTS.filter(a => scores[a[0]]).length;
+  scores[id] = [correct, total];
+  store.set('dr_q02w01_scores', scores);
+  paintProgress();
+  if(was===TOTAL-1 && ACTS.every(a => scores[a[0]])) setTimeout(openSummary, 900);
+}
+function openSummary(){
+  let c=0,t=0;
+  const rows = ACTS.map(([id,name]) => { const [a,b]=scores[id]||[0,0]; c+=a; t+=b; return h('tr',{}, h('td',{},name), h('td',{},a+' / '+b), h('td',{}, h('div',{class:'meter'}, h('i',{style:'width:'+(b?a/b*100:0)+'%'})))); });
+  const pct = t ? Math.round(c/t*100) : 0;
+  $('#sumBig').innerHTML = pct + '% <small>(' + c + ' of ' + t + ' correct)</small>';
+  $('#sumMsg').textContent = pct>=90 ? 'Outstanding! You can explain Revelation, Scripture, Tradition and the Magisterium with confidence.'
+    : pct>=80 ? 'Secure! You have a solid understanding. Review the activities with lower scores to make it even stronger.'
+    : pct>=60 ? 'Good progress. Go back to the Worked Examples, then retry the activities with lower scores.'
+    : 'Keep going! Re-read the Key ideas and the Worked Examples, then try the activities again.';
+  const tbl = $('#sumTable'); tbl.innerHTML='';
+  tbl.append(h('tr',{},h('th',{},'Activity'),h('th',{},'Score'),h('th',{},'')), ...rows);
+  $('#overlay').hidden = false; $('#closeSummary').focus();
+}
+function closeSummary(){ $('#overlay').hidden = true; }
+$('#openSummary').addEventListener('click', openSummary);
+$('#closeSummary').addEventListener('click', closeSummary);
+$('#reviewBtn').addEventListener('click', () => { closeSummary(); $('#practice').scrollIntoView(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeSummary(); });
+$('#resetAll').addEventListener('click', () => {
+  if(!confirm('Clear your saved scores on this device?')) return;
+  store.del('dr_q02w01_scores'); location.reload();
+});
+
+/* ---------- key ideas ---------- */
+const IDEAS = [
+  { tab:'1. Divine Revelation', title:'Revelation is complete in Jesus Christ',
+    pts:['Divine Revelation is <b>God\'s plan for us</b>: God makes Himself and His plan known to us.',
+         'It reached its absolute completion in the person of <b>Jesus Christ</b>, the Word of God (Hebrews 1:1–2).',
+         'There is <b>no new public revelation</b> after the death of the last Apostle. Private revelations (such as apparitions) do not add to the Gospel; at most they help people live it.'],
+    key:'Everything God wants to reveal for our salvation has been given in Christ.' },
+  { tab:'2. Dual authorship', title:'God and humans are both authors of Scripture',
+    pts:['<b>God</b> is the primary author who inspired the words.',
+         'The <b>human writers</b> are true authors who used their own skills, styles and research (for example, Luke investigated before writing his Gospel, Luke 1:1–4).',
+         'God did not dictate word for word, and the writers were not puppets. God worked in and through them, and Scripture teaches the truth God wanted for our salvation.'],
+    key:'Scripture has a divine author and true human authors, at the same time.' },
+  { tab:'3. Deposit of Faith', title:'Scripture and Tradition together',
+    pts:['<b>Sacred Scripture</b> is the speech of God as it is put down in writing.',
+         '<b>Sacred Tradition</b> is the living transmission of the Gospel in the Church (in teaching, worship and the life of believers).',
+         'Together they make up the <b>Deposit of Faith</b>. They flow from the same source, which is Christ.',
+         'Scripture is read <b>within the living Tradition</b>: we read it as the Church has always received and lived it.'],
+    key:'The Bible is not read alone. It is read within the life of the Church.' },
+  { tab:'4. The Magisterium', title:'The teaching authority of the Church',
+    pts:['The <b>Magisterium</b> is the teaching authority of the Church. It consists of the <b>Pope</b> and the <b>bishops in communion with him</b>.',
+         'Its role is to <b>guard and explain the Deposit of Faith</b> so we do not get confused.',
+         'It is not above God\'s Word. It serves the Word, and teaches only what has been handed on, with the help of the Holy Spirit.'],
+    key:'God does not leave us to guess: He gives the Church teachers to protect and explain His truth.' }
+];
+(function(){
+  const tabs = $('#stageTabs'), panel = $('#stagePanel');
+  function show(i){
+    $$('.tab', tabs).forEach((b,j) => b.setAttribute('aria-selected', j===i));
+    const s = IDEAS[i];
+    panel.innerHTML = '';
+    panel.append(h('h3', {}, s.title), h('ul', {}, s.pts.map(p => h('li', {html:p}))), h('div', {class:'callout'}, h('strong', {}, 'Key idea: '), s.key));
+  }
+  IDEAS.forEach((s,i) => tabs.append(h('button', {class:'tab', role:'tab', type:'button', 'aria-selected':'false', onclick:()=>show(i)}, s.tab)));
+  show(0);
+})();
+
+/* ---------- vocabulary cards ---------- */
+const VOCAB = [
+  ['Divine Revelation','God\'s plan for us: God making Himself and His plan known. It reached its completion in Jesus Christ.'],
+  ['Dual authorship','God is the primary author of Scripture, and the human writers are true authors using their own skills and styles.'],
+  ['Sacred Scripture','The speech of God as it is put down in writing.'],
+  ['Sacred Tradition','The living transmission of the Gospel in the Church.'],
+  ['Deposit of Faith','Sacred Scripture and Sacred Tradition together, entrusted to the Church.'],
+  ['Magisterium','The teaching authority of the Church: the Pope and the bishops in union with him.'],
+  ['Communion','Being united with the Pope. Bishops in communion with the Pope share in the Magisterium.']
+];
+VOCAB.forEach(([t,d]) => {
+  const b = h('button', {class:'flip', type:'button', 'aria-pressed':'false'},
+    h('div', {class:'front'}, t), h('div', {class:'hint'}, 'Tap to see the meaning'), h('div', {class:'back'}, d));
+  b.addEventListener('click', () => { const on = b.classList.toggle('on'); b.setAttribute('aria-pressed', on); });
+  $('#flips').append(b);
+});
+
+/* ---------- worked examples ---------- */
+const EXAMPLES = [
+  { title:'Example 1: The Founder\'s Letter',
+    problem:'A founder leaves a letter. Years later, people disagree about what it means. Who decides, and how does this compare to the Church?',
+    steps:[
+      ['Start with the text.','The letter is the written message. Everyone can read the words, but the same words can be read in different ways. In the Church, the written message is <b>Sacred Scripture</b>.'],
+      ['Add the context.','To understand a letter, we ask what the founder intended and how the first readers understood it. In the Church, this is <b>Sacred Tradition</b>: how the Gospel has been lived and handed on from the Apostles.'],
+      ['Find the interpreter.','When people disagree, someone with recognized authority must say what the text really means. In the Church this is the <b>Magisterium</b>: the Pope and the bishops in union with him.'],
+      ['Check the limits of the analogy.','A constitution is a human text. Christians also trust the guidance of the Holy Spirit, and the Magisterium serves the Word of God rather than standing above it.'],
+      ['Answer.','The founder\'s letter is like Scripture, the founder\'s intent is like Tradition, and the recognized interpreter is like the Magisterium. God hands on His truth in an <b>ordered</b> way so we are not left to guess.', true]
+    ]},
+  { title:'Example 2: How can God and humans both be authors?',
+    problem:'Explain how Scripture can have God as its author and also true human authors.',
+    steps:[
+      ['Claim: say both are true.','God is the primary author, and human writers are true authors too.'],
+      ['Evidence for God as author.','Scripture is inspired by God (2 Timothy 3:16). God moved the writers by the Holy Spirit (2 Peter 1:21).'],
+      ['Evidence for human authors.','Luke says he investigated everything carefully and wrote an orderly account (Luke 1:3). Writers used their own skills, vocabulary and styles, such as history, poetry, letters and stories.'],
+      ['Explain how they fit together.','It is not dictation. God worked in and through the human writers, so what they wrote is truly their words and truly God\'s Word.'],
+      ['Answer.','<i>"God is the primary author who inspired the words, and the human writers are true authors who used their own skills and styles. Both are authors at the same time, because God worked through them."</i>', true]
+    ]},
+  { title:'Example 3: Is Revelation complete?',
+    problem:'A person says: "I had a vision that adds a new truth to the Gospel." Is that part of Divine Revelation?',
+    steps:[
+      ['Recall the claim of the Church.','Revelation reached its completion in Jesus Christ. God\'s final word to us is His Son (Hebrews 1:1–2).'],
+      ['Ask what "public revelation" means.','It is the Revelation meant for the whole Church for all time. It ended with the death of the last Apostle.'],
+      ['Compare with private revelation.','Some people receive private revelations (for example, apparitions). The Church may approve them as safe to believe, but they never add to the Deposit of Faith. They can only help people live the Gospel more fully in their time.'],
+      ['Apply to the claim.','A "new truth" added to the Gospel would claim to complete what Christ left unfinished. That contradicts the completeness of Revelation in Him.'],
+      ['Answer.','No. It cannot be added to the Deposit of Faith. Revelation is <b>complete in Jesus Christ</b>, and the Church\'s task is to understand it more deeply, not to add to it.', true]
+    ]},
+  { title:'Example 4: Build a concept map',
+    problem:'Build a concept map with these three ideas: Revelation, Scripture and Tradition, Magisterium.',
+    steps:[
+      ['Put the biggest idea in the center.','<b>Divine Revelation</b> is the root: God making Himself known, complete in Jesus Christ.'],
+      ['Add the second idea.','Revelation is handed on through <b>Sacred Scripture</b> and <b>Sacred Tradition</b>, which together form the Deposit of Faith.'],
+      ['Add the third idea.','The Deposit of Faith is guarded and explained by the <b>Magisterium</b> (Pope and bishops in union with him).'],
+      ['Label the arrows with linking words.','"is handed on through", "together form", "is guarded and explained by".'],
+      ['Check with the three criteria.','<b>Completeness</b>: are all three ideas included? <b>Accuracy</b>: are the links correct? <b>Application</b>: did I add an example (for instance, a Gospel for Scripture, the Creed for Tradition, a bishop teaching for the Magisterium)?'],
+      ['Result.','<div class="cmap"><div class="n root">Divine Revelation (complete in Christ)</div><div class="lnk">is handed on through</div><div class="row2"><div class="n">Sacred Scripture</div><div class="n">Sacred Tradition</div></div><div class="lnk">together form the Deposit of Faith, guarded and explained by</div><div class="n">The Magisterium (Pope and bishops in union with him)</div></div>', true]
+    ]},
+  { title:'Example 5: Reading Scripture within Tradition',
+    problem:'A student reads one verse alone and concludes it means something the Church has never taught. What should the student do?',
+    steps:[
+      ['Notice the risk.','A single verse can be misread when taken alone. Even in the New Testament, some people twisted hard-to-understand passages (2 Peter 3:16).'],
+      ['Read the verse in context.','Read the passages before and after it, and ask what kind of writing it is (history, poetry, letter, story).'],
+      ['Read it with the whole Bible.','Scripture is one story. A verse should not be set against the rest of Scripture.'],
+      ['Read it within the living Tradition.','Ask how the Church has understood and lived the passage since the time of the Apostles.'],
+      ['Ask for guidance.','Like the official in Acts 8:30–31 who needed someone to guide him, ask a teacher, a priest or the Catechism, which presents the teaching of the Magisterium.'],
+      ['Answer.','The student should read the verse in context, with the whole Bible and the living Tradition, and ask for guidance rather than decide alone.', true]
+    ]},
+  { title:'Example 6: Who makes up the Magisterium?',
+    problem:'Who makes up the Magisterium of the Church? <br>A) All baptized Christians &nbsp; B) The Pope and the bishops in union with him &nbsp; C) Only the priests in a local parish',
+    steps:[
+      ['Recall the definition.','The Magisterium is the teaching authority of the Church.'],
+      ['Ask who holds that teaching authority.','Jesus gave the Apostles authority to teach. Their successors are the bishops, with the Pope, the successor of Saint Peter, as head.'],
+      ['Test option A.','All baptized Christians share in living and witnessing to the faith, but they do not make up the teaching authority.'],
+      ['Test option C.','Parish priests help teach and serve, but they are not the Magisterium on their own. The word "only" also makes the option too narrow.'],
+      ['Test option B.','The Pope and the bishops <b>in communion</b> (united) with him match the definition.'],
+      ['Answer.','<b>B.</b> The Magisterium is made up of the Pope and the bishops in union with him.', true]
+    ]}
+];
+EXAMPLES.forEach(ex => {
+  const list = h('ol', {class:'steps'});
+  const items = ex.steps.map(([t,b,fin]) => {
+    const li = h('li', {class:'step' + (fin?' final':'')}, h('b',{class:'t'}, t), h('span',{html:b}));
+    list.append(li); return li;
+  });
+  let n = 0;
+  const next = h('button', {class:'btn', type:'button'}, 'Show next step');
+  const all = h('button', {class:'btn ghost', type:'button'}, 'Show all');
+  const reset = h('button', {class:'btn ghost', type:'button'}, 'Hide steps');
+  const status = h('span', {class:'ref', 'aria-live':'polite'}, '');
+  function paint(){
+    items.forEach((li,i) => li.classList.toggle('show', i<n));
+    next.disabled = n>=items.length;
+    status.textContent = n + ' of ' + items.length + ' steps shown';
+  }
+  next.addEventListener('click', () => { if(n<items.length) n++; paint(); items[n-1].scrollIntoView({block:'nearest', behavior:'smooth'}); });
+  all.addEventListener('click', () => { n=items.length; paint(); });
+  reset.addEventListener('click', () => { n=0; paint(); });
+  paint();
+  $('#exampleList').append(h('div', {class:'card'},
+    h('h3', {}, ex.title),
+    h('div', {class:'problem', html:'<b>Problem:</b> ' + ex.problem}),
+    h('div', {class:'row', style:'margin-top:12px'}, next, all, reset, status),
+    list));
+});
+
+/* ---------- multiple-choice quiz engine ---------- */
+function mountQuiz(id, intro, questions){
+  const mount = $('#'+id+' .mount');
+  function render(){
+    mount.innerHTML = '';
+    let answered = 0, correct = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = h('button', {class:'btn ghost', type:'button', style:'display:none'}, 'Try again');
+    again.addEventListener('click', render);
+    function paintSummary(){
+      if(answered<questions.length){ summary.textContent = 'Answered ' + answered + ' of ' + questions.length; return; }
+      summary.textContent = 'Score: ' + correct + ' / ' + questions.length + (correct===questions.length ? ' – perfect!' : correct/questions.length>=.8 ? ' – secure (80% or higher).' : ' – review the explanations and try again.');
+      again.style.display = '';
+      record(id, correct, questions.length);
+    }
+    if(intro) mount.append(h('p', {html:intro}));
+    questions.forEach((q,qi) => {
+      const order = shuffle(q.o.map((t,i) => ({t, ok:i===q.a})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const btns = order.map(o => {
+        const b = h('button', {class:'opt', type:'button'}, o.t);
+        b.addEventListener('click', () => {
+          if(b.disabled) return;
+          answered++;
+          btns.forEach(x => x.disabled = true);
+          if(o.ok){ correct++; b.classList.add('good'); feedback(fb,'good','✓ Correct. ' + q.e); }
+          else {
+            b.classList.add('bad','shake');
+            btns[order.findIndex(x=>x.ok)].classList.add('good');
+            feedback(fb,'bad','✗ Not quite. ' + q.e);
+          }
+          paintSummary();
+        });
+        return b;
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, (qi+1) + '. ' + q.q), btns, fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  }
+  render();
+}
+
+mountQuiz('act-quiz', 'Twelve questions on the whole topic. Aim for 80% or higher.', [
+  { q:'What is Divine Revelation?', o:['God\'s plan for us: God making Himself and His plan known','A new message given to each generation','A book written only by the Apostles','The teaching of the local parish'], a:0, e:'Revelation is God making Himself known to us.' },
+  { q:'In whom did Divine Revelation reach its completion?', o:['Jesus Christ','Moses','The last Apostle','The Pope'], a:0, e:'Jesus is God\'s final Word to us (Hebrews 1:1–2).' },
+  { q:'What does the Church teach about new public revelation after the last Apostle?', o:['There is none','There is a new one in each century','It is given to each Pope','It is found only in private visions'], a:0, e:'Public Revelation is complete. Private revelations never add to it.' },
+  { q:'Who is the primary author of Scripture?', o:['God','Moses','The Pope','The early bishops'], a:0, e:'God inspired the words of Scripture.' },
+  { q:'What is true about the human writers of Scripture?', o:['They are true authors who used their own skills and styles','They only copied word for word what God dictated','They did not understand what they wrote','They were all priests'], a:0, e:'God worked through the human writers, who used their own abilities.' },
+  { q:'What is Sacred Scripture?', o:['The speech of God as it is put down in writing','The traditions of one family','A history of the Church only','The decisions of the bishops'], a:0, e:'Scripture is God\'s Word put down in writing.' },
+  { q:'What is Sacred Tradition?', o:['The living transmission of the Gospel in the Church','Old customs that never change','A list of local feast days','Private opinions of theologians'], a:0, e:'Tradition is the Gospel handed on in the living Church.' },
+  { q:'What makes up the Deposit of Faith?', o:['Sacred Scripture and Sacred Tradition together','Only the New Testament','Only the Catechism','The writings of the saints only'], a:0, e:'Both flow from the same source: Christ.' },
+  { q:'What is the Magisterium?', o:['The teaching authority of the Church','The Church\'s library','A group of Bible translators','The Vatican\'s choir'], a:0, e:'The Magisterium teaches with authority in the name of Christ.' },
+  { q:'Who makes up the Magisterium?', o:['The Pope and the bishops in union with him','All baptized Christians','Only the priests in a local parish','Any teacher of religion'], a:0, e:'Bishops are united ("in communion") with the Pope.' },
+  { q:'What is the role of the Magisterium?', o:['To guard and explain the Deposit of Faith so we do not get confused','To add new teachings to Revelation','To replace Scripture','To rank the saints'], a:0, e:'It serves God\'s Word by guarding and explaining it.' },
+  { q:'How does the virtue of Order connect to Divine Revelation?', o:['God hands on His truth in an ordered way and does not leave us to guess','Order means the Church never changes anything','Order means each person decides what is true','Order only applies to school rules'], a:0, e:'God is a God of order, not confusion (1 Corinthians 14:33).' }
+]);
+
+mountQuiz('act-analogy', 'The class used a national constitution to compare how God\'s Word is handed on.', [
+  { q:'In the analogy, the written text of a national constitution is like…', o:['Sacred Scripture','Sacred Tradition','The Magisterium','A private revelation'], a:0, e:'Both are the written text.' },
+  { q:'The Founding Fathers\' intent is like…', o:['Sacred Tradition','Sacred Scripture','The Supreme Court','The Pope\'s title'], a:0, e:'Context and intent correspond to how the message was received and lived: Tradition.' },
+  { q:'The Supreme Court is like…', o:['The Magisterium','Sacred Scripture','Sacred Tradition','The Deposit of Faith'], a:0, e:'The interpreter corresponds to the Magisterium.' },
+  { q:'Why is this analogy limited?', o:['Christians also trust the guidance of the Holy Spirit; the Church is more than a human institution','Because the Church has no teaching authority','Because Scripture is not a written text','Because Tradition is only an opinion'], a:0, e:'The Holy Spirit guides the Church, which a human court cannot claim.' },
+  { q:'Why does a constitution need a recognized interpreter?', o:['To settle disagreements so the text is not read in conflicting ways','To replace the text','To make the text shorter','To hide the text from the public'], a:0, e:'The Magisterium plays a similar role for God\'s Word, so we are not left in confusion.' },
+  { q:'In "The Founder\'s Letter," who decides what the message means?', o:['A recognized interpreter reading the letter in light of the founder\'s intent','Whoever speaks the loudest','Each reader alone','The newest reader'], a:0, e:'Likewise, the Magisterium reads Scripture in light of Tradition.' }
+]);
+
+mountQuiz('act-apply', 'Use what you learned in real situations.', [
+  { q:'A friend asks: "Who decides what the Bible really means?" What is the best answer?', o:['The Church, through the Magisterium, reads Scripture within Tradition with the Holy Spirit\'s guidance','Whoever reads it most often','Each person decides alone','The newest translation'], a:0, e:'This is the answer the class built: Scripture, Tradition and the Magisterium work together.' },
+  { q:'Someone says a new vision "completes" what Jesus left unfinished. What do you say?', o:['Revelation is already complete in Jesus Christ; private revelations do not add to it','That is possible, since Revelation is still being added','Only the Pope can add to Revelation','Visions are always false'], a:0, e:'The Church does not expect new public revelation. Private revelations may help us live the Gospel but do not add to it.' },
+  { q:'Luke wrote that he investigated carefully and wrote an orderly account (Luke 1:3). What does this show?', o:['Human authors used their own research and skills while being inspired','Luke did not write his Gospel','God dictated each word, so Luke did nothing','Luke added to Revelation'], a:0, e:'This shows dual authorship and the virtue of Order.' },
+  { q:'A student reads one verse alone and thinks it contradicts Church teaching. What is the best step?', o:['Read it in context, with the whole Bible and Tradition, and ask a teacher, priest or the Catechism','Ignore the rest of the Bible','Decide that the Church is wrong','Post it online as a new discovery'], a:0, e:'Scripture is read within the living Tradition, with guidance.' },
+  { q:'Which is an example of Sacred Tradition at work?', o:['The Church handing on the faith in the Creed and in worship','A person inventing a new belief','Reading a novel','Drawing a map'], a:0, e:'Tradition is the living transmission of the Gospel in the Church.' },
+  { q:'Why does the Church have a Magisterium?', o:['To guard and explain the Deposit of Faith so we do not get confused','To create new revelation','To compete with Scripture','To avoid reading the Bible'], a:0, e:'God does not leave us to guess about His truth.' }
+]);
+
+/* ---------- sequence engine ---------- */
+function mountSequence(id, intro, items){
+  const mount = $('#'+id+' .mount');
+  function render(){
+    mount.innerHTML = '';
+    let next = 0, mistakes = 0;
+    const slots = items.map((_,i) => h('div', {class:'slot' + (i===0?' next':'')}, h('small', {}, 'Step ' + (i+1)), h('span', {}, '?')));
+    const fb = h('div', {class:'fb', 'aria-live':'polite'});
+    let pool = shuffle(items.map((it,i) => ({...it, i})));
+    while(items.length>1 && pool.every((p,k) => p.i===k)) pool = shuffle(pool);
+    const poolEl = h('div', {class:'pool'});
+    const again = h('button', {class:'btn ghost', type:'button', style:'display:none'}, 'Try again');
+    again.addEventListener('click', render);
+    pool.forEach(p => {
+      const b = h('button', {class:'opt', type:'button'}, p.t);
+      b.addEventListener('click', () => {
+        if(b.disabled) return;
+        if(p.i===next){
+          b.disabled = true; b.style.display='none';
+          slots[next].classList.remove('next'); slots[next].classList.add('filled');
+          slots[next].lastChild.textContent = p.t;
+          feedback(fb,'good','✓ Yes! ' + p.why);
+          next++;
+          if(next<items.length) slots[next].classList.add('next');
+          else {
+            feedback(fb,'good','🎉 Complete! ' + (mistakes===0 ? 'No mistakes.' : mistakes + ' mistake' + (mistakes>1?'s':'') + ' along the way. Try again to get it without hints.') + ' ' + p.why);
+            again.style.display=''; record(id, Math.max(0, items.length-mistakes), items.length);
+          }
+        } else {
+          mistakes++;
+          b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'), 600);
+          feedback(fb,'bad','Not yet. Hint for step ' + (next+1) + ': ' + items[next].hint);
+        }
+      });
+      poolEl.append(b);
+    });
+    mount.append(h('p', {}, intro), h('div', {class:'slots'}, slots), h('p', {class:'ref'}, 'Tap the step that belongs in the next empty box.'), poolEl, fb, h('div', {class:'row', style:'margin-top:10px'}, again));
+  }
+  render();
+}
+mountSequence('act-seq', 'God hands on His truth in an ordered way. Put the steps in order.', [
+  { t:'God reveals Himself fully in Jesus Christ', hint:'Everything starts with God making Himself known, completed in His Son.', why:'Revelation is complete in Jesus Christ.' },
+  { t:'Jesus entrusts the Gospel to the Apostles', hint:'Christ gives the message to the people He chose to send out.', why:'The Apostles received the Gospel from Christ.' },
+  { t:'The Apostles hand it on by preaching (Tradition) and by writing (Scripture)', hint:'The Apostles pass on the message in two connected ways.', why:'Scripture and Tradition are the two ways the Gospel is handed on.' },
+  { t:'Scripture and Tradition together form the Deposit of Faith, entrusted to the Church', hint:'The two channels come together as one treasure.', why:'The Deposit of Faith belongs to the whole Church.' },
+  { t:'The Magisterium guards and explains the Deposit of Faith', hint:'Last, someone must protect and explain what has been entrusted.', why:'The Pope and bishops in union with him serve God\'s Word so we are not confused.' }
+]);
+
+/* ---------- match engine ---------- */
+function mountMatch(id, intro, pairs){
+  const mount=$('#'+id+' .mount');
+  function render(){
+    mount.innerHTML='';
+    let sel=null, matched=0, mistakes=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    const L=pairs.map((p,i)=>h('button',{class:'opt',type:'button','data-i':i},p[0]));
+    const R=shuffle(pairs.map((p,i)=>({i,t:p[1]}))).map(p=>h('button',{class:'opt',type:'button','data-i':p.i},p.t));
+    L.forEach(b=>b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      L.forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); sel=b;
+      feedback(fb,'info','Now choose the matching meaning on the right.');
+    }));
+    R.forEach(b=>b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      if(!sel){ feedback(fb,'info','First tap a term on the left.'); return; }
+      if(sel.dataset.i===b.dataset.i){
+        sel.classList.remove('sel'); sel.classList.add('done'); b.classList.add('done'); sel=null; matched++;
+        feedback(fb,'good','✓ Match!');
+        if(matched===pairs.length){
+          feedback(fb,'good','🎉 All matched' + (mistakes? ' with ' + mistakes + ' miss' + (mistakes>1?'es':'') : ' with no misses') + '.');
+          again.style.display=''; record(id, Math.max(0, pairs.length-mistakes), pairs.length);
+        }
+      } else {
+        mistakes++; b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'),600);
+        feedback(fb,'bad','Not that one. Re-read the term and try another meaning.');
+      }
+    }));
+    mount.append(h('p',{},intro),h('div',{class:'match'},h('div',{},L),h('div',{},R)),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  }
+  render();
+}
+mountMatch('act-match','Tap a term, then tap its meaning.',[
+  ['Divine Revelation','God\'s plan for us, complete in Jesus Christ'],
+  ['Sacred Scripture','The speech of God as it is put down in writing'],
+  ['Sacred Tradition','The living transmission of the Gospel in the Church'],
+  ['Deposit of Faith','Scripture and Tradition together, entrusted to the Church'],
+  ['Magisterium','The Pope and the bishops in union with him, who teach with authority'],
+  ['Dual authorship','God is the primary author and humans are true authors']
+]);
+
+/* ---------- sort engine ---------- */
+function mountSort(id, intro, choices, cards){
+  const mount=$('#'+id+' .mount');
+  function render(){
+    mount.innerHTML='';
+    const deck=shuffle(cards); let i=0, right=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const card=h('div',{class:'sortcard'});
+    const btns=choices.map(c=>h('button',{class:'btn',type:'button'},c.label));
+    const count=h('p',{class:'ref'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    function paint(){
+      if(i>=deck.length){ card.textContent='Finished!'; btns.forEach(b=>b.disabled=true); count.textContent=''; return; }
+      card.textContent=deck[i][0]; count.textContent='Card ' + (i+1) + ' of ' + deck.length;
+    }
+    function pick(k){
+      if(i>=deck.length) return;
+      const c=deck[i]; const ok=c[1]===k;
+      if(ok) right++;
+      const msg=(ok?'✓ Correct. ':'✗ Not quite. ') + c[2];
+      i++;
+      if(i>=deck.length){
+        paint();
+        feedback(fb, right===deck.length?'good':'info', msg + ' — Score: ' + right + ' / ' + deck.length + '.');
+        again.style.display=''; record(id, right, deck.length);
+      } else { feedback(fb, ok?'good':'bad', msg); paint(); }
+    }
+    btns.forEach((b,j)=>b.addEventListener('click',()=>pick(choices[j].k)));
+    mount.append(h('p',{html:intro}),count,card,h('div',{class:'row'},btns),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+    paint();
+  }
+  render();
+}
+mountSort('act-sort','Decide which one each card describes: <b>Sacred Scripture</b>, <b>Sacred Tradition</b>, or the <b>Magisterium</b>.',
+  [{k:'S',label:'📖 Sacred Scripture'},{k:'T',label:'🕊️ Sacred Tradition'},{k:'M',label:'⛪ Magisterium'}],
+  [
+    ['The Book of Exodus','S','Exodus is part of the written Word of God, Sacred Scripture.'],
+    ['The Pope and bishops explain what the Church teaches','M','Explaining the faith with authority is the work of the Magisterium.'],
+    ['The Creed handed on and prayed in worship through the centuries','T','The Creed and worship show the faith being handed on in the living Church: Tradition.'],
+    ['The speech of God as it is put down in writing','S','This is the definition of Sacred Scripture.'],
+    ['Guarding and explaining the Deposit of Faith so we do not get confused','M','This is the role of the Magisterium.'],
+    ['The living transmission of the Gospel in the Church','T','This is the definition of Sacred Tradition.'],
+    ['A bishop in union with the Pope answers a question about what the Church believes','M','Bishops in communion with the Pope share in the Magisterium.'],
+    ['The Psalms','S','The Psalms are books of the Bible, Sacred Scripture.'],
+    ['The way the Apostles\' teaching has been lived and handed down in the Church\'s life','T','Handing on the Apostles\' teaching in the Church\'s life is Tradition.']
+  ]);
+mountSort('act-tf','Is each statement true or false?',
+  [{k:'T',label:'✅ True'},{k:'F',label:'❌ False'}],
+  [
+    ['Revelation reached its completion in Jesus Christ.','T','Jesus is God\'s final Word to us (Hebrews 1:1–2).'],
+    ['New public revelation is still being added today.','F','Public Revelation ended with the death of the last Apostle.'],
+    ['God is the primary author of Scripture.','T','God inspired the words of Scripture.'],
+    ['The human writers were only secretaries who copied word for word, without using their own skills.','F','They were true authors who used their own skills and styles.'],
+    ['Human authors of Scripture used their own skills and styles.','T','Luke, for example, researched and wrote an orderly account.'],
+    ['Scripture and Tradition together make up the Deposit of Faith.','T','Both flow from the same source: Christ.'],
+    ['Any individual can decide alone what the Bible means for the whole Church.','F','Scripture is read within the living Tradition, with the guidance of the Magisterium.'],
+    ['The Magisterium is above the Word of God.','F','The Magisterium serves the Word of God; it teaches only what has been handed on.']
+  ]);
+
+/* ---------- cloze engine ---------- */
+function mountCloze(id, intro, S){
+  const mount=$('#'+id+' .mount');
+  function render(){
+    mount.innerHTML='';
+    const ok=new Set(); let wrong=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    const box=h('div',{class:'cloze'});
+    S.forEach((s,k)=>{
+      const sel=h('select',{'aria-label':'Choose the word for sentence ' + (k+1)}, h('option',{value:''},'— choose —'), s[1].map((o,j)=>h('option',{value:j},o)));
+      sel.addEventListener('change',()=>{
+        if(sel.value===''){ sel.className=''; return; }
+        if(+sel.value===s[2]){
+          sel.className='good'; sel.disabled=true; ok.add(k);
+          feedback(fb,'good','✓ ' + s[4]);
+          if(ok.size===S.length){ feedback(fb,'good','🎉 All sentences complete!'); again.style.display=''; record(id, Math.max(0, S.length-wrong), S.length); }
+        } else {
+          wrong++; sel.className='bad shake'; setTimeout(()=>sel.classList.remove('shake'),600);
+          feedback(fb,'bad','Not quite – try another word. Think about what you learned in class.');
+        }
+      });
+      box.append(h('p',{}, s[0], sel, s[3]));
+    });
+    mount.append(h('p',{},intro),box,fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  }
+  render();
+}
+mountCloze('act-cloze','Choose the word that completes each sentence.',[
+  ['Divine Revelation reached its completion in the person of ',['Jesus Christ','Moses','the last Apostle'],0,'.','Jesus is God\'s final Word to us.'],
+  ['God is the ',['primary','hidden','silent'],0,' author of Scripture, and the human writers are true authors too.','God inspired the words, and the human writers used their own skills and styles.'],
+  ['Sacred Scripture and Sacred ',['Tradition','Opinion','History'],0,' together make up the Deposit of Faith.','Both flow from the same source: Christ.'],
+  ['The Magisterium consists of the Pope and the ',['bishops','parish volunteers','Bible translators'],0,' in union with him.','Bishops in communion with the Pope share the teaching authority.'],
+  ['The role of the Magisterium is to guard and ',['explain','replace','hide'],0,' the Deposit of Faith.','It serves God\'s Word by guarding and explaining it.'],
+  ['God is a God of ',['order','chance','silence'],0,', not confusion.','God hands on His truth in an ordered way so we do not have to guess.']
+]);
+
+paintProgress();
+})();
+</script>
+</body>
+</html>
