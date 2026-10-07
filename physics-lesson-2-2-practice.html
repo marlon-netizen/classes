@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physics II – Lesson 2.2 Practice Exercises | Lincoln International Academy</title>
+<meta name="description" content="Interactive practice for Lesson 2.2: Acceleration. Three attempts per question, instant feedback, and a results page with your name.">
+
+<style>
+:root{
+  --bg:#f3f0e9; --surface:#fffdf9; --surface-2:#f8f5ee; --ink:#1e2937; --muted:#5a6575;
+  --line:#ddd6c7; --primary:#1f3a5f; --primary-ink:#ffffff; --accent:#2b7a76; --accent-soft:#e1efed;
+  --blue-soft:#e6edf6; --warm:#b4763a; --warm-soft:#f6ebdb; --good:#2c7a57; --good-soft:#e1f1e8;
+  --bad:#a94a3f; --bad-soft:#f6e4e1; --grid:#c9c5ba; --axis:#1e2937;
+  --shadow:0 1px 2px rgba(30,41,55,.06),0 4px 14px rgba(30,41,55,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+    --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+    --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+    --bad:#e08a7d; --bad-soft:#331e1c; --grid:#334150; --axis:#cfd6e0;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+  --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+  --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+  --bad:#e08a7d; --bad-soft:#331e1c; --grid:#334150; --axis:#cfd6e0;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.5rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+
+header.top{background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:Georgia,serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:#d3b48a;margin-bottom:2px}
+.meta{display:flex;gap:26px;flex-wrap:wrap}
+.meta div{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#aab7ca}
+.meta b{display:block;font-size:1.05rem;text-transform:none;letter-spacing:0;color:#f3f0e9;font-weight:600}
+.lessonbar{background:var(--surface);border-bottom:1px solid var(--line)}
+.lessonbar .wrap{padding-top:14px;padding-bottom:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 20px;align-items:center}
+.lessonbar h1{font-size:clamp(1.15rem,2.6vw,1.45rem);margin:0}
+.lessonbar small{color:var(--muted)}
+.overall{display:flex;align-items:center;gap:12px;font-size:.88rem;color:var(--muted);flex-wrap:wrap}
+.bar{width:140px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:8px}
+nav.tabs button{appearance:none;border:0;background:none;font:inherit;font-weight:600;color:var(--muted);padding:10px 16px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;border-radius:8px 8px 0 0}
+nav.tabs button:hover{color:var(--ink);background:var(--surface-2)}
+nav.tabs button[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--warm)}
+
+main{padding:26px 0 60px}
+section.panel{display:none}
+section.panel.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card>h3:first-child,.card>h2:first-child{margin-top:0}
+.callout{border-left:4px solid var(--primary);background:var(--blue-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.callout b.t{display:block;margin-bottom:4px;font-family:Georgia,serif;font-size:1.05rem}
+.callout ul{margin:.3em 0 0;padding-left:1.2em}
+.eq{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.15rem;text-align:center;padding:8px 6px;overflow-x:auto}
+.math{font-family:"Cambria Math",Cambria,Georgia,serif;white-space:nowrap}
+.math i{font-style:italic}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.15;font-size:.95em}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .2em}
+.frac>span:last-child{padding:0 .2em}
+.sub-h{font-family:Georgia,serif;font-weight:700;margin:22px 0 8px;font-size:1.1rem}
+
+.q{padding:14px 0;border-top:1px solid var(--line)}
+.q:first-of-type{border-top:0}
+.q>p:first-child{margin-bottom:.5em}
+.item-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:4px 20px}
+.q ol,.q ul{margin:.2em 0 .6em;padding-left:1.4em}
+
+/* graphs */
+.graphbox{margin:12px auto 6px;max-width:560px}
+.graphbox svg{width:100%;height:auto;display:block}
+.graphbox figcaption{font-style:italic;color:var(--muted);text-align:center;font-size:.9rem;margin-top:4px}
+svg .g-grid{stroke:var(--grid);stroke-width:1}
+svg .g-axis{stroke:var(--axis);stroke-width:2;fill:none}
+svg .g-tick{fill:var(--muted);font:12px system-ui,sans-serif}
+svg .g-title{fill:var(--ink);font:700 17px system-ui,sans-serif}
+svg .g-lab{fill:var(--ink);font:italic 14px system-ui,sans-serif}
+svg .g-seg{font:600 14px system-ui,sans-serif}
+
+/* data table */
+.tbl{width:100%;border-collapse:collapse;margin:12px 0}
+.tbl th,.tbl td{border:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+.tbl thead th{background:var(--accent-soft)}
+.tbl td:first-child{white-space:nowrap}
+@media (max-width:640px){.tbl{display:block;overflow-x:auto}}
+
+/* interactive items */
+.item{margin:8px 0}
+.item .lbl{font-weight:600;margin-bottom:4px}
+.item .row{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}
+.item input[type=text],.item select,.item textarea{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.item input[type=text]{width:150px}
+.item select{max-width:100%}
+.item textarea{width:100%;min-height:110px;resize:vertical}
+.item .unit{font-family:"Cambria Math",Cambria,Georgia,serif;color:var(--muted)}
+.item.ok input,.item.ok select,.item.ok textarea{border-color:var(--good);background:var(--good-soft)}
+.item.fail input,.item.fail select,.item.fail textarea{border-color:var(--bad);background:var(--bad-soft)}
+.item input:disabled,.item select:disabled,.item textarea:disabled{opacity:1;color:var(--ink)}
+.dots{display:inline-flex;gap:5px;align-items:center;margin-left:4px}
+.dots i{width:12px;height:12px;border-radius:50%;border:2px solid var(--line);background:transparent}
+.dots i.bad{background:var(--bad);border-color:var(--bad)}
+.dots i.good{background:var(--good);border-color:var(--good)}
+.dots span{font-size:.78rem;color:var(--muted);margin-left:4px}
+.fb{margin-top:6px;padding:8px 12px;border-radius:8px;font-size:.93rem;font-weight:600;display:none}
+.fb.show{display:block}
+.fb.good{background:var(--good-soft);color:var(--good)}
+.fb.bad{background:var(--bad-soft);color:var(--bad)}
+.fb.warn{background:var(--warm-soft);color:var(--warm)}
+.fb small{display:block;font-weight:400;color:var(--ink);margin-top:2px}
+
+button.btn{appearance:none;font:inherit;font-weight:600;font-size:.92rem;border-radius:8px;padding:8px 16px;cursor:pointer;border:1px solid var(--primary);background:var(--primary);color:var(--primary-ink);transition:filter .15s,transform .05s}
+button.btn:hover{filter:brightness(1.12)} button.btn:active{transform:translateY(1px)}
+button.btn.ghost{background:transparent;color:var(--primary)}
+button.btn.ghost:hover{background:var(--blue-soft);filter:none}
+button.btn.big{font-size:1.05rem;padding:11px 26px;background:var(--warm);border-color:var(--warm);color:#fff}
+button.btn[disabled]{opacity:.45;cursor:not-allowed}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:1px}
+
+.submitcard{text-align:center;padding:28px 22px}
+.submitcard p{color:var(--muted)}
+
+/* dialog */
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);padding:24px 26px;max-width:440px;width:calc(100% - 32px);box-shadow:0 20px 60px rgba(0,0,0,.35)}
+dialog::backdrop{background:rgba(10,15,25,.55)}
+dialog h3{margin-top:0}
+dialog input[type=text]{width:100%;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);margin:6px 0 4px}
+dialog .err{color:var(--bad);font-size:.88rem;min-height:1.2em}
+dialog .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:14px;flex-wrap:wrap}
+dialog .warnline{background:var(--warm-soft);color:var(--warm);padding:8px 12px;border-radius:8px;font-size:.9rem;margin:8px 0}
+
+/* results */
+#results{display:none}
+body.show-results #results{display:block}
+body.show-results #worksheet{display:none}
+.res-head{display:flex;flex-wrap:wrap;gap:16px 30px;justify-content:space-between;align-items:center}
+.res-head h2{margin:0;font-size:1.8rem}
+.res-head .sub{color:var(--muted)}
+.scorebox{text-align:center;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px 26px}
+.scorebox b{display:block;font-family:Georgia,serif;font-size:2.4rem;line-height:1.1}
+.scorebox span{color:var(--muted);font-size:.9rem}
+.resbar{height:12px;border-radius:99px;background:var(--line);overflow:hidden;margin:16px 0 4px}
+.resbar i{display:block;height:100%;background:var(--good)}
+.stats{display:flex;gap:10px 22px;flex-wrap:wrap;font-size:.92rem;color:var(--muted);margin-bottom:6px}
+.stats b{color:var(--ink)}
+table.res{width:100%;border-collapse:collapse;font-size:.95rem}
+table.res th,table.res td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.res th{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.tag{display:inline-block;font-size:.78rem;font-weight:700;padding:2px 9px;border-radius:99px;white-space:nowrap}
+.tag.ok{background:var(--good-soft);color:var(--good)}
+.tag.fail{background:var(--bad-soft);color:var(--bad)}
+.tag.none{background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
+.tag.prog{background:var(--warm-soft);color:var(--warm)}
+.written{white-space:pre-wrap;color:var(--ink);font-size:.9rem;background:var(--surface-2);border-radius:6px;padding:6px 8px;margin-top:4px}
+.res-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+
+@media print{
+  header.top .meta,nav.tabs,.res-actions,.lessonbar .overall{display:none!important}
+  body{background:#fff}
+  .card{box-shadow:none;break-inside:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Student Practice Page</div>
+      <div class="school">Lincoln International Academy</div>
+    </div>
+    <div class="meta">
+      <div>Class<b>Physics II</b></div>
+      <div>Teacher<b>Eduardo Vásquez</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="lessonbar">
+  <div class="wrap">
+    <div>
+      <h1>Lesson 2.2 · Practice Exercises</h1>
+      <small>Chapter 2 · Motion in One Dimension · <a href="physics-lesson-2-2.html">← Back to the Lesson 2.2 study page</a></small>
+    </div>
+    <div class="overall" aria-live="polite">
+      <span id="overallText">0 of 0 answers finished</span>
+      <div class="bar"><i id="overallBar"></i></div>
+      <button class="btn big" type="button" id="submitTop">SUBMIT</button>
+    </div>
+  </div>
+</div>
+
+<div id="worksheet">
+  <nav class="tabs" aria-label="Worksheets"><div class="wrap" id="tabs" role="tablist"></div></nav>
+  <main><div class="wrap" id="panels"></div></main>
+</div>
+
+<div id="results"><main><div class="wrap" id="resultsInner"></div></main></div>
+
+<dialog id="nameDialog">
+  <form method="dialog" id="nameForm" novalidate>
+    <h3>Submit your work</h3>
+    <div class="warnline" id="unansweredWarn" hidden></div>
+    <label for="studentName">Enter your full name to see your results:</label>
+    <input type="text" id="studentName" autocomplete="name" maxlength="80" placeholder="First and last name">
+    <div class="err" id="nameErr" role="alert"></div>
+    <div class="actions">
+      <button class="btn ghost" type="button" id="nameCancel">Keep working</button>
+      <button class="btn" type="submit">Show my results</button>
+    </div>
+  </form>
+</dialog>
+
+<script>
+(function(){
+'use strict';
+
+/* ---------- helpers ---------- */
+const $=(s,r=document)=>r.querySelector(s);
+const $$=(s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fr=(n,d)=>`<span class="frac"><span>${n}</span><span>${d}</span></span>`;
+const ms2='m/s<sup>2</sup>';
+const MAX=3;
+const KEY='lincoln-physics-2-2-practice-v1';
+
+let state={};
+try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+
+/* ---------- item definitions (answers never displayed) ---------- */
+const ITEMS={};
+const num=(id,ans,unit,hint,label,o={})=>{ ITEMS[id]=Object.assign({id,type:'num',ans,unit,hint,label},o); };
+const sel=(id,options,ans,hint,label)=>{ ITEMS[id]={id,type:'sel',options,ans,hint,label}; };
+const txt=(id,concepts,need,hint,label)=>{ ITEMS[id]={id,type:'txt',concepts,need,hint,label}; };
+const MOTION=['Speeding up','Slowing down','Constant velocity'];
+const YESNO=['Yes','No'];
+
+/* Activity 1 */
+num('a1_aA',2,ms2,'Slope = rise ÷ run. Use the velocities at the start and end of the segment.');
+num('a1_aB',0,ms2,'Is the velocity changing at all during this segment?');
+num('a1_aC',-2,ms2,'Use v<sub>f</sub> − v<sub>i</sub> over t<sub>f</sub> − t<sub>i</sub>. Pay attention to whether velocity rises or falls.');
+sel('a1_dA',MOTION,0,'Compare the velocity at the beginning and end of the segment.');
+sel('a1_dB',MOTION,2,'Compare the velocity at the beginning and end of the segment.');
+sel('a1_dC',MOTION,1,'Compare the velocity at the beginning and end of the segment.');
+num('a1_xA',16,'m','The area under segment A is a triangle: ½ × base × height.');
+num('a1_xB',32,'m','The area under a flat line is a rectangle: base × height.');
+num('a1_xC',16,'m','Use the area under the curve, or ½(v<sub>i</sub> + v<sub>f</sub>)Δt.');
+num('a1_xT',64,'m','Total displacement is the sum of all the segment displacements.');
+txt('a1_q5',[
+  /same (magnitude|size|amount|value|number)|equal|identical|both (are |have |had )?(2|two)|2 ?m\/s|magnitudes? (is|are) (the )?same|same rate|same acceleration/,
+  /opposite|negative|reverse|different (direction|sign)|positive.*negative|negative.*positive|one is (positive|negative)/,
+  /speed(s|ing)? up|slow(s|ing)? down|increas|decreas|gain|los(e|es|ing)|decelerat|faster|slower/
+],3,'Think about both the size of each slope and its sign. What does each sign say about the motion?');
+num('a1_aD',0,ms2,'Is the line flat or sloped?');
+num('a1_aE',0.8,ms2,'Slope = Δv ÷ Δt. Read v and t at each end of the segment from the graph.');
+num('a1_aF',1.2,ms2,'Slope = Δv ÷ Δt. Read v and t at each end of the segment from the graph.');
+num('a1_xD',20,'m','A flat line makes a rectangle: v × Δt.');
+num('a1_xE',30,'m','Use ½(v<sub>i</sub> + v<sub>f</sub>)Δt, or a rectangle plus a triangle.');
+num('a1_xF',55,'m','Use ½(v<sub>i</sub> + v<sub>f</sub>)Δt, or a rectangle plus a triangle.');
+num('a1_xT2',105,'m','Add the displacements of D, E, and F (t = 0 s to 15 s).');
+txt('a1_q9',[
+  /greater|larger|more|bigger|higher|exceed|105|not equal|different/,
+  /area|longer|more time|15 ?s|faster|higher (velocity|speed)|never (slow|decreas)|keeps? (speed|accelerat)|speeds? up|accelerat|bigger area|larger area/
+],2,'Compare the two totals, then compare the shapes of the graphs (time covered and how the area builds up).');
+txt('a1_q10',[
+  /below|cross|negative (velocity|values?)|under the (time )?axis|x-?axis|time axis|dips?|drops?/,
+  /opposite|backward|reverse|negative (direction|displacement)|back(wards)?|return|toward the start|other direction/
+],2,'Where would the line be relative to the time axis? What does the sign of velocity tell you about direction?');
+
+/* Practice problems: time and acceleration */
+num('p1',5.0,'s','Δt = (v<sub>f</sub> − v<sub>i</sub>) ÷ a. What is v<sub>i</sub> when starting from rest?');
+num('p2',5.0,'s','A “complete stop” means v<sub>f</sub> = 0. Watch the signs.');
+num('p3',0.06,ms2,'a = (v<sub>f</sub> − v<sub>i</sub>) ÷ Δt.');
+num('p4',-0.20,ms2,'Use Δv = v<sub>f</sub> − v<sub>i</sub>. Slowing down while moving forward gives a negative value.');
+num('p5',6.07,'s','Rearrange to Δt = (v<sub>f</sub> − v<sub>i</sub>) ÷ a.');
+num('p6a',4.6,'m/s','Use v<sub>f</sub> = v<sub>i</sub> + aΔt and keep the sign of a.');
+sel('p6b',YESNO,0,'Is your final velocity positive or negative?');
+txt('p7',[
+  /slow|decreas|reduc|dimin|less|drop|lower|smaller|losing|decelerat/
+],1,'Think about the direction of the acceleration compared with the direction of motion. What happens to the speed?');
+
+/* Displacement and final velocity */
+num('d1',20.7,'m','Use Equation 1: Δx = ½(v<sub>i</sub> + v<sub>f</sub>)Δt. What is v<sub>i</sub>?');
+num('d2',102,'m','Use Equation 1: Δx = ½(v<sub>i</sub> + v<sub>f</sub>)Δt.');
+num('d3',5.0,'s','Rearrange Equation 1 to solve for Δt.');
+num('d4',201.6,'m','Use Equation 3 with v<sub>i</sub> = 0 (the plane starts at rest).');
+num('d5',2880,'m','Convert minutes to seconds first, then use Equation 3.');
+num('d6a',4.0,'m/s','Use Equation 2 with v<sub>i</sub> = 0.');
+num('d6b',10,'m','Use Equation 1 or 3 with the values you have.');
+num('d7a',15.6,'m/s','Use Equation 2: v<sub>f</sub> = v<sub>i</sub> + aΔt.');
+num('d7b',86.4,'m','Use Equation 1 or 3 with the values you have.');
+num('d8a',3.85,'s','At a complete stop v<sub>f</sub> = 0. Rearrange Equation 2 for Δt.');
+num('d8b',48.1,'m','Use Equation 1 or 3 with the stopping time from part (a).');
+sel('d8c',['Yes, the student is correct','No, the student is not correct'],1,'Compare your stopping distance with 45 m.');
+
+/* Mastery challenge */
+num('m1a',8.36,'m/s','v<sub>f</sub> = v<sub>i</sub> + aΔt, starting from rest.');
+num('m1b',67.7,'m','Split the motion into two stages: the acceleration phase and the constant-velocity phase. How long does stage 2 last?');
+num('m2a',7.2,'s','The truck’s velocity is constant; the police car starts from rest. Use v<sub>f</sub> = v<sub>i</sub> + aΔt.');
+num('m2b',14.4,'s','Set the truck’s displacement (constant velocity) equal to the police car’s (uniform acceleration from rest).');
+num('m3a',21,'m','During the reaction time the velocity is constant.');
+num('m3b',77,'m','Total stopping distance = reaction distance + braking distance. For braking, use v<sub>f</sub><sup>2</sup> = v<sub>i</sub><sup>2</sup> + 2aΔx with v<sub>f</sub> = 0.');
+sel('m3c',YESNO,0,'Compare the total stopping distance with the distance to the obstacle.');
+txt('m4',[
+  /constant (acceleration|accel)|acceleration (is not|isn.?t|changes?|varies|vary|differs?)|not constant|different accelerations?|accelerations? (are|is) different|changing acceleration|only (valid|works?|applies|for)|one (single )?acceleration/,
+  /separate|split|break|divid|each (stage|part|phase|segment)|three (stage|part|phase|segment)|stages?|phases?|segments?|piece|one at a time/,
+  /add|sum|total|combin/
+],3,'Think about what must be true about acceleration for these equations to work, and how many different stages this motion has.');
+
+/* ---------- worksheet content ---------- */
+const slot=id=>`<div data-slot="${id}"></div>`;
+const S=(id,h)=>`<div class="q"><p>${h}</p>${slot(id)}</div>`;
+
+const SHEETS=[
+{
+  id:'s1', tab:'Activity 1 · Velocity-Time Graphs',
+  html:`
+<div class="card">
+  <h2>Activity 1: Velocity-Time Graph Analysis</h2>
+  <div class="callout"><b class="t">Key Concepts</b>
+    <ul>
+      <li><b>Slope</b>: The slope of a velocity-time graph represents the <b>average acceleration</b> (<span class="math"><i>a</i><sub>avg</sub> = ${fr('Δ<i>v</i>','Δ<i>t</i>')}</span>).</li>
+      <li><b>Area</b>: The area under the curve (between the line and the time axis) represents the <b>displacement</b> (<span class="math">Δ<i>x</i></span>).</li>
+      <li><b>Kinematic Equation</b>: You can also calculate displacement using <span class="math">Δ<i>x</i> = ½(<i>v</i><sub>i</sub> + <i>v</i><sub>f</sub>)Δ<i>t</i></span>.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Part 1: The Motion Graph</h3>
+  <p>Analyze the motion of a test vehicle represented in the graph below. The motion is divided into three distinct segments: <b>A</b>, <b>B</b>, and <b>C</b>.</p>
+  <figure class="graphbox" data-graph="g1"></figure>
+  <table class="tbl">
+    <thead><tr>
+      <th>Segment</th>
+      <th>Acceleration Analysis<br><span class="math" style="font-weight:400">Calculate the slope: <i>a</i> = ${fr('<i>v</i><sub>f</sub> − <i>v</i><sub>i</sub>','<i>t</i><sub>f</sub> − <i>t</i><sub>i</sub>')}</span></th>
+      <th>Motion Description<br><span style="font-weight:400">(Speeding up, slowing down, or constant velocity?)</span></th>
+    </tr></thead>
+    <tbody>
+      <tr><td><b>A</b><br>(0 s to 4 s)</td><td>${slot('a1_aA')}</td><td>${slot('a1_dA')}</td></tr>
+      <tr><td><b>B</b><br>(4 s to 8 s)</td><td>${slot('a1_aB')}</td><td>${slot('a1_dB')}</td></tr>
+      <tr><td><b>C</b><br>(8 s to 12 s)</td><td>${slot('a1_aC')}</td><td>${slot('a1_dC')}</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h3>Part 2: Displacement Calculation</h3>
+  <p>Calculate the displacement (<span class="math">Δ<i>x</i></span>) for each segment. You may use the area under the curve (geometric method) or the kinematic equation <span class="math">Δ<i>x</i> = ½(<i>v</i><sub>i</sub> + <i>v</i><sub>f</sub>)Δ<i>t</i></span>. Show your work in your notebook, then enter your answer.</p>
+  ${S('a1_xA','<b>1. Segment A Displacement:</b>')}
+  ${S('a1_xB','<b>2. Segment B Displacement:</b>')}
+  ${S('a1_xC','<b>3. Segment C Displacement:</b>')}
+  ${S('a1_xT','<b>4. Total Displacement:</b><br>Calculate the total displacement of the vehicle from <span class="math"><i>t</i> = 0 s</span> to <span class="math"><i>t</i> = 12 s</span>.')}
+  <div class="sub-h">Critical Thinking</div>
+  ${S('a1_q5','<b>5.</b> Compare the acceleration in Segment A to the acceleration in Segment C. How are they similar, and how are they different in terms of magnitude and direction?')}
+</div>
+
+<div class="card">
+  <h3>Part 3: A Second Motion Graph</h3>
+  <p>Vehicle 2 travels at a constant velocity, then speeds up, then speeds up at an even greater rate.</p>
+  <figure class="graphbox" data-graph="g2"></figure>
+  <div class="q"><p><b>6.</b> Calculate the acceleration for each segment D, E, and F (show the slope calculation for each).</p>
+    <div class="item-grid">${slot('a1_aD')}${slot('a1_aE')}${slot('a1_aF')}</div></div>
+  <div class="q"><p><b>7.</b> Calculate the displacement for each segment D, E, and F using the area under the curve.</p>
+    <div class="item-grid">${slot('a1_xD')}${slot('a1_xE')}${slot('a1_xF')}</div></div>
+  ${S('a1_xT2','<b>8.</b> What is the total displacement from <span class="math"><i>t</i> = 0 s</span> to <span class="math"><i>t</i> = 15 s</span>?')}
+  ${S('a1_q9','<b>9.</b> How does the total displacement of Vehicle 2 compare to the total displacement of the first vehicle (64 m)? Explain why the comparison makes sense given the shapes of the two graphs.')}
+  ${S('a1_q10','<b>10. Critical thinking:</b> Sketch or describe what a velocity-time graph would look like if the vehicle reversed direction during Segment F (i.e., velocity became negative). What would a negative area under the curve represent?')}
+</div>`,
+  labels:{a1_aA:'Segment A',a1_aB:'Segment B',a1_aC:'Segment C',a1_dA:'Segment A',a1_dB:'Segment B',a1_dC:'Segment C',
+          a1_aD:'Segment D',a1_aE:'Segment E',a1_aF:'Segment F',a1_xD:'Segment D',a1_xE:'Segment E',a1_xF:'Segment F'}
+},
+{
+  id:'s2', tab:'Time & Acceleration',
+  html:`
+<div class="card">
+  <h2>Calculating Time and Acceleration</h2>
+  <div class="callout"><b class="t">Key Equations</b>
+    <p>To solve for average acceleration (<span class="math"><i>a</i><sub>avg</sub></span>) or the time interval (<span class="math">Δ<i>t</i></span>), use the following relationships:</p>
+    <div class="eq"><i>a</i><sub>avg</sub> = ${fr('Δ<i>v</i>','Δ<i>t</i>')} = ${fr('<i>v</i><sub>f</sub> − <i>v</i><sub>i</sub>','Δ<i>t</i>')}</div>
+    <p>To find time, rearrange the equation:</p>
+    <div class="eq">Δ<i>t</i> = ${fr('<i>v</i><sub>f</sub> − <i>v</i><sub>i</sub>','<i>a</i><sub>avg</sub>')}</div>
+  </div>
+  <h4>Worked Example: Solving for Time</h4>
+  <p>A shuttle bus slows down with an average acceleration of <span class="math">−1.8 m/s<sup>2</sup></span>. How long does it take the bus to slow from <span class="math">9.0 m/s</span> to a complete stop?</p>
+  <p><b>1. Analyze the Givens:</b></p>
+  <ul>
+    <li>Initial velocity (<span class="math"><i>v</i><sub>i</sub></span>) = <span class="math">9.0 m/s</span></li>
+    <li>Final velocity (<span class="math"><i>v</i><sub>f</sub></span>) = <span class="math">0 m/s</span> (a “complete stop”)</li>
+    <li>Acceleration (<span class="math"><i>a</i><sub>avg</sub></span>) = <span class="math">−1.8 m/s<sup>2</sup></span></li>
+  </ul>
+  <p><b>2. Rearrange and Solve:</b> We need to isolate <span class="math">Δ<i>t</i></span>. By multiplying both sides by <span class="math">Δ<i>t</i></span> and dividing by <span class="math"><i>a</i><sub>avg</sub></span>, we get:</p>
+  <div class="eq">Δ<i>t</i> = ${fr('0 m/s − 9.0 m/s','−1.8 m/s<sup>2</sup>')} = 5.0 s</div>
+</div>
+
+<div class="card">
+  <h3>Practice Problems</h3>
+  ${S('p1','<b>1.</b> A professional runner starts from rest and accelerates uniformly at <span class="math">2.2 m/s<sup>2</sup></span> until reaching a top speed of <span class="math">11.0 m/s</span>. How many seconds does it take the runner to reach this speed?')}
+  ${S('p2','<b>2.</b> A delivery truck is traveling at <span class="math">18.0 m/s</span> when the driver sees a red light ahead. The truck slows down with an average acceleration of <span class="math">−3.6 m/s<sup>2</sup></span>. Calculate the time interval required for the truck to come to a complete stop.')}
+  ${S('p3','<b>3.</b> Turner is increasing the intensity of his workout. His treadmill is initially moving at <span class="math">1.5 m/s</span>. After <span class="math">45</span> seconds of uniform acceleration, the treadmill reaches a velocity of <span class="math">4.2 m/s</span>. What is the average acceleration of the treadmill during this interval?')}
+  ${S('p4','<b>4.</b> A freight train is moving at <span class="math">25.0 m/s</span> in the positive direction. As it approaches a steep grade, it begins to slow down, though it continues moving forward. If the train’s velocity is <span class="math">14.0 m/s</span> after <span class="math">55</span> seconds, what is its average acceleration? (Note: The acceleration should be negative because the train is slowing down while moving in the positive direction.)')}
+  ${S('p5','<b>5.</b> A car traveling at <span class="math">12.5 m/s</span> accelerates at a constant rate of <span class="math">1.4 m/s<sup>2</sup></span> to pass a slower vehicle. If the car reaches a final velocity of <span class="math">21.0 m/s</span>, how long did the passing maneuver take?')}
+  <div class="q"><p><b>6.</b> A cyclist is coasting down a hill at <span class="math">8.0 m/s</span>. She begins to apply her brakes to prepare for a turn, resulting in an average acceleration of <span class="math">−0.85 m/s<sup>2</sup></span>. If she brakes for <span class="math">4.0</span> seconds, what is her final velocity? Is she still moving in the positive direction?</p>
+    ${slot('p6a')}${slot('p6b')}</div>
+  <div class="sub-h">Critical Thinking: Sign Conventions</div>
+  ${S('p7','<b>7.</b> Look back at Problem 4 and Problem 6. In both cases, the objects had a positive velocity but a negative acceleration. Based on the source text (Figure 2.3), explain what happens to the speed of an object when the signs of velocity and acceleration are opposite.')}
+</div>`,
+  labels:{p6a:'Final velocity',p6b:'Is she still moving in the positive direction?'}
+},
+{
+  id:'s3', tab:'Displacement & Final Velocity',
+  html:`
+<div class="card">
+  <h2>Displacement and Final Velocity Problems</h2>
+  <div class="callout"><b class="t">Kinematic Equations for Constant Acceleration</b>
+    Use these equations to solve the problems below. Remember to check your units (convert minutes to seconds if necessary) and ensure your signs for velocity and acceleration match the direction of motion.
+    <p style="margin:.6em 0 0"><b>Equation 1:</b> <span class="math">Δ<i>x</i> = ½(<i>v</i><sub>i</sub> + <i>v</i><sub>f</sub>)Δ<i>t</i></span><br>
+    <b>Equation 2:</b> <span class="math"><i>v</i><sub>f</sub> = <i>v</i><sub>i</sub> + <i>a</i>Δ<i>t</i></span><br>
+    <b>Equation 3:</b> <span class="math">Δ<i>x</i> = <i>v</i><sub>i</sub>Δ<i>t</i> + ½<i>a</i>(Δ<i>t</i>)<sup>2</sup></span></p>
+  </div>
+</div>
+
+<div class="card">
+  <h3>Part 1: Displacement from Initial and Final Velocity</h3>
+  ${S('d1','<b>1.</b> A sprinter starts from rest and reaches a top speed of 9.2 m/s in a time interval of 4.5 s. Calculate the displacement of the sprinter during this acceleration phase.')}
+  ${S('d2','<b>2.</b> A car traveling at 22.0 m/s on a highway applies its brakes uniformly to slow down to 12.0 m/s to enter a construction zone. If this change occurs over 6.0 s, how far does the car travel while slowing down?')}
+  ${S('d3','<b>3.</b> A treadmill belt is moving at 2.5 m/s. The user increases the speed setting, and the belt accelerates uniformly to 4.8 m/s. If the displacement of a point on the belt during this transition is 18.25 m, how long (in seconds) did the acceleration take?')}
+  <div class="sub-h">Part 2: Displacement from Acceleration and Time</div>
+  ${S('d4','<b>4.</b> A small plane at rest on a runway undergoes a constant acceleration of 2.8 m/s². How much runway distance does the plane require to reach its takeoff point 12 seconds later?')}
+  ${S('d5','<b>5.</b> A freight train is traveling at a constant velocity of 15.0 m/s. The engineer increases the throttle, providing a uniform acceleration of 0.15 m/s². Calculate the train’s displacement after it has accelerated for 2.0 minutes. <i>(Hint: Convert time to seconds first.)</i>')}
+  <div class="sub-h">Part 3: Multi-Step Problems (Finding Final Velocity First)</div>
+  <div class="q"><p><b>6.</b> A robotic cart in a warehouse starts from rest and accelerates at 0.80 m/s².<br>a. What is the cart’s final velocity after 5.0 s?<br>b. What is the cart’s total displacement during these 5.0 s?</p>
+    ${slot('d6a')}${slot('d6b')}</div>
+  <div class="q"><p><b>7.</b> A cyclist is moving at 6.0 m/s when they begin pedaling harder, accelerating at 1.2 m/s² for a duration of 8.0 s. Calculate the final velocity of the cyclist and their total displacement during this 8.0 s interval.</p>
+    ${slot('d7a')}${slot('d7b')}</div>
+  <div class="sub-h">Part 4: Critical Thinking and Unit Consistency</div>
+  <div class="q"><p><b>8.</b> A car is traveling at 25 m/s when the driver sees a hazard and slams on the brakes, resulting in a uniform acceleration of −6.5 m/s².<br>a. How much time is required for the car to come to a complete stop?<br>b. A student claims that the car will stop in less than 45 meters. Perform the calculation to determine if the student is correct.</p>
+    ${slot('d8a')}${slot('d8b')}${slot('d8c')}</div>
+</div>`,
+  labels:{d6a:'a. Final velocity',d6b:'b. Total displacement',d7a:'Final velocity',d7b:'Total displacement',
+          d8a:'a. Time to stop',d8b:'b. Stopping distance',d8c:'b. Is the student correct?'}
+},
+{
+  id:'s4', tab:'Kinematics Mastery Challenge',
+  html:`
+<div class="card">
+  <h2>Kinematics Mastery Challenge</h2>
+  <p>This final challenge requires you to combine multiple kinematic equations to solve complex, multi-stage motion problems. For each problem, identify your knowns and unknowns for each stage of motion before selecting your equations. Show all algebraic rearrangements and include units in your final answers.</p>
+  <div class="callout"><b class="t">Kinematic Equations Reference</b>
+    <ul class="math" style="list-style:disc;white-space:normal">
+      <li><i>v</i><sub>f</sub> = <i>v</i><sub>i</sub> + <i>a</i>Δ<i>t</i></li>
+      <li>Δ<i>x</i> = ½(<i>v</i><sub>i</sub> + <i>v</i><sub>f</sub>)Δ<i>t</i></li>
+      <li>Δ<i>x</i> = <i>v</i><sub>i</sub>Δ<i>t</i> + ½<i>a</i>(Δ<i>t</i>)<sup>2</sup></li>
+      <li><i>v</i><sub>f</sub><sup>2</sup> = <i>v</i><sub>i</sub><sup>2</sup> + 2<i>a</i>Δ<i>x</i></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <div class="q"><h4>1. The Two-Stage Sprint</h4>
+    <p>A sprinter starts from rest and accelerates uniformly at <span class="math">2.2 m/s<sup>2</sup></span> for <span class="math">3.8 s</span>. After this acceleration phase, the sprinter maintains their final velocity for the remainder of the race.</p>
+    <p>a) Calculate the sprinter’s velocity at the end of the acceleration phase.<br>b) Calculate the total displacement of the sprinter after a total elapsed time of <span class="math">10.0 s</span>.</p>
+    ${slot('m1a')}${slot('m1b')}</div>
+  <div class="q"><h4>2. The Overtaking Maneuver</h4>
+    <p>A truck is traveling at a constant velocity of <span class="math">18.0 m/s</span>. At the exact moment the truck passes a stationary police car, the police car begins to accelerate at a constant rate of <span class="math">2.5 m/s<sup>2</sup></span> to catch the truck.</p>
+    <p>a) How long does it take for the police car to reach the same velocity as the truck?<br>b) At what time <span class="math">Δ<i>t</i></span> will the police car pull even with the truck (meaning their displacements are equal)?</p>
+    ${slot('m2a')}${slot('m2b')}</div>
+  <div class="q"><h4>3. The Emergency Stop</h4>
+    <p>A car is traveling at <span class="math">28.0 m/s</span> when the driver sees an obstacle <span class="math">85.0 m</span> ahead. It takes the driver <span class="math">0.75 s</span> to react and apply the brakes (during this reaction time, the car travels at constant velocity). Once the brakes are applied, the car accelerates at <span class="math">−7.0 m/s<sup>2</sup></span>.</p>
+    <p>a) Calculate the distance the car travels during the reaction time.<br>b) Determine if the car stops before hitting the obstacle. Support your answer with a calculation of the total stopping distance.</p>
+    ${slot('m3a')}${slot('m3b')}${slot('m3c')}</div>
+  ${S('m4','<h4>4. Critique the Reasoning: The Commuter Train</h4><p>A train accelerates from rest at <span class="math">1.2 m/s<sup>2</sup></span> for <span class="math">15 s</span>, then travels at constant velocity for <span class="math">60 s</span>, and finally slows down to a stop with an acceleration of <span class="math">−2.0 m/s<sup>2</sup></span>.</p><p>A student calculates the total distance by using <span class="math">Δ<i>x</i> = <i>v</i><sub>i</sub>Δ<i>t</i> + ½<i>a</i>(Δ<i>t</i>)<sup>2</sup></span> once, using <span class="math"><i>v</i><sub>i</sub> = 0</span>, <span class="math"><i>a</i> = 1.2 m/s<sup>2</sup></span>, and <span class="math">Δ<i>t</i> = 15 + 60 + time to stop</span>.</p><p>Explain why the student’s method is incorrect based on the requirements for using kinematic equations, and describe the correct multi-step process needed to find the total displacement.</p>')}
+</div>`,
+  labels:{m1a:'a) Velocity at end of acceleration',m1b:'b) Total displacement',m2a:'a) Time to reach truck’s velocity',m2b:'b) Time to pull even',
+          m3a:'a) Reaction distance',m3b:'b) Total stopping distance',m3c:'b) Does the car stop before the obstacle?'}
+}
+];
+
+/* ---------- graphs ---------- */
+const GRAPHS={
+  g1:{title:'Velocity vs. Time',xmax:12,ymax:12,
+      segs:[{p:[[0,0],[4,8]],c:'#2563eb',t:'Segment A',lx:4.7,ly:3.1},{p:[[4,8],[8,8]],c:'#16a34a',t:'Segment B',lx:6,ly:8.7,mid:1},{p:[[8,8],[12,0]],c:'#dc2626',t:'Segment C',lx:11.2,ly:5.1,mid:1}],
+      cap:'Figure 1: Multi-segment velocity-time graph of a test vehicle.'},
+  g2:{title:'Velocity vs. Time (Vehicle 2)',xmax:16,ymax:16,
+      segs:[{p:[[0,4],[5,4]],c:'#2563eb',t:'D',lx:2.5,ly:4.8,mid:1},{p:[[5,4],[10,8]],c:'#16a34a',t:'E',lx:7,ly:6.6,mid:1},{p:[[10,8],[15,14]],c:'#dc2626',t:'F',lx:11.7,ly:11.4,mid:1}],
+      cap:'Figure 2: Velocity-time graph of Vehicle 2.'}
+};
+function drawGraph(el){
+  const g=GRAPHS[el.dataset.graph];
+  const W=560,H=400,L=56,R=36,T=48,B=46,pw=W-L-R,ph=H-T-B;
+  const X=x=>L+x/g.xmax*pw, Y=y=>T+ph-y/g.ymax*ph;
+  let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(g.title)}. ${g.segs.map(q=>q.t).join(', ')}.">`;
+  s+=`<text class="g-title" x="${W/2}" y="26" text-anchor="middle">${esc(g.title)}</text>`;
+  for(let v=0;v<=g.xmax;v+=2){ s+=`<line class="g-grid" x1="${X(v)}" y1="${Y(0)}" x2="${X(v)}" y2="${Y(g.ymax)}"/><text class="g-tick" x="${X(v)}" y="${Y(0)+18}" text-anchor="middle">${v}</text>`; }
+  for(let v=0;v<=g.ymax;v+=2){ s+=`<line class="g-grid" x1="${X(0)}" y1="${Y(v)}" x2="${X(g.xmax)}" y2="${Y(v)}"/><text class="g-tick" x="${X(0)-10}" y="${Y(v)+4}" text-anchor="end">${v}</text>`; }
+  s+=`<path class="g-axis" d="M${X(0)} ${Y(g.ymax)}V${Y(0)}H${X(g.xmax)}"/>`;
+  s+=`<path d="M${X(0)-5} ${Y(g.ymax)+8}L${X(0)} ${Y(g.ymax)}L${X(0)+5} ${Y(g.ymax)+8}Z M${X(g.xmax)-8} ${Y(0)-5}L${X(g.xmax)} ${Y(0)}L${X(g.xmax)-8} ${Y(0)+5}Z" fill="var(--axis)"/>`;
+  s+=`<text class="g-lab" x="${X(0)+8}" y="${Y(g.ymax)+16}">Velocity (m/s)</text>`;
+  s+=`<text class="g-lab" x="${X(g.xmax)}" y="${Y(0)-30}" text-anchor="end">Time (s)</text>`;
+  g.segs.forEach(q=>{
+    s+=`<polyline points="${q.p.map(p=>X(p[0])+','+Y(p[1])).join(' ')}" fill="none" stroke="${q.c}" stroke-width="3.5" stroke-linecap="round"/>`;
+    s+=`<text class="g-seg" fill="${q.c}" x="${X(q.lx)}" y="${Y(q.ly)}" text-anchor="${q.mid?'middle':'start'}">${q.t}</text>`;
+  });
+  s+='</svg>';
+  el.innerHTML=s+`<figcaption>${esc(g.cap)}</figcaption>`;
+}
+
+/* ---------- parsing & checking ---------- */
+function parseNum(raw){
+  let t=String(raw).trim().replace(/[−–—]/g,'-').replace(/\s+/g,' ');
+  const m=t.match(/^([+-]?)\s*(\d[\d,]*\.?\d*|\.\d+)(?:\s*[eE]([+-]?\d+))?/);
+  if(!m) return null;
+  let n=m[2];
+  if(/^\d{1,3}(,\d{3})+(\.\d+)?$/.test(n)) n=n.replace(/,/g,'');
+  else n=n.replace(',','.');
+  let v=parseFloat(n); if(!isFinite(v)) return null;
+  if(m[3]) v*=Math.pow(10,parseInt(m[3],10));
+  return m[1]==='-'?-v:v;
+}
+const REL_TOL=0.015;   // 1.5% tolerance covers normal rounding of answers
+function checkNum(it,raw){
+  const v=parseNum(raw);
+  if(v===null) return {invalid:'Enter a number (you may include units).'};
+  const a=it.ans, tol=a===0?0.005:Math.abs(a)*(it.tol||REL_TOL);
+  if(Math.abs(v-a)<=tol+1e-9) return {ok:true};
+  if(a!==0 && Math.abs(v+a)<=tol) return {msg:'Close — check the sign (direction) of your answer.'};
+  if(a!==0 && Math.abs(v-a)/Math.abs(a)<=0.08) return {msg:'Very close — check your arithmetic and rounding.'};
+  return {msg:'Not quite — re-read the problem and check your setup, units and signs.'};
+}
+function checkTxt(it,raw){
+  const t=raw.trim();
+  if(t.length<15) return {invalid:'Write a complete explanation (at least a full sentence) before checking.'};
+  const low=t.toLowerCase();
+  const got=it.concepts.filter(re=>re.test(low)).length;
+  if(got>=it.need) return {ok:true};
+  return {msg:`Your explanation covers ${Math.min(got,it.need-1)} of the ${it.need} key ideas needed. Add more detail and try again.`};
+}
+
+/* ---------- build UI ---------- */
+const order=[];            // item ids in DOM order
+const sheetOf={};          // id -> sheet
+const tabs=$('#tabs'), panels=$('#panels');
+
+SHEETS.forEach((sh,i)=>{
+  const b=document.createElement('button'); b.type='button'; b.role='tab'; b.textContent=sh.tab; b.dataset.id=sh.id;
+  b.setAttribute('aria-selected',i===0?'true':'false'); tabs.appendChild(b);
+  const p=document.createElement('section'); p.className='panel'+(i===0?' active':''); p.id='panel-'+sh.id; p.innerHTML=sh.html;
+  panels.appendChild(p);
+  $$('[data-graph]',p).forEach(drawGraph);
+  $$('[data-slot]',p).forEach(el=>{
+    const id=el.dataset.slot, it=ITEMS[id];
+    if(!it.label && sh.labels && sh.labels[id]) it.label=sh.labels[id];
+    order.push(id); sheetOf[id]=sh;
+    el.replaceWith(buildItem(it));
+  });
+  const nav=document.createElement('div'); nav.className='card submitcard';
+  nav.innerHTML=i<SHEETS.length-1
+    ? `<button class="btn" type="button" data-go="${SHEETS[i+1].id}">Next worksheet: ${esc(SHEETS[i+1].tab)} →</button>`
+    : `<h3>Finished?</h3><p>Check that you have worked through every question, then submit to see your results.</p><button class="btn big" type="button" data-submit>SUBMIT</button>`;
+  p.appendChild(nav);
+});
+
+function show(id){
+  $$('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.id===id?'true':'false'));
+  $$('section.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+id));
+  window.scrollTo({top:0});
+}
+tabs.addEventListener('click',e=>{ const b=e.target.closest('button'); if(b) show(b.dataset.id); });
+panels.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]'); if(g) show(g.dataset.go);
+  if(e.target.closest('[data-submit]')) openSubmit();
+});
+
+function buildItem(it){
+  const wrap=document.createElement('div'); wrap.className='item'; wrap.id='it-'+it.id;
+  let field;
+  if(it.type==='num'){
+    field=`<input type="text" inputmode="text" autocomplete="off" spellcheck="false" aria-label="${esc(it.label||'Answer')}" placeholder="Answer">`+(it.unit?`<span class="unit">${it.unit}</span>`:'');
+  }else if(it.type==='sel'){
+    field=`<select aria-label="${esc(it.label||'Choose')}"><option value="">— choose —</option>${it.options.map((o,i)=>`<option value="${i}">${esc(o)}</option>`).join('')}</select>`;
+  }else{
+    field=`<textarea aria-label="Your explanation" placeholder="Type your explanation here…" spellcheck="true"></textarea>`;
+  }
+  wrap.innerHTML=(it.label?`<div class="lbl">${esc(it.label)}</div>`:'')+
+    `<div class="row">${field}<button class="btn" type="button">Check</button><span class="dots" aria-hidden="true"><i></i><i></i><i></i><span></span></span></div><div class="fb" aria-live="polite"></div>`;
+  const input=$('input,select,textarea',wrap), btn=$('button',wrap);
+  btn.addEventListener('click',()=>attempt(it,wrap));
+  if(it.type==='num') input.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); attempt(it,wrap); } });
+  paint(it,wrap);
+  return wrap;
+}
+
+function attempt(it,wrap){
+  const st=state[it.id]||(state[it.id]={n:0,done:null,val:''});
+  if(st.done) return;
+  const input=$('input,select,textarea',wrap), fb=$('.fb',wrap);
+  const raw=input.value;
+  let res;
+  if(it.type==='sel'){
+    if(raw===''){ res={invalid:'Choose an answer first.'}; }
+    else res=(+raw===it.ans)?{ok:true}:{msg:'Not quite — look at the problem again.'};
+  }else if(it.type==='num') res=checkNum(it,raw);
+  else res=checkTxt(it,raw);
+  if(res.invalid){ fb.className='fb show warn'; fb.textContent=res.invalid; return; }   // does not use up an attempt
+  st.n++; st.val=raw;
+  if(res.ok){ st.done='ok'; st.okAt=st.n; }
+  else{
+    st.last=res.msg;
+    if(st.n>=MAX) st.done='fail';
+  }
+  save(); paint(it,wrap); updateProgress();
+}
+
+function paint(it,wrap){
+  const st=state[it.id]||{n:0,done:null,val:''};
+  const input=$('input,select,textarea',wrap), btn=$('button',wrap), fb=$('.fb',wrap), dots=$$('.dots i',wrap), dl=$('.dots span',wrap);
+  if(st.val!==undefined && input.value==='') input.value=st.val||'';
+  wrap.classList.toggle('ok',st.done==='ok'); wrap.classList.toggle('fail',st.done==='fail');
+  dots.forEach((d,i)=>{ d.className=''; if(i<st.n) d.className=(st.done==='ok'&&i===st.n-1)?'good':'bad'; });
+  dl.textContent=st.done?'':`Attempt ${Math.min(st.n+1,MAX)} of ${MAX}`;
+  const locked=!!st.done; input.disabled=locked; btn.disabled=locked;
+  if(st.done==='ok'){ fb.className='fb show good'; fb.innerHTML=`✓ Correct!${st.okAt>1?` (attempt ${st.okAt} of ${MAX})`:''}`; }
+  else if(st.done==='fail'){ fb.className='fb show bad'; fb.innerHTML=`✗ You have used all 3 attempts.<small>Review the lesson and ask your teacher to go over this one with you.</small>`; }
+  else if(st.n>0){ fb.className='fb show bad'; fb.innerHTML=`✗ ${esc(st.last)} ${MAX-st.n} attempt${MAX-st.n===1?'':'s'} left.<small>💡 Hint: ${it.hint}</small>`; }
+  else { fb.className='fb'; fb.textContent=''; }
+}
+
+function updateProgress(){
+  const total=order.length, done=order.filter(id=>state[id]&&state[id].done).length;
+  $('#overallText').textContent=`${done} of ${total} answers finished`;
+  $('#overallBar').style.width=(done/total*100)+'%';
+}
+updateProgress();
+
+/* ---------- submit, name, results ---------- */
+const dlg=$('#nameDialog'), nameIn=$('#studentName'), nameErr=$('#nameErr');
+function openSubmit(){
+  const open=order.filter(id=>!(state[id]&&state[id].done)).length;
+  const w=$('#unansweredWarn');
+  if(open){ w.hidden=false; w.textContent=`You still have ${open} question${open===1?'':'s'} that ${open===1?'isn’t':'aren’t'} finished. You can keep working, or submit now.`; }
+  else w.hidden=true;
+  nameIn.value=state._name||''; nameErr.textContent='';
+  if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
+  setTimeout(()=>nameIn.focus(),30);
+}
+$('#submitTop').addEventListener('click',openSubmit);
+$('#nameCancel').addEventListener('click',()=>dlg.close());
+$('#nameForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  const n=nameIn.value.trim().replace(/\s+/g,' ');
+  if(n.length<2){ nameErr.textContent='Please type your name.'; nameIn.focus(); return; }
+  state._name=n; state._when=new Date().toISOString(); save();
+  dlg.close(); renderResults();
+});
+
+function itemLabel(id){ const it=ITEMS[id]; return it.label||''; }
+function answerText(it,st){
+  if(!st||st.val===''||st.val===undefined) return '';
+  if(it.type==='sel') return it.options[+st.val]||'';
+  return st.val;
+}
+const QNAMES={ // human-readable question names for the results table
+  a1_aA:'Part 1 · Acceleration, Segment A',a1_aB:'Part 1 · Acceleration, Segment B',a1_aC:'Part 1 · Acceleration, Segment C',
+  a1_dA:'Part 1 · Description, Segment A',a1_dB:'Part 1 · Description, Segment B',a1_dC:'Part 1 · Description, Segment C',
+  a1_xA:'Q1 · Segment A displacement',a1_xB:'Q2 · Segment B displacement',a1_xC:'Q3 · Segment C displacement',a1_xT:'Q4 · Total displacement',
+  a1_q5:'Q5 · Compare accelerations A and C',a1_aD:'Q6 · Acceleration, Segment D',a1_aE:'Q6 · Acceleration, Segment E',a1_aF:'Q6 · Acceleration, Segment F',
+  a1_xD:'Q7 · Displacement, Segment D',a1_xE:'Q7 · Displacement, Segment E',a1_xF:'Q7 · Displacement, Segment F',a1_xT2:'Q8 · Total displacement (0–15 s)',
+  a1_q9:'Q9 · Compare with first vehicle',a1_q10:'Q10 · Negative velocity / negative area',
+  p1:'Problem 1',p2:'Problem 2',p3:'Problem 3',p4:'Problem 4',p5:'Problem 5',p6a:'Problem 6 · Final velocity',p6b:'Problem 6 · Still moving positive?',p7:'Problem 7 · Sign conventions',
+  d1:'Problem 1',d2:'Problem 2',d3:'Problem 3',d4:'Problem 4',d5:'Problem 5',d6a:'Problem 6a',d6b:'Problem 6b',d7a:'Problem 7 · Final velocity',d7b:'Problem 7 · Displacement',
+  d8a:'Problem 8a',d8b:'Problem 8b · Stopping distance',d8c:'Problem 8b · Is the student correct?',
+  m1a:'Problem 1a',m1b:'Problem 1b',m2a:'Problem 2a',m2b:'Problem 2b',m3a:'Problem 3a',m3b:'Problem 3b · Stopping distance',m3c:'Problem 3b · Stops before obstacle?',m4:'Problem 4 · Critique the reasoning'
+};
+function renderResults(){
+  const total=order.length;
+  const okN=order.filter(id=>state[id]&&state[id].done==='ok').length;
+  const first=order.filter(id=>state[id]&&state[id].done==='ok'&&state[id].okAt===1).length;
+  const failN=order.filter(id=>state[id]&&state[id].done==='fail').length;
+  const openN=total-okN-failN;
+  const pct=Math.round(okN/total*100);
+  const when=new Date(state._when||Date.now());
+  const dateStr=when.toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+  let h=`<div class="card"><div class="res-head">
+      <div><div class="sub">Lesson 2.2 · Practice Exercises · Physics II</div><h2>${esc(state._name)}</h2><div class="sub">${esc(dateStr)}</div></div>
+      <div class="scorebox"><b>${okN} / ${total}</b><span>${pct}% correct</span></div></div>
+    <div class="resbar"><i style="width:${pct}%"></i></div>
+    <div class="stats"><span><b>${first}</b> correct on the first try</span><span><b>${okN-first}</b> correct on a later try</span><span><b>${failN}</b> not solved (3 attempts used)</span><span><b>${openN}</b> not finished</span></div>
+    <div class="res-actions"><button class="btn" type="button" id="resPrint">Print / Save as PDF</button><button class="btn ghost" type="button" id="resBack">← Back to the worksheets</button><button class="btn ghost" type="button" id="resReset">Start over (new student)</button></div></div>`;
+  SHEETS.forEach(sh=>{
+    const ids=order.filter(id=>sheetOf[id]===sh);
+    const ok=ids.filter(id=>state[id]&&state[id].done==='ok').length;
+    h+=`<div class="card"><h3>${esc(sh.tab)} <span class="tag ${ok===ids.length?'ok':'prog'}" style="margin-left:6px">${ok} / ${ids.length}</span></h3><div style="overflow-x:auto"><table class="res"><thead><tr><th>Question</th><th>Result</th><th>Attempts</th><th>Your answer</th></tr></thead><tbody>`;
+    ids.forEach(id=>{
+      const it=ITEMS[id], st=state[id]||{};
+      const tag=st.done==='ok'?'<span class="tag ok">✓ Correct</span>':st.done==='fail'?'<span class="tag fail">✗ Not solved</span>':st.n?'<span class="tag prog">In progress</span>':'<span class="tag none">Not attempted</span>';
+      const ans=answerText(it,st);
+      const unit=(it.type==='num'&&ans&&it.unit)?` ${it.unit}`:'';
+      const cell=it.type==='txt'?(ans?`<div class="written">${esc(ans)}</div>`:'—'):(ans?`${esc(ans)}${unit}`:'—');
+      h+=`<tr><td>${esc(QNAMES[id]||id)}</td><td>${tag}</td><td>${st.n||0} of ${MAX}</td><td>${cell}</td></tr>`;
+    });
+    h+='</tbody></table></div></div>';
+  });
+  h+=`<p style="color:var(--muted);font-size:.88rem">Written explanations are checked automatically for key ideas; your teacher may also read them. Correct answers are never shown on this page.</p>`;
+  $('#resultsInner').innerHTML=h;
+  document.body.classList.add('show-results');
+  window.scrollTo({top:0});
+  $('#resPrint').onclick=()=>window.print();
+  $('#resBack').onclick=()=>{ document.body.classList.remove('show-results'); window.scrollTo({top:0}); };
+  $('#resReset').onclick=()=>{
+    if(confirm('Erase all answers and attempts on this computer and start over?')){
+      try{ localStorage.removeItem(KEY); }catch(e){}
+      location.reload();
+    }
+  };
+}
+})();
+</script>
+</body>
+</html>
