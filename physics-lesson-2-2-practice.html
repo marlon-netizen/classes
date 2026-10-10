@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Physics II – Lesson 2.2 Practice Exercises | Lincoln International Academy</title>
+<title>Physics I – Lesson 2.2 Practice Exercises | Lincoln International Academy</title>
 <meta name="description" content="Interactive practice for Lesson 2.2: Acceleration. Three attempts per question, instant feedback, and a results page with your name.">
 
 <style>
@@ -188,7 +188,7 @@ table.res th{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;colo
       <div class="school">Lincoln International Academy</div>
     </div>
     <div class="meta">
-      <div>Class<b>Physics II</b></div>
+      <div>Class<b>Physics I</b></div>
       <div>Teacher<b>Eduardo Vásquez</b></div>
     </div>
   </div>
@@ -201,6 +201,7 @@ table.res th{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;colo
       <small>Chapter 2 · Motion in One Dimension · <a href="physics-lesson-2-2.html">← Back to the Lesson 2.2 study page</a></small>
     </div>
     <div class="overall" aria-live="polite">
+      <span id="saveStatus" style="font-weight:600"></span>
       <span id="overallText">0 of 0 answers finished</span>
       <div class="bar"><i id="overallBar"></i></div>
       <button class="btn big" type="button" id="submitTop">SUBMIT</button>
@@ -242,9 +243,42 @@ const ms2='m/s<sup>2</sup>';
 const MAX=3;
 const KEY='lincoln-physics-2-2-practice-v1';
 
-let state={};
-try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
-const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+/* Saving: try localStorage, sessionStorage and window.name together so answers survive a refresh
+   even when the browser (or an embedding page) blocks one of them. The newest copy wins on load. */
+const NAMEPFX='LIA22:';
+let state={}, storeMode='none';
+function readStores(){
+  const out=[];
+  try{ const v=localStorage.getItem(KEY); if(v) out.push(['local',JSON.parse(v)]); }catch(e){}
+  try{ const v=sessionStorage.getItem(KEY); if(v) out.push(['session',JSON.parse(v)]); }catch(e){}
+  try{ if(window.name.indexOf(NAMEPFX)===0) out.push(['tab',JSON.parse(window.name.slice(NAMEPFX.length))]); }catch(e){}
+  return out;
+}
+(function(){
+  const found=readStores().filter(x=>x[1]&&typeof x[1]==='object').sort((a,b)=>(b[1]._ts||0)-(a[1]._ts||0));
+  if(found.length) state=found[0][1];
+})();
+function save(){
+  state._ts=Date.now();
+  const json=JSON.stringify(state); let mode='none';
+  try{ localStorage.setItem(KEY,json); if(localStorage.getItem(KEY)===json) mode='local'; }catch(e){}
+  try{ sessionStorage.setItem(KEY,json); if(mode==='none') mode='session'; }catch(e){}
+  try{ window.name=NAMEPFX+json; if(mode==='none') mode='tab'; }catch(e){}
+  storeMode=mode; showSaveStatus();
+}
+function clearSaved(){
+  try{ localStorage.removeItem(KEY); }catch(e){}
+  try{ sessionStorage.removeItem(KEY); }catch(e){}
+  try{ window.name=''; }catch(e){}
+}
+function showSaveStatus(){
+  const el=document.getElementById('saveStatus'); if(!el) return;
+  if(storeMode==='local'){ el.textContent='💾 Progress saved on this device'; el.style.color='var(--good)'; }
+  else if(storeMode==='none'){ el.textContent='⚠ Saving is blocked in this browser'; el.style.color='var(--bad)'; }
+  else{ el.textContent='⚠ Saved for this tab only — keep this tab open'; el.style.color='var(--warm)'; }
+}
+window.addEventListener('pagehide',()=>save());
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') save(); });
 
 /* ---------- item definitions (answers never displayed) ---------- */
 const ITEMS={};
@@ -582,6 +616,7 @@ SHEETS.forEach((sh,i)=>{
 function show(id){
   $$('#tabs button').forEach(b=>b.setAttribute('aria-selected',b.dataset.id===id?'true':'false'));
   $$('section.panel').forEach(p=>p.classList.toggle('active',p.id==='panel-'+id));
+  state._tab=id; save();
   window.scrollTo({top:0});
 }
 tabs.addEventListener('click',e=>{ const b=e.target.closest('button'); if(b) show(b.dataset.id); });
@@ -604,6 +639,8 @@ function buildItem(it){
     `<div class="row">${field}<button class="btn" type="button">Check</button><span class="dots" aria-hidden="true"><i></i><i></i><i></i><span></span></span></div><div class="fb" aria-live="polite"></div>`;
   const input=$('input,select,textarea',wrap), btn=$('button',wrap);
   btn.addEventListener('click',()=>attempt(it,wrap));
+  const draft=()=>{ const st=state[it.id]||(state[it.id]={n:0,done:null,val:''}); if(!st.done){ st.val=input.value; save(); } };
+  input.addEventListener('input',draft); input.addEventListener('change',draft);
   if(it.type==='num') input.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); attempt(it,wrap); } });
   paint(it,wrap);
   return wrap;
@@ -649,7 +686,8 @@ function updateProgress(){
   $('#overallText').textContent=`${done} of ${total} answers finished`;
   $('#overallBar').style.width=(done/total*100)+'%';
 }
-updateProgress();
+updateProgress(); if(Object.keys(state).length) save(); else { try{ localStorage.setItem(KEY+'-t','1'); localStorage.removeItem(KEY+'-t'); storeMode='local'; }catch(e){ storeMode='tab'; } showSaveStatus(); }
+if(state._tab && SHEETS.some(x=>x.id===state._tab)){ show(state._tab); window.scrollTo({top:0}); }
 
 /* ---------- submit, name, results ---------- */
 const dlg=$('#nameDialog'), nameIn=$('#studentName'), nameErr=$('#nameErr');
@@ -668,7 +706,7 @@ $('#nameForm').addEventListener('submit',e=>{
   e.preventDefault();
   const n=nameIn.value.trim().replace(/\s+/g,' ');
   if(n.length<2){ nameErr.textContent='Please type your name.'; nameIn.focus(); return; }
-  state._name=n; state._when=new Date().toISOString(); save();
+  state._name=n; state._when=new Date().toISOString(); state._view='results'; save();
   dlg.close(); renderResults();
 });
 
@@ -693,45 +731,24 @@ const QNAMES={ // human-readable question names for the results table
 function renderResults(){
   const total=order.length;
   const okN=order.filter(id=>state[id]&&state[id].done==='ok').length;
-  const first=order.filter(id=>state[id]&&state[id].done==='ok'&&state[id].okAt===1).length;
-  const failN=order.filter(id=>state[id]&&state[id].done==='fail').length;
-  const openN=total-okN-failN;
   const pct=Math.round(okN/total*100);
-  const when=new Date(state._when||Date.now());
-  const dateStr=when.toLocaleDateString(undefined,{weekday:'long',year:'numeric',month:'long',day:'numeric'});
-  let h=`<div class="card"><div class="res-head">
-      <div><div class="sub">Lesson 2.2 · Practice Exercises · Physics II</div><h2>${esc(state._name)}</h2><div class="sub">${esc(dateStr)}</div></div>
-      <div class="scorebox"><b>${okN} / ${total}</b><span>${pct}% correct</span></div></div>
-    <div class="resbar"><i style="width:${pct}%"></i></div>
-    <div class="stats"><span><b>${first}</b> correct on the first try</span><span><b>${okN-first}</b> correct on a later try</span><span><b>${failN}</b> not solved (3 attempts used)</span><span><b>${openN}</b> not finished</span></div>
-    <div class="res-actions"><button class="btn" type="button" id="resPrint">Print / Save as PDF</button><button class="btn ghost" type="button" id="resBack">← Back to the worksheets</button><button class="btn ghost" type="button" id="resReset">Start over (new student)</button></div></div>`;
-  SHEETS.forEach(sh=>{
-    const ids=order.filter(id=>sheetOf[id]===sh);
-    const ok=ids.filter(id=>state[id]&&state[id].done==='ok').length;
-    h+=`<div class="card"><h3>${esc(sh.tab)} <span class="tag ${ok===ids.length?'ok':'prog'}" style="margin-left:6px">${ok} / ${ids.length}</span></h3><div style="overflow-x:auto"><table class="res"><thead><tr><th>Question</th><th>Result</th><th>Attempts</th><th>Your answer</th></tr></thead><tbody>`;
-    ids.forEach(id=>{
-      const it=ITEMS[id], st=state[id]||{};
-      const tag=st.done==='ok'?'<span class="tag ok">✓ Correct</span>':st.done==='fail'?'<span class="tag fail">✗ Not solved</span>':st.n?'<span class="tag prog">In progress</span>':'<span class="tag none">Not attempted</span>';
-      const ans=answerText(it,st);
-      const unit=(it.type==='num'&&ans&&it.unit)?` ${it.unit}`:'';
-      const cell=it.type==='txt'?(ans?`<div class="written">${esc(ans)}</div>`:'—'):(ans?`${esc(ans)}${unit}`:'—');
-      h+=`<tr><td>${esc(QNAMES[id]||id)}</td><td>${tag}</td><td>${st.n||0} of ${MAX}</td><td>${cell}</td></tr>`;
-    });
-    h+='</tbody></table></div></div>';
-  });
-  h+=`<p style="color:var(--muted);font-size:.88rem">Written explanations are checked automatically for key ideas; your teacher may also read them. Correct answers are never shown on this page.</p>`;
+  const h=`<div class="card" style="text-align:center;padding:40px 22px;max-width:520px;margin:30px auto">
+    <h2 style="font-size:2rem;margin-bottom:.2em">${esc(state._name)}</h2>
+    <div class="scorebox" style="display:inline-block;margin:14px 0 18px;padding:18px 44px"><b style="font-size:3.6rem">${pct}%</b><span>correct answers</span></div>
+    <div class="res-actions" style="justify-content:center"><button class="btn" type="button" id="resPrint">Print / Save as PDF</button><button class="btn ghost" type="button" id="resBack">← Back to the worksheets</button><button class="btn ghost" type="button" id="resReset">Start over (new student)</button></div></div>`;
   $('#resultsInner').innerHTML=h;
   document.body.classList.add('show-results');
   window.scrollTo({top:0});
   $('#resPrint').onclick=()=>window.print();
-  $('#resBack').onclick=()=>{ document.body.classList.remove('show-results'); window.scrollTo({top:0}); };
+  $('#resBack').onclick=()=>{ state._view=''; save(); document.body.classList.remove('show-results'); window.scrollTo({top:0}); };
   $('#resReset').onclick=()=>{
     if(confirm('Erase all answers and attempts on this computer and start over?')){
-      try{ localStorage.removeItem(KEY); }catch(e){}
+      clearSaved();
       location.reload();
     }
   };
 }
+if(state._view==='results' && state._name) renderResults();
 })();
 </script>
 </body>
