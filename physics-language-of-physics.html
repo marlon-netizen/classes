@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Language of Physics – Physics I</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --ink: #2c3a4a;
+    --muted: #66758a;
+    --primary: #4a6fa5;
+    --primary-dark: #35557f;
+    --primary-soft: #e3ebf5;
+    --accent: #8fb3a0;
+    --ok: #3f8f6b;
+    --ok-bg: #e4f3ec;
+    --warn: #b7791f;
+    --warn-bg: #fbf1dc;
+    --bad: #b5524f;
+    --bad-bg: #f8e6e5;
+    --line: #d9e0e8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    letter-spacing: .2px;
+  }
+  header {
+    background: linear-gradient(135deg, #dfe8f3, #eef3f0);
+    border-bottom: 4px solid var(--primary);
+    text-align: center;
+    padding: 2rem 1rem 1.5rem;
+  }
+  header h1 {
+    margin: 0; font-weight: 600;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--primary-dark);
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+  header .class-name { margin: .4rem 0 0; font-size: clamp(1.2rem, 3.5vw, 1.6rem); font-weight: 500; }
+  header .details { margin: .2rem 0 0; color: var(--muted); font-weight: 300; font-size: 1.1rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
+
+  .tabs { display: flex; gap: .5rem; border-bottom: 2px solid var(--line); margin-bottom: 1.2rem; }
+  .tab-btn {
+    font: inherit; font-weight: 500; font-size: 1.05rem;
+    padding: .7rem 1.2rem; border: none; border-radius: 8px 8px 0 0;
+    background: transparent; color: var(--muted); cursor: pointer;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: background .2s, color .2s;
+  }
+  .tab-btn:hover { background: var(--primary-soft); color: var(--primary-dark); }
+  .tab-btn[aria-selected="true"] { background: var(--primary); color: #fff; }
+  .tab-btn:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #9ab7dd; outline-offset: 2px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 1.2rem 1.4rem; margin-bottom: 1.2rem;
+    box-shadow: 0 1px 3px rgba(40,60,90,.05);
+  }
+  h2 { margin: 0 0 .6rem; font-weight: 500; color: var(--primary-dark); font-size: 1.5rem; }
+  h3 { margin: 0 0 .5rem; font-weight: 500; color: var(--primary-dark); font-size: 1.2rem; }
+  p { margin: .5rem 0; font-weight: 300; font-size: 1.05rem; }
+  ul { font-weight: 300; font-size: 1.05rem; padding-left: 1.3rem; }
+  .formula {
+    background: var(--primary-soft); border-left: 5px solid var(--primary);
+    padding: .8rem 1rem; margin: .8rem 0; border-radius: 6px;
+    font-size: 1.3rem; font-weight: 500; text-align: center;
+  }
+  .formula small { display: block; font-size: .95rem; font-weight: 300; color: var(--muted); margin-top: .2rem; }
+  .note { background: var(--warn-bg); border-left: 5px solid var(--warn); padding: .6rem 1rem; border-radius: 6px; }
+  .frac { display: inline-block; text-align: center; vertical-align: middle; margin: 0 .15rem; }
+  .frac span { display: block; padding: 0 .25rem; }
+  .frac span:first-child { border-bottom: 1.5px solid currentColor; }
+  .solution { background: #f7f9fb; border: 1px dashed var(--line); border-radius: 8px; padding: .6rem 1rem; margin-top: .6rem; }
+  .solution p { margin: .25rem 0; }
+  .example-title { color: var(--primary); font-weight: 500; margin-bottom: .2rem; }
+
+  table.data { border-collapse: collapse; margin: .6rem auto; font-weight: 300; }
+  table.data th, table.data td { border: 1px solid var(--line); padding: .3rem .9rem; text-align: center; }
+  table.data th { background: var(--primary-soft); font-weight: 500; }
+  table.data caption { caption-side: top; font-weight: 500; color: var(--primary-dark); padding-bottom: .3rem; }
+  .table-wrap { overflow-x: auto; }
+
+  .scorebar {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .6rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: .8rem 1.2rem; margin-bottom: 1.2rem;
+  }
+  .scorebar strong { color: var(--primary-dark); font-weight: 500; }
+  .progress { flex: 1 1 160px; height: 10px; background: var(--line); border-radius: 6px; overflow: hidden; }
+  .progress div { height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+  .problem .q-num { color: var(--primary); font-weight: 600; letter-spacing: 1px; }
+  .answer-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: .7rem; }
+  .answer-row input[type="text"] {
+    font: inherit; padding: .5rem .8rem; width: 190px;
+    border: 2px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .answer-row input:disabled { background: #eef1f5; }
+  .unit-label { color: var(--muted); font-weight: 300; margin-left: -.2rem; }
+  .options { display: grid; gap: .4rem; margin-top: .6rem; }
+  .options label {
+    display: flex; gap: .6rem; align-items: center; padding: .45rem .8rem;
+    border: 2px solid var(--line); border-radius: 8px; cursor: pointer; font-weight: 300; font-size: 1.05rem;
+    background: #fff; transition: background .15s, border-color .15s;
+  }
+  .options label:hover { background: var(--primary-soft); }
+  .options label.disabled { cursor: default; background: #eef1f5; }
+  .options label.picked-wrong { border-color: var(--bad); background: var(--bad-bg); }
+  .options label.picked-right { border-color: var(--ok); background: var(--ok-bg); }
+  .options input { accent-color: var(--primary); }
+  button.btn {
+    font: inherit; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    background: var(--primary); color: #fff; border: none; border-radius: 8px;
+    padding: .55rem 1.2rem; cursor: pointer; transition: background .2s;
+  }
+  button.btn:hover:not(:disabled) { background: var(--primary-dark); }
+  button.btn:disabled { background: #b8c3d1; cursor: not-allowed; }
+  button.btn.secondary { background: #fff; color: var(--primary-dark); border: 2px solid var(--primary); }
+  button.btn.secondary:hover { background: var(--primary-soft); }
+  .attempts { margin-left: auto; color: var(--muted); font-weight: 300; }
+  .dots { display: inline-flex; gap: 5px; vertical-align: middle; margin-left: .3rem; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 1px solid #6f9783; }
+  .dot.used { background: #d9e0e8; border-color: #b8c3d1; }
+  .feedback { margin-top: .7rem; padding: .6rem 1rem; border-radius: 8px; display: none; font-weight: 400; }
+  .feedback.show { display: block; }
+  .feedback.ok { background: var(--ok-bg); color: #276348; border-left: 5px solid var(--ok); }
+  .feedback.bad { background: var(--bad-bg); color: #8a3b39; border-left: 5px solid var(--bad); }
+  .feedback.hint { background: var(--warn-bg); color: #835a14; border-left: 5px solid var(--warn); }
+  .feedback .sol { font-weight: 300; margin-top: .3rem; }
+  .final { display: none; text-align: center; }
+  .final.show { display: block; }
+  .final h2 { font-size: 1.8rem; }
+  footer { text-align: center; color: var(--muted); font-weight: 300; font-size: .9rem; padding-bottom: 1.5rem; }
+  @media (max-width: 520px) {
+    .tab-btn { padding: .6rem .7rem; font-size: .9rem; flex: 1; }
+    .attempts { margin-left: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Lincoln International Academy</h1>
+  <p class="class-name">Physics I &middot; 10th Grade</p>
+  <p class="details">Teacher: Eduardo Vásquez</p>
+</header>
+
+<main>
+  <div class="tabs" role="tablist" aria-label="Page sections">
+    <button class="tab-btn" role="tab" id="tab-learn" aria-controls="panel-learn" aria-selected="true">Lesson &amp; Examples</button>
+    <button class="tab-btn" role="tab" id="tab-practice" aria-controls="panel-practice" aria-selected="false" tabindex="-1">Practice</button>
+  </div>
+
+  <!-- ============ TAB 1: LESSON ============ -->
+  <section class="panel active" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn">
+    <div class="card">
+      <h2>The Language of Physics</h2>
+      <p>Chapter 1, Section 3. Physicists build simplified models of the real world, then use mathematics to analyze and summarize observations. The mathematical relationships among physical quantities let us <strong>predict</strong> what will happen in new situations.</p>
+      <p><strong>Objectives:</strong></p>
+      <ul>
+        <li>Interpret data in tables and graphs, and recognize equations that summarize data.</li>
+        <li>Distinguish between conventions for abbreviating units and quantities.</li>
+        <li>Use dimensional analysis to check the validity of equations.</li>
+        <li>Perform order-of-magnitude calculations.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>1. Tables, graphs and equations summarize data</h3>
+      <p>In a famous experiment testing Galileo&rsquo;s hypothesis that all objects fall at the same rate without air resistance, a table-tennis ball and a golf ball are dropped in a vacuum. The data are organized in a table:</p>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Data from the dropped-ball experiment</caption>
+          <tr><th>Time (s)</th><th>Distance golf ball falls (cm)</th><th>Distance table-tennis ball falls (cm)</th></tr>
+          <tr><td>0.067</td><td>2.20</td><td>2.20</td></tr>
+          <tr><td>0.133</td><td>8.67</td><td>8.67</td></tr>
+          <tr><td>0.200</td><td>19.60</td><td>19.59</td></tr>
+          <tr><td>0.267</td><td>34.93</td><td>34.92</td></tr>
+          <tr><td>0.333</td><td>54.34</td><td>54.33</td></tr>
+          <tr><td>0.400</td><td>78.40</td><td>78.39</td></tr>
+        </table>
+      </div>
+      <p>A graph of distance versus time shows an obvious pattern (a curve), so we can draw a smooth curve through the points to estimate values at times where we have no data. The data can also be summarized by an equation:</p>
+      <div class="formula">
+        (change in position in meters) = 4.9 &times; (time of fall in seconds)&sup2;
+        <small>In symbols: &Delta;y = 4.9(&Delta;t)&sup2;</small>
+      </div>
+      <p>This equation reproduces the graph and predicts the change in position at <em>any</em> time during the fall.</p>
+    </div>
+
+    <div class="card">
+      <h3>2. Symbols and conventions</h3>
+      <ul>
+        <li>Letters stand for quantities: for example, <em>v</em> is speed.</li>
+        <li>The Greek letter <strong>&Delta;</strong> (delta) means &ldquo;difference or change in&rdquo;. The Greek letter <strong>&Sigma;</strong> (sigma) means &ldquo;sum&rdquo; or &ldquo;total&rdquo;.</li>
+        <li><strong>Variables and quantities</strong> are written in <em>italic</em> or <strong>boldface</strong> letters. <strong>Units</strong> are written in regular (roman) letters.</li>
+      </ul>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Abbreviations for variables and units</caption>
+          <tr><th>Quantity</th><th>Symbol</th><th>Unit</th><th>Unit abbreviation</th></tr>
+          <tr><td>change in vertical position</td><td>&Delta;<em>y</em></td><td>meters</td><td>m</td></tr>
+          <tr><td>time interval</td><td>&Delta;<em>t</em></td><td>seconds</td><td>s</td></tr>
+          <tr><td>mass</td><td><em>m</em></td><td>kilograms</td><td>kg</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>3. Proportional relationships</h3>
+      <ul>
+        <li><strong>Directly proportional:</strong> if one variable changes by a factor, the other changes by the <em>same</em> factor.</li>
+        <li><strong>Inversely proportional:</strong> if one variable changes by a factor, the other changes by the <em>inverse</em> of that factor.</li>
+      </ul>
+      <div class="formula">Force = mass &times; acceleration</div>
+      <p>Doubling the force doubles the acceleration (same mass): force and acceleration are directly proportional. If the force stays constant, doubling the mass cuts the acceleration in half: mass and acceleration are inversely proportional.</p>
+    </div>
+
+    <div class="card">
+      <h3>4. Dimensional analysis weeds out invalid equations</h3>
+      <p>Dimensions can be treated like algebraic quantities. Quantities can be added or subtracted only if they have the same dimensions, and <strong>both sides of an equation must have the same dimensions</strong>.</p>
+      <div class="note">Use it before computing: checking the dimensions of your equation prevents wasting time on an invalid one.</div>
+    </div>
+
+    <div class="card">
+      <h3>5. Order-of-magnitude estimates check answers</h3>
+      <p>An <strong>order-of-magnitude calculation</strong> finds the power of 10 closest to the actual value. It lets you judge whether a more exact answer is reasonable, and it can estimate quantities when little information is given.</p>
+    </div>
+
+    <h2>Worked examples</h2>
+
+    <div class="card">
+      <div class="example-title">Example 1 &mdash; Using the equation &Delta;y = 4.9(&Delta;t)&sup2;</div>
+      <p>How far does a ball fall in 0.200 s? Compare it with the table.</p>
+      <div class="solution">
+        <p>&Delta;y = 4.9 &times; (0.200)&sup2; = 4.9 &times; 0.0400 = <strong>0.196 m</strong> = 19.6 cm</p>
+        <p>The table gives 19.60 cm at 0.200 s. &#10003;</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 2 &mdash; Dimensional analysis</div>
+      <p>A car moves at 88 km/h. How long does it take to travel 725 km? Which operation gives a result with the dimension of <em>time</em>?</p>
+      <div class="solution">
+        <p>Try multiplying: <span class="frac"><span>length</span><span>time</span></span> &times; length = <span class="frac"><span>length&sup2;</span><span>time</span></span>. This is <strong>not</strong> a time, so it is invalid.</p>
+        <p>Try dividing: <span class="frac"><span>length</span><span>length/time</span></span> = length &times; <span class="frac"><span>time</span><span>length</span></span> = time. &#10003;</p>
+        <p>&Delta;t = <span class="frac"><span>725 km</span><span>88 km/h</span></span> = 725 km &times; <span class="frac"><span>1.0 h</span><span>88 km</span></span> &asymp; <strong>8.2 h</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 3 &mdash; Order of magnitude</div>
+      <p>Estimate the time for the same trip.</p>
+      <div class="solution">
+        <p>725 km is closer to 10&sup3; km (1000 km) than to 10&sup2; km, and 88 km/h is about 10&sup2; km/h.</p>
+        <p><span class="frac"><span>10&sup3; km</span><span>10&sup2; km/h</span></span> = 10 h</p>
+        <p>The answer should be closer to 10 than to 1 or 100. The exact answer, 8.2 h, fits. &#10003;</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 4 &mdash; Estimating with little information</div>
+      <p>About how many gallons of gasoline do all cars in the United States use each year?</p>
+      <div class="solution">
+        <p>Assume 300 million people, 5 people per family and 2 cars per family: about 120 million cars (12 &times; 10&sup7;).</p>
+        <p>Assume 10&#8239;000 mi (10&#8308; mi) per car per year at 20 mi/gal: 10&#8239;000 mi/yr &times; <span class="frac"><span>1 gal</span><span>20 mi</span></span> = 500 gal/yr per car.</p>
+        <p>Total: (12 &times; 10&sup7; cars)(500 gal/car) = <strong>6 &times; 10&sup1;&#8304; gal per year</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>Think Science: the engineering design process</h3>
+      <ul>
+        <li><strong>Phase 1:</strong> define the problem, with criteria for success and limitations.</li>
+        <li><strong>Phase 2:</strong> research and propose many possible solutions before settling on one.</li>
+        <li><strong>Phase 3:</strong> test and refine solutions using models and prototypes, then communicate the results with drawings.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ TAB 2: PRACTICE ============ -->
+  <section class="panel" id="panel-practice" role="tabpanel" aria-labelledby="tab-practice" hidden>
+    <div class="card">
+      <h2>Practice Problems</h2>
+      <p>You have <strong>3 attempts</strong> for each problem and you get feedback right away. For multiple-choice problems, select one answer. For numeric problems, type a number (decimals or fractions like 1/3); units are given next to the box.</p>
+    </div>
+
+    <div class="scorebar">
+      <div>Solved: <strong id="solvedCount">0</strong> / <span id="totalCount"></span></div>
+      <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+      <div>Points: <strong id="points">0</strong></div>
+    </div>
+
+    <div id="problems"></div>
+
+    <div class="card final" id="finalCard">
+      <h2>Practice complete!</h2>
+      <p id="finalMsg"></p>
+      <button class="btn secondary" id="resetBtn" type="button">Try again</button>
+    </div>
+  </section>
+</main>
+
+<footer>Lincoln International Academy &middot; Physics I &middot; Chapter 1, Section 3</footer>
+
+<script>
+(function () {
+  /* ---------- Tabs ---------- */
+  var tabs = [document.getElementById('tab-learn'), document.getElementById('tab-practice')];
+  function showTab(idx) {
+    tabs.forEach(function (t, i) {
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      var on = i === idx;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      panel.classList.toggle('active', on);
+      panel.hidden = !on;
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showTab(i); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        showTab(n); tabs[n].focus();
+      }
+    });
+  });
+
+  /* ---------- Problems ----------
+     mc:  { q, opts:[...], ans:index, hint, sol }
+     num: { q, ans:number, tol:number, unit:string, hint, sol }  */
+  var MAX_ATTEMPTS = 3;
+  var problems = [
+    { q: 'In physics equations, what does the Greek letter &Delta; (delta) usually mean?',
+      opts: ['The sum or total', 'The speed of light', 'Difference or change in', 'The mass of an object'], ans: 2,
+      hint: 'In &Delta;<em>t</em>, it tells you the time interval, not a single time.',
+      sol: '&Delta; means &ldquo;difference or change in&rdquo;, so &Delta;<em>t</em> is the change in time (time elapsed).' },
+    { q: 'What does the Greek letter &Sigma; (sigma) usually mean?',
+      opts: ['Difference or change in', 'Sum or total', 'Proportional to', 'Square root of'], ans: 1,
+      hint: 'Think of adding many quantities together.',
+      sol: '&Sigma; means &ldquo;sum&rdquo; or &ldquo;total&rdquo;.' },
+    { q: 'In printed physics books, how are <em>units</em> (like m, s and kg) usually written, compared with variables?',
+      opts: ['In boldface or italic letters', 'Always in capital letters', 'In regular (roman) letters', 'In Greek letters'], ans: 2,
+      hint: 'Variables and quantities use the special styles (italic or boldface).',
+      sol: 'Variables are italic or boldface (such as <em>m</em> for mass); unit abbreviations use regular roman letters (such as kg).' },
+    { q: 'Look at the dropped-ball table: at every time, the golf ball and the table-tennis ball fall (almost) the same distance. What does this support?',
+      opts: ['Heavier objects fall faster in a vacuum', 'Lighter objects fall faster in a vacuum', 'In a vacuum, objects of different mass fall at the same rate', 'Air resistance makes all objects fall equally'], ans: 2,
+      hint: 'The two balls have different masses but the distances match.',
+      sol: 'The distances are nearly identical, supporting Galileo&rsquo;s hypothesis that all objects fall at the same rate in the absence of air resistance.' },
+    { q: 'Using &Delta;<em>y</em> = 4.9(&Delta;<em>t</em>)&sup2;, how far does a ball fall in 0.200 s?',
+      type: 'num', ans: 0.196, tol: 0.002, unit: 'm',
+      hint: 'Square the time first: (0.200)&sup2; = 0.0400. Then multiply by 4.9.',
+      sol: '&Delta;y = 4.9 &times; 0.0400 = 0.196 m (19.6 cm, matching the table).' },
+    { q: 'Using &Delta;<em>y</em> = 4.9(&Delta;<em>t</em>)&sup2;, how far does a ball fall in 0.400 s?',
+      type: 'num', ans: 0.784, tol: 0.005, unit: 'm',
+      hint: '(0.400)&sup2; = 0.160.',
+      sol: '&Delta;y = 4.9 &times; 0.160 = 0.784 m (78.4 cm, matching the table).' },
+    { q: 'Using &Delta;<em>y</em> = 4.9(&Delta;<em>t</em>)&sup2;, how long does it take a ball to fall 19.6 m?',
+      type: 'num', ans: 2.0, tol: 0.05, unit: 's',
+      hint: 'Solve (&Delta;t)&sup2; = 19.6 / 4.9 and then take the square root.',
+      sol: '(&Delta;t)&sup2; = 19.6 / 4.9 = 4.0, so &Delta;t = 2.0 s.' },
+    { q: 'In &Delta;<em>y</em> = 4.9(&Delta;<em>t</em>)&sup2;, if the time of fall doubles, by what factor does the distance fallen change?',
+      type: 'num', ans: 4, tol: 0.01, unit: '&times;',
+      hint: 'Replace &Delta;t with 2&Delta;t and square it.',
+      sol: '(2&Delta;t)&sup2; = 4(&Delta;t)&sup2;, so the distance is multiplied by 4.' },
+    { q: 'Force = mass &times; acceleration. If the mass stays constant and the force is doubled, by what factor does the acceleration change?',
+      type: 'num', ans: 2, tol: 0.01, unit: '&times;',
+      hint: 'Force and acceleration are directly proportional.',
+      sol: 'Directly proportional: the acceleration changes by the same factor, 2.' },
+    { q: 'Force = mass &times; acceleration. If the force stays constant and the mass is doubled, by what factor does the acceleration change? (Enter a decimal or fraction.)',
+      type: 'num', ans: 0.5, tol: 0.005, unit: '&times;',
+      hint: 'Mass and acceleration are inversely proportional.',
+      sol: 'Inversely proportional: doubling the mass multiplies the acceleration by 1/2 = 0.5.' },
+    { q: 'Force stays constant and the mass is tripled. By what factor does the acceleration change? (Enter a fraction or decimal.)',
+      type: 'num', ans: 1/3, tol: 0.005, unit: '&times;',
+      hint: 'Inverse relationship: multiply by 1/3.',
+      sol: 'The acceleration is multiplied by 1/3 &asymp; 0.333.' },
+    { q: 'For a constant force, how are mass and acceleration related?',
+      opts: ['Directly proportional', 'Inversely proportional', 'Not related', 'Equal to each other'], ans: 1,
+      hint: 'When one goes up by a factor, what happens to the other?',
+      sol: 'Since <em>a</em> = <em>F</em>/<em>m</em>, a larger mass gives a smaller acceleration: they are inversely proportional.' },
+    { q: 'What are the units of kg &middot; (m/s) &middot; (1/s)?',
+      opts: ['kg&middot;m/s&sup2;', 'kg&middot;m/s', 'kg&middot;m&sup2;/s&sup2;', 'kg/s&sup2;'], ans: 0,
+      hint: 'Multiply the numerators and the denominators: s &times; s = s&sup2;.',
+      sol: 'kg &times; m/s &times; 1/s = kg&middot;m/s&sup2; (a newton).' },
+    { q: 'What are the units of (kg/s)(m/s)&sup2;?',
+      opts: ['kg&middot;m/s&sup2;', 'kg&middot;m&sup2;/s&sup2;', 'kg&middot;m&sup2;/s&sup3;', 'kg&middot;m/s&sup3;'], ans: 2,
+      hint: 'First square (m/s) to get m&sup2;/s&sup2;, then multiply by kg/s.',
+      sol: '(kg/s)(m&sup2;/s&sup2;) = kg&middot;m&sup2;/s&sup3;.' },
+    { q: 'If you divide a force in newtons (1 N = 1 kg&middot;m/s&sup2;) by a speed in m/s, what are the units of the result?',
+      opts: ['kg&middot;m&sup2;/s&sup3;', 'kg/s', 'kg&middot;s', 'm/s&sup2;'], ans: 1,
+      hint: '(kg&middot;m/s&sup2;) &divide; (m/s) = (kg&middot;m/s&sup2;) &times; (s/m).',
+      sol: '(kg&middot;m/s&sup2;)/(m/s) = kg/s.' },
+    { q: 'If you square a speed expressed in meters per second, in what units is the result expressed?',
+      opts: ['m/s', 'm&sup2;/s', 'm&sup2;/s&sup2;', 's&sup2;/m&sup2;'], ans: 2,
+      hint: 'Square both the meters and the seconds.',
+      sol: '(m/s)&sup2; = m&sup2;/s&sup2;.' },
+    { q: 'Einstein&rsquo;s equation is <em>E</em> = <em>mc</em>&sup2;, where <em>c</em> is the speed of light and <em>m</em> is mass. What is the SI unit of <em>E</em>, in base units?',
+      opts: ['kg&middot;m/s', 'kg&middot;m&sup2;/s&sup2;', 'kg&middot;m/s&sup2;', 'kg&middot;m&sup2;/s'], ans: 1,
+      hint: 'Units of <em>mc</em>&sup2; = kg &times; (m/s)&sup2;.',
+      sol: 'kg &times; m&sup2;/s&sup2; = kg&middot;m&sup2;/s&sup2; (a joule).' },
+    { q: 'You want to find the <em>time</em> to travel a distance <em>d</em> at a speed <em>v</em>. Which expression has the dimension of time?',
+      opts: ['<em>d</em> &times; <em>v</em>', '<em>v</em> / <em>d</em>', '<em>d</em> + <em>v</em>', '<em>d</em> / <em>v</em>'], ans: 3,
+      hint: 'Check the dimensions: length &divide; (length/time).',
+      sol: '<em>d</em>/<em>v</em> = length &divide; (length/time) = time. (Adding <em>d</em> and <em>v</em> is invalid because their dimensions differ.)' },
+    { q: 'A car travels 450 km at a speed of 90 km/h. How long does the trip take?',
+      type: 'num', ans: 5, tol: 0.05, unit: 'h',
+      hint: 'Time = distance &divide; speed.',
+      sol: '&Delta;t = 450 km / (90 km/h) = 5.0 h.' },
+    { q: 'Which is the best order-of-magnitude estimate, in meters, of the height of a mountain?',
+      opts: ['1 m', '10 m', '100 m', '1000 m'], ans: 3,
+      hint: 'Mountains are much taller than buildings.',
+      sol: 'A mountain is typically about 10&sup3; m (1000 m) high.' },
+    { q: 'To the nearest power of 10, 725 km is closest to which value?',
+      opts: ['10&sup1; km', '10&sup2; km', '10&sup3; km', '10&#8308; km'], ans: 2,
+      hint: 'Is 725 closer to 100 or to 1000 (on a power-of-10 scale)?',
+      sol: '725 km is closer to 10&sup3; km (1000 km) than to 10&sup2; km (100 km).' },
+    { q: 'The order of magnitude of 88 km/h is 10<sup><em>n</em></sup> km/h. What is <em>n</em>?',
+      type: 'num', ans: 2, tol: 0.01, unit: '',
+      hint: 'Which is closer to 88: 10, 100 or 1000?',
+      sol: '88 is closest to 100 = 10&sup2;, so <em>n</em> = 2.' },
+    { q: 'Air data: 0.50 m&sup3; has a mass of 0.644 kg; 1.50 m&sup3; has 1.936 kg; 2.25 m&sup3; has 2.899 kg; 4.00 m&sup3; has 5.159 kg; 5.50 m&sup3; has 7.096 kg. What is the ratio mass/volume (approximately)?',
+      type: 'num', ans: 1.29, tol: 0.02, unit: 'kg/m&sup3;',
+      hint: 'Divide any mass by its volume, e.g. 5.159 &divide; 4.00.',
+      sol: 'The ratio is about 1.29 kg/m&sup3; every time (e.g. 5.159/4.00 = 1.29), so mass = 1.29 &times; volume.' },
+    { q: 'Using the relationship from the air data (mass = 1.29 &times; volume), predict the mass of 10.0 m&sup3; of air.',
+      type: 'num', ans: 12.9, tol: 0.3, unit: 'kg',
+      hint: 'Multiply 1.29 by 10.0.',
+      sol: 'mass = 1.29 &times; 10.0 = 12.9 kg.' },
+    { q: 'Each car drives about 10&#8239;000 mi per year and averages 20 mi per gallon. About how many gallons of gasoline does one car use per year?',
+      type: 'num', ans: 500, tol: 5, unit: 'gal',
+      hint: 'Divide the distance by the miles per gallon.',
+      sol: '10&#8239;000 mi &divide; 20 mi/gal = 500 gal per year.' },
+    { q: 'With about 120 million cars (1.2 &times; 10<sup>8</sup>) each using 500 gal per year, the total is 6 &times; 10<sup><em>n</em></sup> gal per year. What is <em>n</em>?',
+      type: 'num', ans: 10, tol: 0.01, unit: '',
+      hint: '1.2 &times; 10<sup>8</sup> &times; 500 = 1.2 &times; 10<sup>8</sup> &times; 5 &times; 10<sup>2</sup> = 6 &times; 10<sup>?</sup>.',
+      sol: '(1.2 &times; 10<sup>8</sup>)(5 &times; 10<sup>2</sup>) = 6 &times; 10<sup>10</sup> gal, so <em>n</em> = 10.' },
+    { q: 'In the engineering design process, during which phase do engineers build and test models or prototypes?',
+      opts: ['Phase 1: defining the problem', 'Phase 2: researching and proposing solutions', 'Phase 3: testing and refining solutions', 'None of the phases'], ans: 2,
+      hint: 'Prototypes are smaller, simpler versions used to see what works.',
+      sol: 'Engineers test and refine solutions in the third phase, using models and prototypes.' }
+  ];
+
+  var state = [];
+  var container = document.getElementById('problems');
+  var solvedEl = document.getElementById('solvedCount');
+  var pointsEl = document.getElementById('points');
+  var barEl = document.getElementById('progressBar');
+  var finalCard = document.getElementById('finalCard');
+  document.getElementById('totalCount').textContent = problems.length;
+
+  function parseNumber(raw) {
+    var s = raw.trim().replace(',', '.');
+    var m = s.match(/^(-?\d*\.?\d+)\s*\/\s*(-?\d*\.?\d+)/);
+    if (m) { var d = parseFloat(m[2]); return d === 0 ? NaN : parseFloat(m[1]) / d; }
+    m = s.match(/^-?\d*\.?\d+/);
+    return m ? parseFloat(m[0]) : NaN;
+  }
+
+  function dots(used) {
+    var h = '';
+    for (var i = 0; i < MAX_ATTEMPTS; i++) h += '<span class="dot' + (i < used ? ' used' : '') + '"></span>';
+    return h;
+  }
+
+  function build() {
+    container.innerHTML = '';
+    state = problems.map(function () { return { used: 0, done: false, correct: false, points: 0 }; });
+    problems.forEach(function (p, i) {
+      var isMC = !!p.opts;
+      var div = document.createElement('div');
+      div.className = 'card problem';
+      var inputHTML;
+      if (isMC) {
+        inputHTML = '<div class="options" role="radiogroup" aria-label="Choices for problem ' + (i + 1) + '">' +
+          p.opts.map(function (o, k) {
+            return '<label><input type="radio" name="q' + i + '" value="' + k + '"><span>' + o + '</span></label>';
+          }).join('') + '</div>';
+      } else {
+        inputHTML = '';
+      }
+      div.innerHTML =
+        '<span class="q-num">PROBLEM ' + (i + 1) + '</span>' +
+        '<p>' + p.q + '</p>' + inputHTML +
+        '<div class="answer-row">' +
+          (isMC ? '' : '<input type="text" inputmode="decimal" autocomplete="off" aria-label="Answer to problem ' + (i + 1) + '" placeholder="Your answer"><span class="unit-label">' + (p.unit || '') + '</span>') +
+          '<button class="btn" type="button">Check</button>' +
+          '<span class="attempts">Attempts left: <span class="dots">' + dots(0) + '</span></span>' +
+        '</div>' +
+        '<div class="feedback" role="status" aria-live="polite"></div>';
+      container.appendChild(div);
+
+      var input = div.querySelector('input[type="text"]');
+      var radios = div.querySelectorAll('input[type="radio"]');
+      var btn = div.querySelector('button');
+      var fb = div.querySelector('.feedback');
+      var dotsEl = div.querySelector('.dots');
+
+      function show(cls, html) { fb.className = 'feedback show ' + cls; fb.innerHTML = html; }
+      function lock() {
+        btn.disabled = true;
+        if (input) input.disabled = true;
+        Array.prototype.forEach.call(radios, function (r) { r.disabled = true; r.parentNode.classList.add('disabled'); });
+      }
+
+      function check() {
+        var st = state[i];
+        if (st.done) return;
+        var ok, picked = null;
+        if (isMC) {
+          Array.prototype.forEach.call(radios, function (r) { if (r.checked) picked = r; });
+          if (!picked) { show('hint', 'Please select an answer first. (This did not use an attempt.)'); return; }
+          ok = parseInt(picked.value, 10) === p.ans;
+        } else {
+          var v = parseNumber(input.value);
+          if (isNaN(v)) { show('hint', 'Please enter a number, e.g. 12.9 or 1/3. (This did not use an attempt.)'); return; }
+          ok = Math.abs(v - p.ans) <= p.tol;
+        }
+        st.used++;
+        dotsEl.innerHTML = dots(st.used);
+        var left = MAX_ATTEMPTS - st.used;
+        if (ok) {
+          st.done = st.correct = true;
+          st.points = MAX_ATTEMPTS - st.used + 1;
+          if (picked) picked.parentNode.classList.add('picked-right');
+          show('ok', '&#10003; Correct! Well done.' + (st.used === 1 ? ' First try!' : '') + '<div class="sol">' + p.sol + '</div>');
+          lock();
+        } else if (left === 0) {
+          st.done = true;
+          if (picked) picked.parentNode.classList.add('picked-wrong');
+          if (isMC) radios[p.ans].parentNode.classList.add('picked-right');
+          show('bad', '&#10007; Not quite. You have used all 3 attempts.<div class="sol"><strong>Solution:</strong> ' + p.sol + '</div>');
+          lock();
+        } else {
+          var msg = '&#10007; Not correct. You have ' + left + ' attempt' + (left > 1 ? 's' : '') + ' left.';
+          if (st.used >= 2) msg += '<div class="sol"><strong>Hint:</strong> ' + p.hint + '</div>';
+          show('bad', msg);
+          if (input) input.select();
+          if (picked) { picked.checked = false; }
+        }
+        update();
+      }
+      btn.addEventListener('click', check);
+      if (input) input.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
+    });
+    update();
+  }
+
+  function update() {
+    var solved = 0, pts = 0, finished = 0;
+    state.forEach(function (s) {
+      if (s.correct) solved++;
+      if (s.done) finished++;
+      pts += s.points;
+    });
+    solvedEl.textContent = solved;
+    pointsEl.textContent = pts + ' / ' + (problems.length * MAX_ATTEMPTS);
+    barEl.style.width = (finished / problems.length * 100) + '%';
+    if (finished === problems.length) {
+      var pct = Math.round(solved / problems.length * 100);
+      var msg = 'You solved ' + solved + ' of ' + problems.length + ' problems (' + pct + '%) and earned ' + pts + ' points. ';
+      msg += pct === 100 ? 'Excellent work!' : pct >= 70 ? 'Good job! Review the solutions you missed.' : 'Keep practicing — review the lesson and try again.';
+      document.getElementById('finalMsg').textContent = msg;
+      finalCard.classList.add('show');
+    } else {
+      finalCard.classList.remove('show');
+    }
+  }
+
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    build();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  build();
+})();
+</script>
+</body>
+</html>
