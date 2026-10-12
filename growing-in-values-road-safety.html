@@ -1,0 +1,839 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Road Safety in My Community | Growing in Values</title>
+<meta name="description" content="Interactive study page for Growing in Values (7th grade): road safety, elements of traffic, and safe behaviors for pedestrians, passengers and cyclists, with worked examples and practice.">
+<style>
+:root{
+  --bg:#f3f0e9; --surface:#fffdf9; --surface-2:#f8f5ee; --ink:#1e2937; --muted:#5a6575;
+  --line:#ddd6c7; --primary:#2f4f6b; --primary-ink:#ffffff; --accent:#3f7f68; --accent-soft:#e2efe8;
+  --blue-soft:#e4ecf3; --warm:#b7791f; --warm-soft:#f7ecd2; --good:#2c7a57; --good-soft:#e1f1e8;
+  --bad:#a94a3f; --bad-soft:#f6e4e1; --shadow:0 1px 2px rgba(30,41,55,.06),0 4px 14px rgba(30,41,55,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+    --line:#2d3947; --primary:#9cc0e0; --primary-ink:#0f1722; --accent:#6fbf9a; --accent-soft:#1a2f26;
+    --blue-soft:#1b2838; --warm:#e0b04f; --warm-soft:#2f2812; --good:#5cc08f; --good-soft:#183024;
+    --bad:#e08a7d; --bad-soft:#331e1c; --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+  --line:#2d3947; --primary:#9cc0e0; --primary-ink:#0f1722; --accent:#6fbf9a; --accent-soft:#1a2f26;
+  --blue-soft:#1b2838; --warm:#e0b04f; --warm-soft:#2f2812; --good:#5cc08f; --good-soft:#183024;
+  --bad:#e08a7d; --bad-soft:#331e1c; --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:#1f3347;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:Georgia,serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em;margin:0}
+.crumbs{margin:.25rem 0 0;font-size:1.05rem;color:#d9d3c4}
+.crumbs strong{color:#fff}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font-size:.8rem;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#f3f0e9;border:1px solid rgba(255,255,255,.2)}
+.theme{background:transparent;border:1px solid rgba(255,255,255,.35);color:#f3f0e9;border-radius:8px;padding:4px 10px;font-size:.85rem}
+
+/* nav */
+nav.sticky{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+nav.sticky .wrap{display:flex;gap:4px;align-items:center;overflow-x:auto;padding-top:6px;padding-bottom:6px}
+nav.sticky a{white-space:nowrap;text-decoration:none;color:var(--ink);padding:6px 12px;border-radius:8px;font-size:.92rem}
+nav.sticky a:hover{background:var(--blue-soft)}
+.progress-box{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);white-space:nowrap}
+.bar{width:110px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+section.sec{padding:34px 0 6px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--warm);font-weight:700;margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow);margin:0 0 18px}
+.card.soft{background:var(--blue-soft)}
+.card.warm{background:var(--warm-soft)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 10px 10px 0;margin:0 0 1em}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.ref{font-size:.82rem;color:var(--muted);font-style:italic}
+.tag{display:inline-block;font-size:.75rem;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary);font-weight:600;margin-right:6px}
+
+/* stage explorer */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:600}
+.tab[aria-selected="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.tabpanel ul{margin:.3em 0 1em;padding-left:1.2em}
+.tabpanel li{margin-bottom:.35em}
+
+/* flip cards */
+.flip{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-height:150px;text-align:left;box-shadow:var(--shadow);width:100%}
+.flip .front{font-family:Georgia,serif;font-size:1.3rem;font-weight:700}
+.flip .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+.flip .back{display:none}
+.flip.on{background:var(--accent-soft);border-color:var(--accent)}
+.flip.on .front{font-size:1.05rem;color:var(--accent)}
+.flip.on .back{display:block;margin-top:8px}
+.flip.on .hint{display:none}
+
+/* accordion */
+details.acc{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:8px}
+details.acc summary{padding:11px 14px;cursor:pointer;font-weight:600}
+details.acc .body{padding:0 14px 12px}
+
+/* activity shell */
+.act{position:relative}
+.act h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.act .done-mark{display:none;font-size:.78rem;background:var(--good-soft);color:var(--good);padding:2px 10px;border-radius:99px;font-family:system-ui,sans-serif;font-weight:700}
+.act.done .done-mark{display:inline-block}
+.btn{background:var(--primary);color:var(--primary-ink);border:0;border-radius:9px;padding:8px 16px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--primary);border:1px solid var(--primary)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.opt:focus-visible,.tab:focus-visible,.flip:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+.opt{display:block;width:100%;text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 8px}
+.opt:hover:not(:disabled){border-color:var(--primary)}
+.opt.good{background:var(--good-soft);border-color:var(--good);color:var(--ink)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt.sel{border-color:var(--primary);background:var(--blue-soft)}
+.opt:disabled{cursor:default}
+.fb{min-height:1.4em;margin:8px 0 0;padding:0;border-radius:8px;font-size:.95rem}
+.fb.show{padding:9px 13px}
+.fb.good{background:var(--good-soft);color:var(--ink);border-left:4px solid var(--good)}
+.fb.bad{background:var(--bad-soft);color:var(--ink);border-left:4px solid var(--bad)}
+.fb.info{background:var(--blue-soft);border-left:4px solid var(--primary)}
+.shake{animation:shake .35s}
+@keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}html{scroll-behavior:auto}.bar i{transition:none}}
+.score{font-weight:700;color:var(--primary)}
+.qhead{font-weight:700;margin-bottom:8px}
+.qblock{border-top:1px dashed var(--line);padding-top:14px;margin-top:14px}
+.qblock:first-of-type{border-top:0;padding-top:0;margin-top:0}
+
+/* worked example */
+.steps{list-style:none;margin:12px 0 0;padding:0}
+.step{display:none;border:1px solid var(--line);border-left:5px solid var(--primary);background:var(--surface-2);border-radius:10px;padding:11px 14px;margin-bottom:9px}
+.step.show{display:block;animation:fade .3s}
+.step b.t{display:block;color:var(--primary);margin-bottom:2px}
+.step.final{border-left-color:var(--good);background:var(--good-soft)}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.problem{background:var(--warm-soft);border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+
+/* sequence */
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}
+.slot{min-height:78px;border:2px dashed var(--line);border-radius:10px;padding:8px 10px;font-size:.92rem;background:var(--surface-2)}
+.slot small{display:block;color:var(--muted);font-weight:700;margin-bottom:2px}
+.slot.filled{border-style:solid;border-color:var(--good);background:var(--good-soft)}
+.slot.next{border-color:var(--primary)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pool .opt{width:auto;margin:0}
+
+/* matching / sort */
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
+@media(max-width:560px){.match{grid-template-columns:1fr}}
+.match .opt.done{background:var(--good-soft);border-color:var(--good);opacity:.85}
+.sortcard{font-family:Georgia,serif;font-size:1.15rem;text-align:center;background:var(--warm-soft);border-radius:12px;padding:20px 12px;margin:10px 0}
+
+/* cloze */
+.cloze p{line-height:2.2}
+select{font:inherit;padding:4px 8px;border-radius:8px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+select.good{border-color:var(--good);background:var(--good-soft)}
+select.bad{border-color:var(--bad);background:var(--bad-soft)}
+textarea{width:100%;min-height:96px;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);resize:vertical}
+.checks{list-style:none;padding:0;margin:8px 0}
+.checks li{padding:4px 0}
+.checks .y{color:var(--good);font-weight:700}
+.checks .n{color:var(--warm);font-weight:700}
+.model{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 10px 10px 0;margin-top:8px}
+
+table.cmp{width:100%;border-collapse:collapse;font-size:.95rem}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.cmp th{background:var(--blue-soft)}
+
+.overlay{position:fixed;inset:0;background:rgba(17,22,29,.6);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 16px}
+.overlay[hidden]{display:none}
+.modal{background:var(--surface);border-radius:16px;max-width:620px;width:100%;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.35);border-top:5px solid var(--warm)}
+.bigscore{font-family:Georgia,serif;font-size:2.6rem;font-weight:700;color:var(--primary);line-height:1.1;margin:4px 0 8px}
+.bigscore small{font-size:1rem;color:var(--muted);font-family:system-ui,sans-serif;font-weight:400}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden;min-width:70px}
+.meter i{display:block;height:100%;background:var(--accent)}
+footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.88rem}
+.sr{position:absolute;left:-9999px}
+@media print{header.top .theme,nav.sticky,.btn{display:none}.step{display:block}}
+
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <p class="school">Lincoln International Academy</p>
+      <p class="crumbs">Class: <strong>Growing in Values</strong> &nbsp;·&nbsp; Teacher: <strong>Nathaly López</strong></p>
+    </div>
+    <div class="meta">
+      <span class="pill">7th Grade · Q02 Week 2</span>
+      <span class="pill">Unit 2: Community, respect and responsibility</span>
+      <button class="theme" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Light / Dark</button>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky" aria-label="Page sections">
+  <div class="wrap">
+    <a href="#learn">Learn</a>
+    <a href="#vocab">Vocabulary</a>
+    <a href="#examples">Worked examples</a>
+    <a href="#practice">Practice</a>
+    <a href="#reflect">Notebook</a>
+    <div class="progress-box" aria-live="polite"><span id="progText">0 of 8 activities</span><div class="bar"><i id="progBar"></i></div></div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ======================= LEARN ======================= -->
+<section class="sec" id="learn">
+  <div class="eyebrow">Elements of traffic</div>
+  <h2>Moving Safely in My Community</h2>
+
+  <div class="card soft">
+    <h3>Guiding question</h3>
+    <p><strong>"How can I protect my life and the lives of others when I move around my community?"</strong></p>
+    <div class="callout">
+      <strong>Learning target:</strong> I can identify the main elements of traffic and their purpose, explain safe behaviors for moving around my community, and propose one concrete action to improve road safety at home, at school or in my neighborhood.
+    </div>
+  </div>
+
+  <div class="card warm">
+    <h3>Road safety is a value</h3>
+    <p>Following traffic rules is not only about avoiding a fine. It shows <strong>respect for life</strong> and <strong>responsibility</strong> toward your family, your classmates and everyone who shares the road. Whether you walk, ride in a car or bus, or ride a bike, your choices protect you and the people around you.</p>
+  </div>
+
+  <h3>Elements of traffic</h3>
+  <p>Select each element to read what it is, what it is for, and the safe behavior that goes with it.</p>
+  <div class="card">
+    <div class="tabs" role="tablist" aria-label="Elements of traffic" id="stageTabs"></div>
+    <div id="stagePanel" class="tabpanel" role="tabpanel" aria-live="polite"></div>
+  </div>
+
+  <div class="card">
+    <h3>Three ways we move: three sets of safe behaviors</h3>
+    <table class="cmp">
+      <tr><th>You are a…</th><th>Safe behaviors</th></tr>
+      <tr><td><b>Pedestrian</b> (on foot)</td><td>Use the crosswalk · wait for the walk signal · look and listen before crossing · no phone while crossing · walk on the sidewalk</td></tr>
+      <tr><td><b>Passenger</b> (in a car or bus)</td><td>Buckle your seatbelt on every ride (back seat too) · stay seated · keep arms and head inside · do not distract the driver · get out on the curb side</td></tr>
+      <tr><td><b>Cyclist</b> (on a bike)</td><td>Wear a helmet that fits · obey signs and signals · use hand signals · be visible with lights or reflectors · do not use a phone</td></tr>
+    </table>
+    <p class="ref" style="margin-top:10px">Traffic rules differ from country to country. Ask your teacher about the rules where you live.</p>
+  </div>
+
+  <div class="card soft">
+    <h3>"Traffic light of behaviors"</h3>
+    <p>Use colors to judge a situation: <b>green</b> = safe, <b>red</b> = unsafe, <b>yellow</b> = "it depends." When you say "it depends," explain what the safe choice would be, and name the traffic element involved (sign, crosswalk, seatbelt, helmet).</p>
+  </div>
+</section>
+
+<!-- ======================= VOCAB ======================= -->
+<section class="sec" id="vocab">
+  <div class="eyebrow">Key vocabulary</div>
+  <h2>Words to Know</h2>
+  <p>Tap a card to flip it. Say the meaning in your own words before you flip!</p>
+  <div class="grid g3" id="flips"></div>
+</section>
+
+<!-- ======================= EXAMPLES ======================= -->
+<section class="sec" id="examples">
+  <div class="eyebrow">Step by step</div>
+  <h2>Worked Examples</h2>
+  <p>Each example shows how to think through a situation from class. Press <strong>Show next step</strong> and try to predict the next step before you reveal it.</p>
+  <div class="card soft"><b>The four case questions:</b> (1) What traffic element is involved? (2) Is the behavior safe or risky? (3) What could happen if nothing changes? (4) What is the safe alternative?</div>
+  <div id="exampleList"></div>
+</section>
+
+<!-- ======================= PRACTICE ======================= -->
+<section class="sec" id="practice">
+  <div class="eyebrow">Your turn</div>
+  <h2>Practice with Instant Feedback</h2>
+  <p>You get feedback right after every answer. Mistakes are part of learning, so use the explanations and try again. Your scores are saved on this device only.</p>
+
+  <div class="card act" id="act-quiz"><h3>1. Mastery Quiz (10 questions) <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-lights"><h3>2. Traffic Light of Behaviors <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-match"><h3>3. Match the Traffic Element <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-roles"><h3>4. Pedestrian, Passenger or Cyclist? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-cases"><h3>5. Case Stations: Safe or Risky? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-seq"><h3>6. Crossing the Street Safely <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-route"><h3>7. Safe Route Map and Pledge <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-cloze"><h3>8. Complete the Sentences <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+
+  <div class="card soft" id="summaryCta" style="display:none">
+    <h3>All activities complete!</h3>
+    <p>Great work. See how you did on each activity.</p>
+    <button class="btn" type="button" id="openSummary">View my score summary</button>
+  </div>
+</section>
+
+<!-- ======================= NOTEBOOK ======================= -->
+<section class="sec" id="reflect">
+  <div class="eyebrow">Write it by hand</div>
+  <h2>Notebook Work and Exit Ticket</h2>
+  <div class="callout warm"><strong>Get your notebook or a sheet of paper and a pencil.</strong> Your answers here are not typed on this page. Write or draw them by hand.</div>
+
+  <div class="card">
+    <h3>Your Safe Route map</h3>
+    <p>In your notebook, sketch a simple map of a route you often walk, cycle or ride (for example, home to school). Mark <strong>at least 2 risk points</strong> (for example: no crosswalk, a broken sidewalk, fast traffic) and write the <strong>safe action</strong> for each one. See Worked Example 5.</p>
+  </div>
+
+  <div class="card">
+    <h3>My road-safety pledge</h3>
+    <p>Write one concrete action you will practice <em>this week</em>, for example "I will always use the crosswalk on the way to school," "I will always wear my seatbelt," or "I will wear my helmet when I cycle." See Worked Example 6.</p>
+  </div>
+
+  <div class="card">
+    <h3>Self-check (think, then write one sentence)</h3>
+    <ul>
+      <li>I can name the traffic element involved in a situation (sign, crosswalk, seatbelt, helmet).</li>
+      <li>I can explain a safe behavior for a pedestrian, a passenger and a cyclist.</li>
+      <li>I took part in my team's case analysis and Safe Route map.</li>
+    </ul>
+  </div>
+
+  <div class="card soft" id="exitTicket">
+    <h3>Exit ticket ✏️</h3>
+    <p><strong>Write your answers in your notebook or on a sheet of paper</strong> before you close this page. Write the title "Exit ticket," your name, and the date, then answer:</p>
+    <ol>
+      <li>Name two traffic elements and explain what each one is for.</li>
+      <li>Write one concrete action you will practice this week to stay safe as a pedestrian, passenger or cyclist.</li>
+    </ol>
+    <p class="ref">Tip: look back at the Worked Examples if you need help. Hand your paper to your teacher when asked.</p>
+  </div>
+  <p style="text-align:center;font-family:Georgia,serif;font-size:1.3rem;margin:22px 0"><em>Safe roads start with my choices.</em></p>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Lincoln International Academy · Growing in Values · Ms. Nathaly López · 7th Grade, Q02 Week 2.
+    <br>Based on the lesson plan "Elements of traffic: moving safely in my community."
+    <div class="row" style="margin-top:10px"><button class="btn ghost" id="resetAll" type="button">Reset my scores</button></div>
+  </div>
+</footer>
+
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="sumTitle" hidden>
+  <div class="modal">
+    <div class="eyebrow">Growing in Values · Road safety</div>
+    <h2 id="sumTitle">Your Score Summary</h2>
+    <div class="bigscore" id="sumBig"></div>
+    <p id="sumMsg"></p>
+    <table class="cmp" id="sumTable"></table>
+    <p class="ref">Scores count correct answers on your latest try of each activity (wrong taps lower the score). Remember to write your exit ticket answers in your notebook or on a paper sheet.</p>
+    <div class="row"><button class="btn" type="button" id="closeSummary">Close</button><button class="btn ghost" type="button" id="reviewBtn">Practice again</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- helpers ---------- */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+function h(tag, attrs, ...kids){
+  const el = document.createElement(tag);
+  for(const k in (attrs||{})){
+    if(k==='class') el.className = attrs[k];
+    else if(k==='html') el.innerHTML = attrs[k];
+    else if(k.startsWith('on')) el.addEventListener(k.slice(2), attrs[k]);
+    else el.setAttribute(k, attrs[k]);
+  }
+  kids.flat().forEach(c => { if(c!=null) el.append(c.nodeType ? c : document.createTextNode(c)); });
+  return el;
+}
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+function feedback(el, kind, text){ el.className = 'fb show ' + kind; el.textContent = text; }
+
+/* ---------- theme ---------- */
+$('#themeBtn').addEventListener('click', () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme==='dark' || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme = dark ? 'light' : 'dark';
+  store.set('rs_theme', root.dataset.theme);
+});
+const savedTheme = store.get('rs_theme', null);
+if(savedTheme) document.documentElement.dataset.theme = savedTheme;
+
+/* ---------- progress & scores ---------- */
+const ACTS = [
+  ['act-quiz','Mastery Quiz'],['act-lights','Traffic Light of Behaviors'],['act-match','Match the Traffic Element'],['act-roles','Pedestrian, Passenger or Cyclist?'],
+  ['act-cases','Case Stations'],['act-seq','Crossing the Street Safely'],['act-route','Safe Route Map and Pledge'],['act-cloze','Complete the Sentences']
+];
+const TOTAL = ACTS.length;
+const scores = store.get('rs_q02w01_scores', {});
+function paintProgress(){
+  const n = ACTS.filter(a => scores[a[0]]).length;
+  $('#progText').textContent = n + ' of ' + TOTAL + ' activities';
+  $('#progBar').style.width = (n/TOTAL*100) + '%';
+  $$('.act').forEach(a => a.classList.toggle('done', !!scores[a.id]));
+  $('#summaryCta').style.display = n===TOTAL ? '' : 'none';
+}
+function record(id, correct, total){
+  const was = ACTS.filter(a => scores[a[0]]).length;
+  scores[id] = [correct, total];
+  store.set('rs_q02w01_scores', scores);
+  paintProgress();
+  if(was===TOTAL-1 && ACTS.every(a => scores[a[0]])) setTimeout(openSummary, 900);
+}
+function openSummary(){
+  let c=0,t=0;
+  const rows = ACTS.map(([id,name]) => { const [a,b]=scores[id]||[0,0]; c+=a; t+=b; return h('tr',{}, h('td',{},name), h('td',{},a+' / '+b), h('td',{}, h('div',{class:'meter'}, h('i',{style:'width:'+(b?a/b*100:0)+'%'})))); });
+  const pct = t ? Math.round(c/t*100) : 0;
+  $('#sumBig').innerHTML = pct + '% <small>(' + c + ' of ' + t + ' correct)</small>';
+  $('#sumMsg').textContent = pct>=90 ? 'Outstanding! You know the traffic elements and the safe behaviors that protect you and others.'
+    : pct>=80 ? 'Secure! You have a solid understanding. Review the activities with lower scores to make it even stronger.'
+    : pct>=60 ? 'Good progress. Go back to the Worked Examples, then retry the activities with lower scores.'
+    : 'Keep going! Re-read the traffic elements and the Worked Examples, then try the activities again.';
+  const tbl = $('#sumTable'); tbl.innerHTML='';
+  tbl.append(h('tr',{},h('th',{},'Activity'),h('th',{},'Score'),h('th',{},'')), ...rows);
+  $('#overlay').hidden = false; $('#closeSummary').focus();
+}
+function closeSummary(){ $('#overlay').hidden = true; }
+$('#openSummary').addEventListener('click', openSummary);
+$('#closeSummary').addEventListener('click', closeSummary);
+$('#reviewBtn').addEventListener('click', () => { closeSummary(); $('#practice').scrollIntoView(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeSummary(); });
+$('#resetAll').addEventListener('click', () => {
+  if(!confirm('Clear your saved scores on this device?')) return;
+  store.del('rs_q02w01_scores'); location.reload();
+});
+
+/* ---------- key ideas ---------- */
+const IDEAS = [
+  { tab:'1. Traffic signs', title:'Traffic signs tell us what to do', ref:'Roads, corners, school zones',
+    pts:['<b>Stop sign</b>: come to a complete stop and check that it is safe before you continue.','<b>Yield sign</b>: slow down and give way to others who have the right of way.','<b>Pedestrian crossing sign</b>: warns drivers that people may be crossing, and tells walkers where it is safest to cross.','Signs only work if everyone obeys them. Their shape, color and symbol tell us their message quickly.'],
+    key:'Signs give clear instructions that keep everyone predictable and safe.' },
+  { tab:'2. Traffic lights', title:'Traffic lights organize who goes and who waits', ref:'Intersections and corners',
+    pts:['<b>Red</b>: stop and wait.','<b>Yellow</b>: caution; the light is about to turn red, so prepare to stop.','<b>Green</b>: go, but only when it is clear and safe.','Pedestrians have their own signals (walk / don\'t walk). Wait for the walk signal before you cross.'],
+    key:'A green light means you may go. It does not mean it is automatically safe: look first.' },
+  { tab:'3. Crosswalks', title:'Crosswalks are the safest place to cross', ref:'Corners, school entrances',
+    pts:['A <b>crosswalk</b> is a marked place where pedestrians cross, and where drivers expect to see them.','Crossing between parked cars or in the middle of the block is risky: drivers may not see you or have time to stop.','Even at a crosswalk, look and make sure vehicles have stopped before you step out.'],
+    key:'Use the crosswalk: it makes you visible and predictable.' },
+  { tab:'4. Seatbelts', title:'Seatbelts protect passengers', ref:'Cars and other vehicles',
+    pts:['A <b>seatbelt</b> holds you in your seat if the car stops suddenly or crashes.','Without it, your body keeps moving and can hit the inside of the car or be thrown out.','Everyone should buckle up on every ride, including in the back seat and on short trips. Younger children need a car seat or booster suited to their size.'],
+    key:'Buckle up before the car moves, every time.' },
+  { tab:'5. Helmets', title:'Helmets protect the head', ref:'Bicycles, scooters, motorcycles',
+    pts:['A <b>helmet</b> reduces the risk of serious head injury if you fall or crash.','It works only if it fits well: snug, level on the head, with the strap fastened.','Wear it on every ride, even short ones close to home.'],
+    key:'A helmet protects your head, and your head protects your future.' },
+  { tab:'6. Safe behaviors', title:'Safe behaviors for everyone', ref:'Every place we travel',
+    pts:['Put away the phone and take off headphones when crossing or riding.','Be visible: bright clothing in the day and lights or reflectors at night.','Stay alert, be patient, and never take a risk to save a few seconds.','Remind friends and family to follow the rules too. Safe habits spread.'],
+    key:'Safe behavior is a daily choice that protects you and others.' }
+];
+(function(){
+  const tabs = $('#stageTabs'), panel = $('#stagePanel');
+  function show(i){
+    $$('.tab', tabs).forEach((b,j) => b.setAttribute('aria-selected', j===i));
+    const s = IDEAS[i];
+    panel.innerHTML = '';
+    panel.append(h('h3', {}, s.title), h('p', {class:'ref'}, 'Where you see it: ' + s.ref), h('ul', {}, s.pts.map(p => h('li', {html:p}))), h('div', {class:'callout'}, h('strong', {}, 'Key idea: '), s.key));
+  }
+  IDEAS.forEach((s,i) => tabs.append(h('button', {class:'tab', role:'tab', type:'button', 'aria-selected':'false', onclick:()=>show(i)}, s.tab)));
+  show(0);
+})();
+
+/* ---------- vocabulary cards ---------- */
+const VOCAB = [
+  ['Traffic sign','A sign that gives instructions, warnings or information to road users, such as stop, yield or pedestrian crossing.'],
+  ['Traffic light','A signal with red (stop), yellow (caution) and green (go) that controls who moves at an intersection.'],
+  ['Crosswalk','A marked place where pedestrians can cross the street.'],
+  ['Seatbelt','A strap that holds a passenger in their seat to protect them in a sudden stop or crash.'],
+  ['Helmet','Protective headgear worn by cyclists (and others) to reduce the risk of head injury.'],
+  ['Pedestrian','A person traveling on foot.'],
+  ['Passenger','A person who travels in a vehicle but is not driving it.'],
+  ['Risk point','A place on a route where there is a danger, such as no crosswalk, a broken sidewalk or fast traffic.'],
+  ['Road-safety pledge','A personal promise to practice one concrete safe behavior.']
+];
+VOCAB.forEach(([t,d]) => {
+  const b = h('button', {class:'flip', type:'button', 'aria-pressed':'false'},
+    h('div', {class:'front'}, t), h('div', {class:'hint'}, 'Tap to see the meaning'), h('div', {class:'back'}, d));
+  b.addEventListener('click', () => { const on = b.classList.toggle('on'); b.setAttribute('aria-pressed', on); });
+  $('#flips').append(b);
+});
+
+/* ---------- worked examples ---------- */
+const EXAMPLES = [
+  { title:'Example 1: Crossing between parked cars',
+    problem:'<i>A student crosses the street in the middle of the block, between two parked cars, instead of using the crosswalk at the corner.</i> Analyze the case with the four questions.',
+    steps:[
+      ['1. What traffic element is involved?','The <b>crosswalk</b> (and the pedestrian signal at the corner).'],
+      ['2. Is the behavior safe or risky?','<b>Risky.</b> The student is outside the marked crossing, and parked cars block the view.'],
+      ['3. What could happen if nothing changes?','Drivers may not see the student until the last moment and may not be able to stop in time. The student could be hit.'],
+      ['4. What is the safe alternative?','Walk to the crosswalk, wait for the walk signal (or for vehicles to stop), look and listen, and then cross.'],
+      ['Answer.','The student should use the crosswalk. It makes them visible and gives drivers time to stop.', true]
+    ]},
+  { title:'Example 2: Riding a bike without a helmet',
+    problem:'<i>A student rides a bike to the corner store without a helmet because "it is only a short ride."</i>',
+    steps:[
+      ['1. What traffic element is involved?','The <b>helmet</b>.'],
+      ['2. Is the behavior safe or risky?','<b>Risky.</b> Most falls happen on short, familiar rides.'],
+      ['3. What could happen if nothing changes?','A fall or crash could cause a serious head injury.'],
+      ['4. What is the safe alternative?','Wear a helmet that fits (snug, level, strap fastened) on every ride, however short.'],
+      ['Answer.','The short distance does not remove the risk. The safe choice is to wear a helmet every time.', true]
+    ]},
+  { title:'Example 3: Getting into a car without a seatbelt',
+    problem:'<i>A student gets into the back seat of a car and does not buckle up because the trip is short.</i>',
+    steps:[
+      ['1. What traffic element is involved?','The <b>seatbelt</b>.'],
+      ['2. Is the behavior safe or risky?','<b>Risky.</b> The back seat is not automatically safe.'],
+      ['3. What could happen if nothing changes?','In a sudden stop or crash, the student could be thrown against the inside of the car or out of the seat, and could also injure others.'],
+      ['4. What is the safe alternative?','Buckle up before the car starts moving, and remind others to do the same.'],
+      ['Answer.','Everyone buckles up on every ride, including the back seat and short trips.', true]
+    ]},
+  { title:'Example 4: Reading the signals at a corner',
+    problem:'You arrive at a corner with a traffic light and a pedestrian signal. How do you cross safely?',
+    steps:[
+      ['Find the crosswalk and the pedestrian signal.','Stand at the curb, not in the road, where drivers can see you.'],
+      ['Read the pedestrian signal.','Wait for the <b>walk</b> signal. If it shows <b>don\'t walk</b> (or a red figure), wait.'],
+      ['Remember: green means "may go," not "safe automatically."','Even with the walk signal, look and listen. Make sure vehicles are stopping.'],
+      ['Cross steadily.','Walk (do not run), keep your eyes up, and keep your phone away.'],
+      ['Answer.','Wait at the curb for the walk signal, look and listen, confirm that vehicles have stopped, and then cross steadily. If the signal changes before you start, wait for the next one.', true]
+    ]},
+  { title:'Example 5: Make a Safe Route map',
+    problem:'Sketch a simple map of a route you often walk, cycle or ride, marking at least 2 risk points and the safe action for each.',
+    steps:[
+      ['Choose your route.','For example, home to school. Draw a line for the route and mark the start and the end.'],
+      ['Walk the route in your mind.','List the places where you cross a street, pass a corner, or share the road with vehicles.'],
+      ['Mark the risk points.','Use a symbol (such as a red triangle) at each place where there is a danger: no crosswalk, a broken sidewalk, fast traffic, a blind corner.'],
+      ['Write the safe action beside each one.','No crosswalk: walk to the nearest marked crossing. Broken sidewalk: watch your step and use the safest path. Fast traffic: wait for a gap or a signal and cross with an adult.'],
+      ['Check the criteria.','At least 2 risk points ✓ A safe action for each ✓ Neat and easy to read ✓ A key explaining the symbols ✓'],
+      ['Example result.','<table class="cmp"><tr><th>Risk point</th><th>Safe action</th></tr><tr><td>No crosswalk at the main road</td><td>Walk to the corner with the crosswalk and wait for the walk signal</td></tr><tr><td>Broken sidewalk near the park</td><td>Watch your step, use the safest path, and tell an adult so it can be reported</td></tr><tr><td>Fast traffic by the school gate</td><td>Wait at the crossing, make sure vehicles stop, then cross</td></tr></table>', true]
+    ]},
+  { title:'Example 6: Write a road-safety pledge',
+    problem:'Write one concrete action you will practice this week.',
+    steps:[
+      ['Start with a vague idea.','"I will be safer."'],
+      ['Problem: can you check it?','"Safer" is too general. No one can tell if you did it.'],
+      ['Make it concrete.','Name the behavior: "I will use the crosswalk."'],
+      ['Make it realistic and add when/where.','"…on my way to school every day this week."'],
+      ['Check it.','Concrete ✓ Realistic ✓ Says when or where ✓ Something I can really do ✓'],
+      ['Final pledge.','<i>"This week I will always use the crosswalk and wait for the walk signal on my way to school."</i>', true]
+    ]}
+];
+EXAMPLES.forEach(ex => {
+  const list = h('ol', {class:'steps'});
+  const items = ex.steps.map(([t,b,fin]) => {
+    const li = h('li', {class:'step' + (fin?' final':'')}, h('b',{class:'t'}, t), h('span',{html:b}));
+    list.append(li); return li;
+  });
+  let n = 0;
+  const next = h('button', {class:'btn', type:'button'}, 'Show next step');
+  const all = h('button', {class:'btn ghost', type:'button'}, 'Show all');
+  const reset = h('button', {class:'btn ghost', type:'button'}, 'Hide steps');
+  const status = h('span', {class:'ref', 'aria-live':'polite'}, '');
+  function paint(){
+    items.forEach((li,i) => li.classList.toggle('show', i<n));
+    next.disabled = n>=items.length;
+    status.textContent = n + ' of ' + items.length + ' steps shown';
+  }
+  next.addEventListener('click', () => { if(n<items.length) n++; paint(); items[n-1].scrollIntoView({block:'nearest', behavior:'smooth'}); });
+  all.addEventListener('click', () => { n=items.length; paint(); });
+  reset.addEventListener('click', () => { n=0; paint(); });
+  paint();
+  $('#exampleList').append(h('div', {class:'card'},
+    h('h3', {}, ex.title),
+    h('div', {class:'problem', html:'<b>Problem:</b> ' + ex.problem}),
+    h('div', {class:'row', style:'margin-top:12px'}, next, all, reset, status),
+    list));
+});
+
+/* ---------- multiple-choice quiz engine ---------- */
+function mountQuiz(id, intro, questions){
+  const mount = $('#'+id+' .mount');
+  function render(){
+    mount.innerHTML = '';
+    let answered = 0, correct = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = h('button', {class:'btn ghost', type:'button', style:'display:none'}, 'Try again');
+    again.addEventListener('click', render);
+    function paintSummary(){
+      if(answered<questions.length){ summary.textContent = 'Answered ' + answered + ' of ' + questions.length; return; }
+      summary.textContent = 'Score: ' + correct + ' / ' + questions.length + (correct===questions.length ? ' – perfect!' : correct/questions.length>=.8 ? ' – secure (80% or higher).' : ' – review the explanations and try again.');
+      again.style.display = '';
+      record(id, correct, questions.length);
+    }
+    if(intro) mount.append(h('p', {html:intro}));
+    questions.forEach((q,qi) => {
+      const order = shuffle(q.o.map((t,i) => ({t, ok:i===q.a})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const btns = order.map(o => {
+        const b = h('button', {class:'opt', type:'button'}, o.t);
+        b.addEventListener('click', () => {
+          if(b.disabled) return;
+          answered++;
+          btns.forEach(x => x.disabled = true);
+          if(o.ok){ correct++; b.classList.add('good'); feedback(fb,'good','✓ Correct. ' + q.e); }
+          else {
+            b.classList.add('bad','shake');
+            btns[order.findIndex(x=>x.ok)].classList.add('good');
+            feedback(fb,'bad','✗ Not quite. ' + q.e);
+          }
+          paintSummary();
+        });
+        return b;
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, (qi+1) + '. ' + q.q), btns, fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  }
+  render();
+}
+
+mountQuiz('act-quiz', 'Ten questions. Aim for 80% or higher.', [
+  { q:'What does a stop sign tell you to do?', o:['Come to a complete stop','Slow down and keep going','Honk and go','Speed up'], a:0, e:'At a stop sign you stop completely and check that it is safe before you continue.' },
+  { q:'What does a yield sign mean?', o:['Slow down and give way to others','Stop and wait for ten seconds','Speed up to pass','Park here'], a:0, e:'Yield means giving way to those who have the right of way.' },
+  { q:'What does a red traffic light mean?', o:['Stop','Go','Speed up','Honk your horn'], a:0, e:'Red means stop and wait.' },
+  { q:'What does a yellow light mean?', o:['Caution: the light is about to turn red, so prepare to stop','Go faster','The road is closed','You may park'], a:0, e:'Yellow is a warning that the signal is changing.' },
+  { q:'What is a crosswalk?', o:['A marked place where pedestrians can cross the street','A place where cars park','A lane only for bicycles','A road with no traffic'], a:0, e:'Crosswalks make pedestrians visible and predictable.' },
+  { q:'Why should every passenger wear a seatbelt?', o:['It holds you in your seat to protect you in a sudden stop or crash','It makes the car go faster','It is only for long trips','It is only for the driver'], a:0, e:'Everyone buckles up, on every ride, including in the back seat.' },
+  { q:'Why should a cyclist wear a helmet?', o:['To protect the head from serious injury in a fall or crash','To look good','To ride faster','Only when riding far'], a:0, e:'A helmet reduces the risk of serious head injury.' },
+  { q:'What is a pedestrian?', o:['A person traveling on foot','A person driving a car','A person riding a bus','A traffic sign'], a:0, e:'Pedestrians walk; they need crosswalks and signals.' },
+  { q:'Which is a safe pedestrian behavior?', o:['Use the crosswalk and wait for the walk signal','Cross between parked cars','Run across when you see a gap','Cross while looking at your phone'], a:0, e:'Safe pedestrians are visible, patient and alert.' },
+  { q:'How can I protect my life and the lives of others when I move around my community?', o:['By following traffic rules and making safe choices as a pedestrian, passenger or cyclist','By moving as fast as I can','By ignoring signs when no one is watching','By leaving safety to others'], a:0, e:'Road safety is everyone\'s responsibility.' }
+]);
+
+mountQuiz('act-cases', 'Each case has three questions: the traffic element involved, what could happen, and the safe alternative.', [
+  { q:'Case 1: A student crosses between parked cars instead of at the crosswalk. Which traffic element is involved?', o:['The crosswalk','The helmet','The seatbelt','The stop sign'], a:0, e:'The safe place to cross is the crosswalk.' },
+  { q:'Case 1: What could happen if nothing changes?', o:['A driver may not see the student or stop in time, and the student could be hit','Nothing, because parked cars protect the student','The student will cross faster','The driver will always stop'], a:0, e:'Parked cars block the view for both the student and the drivers.' },
+  { q:'Case 1: What is the safe alternative?', o:['Walk to the crosswalk, wait for the signal, look and listen, then cross','Run across quickly','Ask a friend to watch for cars','Cross where the street is narrowest'], a:0, e:'The crosswalk and the signal make the crossing predictable.' },
+  { q:'Case 2: A student rides a bike without a helmet. Which traffic element is involved?', o:['The helmet','The traffic light','The crosswalk','The yield sign'], a:0, e:'The helmet protects the head.' },
+  { q:'Case 2: What could happen if nothing changes?', o:['A fall could cause a serious head injury','Nothing, because bikes are slow','The bike will be lighter and safer','The student will ride faster'], a:0, e:'Even short, slow rides can end in a fall.' },
+  { q:'Case 2: What is the safe alternative?', o:['Wear a helmet that fits on every ride','Wear a helmet only on long rides','Ride only when no one is watching','Ride on the road without lights'], a:0, e:'A well-fitted helmet should be worn every time.' },
+  { q:'Case 3: A student gets into a car without a seatbelt. Which traffic element is involved?', o:['The seatbelt','The stop sign','The crosswalk','The helmet'], a:0, e:'The seatbelt holds passengers safely in their seats.' },
+  { q:'Case 3: What could happen if nothing changes?', o:['In a sudden stop or crash the student could be thrown and seriously hurt','Nothing, because the back seat is always safe','The ride will be faster','The car will use less fuel'], a:0, e:'The back seat is not automatically safe.' },
+  { q:'Case 3: What is the safe alternative?', o:['Buckle up before the car moves, and remind others to do the same','Buckle up only on the highway','Buckle up when the driver says so','Hold on to the door handle'], a:0, e:'Everyone buckles up on every ride.' },
+  { q:'Case 4: A student walks toward a corner looking at a phone and does not notice the red light. Which traffic element is involved?', o:['The traffic light','The helmet','The seatbelt','The yield sign'], a:0, e:'Red means stop. A phone can make us miss it.' },
+  { q:'Case 4: What could happen if nothing changes?', o:['The student could step into traffic without noticing vehicles','The student will get there faster','The light will change by itself','Nothing, drivers always see walkers'], a:0, e:'Distractions reduce our awareness of danger.' },
+  { q:'Case 4: What is the safe alternative?', o:['Put the phone away, look at the signal, and wait for the walk signal','Look at the phone and listen for cars','Cross quickly with headphones on','Follow the person in front'], a:0, e:'Eyes and ears are our best safety tools.' }
+]);
+
+mountQuiz('act-route', 'Think like a road-safety designer: use your Safe Route map and pledge skills.', [
+  { q:'On your route you must cross a busy road with no crosswalk. What is the best safe action?', o:['Walk to the nearest marked crossing or signal, even if it is farther','Run across when you see a gap','Cross where cars are slowest','Wait for a car to wave you across'], a:0, e:'A marked crossing makes you visible and predictable.' },
+  { q:'The sidewalk on your route is broken. What is the best safe action?', o:['Choose the safest path, stay alert, and tell an adult so it can be reported','Ignore it and walk fast','Walk in the middle of the road','Do not tell anyone'], a:0, e:'Protect yourself now and help get the problem fixed.' },
+  { q:'There is fast traffic by the school gate. What is a good safe action?', o:['Wait at a crossing, make sure vehicles stop, then cross','Cross as fast as you can','Cross between parked cars','Ask a friend to cross first'], a:0, e:'Patience and a safe crossing reduce risk.' },
+  { q:'Which is the best way to mark a risk point on your map?', o:['A symbol at the place, with the danger named and the safe action written next to it','A dot with no label','A drawing of the whole city','Only the name of the street'], a:0, e:'A good map shows the risk and what to do about it.' },
+  { q:'Which pledge is concrete and realistic?', o:['"This week I will always use the crosswalk on my way to school."','"I will be safer."','"I will never cross any street again."','"Everyone should follow the rules."'], a:0, e:'A good pledge names a specific action, when it will happen, and is something you can really do.' },
+  { q:'Which action would help improve road safety at school?', o:['Make a poster reminding classmates to use the crosswalk and wait for the walk signal','Race across before cars come','Ignore the signs','Park anywhere near the gate'], a:0, e:'A concrete, realistic action like a reminder poster can change habits.' }
+]);
+
+/* ---------- sequence engine ---------- */
+function mountSequence(id, intro, items){
+  const mount = $('#'+id+' .mount');
+  function render(){
+    mount.innerHTML = '';
+    let next = 0, mistakes = 0;
+    const slots = items.map((_,i) => h('div', {class:'slot' + (i===0?' next':'')}, h('small', {}, 'Step ' + (i+1)), h('span', {}, '?')));
+    const fb = h('div', {class:'fb', 'aria-live':'polite'});
+    let pool = shuffle(items.map((it,i) => ({...it, i})));
+    while(items.length>1 && pool.every((p,k) => p.i===k)) pool = shuffle(pool);
+    const poolEl = h('div', {class:'pool'});
+    const again = h('button', {class:'btn ghost', type:'button', style:'display:none'}, 'Try again');
+    again.addEventListener('click', render);
+    pool.forEach(p => {
+      const b = h('button', {class:'opt', type:'button'}, p.t);
+      b.addEventListener('click', () => {
+        if(b.disabled) return;
+        if(p.i===next){
+          b.disabled = true; b.style.display='none';
+          slots[next].classList.remove('next'); slots[next].classList.add('filled');
+          slots[next].lastChild.textContent = p.t;
+          feedback(fb,'good','✓ Yes! ' + p.why);
+          next++;
+          if(next<items.length) slots[next].classList.add('next');
+          else {
+            feedback(fb,'good','🎉 Complete! ' + (mistakes===0 ? 'No mistakes.' : mistakes + ' mistake' + (mistakes>1?'s':'') + ' along the way. Try again to get it without hints.') + ' ' + p.why);
+            again.style.display=''; record(id, Math.max(0, items.length-mistakes), items.length);
+          }
+        } else {
+          mistakes++;
+          b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'), 600);
+          feedback(fb,'bad','Not yet. Hint for step ' + (next+1) + ': ' + items[next].hint);
+        }
+      });
+      poolEl.append(b);
+    });
+    mount.append(h('p', {}, intro), h('div', {class:'slots'}, slots), h('p', {class:'ref'}, 'Tap the step that belongs in the next empty box.'), poolEl, fb, h('div', {class:'row', style:'margin-top:10px'}, again));
+  }
+  render();
+}
+mountSequence('act-seq', 'Put the steps for crossing the street safely in order.', [
+  { t:'Stop at the curb and find the crosswalk or signal', hint:'Before anything else, find the safest place to cross.', why:'Start at the curb, where drivers can see you, at the crosswalk.' },
+  { t:'Wait for the walk signal (or for traffic to stop)', hint:'Patience comes before stepping into the road.', why:'Wait until the signal says you may cross.' },
+  { t:'Look and listen in all directions', hint:'Check for vehicles before you step off the curb.', why:'Even with a walk signal, always look and listen.' },
+  { t:'Make sure vehicles have stopped', hint:'Confirm that drivers see you and are stopping.', why:'Do not assume. Check that vehicles are really stopping.' },
+  { t:'Cross at a steady walk with your eyes up and phone away', hint:'Now you can move, but stay focused.', why:'Walk, do not run, and keep your attention on the road.' },
+  { t:'Keep looking until you are safely on the other side', hint:'Stay alert until you finish.', why:'Stay alert all the way across.' }
+]);
+
+/* ---------- match engine ---------- */
+function mountMatch(id, intro, pairs){
+  const mount=$('#'+id+' .mount');
+  function render(){
+    mount.innerHTML='';
+    let sel=null, matched=0, mistakes=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    const L=pairs.map((p,i)=>h('button',{class:'opt',type:'button','data-i':i},p[0]));
+    const R=shuffle(pairs.map((p,i)=>({i,t:p[1]}))).map(p=>h('button',{class:'opt',type:'button','data-i':p.i},p.t));
+    L.forEach(b=>b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      L.forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); sel=b;
+      feedback(fb,'info','Now choose the matching meaning on the right.');
+    }));
+    R.forEach(b=>b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      if(!sel){ feedback(fb,'info','First tap a term on the left.'); return; }
+      if(sel.dataset.i===b.dataset.i){
+        sel.classList.remove('sel'); sel.classList.add('done'); b.classList.add('done'); sel=null; matched++;
+        feedback(fb,'good','✓ Match!');
+        if(matched===pairs.length){
+          feedback(fb,'good','🎉 All matched' + (mistakes? ' with ' + mistakes + ' miss' + (mistakes>1?'es':'') : ' with no misses') + '.');
+          again.style.display=''; record(id, Math.max(0, pairs.length-mistakes), pairs.length);
+        }
+      } else {
+        mistakes++; b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'),600);
+        feedback(fb,'bad','Not that one. Re-read the term and try another meaning.');
+      }
+    }));
+    mount.append(h('p',{},intro),h('div',{class:'match'},h('div',{},L),h('div',{},R)),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  }
+  render();
+}
+mountMatch('act-match','Tap a traffic element, then tap its purpose.',[
+  ['Stop sign','Come to a complete stop'],
+  ['Yield sign','Slow down and give way to others'],
+  ['Red light','Stop and wait'],
+  ['Yellow light','Caution: prepare to stop'],
+  ['Crosswalk','A marked place for pedestrians to cross'],
+  ['Seatbelt','Holds you in your seat in a sudden stop or crash'],
+  ['Helmet','Protects the head from injury']
+]);
+
+/* ---------- sort engine ---------- */
+function mountSort(id, intro, choices, cards){
+  const mount=$('#'+id+' .mount');
+  function render(){
+    mount.innerHTML='';
+    const deck=shuffle(cards); let i=0, right=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const card=h('div',{class:'sortcard'});
+    const btns=choices.map(c=>h('button',{class:'btn',type:'button'},c.label));
+    const count=h('p',{class:'ref'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    function paint(){
+      if(i>=deck.length){ card.textContent='Finished!'; btns.forEach(b=>b.disabled=true); count.textContent=''; return; }
+      card.textContent=deck[i][0]; count.textContent='Card ' + (i+1) + ' of ' + deck.length;
+    }
+    function pick(k){
+      if(i>=deck.length) return;
+      const c=deck[i]; const ok=c[1]===k;
+      if(ok) right++;
+      const msg=(ok?'✓ Correct. ':'✗ Not quite. ') + c[2];
+      i++;
+      if(i>=deck.length){
+        paint();
+        feedback(fb, right===deck.length?'good':'info', msg + ' — Score: ' + right + ' / ' + deck.length + '.');
+        again.style.display=''; record(id, right, deck.length);
+      } else { feedback(fb, ok?'good':'bad', msg); paint(); }
+    }
+    btns.forEach((b,j)=>b.addEventListener('click',()=>pick(choices[j].k)));
+    mount.append(h('p',{html:intro}),count,card,h('div',{class:'row'},btns),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+    paint();
+  }
+  render();
+}
+mountSort('act-lights','Like the colored-card check: is each scene <b>safe</b> (green), <b>unsafe</b> (red), or <b>it depends</b> (yellow)? Read the explanation after each answer.',
+  [{k:'G',label:'🟢 Safe'},{k:'R',label:'🔴 Unsafe'},{k:'Y',label:'🟡 It depends'}],
+  [
+    ['Crossing at the corner at the crosswalk, after the walk signal comes on and the vehicles have stopped.','G','The crosswalk and the signal make the crossing safe and predictable.'],
+    ['Crossing in the middle of the block, between two parked cars.','R','Drivers cannot see you easily or stop in time. Use the crosswalk.'],
+    ['Buckling your seatbelt in the back seat, even on a short trip.','G','The seatbelt protects you on every ride.'],
+    ['Riding a bike downhill without a helmet "just to the corner."','R','Short rides can still end in a fall. Wear a helmet every time.'],
+    ['Crossing while looking down at a phone, with headphones on.','R','You cannot see or hear danger when distracted.'],
+    ['A cyclist with a helmet signals before turning and stops at a red light.','G','Helmet, signals and obeying the light are all safe behaviors.'],
+    ['The walk signal is on, but a car is coming fast and does not seem to slow down.','Y','It depends: the signal says you may go, but you should wait until you are sure the car has stopped.'],
+    ['Riding with a helmet at dusk, with no lights or reflectors.','Y','It depends: the helmet protects your head, but you also need to be visible. Add lights or reflectors.']
+  ]);
+mountSort('act-roles','Who does each safe behavior belong to most: a <b>pedestrian</b>, a <b>passenger</b>, or a <b>cyclist</b>?',
+  [{k:'P',label:'🚶 Pedestrian'},{k:'S',label:'🚗 Passenger'},{k:'C',label:'🚲 Cyclist'}],
+  [
+    ['Wait for the walk signal before crossing.','P','Pedestrians use crosswalks and signals.'],
+    ['Look and listen in all directions before crossing.','P','This applies to anyone crossing on foot.'],
+    ['Do not use a phone while crossing the street.','P','Distractions are dangerous when crossing.'],
+    ['Buckle your seatbelt on every ride, including the back seat.','S','Passengers buckle up every time.'],
+    ['Stay seated and keep your arms and head inside the vehicle.','S','Passengers stay safe inside the vehicle.'],
+    ['Get out on the curb side, away from traffic.','S','Passengers should exit on the side away from moving traffic when possible.'],
+    ['Wear a helmet that fits, with the strap fastened.','C','Helmets protect cyclists from head injuries.'],
+    ['Use hand signals before turning.','C','Hand signals tell others what you will do.'],
+    ['Use lights or reflectors when riding at night.','C','Cyclists need to be seen.']
+  ]);
+
+/* ---------- cloze engine ---------- */
+function mountCloze(id, intro, S){
+  const mount=$('#'+id+' .mount');
+  function render(){
+    mount.innerHTML='';
+    const ok=new Set(); let wrong=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    const box=h('div',{class:'cloze'});
+    S.forEach((s,k)=>{
+      const sel=h('select',{'aria-label':'Choose the word for sentence ' + (k+1)}, h('option',{value:''},'— choose —'), s[1].map((o,j)=>h('option',{value:j},o)));
+      sel.addEventListener('change',()=>{
+        if(sel.value===''){ sel.className=''; return; }
+        if(+sel.value===s[2]){
+          sel.className='good'; sel.disabled=true; ok.add(k);
+          feedback(fb,'good','✓ ' + s[4]);
+          if(ok.size===S.length){ feedback(fb,'good','🎉 All sentences complete!'); again.style.display=''; record(id, Math.max(0, S.length-wrong), S.length); }
+        } else {
+          wrong++; sel.className='bad shake'; setTimeout(()=>sel.classList.remove('shake'),600);
+          feedback(fb,'bad','Not quite – try another word. Think about what you learned in class.');
+        }
+      });
+      box.append(h('p',{}, s[0], sel, s[3]));
+    });
+    mount.append(h('p',{},intro),box,fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  }
+  render();
+}
+mountCloze('act-cloze','Choose the word that completes each sentence.',[
+  ['A red traffic light means ',['stop','go','speed up'],0,'.','Red means stop and wait.'],
+  ['A ',['crosswalk','fence','ramp'],0,' is a marked place where pedestrians cross the street.','Crosswalks make pedestrians visible.'],
+  ['A ',['seatbelt','backpack','mirror'],0,' holds you in your seat to protect you in a sudden stop or crash.','Everyone buckles up on every ride.'],
+  ['A cyclist should wear a ',['helmet','scarf','watch'],0,' to protect the head.','A helmet reduces the risk of head injury.'],
+  ['A yield sign means slow down and ',['give','take','block'],0,' way to others.','Yield means giving way to others.'],
+  ['Road safety protects my life and the lives of ',['others','nobody','drivers only'],0,'.','Safe choices protect everyone who shares the road.']
+]);
+
+paintProgress();
+})();
+</script>
+</body>
+</html>
