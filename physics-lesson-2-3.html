@@ -1,0 +1,1384 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physics II – Lesson 2.3 Falling Objects | Lincoln International Academy</title>
+<meta name="description" content="Interactive study page for Lesson 2.3: Falling Objects – free fall, constant acceleration, and take-it-further topics in angular kinematics and time dilation.">
+<script>try{var t=localStorage.getItem('lia-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f0e9; --surface:#fffdf9; --surface-2:#f8f5ee; --ink:#1e2937; --muted:#5a6575;
+  --line:#ddd6c7; --primary:#1f3a5f; --primary-ink:#ffffff; --accent:#2b7a76; --accent-soft:#e1efed;
+  --blue-soft:#e6edf6; --warm:#b4763a; --warm-soft:#f6ebdb; --good:#2c7a57; --good-soft:#e1f1e8;
+  --bad:#a94a3f; --bad-soft:#f6e4e1; --hot:#c58a4d; --cold:#4f86a8; --work:#2b7a76;
+  --shadow:0 1px 2px rgba(30,41,55,.06),0 4px 14px rgba(30,41,55,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+    --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+    --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+    --bad:#e08a7d; --bad-soft:#331e1c; --hot:#c58a4d; --cold:#6aa3c7; --work:#58b5ae;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+  --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+  --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+  --bad:#e08a7d; --bad-soft:#331e1c; --hot:#c58a4d; --cold:#6aa3c7; --work:#58b5ae;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 'Oswald','Arial Narrow',sans-serif}
+h1,h2,h3,h4{font-family:'Oswald',sans-serif;font-weight:600;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:'Oswald',sans-serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:#d3b48a;margin-bottom:2px}
+.meta{display:flex;gap:26px;flex-wrap:wrap}
+.meta div{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#aab7ca}
+.meta b{display:block;font-size:1.05rem;text-transform:none;letter-spacing:0;color:#f3f0e9;font-weight:600}
+.lessonbar{background:var(--surface);border-bottom:1px solid var(--line)}
+.lessonbar .wrap{padding-top:14px;padding-bottom:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center}
+.lessonbar h1{font-size:clamp(1.15rem,2.6vw,1.45rem);margin:0}
+.lessonbar small{color:var(--muted)}
+.overall{display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--muted)}
+.bar{width:150px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+
+/* nav */
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:8px}
+nav.tabs button{appearance:none;border:0;background:none;font:inherit;font-weight:600;color:var(--muted);padding:10px 16px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;border-radius:8px 8px 0 0}
+nav.tabs button:hover{color:var(--ink);background:var(--surface-2)}
+nav.tabs button[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--warm)}
+:root[data-theme="dark"] nav.tabs button[aria-selected="true"]{color:var(--primary)}
+
+main{padding:26px 0 60px}
+section.panel{display:none}
+section.panel.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card>h3:first-child,.card>h2:first-child{margin-top:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.callout.blue{border-color:var(--primary);background:var(--blue-soft)}
+.callout b.t{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;color:var(--muted)}
+.law{font-family:'Oswald',sans-serif;font-size:1.15rem;font-style:italic}
+.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary)}
+.objectives{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.objectives li{display:flex;gap:12px;align-items:flex-start}
+.objectives li span{flex:none;width:26px;height:26px;border-radius:50%;background:var(--primary);color:var(--primary-ink);font-weight:700;font-size:.85rem;display:grid;place-items:center;margin-top:2px}
+
+/* math */
+.eq{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.2rem;text-align:center;padding:10px 6px;overflow-x:auto}
+.eq.big{font-size:1.35rem}
+.eq i,.math i{font-style:italic}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.15}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em .08em}
+.frac>span:last-child{padding:.08em .25em 0}
+sub{font-size:.7em;line-height:0}
+.math{font-family:"Cambria Math",Cambria,Georgia,serif;white-space:nowrap}
+
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left}
+th{background:var(--surface-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+
+/* controls */
+button.btn,.btn{appearance:none;font:inherit;font-weight:600;font-size:.92rem;border-radius:8px;padding:8px 16px;cursor:pointer;border:1px solid var(--primary);background:var(--primary);color:var(--primary-ink);transition:filter .15s,transform .05s}
+button.btn:hover{filter:brightness(1.12)} button.btn:active{transform:translateY(1px)}
+button.btn.ghost{background:transparent;color:var(--primary)}
+button.btn.ghost:hover{background:var(--blue-soft);filter:none}
+button.btn[disabled]{opacity:.45;cursor:not-allowed}
+:root[data-theme="dark"] button.btn.ghost{color:var(--primary)}
+input[type=text]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:150px}
+input[type=text]:focus,button:focus-visible,input[type=range]:focus-visible,summary:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:1px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.sliderrow{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:center;margin:8px 0}
+.sliderrow output{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+@media (max-width:560px){.sliderrow{grid-template-columns:1fr 80px}.sliderrow label{grid-column:1/-1}}
+
+details{border:1px solid var(--line);border-radius:8px;padding:2px 14px;margin:10px 0;background:var(--surface-2)}
+summary{cursor:pointer;font-weight:600;padding:8px 0}
+details[open]>summary{margin-bottom:4px}
+
+/* readouts */
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+.readout{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.readout small{display:block;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
+.readout b{font-size:1.4rem;font-family:'Oswald',sans-serif;font-variant-numeric:tabular-nums}
+.status{padding:9px 14px;border-radius:8px;font-weight:600;font-size:.92rem;margin-top:8px;background:var(--good-soft);color:var(--good)}
+.status.warn{background:var(--warm-soft);color:var(--warm)}
+.status.bad{background:var(--bad-soft);color:var(--bad)}
+svg.flow{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+svg.flow text{fill:var(--ink);font:600 12px 'Oswald','Arial Narrow',sans-serif}
+svg.flow .res-t{fill:#fff}
+.effbar{position:relative;height:16px;background:var(--line);border-radius:99px;margin:26px 0 30px}
+.effbar i.fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--accent);transition:width .15s}
+.effbar span.tick{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);opacity:.55}
+.effbar span.tick em{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-style:normal;font-size:.68rem;color:var(--muted);white-space:nowrap}
+.effbar span.tick.hi em{top:-20px}
+
+canvas{width:100%;max-width:520px;height:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);display:block}
+.meter{height:14px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0}
+.meter i{display:block;height:100%;background:var(--warm);width:0;transition:width .2s}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+
+/* dice */
+.hist{display:flex;align-items:flex-end;gap:4px;height:170px;border-bottom:2px solid var(--line);padding:0 2px;margin-top:12px}
+.hist div{flex:1;position:relative;background:var(--accent);border-radius:4px 4px 0 0;min-height:1px;transition:height .25s}
+.hist div b{position:absolute;top:-19px;left:0;right:0;text-align:center;font-size:.7rem;color:var(--muted);font-weight:600}
+.hist div.ghost{background:transparent;border:1.5px dashed var(--warm);border-bottom:0}
+.histx{display:flex;gap:4px;font-size:.78rem;color:var(--muted);text-align:center;padding:0 2px}
+.histx span{flex:1}
+.dice{font-size:2.2rem;letter-spacing:.2em;min-height:1.4em}
+
+/* stepper */
+.example{margin-bottom:22px}
+.example header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px}
+.problem-box{background:var(--blue-soft);border-radius:10px;padding:14px 16px;margin:10px 0 16px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.step{display:none;border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden;background:var(--surface)}
+.step.show{display:block;animation:fade .3s}
+.step>h4{margin:0;padding:9px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;font-family:'Oswald','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:.09em;font-size:.82rem;color:var(--primary)}
+.step>h4 .n{width:24px;height:24px;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-size:.8rem;letter-spacing:0}
+.step .body{padding:12px 16px}
+.step .ask{border-top:1px dashed var(--line);padding:12px 16px;background:var(--warm-soft)}
+.step .ask p{margin:0 0 8px;font-weight:600}
+.opt{display:block;width:100%;text-align:left;font:inherit;padding:9px 12px;margin:6px 0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--good);background:var(--good-soft);color:var(--ink)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin-top:8px;font-size:.93rem}
+.fb.ok{color:var(--good)} .fb.no{color:var(--bad)} .fb.near{color:var(--warm)}
+.fb b{font-weight:700}
+.dots{display:flex;gap:6px;margin:6px 0 14px}
+.dots i{width:28px;height:6px;border-radius:99px;background:var(--line)} .dots i.on{background:var(--accent)}
+.givenlist{display:flex;gap:10px 28px;flex-wrap:wrap;margin:4px 0}
+.givenlist span{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.1rem}
+.unk{color:var(--bad);font-style:italic}
+.boxed{display:inline-block;border:1.5px solid var(--bad);padding:2px 10px;border-radius:4px}
+
+/* practice */
+.setpicker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.setpicker button{appearance:none;font:inherit;font-weight:600;background:var(--surface);border:1px solid var(--line);color:var(--ink);padding:9px 14px;border-radius:99px;cursor:pointer}
+.setpicker button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.setpicker button small{opacity:.75;font-weight:500;margin-left:4px}
+.prob{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 20px;margin-bottom:14px;box-shadow:var(--shadow);position:relative}
+.prob.done{border-color:var(--good)}
+.prob .num{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;display:flex;justify-content:space-between}
+.prob .num .badge{color:var(--good)}
+.partrow{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin:8px 0}
+.partrow label{min-width:210px;font-size:.93rem}
+.partrow .u{color:var(--muted);min-width:34px}
+.partrow .ptag{font-weight:700}
+.prob .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.hintbox,.solbox{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.95rem}
+.hintbox{background:var(--warm-soft)} .solbox{background:var(--blue-soft)}
+.solbox ol{margin:6px 0 0;padding-left:20px}
+.pnote{color:var(--muted);font-size:.86rem}
+.sethead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.sethead p{margin:0;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.linkbtn{background:none;border:0;color:var(--accent);font:inherit;text-decoration:underline;cursor:pointer;padding:0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{appearance:none;border:0;background:none;font:inherit;font-weight:700;padding:8px 18px;cursor:pointer;color:var(--ink);min-width:54px;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink)}
+.ctlrow{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:8px 0}
+.ctlrow label.l{font-weight:600;min-width:100px}
+svg.vt{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+svg.vt text{fill:var(--muted);font:600 11px 'Oswald','Arial Narrow',sans-serif}
+svg.vt .lbl{fill:var(--ink)}
+svg.vt .axis{stroke:var(--muted);stroke-width:1.4}
+svg.vt .grid{stroke:var(--line);stroke-width:1}
+select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.vartable{width:100%;max-width:520px}
+.vartable td{padding:6px 10px}
+.vartable td:first-child{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.1rem}
+.eqcard{background:var(--blue-soft);border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin-top:10px}
+tr.hl td{background:var(--accent-soft);font-weight:700}
+.subhead{margin:26px 0 10px;font-size:1rem;font-family:'Oswald','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--primary);border-bottom:2px solid var(--line);padding-bottom:4px}
+.fig{margin:10px 0 6px}
+.figcap{font-size:.82rem;color:var(--muted);text-align:center}
+.opt input{margin-right:10px}
+
+body{letter-spacing:.015em}
+h1,h2,h3,h4{letter-spacing:.01em}
+.school{font-weight:700;letter-spacing:.02em}
+header.top{position:relative}
+.theme{position:absolute;top:12px;right:max(16px,calc((100vw - 1020px)/2 + 16px));display:inline-flex;border:1px solid rgba(255,255,255,.35);border-radius:99px;overflow:hidden;background:rgba(255,255,255,.08);z-index:5}
+.theme button{display:inline-flex;gap:6px;align-items:center;appearance:none;border:0;background:none;color:#e9e3f0;font:inherit;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;cursor:pointer}
+.theme button:hover{background:rgba(255,255,255,.14)}
+.theme button[aria-pressed="true"]{background:#f3f0e9;color:#1b2f4b}
+.theme button:focus-visible{outline:3px solid #e0b79c;outline-offset:-3px}
+@media (max-width:620px){header.top .wrap{padding-top:56px}}
+.lbl{fill:var(--ink)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="theme" role="group" aria-label="Color theme">
+    <button type="button" data-theme-set="light" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3L17 7M7 17l-1.7 1.7"/></g></svg><span>Light</span></button>
+    <button type="button" data-theme-set="dark" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><span>Dark</span></button>
+  </div>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Student Learning Page</div>
+      <div class="school">Lincoln International Academy</div>
+    </div>
+    <div class="meta">
+      <div>Class<b>Physics II</b></div>
+      <div>Teacher<b>Eduardo Vásquez</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="lessonbar">
+  <div class="wrap">
+    <div>
+      <h1>Lesson 2.3 · Falling Objects</h1>
+      <small>Chapter 2 · Motion in One Dimension · <a href="physics-lesson-2-2.html">← Lesson 2.2 · Acceleration</a> · <a href="index.html">Lesson 10.3 · Second Law of Thermodynamics</a></small>
+    </div>
+    <div class="overall" aria-live="polite">
+      <span id="overallText">0 of 0 practice problems solved</span>
+      <div class="bar"><i id="overallBar"></i></div>
+    </div>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="Lesson sections">
+  <div class="wrap" role="tablist">
+    <button role="tab" id="t-review" data-tab="review" aria-selected="true">1 · Review</button>
+    <button role="tab" id="t-examples" data-tab="examples" aria-selected="false">2 · Worked Examples</button>
+    <button role="tab" id="t-practice" data-tab="practice" aria-selected="false">3 · Practice</button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===================== REVIEW ===================== -->
+<section class="panel active" id="review" aria-labelledby="t-review">
+
+  <div class="card">
+    <h2>What you should be able to do</h2>
+    <ul class="objectives">
+      <li><span>1</span><div><b>Relate the motion of a freely falling body</b> to motion with constant acceleration.</div></li>
+      <li><span>2</span><div><b>Calculate displacement, velocity, and time</b> during the motion of a freely falling object.</div></li>
+    </ul>
+    <p class="pnote" style="margin-top:12px">Also in this lesson: <a href="#part-a">Free fall</a> · <a href="#part-b">Up-and-down motion</a> · <a href="#part-c">Equations</a> · <a href="#part-d">Skydiving</a> · <a href="#part-e">Take it further: angular kinematics</a> · <a href="#part-f">Physics on the edge: time dilation</a> · <a href="#part-g">Think Science</a></p>
+  </div>
+
+  <div class="card" id="part-a">
+    <span class="pill">Part A</span>
+    <h2>Free fall</h2>
+    <p>On August 2, 1971, astronaut David Scott released a hammer and a feather from the same height above the Moon's surface. Although the hammer is far more massive, <b>both fell at the same rate</b>: they traveled the same displacement in the same amount of time.</p>
+    <p>In a vacuum (Figure 3.1) an apple and a feather released from rest stay side by side. The time between successive images is the same, but the displacement in each interval grows by the same amount each time — so the velocity increases by the same amount every interval. They fall with the <b>same constant acceleration</b>.</p>
+    <div class="callout blue">
+      <b class="t">Key term</b>
+      <b>Free fall</b> — the motion of a body when only the force due to gravity is acting on the body.
+    </div>
+    <p>If air resistance is ignored, every object dropped near the surface of a planet falls with the same acceleration, directed toward the center of the planet. We write it <i>a</i><sub>g</sub> (or <i>g</i>). Choosing <b>up as the positive direction</b>:</p>
+    <div class="eq big"><i>a</i><sub>g</sub> = −<i>g</i> = −9.81 m/s²  (≈ −32 ft/s²)</div>
+    <p class="pnote">Unless stated otherwise, use 9.81 m/s². We use Δ<i>y</i> (vertical displacement) instead of Δ<i>x</i> for vertical motion.</p>
+
+    <h3>Hammer &amp; feather lab</h3>
+    <p>Choose a world and a drop height, then press <b>Drop</b>. Turn on the atmosphere to see what air resistance does (not available on the Moon, which has no atmosphere).</p>
+    <div class="ctlrow">
+      <span class="l"><b>World</b></span>
+      <div class="seg" id="dlPlanet" role="group" aria-label="World">
+        <button type="button" data-g="1.62" data-n="Moon" aria-pressed="false">Moon · 1.62</button><button type="button" data-g="3.71" data-n="Mars" aria-pressed="false">Mars · 3.71</button><button type="button" data-g="9.81" data-n="Earth" aria-pressed="true">Earth · 9.81</button><button type="button" data-g="24.8" data-n="Jupiter" aria-pressed="false">Jupiter · 24.8</button>
+      </div>
+      <label><input type="checkbox" id="dlAir"> atmosphere (air resistance)</label>
+    </div>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="dlH">Drop height</label><input id="dlH" type="range" min="1" max="50" step="1" value="20"><output id="dlHO"></output></div>
+        <div class="row"><button class="btn" id="dlGo" type="button">Drop</button><button class="btn ghost" id="dlReset" type="button">Reset</button></div>
+        <div class="readouts">
+          <div class="readout"><small>Hammer: t · v</small><b id="dlHam" style="font-size:1.05rem">—</b></div>
+          <div class="readout"><small>Feather: t · v</small><b id="dlFea" style="font-size:1.05rem">—</b></div>
+        </div>
+        <div class="status" id="dlStatus" aria-live="polite">Both bodies are released from rest (v<sub>i</sub> = 0).</div>
+        <p class="pnote" style="margin-top:8px">Check: with no air, Δ<i>y</i> = −½<i>g</i>(Δ<i>t</i>)², so Δ<i>t</i> = √(2·height / <i>g</i>) — independent of mass.</p>
+      </div>
+      <div id="dlSvg"></div>
+    </div>
+  </div>
+
+  <div class="card" id="part-b">
+    <span class="pill">Part B</span>
+    <h2>Acceleration is constant during upward and downward motion</h2>
+    <p>A ball thrown straight up keeps moving upward for a while, stops momentarily at the peak, then falls. Because the ball changes direction it may seem that velocity <em>and</em> acceleration are both changing. In fact, <b>the acceleration is −9.81 m/s² from the instant of release until it lands</b>.</p>
+    <p>Example (Figure 3.2): a ball is thrown up with <i>v</i><sub>i</sub> = +10.5 m/s. After 1.0 s its velocity has changed by −9.81 m/s, to +0.69 m/s. After 2.0 s it changes by another −9.81 m/s, to −9.12 m/s.</p>
+    <div class="callout warm"><b class="t">Big idea</b>At the peak the velocity is <b>zero</b>, but the acceleration is still <b>−9.81 m/s²</b>. The straight-line slope of the velocity–time graph (Figure 3.3) shows the acceleration is constant at every moment.</div>
+    <ul>
+      <li><b>Rising:</b> velocity +, acceleration − → <em>slowing down</em> (smaller and smaller displacements per interval).</li>
+      <li><b>At the top:</b> velocity 0, acceleration −9.81 m/s² (momentarily at rest).</li>
+      <li><b>Falling:</b> velocity −, acceleration − → <em>speeding up</em> (larger and larger displacements per interval).</li>
+    </ul>
+
+    <h3>Tossed-ball lab</h3>
+    <p>Set the launch speed, then press <b>Play</b> or drag the time slider. Watch the velocity arrow (teal) change while the acceleration arrow (amber) never does.</p>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="tvV0">Launch velocity v<sub>i</sub></label><input id="tvV0" type="range" min="2" max="25" step="0.5" value="10.5"><output id="tvV0O"></output></div>
+        <div class="sliderrow"><label for="tvT">Time t</label><input id="tvT" type="range" min="0" max="2" step="0.01" value="0"><output id="tvTO"></output></div>
+        <div class="row"><button class="btn" id="tvPlay" type="button">Play</button><button class="btn ghost" id="tvRst" type="button">Reset</button></div>
+        <div class="readouts">
+          <div class="readout"><small>Height y</small><b id="tvY">—</b></div>
+          <div class="readout"><small>Velocity v</small><b id="tvV">—</b></div>
+          <div class="readout"><small>Acceleration a</small><b id="tvA">−9.81 m/s²</b></div>
+        </div>
+        <div class="status" id="tvStatus" aria-live="polite"></div>
+        <p class="pnote" id="tvSummary" style="margin-top:8px"></p>
+      </div>
+      <div id="tvScene"></div>
+    </div>
+    <div class="grid2">
+      <div><h4>Velocity vs. time (Figure 3.3)</h4><div id="tvGv"></div></div>
+      <div><h4>Height vs. time</h4><div id="tvGy"></div></div>
+    </div>
+  </div>
+
+  <div class="card" id="part-c">
+    <span class="pill">Part C</span>
+    <h2>Solving free-fall problems</h2>
+    <p>Free-fall acceleration is the same throughout the motion, so you can analyze a freely falling object over <em>any</em> time interval with the equations of constant acceleration — just use <b>Δ<i>y</i></b> and <b><i>a</i> = −9.81 m/s²</b>:</p>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Equation</th><th>Leaves out</th></tr></thead>
+      <tbody>
+        <tr><td class="math">Δ<i>y</i> = ½(<i>v</i><sub>i</sub> + <i>v</i><sub>f</sub>)Δ<i>t</i></td><td><i>a</i></td></tr>
+        <tr><td class="math"><i>v</i><sub>f</sub> = <i>v</i><sub>i</sub> + <i>a</i>Δ<i>t</i></td><td>Δ<i>y</i></td></tr>
+        <tr><td class="math">Δ<i>y</i> = <i>v</i><sub>i</sub>Δ<i>t</i> + ½<i>a</i>(Δ<i>t</i>)<sup>2</sup></td><td><i>v</i><sub>f</sub></td></tr>
+        <tr><td class="math"><i>v</i><sub>f</sub><sup>2</sup> = <i>v</i><sub>i</sub><sup>2</sup> + 2<i>a</i>Δ<i>y</i></td><td>Δ<i>t</i></td></tr>
+      </tbody>
+    </table>
+    </div>
+    <div class="grid2" style="margin-top:12px">
+      <div class="callout"><b class="t">Dropped / released from rest</b><i>v</i><sub>i</sub> = 0. Falling down, Δ<i>y</i> is <b>negative</b> and <i>v</i><sub>f</sub> is negative.</div>
+      <div class="callout"><b class="t">Thrown upward and returning</b>Δ<i>y</i> is the <em>net</em> displacement (0 when it comes back to the start). At the same height the speed is the same going up and coming down.</div>
+    </div>
+    <ul>
+      <li><b>Top of the path:</b> <i>v</i> = 0, so <i>v</i><sub>f</sub><sup>2</sup> = 0 = <i>v</i><sub>i</sub><sup>2</sup> − 2<i>g</i>Δ<i>y</i> gives the maximum height Δ<i>y</i><sub>max</sub> = <i>v</i><sub>i</sub><sup>2</sup>/(2<i>g</i>) and the time to the top Δ<i>t</i> = <i>v</i><sub>i</sub>/<i>g</i>.</li>
+      <li>When using <i>v</i><sub>f</sub><sup>2</sup> = …, take the square root and choose the sign by thinking about the direction of motion.</li>
+    </ul>
+
+    <h3>Which equation should I use?</h3>
+    <p>Say what the problem gives, what it asks for, and which quantity is <em>not involved</em>. (In free fall, <i>a</i> = −9.81 m/s² is usually "given" even if not stated.)</p>
+    <table class="vartable" id="eqTable"></table>
+    <div class="status warn" id="eqStatus" aria-live="polite">Choose exactly 3 "Given", 1 "Want" and 1 "Not involved".</div>
+    <div class="eqcard" id="eqResult" hidden></div>
+  </div>
+
+  <div class="card" id="quicklab">
+    <span class="pill">Quick Lab (virtual)</span>
+    <h3>Time interval of free fall: your reaction time</h3>
+    <p>A friend holds a meterstick vertically; you catch it as fast as you can after it is released. The distance it falls before you catch it gives your reaction time: Δ<i>t</i> = √(2Δ<i>y</i> / <i>g</i>). <em>Materials: meterstick or ruler. Safety: avoid eye injury; do not swing metersticks.</em></p>
+    <div class="sliderrow"><label for="rtD">Distance fallen (cm)</label><input id="rtD" type="range" min="2" max="50" step="0.5" value="18"><output id="rtDO"></output></div>
+    <div class="readouts">
+      <div class="readout"><small>Reaction time</small><b id="rtT">—</b></div>
+      <div class="readout"><small>Compare</small><b id="rtC" style="font-size:1rem">—</b></div>
+    </div>
+    <p class="pnote">Typical human reaction times are about 0.15–0.30 s (distances of roughly 11–44 cm).</p>
+  </div>
+
+  <div class="card" id="part-d">
+    <span class="pill">Why it matters</span>
+    <h2>Skydiving and terminal velocity</h2>
+    <p>If Earth had no atmosphere, a skydiver would fall with <i>a</i><sub>g</sub> = −9.81 m/s² forever. In reality air resistance grows with speed: the acceleration decreases and, after a few seconds, drops to zero. The constant speed reached is the <b>terminal velocity</b>; it depends on the object's mass, shape and size.</p>
+    <div class="ctlrow"><span class="l"><b>Body position</b></span>
+      <div class="seg" id="termPos" role="group" aria-label="Body position">
+        <button type="button" data-v="55" aria-pressed="true">Spread out · ≈55 m/s</button><button type="button" data-v="90" aria-pressed="false">Curled in a ball · ≈90 m/s</button><button type="button" data-v="5" aria-pressed="false">Open parachute · ≈5 m/s</button>
+      </div>
+    </div>
+    <div id="termChart"></div>
+    <p class="pnote" id="termInfo"></p>
+    <p class="pnote">The world record for the fastest terminal velocity (2015) was 148 m/s (331 mi/h).</p>
+  </div>
+
+  <div class="card" id="part-e">
+    <span class="pill">Take it further</span>
+    <h2>Angular kinematics</h2>
+    <p>A point on an object that rotates about a fixed axis moves in a circle. We describe it with <b>angular</b> quantities: all points on a rigid rotating object (except on the axis) turn through the same angle in the same time.</p>
+    <h3>Measuring angles with radians</h3>
+    <div class="eq big">θ = <span class="frac"><span>arc length</span><span>radius</span></span> = <span class="frac"><span><i>s</i></span><span><i>r</i></span></span></div>
+    <p>The radian (rad) is a pure number: one radian is the angle for which the arc length equals the radius. One full revolution: <i>s</i> = 2π<i>r</i> → θ = 2π rad ≈ 6.28 rad. To convert degrees to radians:</p>
+    <div class="eq">θ (rad) = <span class="frac"><span>π</span><span>180°</span></span> θ (deg)</div>
+    <div class="callout blue"><b class="t">Key terms</b><b>Angular displacement</b> Δθ = Δ<i>s</i>/<i>r</i> · <b>Angular velocity</b> ω<sub>avg</sub> = Δθ/Δ<i>t</i> (rad/s) · <b>Angular acceleration</b> α<sub>avg</sub> = Δω/Δ<i>t</i> = (ω<sub>2</sub> − ω<sub>1</sub>)/(<i>t</i><sub>2</sub> − <i>t</i><sub>1</sub>) (rad/s²). Counterclockwise is positive; clockwise is negative. α has the same sign as ω when the rotation speeds up.</div>
+
+    <h4>Radians &amp; arc length explorer</h4>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="agDeg">Angle θ</label><input id="agDeg" type="range" min="0" max="360" step="5" value="60"><output id="agDegO"></output></div>
+        <div class="sliderrow"><label for="agR">Radius r</label><input id="agR" type="range" min="1" max="20" step="0.5" value="12"><output id="agRO"></output></div>
+        <div class="ctlrow"><b>Direction</b><div class="seg" id="agDir" role="group" aria-label="Rotation direction"><button type="button" data-d="1" aria-pressed="true">Counterclockwise (+)</button><button type="button" data-d="-1" aria-pressed="false">Clockwise (−)</button></div></div>
+        <div class="readouts">
+          <div class="readout"><small>θ in radians</small><b id="agRad">—</b></div>
+          <div class="readout"><small>Arc length s = rθ</small><b id="agS">—</b></div>
+        </div>
+        <div class="status" id="agStatus" aria-live="polite"></div>
+      </div>
+      <div id="agSvg"></div>
+    </div>
+
+    <h4>Spinning wheel (constant angular acceleration)</h4>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="whW">Initial ω<sub>i</sub></label><input id="whW" type="range" min="-10" max="10" step="0.5" value="4"><output id="whWO"></output></div>
+        <div class="sliderrow"><label for="whA">Angular accel. α</label><input id="whA" type="range" min="-4" max="4" step="0.25" value="-1.5"><output id="whAO"></output></div>
+        <div class="row"><button class="btn" id="whPlay" type="button">Spin (4 s)</button></div>
+        <div class="readouts">
+          <div class="readout"><small>t</small><b id="whT">0.0 s</b></div>
+          <div class="readout"><small>ω = ω<sub>i</sub> + αt</small><b id="whOm">—</b></div>
+          <div class="readout"><small>Δθ</small><b id="whTh">—</b></div>
+        </div>
+        <div class="status" id="whStatus" aria-live="polite"></div>
+      </div>
+      <div id="whSvg"></div>
+    </div>
+
+    <h4 style="margin-top:16px">Rotational ↔ linear: same equations, new symbols</h4>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Rotational (constant α)</th><th>Linear (constant a)</th></tr></thead>
+      <tbody>
+        <tr><td class="math">ω<sub>f</sub> = ω<sub>i</sub> + αΔ<i>t</i></td><td class="math"><i>v</i><sub>f</sub> = <i>v</i><sub>i</sub> + <i>a</i>Δ<i>t</i></td></tr>
+        <tr><td class="math">Δθ = ω<sub>i</sub>Δ<i>t</i> + ½α(Δ<i>t</i>)²</td><td class="math">Δ<i>x</i> = <i>v</i><sub>i</sub>Δ<i>t</i> + ½<i>a</i>(Δ<i>t</i>)²</td></tr>
+        <tr><td class="math">ω<sub>f</sub>² = ω<sub>i</sub>² + 2αΔθ</td><td class="math"><i>v</i><sub>f</sub>² = <i>v</i><sub>i</sub>² + 2<i>a</i>Δ<i>x</i></td></tr>
+        <tr><td class="math">Δθ = ½(ω<sub>i</sub> + ω<sub>f</sub>)Δ<i>t</i></td><td class="math">Δ<i>x</i> = ½(<i>v</i><sub>i</sub> + <i>v</i><sub>f</sub>)Δ<i>t</i></td></tr>
+      </tbody></table></div>
+    <p class="pnote">Substitutions: θ ↔ <i>x</i>, ω ↔ <i>v</i>, α ↔ <i>a</i>. ω in these equations is the <em>instantaneous</em> angular velocity. They apply only to rotation about a fixed axis with constant angular acceleration.</p>
+    <p class="pnote"><b>Quick Lab idea (Radians and arc length):</b> draw a circle with a compass, cut wires equal to the radius and lay them along the circumference. About 6.28 radius-lengths fit around the circle, no matter the circle's size.</p>
+  </div>
+
+  <div class="card" id="part-f">
+    <span class="pill">Physics on the edge</span>
+    <h2>Special relativity and time dilation</h2>
+    <p>Before Einstein, everyone assumed Δ<i>t</i> was the same for every observer (time is "absolute"). In 1905 he showed that the speed of light is the same for any observer, so the observer beside the track, who sees the light pulse travel a <em>longer</em> path than the passenger on the train, must measure a <b>longer</b> time interval. This is <b>time dilation</b>:</p>
+    <div class="eq big">Δ<i>t</i>′ = <span class="frac"><span>Δ<i>t</i></span><span>√(1 − <i>v</i>²/<i>c</i>²)</span></span></div>
+    <p>Δ<i>t</i> is measured by the person on the train (or the moving clock); Δ<i>t</i>′ by the person beside the track; <i>c</i> = 3.00 × 10<sup>8</sup> m/s. At everyday speeds <i>v</i>²/<i>c</i>² is tiny, so Δ<i>t</i>′ ≈ Δ<i>t</i>. Near the speed of light the effect grows without limit. It has been confirmed with muons traveling at 0.9994<i>c</i> and with atomic clocks on jet planes.</p>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="rvV">Speed v/c</label><input id="rvV" type="range" min="0" max="0.999" step="0.001" value="0.8"><output id="rvVO"></output></div>
+        <div class="sliderrow"><label for="rvT">Δt on the train</label><input id="rvT" type="range" min="1" max="20" step="1" value="10"><output id="rvTO"></output></div>
+        <div class="row"><button class="btn ghost" data-rv="0.1" type="button">0.1c</button><button class="btn ghost" data-rv="0.5" type="button">0.5c</button><button class="btn ghost" data-rv="0.9" type="button">0.9c</button><button class="btn ghost" data-rv="0.99" type="button">0.99c</button><button class="btn ghost" data-rv="0.999" type="button">0.999c</button></div>
+        <div class="readouts">
+          <div class="readout"><small>Factor 1/√(1 − v²/c²)</small><b id="rvG">—</b></div>
+          <div class="readout"><small>Δt′ (observer beside track)</small><b id="rvTp">—</b></div>
+        </div>
+      </div>
+      <div id="rvBars"></div>
+    </div>
+  </div>
+
+  <div class="card" id="part-g">
+    <span class="pill">Think Science</span>
+    <h2>Theories in motion</h2>
+    <p>A <b>hypothesis</b> is a tentative, testable explanation supported by evidence. When a hypothesis proves reliable across a wide range of conditions, scientists combine it with related hypotheses to form a <b>theory</b>.</p>
+    <p><b>Falling objects.</b> Aristotle (4th century BCE) claimed that the speed of a falling object is directly related to its mass; this qualitative idea was accepted for nearly 2000 years. By about 1600 Galileo theorized that objects fall at the same speed, independent of mass, and supported it with experimental and observational evidence. Independent tests and Newton's theory of gravitation later displaced Aristotle's explanation.</p>
+    <h4>Conceptual challenge: estimating distance</h4>
+    <p>How far does a basketball player move during a game? Estimate with reasonable assumptions:</p>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="esT">Game length (min)</label><input id="esT" type="range" min="30" max="60" step="1" value="48"><output id="esTO"></output></div>
+        <div class="sliderrow"><label for="esP">Time moving (%)</label><input id="esP" type="range" min="20" max="100" step="5" value="60"><output id="esPO"></output></div>
+        <div class="sliderrow"><label for="esS">Average speed (m/s)</label><input id="esS" type="range" min="0.5" max="5" step="0.1" value="2.5"><output id="esSO"></output></div>
+      </div>
+      <div><div class="readouts"><div class="readout"><small>Estimated distance</small><b id="esD">—</b></div></div><p class="pnote" id="esN"></p></div>
+    </div>
+    <p class="pnote">Quick estimates let scientists narrow the range of possibilities and focus on the most reasonable hypotheses.</p>
+  </div>
+
+  <div class="card">
+    <h3>Remember when solving problems</h3>
+    <ol>
+      <li><b>Analyze</b> — list givens and unknowns; choose <b>up as +</b>; remember <i>a</i> = −9.81 m/s² and, for objects dropped, <i>v</i><sub>i</sub> = 0.</li>
+      <li><b>Plan</b> — choose the equation that has your unknown and leaves out the quantity you don't know and don't need.</li>
+      <li><b>Solve</b> — rearrange first, substitute with signs, and choose the sign of any square root by reasoning about direction.</li>
+      <li><b>Check</b> — does the sign make sense (down = negative)? Is the size reasonable compared with the free-fall acceleration?</li>
+    </ol>
+    <p class="pnote">Ready? Go to <button class="linkbtn" data-goto="examples">Worked Examples</button>, then <button class="linkbtn" data-goto="practice">Practice</button>.</p>
+  </div>
+</section>
+
+<!-- ===================== EXAMPLES ===================== -->
+<section class="panel" id="examples" aria-labelledby="t-examples">
+  <div class="card">
+    <h2>Step-by-step worked examples</h2>
+    <p>Each example follows <b>Analyze → Plan → Solve → Check</b>. Press <em>Next step</em> to reveal one step at a time. At most steps you'll answer a quick question first — that's where the thinking happens.</p>
+  </div>
+  <div id="exampleList"></div>
+</section>
+
+<!-- ===================== PRACTICE ===================== -->
+<section class="panel" id="practice" aria-labelledby="t-practice">
+  <div class="card">
+    <h2>Practice on your own</h2>
+    <p>Type your answer and press <b>Check</b> (or Enter) for immediate feedback. Stuck? Use <b>Hint</b>. After two tries you can open the full <b>Solution</b>.</p>
+    <ul>
+      <li>Use <b>up = positive</b>, <i>g</i> = 9.81 m/s² (so <i>a</i> = −9.81 m/s²). Keep the signs: a falling object has a negative displacement and a negative velocity. When a problem asks for a <em>speed</em> or a <em>distance</em>, give a positive number.</li>
+      <li>You may enter answers like <span class="math">2.2</span>, <span class="math">−3.5e-3</span> or <span class="math">1.38 x 10^4</span>. Answers within about 3 % are accepted.</li>
+    </ul>
+  </div>
+  <div class="setpicker" id="setPicker" role="group" aria-label="Problem sets"></div>
+  <div id="problemList"></div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Lincoln International Academy · Physics II · Mr. Eduardo Vásquez<br>Content adapted from <i>Holt McDougal Physics</i>, Chapter 2 §3 (Falling Objects, Take It Further, Physics on the Edge, Think Science) (© Houghton Mifflin Harcourt). Additional problems written for this page.</div>
+    <div>Your progress is saved in this browser only. <button class="linkbtn" id="resetAll">Reset my progress</button></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+const $  = (s,e=document)=>e.querySelector(s);
+const $$ = (s,e=document)=>[...e.querySelectorAll(s)];
+const KEY='lia-physics2-lesson-2-3';
+let state={};
+try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+
+/* ---------- notation helpers ---------- */
+const vi='<i>v</i><sub>i</sub>', vf='<i>v</i><sub>f</sub>', dx='Δ<i>y</i>', dt='Δ<i>t</i>', A='<i>a</i>', sq='<sup>2</sup>';
+const F=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const EQ={
+  avg:`${A}<sub>avg</sub> = ${F('Δ<i>v</i>',dt)} = ${F(vf+' − '+vi,dt)}`,
+  disp:`${dx} = ½(${vi} + ${vf})${dt}`,
+  vel:`${vf} = ${vi} + ${A}${dt}`,
+  disp2:`${dx} = ${vi}${dt} + ½${A}(${dt})${sq}`,
+  vsq:`${vf}${sq} = ${vi}${sq} + 2${A}${dx}`
+};
+const S=(x,sf=3)=>{
+  if(x===0) return '0';
+  const e=Math.floor(Math.log10(Math.abs(x)));
+  if(e>=4||e<=-3){ const m=+(x/Math.pow(10,e)).toPrecision(sf); return `${m} × 10<sup>${e}</sup>`; }
+  return String(+x.toPrecision(sf));
+};
+const kmh=x=>x/3.6;
+
+/* ---------- number parsing / judging ---------- */
+function parseNum(raw){
+  if(raw==null) return NaN;
+  let s=String(raw).trim().toLowerCase().replace(/,/g,'').replace(/\s+/g,'').replace(/[−–]/g,'-');
+  if(!s) return NaN;
+  const sup={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-'};
+  s=s.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g,m=>'^'+[...m].map(c=>sup[c]).join(''));
+  s=s.replace(/(km\/h|m\/s\^?2|m\/s²|m\/s|km|kph|ms|s|m)$/,'');
+  const m=s.match(/^([+-]?(?:\d+\.?\d*|\.\d+))(?:(?:x|×|\*)10\^?\(?([+-]?\d+)\)?|e([+-]?\d+))?$/);
+  if(!m) return NaN;
+  let v=parseFloat(m[1]);
+  const ex=m[2]!==undefined?m[2]:m[3];
+  if(ex!==undefined) v*=Math.pow(10,parseInt(ex,10));
+  return v;
+}
+function judge(v,part){
+  if(!isFinite(v)) return {state:'no',msg:'I couldn\'t read that as a number. Try something like 2.2, −3.5e-3 or 1.38 x 10^4.'};
+  const tol=part.tol??0.03, ans=part.ans, A_=Math.abs(ans);
+  const cmp=part.abs? Math.abs(v):v;
+  const rel=Math.abs(cmp-(part.abs?A_:ans))/A_;
+  if(rel<=tol) return {state:'ok',msg:'Correct!'};
+  for(const t of (part.traps||[])){ if(Math.abs(v-t.v)/Math.abs(t.v)<=0.02) return {state:'no',msg:t.msg}; }
+  if(!part.abs && Math.abs(v+ans)/A_<=tol) return {state:'near',msg:'Right size, wrong sign. Check the direction: velocity, acceleration and displacement are vectors (which way is positive?).'};
+  if(ans>0 && v<0) return {state:'no',msg:'This quantity should come out positive here. Check which value is "final" and which is "initial".'};
+  const av=Math.abs(v);
+  const facts=[[1000,'Right digits, wrong power of ten — check the unit conversion (m vs km).'],[3.6,'That looks like a km/h ↔ m/s mix-up. Divide km/h by 3.6 to get m/s (multiply to go back).'],[60,'Check your minutes ↔ seconds conversion (1 min = 60 s).'],[2,'Off by a factor of 2 — did you forget the ½ (or the 2) in the equation?']];
+  for(const [k,msg] of facts){
+    if(Math.abs(av*k-A_)/A_<=tol || Math.abs(av/k-A_)/A_<=tol) return {state:'near',msg};
+  }
+  if(rel<=0.12) return {state:'near',msg:'Close! Check your rounding or an intermediate value.'};
+  return {state:'no',msg:'Not quite. Re-read the question, check the equation you chose and the units, and try a hint if you need one.'};
+}
+
+/* ---------- v–t graph svg ---------- */
+function vtSVG(vi_,vf_,T,o={}){
+  const W=420,H=230,L=48,R=16,Tp=20,B=34;
+  const vmin=Math.min(0,vi_,vf_), vmax=Math.max(0,vi_,vf_), span=(vmax-vmin)||1;
+  const lo=vmin-(vmin<0?span*.12:0), hi=vmax+span*.15;
+  const X=t=>L+(t/T)*(W-L-R), Y=v=>Tp+(hi-v)/(hi-lo)*(H-Tp-B);
+  const f=v=>String(+v.toPrecision(3));
+  const avg=(vi_+vf_)/2;
+  let s=`<svg class="vt" viewBox="0 0 ${W} ${H}" role="img" aria-label="Velocity versus time graph">`;
+  s+=`<polygon points="${X(0)},${Y(0)} ${X(0)},${Y(vi_)} ${X(T)},${Y(vf_)} ${X(T)},${Y(0)}" fill="var(--accent)" opacity=".2"/>`;
+  s+=`<line class="axis" x1="${L}" y1="${Tp-6}" x2="${L}" y2="${H-B}"/><line class="axis" x1="${L}" y1="${Y(0)}" x2="${W-R}" y2="${Y(0)}"/>`;
+  if(o.avg!==false) s+=`<line x1="${X(0)}" y1="${Y(avg)}" x2="${X(T)}" y2="${Y(avg)}" stroke="var(--warm)" stroke-width="2" stroke-dasharray="6 5"/><text x="${W-R}" y="${Y(avg)-5}" text-anchor="end" style="fill:var(--warm)">v̄ = ${f(avg)}</text>`;
+  s+=`<line x1="${X(0)}" y1="${Y(vi_)}" x2="${X(T)}" y2="${Y(vf_)}" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round"/>`;
+  s+=`<circle cx="${X(0)}" cy="${Y(vi_)}" r="5" fill="var(--accent)"/><circle cx="${X(T)}" cy="${Y(vf_)}" r="5" fill="var(--accent)"/>`;
+  s+=`<text class="lbl" x="${L-6}" y="${Y(vi_)+4}" text-anchor="end">${f(vi_)}</text><text class="lbl" x="${X(T)-4}" y="${Y(vf_)+(vf_>=vi_?-9:16)}" text-anchor="end">${f(vf_)}</text>`;
+  s+=`<text x="${L+4}" y="${Tp-8}">v (m/s)</text><text x="${W-R}" y="${H-8}" text-anchor="end">t (s)</text>`;
+  s+=`<text x="${L}" y="${H-B+14}" text-anchor="middle">0</text><text x="${X(T)}" y="${H-B+14}" text-anchor="middle">${f(T)}</text>`;
+  if(o.areaLabel!==false) s+=`<text class="lbl" x="${(X(0)+X(T))/2}" y="${Y(avg>=0?avg/2:avg/2)+4}" text-anchor="middle" style="font-weight:700">Δx = area</text>`;
+  return s+'</svg>';
+}
+
+/* ---------- tabs ---------- */
+function showTab(name){
+  $$('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));
+  $$('section.panel').forEach(p=>p.classList.toggle('active',p.id===name));
+  if(location.hash!=='#'+name) history.replaceState(null,'','#'+name);
+  window.scrollTo({top:0});
+}
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.addEventListener('click',e=>{ const g=e.target.closest('[data-goto]'); if(g) showTab(g.dataset.goto); });
+
+/* ---------- theme toggle ---------- */
+(function(){
+  const root=document.documentElement, mq=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+  const eff=()=>root.getAttribute('data-theme')||((mq&&mq.matches)?'dark':'light');
+  function sync(){ const t=eff(); $$('[data-theme-set]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeSet===t))); }
+  $$('[data-theme-set]').forEach(b=>b.addEventListener('click',()=>{
+    root.setAttribute('data-theme',b.dataset.themeSet);
+    try{ localStorage.setItem('lia-theme',b.dataset.themeSet); }catch(e){}
+    sync();
+  }));
+  if(mq&&mq.addEventListener) mq.addEventListener('change',sync);
+  sync();
+})();
+
+/* ---------- generic line chart ---------- */
+function lineChart(series,o){
+  const W=o.W||460,H=o.H||230,L=46,R=14,T=14,B=34;
+  const xmin=o.xmin||0,xmax=o.xmax,ymin=o.ymin,ymax=o.ymax;
+  const X=x=>L+(x-xmin)/(xmax-xmin)*(W-L-R), Y=y=>T+(1-(y-ymin)/(ymax-ymin))*(H-T-B);
+  const cl=y=>Math.max(ymin,Math.min(ymax,y));
+  const f=v=>String(+v.toPrecision(3));
+  let s=`<svg class="vt" viewBox="0 0 ${W} ${H}" role="img" aria-label="${o.aria||'Graph'}">`;
+  for(let i=0;i<=4;i++){ const v=ymin+(ymax-ymin)*i/4; s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${f(v)}</text>`; }
+  for(let i=0;i<=4;i++){ const v=xmin+(xmax-xmin)*i/4; s+=`<text x="${X(v)}" y="${H-B+15}" text-anchor="middle">${f(v)}</text>`; }
+  if(ymin<0&&ymax>0) s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="${Y(0)}" y2="${Y(0)}"/>`;
+  s+=`<line class="axis" x1="${L}" x2="${L}" y1="${T}" y2="${H-B}"/><line class="axis" x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}"/>`;
+  series.forEach(se=>{ s+=`<polyline fill="none" stroke="${se.color||'var(--accent)'}" stroke-width="${se.w||3}" ${se.dash?'stroke-dasharray="7 5"':''} stroke-linejoin="round" points="${se.pts.map(p=>X(p[0])+','+Y(cl(p[1]))).join(' ')}"/>`; if(se.label) s+=`<text x="${X(se.pts[se.pts.length-1][0])-4}" y="${Y(cl(se.pts[se.pts.length-1][1]))-6}" text-anchor="end" style="fill:${se.color}">${se.label}</text>`; });
+  if(o.mark){ s+=`<line x1="${X(o.mark[0])}" x2="${X(o.mark[0])}" y1="${T}" y2="${H-B}" stroke="var(--warm)" stroke-width="1.5" stroke-dasharray="4 4"/><circle cx="${X(o.mark[0])}" cy="${Y(cl(o.mark[1]))}" r="6" fill="var(--warm)"/>`; }
+  s+=`<text x="${L+4}" y="${T+8}">${o.ylab||''}</text><text x="${W-R}" y="${H-4}" text-anchor="end">${o.xlab||''}</text>`;
+  return s+'</svg>';
+}
+
+/* ---------- hammer & feather lab ---------- */
+(function(){
+  let g=9.81, name='Earth', run=false, raf=null, last=0, bodies=null;
+  const H=()=>+$('#dlH').value;
+  function reset(){ bodies={h:{y:0,v:0,done:false,t:0,k:.01},f:{y:0,v:0,done:false,t:0,k:2.5}}; t=0; draw(); readouts(); $('#dlStatus').className='status'; $('#dlStatus').textContent='Both bodies are released from rest (vᵢ = 0). Press Drop.'; $('#dlGo').disabled=false; run=false; if(raf) cancelAnimationFrame(raf); raf=null; }
+  let t=0;
+  function step(dt){
+    const air=$('#dlAir').checked&&name!=='Moon', h=H();
+    for(const b of [bodies.h,bodies.f]){
+      if(b.done) continue;
+      const k=air?b.k:0, a=g-k*b.v, vy=b.v+a*dt, ny=b.y+vy*dt;
+      if(ny>=h){ const fr=(h-b.y)/(ny-b.y||1e-9); b.t=t+dt*fr; b.v=b.v+a*dt*fr; b.y=h; b.done=true; }
+      else { b.y=ny; b.v=vy; b.t=t+dt; }
+    }
+    t+=dt;
+  }
+  function draw(){
+    const h=H(), top=26, gnd=268, sc=(gnd-top-16)/h;
+    const body=(x,b,type)=>{ const y=top+b.y*sc;
+      return type==='h'?`<rect x="${x-16}" y="${y}" width="32" height="16" rx="3" fill="var(--primary)"/><rect x="${x-3}" y="${y-8}" width="6" height="10" fill="var(--muted)"/>`:`<ellipse cx="${x}" cy="${y+8}" rx="${5}" ry="${14}" fill="var(--hot)" transform="rotate(25 ${x} ${y+8})"/>`; };
+    $('#dlSvg').innerHTML=`<svg class="vt" viewBox="0 0 300 300" role="img" aria-label="Hammer and feather falling">
+      <rect x="20" y="${gnd}" width="260" height="10" fill="var(--muted)" opacity=".5"/>
+      <text x="90" y="16" text-anchor="middle">hammer</text><text x="210" y="16" text-anchor="middle">feather</text>
+      <line x1="90" x2="90" y1="${top}" y2="${gnd}" stroke="var(--line)" stroke-dasharray="3 4"/><line x1="210" x2="210" y1="${top}" y2="${gnd}" stroke="var(--line)" stroke-dasharray="3 4"/>
+      ${body(90,bodies.h,'h')}${body(210,bodies.f,'f')}
+      <text x="285" y="${gnd-4}" text-anchor="end">${name} · g = ${g} m/s²</text></svg>`;
+  }
+  function readouts(){
+    const fm=b=>b.t===0?'—':`${b.t.toFixed(2)} s · ${(b.v).toFixed(1)} m/s ${b.done?'(landed)':''}`;
+    $('#dlHam').textContent=fm(bodies.h); $('#dlFea').textContent=fm(bodies.f);
+  }
+  function loop(now){
+    if(!run) return;
+    const dt=Math.min((now-last)/1000,0.05); last=now;
+    const n=Math.ceil(dt/0.004); for(let i=0;i<n;i++) step(dt/n);
+    draw(); readouts();
+    if(bodies.h.done&&bodies.f.done){
+      run=false; $('#dlGo').disabled=false; const st=$('#dlStatus'); const same=Math.abs(bodies.h.t-bodies.f.t)<0.02;
+      st.className='status'+(same?'':' warn');
+      st.innerHTML=same?`Both landed together at ${bodies.h.t.toFixed(2)} s with speed ${bodies.h.v.toFixed(1)} m/s: free fall is independent of mass. (Theory: √(2·${H()}/${g}) = ${Math.sqrt(2*H()/g).toFixed(2)} s.)`:`The feather lands ${(bodies.f.t-bodies.h.t).toFixed(2)} s after the hammer: air resistance (not free fall) slows it. Its speed levels off near its terminal velocity.`;
+      return;
+    }
+    raf=requestAnimationFrame(loop);
+  }
+  $('#dlGo').addEventListener('click',()=>{ reset(); run=true; last=performance.now(); $('#dlGo').disabled=true; raf=requestAnimationFrame(loop); });
+  $('#dlReset').addEventListener('click',reset);
+  $('#dlH').addEventListener('input',()=>{ $('#dlHO').textContent=H()+' m'; reset(); });
+  $$('#dlPlanet button').forEach(b=>b.addEventListener('click',()=>{
+    g=+b.dataset.g; name=b.dataset.n; $$('#dlPlanet button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+    const moon=name==='Moon'; $('#dlAir').disabled=moon; if(moon) $('#dlAir').checked=false; reset();
+  }));
+  $('#dlAir').addEventListener('change',reset);
+  $('#dlHO').textContent=H()+' m'; reset();
+})();
+
+/* ---------- tossed ball lab ---------- */
+(function(){
+  const g=9.81, V0=$('#tvV0'), TS=$('#tvT'); let raf=null, playing=false, last=0;
+  const T=()=>2*(+V0.value)/g;
+  function upd(){
+    const v0=+V0.value, Tt=T(); TS.max=Tt.toFixed(2); if(+TS.value>Tt) TS.value=Tt;
+    const t=+TS.value, y=v0*t-.5*g*t*t, v=v0-g*t, ymax=v0*v0/(2*g);
+    $('#tvV0O').textContent=v0+' m/s'; $('#tvTO').textContent=t.toFixed(2)+' s';
+    $('#tvY').textContent=y.toFixed(2)+' m'; $('#tvV').textContent=(v>=0?'+':'')+v.toFixed(2)+' m/s';
+    const st=$('#tvStatus');
+    if(Math.abs(v)<0.12){ st.className='status warn'; st.textContent='At the peak: v = 0 but a is still −9.81 m/s².'; }
+    else if(v>0){ st.className='status'; st.textContent='Rising: v is + and a is − → slowing down.'; }
+    else { st.className='status'; st.textContent='Falling: v is − and a is − → speeding up.'; }
+    $('#tvSummary').innerHTML=`Maximum height = v<sub>i</sub>²/(2g) = <b>${ymax.toFixed(2)} m</b> · time to the top = v<sub>i</sub>/g = <b>${(v0/g).toFixed(2)} s</b> · total time in the air = <b>${Tt.toFixed(2)} s</b>`;
+    // scene
+    const gnd=270, sc=220/ymax, py=gnd-10-y*sc, vp=Math.max(-70,Math.min(70,v/v0*60));
+    $('#tvScene').innerHTML=`<svg class="vt" viewBox="0 0 220 290" style="max-width:240px" role="img" aria-label="Ball thrown upward">
+      <line x1="110" x2="110" y1="20" y2="${gnd}" stroke="var(--line)" stroke-dasharray="3 4"/><rect x="40" y="${gnd}" width="140" height="8" fill="var(--muted)" opacity=".5"/>
+      <line x1="${110-60}" x2="${110+60}" y1="${gnd-10-ymax*sc}" y2="${gnd-10-ymax*sc}" stroke="var(--line)" stroke-dasharray="2 4"/><text x="${110-62}" y="${gnd-14-ymax*sc}" text-anchor="start">peak</text>
+      <circle cx="110" cy="${py}" r="11" fill="var(--hot)"/>
+      <defs><marker id="tvh1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 z" fill="var(--accent)"/></marker><marker id="tvh2" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto-start-reverse"><path d="M0,0 L8,4 L0,8 z" fill="var(--warm)"/></marker></defs>
+      ${Math.abs(vp)>2?`<line x1="140" x2="140" y1="${py}" y2="${py-vp}" stroke="var(--accent)" stroke-width="4" marker-end="url(#tvh1)"/>`:''}
+      <text x="150" y="${py+4}" style="fill:var(--accent)">v</text>
+      <line x1="80" x2="80" y1="${py}" y2="${py+45}" stroke="var(--warm)" stroke-width="4" marker-end="url(#tvh2)"/><text x="62" y="${py+4}" style="fill:var(--warm)">a</text></svg>`;
+    const n=60, vs=[],ys=[]; for(let i=0;i<=n;i++){ const tt=Tt*i/n; vs.push([tt,v0-g*tt]); ys.push([tt,v0*tt-.5*g*tt*tt]); }
+    $('#tvGv').innerHTML=lineChart([{pts:vs}],{xmax:Tt,ymin:-v0*1.1,ymax:v0*1.1,xlab:'t (s)',ylab:'v (m/s)',mark:[t,v],aria:'Velocity-time graph of the ball'});
+    $('#tvGy').innerHTML=lineChart([{pts:ys,color:'var(--primary)'}],{xmax:Tt,ymin:0,ymax:ymax*1.1,xlab:'t (s)',ylab:'y (m)',mark:[t,y],aria:'Height-time graph of the ball'});
+  }
+  function frame(now){
+    if(!playing) return;
+    const dt=(now-last)/1000; last=now; let t=+TS.value+dt;
+    if(t>=T()){ t=T(); playing=false; $('#tvPlay').textContent='Play'; }
+    TS.value=t; upd();
+    if(playing) raf=requestAnimationFrame(frame);
+  }
+  $('#tvPlay').addEventListener('click',()=>{
+    if(playing){ playing=false; $('#tvPlay').textContent='Play'; return; }
+    if(+TS.value>=T()-0.005) TS.value=0;
+    playing=true; $('#tvPlay').textContent='Pause'; last=performance.now(); raf=requestAnimationFrame(frame);
+  });
+  $('#tvRst').addEventListener('click',()=>{ playing=false; $('#tvPlay').textContent='Play'; TS.value=0; upd(); });
+  TS.addEventListener('input',()=>{ playing=false; $('#tvPlay').textContent='Play'; upd(); });
+  V0.addEventListener('input',()=>{ playing=false; $('#tvPlay').textContent='Play'; TS.value=0; upd(); });
+  TS.step=0.01; upd();
+})();
+
+/* ---------- equation chooser (free fall: Δy) ---------- */
+(function(){
+  const V=[['vi','<i>v</i><sub>i</sub> (initial velocity)'],['vf','<i>v</i><sub>f</sub> (final velocity)'],['a','<i>a</i> (acceleration, usually −9.81 m/s²)'],['dy','Δ<i>y</i> (displacement)'],['dt','Δ<i>t</i> (time interval)']];
+  const EQS={
+    a:{eq:EQ.disp,solve:{dy:`${dx} = ½(${vi} + ${vf})${dt}`,dt:`${dt} = ${F('2'+dx,vi+' + '+vf)}`,vf:`${vf} = ${F('2'+dx,dt)} − ${vi}`,vi:`${vi} = ${F('2'+dx,dt)} − ${vf}`}},
+    dy:{eq:EQ.vel,solve:{vf:`${vf} = ${vi} + ${A}${dt}`,vi:`${vi} = ${vf} − ${A}${dt}`,a:`${A} = ${F(vf+' − '+vi,dt)}`,dt:`${dt} = ${F(vf+' − '+vi,A)}`}},
+    vf:{eq:EQ.disp2,solve:{dy:`${dx} = ${vi}${dt} + ½${A}(${dt})${sq}`,a:`${A} = ${F('2('+dx+' − '+vi+dt+')','('+dt+')'+sq)}`,vi:`${vi} = ${F(dx,dt)} − ½${A}${dt}`,dt:'Quadratic in Δ<i>t</i>: ½<i>a</i>(Δ<i>t</i>)² + <i>v</i><sub>i</sub>Δ<i>t</i> − Δ<i>y</i> = 0 (find v<sub>f</sub> first with another equation, then use v<sub>f</sub> = v<sub>i</sub> + aΔt).'}},
+    dt:{eq:EQ.vsq,solve:{vf:`${vf} = ±√(${vi}${sq} + 2${A}${dx})`,vi:`${vi} = ±√(${vf}${sq} − 2${A}${dx})`,a:`${A} = ${F(vf+sq+' − '+vi+sq,'2'+dx)}`,dy:`${dx} = ${F(vf+sq+' − '+vi+sq,'2'+A)}`}}
+  };
+  const tbl=$('#eqTable');
+  V.forEach(([k,lab])=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML=`<td>${lab}</td><td><select aria-label="${lab.replace(/<[^>]+>/g,'')}" data-k="${k}"><option value="">— choose —</option><option value="g">Given</option><option value="w">Want (unknown)</option><option value="n">Not involved</option></select></td>`;
+    tbl.appendChild(tr);
+  });
+  function upd(){
+    const g=[],w=[],n=[];
+    $$('select',tbl).forEach(s=>{ ({g,w,n}[s.value]||[]).push(s.dataset.k); });
+    const st=$('#eqStatus'), res=$('#eqResult');
+    if(g.length+w.length+n.length<5){ st.className='status warn'; st.textContent='Choose exactly 3 "Given", 1 "Want" and 1 "Not involved".'; res.hidden=true; return; }
+    if(g.length!==3||w.length!==1||n.length!==1){ st.className='status bad'; st.textContent=`You have ${g.length} given, ${w.length} unknown, ${n.length} not involved. A solvable problem has 3 given, 1 unknown, and 1 quantity that is not involved.`; res.hidden=true; return; }
+    const e=EQS[n[0]];
+    st.className='status'; st.textContent='Use the equation that leaves out the quantity you don\'t have and don\'t need.';
+    res.hidden=false; res.innerHTML=`<b>Equation to use</b> (it does not contain ${V.find(x=>x[0]===n[0])[1].split(' (')[0]}):<div class="eq">${e.eq}</div><b>Solved for the unknown:</b><div class="eq">${e.solve[w[0]]}</div>`;
+  }
+  $$('select',tbl).forEach(s=>s.addEventListener('change',upd));
+})();
+
+/* ---------- reaction time ---------- */
+(function(){
+  const r=$('#rtD');
+  function upd(){
+    const d=+r.value/100, t=Math.sqrt(2*d/9.81);
+    $('#rtDO').textContent=r.value+' cm'; $('#rtT').textContent=t.toFixed(3)+' s';
+    $('#rtC').textContent=t<0.15?'Faster than typical':t<=0.30?'Typical':'Slower than typical';
+  }
+  r.addEventListener('input',upd); upd();
+})();
+
+/* ---------- terminal velocity ---------- */
+(function(){
+  let vt=55;
+  function upd(){
+    const g=9.81, n=80, tm=20, a=[],b=[];
+    for(let i=0;i<=n;i++){ const t=tm*i/n; a.push([t,g*t]); b.push([t,vt*Math.tanh(g*t/vt)]); }
+    $('#termChart').innerHTML=lineChart([{pts:a,color:'var(--warm)',dash:true,w:2.5,label:'no air: v = gt'},{pts:b,color:'var(--accent)',label:'with air'}],{xmax:tm,ymin:0,ymax:120,xlab:'time t (s)',ylab:'speed (m/s)',aria:'Speed versus time with and without air resistance'});
+    const t95=Math.atanh(0.95)*vt/g;
+    $('#termInfo').innerHTML=`With air the speed levels off near the terminal speed of about <b>${vt} m/s</b> (reaching 95 % of it after about ${t95.toFixed(1)} s); the acceleration drops to zero. Without air the speed would keep growing by 9.81 m/s every second. <em>(Drag model: v = v<sub>t</sub>·tanh(gt/v<sub>t</sub>), for illustration.)</em>`;
+  }
+  $$('#termPos button').forEach(b=>b.addEventListener('click',()=>{ vt=+b.dataset.v; $$('#termPos button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); upd(); }));
+  upd();
+})();
+
+/* ---------- angular: radians & arc length ---------- */
+(function(){
+  const D=$('#agDeg'), R=$('#agR'); let dir=1;
+  const gcd=(a,b)=>b?gcd(b,a%b):a;
+  function frac(deg){ if(deg===0) return '0'; if(deg%15) return null; let n=deg/15,d=12,k=gcd(n,d); n/=k; d/=k; return (n===1?'':n)+'π'+(d===1?'':'/'+d); }
+  function upd(){
+    const deg=+D.value, r=+R.value, th=deg*Math.PI/180, a=dir*th, s=r*a;
+    $('#agDegO').textContent=deg+'°'; $('#agRO').textContent=r+' m';
+    const fr=frac(deg); $('#agRad').textContent=(dir<0?'−':'')+th.toFixed(3)+' rad';
+    $('#agS').textContent=s.toFixed(2)+' m';
+    $('#agStatus').innerHTML=`θ = ${deg}° × π/180° = <b>${(dir<0?'−':'')+th.toFixed(3)} rad</b>${fr?` (= ${dir<0?'−':''}${fr} rad)`:''}. ${dir>0?'Counterclockwise → Δθ and s are positive.':'Clockwise → Δθ and s are negative.'}`;
+    const cx=130,cy=130,Rr=100, ex=cx+Rr*Math.cos(a), ey=cy-Rr*Math.sin(a);
+    const large=Math.abs(deg)>180?1:0, sweep=dir>0?0:1;
+    const arc=deg>=359.5?`<circle cx="${cx}" cy="${cy}" r="${Rr}" fill="none" stroke="var(--accent)" stroke-width="5"/>`:(deg>0?`<path d="M ${cx+Rr} ${cy} A ${Rr} ${Rr} 0 ${large} ${sweep} ${ex} ${ey}" fill="none" stroke="var(--accent)" stroke-width="5"/>`:'');
+    $('#agSvg').innerHTML=`<svg class="vt" viewBox="0 0 260 260" style="max-width:300px" role="img" aria-label="Angle measured on a circle">
+      <circle cx="${cx}" cy="${cy}" r="${Rr}" fill="none" stroke="var(--line)" stroke-width="2"/>${arc}
+      <line x1="${cx}" y1="${cy}" x2="${cx+Rr+18}" y2="${cy}" stroke="var(--muted)" stroke-width="2"/>
+      <line x1="${cx}" y1="${cy}" x2="${ex}" y2="${ey}" stroke="var(--warm)" stroke-width="3"/>
+      <circle cx="${ex}" cy="${ey}" r="7" fill="var(--hot)"/><circle cx="${cx}" cy="${cy}" r="3" fill="var(--ink)"/>
+      <text x="${cx+Rr+20}" y="${cy-6}" text-anchor="end">reference line</text><text x="${cx+22}" y="${cy-8}" class="lbl" style="fill:var(--ink)">θ</text></svg>`;
+  }
+  [D,R].forEach(e=>e.addEventListener('input',upd));
+  $$('#agDir button').forEach(b=>b.addEventListener('click',()=>{ dir=+b.dataset.d; $$('#agDir button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); upd(); }));
+  upd();
+})();
+
+/* ---------- angular: spinning wheel ---------- */
+(function(){
+  const W=$('#whW'), A_=$('#whA'); let raf=null, t0=0, playing=false, tcur=0;
+  function draw(t){
+    const w0=+W.value, al=+A_.value, th=w0*t+.5*al*t*t, om=w0+al*t, deg=th*180/Math.PI;
+    $('#whT').textContent=t.toFixed(1)+' s'; $('#whOm').textContent=(om>0?'+':'')+om.toFixed(2)+' rad/s'; $('#whTh').textContent=th.toFixed(1)+' rad';
+    let spokes=''; for(let i=0;i<8;i++) spokes+=`<line x1="110" y1="110" x2="110" y2="20" stroke="var(--line)" stroke-width="2" transform="rotate(${i*45} 110 110)"/>`;
+    $('#whSvg').innerHTML=`<svg class="vt" viewBox="0 0 220 220" style="max-width:240px" role="img" aria-label="Spinning wheel"><g transform="rotate(${-deg} 110 110)"><circle cx="110" cy="110" r="90" fill="none" stroke="var(--primary)" stroke-width="5"/>${spokes}<circle cx="110" cy="20" r="9" fill="var(--hot)"/></g><circle cx="110" cy="110" r="5" fill="var(--ink)"/><text x="10" y="16">counterclockwise = +</text></svg>`;
+  }
+  function labels(){
+    const w0=+W.value, al=+A_.value; $('#whWO').textContent=w0+' rad/s'; $('#whAO').textContent=al+' rad/s²';
+    const st=$('#whStatus');
+    if(al===0){ st.textContent='α = 0: the angular velocity stays constant.'; }
+    else if(w0===0){ st.textContent='Starting from rest: the wheel speeds up in the direction of α.'; }
+    else if(w0*al>0){ st.textContent='ω and α have the same sign → the wheel spins faster.'; }
+    else { st.textContent=`ω and α have opposite signs → the wheel slows down${(-w0/al)<4?`, stops at t = ${(-w0/al).toFixed(2)} s, then reverses`:''}.`; }
+    st.className='status';
+  }
+  function frame(now){
+    if(!playing) return; tcur=Math.min((now-t0)/1000,4); draw(tcur);
+    if(tcur<4) raf=requestAnimationFrame(frame); else playing=false;
+  }
+  $('#whPlay').addEventListener('click',()=>{ playing=true; t0=performance.now(); raf=requestAnimationFrame(frame); });
+  [W,A_].forEach(e=>e.addEventListener('input',()=>{ playing=false; tcur=0; labels(); draw(0); }));
+  labels(); draw(0);
+})();
+
+/* ---------- time dilation ---------- */
+(function(){
+  const V=$('#rvV'), T_=$('#rvT');
+  function upd(){
+    const b=+V.value, dt_=+T_.value, gm=1/Math.sqrt(1-b*b), tp=dt_*gm;
+    $('#rvVO').textContent=b.toFixed(3)+'c'; $('#rvTO').textContent=dt_+' s';
+    $('#rvG').textContent=gm.toFixed(3); $('#rvTp').textContent=tp.toFixed(2)+' s';
+    const max=Math.max(tp,dt_), w1=dt_/max*100, w2=tp/max*100;
+    $('#rvBars').innerHTML=`<div style="margin:6px 0"><small class="pnote">Δt on the train (passenger)</small><div class="meter"><i style="width:${w1}%;background:var(--accent)"></i></div><b>${dt_.toFixed(2)} s</b></div>
+      <div style="margin:14px 0 6px"><small class="pnote">Δt′ beside the track (observer)</small><div class="meter"><i style="width:${w2}%;background:var(--warm)"></i></div><b>${tp.toFixed(2)} s</b></div>
+      <p class="pnote">${b<0.1?'At everyday speeds the difference is far too small to notice.':b<0.9?'The observer beside the track measures a noticeably longer interval.':'Close to the speed of light the interval stretches enormously.'}</p>`;
+  }
+  [V,T_].forEach(e=>e.addEventListener('input',upd));
+  $$('[data-rv]').forEach(b=>b.addEventListener('click',()=>{ V.value=b.dataset.rv; upd(); }));
+  upd();
+})();
+
+/* ---------- estimation ---------- */
+(function(){
+  const T_=$('#esT'),P_=$('#esP'),S_=$('#esS');
+  function upd(){
+    const t=+T_.value,p=+P_.value,s=+S_.value, d=t*60*(p/100)*s;
+    $('#esTO').textContent=t+' min'; $('#esPO').textContent=p+' %'; $('#esSO').textContent=s.toFixed(1)+' m/s';
+    $('#esD').textContent=(d/1000).toFixed(1)+' km';
+    $('#esN').textContent=`distance ≈ (${t} min × 60 s/min) × ${p} % × ${s.toFixed(1)} m/s ≈ ${Math.round(d)} m. Walking is about 1.5 m/s and sprinting about 6 m/s, so an average near 2–3 m/s is reasonable.`;
+  }
+  [T_,P_,S_].forEach(e=>e.addEventListener('input',upd)); upd();
+})();
+
+/* ---------- ask widgets (worked examples) ---------- */
+function mkMC(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  ask.opts.forEach((o,i)=>{
+    const b=document.createElement('button'); b.className='opt'; b.type='button'; b.innerHTML=o;
+    b.addEventListener('click',()=>{
+      if(i===ask.correct){ b.classList.add('right'); $$('.opt',host).forEach(x=>x.disabled=true); fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); onDone(); }
+      else { b.classList.add('wrong'); b.disabled=true; fb.className='fb no'; fb.innerHTML=(ask.wrong&&ask.wrong[i])||'Not quite — try another option.'; }
+    });
+    host.appendChild(b);
+  });
+  host.appendChild(fb);
+}
+function mkNum(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const row=document.createElement('div'); row.className='row';
+  const inp=document.createElement('input'); inp.type='text'; inp.setAttribute('aria-label','Your answer'); inp.placeholder='your answer'; inp.autocomplete='off';
+  const u=document.createElement('span'); u.className='math'; u.innerHTML=ask.unit||'';
+  const btn=document.createElement('button'); btn.className='btn'; btn.type='button'; btn.textContent='Check';
+  row.append(inp,u,btn); host.appendChild(row);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite'); host.appendChild(fb);
+  const go=()=>{
+    const j=judge(parseNum(inp.value),{ans:ask.ans,tol:ask.tol||0.02,traps:ask.traps,abs:ask.abs});
+    if(j.state==='ok'){ fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); inp.disabled=true; btn.disabled=true; onDone(); }
+    else { fb.className='fb '+j.state; fb.textContent=j.msg; }
+  };
+  btn.addEventListener('click',go); inp.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+}
+
+/* ---------- worked examples ---------- */
+const G=(...items)=>`<div class="givenlist">${items.map(i=>`<span>${i}</span>`).join('')}</div>`;
+const U=(x)=>`<span class="unk">${x}</span>`;
+const g=9.81;
+const EX=[
+ { id:'E1', tag:'Sample Problem F', title:'A stuntwoman jumps off the Gateway Arch',
+   problem:'The Gateway Arch in St. Louis is about <b>192 m</b> tall. Sally, a stuntwoman, jumps off the top of the arch. If it takes her <b>6.4 s</b> to land on the safety pad at the base, what is her average acceleration? What is her final velocity?',
+   steps:[
+    {name:'Analyze', html:G(`${vi} = 0 m/s`,`${dx} = −192 m`,`${dt} = 6.4 s`)+G(U(`${A} = ?`),U(`${vf} = ?`)),
+     ask:{type:'mc',q:'Why is Δ<i>y</i> <b>negative</b> (−192 m)?',opts:['Because she lands below where she started and up is positive','Because the arch is tall','Because acceleration is negative'],correct:0,why:'Displacement is final position minus initial position: she ends 192 m below the top of the arch, and "up" is the positive direction.'}},
+    {name:'Plan', html:`<p>Both ${A} and ${vf} are unknown. First find the acceleration with the equation that needs only the known variables:</p><div class="eq">${EQ.disp2}</div><p>Rearrange, then use the velocity equation:</p><div class="eq">${A} = ${F('2('+dx+' − '+vi+dt+')','('+dt+')'+sq)} &nbsp;&nbsp; ${vf} = ${vi} + ${A}${dt}</div>`,
+     ask:{type:'mc',q:'Why can we <b>not</b> simply use a = −9.81 m/s² here?',opts:['We can; the answer is exactly −9.81 m/s²','The problem gives the time and asks for her <em>actual average</em> acceleration, which may differ from g because of air resistance','Because she is moving upward'],correct:1,why:'The data (192 m in 6.4 s) let us calculate her real acceleration. Comparing it with 9.81 m/s² is part of checking the result.',wrong:{0:'Free fall assumes no air resistance, which is not true for a falling stuntwoman.'}}},
+    {name:'Calculate', html:`<div class="eq">${A} = ${F('2[(−192 m) − (0 m/s)(6.4 s)]','(6.4 s)²')} = <span class="boxed">−9.4 m/s²</span></div><div class="eq">${vf} = 0 + (−9.4 m/s²)(6.4 s) = <span class="boxed">−6.0 × 10<sup>1</sup> m/s</span></div>`,
+     ask:{type:'num',q:'Calculate a = 2(−192) ÷ 6.4².',ans:2*(-192)/(6.4*6.4),tol:0.01,unit:'m/s²',why:'a ≈ −9.4 m/s².'}},
+    {name:'Check your work', html:`<p>Sally's downward acceleration (9.4 m/s²) is less than the free-fall acceleration (9.81 m/s²). That indicates <b>air resistance</b> reduces her downward acceleration by about 0.4 m/s². Her final speed is 60 m/s; at that speed with no acceleration she would cover 192 m in just over 3 s.</p>`,
+     ask:{type:'mc',q:'Why is her final velocity <b>negative</b>?',opts:['She is moving downward and up is positive','Velocity can never be positive','Because time is positive'],correct:0,why:'Downward motion is in the negative direction; a = − and v = − means she was speeding up.'}}
+   ]},
+ { id:'E2', tag:'Practice #3', title:'A ball thrown straight up returns to its starting point',
+   problem:'A tennis ball is thrown vertically upward with an initial velocity of <b>+8.0 m/s</b>. (a) What will the ball\'s speed be when it returns to its starting point? (b) How long will the ball take to reach its starting point?',
+   steps:[
+    {name:'Analyze', html:G(`${vi} = +8.0 m/s`,`${A} = −9.81 m/s²`,`${dx} = 0 m`)+G(U(`${vf} = ?`),U(`${dt} = ?`)),
+     ask:{type:'mc',q:'What is the ball\'s displacement when it returns to the starting point?',opts:['Zero — displacement depends only on the start and end positions','+8.0 m','Twice the maximum height'],correct:0,why:'Displacement is net: it ends where it began, so Δy = 0 (the total path length is not zero).'}},
+    {name:'Plan', html:`<p>(a) No time given → use ${EQ.vsq} with ${dx} = 0. (b) Then ${dt} = (${vf} − ${vi})/${A}.</p>`,
+     ask:{type:'mc',q:'With Δy = 0, v<sub>f</sub>² = v<sub>i</sub>² gives v<sub>f</sub> = ±8.0 m/s. Which sign is correct on the way back down?',opts:['+8.0 m/s','−8.0 m/s (moving downward)','0'],correct:1,why:'The ball is moving downward at the starting height, so its velocity is −8.0 m/s: the same speed as when it was thrown.'}},
+    {name:'Solve', html:`<div class="eq">(a) speed = |${vf}| = <span class="boxed">8.0 m/s</span></div><div class="eq">(b) ${dt} = ${F(vf+' − '+vi,A)} = ${F('−8.0 − 8.0 m/s','−9.81 m/s²')} = <span class="boxed">1.6 s</span></div>`,
+     ask:{type:'num',q:'Calculate (−8.0 − 8.0) ÷ (−9.81).',ans:16/9.81,tol:0.01,unit:'s',why:'Δt ≈ 1.63 s.'}},
+    {name:'Check your work', html:`<p>Time to the top is ${vi}/g = 8.0/9.81 = 0.82 s. The trip down takes the same time, so the total is 2(0.82) = 1.63 s ✔. Up-and-down motion is symmetric.</p>`,
+     ask:{type:'mc',q:'If the ball were thrown up at twice the speed (16 m/s), the time in the air would be…',opts:['The same','Twice as long','Four times as long'],correct:1,why:'Δt = 2v<sub>i</sub>/g is proportional to v<sub>i</sub>. (The maximum height, though, would be four times larger.)'}}
+   ]},
+ { id:'E3', tag:'Practice #2 (variation)', title:'Dropped from a height: speed and time',
+   problem:'A flowerpot falls from a windowsill <b>35.0 m</b> above the sidewalk. (a) How fast is the flowerpot moving when it strikes the ground? (b) How much time does a passerby on the sidewalk below have to move out of the way before the flowerpot hits the ground?',
+   steps:[
+    {name:'Analyze', html:G(`${vi} = 0 m/s`,`${dx} = −35.0 m`,`${A} = −9.81 m/s²`)+G(U(`${vf} = ?`),U(`${dt} = ?`)),
+     ask:{type:'mc',q:'How do we know v<sub>i</sub> = 0?',opts:['"Falls from a windowsill" means it starts from rest','Because gravity starts at zero','Because Δy is negative'],correct:0,why:'The pot simply falls (it is not thrown), so its initial velocity is zero.'}},
+    {name:'Plan', html:`<p>(a) ${EQ.vsq}, choose the negative root (moving down). (b) ${dt} = (${vf} − ${vi})/${A}.</p>`},
+    {name:'Solve (a)', html:`<div class="eq">${vf} = −√(0 + 2(−9.81)(−35.0)) = −√686.7 = <span class="boxed">−26.2 m/s</span></div>`,
+     ask:{type:'num',q:'What is the <b>speed</b> of the pot at the ground? Calculate √(2 × 9.81 × 35.0).',ans:Math.sqrt(2*g*35),tol:0.01,unit:'m/s',abs:true,why:'Speed ≈ 26.2 m/s (velocity −26.2 m/s).'}},
+    {name:'Solve (b) and check', html:`<div class="eq">${dt} = ${F('−26.2 − 0','−9.81')} = <span class="boxed">2.67 s</span></div><p>Check with ${dx} = ½${A}(${dt})²: ½(−9.81)(2.67)² = −35.0 m ✔.</p>`,
+     ask:{type:'num',q:'Calculate 26.2 ÷ 9.81.',ans:26.2/9.81,tol:0.01,unit:'s',why:'Δt ≈ 2.67 s — a short warning for the passerby.'}}
+   ]},
+ { id:'E4', tag:'Figure 3.2 ball', title:'Velocity at different times, maximum height',
+   problem:'A ball is thrown straight up with an initial velocity of <b>+10.5 m/s</b>. (a) What is its velocity after 2.0 s? (b) What is the maximum height it reaches above the release point? (c) What are the ball\'s velocity and acceleration at the peak?',
+   steps:[
+    {name:'Analyze', html:G(`${vi} = +10.5 m/s`,`${A} = −9.81 m/s²`)+G(U(`(a) ${vf} at 2.0 s`),U('(b) maximum height'),U('(c) v and a at the peak')),
+     ask:{type:'mc',q:'At the very top of its path, what is true of the ball\'s velocity?',opts:['v = 0 for an instant','v = −9.81 m/s','v is at its largest value'],correct:0,why:'The ball changes direction there, so its velocity passes through zero.'}},
+    {name:'Solve (a)', html:`<div class="eq">${vf} = ${vi} + ${A}${dt} = 10.5 + (−9.81)(2.0) = <span class="boxed">−9.12 m/s</span></div><p>(After 1.0 s: +0.69 m/s; after 2.0 s: −9.12 m/s — each second the velocity changes by −9.81 m/s.)</p>`,
+     ask:{type:'num',q:'Calculate 10.5 − 9.81 × 2.0.',ans:10.5-9.81*2,tol:0.01,unit:'m/s',why:'v = −9.12 m/s: the ball is already on its way down.'}},
+    {name:'Solve (b)', html:`<p>At the peak ${vf} = 0, and the time is unknown, so use ${EQ.vsq}:</p><div class="eq">0 = ${vi}² + 2${A}${dx} → ${dx} = ${F('−'+vi+'²','2'+A)} = ${F('−(10.5)²','2(−9.81)')} = <span class="boxed">5.62 m</span></div>`,
+     ask:{type:'num',q:'Calculate 10.5² ÷ (2 × 9.81).',ans:10.5*10.5/(2*g),tol:0.01,unit:'m',why:'Maximum height ≈ 5.62 m. The time to the peak is 10.5/9.81 = 1.07 s.'}},
+    {name:'(c) Check your work', html:`<p>At the peak: <b>v = 0</b> but <b>a = −9.81 m/s²</b>. The acceleration is the same at every instant. The v–t graph is a straight line with slope −9.81 m/s²; it crosses zero at t = 1.07 s.</p>`,
+     ask:{type:'mc',q:'What is the ball\'s acceleration at the instant it is at the peak?',opts:['0 m/s²','−9.81 m/s²','+9.81 m/s²'],correct:1,why:'Gravity acts the whole time; the velocity is changing even though it is momentarily zero.',wrong:{0:'A zero velocity does not mean zero acceleration — the velocity is still changing from + to −.'}}}
+   ]},
+ { id:'E5', tag:'Initial downward velocity', title:'Thrown downward from a cliff',
+   problem:'A stone is thrown <b>downward</b> with an initial speed of <b>5.0 m/s</b> from the top of a <b>60.0 m</b> cliff. (a) What is its velocity when it reaches the bottom? (b) How long does it take to get there?',
+   steps:[
+    {name:'Analyze', html:G(`${vi} = −5.0 m/s`,`${dx} = −60.0 m`,`${A} = −9.81 m/s²`)+G(U(`${vf} = ?`),U(`${dt} = ?`)),
+     ask:{type:'mc',q:'What is the sign of the initial velocity, and why?',opts:['Negative: the stone is thrown downward and up is positive','Positive: it is a speed','Zero: it is dropped'],correct:0,why:'Velocity is a vector. A downward throw is negative in our coordinate system.'}},
+    {name:'Plan', html:`<p>(a) ${EQ.vsq} (no time needed), negative root. (b) ${dt} = (${vf} − ${vi})/${A}.</p>`},
+    {name:'Solve', html:`<div class="eq">${vf} = −√((−5.0)² + 2(−9.81)(−60.0)) = −√1202.2 = <span class="boxed">−34.7 m/s</span></div><div class="eq">${dt} = ${F('−34.7 − (−5.0)','−9.81')} = <span class="boxed">3.0 s</span></div>`,
+     ask:{type:'num',q:'Calculate (−34.67 − (−5.0)) ÷ (−9.81).',ans:(-Math.sqrt(25+2*g*60)+5)/-g,tol:0.01,unit:'s',why:'Δt ≈ 3.02 s.'}},
+    {name:'Check your work', html:`<p>Compare with a stone simply dropped from 60 m: t = √(2·60/9.81) = 3.5 s and v = −34.3 m/s. The throw makes the stone reach the ground sooner (3.0 s) and a little faster (34.7 m/s) ✔.</p>`,
+     ask:{type:'mc',q:'If the stone were thrown <b>up</b> at 5.0 m/s from the same cliff, would it land with a greater, smaller or equal speed than when thrown down at 5.0 m/s?',opts:['Smaller','Equal','Greater'],correct:1,why:'When it comes back down to the cliff-top height it has speed 5.0 m/s downward — exactly the same state as the downward throw — so it lands with the same speed (but takes longer).'}}
+   ]},
+ { id:'E6', tag:'Up then down', title:'Thrown upward from a rooftop',
+   problem:'A rock is thrown <b>upward</b> at <b>12.0 m/s</b> from the edge of a roof <b>20.0 m</b> above the street. It misses the roof on the way down and lands on the street. How long is the rock in the air, and how fast is it moving just before it hits the street?',
+   steps:[
+    {name:'Analyze', html:G(`${vi} = +12.0 m/s`,`${dx} = −20.0 m`,`${A} = −9.81 m/s²`)+G(U(`${dt} = ?`),U(`${vf} = ?`)),
+     ask:{type:'mc',q:'The rock first rises, then falls past the roof edge to the street. What is Δy for the whole trip?',opts:['−20.0 m — the final position is 20.0 m below the starting point','+20.0 m','Zero'],correct:0,why:'Displacement is final minus initial position, regardless of the path (up first, then down).'}},
+    {name:'Plan', html:`<p>Find ${vf} first with ${EQ.vsq}, then the total time with ${vf} = ${vi} + ${A}${dt}.</p>`,
+     ask:{type:'mc',q:'The square root gives ±; which sign do we choose for v<sub>f</sub> just before landing?',opts:['Negative — the rock is moving down','Positive — it was thrown up','Either'],correct:0,why:'At the moment it hits the street it is moving downward.'}},
+    {name:'Solve', html:`<div class="eq">${vf} = −√(12.0² + 2(−9.81)(−20.0)) = −√(144 + 392.4) = <span class="boxed">−23.2 m/s</span></div><div class="eq">${dt} = ${F('−23.16 − 12.0','−9.81')} = <span class="boxed">3.58 s</span></div>`,
+     ask:{type:'num',q:'Calculate (−23.16 − 12.0) ÷ (−9.81).',ans:35.16/9.81,tol:0.01,unit:'s',why:'The rock is in the air for about 3.58 s.'}},
+    {name:'Check your work', html:`<p>Time up: 12.0/9.81 = 1.22 s; peak 7.3 m above the roof; fall 27.3 m takes √(2·27.3/9.81) = 2.36 s; total 1.22 + 2.36 = 3.58 s ✔.</p>`,
+     ask:{type:'mc',q:'How would the landing speed change if the rock had been thrown <b>down</b> at 12.0 m/s from the same roof?',opts:['It would be the same: 23.2 m/s','It would be smaller','It would be greater'],correct:0,why:'Coming down past the roof edge, the thrown-up rock moves at 12.0 m/s downward — the same as the downward throw — so both reach the street at 23.2 m/s. (The time in the air differs.)'}}
+   ]},
+ { id:'E7', tag:'Take it further', title:'Angular kinematics: constant angular acceleration',
+   problem:'A wheel rotates counterclockwise with an angular velocity of <b>4.0 rad/s</b>. It then speeds up with a constant angular acceleration of <b>1.5 rad/s²</b> for <b>6.0 s</b>. Find (a) its final angular velocity and (b) the angle (in radians and in revolutions) through which it turns.',
+   steps:[
+    {name:'Analyze', html:G('ω<sub>i</sub> = +4.0 rad/s','α = +1.5 rad/s²','Δ<i>t</i> = 6.0 s')+G(U('ω<sub>f</sub> = ?'),U('Δθ = ?')),
+     ask:{type:'mc',q:'Why are ω<sub>i</sub> and α both positive?',opts:['Counterclockwise is positive, and α has the same sign as ω because the wheel speeds up','Because they are angles','Because radians are always positive'],correct:0,why:'By convention counterclockwise rotation is positive; α is positive when it increases the magnitude of a positive ω.'}},
+    {name:'Plan', html:`<p>The rotational equations mirror the linear ones (θ↔x, ω↔v, α↔a):</p><div class="eq">ω<sub>f</sub> = ω<sub>i</sub> + αΔ<i>t</i> &nbsp;&nbsp; Δθ = ω<sub>i</sub>Δ<i>t</i> + ½α(Δ<i>t</i>)²</div>`},
+    {name:'Solve', html:`<div class="eq">ω<sub>f</sub> = 4.0 + (1.5)(6.0) = <span class="boxed">13.0 rad/s</span></div><div class="eq">Δθ = (4.0)(6.0) + ½(1.5)(6.0)² = 24 + 27 = <span class="boxed">51 rad</span></div>`,
+     ask:{type:'num',q:'Calculate 4.0 × 6.0 + ½ × 1.5 × 6.0².',ans:51,tol:0.01,unit:'rad',why:'Δθ = 51 rad.'}},
+    {name:'Check your work', html:`<p>Revolutions: 51 rad ÷ 2π ≈ <b>8.1 rev</b>. Average angular velocity = (4.0 + 13.0)/2 = 8.5 rad/s, and 8.5 × 6.0 = 51 rad ✔.</p>`,
+     ask:{type:'num',q:'Convert 51 rad to revolutions (divide by 2π).',ans:51/(2*Math.PI),tol:0.01,unit:'rev',why:'≈ 8.1 revolutions.'}}
+   ]}
+];
+(function buildExamples(){
+  const host=$('#exampleList');
+  EX.forEach((ex,idx)=>{
+    const card=document.createElement('div'); card.className='card example'; card.id=ex.id;
+    card.innerHTML=`<header><h3 style="margin:0">Example ${idx+1} · ${ex.title}</h3><span class="pill">${ex.tag}</span></header>
+      <div class="problem-box">${ex.problem}</div>
+      <div class="dots"></div><ol class="steps"></ol><div class="row ctrl"></div>`;
+    const dots=$('.dots',card), list=$('.steps',card), ctrl=$('.ctrl',card);
+    const next=document.createElement('button'); next.className='btn'; next.type='button'; next.textContent='Start: reveal step 1';
+    const restart=document.createElement('button'); restart.className='btn ghost'; restart.type='button'; restart.textContent='Restart example'; restart.hidden=true;
+    ctrl.append(next,restart);
+    ex.steps.forEach((s,i)=>{
+      const d=document.createElement('i'); dots.appendChild(d);
+      const li=document.createElement('li'); li.className='step';
+      li.innerHTML=`<h4><span class="n">${i+1}</span>${s.name}</h4><div class="body">${s.html}</div>`;
+      if(s.ask){ const a=document.createElement('div'); a.className='ask'; li.appendChild(a); }
+      list.appendChild(li);
+    });
+    let cur=-1, needAsk=false;
+    function reveal(){
+      cur++; const li=list.children[cur], s=ex.steps[cur];
+      li.classList.add('show'); dots.children[cur].classList.add('on');
+      if(s.ask){
+        needAsk=true; next.disabled=true;
+        (s.ask.type==='num'?mkNum:mkMC)($('.ask',li),s.ask,()=>{ needAsk=false; next.disabled=false; refresh(); });
+      }
+      refresh(); li.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    function refresh(){
+      if(cur>=ex.steps.length-1 && !needAsk){ next.hidden=true; restart.hidden=false; if(!state['ex_'+ex.id]){ state['ex_'+ex.id]=1; save(); } }
+      else { next.textContent=needAsk?'Answer the question above to continue':(cur<0?'Start: reveal step 1':`Next step: ${ex.steps[cur+1]?.name||''}`); }
+    }
+    next.addEventListener('click',reveal);
+    restart.addEventListener('click',()=>{
+      cur=-1; needAsk=false; next.hidden=false; next.disabled=false; restart.hidden=true;
+      [...list.children].forEach((li,i)=>{ li.classList.remove('show'); const a=$('.ask',li); if(a) a.innerHTML=''; dots.children[i].classList.remove('on'); });
+      refresh(); card.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    host.appendChild(card);
+  });
+})();
+
+/* ---------- practice problems ---------- */
+const T=(label,unit,ans,extra={})=>Object.assign({label,unit,ans},extra);
+const P=[]; const add=(set,sub,text,parts,h,sol,extra={})=>P.push(Object.assign({set,sub,text,parts,h,sol},extra));
+const MC=(set,text,opts,correct,why,hint,extra={})=>P.push(Object.assign({set,type:Array.isArray(correct)&&correct.length>1?'multi':'mc',text,opts,correct:[].concat(correct),why,h:[hint]},extra));
+const r3=x=>String(+x.toPrecision(3));
+const sqrt=Math.sqrt;
+
+/* ===== Textbook practice (Sample Problem F) ===== */
+const sb='Falling Object · Sample Problem F practice';
+add('tb',sb,'A robot probe drops a camera off the rim of a 239 m high cliff on Mars, where the free-fall acceleration is −3.7 m/s². (a) Find the velocity with which the camera hits the ground. (b) Find the time required for it to hit the ground.',
+ [T('(a) Final velocity','m/s',-sqrt(2*3.7*239)),T('(b) Time','s',sqrt(2*239/3.7),{tol:0.04})],
+ [`Dropped → ${vi} = 0, ${dx} = −239 m, ${A} = −3.7 m/s². (a) Use ${EQ.vsq} and take the negative root. (b) ${dt} = (${vf} − ${vi})/${A}.`,`(a) ${vf} = −√(2 × 3.7 × 239).`],
+ [`(a) ${vf} = −√(2(−3.7)(−239)) = −√1768.6 = <b>−42 m/s</b>`,`(b) ${dt} = (−42.05 − 0)/(−3.7) = <b>11 s</b>`]);
+add('tb',sb,'A flowerpot falls from a windowsill 25.0 m above the sidewalk. (a) How fast is the flowerpot moving when it strikes the ground? (b) How much time does a passerby on the sidewalk below have to move out of the way before the flowerpot hits the ground?',
+ [T('(a) Speed at the ground','m/s',sqrt(2*g*25),{abs:true}),T('(b) Time of fall','s',sqrt(2*25/g))],
+ [`${vi} = 0, ${dx} = −25.0 m, ${A} = −9.81 m/s². Use ${EQ.vsq} for the speed; then ${dt} = (${vf} − ${vi})/${A}.`,`√(2 × 9.81 × 25.0) = √490.5.`],
+ [`(a) ${vf} = −√(2(9.81)(25.0)) = −22.1 m/s → speed <b>22.1 m/s</b>`,`(b) ${dt} = (−22.15 − 0)/(−9.81) = <b>2.26 s</b>`]);
+add('tb',sb,'A tennis ball is thrown vertically upward with an initial velocity of +8.0 m/s. (a) What will the ball\'s speed be when it returns to its starting point? (b) How long will the ball take to reach its starting point?',
+ [T('(a) Speed on return','m/s',8.0,{abs:true}),T('(b) Time','s',16/g)],
+ [`The displacement is zero when the ball returns, so ${vf}² = ${vi}² and the speed is the same. For the time use ${dt} = (${vf} − ${vi})/${A} with ${vf} = −8.0 m/s.`,`(−8.0 − 8.0) ÷ (−9.81).`],
+ [`(a) ${vf}² = ${vi}² + 2${A}(0) → ${vf} = −8.0 m/s: speed <b>8.0 m/s</b>`,`(b) ${dt} = (−8.0 − 8.0)/(−9.81) = <b>1.6 s</b>`]);
+add('tb',sb,'A volleyball is hit upward with an initial velocity of 6.0 m/s. Calculate the displacement of the volleyball when its final velocity is 1.1 m/s upward.',
+ [T('Displacement','m',(1.1*1.1-36)/(2*-g))],
+ [`Time is not given → ${EQ.vsq} solved for ${dx}: ${dx} = (${vf}² − ${vi}²)/(2${A}).`,`(1.1² − 6.0²) ÷ (2 × −9.81).`],
+ [`${dx} = ${F(vf+sq+' − '+vi+sq,'2'+A)} = ${F('(1.1)² − (6.0)²','2(−9.81)')} = <b>1.8 m</b> (above the starting point)`]);
+
+/* ===== More free-fall problems ===== */
+const sf='ff';
+add(sf,null,'A pebble is dropped from a bridge 45.0 m above a river. (a) How long does it take to hit the water? (b) What is its speed just before it hits?',
+ [T('(a) Time','s',sqrt(2*45/g)),T('(b) Speed','m/s',sqrt(2*g*45),{abs:true})],
+ [`Dropped: ${vi} = 0, ${dx} = −45.0 m. Use ${EQ.disp2} → ${dt} = √(2${dx}/${A}).`,`√(2(−45.0)/(−9.81)).`],
+ [`(a) ${dt} = √(2(−45.0 m)/(−9.81 m/s²)) = <b>3.03 s</b>`,`(b) ${vf} = ${vi} + ${A}${dt} = −9.81(3.03) = −29.7 m/s → speed <b>29.7 m/s</b>`]);
+add(sf,null,'A ball dropped from the top of a building takes 2.80 s to reach the ground. (a) How tall is the building? (b) How fast is the ball moving as it lands?',
+ [T('(a) Height of building','m',.5*g*2.8*2.8),T('(b) Speed at landing','m/s',g*2.8,{abs:true})],
+ [`${vi} = 0, ${dt} = 2.80 s. ${dx} = ${vi}${dt} + ½${A}(${dt})² gives the (negative) displacement; the height is its magnitude.`,`½(9.81)(2.80)².`],
+ [`(a) ${dx} = ½(−9.81)(2.80)² = −38.5 m → height <b>38.5 m</b>`,`(b) ${vf} = (−9.81)(2.80) = −27.5 m/s → speed <b>27.5 m/s</b>`]);
+add(sf,null,'A ball is thrown straight up at 15.0 m/s. Ignore air resistance. Find (a) the maximum height above the release point, (b) the time to reach the top, and (c) the total time before the ball returns to the thrower\'s hand.',
+ [T('(a) Maximum height','m',15*15/(2*g),{tol:0.05}),T('(b) Time to the top','s',15/g),T('(c) Total time','s',30/g)],
+ [`At the top ${vf} = 0. (a) ${EQ.vsq}. (b) ${dt} = (0 − ${vi})/${A}. (c) The way down takes as long as the way up.`,`(a) 15.0² ÷ (2 × 9.81).`],
+ [`(a) ${dx} = (0 − 15.0²)/(2(−9.81)) = <b>11.5 m</b>`,`(b) ${dt} = (0 − 15.0)/(−9.81) = <b>1.53 s</b>`,`(c) 2 × 1.53 = <b>3.06 s</b>`]);
+add(sf,null,'A stone is thrown downward with an initial speed of 5.0 m/s from the top of a 60.0 m cliff. (a) With what speed does it hit the bottom? (b) How long does it take?',
+ [T('(a) Speed at the bottom','m/s',sqrt(25+2*g*60),{abs:true}),T('(b) Time','s',(sqrt(25+2*g*60)-5)/g)],
+ [`${vi} = −5.0 m/s, ${dx} = −60.0 m. (a) ${EQ.vsq}, negative root. (b) ${dt} = (${vf} − ${vi})/${A}.`,`√(25 + 2 × 9.81 × 60).`],
+ [`(a) ${vf} = −√((−5.0)² + 2(−9.81)(−60.0)) = −34.7 m/s → speed <b>34.7 m/s</b>`,`(b) ${dt} = (−34.67 + 5.0)/(−9.81) = <b>3.02 s</b>`]);
+add(sf,null,'A rock is thrown upward at 12.0 m/s from the edge of a roof 20.0 m above the street (it misses the roof on the way down). (a) How fast is it moving just before it hits the street? (b) How long is it in the air?',
+ [T('(a) Speed at the street','m/s',sqrt(144+2*g*20),{abs:true}),T('(b) Time in the air','s',(sqrt(144+2*g*20)+12)/g)],
+ [`${vi} = +12.0 m/s, ${dx} = −20.0 m (net). (a) ${EQ.vsq}, negative root. (b) ${dt} = (${vf} − ${vi})/${A}.`,`√(144 + 392.4) = 23.2 m/s.`],
+ [`(a) ${vf} = −√(12.0² + 2(9.81)(20.0)) = −23.2 m/s → speed <b>23.2 m/s</b>`,`(b) ${dt} = (−23.16 − 12.0)/(−9.81) = <b>3.58 s</b>`]);
+add(sf,null,'In the Quick Lab, a meterstick is released and caught after it has fallen 18.0 cm. What is the reaction time of the person who caught it?',
+ [T('Reaction time','s',sqrt(2*.18/g))],
+ [`Convert 18.0 cm to 0.180 m. Released from rest: ${dx} = −½g(${dt})² → ${dt} = √(2|${dx}|/g).`,`√(2 × 0.180 ÷ 9.81).`],
+ [`${dt} = √(2(0.180 m)/(9.81 m/s²)) = <b>0.192 s</b>`]);
+add(sf,null,'On the Moon, where the free-fall acceleration is −1.62 m/s², an astronaut drops a hammer from a height of 1.50 m. (a) How long does it take to reach the surface? (b) What is its speed on impact?',
+ [T('(a) Time','s',sqrt(2*1.5/1.62)),T('(b) Speed','m/s',sqrt(2*1.62*1.5),{abs:true})],
+ [`Dropped: ${vi} = 0, ${dx} = −1.50 m, ${A} = −1.62 m/s². ${dt} = √(2${dx}/${A}).`,`√(2 × 1.50 ÷ 1.62).`],
+ [`(a) ${dt} = √(2(−1.50)/(−1.62)) = <b>1.36 s</b>`,`(b) ${vf} = ${A}${dt} = −1.62(1.361) = −2.21 m/s → speed <b>2.21 m/s</b>`]);
+add(sf,null,'A pebble is dropped down a deep well and falls freely. How far does it fall during the <b>third second</b> of its fall (between t = 2.00 s and t = 3.00 s)?',
+ [T('Distance in the 3rd second','m',.5*g*(9-4),{abs:true})],
+ [`Find the displacement after 3.00 s and after 2.00 s with ${dx} = ½${A}(${dt})², then subtract.`,`½(9.81)(3.00² − 2.00²).`],
+ [`Δy(3 s) = −½(9.81)(9.00) = −44.1 m; Δy(2 s) = −½(9.81)(4.00) = −19.6 m`,`Distance in the third second = 44.1 − 19.6 = <b>24.5 m</b>`]);
+add(sf,null,'What initial upward speed must a ball have to reach a maximum height of 8.0 m above its release point?',
+ [T('Initial speed','m/s',sqrt(2*g*8),{tol:0.05})],
+ [`At the top ${vf} = 0: ${vi} = √(−2${A}${dx}).`,`√(2 × 9.81 × 8.0).`],
+ [`0 = ${vi}² + 2(−9.81)(8.0) → ${vi} = √156.96 = <b>12.5 m/s</b>`]);
+add(sf,null,'A ball is thrown straight up with a velocity of +20.0 m/s. Find its velocity (a) 1.00 s and (b) 3.00 s after release. Keep the sign (+ up, − down).',
+ [T('(a) v at 1.00 s','m/s',20-g),T('(b) v at 3.00 s','m/s',20-3*g)],
+ [`${EQ.vel} with ${A} = −9.81 m/s².`,`(a) 20.0 − 9.81(1.00).`],
+ [`(a) ${vf} = 20.0 + (−9.81)(1.00) = <b>+10.2 m/s</b> (still rising)`,`(b) ${vf} = 20.0 + (−9.81)(3.00) = <b>−9.43 m/s</b> (falling)`]);
+MC(sf,'A ball is thrown straight up. At the exact top of its path, what are the ball\'s velocity and acceleration?',
+ ['v = 0 and a = 0','v = 0 and a = −9.81 m/s²','v = −9.81 m/s and a = 0','v = +9.81 m/s and a = +9.81 m/s²'],[1],
+ 'The velocity passes through zero as it changes from + to −, but the acceleration due to gravity is constant at −9.81 m/s² the whole time.','Acceleration is the rate of change of velocity — is the velocity changing at the top?');
+MC(sf,'On the Moon, a hammer and a feather released together from the same height hit the surface at the same time because…',
+ ['the Moon\'s gravity is weaker','there is no air resistance, so both fall with the same free-fall acceleration regardless of mass','the feather is heavier on the Moon','the hammer is slowed down by the Moon\'s surface'],[1],
+ 'In free fall (only gravity acting) the acceleration is independent of the object\'s mass.','What force other than gravity acts on a feather on Earth?');
+MC(sf,'A ball is dropped and, at the same time, another is thrown downward with an initial speed of 10 m/s. What is the acceleration of each ball while in the air (ignore air resistance)?',
+ ['Both −9.81 m/s²','The dropped ball: −9.81 m/s²; the thrown ball: more than 9.81 m/s² in magnitude','The dropped ball: 0; the thrown ball: −9.81 m/s²','The thrown ball: −10 m/s²'],[0],
+ 'Once released, the only force is gravity, so every freely falling object has a = −9.81 m/s² regardless of its initial velocity.','Does the initial velocity change the acceleration?');
+MC(sf,'The constant speed reached by a skydiver falling through the air when air resistance balances the force of gravity is called…',
+ ['free fall','terminal velocity','average velocity','instantaneous acceleration'],[1],
+ 'When the net force becomes zero the acceleration is zero and the speed becomes constant: the terminal velocity. It depends on mass, shape and size.','The acceleration drops to zero after a few seconds.');
+MC(sf,'Which body position gives a skydiver the <b>greatest</b> terminal velocity?',
+ ['Spread out horizontally (about 55 m/s)','Curled into a ball (about 90 m/s)','With an open parachute (about 5 m/s)','All positions give the same terminal velocity'],[1],
+ 'A smaller area facing the air means less air resistance, so the diver must fall faster before drag balances gravity.','Which position presents the smallest area to the air?');
+
+/* ===== Section 3 formative assessment & concepts ===== */
+const sa='fa';
+MC(sa,'Formative 1(a): A coin is tossed vertically upward. What happens to its velocity while it is in the air?',
+ ['It stays constant','It decreases from positive, passes through zero at the top, then becomes increasingly negative','It increases the whole time','It is zero the whole time'],[1],
+ 'With a = −9.81 m/s² the velocity changes by −9.81 m/s every second: v = v<sub>i</sub> − 9.81 Δt.','Use v<sub>f</sub> = v<sub>i</sub> + aΔt.');
+MC(sa,'Formative 1(b): Does the coin\'s acceleration increase, decrease, or remain constant while it is in the air?',
+ ['Increases','Decreases','Remains constant at −9.81 m/s²','It is zero at the top and −9.81 m/s² elsewhere'],[2],
+ 'Free-fall acceleration is the same at every instant (rising, at the top, falling).','Constant acceleration means a straight-line v–t graph.');
+add(sa,null,'Formative 2: A pebble is dropped down a well and hits the water 1.5 s later. Using the equations for motion with constant acceleration, determine the distance from the edge of the well to the water\'s surface.',
+ [T('Distance to the water','m',.5*g*2.25,{abs:true})],
+ [`${vi} = 0, ${dt} = 1.5 s. ${dx} = ${vi}${dt} + ½${A}(${dt})².`,`½(−9.81)(1.5)².`],
+ [`${dx} = 0 + ½(−9.81 m/s²)(1.5 s)² = −11 m`,`The water is <b>11 m</b> below the edge (11.04 m).`]);
+MC(sa,'Formative 3: A ball is thrown vertically upward. What are its velocity and acceleration when it reaches its maximum altitude? What is its acceleration just before it hits the ground?',
+ ['At the top v = 0 and a = −9.81 m/s²; just before landing a = −9.81 m/s²','At the top v = 0 and a = 0; just before landing a = −9.81 m/s²','At the top v = −9.81 m/s and a = 0; just before landing a = 0','At the top v = 0 and a = −9.81 m/s²; just before landing a = 0'],[0],
+ 'Gravity is the only force acting the whole time, so the acceleration is −9.81 m/s² at every point of the motion.','Does the acceleration ever change during free fall?');
+MC(sa,'Formative 4: Two children bounce rubber balls. One child simply drops a ball; at the same time the other throws a ball downward with an initial speed of 10 m/s. What is the acceleration of each ball while in motion (before it hits the ground)?',
+ ['Both have a = −9.81 m/s²','The thrown ball has the greater acceleration','The dropped ball has the greater acceleration','Both have zero acceleration'],[0],
+ 'Both are in free fall once released. The thrown ball has a larger speed at any moment but the same acceleration.','Initial velocity does not affect acceleration.');
+add(sa,null,'Formative 5 (with numbers): A gymnast releases the high bar at a point 2.50 m above the mat. In one dismount she swings up off the bar with an initial upward velocity of +4.0 m/s; in the second she releases from the same height with an initial downward velocity of −3.0 m/s. Find her final velocity as she reaches the mat in each case.',
+ [T('Dismount 1 (+4.0 m/s)','m/s',-sqrt(16+2*g*2.5)),T('Dismount 2 (−3.0 m/s)','m/s',-sqrt(9+2*g*2.5))],
+ [`In both cases ${dx} = −2.50 m and ${A} = −9.81 m/s² (the same!). Use ${EQ.vsq} and the negative root.`,`Dismount 1: √(4.0² + 2 × 9.81 × 2.50).`],
+ [`Dismount 1: ${vf} = −√(16 + 49.05) = <b>−8.1 m/s</b>`,`Dismount 2: ${vf} = −√(9 + 49.05) = <b>−7.6 m/s</b>`,'Her acceleration is −9.81 m/s² in each case. The first final speed is greater because she was moving faster when she passed the bar level on the way down (4.0 m/s versus 3.0 m/s).']);
+const POSG=t=>3.0*t-.5*g*t*t;
+function bballFig(){
+  const W=470,H=250,L=48,R=14,T=16,B=34, X=t=>L+t/1.4*(W-L-R), Y=y=>T+(0.6-y)/(6.2)*(H-T-B);
+  let s=`<svg class="vt" viewBox="0 0 ${W} ${H}" role="img" aria-label="Position versus time graph of a basketball thrown straight up">`;
+  for(let y=-5;y<=0;y+=1) s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(y)}" y2="${Y(y)}"/><text x="${L-6}" y="${Y(y)+4}" text-anchor="end">${y.toFixed(1)}</text>`;
+  s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="${Y(0)}" y2="${Y(0)}"/><line class="axis" x1="${L}" x2="${L}" y1="${T}" y2="${H-B}"/>`;
+  for(let t=0.2;t<=1.4;t+=0.2) s+=`<text x="${X(t)}" y="${Y(0)-6}" text-anchor="middle">${t.toFixed(1)}</text>`;
+  let pts=''; for(let i=0;i<=70;i++){ const t=1.4*i/70; pts+=X(t)+','+Y(POSG(t))+' '; }
+  s+=`<polyline fill="none" stroke="var(--accent)" stroke-width="3.5" points="${pts}"/><text x="${L+4}" y="${T+8}">position (m)</text><text x="${W-R}" y="${H-4}" text-anchor="end">time (s)</text></svg>`;
+  return `<div class="fig">${s}<div class="figcap">Position–time graph of a basketball thrown straight up (Figure 3.4, redrawn; values are approximate).</div></div>`;
+}
+MC(sa,'Formative 6(a): Use the position–time graph of the basketball. Is the velocity of the basketball constant?',
+ ['Yes — it is a smooth curve','No — the slope of a position–time graph is the velocity, and the slope keeps changing','Yes — the graph is symmetric','Cannot be determined'],[1],
+ 'The graph is a curve (a parabola), so its slope (the velocity) changes continuously from positive, through zero at the top, to more and more negative.','What does the slope of a position–time graph represent?',{figure:bballFig});
+MC(sa,'Formative 6(b): Is the acceleration of the basketball constant?',
+ ['No — the velocity is not constant so the acceleration cannot be constant','Yes — the graph is a parabola: position is quadratic in time, which corresponds to constant acceleration (−9.81 m/s²)','Yes, but only on the way up','No — it is zero at the top'],[1],
+ 'Constant acceleration produces x = x<sub>0</sub> + v<sub>i</sub>t + ½at² — a parabola. The velocity changes at a steady rate.','Which kind of motion gives a parabolic position–time graph?',{figure:bballFig});
+add(sa,null,'Formative 6(c): Use the position–time graph. Estimate the basketball\'s initial velocity. (The curve reaches its highest point, about 0.46 m, at about 0.3 s.)',
+ [T('Initial velocity','m/s',3.0,{tol:0.12})],
+ [`At the top ${vf} = 0 so ${vi} = −${A}·t<sub>top</sub> = 9.81 × t<sub>top</sub>. The peak occurs at about 0.3 s.`,`9.81 × 0.3 ≈ 2.9 m/s; or √(2 × 9.81 × 0.46) ≈ 3.0 m/s.`],
+ [`The curve peaks at t ≈ 0.3 s: ${vi} = g·t<sub>top</sub> ≈ 9.81(0.30) ≈ <b>+3 m/s</b>`,`Check with the height: ${vi} = √(2g·Δy<sub>max</sub>) = √(2(9.81)(0.46)) ≈ 3.0 m/s ✔`,'The velocity–time graph is a straight line starting at +3 m/s, crossing zero at 0.3 s, with slope −9.81 m/s².'],{figure:bballFig});
+MC(sa,'Conceptual challenge — estimating distance: about how far does a basketball player move during a game? (Assume a 48-minute game, moving about 60 % of the time at an average of about 2.5 m/s.)',
+ ['About 400 m','About 4 km','About 40 km','About 400 km'],[1],
+ 'distance ≈ time × fraction moving × average speed = (48 × 60 s)(0.60)(2.5 m/s) ≈ 4300 m ≈ 4 km.','Multiply: seconds in the game × fraction moving × average speed.');
+
+/* ===== Take it further ===== */
+const st='tf';
+add(st,'Angular kinematics',`(a) Convert 135° to radians. (b) Convert 5π/6 rad to degrees.`,
+ [T('(a) 135° in radians','rad',135*Math.PI/180),T('(b) 5π/6 rad in degrees','°',150)],
+ [`θ(rad) = (π/180°)·θ(deg). For (b) multiply by 180°/π.`,`(a) 135 × π/180 = 3π/4 ≈ 2.356 rad.`],
+ [`(a) θ = (π/180°)(135°) = 3π/4 = <b>2.36 rad</b>`,`(b) θ = (5π/6)(180°/π) = <b>150°</b>`]);
+add(st,null,`A light bulb on a Ferris wheel of radius 12.0 m moves through an arc length of 20.0 m (counterclockwise). Find the angular displacement in (a) radians and (b) degrees.`,
+ [T('(a) Δθ','rad',20/12),T('(b) Δθ','°',20/12*180/Math.PI)],
+ [`Δθ = Δs/r (in radians). For degrees multiply by 180°/π.`,`20.0 ÷ 12.0 = 1.67 rad.`],
+ [`(a) Δθ = Δ<i>s</i>/<i>r</i> = 20.0 m / 12.0 m = <b>1.67 rad</b>`,`(b) 1.667 rad × (180°/π) = <b>95.5°</b>`]);
+add(st,null,`(a) A wheel turns through an angle of 15.0 rad in 3.0 s. What is its average angular velocity? (b) A motor turns at 120 revolutions per minute. Express this angular velocity in rad/s.`,
+ [T('(a) ω<sub>avg</sub>','rad/s',5.0),T('(b) ω','rad/s',120*2*Math.PI/60,{tol:0.04})],
+ [`(a) ω<sub>avg</sub> = Δθ/Δ<i>t</i>. (b) 1 rev = 2π rad and 1 min = 60 s.`,`(b) 120 × 2π ÷ 60.`],
+ [`(a) ω<sub>avg</sub> = 15.0 rad / 3.0 s = <b>5.0 rad/s</b>`,`(b) 120 rev/min × (2π rad/rev) × (1 min/60 s) = <b>12.6 rad/s</b>`]);
+add(st,null,`Looking down on a bicycle wheel, the wheel rotates clockwise. Its angular velocity increases from 2.0 rad/s to 8.0 rad/s (clockwise) in 3.0 s. Taking counterclockwise as positive, find the average angular acceleration. Is the wheel speeding up or slowing down?`,
+ [T('Average angular acceleration','rad/s²',-2.0)],
+ [`Clockwise is negative: ω<sub>1</sub> = −2.0 rad/s, ω<sub>2</sub> = −8.0 rad/s. α<sub>avg</sub> = (ω<sub>2</sub> − ω<sub>1</sub>)/Δ<i>t</i>.`,`(−8.0 − (−2.0)) ÷ 3.0.`],
+ [`α<sub>avg</sub> = (−8.0 − (−2.0) rad/s)/(3.0 s) = <b>−2.0 rad/s²</b>`,`ω and α have the same sign (both negative), so the wheel is <b>speeding up</b>.`]);
+add(st,null,`A wheel has an initial angular velocity of +4.0 rad/s and a constant angular acceleration of +1.5 rad/s². After 6.0 s find (a) its angular velocity and (b) the angle through which it has turned.`,
+ [T('(a) ω<sub>f</sub>','rad/s',13),T('(b) Δθ','rad',51)],
+ [`ω<sub>f</sub> = ω<sub>i</sub> + αΔ<i>t</i> and Δθ = ω<sub>i</sub>Δ<i>t</i> + ½α(Δ<i>t</i>)².`,`(a) 4.0 + 1.5 × 6.0.`],
+ [`(a) ω<sub>f</sub> = 4.0 + (1.5)(6.0) = <b>13 rad/s</b>`,`(b) Δθ = (4.0)(6.0) + ½(1.5)(6.0)² = <b>51 rad</b>`]);
+add(st,null,`A wheel starts from rest and has a constant angular acceleration of 2.0 rad/s². (a) What is its angular velocity after it has turned through 25 rad? (b) How long does this take?`,
+ [T('(a) ω<sub>f</sub>','rad/s',sqrt(2*2*25)),T('(b) Δ<i>t</i>','s',sqrt(2*2*25)/2)],
+ [`Use ω<sub>f</sub>² = ω<sub>i</sub>² + 2αΔθ with ω<sub>i</sub> = 0. Then Δ<i>t</i> = (ω<sub>f</sub> − ω<sub>i</sub>)/α.`,`√(2 × 2.0 × 25).`],
+ [`(a) ω<sub>f</sub> = √(2αΔθ) = √(2(2.0)(25)) = <b>10 rad/s</b>`,`(b) Δ<i>t</i> = (10 − 0)/2.0 = <b>5.0 s</b>`]);
+MC(st,'When a rotating object is viewed from above, which statements about the sign convention are correct? (Select all that apply.)',
+ ['Counterclockwise rotation gives a positive angular displacement','Clockwise rotation gives a negative angular velocity','Angular acceleration has the same sign as angular velocity when the object slows down','Angular acceleration has the same sign as angular velocity when the object speeds up'],[0,1,3],
+ 'Counterclockwise = +, clockwise = −. α has the same sign as ω when |ω| increases (speeding up) and the opposite sign when |ω| decreases.','Compare with linear motion: same signs → speeding up.');
+add(st,'Special relativity',`A train moves at 0.800<i>c</i> relative to the track. A passenger measures a time interval of 10.0 s on the train. What time interval does an observer beside the track measure?`,
+ [T('Δ<i>t</i>′','s',10/sqrt(1-.64))],
+ [`Δ<i>t</i>′ = Δ<i>t</i> / √(1 − <i>v</i>²/<i>c</i>²), with <i>v</i>/<i>c</i> = 0.800.`,`√(1 − 0.64) = 0.6.`],
+ [`Δ<i>t</i>′ = 10.0 s / √(1 − (0.800)²) = 10.0 / 0.600 = <b>16.7 s</b>`]);
+add(st,null,`A muon at rest lives for 2.20 µs. A muon moving at 0.9994<i>c</i> relative to the laboratory is observed. What lifetime is measured in the laboratory?`,
+ [T('Lifetime','µs',2.2/sqrt(1-0.9994*0.9994),{tol:0.04})],
+ [`Δ<i>t</i>′ = Δ<i>t</i>/√(1 − (<i>v</i>/<i>c</i>)²). Compute 1 − 0.9994² first (keep several decimals).`,`1 − 0.9994² = 0.001200…; its square root is 0.0346.`],
+ [`1 − (0.9994)² = 0.00120; √0.00120 = 0.0346`,`Δ<i>t</i>′ = 2.20 µs / 0.0346 = <b>63.5 µs</b>`]);
+MC(st,'In the train-and-mirror thought experiment, why does the observer beside the track measure a <b>longer</b> time for the light pulse?',
+ ['The observer\'s clock is broken','The light travels a longer path (at an angle) according to this observer, and the speed of light is the same for all observers, so it takes more time','Light travels faster for the observer beside the track','Light slows down inside the train'],[1],
+ 'The postulate that the speed of light is the same for any observer plus the longer path means a longer time interval: time dilation.','Time = distance ÷ speed, with the speed fixed.');
+MC(st,'How is a scientific <b>theory</b> different from a hypothesis?',
+ ['A theory is a guess; a hypothesis is a fact','A hypothesis is a tentative, testable explanation; a theory combines related hypotheses that have proven reliable across a wide range of conditions and been tested by independent researchers','They mean the same thing','A theory cannot be tested'],[1],
+ 'Hypotheses are tested; those that hold up across many conditions are combined into theories.','Think of Galileo\'s evidence versus Aristotle\'s qualitative idea.');
+MC(st,'Aristotle\'s theory of falling objects is described as <b>qualitative</b>, whereas Galileo\'s approach was…',
+ ['also qualitative','quantitative, supported by experimental and observational evidence that falling objects fall at the same rate independent of mass','based only on authority','impossible to test'],[1],
+ 'Galileo collected measurements and used mathematics; later tests and Newton\'s theory of gravitation confirmed his conclusion.','Qualitative = descriptive; quantitative = measured.');
+
+const SETS=[
+ {id:'tb',name:'Textbook Practice',desc:'The Practice problems after Sample Problem F (Falling Object).'},
+ {id:'ff',name:'More Free Fall',desc:'Additional free-fall problems: dropping, throwing up and down, other worlds, terminal velocity.'},
+ {id:'fa',name:'Section 3 Assessment',desc:'Formative assessment, graph interpretation and the conceptual challenge.'},
+ {id:'tf',name:'Take It Further',desc:'Angular kinematics, special relativity and time dilation, and Think Science.'}
+];
+
+P.forEach((p,i)=>{ p.id=p.set+(i+1); });
+let curSet='tb';
+
+function setStats(sid){ const ps=P.filter(p=>p.set===sid); return {done:ps.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length,total:ps.length}; }
+function updateOverall(){
+  const done=P.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length;
+  $('#overallText').textContent=`${done} of ${P.length} practice problems solved`;
+  $('#overallBar').style.width=(100*done/P.length)+'%';
+  $$('#setPicker button').forEach(b=>{ const s=setStats(b.dataset.set); $('small',b).textContent=`${s.done}/${s.total}`; });
+}
+function buildPicker(){
+  const pk=$('#setPicker'); pk.innerHTML='';
+  SETS.forEach(s=>{
+    const b=document.createElement('button'); b.type='button'; b.dataset.set=s.id; b.setAttribute('aria-pressed',String(s.id===curSet));
+    b.innerHTML=`${s.name}<small></small>`; b.addEventListener('click',()=>{ curSet=s.id; buildPicker(); renderSet(); }); pk.appendChild(b);
+  });
+  updateOverall();
+}
+function renderSet(){
+  const host=$('#problemList'); host.innerHTML='';
+  const s=SETS.find(x=>x.id===curSet);
+  const head=document.createElement('div'); head.className='sethead'; head.innerHTML=`<p>${s.desc.replace(/_(\w+)/g,'<sub>$1</sub>')}</p>`; host.appendChild(head);
+  let last=null;
+  P.filter(p=>p.set===curSet).forEach((p,i)=>{
+    if(p.sub&&p.sub!==last){ const h=document.createElement('h3'); h.className='subhead'; h.textContent=p.sub; host.appendChild(h); last=p.sub; }
+    host.appendChild(renderProblem(p,i+1));
+  });
+}
+function renderProblem(p,n){
+  const st=state['p_'+p.id]=state['p_'+p.id]||{done:false,tries:0};
+  const el=document.createElement('div'); el.className='prob'+(st.done?' done':'');
+  el.innerHTML=`<div class="num"><span>Problem ${n}</span><span class="badge">${st.done?'✔ Solved':''}</span></div><p style="margin:6px 0 4px">${p.text}</p>`;
+  if(p.figure) el.insertAdjacentHTML('beforeend',p.figure());
+  const body=document.createElement('div'); el.appendChild(body);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  const hintHost=document.createElement('div'), solHost=document.createElement('div');
+  const acts=document.createElement('div'); acts.className='acts';
+  const check=document.createElement('button'); check.className='btn'; check.type='button'; check.textContent='Check';
+  const hint=document.createElement('button'); hint.className='btn ghost'; hint.type='button'; hint.textContent='Hint';
+  const sol=document.createElement('button'); sol.className='btn ghost'; sol.type='button';
+  let hintN=0, inputs=[], checkFn;
+
+  if(p.opts){
+    const multi=p.type==='multi';
+    p.opts.forEach((o,i)=>{
+      const lab=document.createElement('label'); lab.className='opt'; lab.style.display='block'; lab.style.cursor='pointer';
+      const inp=document.createElement('input'); inp.type=multi?'checkbox':'radio'; inp.name='q_'+p.id; inp.value=i;
+      lab.append(inp); lab.insertAdjacentHTML('beforeend',o); body.appendChild(lab); inputs.push(inp);
+    });
+    checkFn=()=>{
+      const sel=inputs.filter(i=>i.checked).map(i=>+i.value);
+      if(!sel.length){ fb.className='fb near'; fb.textContent='Select an answer first.'; return null; }
+      const ok=sel.length===p.correct.length&&p.correct.every(c=>sel.includes(c));
+      inputs.forEach(i=>i.parentElement.classList.remove('right','wrong'));
+      if(ok){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+p.why; return true; }
+      sel.forEach(v=>{ if(!p.correct.includes(v)) inputs[v].parentElement.classList.add('wrong'); });
+      fb.className='fb no'; fb.textContent='Not quite. Re-read the question and use the sign table, the graph or the equations to reason it out.';
+      return false;
+    };
+  } else {
+    p.parts.forEach((part,i)=>{
+      const row=document.createElement('div'); row.className='partrow';
+      const id=`in_${p.id}_${i}`;
+      row.innerHTML=`<label for="${id}">${part.label}</label>`;
+      const inp=document.createElement('input'); inp.type='text'; inp.id=id; inp.autocomplete='off'; inp.placeholder='your answer';
+      const u=document.createElement('span'); u.className='u'; u.textContent=part.unit;
+      const pf=document.createElement('span'); pf.className='fb'; pf.style.margin='0'; pf.setAttribute('aria-live','polite');
+      row.append(inp,u,pf); body.appendChild(row); inputs.push({inp,pf});
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') check.click(); });
+    });
+    checkFn=()=>{
+      let all=true, any=false;
+      inputs.forEach(({inp,pf},i)=>{
+        if(!inp.value.trim()){ pf.className='fb near'; pf.textContent='Enter a value.'; all=false; return; }
+        any=true;
+        const j=judge(parseNum(inp.value),p.parts[i]);
+        pf.className='fb '+j.state; pf.textContent=(j.state==='ok'?'✔ ':'')+j.msg;
+        if(j.state!=='ok') all=false;
+      });
+      fb.textContent=''; fb.className='fb';
+      return any?all:null;
+    };
+  }
+  function showSol(){
+    solHost.className='solbox';
+    solHost.innerHTML=p.sol?'<b>Worked solution</b><ol>'+p.sol.map(s=>`<li>${s}</li>`).join('')+'</ol>':'<b>Answer explained</b><p style="margin:4px 0 0">'+p.why+'</p>';
+  }
+  function syncSol(){
+    const open=!!solHost.innerHTML;
+    sol.disabled=!(st.done||st.tries>=2);
+    sol.textContent=sol.disabled?'Solution (after 2 tries)':(open?'Hide solution':'Show solution');
+  }
+  check.addEventListener('click',()=>{
+    const r=checkFn(); if(r===null) return;
+    st.tries++;
+    if(r){
+      if(!st.done){ st.done=true; el.classList.add('done'); $('.badge',el).textContent='✔ Solved'; }
+      if(p.parts){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+(st.tries===1?'First try — nice work.':'Well done for sticking with it.'); }
+    } else if(p.parts && st.tries>=2 && !st.done){ fb.className='fb near'; fb.textContent='Still stuck? Try another hint, or open the worked solution.'; }
+    save(); updateOverall(); syncSol();
+  });
+  hint.addEventListener('click',()=>{
+    const hs=p.h||[]; if(!hs.length) return;
+    hintN=Math.min(hintN+1,hs.length);
+    hintHost.className='hintbox'; hintHost.innerHTML=`<b>Hint ${hintN}${hs.length>1?' of '+hs.length:''}:</b> `+hs.slice(0,hintN).map((h,i)=>i===hintN-1?h:'<span class="pnote">'+h+'</span>').reverse().join('<br>');
+    hint.textContent=hintN<hs.length?'Another hint':'Hint';
+  });
+  sol.addEventListener('click',()=>{ if(sol.disabled) return; if(solHost.innerHTML){ solHost.innerHTML=''; solHost.className=''; } else showSol(); syncSol(); });
+  acts.append(check,hint,sol); el.append(acts,fb,hintHost,solHost);
+  syncSol();
+  return el;
+}
+
+$('#resetAll').addEventListener('click',()=>{ if(confirm('Clear all saved progress on this device?')){ state={}; save(); buildPicker(); renderSet(); } });
+buildPicker(); renderSet();
+const h=(location.hash||'').slice(1); if(['review','examples','practice'].includes(h)) showTab(h);
+window.LIA23={P,EX,parseNum,judge};
+})();
+</script>
+</body>
+</html>
