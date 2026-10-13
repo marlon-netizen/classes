@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Exodus and Covenant | Faith Formation</title>
+<meta name="description" content="Interactive study page for Faith Formation: Exodus and Covenant – the Passover, the Exodus, the Sinai Covenant and the New Covenant, with the virtue of Order.">
+<style>
+:root{
+  --bg:#f3f0e9; --surface:#fffdf9; --surface-2:#f8f5ee; --ink:#1e2937; --muted:#5a6575;
+  --line:#ddd6c7; --primary:#1f3a5f; --primary-ink:#ffffff; --accent:#2b7a76; --accent-soft:#e1efed;
+  --blue-soft:#e6edf6; --warm:#b4763a; --warm-soft:#f6ebdb; --good:#2c7a57; --good-soft:#e1f1e8;
+  --bad:#a94a3f; --bad-soft:#f6e4e1; --shadow:0 1px 2px rgba(30,41,55,.06),0 4px 14px rgba(30,41,55,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+    --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+    --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+    --bad:#e08a7d; --bad-soft:#331e1c; --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+  --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+  --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+  --bad:#e08a7d; --bad-soft:#331e1c; --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:Georgia,serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em;margin:0}
+.crumbs{margin:.25rem 0 0;font-size:1.05rem;color:#d9d3c4}
+.crumbs strong{color:#fff}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font-size:.8rem;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#f3f0e9;border:1px solid rgba(255,255,255,.2)}
+.theme{background:transparent;border:1px solid rgba(255,255,255,.35);color:#f3f0e9;border-radius:8px;padding:4px 10px;font-size:.85rem}
+
+/* nav */
+nav.sticky{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+nav.sticky .wrap{display:flex;gap:4px;align-items:center;overflow-x:auto;padding-top:6px;padding-bottom:6px}
+nav.sticky a{white-space:nowrap;text-decoration:none;color:var(--ink);padding:6px 12px;border-radius:8px;font-size:.92rem}
+nav.sticky a:hover{background:var(--blue-soft)}
+.progress-box{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);white-space:nowrap}
+.bar{width:110px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+section.sec{padding:34px 0 6px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--warm);font-weight:700;margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow);margin:0 0 18px}
+.card.soft{background:var(--blue-soft)}
+.card.warm{background:var(--warm-soft)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 10px 10px 0;margin:0 0 1em}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.ref{font-size:.82rem;color:var(--muted);font-style:italic}
+.tag{display:inline-block;font-size:.75rem;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary);font-weight:600;margin-right:6px}
+
+/* stage explorer */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:600}
+.tab[aria-selected="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.tabpanel ul{margin:.3em 0 1em;padding-left:1.2em}
+.tabpanel li{margin-bottom:.35em}
+
+/* flip cards */
+.flip{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-height:150px;text-align:left;box-shadow:var(--shadow);width:100%}
+.flip .front{font-family:Georgia,serif;font-size:1.3rem;font-weight:700}
+.flip .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+.flip .back{display:none}
+.flip.on{background:var(--accent-soft);border-color:var(--accent)}
+.flip.on .front{font-size:1.05rem;color:var(--accent)}
+.flip.on .back{display:block;margin-top:8px}
+.flip.on .hint{display:none}
+
+/* accordion */
+details.acc{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:8px}
+details.acc summary{padding:11px 14px;cursor:pointer;font-weight:600}
+details.acc .body{padding:0 14px 12px}
+
+/* activity shell */
+.act{position:relative}
+.act h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.act .done-mark{display:none;font-size:.78rem;background:var(--good-soft);color:var(--good);padding:2px 10px;border-radius:99px;font-family:system-ui,sans-serif;font-weight:700}
+.act.done .done-mark{display:inline-block}
+.btn{background:var(--primary);color:var(--primary-ink);border:0;border-radius:9px;padding:8px 16px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--primary);border:1px solid var(--primary)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.opt:focus-visible,.tab:focus-visible,.flip:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+.opt{display:block;width:100%;text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 8px}
+.opt:hover:not(:disabled){border-color:var(--primary)}
+.opt.good{background:var(--good-soft);border-color:var(--good);color:var(--ink)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt.sel{border-color:var(--primary);background:var(--blue-soft)}
+.opt:disabled{cursor:default}
+.fb{min-height:1.4em;margin:8px 0 0;padding:0;border-radius:8px;font-size:.95rem}
+.fb.show{padding:9px 13px}
+.fb.good{background:var(--good-soft);color:var(--ink);border-left:4px solid var(--good)}
+.fb.bad{background:var(--bad-soft);color:var(--ink);border-left:4px solid var(--bad)}
+.fb.info{background:var(--blue-soft);border-left:4px solid var(--primary)}
+.shake{animation:shake .35s}
+@keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}html{scroll-behavior:auto}.bar i{transition:none}}
+.score{font-weight:700;color:var(--primary)}
+.qhead{font-weight:700;margin-bottom:8px}
+.qblock{border-top:1px dashed var(--line);padding-top:14px;margin-top:14px}
+.qblock:first-of-type{border-top:0;padding-top:0;margin-top:0}
+
+/* worked example */
+.steps{list-style:none;margin:12px 0 0;padding:0}
+.step{display:none;border:1px solid var(--line);border-left:5px solid var(--primary);background:var(--surface-2);border-radius:10px;padding:11px 14px;margin-bottom:9px}
+.step.show{display:block;animation:fade .3s}
+.step b.t{display:block;color:var(--primary);margin-bottom:2px}
+.step.final{border-left-color:var(--good);background:var(--good-soft)}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.problem{background:var(--warm-soft);border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+
+/* sequence */
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}
+.slot{min-height:78px;border:2px dashed var(--line);border-radius:10px;padding:8px 10px;font-size:.92rem;background:var(--surface-2)}
+.slot small{display:block;color:var(--muted);font-weight:700;margin-bottom:2px}
+.slot.filled{border-style:solid;border-color:var(--good);background:var(--good-soft)}
+.slot.next{border-color:var(--primary)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pool .opt{width:auto;margin:0}
+
+/* matching / sort */
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
+@media(max-width:560px){.match{grid-template-columns:1fr}}
+.match .opt.done{background:var(--good-soft);border-color:var(--good);opacity:.85}
+.sortcard{font-family:Georgia,serif;font-size:1.15rem;text-align:center;background:var(--warm-soft);border-radius:12px;padding:20px 12px;margin:10px 0}
+
+/* cloze */
+.cloze p{line-height:2.2}
+select{font:inherit;padding:4px 8px;border-radius:8px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+select.good{border-color:var(--good);background:var(--good-soft)}
+select.bad{border-color:var(--bad);background:var(--bad-soft)}
+textarea{width:100%;min-height:96px;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);resize:vertical}
+.checks{list-style:none;padding:0;margin:8px 0}
+.checks li{padding:4px 0}
+.checks .y{color:var(--good);font-weight:700}
+.checks .n{color:var(--warm);font-weight:700}
+.model{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 10px 10px 0;margin-top:8px}
+
+table.cmp{width:100%;border-collapse:collapse;font-size:.95rem}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.cmp th{background:var(--blue-soft)}
+
+.overlay{position:fixed;inset:0;background:rgba(17,22,29,.6);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 16px}
+.overlay[hidden]{display:none}
+.modal{background:var(--surface);border-radius:16px;max-width:620px;width:100%;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.35);border-top:5px solid var(--warm)}
+.bigscore{font-family:Georgia,serif;font-size:2.6rem;font-weight:700;color:var(--primary);line-height:1.1;margin:4px 0 8px}
+.bigscore small{font-size:1rem;color:var(--muted);font-family:system-ui,sans-serif;font-weight:400}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden;min-width:70px}
+.meter i{display:block;height:100%;background:var(--accent)}
+footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.88rem}
+.sr{position:absolute;left:-9999px}
+@media print{header.top .theme,nav.sticky,.btn{display:none}.step{display:block}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <p class="school">Lincoln International Academy</p>
+      <p class="crumbs">Class: <strong>Faith Formation</strong> &nbsp;·&nbsp; Teacher: <strong>Nathaly López</strong></p>
+    </div>
+    <div class="meta">
+      <span class="pill">6th Grade · Quarter 2 · Week 1</span>
+      <span class="pill">Virtue: Order</span>
+      <button class="theme" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Light / Dark</button>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky" aria-label="Page sections">
+  <div class="wrap">
+    <a href="#learn">Learn</a>
+    <a href="#vocab">Vocabulary</a>
+    <a href="#examples">Worked examples</a>
+    <a href="#practice">Practice</a>
+    <a href="#reflect">Notebook</a>
+    <a href="#bible">Exodus in the Bible</a>
+    <div class="progress-box" aria-live="polite"><span id="progText">0 of 8 activities</span><div class="bar"><i id="progBar"></i></div></div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ======================= LEARN ======================= -->
+<section class="sec" id="learn">
+  <div class="eyebrow">Exodus and Covenant</div>
+  <h2>The Journey from Slavery to Freedom</h2>
+
+  <div class="card soft">
+    <h3>What would you risk to be free?</h3>
+    <p>Keep this question in mind as you study. The people of Israel were slaves in Egypt. God led them out, step by step, and gave them a way to live that kept them free.</p>
+    <div class="callout">
+      <strong>Standard A.3.6.4</strong> – Jesus is the fulfillment of the Old Covenant and established the New Covenant.<br>
+      <strong>By the end of this page you can:</strong> put the Passover, Exodus and Sinai in order · explain what the lamb's blood signified · explain the purpose of the Law · explain how Jesus fulfills the Old Covenant in the New Covenant.
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>The Virtue of Order</h3>
+    <p>God gives exact instructions to protect His people and lead them to freedom.</p>
+    <div class="callout warm"><strong>Virtue: Order</strong> – Following the right rules and sequence keeps us safe and free.</div>
+    <p><strong>Think about it:</strong> What needs an order to work? A recipe, a basketball play, a fire drill. If the steps are skipped or mixed up, things go wrong. The Passover night was like that: God's instructions were exact because lives depended on them.</p>
+  </div>
+
+  <h3>Explore the stages</h3>
+  <p>Select each stage to read what happened, where to find it in Exodus, and the key idea.</p>
+  <div class="card">
+    <div class="tabs" role="tablist" aria-label="Stages of the journey" id="stageTabs"></div>
+    <div id="stagePanel" class="tabpanel" role="tabpanel" aria-live="polite"></div>
+  </div>
+
+  <div class="card">
+    <h3>The New Covenant</h3>
+    <div class="grid g2">
+      <div>
+        <span class="tag">Old Covenant</span>
+        <p>The lamb's blood on the doorposts (Exodus 12) and the covenant at Sinai (Exodus 19–24). God makes Israel His own people and gives them the Law.</p>
+      </div>
+      <div>
+        <span class="tag">New Covenant</span>
+        <p>Jesus at the Last Supper, during the Passover meal, says the cup is the new covenant in His blood (Luke 22:19–20). Jesus is the Lamb of God (John 1:29).</p>
+      </div>
+    </div>
+    <div class="callout"><strong>Fulfillment</strong> does not mean "throwing away." Jesus said He came not to abolish the Law but to fulfill it (Matthew 5:17). The Old Covenant points ahead; the New Covenant completes it.</div>
+  </div>
+
+  <div class="card warm">
+    <h3>Real-life connections</h3>
+    <ul>
+      <li><strong>A fire drill:</strong> exact instructions save lives, like the instructions of the Passover night.</li>
+      <li><strong>Family traditions:</strong> holiday meals that families repeat remind them who they are, as the Passover meal reminded Israel.</li>
+      <li><strong>Sports and teams:</strong> rules make the game possible and fair. They do not take away the fun; they make it playable.</li>
+      <li><strong>Promises:</strong> a promise or commitment binds you and also frees you to be trusted.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ======================= VOCAB ======================= -->
+<section class="sec" id="vocab">
+  <div class="eyebrow">Key vocabulary</div>
+  <h2>Words to Know</h2>
+  <p>Tap a card to flip it. Say the meaning in your own words before you flip!</p>
+  <div class="grid g3" id="flips"></div>
+</section>
+
+<!-- ======================= EXAMPLES ======================= -->
+<section class="sec" id="examples">
+  <div class="eyebrow">Step by step</div>
+  <h2>Worked Examples</h2>
+  <p>Each example shows how to think through a type of question. Press <strong>Show next step</strong> and try to predict the next step before you reveal it.</p>
+  <div id="exampleList"></div>
+</section>
+
+<!-- ======================= PRACTICE ======================= -->
+<section class="sec" id="practice">
+  <div class="eyebrow">Your turn</div>
+  <h2>Practice with Instant Feedback</h2>
+  <p>You get feedback right after every answer. Mistakes are part of learning, so use the hints and try again. Your progress is saved on this device.</p>
+
+  <div class="card act" id="act-quiz"><h3>1. Vocabulary Quiz <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-seq3"><h3>2. Sequence Strip: 3 Stages <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-plagues"><h3>3. Order the Plagues <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-journey"><h3>4. Story Timeline <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-match"><h3>5. Match the Term <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-sort"><h3>6. The Law: Two Directions <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-scripture"><h3>7. Scripture Detective <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-cloze"><h3>8. Complete the Sentences <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+
+  <div class="card soft" id="summaryCta" style="display:none">
+    <h3>All activities complete!</h3>
+    <p>Great work. See how you did on each activity.</p>
+    <button class="btn" type="button" id="openSummary">View my score summary</button>
+  </div>
+</section>
+
+<!-- ======================= REFLECT ======================= -->
+<section class="sec" id="reflect">
+  <div class="eyebrow">Metacognition</div>
+  <h2>Reflect in Your Notebook</h2>
+  <div class="callout warm"><strong>Get your notebook and a pencil.</strong> Your answers to these questions are for you and your teacher, so write them by hand in your notebook, not on this page.</div>
+  <div class="card">
+    <h3>Rules for Freedom</h3>
+    <p>How do rules like the Ten Commandments help a person stay free rather than stuck?</p>
+    <div class="callout"><strong>Start with:</strong> One rule in my life that helps me stay free is ____ because ____.</div>
+  </div>
+  <div class="card">
+    <h3>End-of-week questions</h3>
+    <ol>
+      <li>Which part of the Exodus story could I explain to someone else?</li>
+      <li>What rule or routine in my life helps me be free rather than stuck?</li>
+      <li>What question do I still have about the covenant?</li>
+    </ol>
+  </div>
+  <div class="card soft">
+    <h3>Exit ticket ✏️</h3>
+    <p><strong>Write your answers in your notebook</strong> before you close this page:</p>
+    <ol>
+      <li>Which part of the Exodus story (Passover, Red Sea, or Sinai) is clearest to you?</li>
+      <li>How does Jesus fulfill the Old Covenant?</li>
+    </ol>
+    <p class="ref">Tip: look back at Worked Example 4 if you need help with question 2. Hand your notebook to your teacher when asked.</p>
+  </div>
+  <p style="text-align:center;font-family:Georgia,serif;font-size:1.3rem;margin:22px 0"><em>Order leads to life.</em></p>
+</section>
+
+<!-- ======================= BIBLE ======================= -->
+<section class="sec" id="bible">
+  <div class="eyebrow">Additional reference</div>
+  <h2>The Book of Exodus (Catholic Bible)</h2>
+  <p>Read these passages in your own Catholic Bible (for example the NABRE). The summaries below are written in simple words to help you find your place; they are not word-for-word quotes.</p>
+  <div id="bibleList"></div>
+  <div class="card soft">
+    <h3>Connecting to the New Testament</h3>
+    <table class="cmp">
+      <tr><th>Passage</th><th>What it shows</th></tr>
+      <tr><td>Matthew 26:17–29 · Luke 22:14–20</td><td>The Last Supper takes place at the Passover meal. Jesus gives the new covenant in His blood.</td></tr>
+      <tr><td>John 1:29</td><td>John the Baptist calls Jesus the "Lamb of God."</td></tr>
+      <tr><td>1 Corinthians 5:7</td><td>Saint Paul calls Christ our Passover lamb.</td></tr>
+      <tr><td>Matthew 5:17</td><td>Jesus came to fulfill the Law, not to abolish it.</td></tr>
+      <tr><td>Jeremiah 31:31–34</td><td>The prophet promises that God will make a new covenant.</td></tr>
+    </table>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Lincoln International Academy · Faith Formation · Ms. Nathaly López · 6th Grade, Q02 Week 1 (Virtue: Order).
+    <br>Based on the class presentation "Exodus and Covenant: The Journey from Slavery to Freedom" and the Book of Exodus.
+    <div class="row" style="margin-top:10px"><button class="btn ghost" id="resetAll" type="button">Reset my progress</button></div>
+  </div>
+</footer>
+
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="sumTitle" hidden>
+  <div class="modal">
+    <div class="eyebrow">Faith Formation · Exodus and Covenant</div>
+    <h2 id="sumTitle">Your Score Summary</h2>
+    <div class="bigscore" id="sumBig"></div>
+    <p id="sumMsg"></p>
+    <table class="cmp" id="sumTable"></table>
+    <p class="ref">Scores count correct answers on your latest try of each activity (hints and wrong taps lower the score). Remember to write your exit ticket answers in your notebook.</p>
+    <div class="row"><button class="btn" type="button" id="closeSummary">Close</button><button class="btn ghost" type="button" id="reviewBtn">Practice again</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+
+/* ---------- helpers ---------- */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+function h(tag, attrs, ...kids){
+  const el = document.createElement(tag);
+  for(const k in (attrs||{})){
+    if(k==='class') el.className = attrs[k];
+    else if(k==='html') el.innerHTML = attrs[k];
+    else if(k.startsWith('on')) el.addEventListener(k.slice(2), attrs[k]);
+    else el.setAttribute(k, attrs[k]);
+  }
+  kids.flat().forEach(c => { if(c!=null) el.append(c.nodeType ? c : document.createTextNode(c)); });
+  return el;
+}
+function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
+  del(k){ try{ localStorage.removeItem(k); }catch(e){} }
+};
+function feedback(el, kind, text){
+  el.className = 'fb show ' + kind;
+  el.textContent = text;
+}
+function clearFb(el){ el.className='fb'; el.textContent=''; }
+
+/* ---------- theme ---------- */
+$('#themeBtn').addEventListener('click', () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme==='dark' || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.theme = dark ? 'light' : 'dark';
+  store.set('ff_theme', root.dataset.theme);
+});
+const savedTheme = store.get('ff_theme', null);
+if(savedTheme) document.documentElement.dataset.theme = savedTheme;
+
+/* ---------- progress & scores ---------- */
+const ACTS = [
+  ['act-quiz','Vocabulary Quiz'],['act-seq3','Sequence Strip'],['act-plagues','Order the Plagues'],['act-journey','Story Timeline'],
+  ['act-match','Match the Term'],['act-sort','The Law: Two Directions'],['act-scripture','Scripture Detective'],['act-cloze','Complete the Sentences']
+];
+const TOTAL = ACTS.length;
+const scores = store.get('ff_exodus_scores', {});
+function paintProgress(){
+  const n = ACTS.filter(a => scores[a[0]]).length;
+  $('#progText').textContent = n + ' of ' + TOTAL + ' activities';
+  $('#progBar').style.width = (n/TOTAL*100) + '%';
+  $$('.act').forEach(a => a.classList.toggle('done', !!scores[a.id]));
+  $('#summaryCta').style.display = n===TOTAL ? '' : 'none';
+}
+function record(id, correct, total){
+  const was = ACTS.filter(a => scores[a[0]]).length;
+  scores[id] = [correct, total];
+  store.set('ff_exodus_scores', scores);
+  paintProgress();
+  if(was===TOTAL-1 && ACTS.every(a => scores[a[0]])) setTimeout(openSummary, 900);
+}
+function openSummary(){
+  let c=0,t=0;
+  const rows = ACTS.map(([id,name]) => { const [a,b]=scores[id]||[0,0]; c+=a; t+=b; return h('tr',{}, h('td',{},name), h('td',{},a+' / '+b), h('td',{}, h('div',{class:'meter'}, h('i',{style:'width:'+(b?a/b*100:0)+'%'})))); });
+  const pct = t ? Math.round(c/t*100) : 0;
+  $('#sumBig').innerHTML = pct + '% <small>(' + c + ' of ' + t + ' correct)</small>';
+  $('#sumMsg').textContent = pct>=90 ? 'Outstanding! You understand the Passover, Exodus, Sinai and the New Covenant very well.'
+    : pct>=80 ? 'Secure! You have a solid understanding. Review the activities with lower scores to make it even stronger.'
+    : pct>=60 ? 'Good progress. Go back to the Worked Examples, then retry the activities with lower scores.'
+    : 'Keep going! Re-read the Learn section and the Worked Examples, then try the activities again.';
+  const tbl = $('#sumTable'); tbl.innerHTML='';
+  tbl.append(h('tr',{},h('th',{},'Activity'),h('th',{},'Score'),h('th',{},'')), ...rows);
+  $('#overlay').hidden = false; $('#closeSummary').focus();
+}
+function closeSummary(){ $('#overlay').hidden = true; }
+$('#openSummary').addEventListener('click', openSummary);
+$('#closeSummary').addEventListener('click', closeSummary);
+$('#reviewBtn').addEventListener('click', () => { closeSummary(); $('#practice').scrollIntoView(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeSummary(); });
+$('#resetAll').addEventListener('click', () => {
+  if(!confirm('Clear your saved scores on this device?')) return;
+  store.del('ff_exodus_scores'); location.reload();
+});
+
+/* ---------- stage explorer ---------- */
+const STAGES = [
+  { id:'s0', tab:'Before: Slavery', title:'Israel is enslaved in Egypt', ref:'Exodus 1–4',
+    pts:['A new king of Egypt forces the Israelites into hard labor (Exodus 1).','Moses is born, saved from danger, and raised in Pharaoh\'s household (Exodus 2).','God speaks to Moses from the burning bush and sends him to lead the people out (Exodus 3).'],
+    key:'God hears the cry of His people and acts to set them free.' },
+  { id:'s1', tab:'Stage 1: The Passover', title:'The blood of the lamb is a sign of protection', ref:'Exodus 12',
+    pts:['After nine plagues, Pharaoh still refuses to let the people go (Exodus 7–11).','God gives exact instructions: each household takes a lamb without blemish and puts its blood on the doorposts and lintel (Exodus 12:3–7).','They eat the meal ready to travel (Exodus 12:11). The destroyer "passes over" the marked houses and the firstborn are spared (Exodus 12:13).','God commands that this day be remembered as a feast every year (Exodus 12:14).'],
+    key:'Obeying the exact instructions protected God\'s people. The Passover is a memorial the people keep to remember who they are.' },
+  { id:'s2', tab:'Stage 2: The Exodus', title:'God delivers His people from slavery', ref:'Exodus 12:31–14:31',
+    pts:['Pharaoh finally lets Israel go, and the people leave Egypt (Exodus 12:31–42).','God leads them by a pillar of cloud by day and fire by night (Exodus 13:21).','Pharaoh\'s army chases them. At the Red Sea God opens a path through the water and Israel crosses on dry ground (Exodus 14:21–22).','The waters close over the pursuing army, and Israel is free (Exodus 14:27–31).'],
+    key:'"Exodus" means "exit" or "departure." God is the one who rescues; Israel only has to trust and follow.' },
+  { id:'s3', tab:'Stage 3: The Sinai Covenant', title:'The Law provides a structure for freedom', ref:'Exodus 19–24',
+    pts:['At Mount Sinai God offers a covenant: Israel will be His own people (Exodus 19:3–8).','God gives the Ten Commandments (Exodus 20:1–17). They begin by reminding Israel that God brought them out of slavery (Exodus 20:2).','The covenant is sealed with the people\'s promise to obey and with sacrificial blood (Exodus 24:3–8).'],
+    key:'The Law is not a new kind of slavery. It was given to people who were already free so they could stay free and live well together.' },
+  { id:'s4', tab:'New Covenant', title:'Jesus fulfills the Old Covenant', ref:'Luke 22:14–20 · John 1:29',
+    pts:['Jesus celebrates the Passover meal with His disciples (Luke 22:14–15).','He gives them the cup and calls it the new covenant in His blood (Luke 22:20).','He is called the Lamb of God (John 1:29). Saint Paul writes that Christ is our Passover lamb (1 Corinthians 5:7).'],
+    key:'The Old Covenant points forward. Jesus completes it and establishes the New Covenant.' }
+];
+(function(){
+  const tabs = $('#stageTabs'), panel = $('#stagePanel');
+  function show(i){
+    $$('.tab', tabs).forEach((b,j) => b.setAttribute('aria-selected', j===i));
+    const s = STAGES[i];
+    panel.innerHTML = '';
+    panel.append(
+      h('h3', {}, s.title),
+      h('p', {class:'ref'}, 'Read in your Bible: ' + s.ref),
+      h('ul', {}, s.pts.map(p => h('li', {}, p))),
+      h('div', {class:'callout'}, h('strong', {}, 'Key idea: '), s.key)
+    );
+  }
+  STAGES.forEach((s,i) => tabs.append(h('button', {class:'tab', role:'tab', type:'button', 'aria-selected':'false', onclick:()=>show(i)}, s.tab)));
+  show(1);
+})();
+
+/* ---------- vocabulary cards ---------- */
+const VOCAB = [
+  ['Passover','God protected the Israelites and spared their firstborn. Houses marked with the lamb\'s blood were "passed over." (Exodus 12)'],
+  ['Exodus','The "exit": God\'s deliverance of Israel from slavery in Egypt, including the crossing of the Red Sea. (Exodus 12–14)'],
+  ['Covenant','A sacred promise that binds two parties in a relationship. At Sinai God and Israel make a covenant. (Exodus 19–24)'],
+  ['Law','The Ten Commandments given to help people live in freedom. (Exodus 20)'],
+  ['Order (virtue)','Following the right rules and sequence keeps us safe and free.'],
+  ['Fulfillment','Completing what was promised. Jesus fulfills the Old Covenant and establishes the New Covenant. (Matthew 5:17)']
+];
+VOCAB.forEach(([t,d]) => {
+  const b = h('button', {class:'flip', type:'button', 'aria-pressed':'false'},
+    h('div', {class:'front'}, t),
+    h('div', {class:'hint'}, 'Tap to see the meaning'),
+    h('div', {class:'back'}, d));
+  b.addEventListener('click', () => { const on = b.classList.toggle('on'); b.setAttribute('aria-pressed', on); });
+  $('#flips').append(b);
+});
+
+/* ---------- worked examples ---------- */
+const EXAMPLES = [
+  { title:'Example 1: Put the events in order',
+    problem:'Put these in the correct order (1–3): the Exodus (Red Sea), the Sinai Covenant (the Law), the Passover (the lamb\'s blood).',
+    steps:[
+      ['Find a clue for the first event.','Read the Passover chapter (Exodus 12). It is the last event in Egypt: the night God strikes the firstborn of Egypt, Israel is spared, and Pharaoh finally lets them go. Nothing else can happen before they are free to leave. <b>Passover = 1.</b>'],
+      ['Find the next event.','After the people leave Egypt, Pharaoh changes his mind and chases them to the Red Sea (Exodus 14). The crossing is the moment of deliverance. <b>Exodus (Red Sea) = 2.</b>'],
+      ['Place the last event.','Israel travels on to Mount Sinai, where the covenant and Ten Commandments are given (Exodus 19–20). <b>Sinai Covenant = 3.</b>'],
+      ['Check your work with the chapter numbers.','Exodus 12 → 14 → 19–20. In a story, chapters usually run in the same order as events. The numbers match our order.'],
+      ['Answer.','<b>1. Passover → 2. Exodus (Red Sea) → 3. Sinai Covenant.</b> Freedom comes first; the Law follows to protect it.', true]
+    ]},
+  { title:'Example 2: What did the lamb\'s blood signify?',
+    problem:'Which answer is best? <br>A) That the family was rich &nbsp; B) That the family was protected by God and trusted His instructions &nbsp; C) That the family was punished &nbsp; D) That the family was Egyptian',
+    steps:[
+      ['Find the key words in the text.','Exodus 12:7 says to put the blood on the doorposts and lintel. Exodus 12:13 says the blood is a <i>sign</i>, and when God sees it He will pass over that house.'],
+      ['Ask: what does a sign do?','A sign tells you something. Here the sign marks which houses belong to the people who followed God\'s instructions.'],
+      ['Ask: what happened to marked houses?','They were passed over. The firstborn were spared. So the blood meant <b>protection</b>.'],
+      ['Eliminate the wrong choices.','A) Nothing in the passage is about wealth. C) The marked houses were spared, not punished. D) The blood marked Israelite homes, not Egyptians.'],
+      ['Answer.','<b>B.</b> The blood signified that the household was protected by God and had trusted and obeyed His instructions.', true]
+    ]},
+  { title:'Example 3: Why did God give such exact instructions for the Passover?',
+    problem:'Write a short answer using Claim → Evidence → Reasoning → Real-life link.',
+    steps:[
+      ['Claim: answer the question directly.','God gave exact instructions because the exact steps protected the people and led them to freedom.'],
+      ['Evidence: point to the text.','God told them which animal to choose (a lamb without blemish), what to do with the blood, how to eat, and to be ready to travel (Exodus 12:5–11).'],
+      ['Reasoning: explain how the evidence supports the claim.','If a family skipped the blood on the doorposts, the sign would be missing. Being ready to leave meant they could escape quickly when Pharaoh let them go. The order of steps mattered for safety and freedom. This is the virtue of <b>Order</b>.'],
+      ['Real-life link.','Like a fire drill: when everyone follows the exact steps, everyone gets out safely.'],
+      ['Put it together.','<i>"God gave exact instructions because they protected His people and led them to freedom. In Exodus 12 He told them to put the lamb\'s blood on the doorposts and be ready to leave. Following the steps in order kept them safe, just like a fire drill."</i>', true]
+    ]},
+  { title:'Example 4: How does Jesus fulfill the Old Covenant?',
+    problem:'Explain how the Passover lamb and the Last Supper are connected.',
+    steps:[
+      ['Name what you know about the Old Covenant.','At the Passover, the lamb\'s blood was a sign of protection (Exodus 12). At Sinai the covenant was sealed with blood (Exodus 24:8).'],
+      ['Find the connection in the New Testament.','The Last Supper happened at the Passover meal (Luke 22:14–15). Jesus took the cup and called it the new covenant in His blood (Luke 22:20).'],
+      ['Compare them side by side.','<table class="cmp"><tr><th></th><th>Old Covenant</th><th>New Covenant</th></tr><tr><td>Sign</td><td>Lamb\'s blood on the doorposts</td><td>Jesus, the Lamb of God (John 1:29)</td></tr><tr><td>Meal</td><td>Passover meal</td><td>Last Supper</td></tr><tr><td>Result</td><td>Spared from death, freed from slavery</td><td>Gift of life, freedom from sin</td></tr></table>'],
+      ['Use the key word: fulfill.','Jesus did not cancel the Old Covenant. He said He came to fulfill the Law (Matthew 5:17). What the Passover pointed to, Jesus completes.'],
+      ['Answer.','Jesus fulfills the Old Covenant because the Passover lamb and the covenant sealed with blood pointed toward Him. At the Last Supper, during the Passover meal, He established the New Covenant in His blood.', true]
+    ]},
+  { title:'Example 5: How do rules help me stay free?',
+    problem:'Finish the sentence: "One rule in my life that helps me stay free is ____ because ____."',
+    steps:[
+      ['Pick a real rule or routine from your life.','For example: finishing homework before games.'],
+      ['Ask: what does this rule protect?','It protects my time, my grades, and my peace of mind.'],
+      ['Ask: what would I lose without it?','Without it I could get stressed and stuck, so I would have less real freedom to enjoy my free time.'],
+      ['Connect to the Law.','The Ten Commandments begin by reminding Israel that God freed them from slavery (Exodus 20:2). The rules were given to keep them free.'],
+      ['Write the sentence.','<i>"One rule in my life that helps me stay free is finishing homework before games because it protects my time and lets me play without worry."</i>', true]
+    ]}
+];
+EXAMPLES.forEach(ex => {
+  const list = h('ol', {class:'steps'});
+  const items = ex.steps.map(([t,b,fin]) => {
+    const li = h('li', {class:'step' + (fin?' final':'')}, h('b',{class:'t'}, t), h('span',{html:b}));
+    list.append(li); return li;
+  });
+  let n = 0;
+  const next = h('button', {class:'btn', type:'button'}, 'Show next step');
+  const all = h('button', {class:'btn ghost', type:'button'}, 'Show all');
+  const reset = h('button', {class:'btn ghost', type:'button'}, 'Hide steps');
+  const status = h('span', {class:'ref', 'aria-live':'polite'}, '');
+  function paint(){
+    items.forEach((li,i) => li.classList.toggle('show', i<n));
+    next.disabled = n>=items.length;
+    status.textContent = n + ' of ' + items.length + ' steps shown';
+  }
+  next.addEventListener('click', () => { if(n<items.length) n++; paint(); items[n-1].scrollIntoView({block:'nearest', behavior:'smooth'}); });
+  all.addEventListener('click', () => { n=items.length; paint(); });
+  reset.addEventListener('click', () => { n=0; paint(); });
+  paint();
+  $('#exampleList').append(h('div', {class:'card'},
+    h('h3', {}, ex.title),
+    h('div', {class:'problem', html:'<b>Problem:</b> ' + ex.problem}),
+    h('div', {class:'row', style:'margin-top:12px'}, next, all, reset, status),
+    list));
+});
+
+/* ---------- multiple-choice quiz engine ---------- */
+function mountQuiz(id, questions, opts){
+  const mount = $('#'+id+' .mount');
+  const state = {};
+  function render(){
+    mount.innerHTML = '';
+    let answered = 0, correct = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = h('button', {class:'btn ghost', type:'button', style:'display:none'}, 'Try again');
+    again.addEventListener('click', render);
+    function paintSummary(){
+      if(answered<questions.length){ summary.textContent = 'Answered ' + answered + ' of ' + questions.length; return; }
+      summary.textContent = 'Score: ' + correct + ' / ' + questions.length + (correct===questions.length ? ' – perfect!' : correct/questions.length>=.8 ? ' – secure (80% or higher).' : ' – review the explanations and try again.');
+      again.style.display = '';
+      record(id, correct, questions.length);
+    }
+    questions.forEach((q,qi) => {
+      const order = shuffle(q.o.map((t,i) => ({t, ok:i===q.a})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const btns = order.map(o => {
+        const b = h('button', {class:'opt', type:'button'}, o.t);
+        b.addEventListener('click', () => {
+          if(b.disabled) return;
+          answered++;
+          btns.forEach(x => x.disabled = true);
+          if(o.ok){ correct++; b.classList.add('good'); feedback(fb,'good','✓ Correct. ' + q.e); }
+          else {
+            b.classList.add('bad','shake');
+            btns[order.findIndex(x=>x.ok)].classList.add('good');
+            feedback(fb,'bad','✗ Not quite. ' + q.e);
+          }
+          paintSummary();
+        });
+        return b;
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, (qi+1) + '. ' + q.q), btns, fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  }
+  render();
+}
+
+mountQuiz('act-quiz', [
+  { q:'What does "Passover" refer to in the Exodus story?', o:['God protected the Israelites and spared their firstborn','The crossing of the Red Sea','The giving of the Ten Commandments','A harvest festival in Egypt'], a:0, e:'The destroyer "passed over" the houses marked with the lamb\'s blood (Exodus 12:13).' },
+  { q:'A covenant is…', o:['a sacred promise that binds two parties in a relationship','a rule that only applies to kings','a type of lamb offered at the temple','a mountain in the desert'], a:0, e:'At Sinai, God and Israel entered a covenant: a sacred bond, not just a list of rules.' },
+  { q:'Why did God give the Law (the Ten Commandments)?', o:['To help people live in freedom','To make life harder for the Israelites','To punish Pharaoh','To replace the Passover'], a:0, e:'The Law begins by reminding Israel that God freed them from slavery (Exodus 20:2). It helps them stay free.' },
+  { q:'On which mountain did God give the Law to Moses?', o:['Mount Sinai','Mount Everest','Mount Zion','Mount Ararat'], a:0, e:'Exodus 19–20 takes place at Mount Sinai.' },
+  { q:'What did each Israelite household put on the doorposts?', o:['The blood of a lamb','Olive oil','A cross made of wood','Bread'], a:0, e:'Exodus 12:7 – the lamb\'s blood was put on the two doorposts and the lintel.' },
+  { q:'What does the virtue of Order teach?', o:['Following the right rules and sequence keeps us safe and free','Doing things as fast as possible','Making our own rules','Rules do not matter if you mean well'], a:0, e:'God gave exact instructions to protect His people. Order helps us stay safe and free.' },
+  { q:'Which event shows the New Covenant?', o:['Jesus at the Last Supper','Moses at the burning bush','The plague of locusts','The crossing of the Red Sea'], a:0, e:'At the Last Supper Jesus called the cup the new covenant in His blood (Luke 22:20).' },
+  { q:'What is the Exodus?', o:['God\'s deliverance of Israel from slavery in Egypt','The building of the Temple','The story of Noah\'s ark','The return of Israel from exile'], a:0, e:'"Exodus" means "exit." God led Israel out of Egypt and through the Red Sea.' }
+]);
+
+mountQuiz('act-scripture', [
+  { q:'Exodus 12:7 – "Put the blood on the two doorposts and the lintel." Which stage is this?', o:['The Passover','The Sinai Covenant','The New Covenant','The Red Sea crossing'], a:0, e:'This is the Passover instruction about the lamb\'s blood.' },
+  { q:'Exodus 14:21–22 – The waters divide and Israel walks through on dry ground. Which stage is this?', o:['The Exodus','The Passover','The Sinai Covenant','The Last Supper'], a:0, e:'This is the Red Sea crossing, the moment of deliverance.' },
+  { q:'Exodus 20:1–17 – God speaks the Ten Commandments. Which stage is this?', o:['The Sinai Covenant','The Passover','The Exodus','The burning bush'], a:0, e:'The Law was given at Sinai.' },
+  { q:'Luke 22:19–20 – Jesus takes the cup and says "the new covenant in my blood." Which stage is this?', o:['The New Covenant','The Old Covenant at Sinai','The Passover in Egypt','The Exodus'], a:0, e:'Jesus establishes the New Covenant at the Last Supper.' },
+  { q:'Exodus 20:2 says "I am the LORD your God, who brought you out of the land of Egypt, out of the house of slavery." What does this teach about the Law?', o:['The Law is given to people who are already free, to help them stay free','The Law is the price Israel must pay to leave Egypt','The Law is for Egyptians only','The Law replaced God\'s promise'], a:0, e:'The commandments begin with God\'s act of freeing His people. Rules support freedom rather than take it away.' }
+]);
+
+/* ---------- sequence engine ---------- */
+function mountSequence(id, intro, items){
+  const mount = $('#'+id+' .mount');
+  function render(){
+    mount.innerHTML = '';
+    let next = 0, mistakes = 0;
+    const slots = items.map((_,i) => h('div', {class:'slot' + (i===0?' next':'')}, h('small', {}, 'Step ' + (i+1)), h('span', {}, '?')));
+    const fb = h('div', {class:'fb', 'aria-live':'polite'});
+    let pool = shuffle(items.map((it,i) => ({...it, i})));
+    while(items.length>1 && pool.every((p,k) => p.i===k)) pool = shuffle(pool);
+    const poolEl = h('div', {class:'pool'});
+    const again = h('button', {class:'btn ghost', type:'button', style:'display:none'}, 'Try again');
+    again.addEventListener('click', render);
+    pool.forEach(p => {
+      const b = h('button', {class:'opt', type:'button'}, p.t);
+      b.addEventListener('click', () => {
+        if(b.disabled) return;
+        if(p.i===next){
+          b.disabled = true; b.style.display='none';
+          slots[next].classList.remove('next'); slots[next].classList.add('filled');
+          slots[next].lastChild.textContent = p.t;
+          feedback(fb,'good','✓ Yes! ' + p.why);
+          next++;
+          if(next<items.length) slots[next].classList.add('next');
+          else {
+            feedback(fb,'good','🎉 Complete! ' + (mistakes===0 ? 'No mistakes.' : mistakes + ' mistake' + (mistakes>1?'s':'') + ' along the way. Try again to get it without hints.') + ' ' + p.why);
+            again.style.display=''; record(id, Math.max(0, items.length-mistakes), items.length);
+          }
+        } else {
+          mistakes++;
+          b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'), 600);
+          feedback(fb,'bad','Not yet. Hint for step ' + (next+1) + ': ' + items[next].hint);
+        }
+      });
+      poolEl.append(b);
+    });
+    mount.append(h('p', {}, intro), h('div', {class:'slots'}, slots), h('p', {class:'ref'}, 'Tap the event that belongs in the next empty step.'), poolEl, fb, h('div', {class:'row', style:'margin-top:10px'}, again));
+  }
+  render();
+}
+mountSequence('act-seq3', 'Build the three-box sequence strip. Tap the events in the order they happened.', [
+  { t:'The Passover (lamb\'s blood)', hint:'It happens in Egypt, the night before the people leave.', why:'The Passover came first: the lamb\'s blood protected Israel on the night before they left (Exodus 12).' },
+  { t:'The Exodus (Red Sea)', hint:'It happens after the people leave Egypt, when Pharaoh chases them.', why:'The Exodus came next: God opened the sea and Israel crossed to freedom (Exodus 14).' },
+  { t:'The Sinai Covenant (the Law)', hint:'It happens at a mountain, after Israel has already been set free.', why:'Sinai came third: the covenant and the Law were given to people who were already free (Exodus 19–20).' }
+]);
+mountSequence('act-plagues', 'Six of the ten plagues are listed. Put them in the order they happened in the Book of Exodus (chapters 7–12).', [
+  { t:'Water turns to blood', hint:'It is the very first plague, at the Nile (Exodus 7).', why:'First plague: the Nile turns to blood (Exodus 7:14–25).' },
+  { t:'Frogs', hint:'It comes right after the water turned to blood (Exodus 8).', why:'Second plague: frogs cover the land (Exodus 8:1–15).' },
+  { t:'Hail', hint:'It is the seventh plague, a storm from the sky (Exodus 9).', why:'Seventh plague: thunder and hail (Exodus 9:13–35).' },
+  { t:'Locusts', hint:'After the hail, insects eat what the hail left (Exodus 10).', why:'Eighth plague: locusts (Exodus 10:1–20).' },
+  { t:'Darkness', hint:'Three days of thick darkness over Egypt (Exodus 10).', why:'Ninth plague: darkness over the land (Exodus 10:21–29).' },
+  { t:'Death of the firstborn (Passover night)', hint:'It is the last plague, the night of the Passover (Exodus 11–12).', why:'Tenth plague: the death of the firstborn of Egypt. Israel is spared by the lamb\'s blood (Exodus 12:29).' }
+]);
+mountSequence('act-journey', 'Put the whole story in order, from slavery to the New Covenant.', [
+  { t:'God calls Moses at the burning bush', hint:'God sends Moses before anything is done to Pharaoh (Exodus 3).', why:'Moses is called to lead the people out (Exodus 3).' },
+  { t:'The plagues strike Egypt', hint:'Pharaoh refuses to let the people go, so ten signs follow (Exodus 7–11).', why:'The plagues show God\'s power over Pharaoh (Exodus 7–11).' },
+  { t:'The Passover night', hint:'The last plague and the lamb\'s blood on the doorposts.', why:'The lamb\'s blood protects Israel and Pharaoh lets them go (Exodus 12).' },
+  { t:'Israel crosses the Red Sea', hint:'This happens after they leave Egypt and before they reach the mountain.', why:'God delivers Israel through the sea (Exodus 14).' },
+  { t:'The covenant and Ten Commandments at Sinai', hint:'This is at the mountain, three months after leaving Egypt (Exodus 19).', why:'God gives the Law to His freed people (Exodus 19–20).' },
+  { t:'Jesus establishes the New Covenant at the Last Supper', hint:'This happens in the New Testament, many centuries later.', why:'Jesus fulfills the Old Covenant and establishes the New (Luke 22:20).' }
+]);
+
+/* ---------- matching ---------- */
+(function(){
+  const id='act-match', mount=$('#'+id+' .mount');
+  const pairs=[
+    ['Passover','God spared the Israelites whose doors were marked with lamb\'s blood'],
+    ['Exodus','God\'s deliverance of Israel out of slavery in Egypt'],
+    ['Covenant','A sacred promise binding two parties in a relationship'],
+    ['Law','The Ten Commandments given to help people live in freedom'],
+    ['Order','Following the right rules and sequence keeps us safe and free'],
+    ['Lamb of God','The title John the Baptist gave to Jesus']
+  ];
+  function render(){
+    mount.innerHTML='';
+    let sel=null, matched=0, mistakes=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    const L=pairs.map((p,i)=>h('button',{class:'opt',type:'button','data-i':i},p[0]));
+    const R=shuffle(pairs.map((p,i)=>({i,t:p[1]}))).map(p=>h('button',{class:'opt',type:'button','data-i':p.i},p.t));
+    L.forEach(b=>b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      L.forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); sel=b;
+      feedback(fb,'info','Now choose the matching meaning.');
+    }));
+    R.forEach(b=>b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      if(!sel){ feedback(fb,'info','First tap a term on the left.'); return; }
+      if(sel.dataset.i===b.dataset.i){
+        sel.classList.remove('sel'); sel.classList.add('done'); b.classList.add('done'); sel=null; matched++;
+        feedback(fb,'good','✓ Match!');
+        if(matched===pairs.length){
+          feedback(fb,'good','🎉 All matched' + (mistakes? ' with ' + mistakes + ' miss' + (mistakes>1?'es':'') : ' with no misses') + '.');
+          again.style.display=''; record(id, Math.max(0, pairs.length-mistakes), pairs.length);
+        }
+      } else {
+        mistakes++; b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'),600);
+        feedback(fb,'bad','Not that one. Re-read the term and try another meaning.');
+      }
+    }));
+    mount.append(h('p',{},'Tap a term, then tap its meaning.'),h('div',{class:'match'},h('div',{},L),h('div',{},R)),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  }
+  render();
+})();
+
+/* ---------- sort ---------- */
+(function(){
+  const id='act-sort', mount=$('#'+id+'.act .mount');
+  const cards=[
+    ['Have no other gods before the Lord','G','This commandment is about our relationship with God.'],
+    ['Do not misuse the name of God','G','Respecting God\'s name belongs to loving God.'],
+    ['Keep the Sabbath day holy','G','Setting aside time for God is part of loving Him.'],
+    ['Honor your father and mother','N','This begins the commandments about loving our neighbor.'],
+    ['Do not kill','N','Protecting life is love of neighbor.'],
+    ['Do not steal','N','Respecting what belongs to others is love of neighbor.'],
+    ['Do not lie about other people','N','Truthfulness protects others.'],
+    ['Do not envy what your neighbor has','N','Not coveting is part of loving our neighbor.']
+  ];
+  function render(){
+    mount.innerHTML='';
+    const deck=shuffle(cards); let i=0, right=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const card=h('div',{class:'sortcard'});
+    const bG=h('button',{class:'btn',type:'button'},'Love of God');
+    const bN=h('button',{class:'btn',type:'button'},'Love of neighbor');
+    const count=h('p',{class:'ref'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    function paint(){
+      if(i>=deck.length){
+        card.textContent='Finished!'; bG.disabled=bN.disabled=true;
+        feedback(fb,'good','Score: ' + right + ' / ' + deck.length + '. The Ten Commandments teach love of God (the first three) and love of neighbor (the rest).');
+        again.style.display=''; record(id, right, deck.length); count.textContent=''; return;
+      }
+      card.textContent=deck[i][0]; count.textContent='Card ' + (i+1) + ' of ' + deck.length;
+    }
+    function pick(k){
+      if(i>=deck.length) return;
+      const c=deck[i]; const ok=c[1]===k;
+      if(ok) right++;
+      feedback(fb, ok?'good':'bad', (ok?'✓ Correct. ':'✗ Not quite. ') + c[2]);
+      i++; if(i>=deck.length) { const msg=fb.textContent; paint(); fb.textContent = msg + ' ' + fb.textContent; } else paint();
+    }
+    bG.addEventListener('click',()=>pick('G')); bN.addEventListener('click',()=>pick('N'));
+    mount.append(h('p',{},'The Law at Sinai has two directions. Decide which each commandment is mostly about.'),count,card,h('div',{class:'row'},bG,bN),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+    paint();
+  }
+  render();
+})();
+
+/* ---------- cloze ---------- */
+(function(){
+  const id='act-cloze', mount=$('#'+id+' .mount');
+  const S=[
+    ['The blood of the lamb on the doorposts was a sign of ',['protection','punishment','celebration'],0,'.','The blood marked houses God would pass over (Exodus 12:13).'],
+    ['Following the right rules and sequence is the virtue of ',['Order','Speed','Pride'],0,'.','Order keeps us safe and free.'],
+    ['A ',['covenant','plague','lintel'],0,' is a sacred promise that binds two parties in a relationship.','God and Israel made a covenant at Sinai.'],
+    ['God gave the Law to Moses at Mount ',['Ararat','Sinai','Zion'],1,'.','Exodus 19–20 takes place at Mount Sinai.'],
+    ['Jesus is the ',['opponent','copy','fulfillment'],2,' of the Old Covenant and established the New Covenant.','Jesus said He came to fulfill the Law, not abolish it (Matthew 5:17).'],
+    ['God showed order by giving ',['vague','exact','secret'],1,' instructions for the Passover.','The exact steps protected the people and led them to freedom (Exodus 12).']
+  ];
+  function render(){
+    mount.innerHTML='';
+    let ok=new Set(), wrong=0;
+    const fb=h('div',{class:'fb','aria-live':'polite'});
+    const again=h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again');
+    again.addEventListener('click',render);
+    const box=h('div',{class:'cloze'});
+    S.forEach((s,k)=>{
+      const sel=h('select',{'aria-label':'Choose the word for sentence ' + (k+1)}, h('option',{value:''},'— choose —'), s[1].map((o,j)=>h('option',{value:j},o)));
+      sel.addEventListener('change',()=>{
+        if(sel.value===''){ sel.className=''; return; }
+        if(+sel.value===s[2]){
+          sel.className='good'; sel.disabled=true; ok.add(k);
+          feedback(fb,'good','✓ ' + s[4]);
+          if(ok.size===S.length){ feedback(fb,'good','🎉 All sentences complete!'); again.style.display=''; record(id, Math.max(0, S.length-wrong), S.length); }
+        } else {
+          wrong++; sel.className='bad shake'; setTimeout(()=>sel.classList.remove('shake'),600);
+          feedback(fb,'bad','Not quite – try another word. Think about what you learned in the story.');
+        }
+      });
+      box.append(h('p',{}, s[0], sel, s[3]));
+    });
+    mount.append(h('p',{},'Choose the word that completes each sentence.'),box,fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  }
+  render();
+})();
+
+/* ---------- Exodus reference ---------- */
+const BIBLE = [
+  ['Exodus 1–2: Slavery and the birth of Moses','The Israelites grow in number and are enslaved. Pharaoh commands that Hebrew baby boys be thrown into the Nile. Moses is hidden, found by Pharaoh\'s daughter, and raised in the palace.'],
+  ['Exodus 3–4: The burning bush','God calls Moses from a bush that burns without being consumed. God reveals His name and sends Moses to bring His people out of Egypt.'],
+  ['Exodus 5–11: Pharaoh and the plagues','Moses and Aaron ask Pharaoh to let the people go. Pharaoh refuses, and ten plagues strike Egypt, ending with the death of the firstborn.'],
+  ['Exodus 12–13: The Passover','Instructions for the Passover lamb, the blood on the doorposts, and the meal eaten in haste. God commands the people to remember this day every year.'],
+  ['Exodus 14–15: Crossing the Red Sea','God parts the sea so Israel can cross on dry ground. Pharaoh\'s army is lost in the water. Moses and Miriam lead the people in a song of thanks.'],
+  ['Exodus 16–18: In the wilderness','God provides manna and quail and water from the rock. Moses appoints leaders to help him judge the people (a good example of order!).'],
+  ['Exodus 19–20: Sinai and the Ten Commandments','Israel camps at Mount Sinai. God offers the covenant and the people agree. God speaks the Ten Commandments.'],
+  ['Exodus 21–24: Laws and the covenant ceremony','God gives more laws for living together in justice. The covenant is sealed with the people\'s promise and sacrificial blood (Exodus 24:3–8).'],
+  ['Exodus 25–40: The Tabernacle and the golden calf','God gives plans for the Tabernacle, a dwelling place among His people. Israel sins with the golden calf (Exodus 32), but God forgives and renews the covenant (Exodus 34).']
+];
+BIBLE.forEach(([t,b]) => $('#bibleList').append(h('details',{class:'acc'}, h('summary',{},t), h('div',{class:'body'},b))));
+
+paintProgress();
+})();
+</script>
+</body>
+</html>
