@@ -248,7 +248,25 @@ nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(-
 .namel{display:block;font-weight:700;font-size:.88rem;margin:8px 0}
 .nameIn{display:block;width:100%;max-width:420px;margin-top:4px;font:inherit;padding:9px 12px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
 .copyline{background:var(--sky);border-radius:8px;padding:8px 12px;font-size:.88rem;word-break:break-word}
-@media print{header.top,nav.sticky,.mapcol,.subnav,footer,.btn,.theme-btn{display:none!important}.layout{display:block}.tabpanel[hidden]{display:none}}
+
+
+.submitRow{margin:6px 0 18px;text-align:center}
+.modal{position:fixed;inset:0;z-index:100;background:rgba(10,20,40,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.modal[hidden]{display:none}
+.mbox{position:relative;background:var(--surface);color:var(--ink);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.35);padding:22px 24px;width:100%;max-width:440px;max-height:calc(100vh - 32px);overflow:auto;border-top:6px solid var(--gold)}
+.mbox h3{margin-bottom:.4em}
+.mclose{position:absolute;top:8px;right:12px;border:0;background:transparent;font-size:1.6rem;line-height:1;color:var(--muted)}
+.bigscore{font-size:2.2rem;font-weight:900;color:var(--blue);margin:6px 0}
+.bigscore small{font-size:1rem;color:var(--terra);margin-left:10px}
+.mbtns{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+body.modal-open{overflow:hidden}
+@media print{
+ body.pm header.top,body.pm nav.sticky,body.pm .layout,body.pm footer{display:none!important}
+ body.pm .modal{position:static;background:none;display:block;padding:0}
+ body.pm .mbox{box-shadow:none;max-width:none}
+ body.pm .mclose,body.pm .mbtns,body.pm .nameIn,body.pm .namel{display:none}
+ body:not(.pm) .modal{display:none}
+}
 
 </style>
 </head>
@@ -279,7 +297,6 @@ nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(-
   <button type="button" role="tab" data-t="l2" aria-selected="false">Lesson 2</button>
   <button type="button" role="tab" data-t="l3" aria-selected="false">Lesson 3</button>
   <button type="button" role="tab" data-t="l4" aria-selected="false">Lesson 4</button>
-  <button type="button" role="tab" data-t="sum" aria-selected="false">🏅 My scores</button>
 </div></nav>
 
 <div class="wrap wide layout">
@@ -333,7 +350,7 @@ nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(-
 
 <section class="tabpanel" id="p-l1" hidden>
   <div class="lhead"><p class="kicker2">Lesson 1 of 4</p><h2>Enlightenment, French Revolution and the legacy of Bolívar</h2>
-    <div class="subnav" role="tablist" aria-label="Lesson 1 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button><button type="button" role="tab" data-s="score" aria-selected="false">🏅 My score</button></div>
+    <div class="subnav" role="tablist" aria-label="Lesson 1 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button></div>
   </div>
   <div class="lsub" data-sub="study">
 <div class="card" id="t1">
@@ -387,11 +404,10 @@ nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(-
     <p style="margin-top:20px"><button class="btn" type="button" data-goto="l1:practice">Ready? Go to the practice →</button></p>
   </div>
   <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
-  <div class="lsub" data-sub="score" hidden><div class="card scoreView" data-l="1"></div></div>
 </section>
 <section class="tabpanel" id="p-l2" hidden>
   <div class="lhead"><p class="kicker2">Lesson 2 of 4</p><h2>Marxist philosophy</h2>
-    <div class="subnav" role="tablist" aria-label="Lesson 2 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button><button type="button" role="tab" data-s="score" aria-selected="false">🏅 My score</button></div>
+    <div class="subnav" role="tablist" aria-label="Lesson 2 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button></div>
   </div>
   <div class="lsub" data-sub="study">
 <div class="card" id="t2">
@@ -437,11 +453,10 @@ nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(-
     <p style="margin-top:20px"><button class="btn" type="button" data-goto="l2:practice">Ready? Go to the practice →</button></p>
   </div>
   <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
-  <div class="lsub" data-sub="score" hidden><div class="card scoreView" data-l="2"></div></div>
 </section>
 <section class="tabpanel" id="p-l3" hidden>
   <div class="lhead"><p class="kicker2">Lesson 3 of 4</p><h2>Latin American thought and Rubén Darío</h2>
-    <div class="subnav" role="tablist" aria-label="Lesson 3 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button><button type="button" role="tab" data-s="score" aria-selected="false">🏅 My score</button></div>
+    <div class="subnav" role="tablist" aria-label="Lesson 3 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button></div>
   </div>
   <div class="lsub" data-sub="study">
 <div class="card" id="t3">
@@ -480,11 +495,10 @@ nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(-
     <p style="margin-top:20px"><button class="btn" type="button" data-goto="l3:practice">Ready? Go to the practice →</button></p>
   </div>
   <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
-  <div class="lsub" data-sub="score" hidden><div class="card scoreView" data-l="3"></div></div>
 </section>
 <section class="tabpanel" id="p-l4" hidden>
   <div class="lhead"><p class="kicker2">Lesson 4 of 4</p><h2>Benjamín Zeledón and the anti-imperialist legacy</h2>
-    <div class="subnav" role="tablist" aria-label="Lesson 4 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button><button type="button" role="tab" data-s="score" aria-selected="false">🏅 My score</button></div>
+    <div class="subnav" role="tablist" aria-label="Lesson 4 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button></div>
   </div>
   <div class="lsub" data-sub="study">
 <div class="card" id="t4">
@@ -532,9 +546,7 @@ nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(-
     <p style="margin-top:20px"><button class="btn" type="button" data-goto="l4:practice">Ready? Go to the practice →</button></p>
   </div>
   <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
-  <div class="lsub" data-sub="score" hidden><div class="card scoreView" data-l="4"></div></div>
 </section>
-<section class="tabpanel" id="p-sum" hidden><div class="card scoreView" data-l="all"></div></section>
 
 </main>
 
@@ -556,6 +568,8 @@ nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(-
 </div>
 
 <footer><div class="zig" aria-hidden="true"></div><div class="wrap">Lincoln International Academy · Social Science 11th · Based on the 2026–2027 yearly plan, Unit III · Prepared with Ms. Kathya López's curriculum map</div></footer>
+
+<div class="modal" id="scoreModal" hidden></div>
 
 <script>
 (function(){
@@ -932,45 +946,66 @@ const VLES={
 const vocFor=l=>VLES[l].map(t=>VOC.find(v=>v[0]===t));
 const hasAct=(l,t)=>t!=='map'||!!MAPQ_BY[l];
 
-/* ---------- storage ---------- */
-const KEY='u3-progress-v1';
-let state={name:'',scores:{}};
-try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&typeof o==='object'){state.name=String(o.name||'');state.scores=o.scores||{};}}}catch(e){}
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}};
+/* ---------- name storage ---------- */
+const KEY='u3-student-name-v1';
+let studentName='';
+try{studentName=String(localStorage.getItem(KEY)||'');}catch(e){}
+const saveName=()=>{try{localStorage.setItem(KEY,studentName);}catch(e){}};
 const pctOf=(c,t)=>t?Math.round(c/t*100):0;
-function recordScore(l,t,c,tt){
-  const k=l+':'+t,p=state.scores[k];
-  if(!p||c/tt>=p.c/p.t)state.scores[k]={c,t:tt};
-  save();renderScores();
+
+/* ---------- score pop-up ---------- */
+const modal=$('#scoreModal');
+let cur=null;
+const lineText=()=>`${studentName.trim()||'(name)'} · Unit III, Lesson ${cur.l} · ${cur.label} · ${cur.cor}/${cur.tot} (${pctOf(cur.cor,cur.tot)}%)`;
+function copyText(txt,btn){
+  const done=()=>{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);};
+  const fallback=()=>{const t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(e){}t.remove();};
+  try{navigator.clipboard.writeText(txt).then(done,fallback);}catch(e){fallback();}
 }
-function lessonTotals(l){
-  let c=0,t=0,n=0,m=0;
-  ACT.forEach(([k])=>{if(!hasAct(l,k))return;m++;const s=state.scores[l+':'+k];if(s){c+=s.c;t+=s.t;n++;}});
-  return {c,t,n,m};
+function openScore(info){
+  cur=info;
+  const {l,label,cor,ans,tot}=cur,pct=pctOf(cor,tot),inc=ans<tot;
+  modal.innerHTML=`<div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <button type="button" class="mclose" aria-label="Close">×</button>
+    <p class="kicker2">Lesson ${l} · ${esc(label)}</p>
+    <h3 id="mTitle">${inc?'Submit your score':'Activity complete!'}</h3>
+    ${inc?`<div class="fb show no"><b class="h">Not finished</b>You answered ${ans} of ${tot}. Unanswered items count as 0. Keep working or submit now.</div>`:''}
+    <div class="bigscore">${cor} / ${tot}<small>${pct}%</small></div>
+    <label class="namel">Student name <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(studentName)}"></label>
+    <p class="copyline"></p>
+    <p class="legend" style="margin:6px 0 10px">Only your name and score are shown; your answers are not included.</p>
+    <p class="mbtns"><button type="button" class="btn copyBtn">Copy my score</button> <button type="button" class="btn alt printBtn">Print</button> <button type="button" class="btn alt closeBtn">${inc?'Keep working':'Close'}</button></p>
+  </div>`;
+  const ni=$('.nameIn',modal),cl=$('.copyline',modal),cb=$('.copyBtn',modal);
+  const refresh=()=>{cl.textContent=lineText();cb.disabled=!studentName.trim();cb.title=cb.disabled?'Type your name first':'';};
+  ni.oninput=()=>{studentName=ni.value;saveName();refresh();};
+  cb.onclick=()=>copyText(lineText(),cb);
+  $('.printBtn',modal).onclick=()=>{if(!studentName.trim()){ni.focus();return;}document.body.classList.add('pm');window.print();setTimeout(()=>document.body.classList.remove('pm'),500);};
+  $('.closeBtn',modal).onclick=closeScore;$('.mclose',modal).onclick=closeScore;
+  refresh();modal.hidden=false;document.body.classList.add('modal-open');
+  setTimeout(()=>ni.focus(),30);
 }
+function closeScore(){modal.hidden=true;document.body.classList.remove('modal-open');}
+modal.addEventListener('click',e=>{if(e.target===modal)closeScore();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)closeScore();});
 
 /* ---------- practice factory ---------- */
 function makePractice(l,rootEl){
   const acts=ACT.filter(a=>hasAct(l,a[0]));
   rootEl.innerHTML=`<div class="ptabs" role="tablist" aria-label="Activity type">${acts.map((a,i)=>`<button class="ptab" role="tab" aria-selected="${i===0}" data-p="${a[0]}">${a[1]}</button>`).join('')}</div>
-  <div class="scorebar"><b class="scoreTxt">Score: 0 / 0</b><div class="prog" aria-hidden="true"><i class="progBar"></i></div><span class="progTxt"></span><button class="btn alt resetBtn" type="button">Restart this set</button></div>
-  <div class="quiz"></div><div class="card summary"></div>`;
-  const quiz=$('.quiz',rootEl),summary=$('.summary',rootEl);
-  let mode='mcq',ans=0,cor=0,tot=0;
+  <div class="scorebar"><b class="scoreTxt">Score: 0 / 0</b><div class="prog" aria-hidden="true"><i class="progBar"></i></div><span class="progTxt"></span><button class="btn alt resetBtn" type="button">Restart this set</button><button class="btn submitBtn" type="button">Submit</button></div>
+  <div class="quiz"></div><p class="submitRow"><button class="btn submitBtn" type="button">Submit my score</button></p>`;
+  const quiz=$('.quiz',rootEl);
+  let mode='mcq',ans=0,cor=0,tot=0,shown=false;
+  const labelOf=()=>(ACT.find(a=>a[0]===mode)||[,mode])[1];
+  const submit=()=>openScore({l,label:labelOf(),cor,ans,tot});
   const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
   function rec(c,m){ans+=m;cor+=c;update();}
   function update(){
     $('.scoreTxt',rootEl).textContent=`Score: ${cor} / ${ans}`;
     $('.progTxt',rootEl).textContent=`${ans} of ${tot} answered`;
     $('.progBar',rootEl).style.width=(tot?ans/tot*100:0)+'%';
-    if(tot&&ans===tot){
-      const pct=pctOf(cor,tot);
-      const msg=pct>=90?'Excellent work!':pct>=70?'Good job. Review the items you missed.':'Keep studying. Re-read the lesson and try again.';
-      summary.className='card summary show';
-      summary.innerHTML=`<div class="big">${pct}%</div><p><b>${cor} of ${tot} correct.</b> ${msg} Your score was saved on the “My score” page.</p><button class="btn againBtn" type="button">Try this set again</button>`;
-      $('.againBtn',summary).onclick=()=>build(mode);
-      recordScore(l,mode,cor,tot);
-    }
+    if(tot&&ans===tot&&!shown){shown=true;setTimeout(submit,400);}
   }
   const box=(label,i,body)=>{const c=document.createElement('div');c.className='q';c.innerHTML=`<div class="num">${label} ${i+1}</div>${body}`;return c;};
   function mcCard(item,idx,label,fixed){
@@ -1098,7 +1133,7 @@ function makePractice(l,rootEl){
     return [card,1];
   }
   function build(m){
-    mode=m;ans=0;cor=0;quiz.innerHTML='';summary.className='card summary';
+    mode=m;ans=0;cor=0;shown=false;quiz.innerHTML='';
     let cards=[];
     const one=(f)=>(x,i)=>[f(x,i),1];
     if(m==='mcq')cards=shuffle(pick(MCQ,IDX.mcq[l])).slice(0,6).map((it,i)=>[mcCard(it,i,'Question'),1]);
@@ -1114,49 +1149,13 @@ function makePractice(l,rootEl){
     tot=cards.reduce((a,c)=>a+c[1],0);cards.forEach(c=>quiz.appendChild(c[0]));update();
   }
   $$('.ptab',rootEl).forEach(b=>b.onclick=()=>{$$('.ptab',rootEl).forEach(x=>x.setAttribute('aria-selected',x===b));build(b.dataset.p);});
+  $$('.submitBtn',rootEl).forEach(b=>b.onclick=submit);
   $('.resetBtn',rootEl).onclick=()=>{build(mode);quiz.scrollIntoView({behavior:'smooth',block:'start'});};
   build('mcq');
 }
 
-/* ---------- score views ---------- */
-function copyText(txt,btn){
-  const done=()=>{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);};
-  try{navigator.clipboard.writeText(txt).then(done,()=>fallback());}catch(e){fallback();}
-  function fallback(){const t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(e){}t.remove();}
-}
-function scoreHTML(l){
-  const rows=ACT.filter(a=>hasAct(l,a[0])).map(([k,lab])=>{const s=state.scores[l+':'+k];return `<tr><td>${lab}</td><td>${s?`${s.c} / ${s.t}`:'<span class="muted">Not completed</span>'}</td><td>${s?pctOf(s.c,s.t)+'%':'—'}</td></tr>`;}).join('');
-  const T=lessonTotals(l);
-  return `<h3>My score · Lesson ${l}</h3><p class="lead">${esc(LN[l])}</p>
-  <label class="namel">Student name <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(state.name)}"></label>
-  <table class="stbl"><thead><tr><th>Activity</th><th>Score</th><th>%</th></tr></thead><tbody>${rows}</tbody></table>
-  <div class="stot"><b>Lesson score:</b> ${T.t?`${T.c} / ${T.t} (${pctOf(T.c,T.t)}%)`:'no activities completed yet'}<br><small>${T.n} of ${T.m} activities completed. Finish each activity set to record its score; your best score for each activity is kept.</small></div>
-  <p class="copyline">${esc(state.name||'(name)')} · Unit III, Lesson ${l} · ${T.t?`${T.c}/${T.t} (${pctOf(T.c,T.t)}%)`:'no score yet'}</p>
-  <p><button class="btn copyBtn" type="button" data-l="${l}">Copy my score</button> <button class="btn alt printBtn" type="button">Print</button></p>`;
-}
-function sumHTML(){
-  let C=0,TT=0;
-  const rows=[1,2,3,4].map(l=>{const T=lessonTotals(l);C+=T.c;TT+=T.t;return `<tr><td>Lesson ${l}: ${esc(LN[l])}</td><td>${T.n} / ${T.m}</td><td>${T.t?`${T.c} / ${T.t}`:'—'}</td><td>${T.t?pctOf(T.c,T.t)+'%':'—'}</td></tr>`;}).join('');
-  return `<h2>My scores</h2><p class="lead">Your score on the activities of all four lessons. Only your name and your scores are shown; your answers are not recorded.</p>
-  <label class="namel">Student name <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(state.name)}"></label>
-  <table class="stbl"><thead><tr><th>Lesson</th><th>Activities done</th><th>Score</th><th>%</th></tr></thead><tbody>${rows}</tbody></table>
-  <div class="stot"><b>Unit III total:</b> ${TT?`${C} / ${TT} (${pctOf(C,TT)}%)`:'no activities completed yet'}</div>
-  <p class="copyline">${esc(state.name||'(name)')} · Unit III · ${[1,2,3,4].map(l=>{const T=lessonTotals(l);return `L${l}: ${T.t?T.c+'/'+T.t:'—'}`;}).join(' · ')} · Total ${TT?C+'/'+TT+' ('+pctOf(C,TT)+'%)':'—'}</p>
-  <p><button class="btn copyBtn" type="button" data-l="all">Copy my scores</button> <button class="btn alt printBtn" type="button">Print</button> <button class="btn alt resetScores" type="button">Clear saved scores</button></p>`;
-}
-function renderScores(){
-  $$('.scoreView').forEach(v=>{const act=document.activeElement;const keep=act&&v.contains(act)&&act.classList.contains('nameIn');const pos=keep?act.selectionStart:0;v.innerHTML=v.dataset.l==='all'?sumHTML():scoreHTML(+v.dataset.l);wire(v);if(keep){const n=$('.nameIn',v);n.focus();try{n.setSelectionRange(pos,pos);}catch(e){}}});
-}
-function wire(v){
-  const ni=$('.nameIn',v);
-  ni.oninput=()=>{state.name=ni.value;save();renderScores();};
-  $$('.copyBtn',v).forEach(b=>b.onclick=()=>copyText($('.copyline',v).textContent,b));
-  $$('.printBtn',v).forEach(b=>b.onclick=()=>window.print());
-  const rs=$('.resetScores',v);if(rs)rs.onclick=()=>{if(confirm('Clear all saved scores on this device?')){state.scores={};save();renderScores();}};
-}
-
 /* ---------- tabs ---------- */
-const TABS=['home','l1','l2','l3','l4','sum'];
+const TABS=['home','l1','l2','l3','l4'];
 function showTab(id,sub){
   if(!TABS.includes(id))id='home';
   TABS.forEach(t=>{$('#p-'+t).hidden=t!==id;});
@@ -1182,7 +1181,6 @@ $$('[data-goto]').forEach(b=>b.onclick=()=>{const [t,s]=b.dataset.goto.split(':'
   $$('.vcard',p).forEach(c=>c.onclick=()=>c.classList.toggle('open'));
   makePractice(l,$('.practiceRoot',p));
 });
-renderScores();
 showTab((location.hash||'').slice(1)||'home');
 
 })();
