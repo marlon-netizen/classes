@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rules on Wheels | Growing in Values</title>
-<meta name="description" content="Interactive slide-based review for Growing in Values (8th grade): respecting road-safety rules as a pedestrian, cyclist and passenger.">
+<meta name="description" content="Interactive 35-minute slide-based activity for Growing in Values (8th grade): respecting road-safety rules as a pedestrian, cyclist and passenger.">
 <style>
 :root{
   --bg:#f4f2ee; --card:#fffefb; --ink:#25313d; --muted:#667180; --line:#dcd7cd;
@@ -20,7 +20,8 @@ body{background:var(--bg);color:var(--ink);font:16px/1.6 "Segoe UI",system-ui,-a
 h1,h2,h3{line-height:1.25;margin:0 0 .5em;color:var(--slate-deep)}
 h2{font-size:1.55rem} h3{font-size:1.1rem}
 p{margin:0 0 1em}
-button{font:inherit;color:inherit;cursor:pointer}
+button,select{font:inherit;color:inherit}
+button{cursor:pointer}
 
 /* header */
 .top{background:var(--slate-deep);color:#f4f2ee;border-bottom:4px solid var(--warm)}
@@ -32,7 +33,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 /* shell */
 .app{max-width:900px;margin:22px auto 40px;padding:0 16px}
 .progress{margin-bottom:14px}
-.prow{display:flex;justify-content:space-between;font-size:.88rem;color:var(--muted);margin-bottom:6px}
+.prow{display:flex;justify-content:space-between;gap:10px;font-size:.88rem;color:var(--muted);margin-bottom:6px;flex-wrap:wrap}
 .pbar{height:8px;background:var(--line);border-radius:99px;overflow:hidden}
 .pbar i{display:block;height:100%;width:0;background:var(--teal);border-radius:99px;transition:width .45s ease}
 .deck{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);padding:clamp(18px,4vw,34px);min-height:430px;overflow:hidden}
@@ -42,6 +43,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 @keyframes in-next{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
 @keyframes in-prev{from{opacity:0;transform:translateX(-24px)}to{opacity:1;transform:none}}
 .kicker{font-size:.76rem;text-transform:uppercase;letter-spacing:.12em;color:var(--warm);font-weight:700;margin-bottom:4px}
+.kicker .min{margin-left:8px;background:var(--slate-soft);color:var(--slate);padding:1px 9px;border-radius:99px;letter-spacing:.02em;text-transform:none;font-weight:600}
 .slide h2:focus{outline:none}
 
 .nav{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:16px}
@@ -51,7 +53,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .btn.ghost{background:transparent;color:var(--slate);border:1px solid var(--slate)}
 .btn.ghost:hover:not(:disabled){background:var(--slate-soft)}
 .btn:disabled{opacity:.45;cursor:not-allowed}
-.btn:focus-visible,.opt:focus-visible,.role:focus-visible,input:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.btn:focus-visible,.opt:focus-visible,.role:focus-visible,.rv:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
 .hint{font-size:.88rem;color:var(--muted);text-align:center;flex:1}
 
 /* callouts */
@@ -61,18 +63,18 @@ button{font:inherit;color:inherit;cursor:pointer}
 .box.w{background:var(--warm-soft);border-left:4px solid var(--warm)}
 .small{font-size:.88rem;color:var(--muted)}
 
-/* roles */
+/* roles + reveal cards */
 .roles{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));margin:12px 0 16px}
-.role{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:border-color .2s,background .2s;width:100%}
-.role:hover{border-color:var(--teal)}
+.role,.rv{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;transition:border-color .2s,background .2s;width:100%}
+.role:hover,.rv:hover{border-color:var(--teal)}
 .role .ico{font-size:1.6rem;display:block}
-.role .nm{font-weight:700;color:var(--slate-deep);display:block;margin:2px 0}
-.role .tap{font-size:.8rem;color:var(--muted)}
-.role .more{display:none;margin-top:8px;font-size:.93rem}
-.role .more ul{margin:.3em 0 .5em;padding-left:1.1em}
-.role[aria-expanded="true"]{background:var(--teal-soft);border-color:var(--teal)}
-.role[aria-expanded="true"] .more{display:block}
-.role[aria-expanded="true"] .tap{display:none}
+.role .nm,.rv .nm{font-weight:700;color:var(--slate-deep);display:block;margin:2px 0}
+.tap{font-size:.8rem;color:var(--muted)}
+.more{display:none;margin-top:8px;font-size:.93rem}
+.more ul{margin:.3em 0 .5em;padding-left:1.1em}
+[aria-expanded="true"].role,[aria-expanded="true"].rv{background:var(--teal-soft);border-color:var(--teal)}
+[aria-expanded="true"] .more{display:block}
+[aria-expanded="true"] .tap{display:none}
 .take{margin:0;padding-left:1.2em}
 .take li{margin-bottom:.3em}
 
@@ -87,7 +89,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 
 /* questions */
 .qblock{border-top:1px dashed var(--line);padding-top:14px;margin-top:14px}
-.qblock:first-of-type{border-top:0;padding-top:0;margin-top:0}
+.qs>.qblock:first-child{border-top:0;padding-top:0;margin-top:0}
 .qtext{font-weight:600;margin-bottom:8px}
 .qtag{display:inline-block;font-size:.72rem;background:var(--slate-soft);color:var(--slate);padding:1px 9px;border-radius:99px;margin-right:6px;vertical-align:middle;font-weight:700}
 .opt{display:block;width:100%;text-align:left;background:#fbfaf7;border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 8px;transition:border-color .15s,background .15s}
@@ -95,6 +97,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .opt:disabled{cursor:default}
 .opt.good{background:var(--good-soft);border-color:var(--good)}
 .opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt.pick{background:var(--slate-soft);border-color:var(--slate)}
 .opt.dim{opacity:.6}
 .tf{display:flex;gap:10px}
 .tf .opt{width:auto;flex:1;text-align:center;font-weight:600}
@@ -102,6 +105,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .fb.show{padding:9px 13px;animation:in-next .3s ease}
 .fb.good{background:var(--good-soft);border-left:4px solid var(--good)}
 .fb.bad{background:var(--bad-soft);border-left:4px solid var(--bad)}
+.fb.info{background:var(--slate-soft);border-left:4px solid var(--slate)}
 .fill{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .fill input{font:inherit;padding:8px 12px;border:2px solid var(--line);border-radius:10px;min-width:160px;background:#fff;color:var(--ink)}
 .fill input:disabled{background:#f1eee8}
@@ -110,15 +114,35 @@ button{font:inherit;color:inherit;cursor:pointer}
 .shake{animation:shake .35s}
 @keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
 
+/* sort cards, sequence */
+.sortcard{font-size:1.15rem;text-align:center;background:var(--warm-soft);border-radius:12px;padding:20px 12px;margin:10px 0;font-weight:600}
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px;margin:10px 0}
+.slot{min-height:76px;border:2px dashed var(--line);border-radius:10px;padding:8px 10px;font-size:.9rem;background:#fbfaf7}
+.slot small{display:block;color:var(--muted);font-weight:700;margin-bottom:2px}
+.slot.filled{border-style:solid;border-color:var(--good);background:var(--good-soft)}
+.slot.next{border-color:var(--slate)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pool .opt{width:auto;margin:0}
+
+/* story / builder */
+.story{background:var(--warm-soft);border-radius:12px;padding:10px 14px;margin-bottom:8px;font-style:italic}
+.builder{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:10px 0}
+.builder label{display:block;font-weight:600;font-size:.9rem;margin-bottom:4px}
+.builder select{width:100%;padding:9px 10px;border:2px solid var(--line);border-radius:10px;background:#fff}
+.pledge{background:var(--teal-soft);border-left:4px solid var(--teal);border-radius:10px;padding:14px 16px;font-size:1.1rem;font-weight:600;margin:8px 0}
+.checks{list-style:none;padding:0;margin:8px 0}
+.checks li{padding:2px 0}
+.checks b{color:var(--good)}
+
 /* summary */
 .scorewrap{text-align:center;margin:6px 0 12px}
 .ring{width:150px;height:150px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;background:conic-gradient(var(--teal) calc(var(--p)*1%),var(--line) 0)}
 .ring span{width:118px;height:118px;border-radius:50%;background:var(--card);display:grid;place-items:center;font-size:2rem;font-weight:700;color:var(--slate-deep)}
 .score{font-size:1.3rem;font-weight:700;color:var(--slate-deep)}
 .msg{max-width:560px;margin:8px auto 14px;text-align:center}
-.brk{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:12px 0}
-.brk div{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fbfaf7;font-size:.92rem}
-.brk .ok b{color:var(--good)} .brk .no b{color:var(--bad)}
+.brk{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin:12px 0}
+.brk div{border:1px solid var(--line);border-radius:10px;padding:8px 12px;background:#fbfaf7;font-size:.92rem;display:flex;justify-content:space-between;gap:8px}
+.brk .ok b{color:var(--good)} .brk .part b{color:var(--warm)} .brk .no b{color:var(--bad)}
 
 footer{text-align:center;color:var(--muted);font-size:.82rem;padding:0 16px 30px}
 @media (max-width:560px){.nav{flex-wrap:wrap}.hint{order:3;flex-basis:100%}.tf{flex-direction:column}}
@@ -136,79 +160,150 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:0 16px 30px
 
 <main class="app">
   <div class="progress" aria-live="polite">
-    <div class="prow"><span id="plabel">Slide 1 of 6</span><span id="ptitle">Review the rules</span></div>
-    <div class="pbar" role="progressbar" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1" id="pb"><i id="pfill"></i></div>
+    <div class="prow"><span id="plabel">Slide 1 of 16</span><span id="ptitle"></span><span id="ptime"></span></div>
+    <div class="pbar" role="progressbar" aria-valuemin="1" aria-valuemax="16" aria-valuenow="1" id="pb"><i id="pfill"></i></div>
   </div>
 
   <div class="deck" id="deck">
 
-    <!-- Slide 1: theory -->
-    <section class="slide" data-title="Review the rules" aria-label="Slide 1: Theory">
-      <div class="kicker">8th Grade · Rules on wheels</div>
-      <h2 tabindex="-1">Respecting Traffic as a Pedestrian, Cyclist and Passenger</h2>
+    <!-- 1 warm-up -->
+    <section class="slide" data-title="Warm-up: Which role, which rule?" data-min="3" data-group="warm">
+      <div class="kicker">8th Grade · Rules on wheels<span class="min">⏱ about 3 min</span></div>
+      <h2 tabindex="-1">Warm-up: Which Role, Which Rule?</h2>
       <div class="box q"><b>Guiding question:</b> What rule protects me in each of my roles in traffic: as a pedestrian, as a cyclist, and as a passenger?</div>
-      <p>Every time we move around our community we play a role in traffic. Each role has <b>specific safety rules</b>. Respecting them protects <b>you</b> and <b>the people around you</b>: this is responsibility and respect for life. <span class="small">(Tap each role to see its rules.)</span></p>
+      <div class="box t"><b>By the end of this activity you can:</b> identify the safety rules for pedestrians, cyclists and passengers · show respect for those rules in a case or role-play · write a personal commitment to follow them.</div>
+      <p><b>Quick check (not scored).</b> For each scene, name the role and say whether the rule was respected.</p>
+      <div class="qs" id="m-warm"></div>
+    </section>
+
+    <!-- 2 theory: rules by role -->
+    <section class="slide" data-title="Rules by role" data-min="2">
+      <div class="kicker">Review<span class="min">⏱ about 2 min</span></div>
+      <h2 tabindex="-1">Rules by Role</h2>
+      <p>Every time we move around our community we play a role in traffic. Each role has <b>specific safety rules</b>. <span class="small">(Tap each role to see its rules.)</span></p>
       <div class="roles" id="roles"></div>
       <div class="box t">
         <b>Key takeaways</b>
         <ul class="take">
           <li>Each role has its own rules: <b>pedestrian</b>, <b>cyclist</b>, <b>passenger</b>.</li>
-          <li>Rules are not only about avoiding a fine. They make traffic <b>predictable</b>, so everyone can anticipate what others will do.</li>
-          <li>Respecting a rule protects the person <b>and others</b>.</li>
+          <li>Respecting a rule protects <b>you</b> and <b>others</b>.</li>
+          <li>Rules vary by country, so ask your teacher about the rules where you live.</li>
         </ul>
       </div>
-      <p class="small">Traffic rules vary from country to country. Ask your teacher about the rules where you live.</p>
     </section>
 
-    <!-- Slide 2: guided example -->
-    <section class="slide" data-title="Guided example" aria-label="Slide 2: Guided example">
-      <div class="kicker">Solved case</div>
-      <h2 tabindex="-1">Guided Example: Case Response Step by Step</h2>
-      <div class="case"><b>Case:</b> <i>Sofia rides her bike to school. She rides on the left side of the road, against the traffic, without a helmet, and she turns at the corner without signaling.</i></div>
-      <p>Click <b>Show next step</b> to see how to analyze the case, just like in the Case Response worksheet.</p>
-      <div class="row" style="margin-bottom:10px">
-        <button class="btn teal" id="stepNext" type="button">Show next step</button>
-        <button class="btn ghost" id="stepAll" type="button">Show all</button>
-        <button class="btn ghost" id="stepReset" type="button">Hide steps</button>
-        <span class="small" id="stepStatus" aria-live="polite"></span>
-      </div>
-      <ol class="steps" id="steps"></ol>
+    <!-- 3 theory: why -->
+    <section class="slide" data-title="Why rules protect" data-min="2">
+      <div class="kicker">Review<span class="min">⏱ about 2 min</span></div>
+      <h2 tabindex="-1">Why Do Rules Protect Us?</h2>
+      <p>Rules are not only about avoiding a fine. They show <b>respect for life</b> and <b>responsibility</b> toward everyone who shares the road. Tap each card, think of your answer first, then reveal it.</p>
+      <div class="roles" id="why"></div>
     </section>
 
-    <!-- Slide 3: multiple choice -->
-    <section class="slide" data-title="Exercise 1: Multiple choice" aria-label="Slide 3: Multiple choice exercise" data-group="mc">
-      <div class="kicker">Exercise 1 of 3 · Multiple choice</div>
+    <!-- 4-6 guided examples -->
+    <section class="slide" data-title="Guided example 1: Cyclist" data-min="3">
+      <div class="kicker">Solved case 1 of 3 · Cyclist<span class="min">⏱ about 3 min</span></div>
+      <h2 tabindex="-1">Guided Example: Sofia the Cyclist</h2>
+      <div class="case"><b>Case:</b> <i>Sofia rides her bike to school. She rides on the side of the road facing the traffic, wears no helmet, and turns at the corner without signaling.</i></div>
+      <p>Click <b>Show next step</b> to see how to complete a Case Response, just like the worksheet.</p>
+      <div id="m-ex1"></div>
+    </section>
+    <section class="slide" data-title="Guided example 2: Pedestrian" data-min="2">
+      <div class="kicker">Solved case 2 of 3 · Pedestrian<span class="min">⏱ about 2 min</span></div>
+      <h2 tabindex="-1">Guided Example: Leo the Pedestrian</h2>
+      <div class="case"><b>Case:</b> <i>Leo walks home from school wearing headphones and looking at his phone. At the corner the pedestrian signal is red. He sees no cars, so he steps off the curb and crosses diagonally, away from the crosswalk, without looking both ways.</i></div>
+      <p>This time, try to predict each step before you reveal it.</p>
+      <div id="m-ex2"></div>
+    </section>
+    <section class="slide" data-title="Guided example 3: Passenger" data-min="2">
+      <div class="kicker">Solved case 3 of 3 · Passenger<span class="min">⏱ about 2 min</span></div>
+      <h2 tabindex="-1">Guided Example: Ana the Passenger</h2>
+      <div class="case"><b>Case:</b> <i>Ana is in the back seat of her uncle's car. She does not buckle up because the trip is short, leans forward to show the driver a video, and when they arrive she opens the street-side door without checking for traffic.</i></div>
+      <p>Use the same steps. Notice how many rules were broken in one short trip.</p>
+      <div id="m-ex3"></div>
+    </section>
+
+    <!-- 7 MC -->
+    <section class="slide" data-title="Exercise 1: Multiple choice" data-min="3" data-group="mc" data-review="1">
+      <div class="kicker">Exercise 1 · Multiple choice<span class="min">⏱ about 3 min</span></div>
       <h2 tabindex="-1">Which Role, Which Rule?</h2>
       <p>Choose the best answer. You get feedback right away, and each question can be answered only once.</p>
-      <div class="qs" id="q-mc"></div>
+      <div class="qs" id="m-mc"></div>
     </section>
 
-    <!-- Slide 4: scenarios -->
-    <section class="slide" data-title="Exercise 2: Scenario decisions" aria-label="Slide 4: Scenario decision exercise" data-group="sc">
-      <div class="kicker">Exercise 2 of 3 · Scenario decisions</div>
+    <!-- 8 sort -->
+    <section class="slide" data-title="Exercise 2: Sort the rules" data-min="2" data-group="sort">
+      <div class="kicker">Exercise 2 · Sorting<span class="min">⏱ about 2 min</span></div>
+      <h2 tabindex="-1">Sort the Rules by Role</h2>
+      <p>Which role does each rule belong to?</p>
+      <div class="qs" id="m-sort"></div>
+    </section>
+
+    <!-- 9 scenarios -->
+    <section class="slide" data-title="Exercise 3: Scenario decisions" data-min="3" data-group="sc">
+      <div class="kicker">Exercise 3 · Scenario decisions<span class="min">⏱ about 3 min</span></div>
       <h2 tabindex="-1">What Would You Do?</h2>
       <p>You are in the situation. Pick the safest, most respectful action for your role.</p>
-      <div class="qs" id="q-sc"></div>
+      <div class="qs" id="m-sc"></div>
     </section>
 
-    <!-- Slide 5: true/false + fill -->
-    <section class="slide" data-title="Exercise 3: True/False and fill-in" aria-label="Slide 5: True or false and fill in the blank" data-group="tf">
-      <div class="kicker">Exercise 3 of 3 · True/False and fill in the blank</div>
+    <!-- 10 sequence -->
+    <section class="slide" data-title="Exercise 4: Order the case response" data-min="2" data-group="seq">
+      <div class="kicker">Exercise 4 · Sequencing<span class="min">⏱ about 2 min</span></div>
+      <h2 tabindex="-1">Build a Case Response</h2>
+      <p>Put the steps of a Case Response in the best order, as in the guided examples.</p>
+      <div class="qs" id="m-seq"></div>
+    </section>
+
+    <!-- 11 spot the mistake -->
+    <section class="slide" data-title="Exercise 5: Spot the mistake" data-min="3" data-group="spot">
+      <div class="kicker">Exercise 5 · Case stations<span class="min">⏱ about 3 min</span></div>
+      <h2 tabindex="-1">Spot the Mistake</h2>
+      <p>For each case, name the rule that was not respected and explain the consequence.</p>
+      <div class="qs" id="m-spot"></div>
+    </section>
+
+    <!-- 12 tf/fill -->
+    <section class="slide" data-title="Exercise 6: True/False and fill-in" data-min="2" data-group="tf">
+      <div class="kicker">Exercise 6 · True/False and fill in the blank<span class="min">⏱ about 2 min</span></div>
       <h2 tabindex="-1">True or False? Complete the Rule</h2>
-      <div class="qs" id="q-tf"></div>
+      <div class="qs" id="m-tf"></div>
     </section>
 
-    <!-- Slide 6: summary -->
-    <section class="slide" data-title="Summary and score" aria-label="Slide 6: Summary and score">
-      <div class="kicker">Summary</div>
+    <!-- 13 simulation -->
+    <section class="slide" data-title="Role-play: A day with Mateo" data-min="2" data-group="sim">
+      <div class="kicker">Role-play · Show the safe way<span class="min">⏱ about 2 min</span></div>
+      <h2 tabindex="-1">A Day with Mateo</h2>
+      <p>Follow Mateo through his day. At each moment, choose how he should act. A new moment appears after each decision.</p>
+      <div class="qs" id="m-sim"></div>
+    </section>
+
+    <!-- 14 synthesis -->
+    <section class="slide" data-title="Synthesis: Which rule matters most?" data-min="1" data-group="syn">
+      <div class="kicker">Whole-class synthesis (not scored)<span class="min">⏱ about 1 min</span></div>
+      <h2 tabindex="-1">Which Rule Is Most Often Broken?</h2>
+      <div class="qs" id="m-syn"></div>
+    </section>
+
+    <!-- 15 commitment -->
+    <section class="slide" data-title="My road-safety commitment" data-min="2" data-group="com">
+      <div class="kicker">My commitment (not scored)<span class="min">⏱ about 2 min</span></div>
+      <h2 tabindex="-1">My Road-Safety Commitment</h2>
+      <p>Build a personal, realistic commitment. Choose a role, a rule, and when you will practice it.</p>
+      <div id="m-com"></div>
+    </section>
+
+    <!-- 16 summary -->
+    <section class="slide" data-title="Summary and score" data-min="1">
+      <div class="kicker">Summary<span class="min">⏱ about 1 min</span></div>
       <h2 tabindex="-1">Your Results</h2>
       <div class="scorewrap">
         <div class="ring" id="ring" style="--p:0"><span id="pct">0%</span></div>
-        <div class="score" id="scoreText" aria-live="polite">Score: 0 out of 10</div>
+        <div class="score" id="scoreText" aria-live="polite">Score: 0 out of 0</div>
       </div>
       <p class="msg" id="scoreMsg"></p>
       <div class="brk" id="brk"></div>
-      <div class="box w"><b>Next step in your notebook:</b> write your personal road-safety commitment: the role you will focus on this week (pedestrian, cyclist or passenger) and the specific rule you will respect. Make it realistic.</div>
+      <div class="box w"><b>Write it in your notebook:</b> copy your personal road-safety commitment and, in two or three sentences, explain why the rule you chose protects you and others. Hand it in or keep it for the next session.</div>
       <div class="row" style="justify-content:center">
         <button class="btn" id="reviewBtn" type="button">Review my answers</button>
         <button class="btn teal" id="restartBtn" type="button">Restart activity</button>
@@ -229,7 +324,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:0 16px 30px
 (function(){
 "use strict";
 
-/* ---------- content ---------- */
+/* ====================== CONTENT ====================== */
 var ROLES = [
   { ico:'🚶', nm:'Pedestrian', rules:['Use the crosswalk','Look both ways before crossing','Walk on the sidewalk'],
     why:'Drivers expect to see you at the crosswalk, looking first lets you check for vehicles, and the sidewalk keeps you away from traffic.' },
@@ -238,195 +333,382 @@ var ROLES = [
   { ico:'🚗', nm:'Passenger', rules:['Wear a seatbelt','Do not distract the driver','Enter and exit on the sidewalk side'],
     why:'A seatbelt protects you (and others in the car), the driver needs full attention, and the sidewalk side keeps you away from moving traffic.' }
 ];
+var WHY = [
+  { nm:'Why does riding WITH traffic matter?', a:'Drivers expect vehicles to come from that direction, so they look there. Riding against traffic makes you unexpected, and a collision is more likely and more serious.' },
+  { nm:'Why use a crosswalk and look both ways?', a:'The crosswalk is where drivers expect pedestrians. Looking both ways lets you confirm that vehicles are really stopping, because drivers can miss you.' },
+  { nm:'Why does a seatbelt protect others too?', a:'In a sudden stop or crash an unbuckled passenger keeps moving and can hit other people in the car. Buckling up protects you and everyone inside.' },
+  { nm:'Why should passengers not distract the driver?', a:'The driver must watch the road, signs and pedestrians. A distracted driver puts every person on the road at risk, not only those in the car.' }
+];
 
-var STEPS = [
-  ['1. Describe the situation','Sofia is a cyclist riding to school. She rides against the traffic, has no helmet, and turns without signaling.'],
+var EX1 = [
+  ['1. Describe the situation','Sofia is a cyclist riding to school. She rides facing the traffic, has no helmet, and turns without signaling.'],
   ['2. Identify the role','Sofia is a <b>cyclist</b>, so the cyclist rules apply: wear a helmet, ride with traffic, use hand signals.'],
-  ['3. Name the rule that applies','Three rules matter here: <b>wear a helmet</b>, <b>ride with traffic</b>, and <b>use hand signals</b>.'],
+  ['3. Name the rule that applies','<b>Wear a helmet</b>, <b>ride with traffic</b>, and <b>use hand signals</b>.'],
   ['4. Was the rule respected?','<b>No.</b> She broke all three: no helmet, riding against traffic, and no signal.'],
   ['5. State the consequence','Drivers do not expect a bike coming from the front, so a collision is more likely. Without a helmet a fall could cause a serious head injury. Without a signal, drivers cannot anticipate her turn.'],
   ['6. Show the safe way (role-play)','Sofia puts on a well-fitted helmet, rides on the same side as the traffic, checks behind, signals with her hand, and turns when it is safe.'],
   ['7. Explain why the rule protects others, not just you','When cyclists ride predictably, drivers and pedestrians can anticipate them, so everyone on the road is safer.', true]
 ];
+var EX2 = [
+  ['1. Describe the situation','Leo is walking home with headphones on and eyes on his phone. The pedestrian signal is red, and he crosses diagonally, away from the crosswalk, without looking.'],
+  ['2. Identify the role','Leo is a <b>pedestrian</b>.'],
+  ['3. Name the rule that applies','<b>Use the crosswalk</b> and <b>look both ways before crossing</b> (and wait for the signal).'],
+  ['4. Was the rule respected?','<b>No.</b> He left the crosswalk, ignored the red signal, and did not look. His headphones and phone also kept him from noticing danger.'],
+  ['5. State the consequence','A driver turning the corner may not see him, and Leo cannot hear an approaching vehicle. He could be hit, and a driver who brakes suddenly could cause a crash that hurts others.'],
+  ['6. Show the safe way (role-play)','Leo puts the phone away, takes off the headphones, waits at the crosswalk for the walk signal, looks both ways, and crosses at a steady pace.'],
+  ['7. Explain why the rule protects others, not just you','Predictable pedestrians let drivers stop smoothly, which protects other drivers, passengers and cyclists too.', true]
+];
+var EX3 = [
+  ['1. Describe the situation','Ana is unbuckled in the back seat, distracts the driver with a video, and then opens the street-side door without checking.'],
+  ['2. Identify the role','Ana is a <b>passenger</b>.'],
+  ['3. Name the rule that applies','<b>Wear a seatbelt</b>, <b>do not distract the driver</b>, and <b>enter and exit on the sidewalk side</b>.'],
+  ['4. Was the rule respected?','<b>No.</b> She broke all three rules within one short trip.'],
+  ['5. State the consequence','In a sudden stop she could be thrown and could hit other passengers. The driver loses attention. An opened street-side door could hit a passing cyclist or vehicle, or Ana herself could be hit.'],
+  ['6. Show the safe way (role-play)','Ana buckles up before the car moves, saves the video for later, waits until the car has fully stopped, checks for traffic, and exits on the sidewalk side.'],
+  ['7. Explain why the rule protects others, not just you','A buckled, calm passenger and an attentive driver protect everyone in the car and everyone around it.', true]
+];
 
-var QS = {
-  mc:[
-    { tag:'Role', q:'Which role does this rule belong to? <i>"Ride with traffic and use hand signals."</i>',
-      o:['Pedestrian','Cyclist','Passenger'], a:1,
-      e:'These are cyclist rules: riding with traffic and signaling make a cyclist predictable.',
-      w:'Think about who rides and turns on the road: those are rules for cyclists.', label:'Cyclist rule' },
-    { tag:'Rule', q:'Which rule helps a <b>passenger</b> protect themselves and others?',
-      o:['Sit anywhere, even without a seatbelt','Wear a seatbelt on every ride','Talk to the driver constantly','Open the door before the car stops'], a:1,
-      e:'A seatbelt holds you in your seat in a sudden stop or crash, and it keeps you from hurting others in the car.',
-      w:'A passenger protects everyone by buckling up and not distracting the driver.', label:'Passenger rule' },
-    { tag:'Why', q:'Why should pedestrians use the crosswalk and look both ways?',
-      o:['Because it is faster','Because drivers expect to see them there and they can check for vehicles','Because rules are only for children','Because crossing anywhere is just as safe'], a:1,
-      e:'At the crosswalk you are visible and predictable. Looking both ways lets you confirm that vehicles are stopping.',
-      w:'The reason is safety: being visible and checking traffic protects you.', label:'Pedestrian why' }
-  ],
-  sc:[
-    { tag:'Pedestrian', q:'You are walking and the walk signal at the corner is off. Your friend calls you from the other side. What do you do?',
-      o:[ ['Wait for the walk signal, look both ways, and cross at the crosswalk.',1,'Waiting keeps you visible and predictable, and you stay safe even if your friend is waiting.'],
-          ['Run across quickly before a car comes.',0,'Running across a street with traffic is risky, because drivers may not see you or stop in time.'],
-          ['Cross between parked cars to save time.',0,'Parked cars hide you from drivers. Use the crosswalk.'] ], label:'Pedestrian scenario' },
-    { tag:'Cyclist', q:'You are cycling and want to turn at the next corner. What do you do?',
-      o:[ ['Turn suddenly without looking.',0,'Others cannot anticipate a sudden turn, and a collision becomes likely.'],
-          ['Check for traffic, signal your turn with your hand, and turn when it is safe.',1,'Signaling and checking make your move predictable and protect everyone around you.'],
-          ['Stop in the middle of the road and wave.',0,'Stopping in the lane without warning creates a new danger.'] ], label:'Cyclist scenario' },
-    { tag:'Passenger', q:'You are a passenger and the car has arrived at school. The street is on your left and the sidewalk is on your right. What do you do?',
-      o:[ ['Open the street-side door right away.',0,'Opening a door into the traffic lane is dangerous for you and for passing cyclists and vehicles.'],
-          ['Wait until the car has fully stopped, check for traffic, and exit on the sidewalk side.',1,'Exiting on the sidewalk side keeps you away from moving traffic.'],
-          ['Climb out through the window.',0,'Always use the door, on the sidewalk side, after the car has fully stopped.'] ], label:'Passenger scenario' }
-  ],
-  tf:[
-    { type:'tf', tag:'True or False', q:'A cyclist should ride against the traffic so they can see the cars coming.', a:false,
-      e:'Cyclists should ride with traffic: drivers expect vehicles to come from that direction, so they are more likely to see you.', label:'Ride with traffic' },
-    { type:'tf', tag:'True or False', q:'A passenger should avoid distracting the driver.', a:true,
-      e:'The driver needs full attention to keep everyone in the car and on the road safe.', label:'Do not distract the driver' },
-    { type:'fill', tag:'Fill in the blank', q:'A cyclist should always wear a ______ to protect the head.', ok:/^(a |the )?(bicycle |bike )?helmets?$/i, show:'helmet',
-      e:'A helmet reduces the risk of serious head injury if you fall or crash.', label:'Helmet' },
-    { type:'fill', tag:'Fill in the blank', q:'Before crossing the street, a pedestrian should look ______ ways.', ok:/^(both|two|all|left and right|right and left)( ways)?$/i, show:'both',
-      e:'Looking both ways lets you check for vehicles coming from either direction.', label:'Look both ways' }
+/* choice = [text, ok, feedback] */
+var WARM = [
+  { tag:'Scene 1', q:'A student crosses the street without looking.',
+    o:[['Pedestrian: the rule was not respected',1,'Right. Pedestrians must look both ways before crossing.'],['Cyclist: the rule was respected',0,'This person is on foot, so the role is pedestrian.'],['Passenger: the rule was not respected',0,'Nobody here is in a vehicle. The role is pedestrian.'],['Pedestrian: the rule was respected',0,'Crossing without looking breaks a pedestrian rule.']] },
+  { tag:'Scene 2', q:'A cyclist rides against the traffic.',
+    o:[['Cyclist: the rule was not respected',1,'Right. Cyclists should ride with traffic so drivers expect them.'],['Pedestrian: the rule was respected',0,'The person is riding a bike, so the role is cyclist.'],['Cyclist: the rule was respected',0,'Riding against traffic breaks the rule.'],['Passenger: the rule was not respected',0,'The role is cyclist.']] },
+  { tag:'Scene 3', q:'A passenger is not wearing a seatbelt.',
+    o:[['Passenger: the rule was not respected',1,'Right. Every passenger must wear a seatbelt.'],['Passenger: the rule was respected',0,'Without a seatbelt, the rule was not respected.'],['Pedestrian: the rule was not respected',0,'The person is riding in a vehicle, so the role is passenger.'],['Cyclist: the rule was respected',0,'The role is passenger.']] }
+];
+var MC = [
+  { tag:'Role', q:'Which role does this rule belong to? <i>"Ride with traffic and use hand signals."</i>', label:'Cyclist rule',
+    o:[['Pedestrian',0,'Pedestrians walk. Riding and signaling are cyclist rules.'],['Cyclist',1,'These are cyclist rules: riding with traffic and signaling make a cyclist predictable.'],['Passenger',0,'Passengers do not ride or signal. These are cyclist rules.']] },
+  { tag:'Rule', q:'Which rule helps a <b>passenger</b> protect themselves and others?', label:'Passenger rule',
+    o:[['Sit anywhere, even without a seatbelt',0,'A passenger protects everyone by buckling up.'],['Wear a seatbelt on every ride',1,'A seatbelt holds you in your seat in a sudden stop or crash, and keeps you from hurting others in the car.'],['Talk to the driver constantly',0,'Distracting the driver is unsafe.'],['Open the door before the car stops',0,'Wait until the car has fully stopped.']] },
+  { tag:'Why', q:'Why should pedestrians use the crosswalk and look both ways?', label:'Pedestrian why',
+    o:[['Because it is faster',0,'The reason is safety, not speed.'],['Because drivers expect to see them there and they can check for vehicles',1,'At the crosswalk you are visible and predictable. Looking both ways lets you confirm that vehicles are stopping.'],['Because rules are only for children',0,'Rules protect people of every age.'],['Because crossing anywhere is just as safe',0,'Crossing outside the crosswalk is riskier.']] }
+];
+var SORT = {
+  choices:[{k:'P',label:'🚶 Pedestrian'},{k:'C',label:'🚲 Cyclist'},{k:'S',label:'🚗 Passenger'}],
+  cards:[
+    ['Use the crosswalk','P','Pedestrians cross at the crosswalk, where drivers expect them.'],
+    ['Wear a helmet','C','Helmets protect cyclists from head injuries.'],
+    ['Wear a seatbelt','S','Passengers buckle up on every ride.'],
+    ['Use hand signals','C','Hand signals tell others what a cyclist will do.'],
+    ['Enter and exit on the sidewalk side','S','Passengers stay away from moving traffic by using the sidewalk side.'],
+    ['Walk on the sidewalk','P','The sidewalk keeps pedestrians away from vehicles.']
   ]
 };
+var SC = [
+  { tag:'Pedestrian', q:'You are walking and the walk signal at the corner is off. Your friend calls you from the other side. What do you do?', label:'Pedestrian scenario',
+    o:[['Wait for the walk signal, look both ways, and cross at the crosswalk.',1,'Waiting keeps you visible and predictable.'],['Run across quickly before a car comes.',0,'Running across a street with traffic is risky, because drivers may not see you or stop in time.'],['Cross between parked cars to save time.',0,'Parked cars hide you from drivers. Use the crosswalk.']] },
+  { tag:'Cyclist', q:'You are cycling and want to turn at the next corner. What do you do?', label:'Cyclist scenario',
+    o:[['Turn suddenly without looking.',0,'Others cannot anticipate a sudden turn, and a collision becomes likely.'],['Check for traffic, signal your turn with your hand, and turn when it is safe.',1,'Signaling and checking make your move predictable and protect everyone around you.'],['Stop in the middle of the road and wave.',0,'Stopping in the lane without warning creates a new danger.']] },
+  { tag:'Passenger', q:'You are a passenger and the car has arrived at school. The street is on your left and the sidewalk is on your right. What do you do?', label:'Passenger scenario',
+    o:[['Open the street-side door right away.',0,'Opening a door into the traffic lane is dangerous for you and for passing cyclists and vehicles.'],['Wait until the car has fully stopped, check for traffic, and exit on the sidewalk side.',1,'Exiting on the sidewalk side keeps you away from moving traffic.'],['Climb out through the window.',0,'Always use the door, on the sidewalk side, after the car has fully stopped.']] }
+];
+var SEQ = [
+  { t:'Describe the situation', hint:'Start with the facts: what happened and who was involved.', why:'Always begin by describing what happened.' },
+  { t:'Identify the role', hint:'Decide whether the person is a pedestrian, cyclist or passenger.', why:'The role tells you which rules apply.' },
+  { t:'Name the rule that applies', hint:'Now connect the role to the safety rule.', why:'Name the exact rule for that role.' },
+  { t:'Decide: was the rule respected?', hint:'Compare what happened with the rule.', why:'You can judge only after you know the rule.' },
+  { t:'State the consequence', hint:'Explain what could happen if the rule is not respected.', why:'Consequences show why the rule exists.' },
+  { t:'Show the safe way', hint:'The last step proposes how to act safely.', why:'End with the safe behavior, as in the role-play.' }
+];
+var SPOT = [
+  { case:'<b>Case A – Pedestrian:</b> Noah gets off the bus and runs across the road behind it to catch up with a friend.',
+    q1:['Which rule did Noah not respect?',[['Use the crosswalk and look both ways before crossing',1,'Noah crossed away from a crosswalk without looking.'],['Wear a helmet',0,'Helmets are a cyclist rule.'],['Wear a seatbelt',0,'Seatbelts are a passenger rule.']],'Case A: rule broken'],
+    q2:['What could happen?',[['Vehicles passing the bus cannot see him, so he could be hit',1,'The bus hides pedestrians from drivers who cannot stop in time.'],['Nothing, because the bus protects him',0,'The bus hides him from other drivers, which makes it more dangerous.'],['He will arrive safely because he is fast',0,'Speed does not protect a pedestrian.']],'Case A: consequence'] },
+  { case:'<b>Case B – Cyclist:</b> Tomás rides on the left side, against the traffic, "so he can see the cars coming."',
+    q1:['Which rule did Tomás not respect?',[['Ride with traffic',1,'Cyclists should ride in the same direction as traffic.'],['Use the crosswalk',0,'The crosswalk is a pedestrian rule.'],['Enter and exit on the sidewalk side',0,'That is a passenger rule.']],'Case B: rule broken'],
+    q2:['What could happen?',[['Drivers do not expect him from that direction, so a head-on collision is more likely',1,'Predictability is what keeps cyclists safe.'],['He will be safer because he sees the cars',0,'Seeing the cars does not help if the drivers do not see him.'],['Nothing, because bikes are slow',0,'Even slow bikes can cause serious crashes.']],'Case B: consequence'] },
+  { case:'<b>Case C – Passenger:</b> Carla arrives at school and gets out of the car on the traffic side without looking.',
+    q1:['Which rule did Carla not respect?',[['Enter and exit on the sidewalk side',1,'Passengers should exit on the side away from moving traffic.'],['Ride with traffic',0,'That is a cyclist rule.'],['Walk on the sidewalk',0,'That is a pedestrian rule, but Carla\'s error was how she exited the car.']],'Case C: rule broken'],
+    q2:['What could happen?',[['A passing vehicle or cyclist could hit the opened door or hit her',1,'Opening a door into traffic is dangerous for everyone.'],['Nothing, because she is quick',0,'Speed does not remove the danger.'],['The driver will have to wait longer',0,'The real danger is being hit, not waiting.']],'Case C: consequence'] }
+];
+var TF = [
+  { type:'tf', tag:'True or False', q:'A cyclist should ride against the traffic so they can see the cars coming.', a:false, label:'Ride with traffic',
+    e:'Cyclists should ride with traffic: drivers expect vehicles to come from that direction, so they are more likely to see you.' },
+  { type:'tf', tag:'True or False', q:'A passenger should avoid distracting the driver.', a:true, label:'Do not distract the driver',
+    e:'The driver needs full attention to keep everyone in the car and on the road safe.' },
+  { type:'fill', tag:'Fill in the blank', q:'A cyclist should always wear a ______ to protect the head.', ok:/^(a |the )?(bicycle |bike )?helmets?$/i, show:'helmet', label:'Helmet',
+    e:'A helmet reduces the risk of serious head injury if you fall or crash.' },
+  { type:'fill', tag:'Fill in the blank', q:'Before crossing the street, a pedestrian should look ______ ways.', ok:/^(both|two|all|left and right|right and left)( ways)?$/i, show:'both', label:'Look both ways',
+    e:'Looking both ways lets you check for vehicles coming from either direction.' }
+];
+var SIM = [
+  { story:'🌅 <b>Morning.</b> Mateo is late for the bus. A marked crosswalk is 20 meters away, but he could cut across the street between two parked cars.', tag:'Pedestrian', q:'What should Mateo do?', label:'Mateo: crossing',
+    o:[['Walk to the crosswalk and cross there, even though it takes a little longer.',1,'The crosswalk makes him visible and predictable.'],['Cut across between the parked cars to save time.',0,'Drivers cannot see him between parked cars.'],['Run diagonally across the street.',0,'Running outside the crosswalk is risky.']] },
+  { story:'🚗 <b>After school.</b> Mateo gets into his aunt\'s car. She starts the engine.', tag:'Passenger', q:'What should Mateo do?', label:'Mateo: seatbelt',
+    o:[['Buckle up before the car moves, and keep the conversation calm.',1,'Buckling up before moving protects him and the others in the car.'],['Buckle up later, when the car reaches the main road.',0,'A seatbelt must be on before the car moves.'],['Skip it, since the trip is short.',0,'Short trips can still end in a sudden stop.']] },
+  { story:'🚲 <b>Afternoon.</b> Mateo wants to ride his bike to the park with his helmet in his backpack.', tag:'Cyclist', q:'What should Mateo do?', label:'Mateo: helmet',
+    o:[['Put on the helmet, fasten the strap, and ride with traffic.',1,'A well-fitted helmet protects his head on every ride.'],['Carry the helmet and wear it only on the busy road.',0,'The helmet protects only when it is on his head.'],['Leave it, since the park is close.',0,'Short rides can end in falls too.']] },
+  { story:'🚦 <b>At the corner.</b> Mateo\'s friend says, "Let\'s cross now, the cars will stop." The pedestrian signal is red.', tag:'Respect', q:'What should Mateo do?', label:'Mateo: leading by example',
+    o:[['Wait, and kindly explain that waiting protects both of them.',1,'Respecting the rule and encouraging others shows responsibility and leadership.'],['Cross anyway, because his friend wants to.',0,'Peer pressure is not a reason to break a safety rule.'],['Cross but tell his friend to go first.',0,'This still breaks the rule and adds risk.']] }
+];
+var SYN = {
+  q:'Which rule, from any of the three roles, do you think is most often broken in our community?',
+  o:[['Pedestrian: use the crosswalk / look both ways','Walking outside the crosswalk and crossing without looking is very common. It matters because drivers cannot always see or stop for people who cross unexpectedly.'],
+     ['Cyclist: wear a helmet / ride with traffic / use signals','Cycling rules are often skipped on short rides. They matter because helmets and predictable riding greatly reduce serious injuries.'],
+     ['Passenger: wear a seatbelt / do not distract the driver','Skipping the seatbelt on short trips is a common habit. It matters because a sudden stop can happen anywhere, and an unbuckled passenger can hurt others too.']]
+};
+var COM = {
+  roles:{
+    Pedestrian:['use the crosswalk','look both ways before crossing','walk on the sidewalk'],
+    Cyclist:['wear my helmet','ride with traffic','use hand signals'],
+    Passenger:['wear my seatbelt','not distract the driver','enter and exit on the sidewalk side']
+  },
+  when:['on my way to school every day this week','every time I ride or walk this week','on every trip this week, including short ones']
+};
 
-/* ---------- helpers ---------- */
+/* ====================== HELPERS ====================== */
 function $(s,r){ return (r||document).querySelector(s); }
 function $$(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
 function el(tag,cls,html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
 function setFb(box,kind,html){ box.className='fb show '+kind; box.innerHTML=html; }
+function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 
 var slides=$$('.slide'), deck=$('#deck'), idx=0;
-var results={};      // id -> true/false (once answered)
-var total=0;         // number of scored questions
-var groups={mc:[],sc:[],tf:[]};
+var items={};        // id -> {group,label,max,score|null,scored}
+var order=[];        // registration order
 
-/* ---------- slide 1: roles ---------- */
-(function(){
-  var wrap=$('#roles');
-  ROLES.forEach(function(r){
-    var b=el('button','role');
-    b.type='button'; b.setAttribute('aria-expanded','false');
-    b.innerHTML='<span class="ico">'+r.ico+'</span><span class="nm">'+r.nm+'</span><span class="tap">Tap to see the rules</span>'+
-      '<span class="more"><ul>'+r.rules.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><b>Why it protects:</b> '+r.why+'</span>';
+function reg(id,group,label,max,scored){ items[id]={group:group,label:label,max:max,score:null,scored:scored!==false}; order.push(id); }
+function finish(id,score){ items[id].score=score; updateNav(); }
+function itemsIn(g){ return order.filter(function(id){ return items[id].group===g; }); }
+function doneIn(g){ return itemsIn(g).filter(function(id){ return items[id].score!==null; }).length; }
+
+/* ====================== COMPONENTS ====================== */
+function mkReveal(mount,list,withIcon){
+  mount.innerHTML='';
+  list.forEach(function(r){
+    var b=el('button',withIcon?'role':'rv'); b.type='button'; b.setAttribute('aria-expanded','false');
+    if(withIcon){
+      b.innerHTML='<span class="ico">'+r.ico+'</span><span class="nm">'+r.nm+'</span><span class="tap">Tap to see the rules</span>'+
+        '<span class="more"><ul>'+r.rules.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul><b>Why it protects:</b> '+r.why+'</span>';
+    } else {
+      b.innerHTML='<span class="nm">'+r.nm+'</span><span class="tap">Think, then tap to reveal</span><span class="more">'+r.a+'</span>';
+    }
     b.addEventListener('click',function(){ b.setAttribute('aria-expanded', b.getAttribute('aria-expanded')==='true'?'false':'true'); });
-    wrap.appendChild(b);
+    mount.appendChild(b);
   });
-})();
-
-/* ---------- slide 2: stepper ---------- */
-var shown=0;
-(function(){
-  var list=$('#steps'), items=STEPS.map(function(s){
-    var li=el('li','step'+(s[2]?' fin':''),'<b class="t">'+s[0]+'</b>'+s[1]); list.appendChild(li); return li; });
-  var nx=$('#stepNext'), all=$('#stepAll'), rs=$('#stepReset'), st=$('#stepStatus');
-  function paint(){
-    items.forEach(function(li,i){ li.classList.toggle('show',i<shown); });
-    nx.disabled=shown>=items.length; st.textContent=shown+' of '+items.length+' steps shown';
-  }
-  nx.addEventListener('click',function(){ if(shown<items.length) shown++; paint(); items[shown-1].scrollIntoView({block:'nearest',behavior:'smooth'}); });
-  all.addEventListener('click',function(){ shown=items.length; paint(); });
-  rs.addEventListener('click',function(){ shown=0; paint(); });
-  window.__resetSteps=function(){ shown=0; paint(); };
-  paint();
-})();
-
-/* ---------- exercises ---------- */
-function buildExercises(){
-  groups={mc:[],sc:[],tf:[]}; results={}; total=0;
-  ['mc','sc','tf'].forEach(function(g){ $('#q-'+g).innerHTML=''; });
-
-  QS.mc.forEach(function(q,i){ buildChoice('mc',q,'mc'+i, q.o.map(function(t,j){ return {t:t,ok:j===q.a,fb:j===q.a?q.e:q.w}; }), i); });
-  QS.sc.forEach(function(q,i){ buildChoice('sc',q,'sc'+i, q.o.map(function(x){ return {t:x[0],ok:!!x[1],fb:x[2]}; }), i); });
-  QS.tf.forEach(function(q,i){ if(q.type==='tf') buildTF(q,'tf'+i,i); else buildFill(q,'tf'+i,i); });
 }
-function register(group,id,label){ groups[group].push(id); total++; results[id]=null; labels[id]=label; }
-var labels={};
 
-function afterAnswer(){ updateNav(); }
+function mkStepper(mount,steps){
+  mount.innerHTML='';
+  var shown=0, list=el('ol','steps');
+  var lis=steps.map(function(s){ var li=el('li','step'+(s[2]?' fin':''),'<b class="t">'+s[0]+'</b>'+s[1]); list.appendChild(li); return li; });
+  var nx=el('button','btn teal','Show next step'), all=el('button','btn ghost','Show all'), rs=el('button','btn ghost','Hide steps'), st=el('span','small');
+  nx.type=all.type=rs.type='button'; st.setAttribute('aria-live','polite');
+  function paint(){ lis.forEach(function(li,i){ li.classList.toggle('show',i<shown); }); nx.disabled=shown>=lis.length; st.textContent=shown+' of '+lis.length+' steps shown'; }
+  nx.addEventListener('click',function(){ if(shown<lis.length) shown++; paint(); lis[shown-1].scrollIntoView({block:'nearest',behavior:'smooth'}); });
+  all.addEventListener('click',function(){ shown=lis.length; paint(); });
+  rs.addEventListener('click',function(){ shown=0; paint(); });
+  mount.appendChild(el('div','row')); mount.firstChild.style.marginBottom='10px';
+  [nx,all,rs,st].forEach(function(x){ mount.firstChild.appendChild(x); });
+  mount.appendChild(list); paint();
+}
 
-function buildChoice(group,q,id,opts,i){
-  register(group,id,q.label);
+/* single choice question. opts: [text, ok, feedback]. scored:false => neutral */
+function mkChoice(mount,group,id,q,num,scored,onDone){
+  reg(id,group,q.label||q.tag,1,scored);
   var block=el('div','qblock'), fb=el('div','fb'); fb.setAttribute('aria-live','polite');
-  block.appendChild(el('div','qtext','<span class="qtag">'+q.tag+'</span>'+(i+1)+'. '+q.q));
-  var btns=opts.map(function(o){
-    var b=el('button','opt'); b.type='button'; b.textContent=o.t;
+  block.appendChild(el('div','qtext','<span class="qtag">'+q.tag+'</span>'+(num?num+'. ':'')+q.q));
+  var btns=q.o.map(function(o){
+    var b=el('button','opt'); b.type='button'; b.textContent=o[0];
     b.addEventListener('click',function(){
-      if(results[id]!==null) return;                 // locked: no double scoring
-      results[id]=o.ok;
+      if(items[id].score!==null) return;                       // locked: no double scoring
       btns.forEach(function(x){ x.disabled=true; });
-      if(o.ok){ b.classList.add('good'); setFb(fb,'good','✓ <b>Correct!</b> '+o.fb); }
+      var ok=!!o[1];
+      if(scored===false){ b.classList.add('pick'); setFb(fb,'info','💡 '+o[2]); }
+      else if(ok){ b.classList.add('good'); setFb(fb,'good','✓ <b>Correct!</b> '+o[2]); }
       else{
         b.classList.add('bad','shake');
-        var right=opts.findIndex(function(z){return z.ok;}); btns[right].classList.add('good');
-        setFb(fb,'bad','✗ <b>Not quite.</b> '+o.fb+' The best answer is highlighted in green.');
+        for(var k=0;k<q.o.length;k++) if(q.o[k][1]) btns[k].classList.add('good');
+        setFb(fb,'bad','✗ <b>Not quite.</b> '+o[2]+' The best answer is highlighted in green.');
       }
-      btns.forEach(function(x){ if(!x.classList.contains('good')&&!x.classList.contains('bad')) x.classList.add('dim'); });
-      afterAnswer();
+      btns.forEach(function(x){ if(!/good|bad|pick/.test(x.className)) x.classList.add('dim'); });
+      finish(id, ok?1:0);
+      if(onDone) onDone();
     });
     block.appendChild(b); return b;
   });
-  block.appendChild(fb); $('#q-'+group).appendChild(block);
+  block.appendChild(fb); mount.appendChild(block); return block;
 }
 
-function buildTF(q,id,i){
-  register('tf',id,q.label);
+function mkTF(mount,group,id,q,num){
+  reg(id,group,q.label,1,true);
   var block=el('div','qblock'), fb=el('div','fb'), row=el('div','tf'); fb.setAttribute('aria-live','polite');
-  block.appendChild(el('div','qtext','<span class="qtag">'+q.tag+'</span>'+(i+1)+'. '+q.q));
+  block.appendChild(el('div','qtext','<span class="qtag">'+q.tag+'</span>'+num+'. '+q.q));
   var btns=[true,false].map(function(v){
     var b=el('button','opt'); b.type='button'; b.textContent=v?'True':'False';
     b.addEventListener('click',function(){
-      if(results[id]!==null) return;
-      var ok=(v===q.a); results[id]=ok;
-      btns.forEach(function(x){ x.disabled=true; });
+      if(items[id].score!==null) return;
+      var ok=(v===q.a); btns.forEach(function(x){ x.disabled=true; });
       if(ok){ b.classList.add('good'); setFb(fb,'good','✓ <b>Correct!</b> '+q.e); }
       else{ b.classList.add('bad','shake'); btns[q.a?0:1].classList.add('good'); setFb(fb,'bad','✗ <b>Not quite.</b> The statement is '+(q.a?'true':'false')+'. '+q.e); }
-      afterAnswer();
+      finish(id, ok?1:0);
     });
     row.appendChild(b); return b;
   });
-  block.appendChild(row); block.appendChild(fb); $('#q-tf').appendChild(block);
+  block.appendChild(row); block.appendChild(fb); mount.appendChild(block);
 }
 
-function buildFill(q,id,i){
-  register('tf',id,q.label);
+function mkFill(mount,group,id,q,num){
+  reg(id,group,q.label,1,true);
   var block=el('div','qblock'), fb=el('div','fb'); fb.setAttribute('aria-live','polite');
-  block.appendChild(el('div','qtext','<span class="qtag">'+q.tag+'</span>'+(i+1)+'. '+q.q));
-  var wrap=el('div','fill'), inp=el('input'); inp.type='text'; inp.placeholder='Type your answer'; inp.setAttribute('aria-label','Your answer for question '+(i+1)); inp.autocomplete='off';
-  var go=el('button','btn teal'); go.type='button'; go.textContent='Check';
+  block.appendChild(el('div','qtext','<span class="qtag">'+q.tag+'</span>'+num+'. '+q.q));
+  var wrap=el('div','fill'), inp=el('input'); inp.type='text'; inp.placeholder='Type your answer'; inp.setAttribute('aria-label','Your answer for question '+num); inp.autocomplete='off';
+  var go=el('button','btn teal','Check'); go.type='button';
   function submit(){
-    if(results[id]!==null) return;
+    if(items[id].score!==null) return;
     var v=inp.value.trim();
-    if(!v){ setFb(fb,'bad','Type an answer first, then press Check.'); return; }
-    var ok=q.ok.test(v); results[id]=ok; inp.disabled=true; go.disabled=true;
+    if(!v){ setFb(fb,'info','Type an answer first, then press Check.'); return; }
+    var ok=q.ok.test(v); inp.disabled=true; go.disabled=true;
     if(ok){ inp.classList.add('good'); setFb(fb,'good','✓ <b>Correct!</b> '+q.e); }
     else{ inp.classList.add('bad','shake'); setFb(fb,'bad','✗ <b>Not quite.</b> The answer is “<b>'+q.show+'</b>”. '+q.e); }
-    afterAnswer();
+    finish(id, ok?1:0);
   }
   go.addEventListener('click',submit);
   inp.addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); submit(); } });
   wrap.appendChild(inp); wrap.appendChild(go);
-  block.appendChild(wrap); block.appendChild(fb); $('#q-tf').appendChild(block);
+  block.appendChild(wrap); block.appendChild(fb); mount.appendChild(block);
 }
 
-/* ---------- navigation ---------- */
+/* card sorting: one item, score = number right */
+function mkSort(mount,group,id,label,cfg){
+  var cards=shuffle(cfg.cards), n=cards.length, i=0, right=0;
+  reg(id,group,label,n,true);
+  var count=el('p','small'), card=el('div','sortcard'), row=el('div','row'), fb=el('div','fb'); fb.setAttribute('aria-live','polite');
+  var btns=cfg.choices.map(function(c){ var b=el('button','btn',c.label); b.type='button'; row.appendChild(b); return b; });
+  function paint(){
+    if(i>=n){ card.textContent='Finished!'; count.textContent=''; btns.forEach(function(b){ b.disabled=true; }); return; }
+    card.textContent=cards[i][0]; count.textContent='Card '+(i+1)+' of '+n;
+  }
+  btns.forEach(function(b,j){
+    b.addEventListener('click',function(){
+      if(i>=n) return;
+      var c=cards[i], ok=(c[1]===cfg.choices[j].k); if(ok) right++;
+      var msg=(ok?'✓ <b>Correct.</b> ':'✗ <b>Not quite.</b> ')+c[2];
+      i++;
+      if(i>=n){ paint(); setFb(fb,right===n?'good':'info',msg+' — You got <b>'+right+' of '+n+'</b> right.'); finish(id,right); }
+      else { setFb(fb,ok?'good':'bad',msg); paint(); }
+    });
+  });
+  mount.appendChild(count); mount.appendChild(card); mount.appendChild(row); mount.appendChild(fb); paint();
+}
+
+/* sequence: one item, score = steps placed without a mistake */
+function mkSeq(mount,group,id,label,seq){
+  var n=seq.length, next=0, mistakes=0;
+  reg(id,group,label,n,true);
+  var slots=seq.map(function(_,k){ return el('div','slot'+(k===0?' next':''),'<small>Step '+(k+1)+'</small><span>?</span>'); });
+  var fb=el('div','fb'); fb.setAttribute('aria-live','polite');
+  var pool=shuffle(seq.map(function(s,k){ return {t:s.t,i:k}; }));
+  while(n>1 && pool.every(function(p,k){ return p.i===k; })) pool=shuffle(pool);
+  var poolEl=el('div','pool');
+  pool.forEach(function(p){
+    var b=el('button','opt',p.t); b.type='button';
+    b.addEventListener('click',function(){
+      if(b.disabled||items[id].score!==null) return;
+      if(p.i===next){
+        b.disabled=true; b.style.display='none';
+        slots[next].classList.remove('next'); slots[next].classList.add('filled'); slots[next].lastChild.textContent=p.t;
+        setFb(fb,'good','✓ <b>Yes!</b> '+seq[next].why); next++;
+        if(next<n) slots[next].classList.add('next');
+        else { setFb(fb,'good','🎉 <b>Complete!</b> '+(mistakes? mistakes+' mistake'+(mistakes>1?'s':'')+' along the way.':'No mistakes.')+' '+seq[n-1].why); finish(id,Math.max(0,n-mistakes)); }
+      } else {
+        mistakes++; b.classList.add('bad','shake'); setTimeout(function(){ b.classList.remove('bad','shake'); },600);
+        setFb(fb,'bad','Not yet. Hint for step '+(next+1)+': '+seq[next].hint);
+      }
+    });
+    poolEl.appendChild(b);
+  });
+  mount.appendChild(el('div','slots')); slots.forEach(function(s){ mount.lastChild.appendChild(s); });
+  mount.appendChild(el('p','small','Tap the step that belongs in the next empty box.')); mount.appendChild(poolEl); mount.appendChild(fb);
+}
+
+/* ====================== BUILD ALL ====================== */
+function buildAll(){
+  items={}; order=[];
+  mkReveal($('#roles'),ROLES,true);
+  mkReveal($('#why'),WHY,false);
+  mkStepper($('#m-ex1'),EX1); mkStepper($('#m-ex2'),EX2); mkStepper($('#m-ex3'),EX3);
+  ['warm','mc','sort','sc','seq','spot','tf','sim','syn','com'].forEach(function(g){ var m=$('#m-'+g); if(m) m.innerHTML=''; });
+
+  WARM.forEach(function(q,i){ mkChoice($('#m-warm'),'warm','warm'+i,q,i+1,false); });
+  MC.forEach(function(q,i){ mkChoice($('#m-mc'),'mc','mc'+i,q,i+1,true); });
+  mkSort($('#m-sort'),'sort','sort','Sort rules by role',SORT);
+  SC.forEach(function(q,i){ mkChoice($('#m-sc'),'sc','sc'+i,q,i+1,true); });
+  mkSeq($('#m-seq'),'seq','seq','Case Response order',SEQ);
+  var n=0;
+  SPOT.forEach(function(c,i){
+    var box=el('div','qblock'); box.appendChild(el('div','case',c.case)); $('#m-spot').appendChild(box);
+    var m1=el('div','qs'), m2=el('div','qs'); box.appendChild(m1); box.appendChild(m2);
+    mkChoice(m1,'spot','spotA'+i,{tag:'Rule',q:c.q1[0],label:c.q1[2],o:c.q1[1]},++n,true);
+    mkChoice(m2,'spot','spotB'+i,{tag:'Consequence',q:c.q2[0],label:c.q2[2],o:c.q2[1]},++n,true);
+  });
+  TF.forEach(function(q,i){ if(q.type==='tf') mkTF($('#m-tf'),'tf','tf'+i,q,i+1); else mkFill($('#m-tf'),'tf','tf'+i,q,i+1); });
+
+  /* simulation: reveal one moment at a time */
+  var blocks=[];
+  SIM.forEach(function(q,i){
+    var wrap=el('div','qblock'); wrap.appendChild(el('div','story',q.story)); var m=el('div'); wrap.appendChild(m);
+    var b=mkChoice(m,'sim','sim'+i,{tag:q.tag,q:q.q,label:q.label,o:q.o},i+1,true,function(){ if(blocks[i+1]) { blocks[i+1].style.display=''; blocks[i+1].scrollIntoView({block:'nearest',behavior:'smooth'}); } });
+    blocks.push(wrap); if(i>0) wrap.style.display='none'; $('#m-sim').appendChild(wrap);
+  });
+
+  /* synthesis (unscored) */
+  mkChoice($('#m-syn'),'syn','syn',{tag:'Think',label:'Synthesis',q:SYN.q,o:SYN.o.map(function(x){ return [x[0],1,x[1]+' <br><b>In your notebook:</b> write two or three sentences explaining why this rule matters.']; })},0,false);
+
+  buildCommit($('#m-com'));
+}
+
+function buildCommit(mount){
+  reg('com','com','Commitment',1,false);
+  var wrap=el('div','builder');
+  function sel(label,opts){
+    var d=el('div'); d.appendChild(el('label',null,label)); var s=el('select'); s.appendChild(new Option('— choose —',''));
+    opts.forEach(function(o){ s.appendChild(new Option(o,o)); }); d.appendChild(s); wrap.appendChild(d); return s;
+  }
+  var sRole=sel('1. My role',Object.keys(COM.roles));
+  var sRule=sel('2. The rule I will respect',[]); sRule.disabled=true;
+  var sWhen=sel('3. When I will practice it',COM.when);
+  var out=el('div'); out.setAttribute('aria-live','polite');
+  sRole.addEventListener('change',function(){
+    sRule.innerHTML=''; sRule.appendChild(new Option('— choose —',''));
+    if(sRole.value){ COM.roles[sRole.value].forEach(function(r){ sRule.appendChild(new Option(r,r)); }); sRule.disabled=false; } else sRule.disabled=true;
+    update();
+  });
+  [sRule,sWhen].forEach(function(s){ s.addEventListener('change',update); });
+  function update(){
+    out.innerHTML='';
+    if(sRole.value&&sRule.value&&sWhen.value){
+      var role=sRole.value.toLowerCase();
+      var text='As a '+role+', I will '+sRule.value+' '+sWhen.value+'.';
+      out.appendChild(el('div','pledge','“'+text+'”'));
+      out.appendChild(el('ul','checks','<li><b>✓</b> <b style="color:inherit">Specific:</b> it names one rule for one role.</li><li><b>✓</b> <b style="color:inherit">Realistic:</b> it is something you can really do.</li><li><b>✓</b> <b style="color:inherit">Observable:</b> others could see whether you did it.</li>'));
+      out.appendChild(el('div','box w','<b>Now write it in your notebook</b> (or on a paper sheet), in your own words. You can add why the rule protects you and others.'));
+      if(items.com.score===null) finish('com',1);
+    }
+  }
+  mount.appendChild(wrap); mount.appendChild(out);
+}
+
+/* ====================== NAVIGATION ====================== */
 function groupOf(i){ return slides[i].getAttribute('data-group'); }
-function answeredIn(g){ return groups[g].filter(function(id){ return results[id]!==null; }).length; }
-function slideDone(i){ var g=groupOf(i); return !g || answeredIn(g)===groups[g].length; }
+function slideDone(i){ var g=groupOf(i); return !g || doneIn(g)===itemsIn(g).length; }
+function minutesLeft(from){ var t=0; for(var i=from;i<slides.length;i++) t+=+slides[i].getAttribute('data-min')||0; return t; }
 
 function updateNav(){
   var last=slides.length-1, g=groupOf(idx);
   $('#prev').disabled=(idx===0);
   $('#next').style.visibility=(idx===last)?'hidden':'visible';
-  var ok=slideDone(idx);
-  $('#next').disabled=!ok;
-  $('#hint').textContent = g ? (ok ? 'All questions answered. You can continue.' : 'Answer all questions to continue ('+answeredIn(g)+' of '+groups[g].length+' answered).') : '';
+  var ok=slideDone(idx); $('#next').disabled=!ok;
+  $('#hint').textContent = g ? (ok ? 'Done! You can continue.' : 'Complete this activity to continue ('+doneIn(g)+' of '+itemsIn(g).length+' done).') : '';
 }
 function show(n,back){
   idx=n; deck.classList.toggle('back',!!back);
   slides.forEach(function(s,i){ s.classList.toggle('active',i===n); });
   $('#plabel').textContent='Slide '+(n+1)+' of '+slides.length;
   $('#ptitle').textContent=slides[n].getAttribute('data-title');
+  var left=minutesLeft(n); $('#ptime').textContent = n===slides.length-1 ? 'Activity complete' : 'About '+left+' min left';
   $('#pfill').style.width=((n+1)/slides.length*100)+'%';
   $('#pb').setAttribute('aria-valuenow',n+1);
   if(n===slides.length-1) renderSummary();
@@ -437,37 +719,34 @@ function show(n,back){
 $('#next').addEventListener('click',function(){ if(idx<slides.length-1 && slideDone(idx)) show(idx+1,false); });
 $('#prev').addEventListener('click',function(){ if(idx>0) show(idx-1,true); });
 document.addEventListener('keydown',function(e){
-  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA') return;
+  var t=e.target.tagName; if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT') return;
   if(e.key==='ArrowRight' && !$('#next').disabled && idx<slides.length-1) show(idx+1,false);
   if(e.key==='ArrowLeft' && idx>0) show(idx-1,true);
 });
 
-/* ---------- summary ---------- */
+/* ====================== SUMMARY ====================== */
 function renderSummary(){
-  var score=0, ids=Object.keys(results);
-  ids.forEach(function(id){ if(results[id]===true) score++; });
-  var pct=Math.round(score/total*100);
+  var score=0,total=0, brk=$('#brk'); brk.innerHTML='';
+  order.forEach(function(id){
+    var it=items[id]; if(!it.scored) return;
+    var s=it.score||0; score+=s; total+=it.max;
+    var cls=s===it.max?'ok':(s===0?'no':'part');
+    brk.appendChild(el('div',cls,'<span>'+it.label+'</span><b>'+(s===it.max?'✓ ':s===0?'✗ ':'◐ ')+s+'/'+it.max+'</b>'));
+  });
+  var pct=total?Math.round(score/total*100):0;
   $('#scoreText').textContent='Score: '+score+' out of '+total;
   $('#pct').textContent=pct+'%'; $('#ring').style.setProperty('--p',pct);
-  var msg = pct===100 ? '🌟 Perfect score! You know the rules for every role, and you can explain why they protect you and others. Keep modeling safe behavior.'
-          : pct>=80 ? '👏 Great job! You understand the rules for pedestrians, cyclists and passengers. Review the questions you missed to make it even stronger.'
-          : pct>=60 ? '👍 Good effort! You have the basics. Use “Review my answers” to read the explanations, then try again.'
-          : '💪 Keep practicing! Re-read the rules for each role on Slide 1, study the guided example, and restart the activity.';
-  $('#scoreMsg').textContent=msg;
-  var brk=$('#brk'); brk.innerHTML='';
-  ids.forEach(function(id){
-    var ok=results[id]===true;
-    brk.appendChild(el('div',ok?'ok':'no','<b>'+(ok?'✓':'✗')+'</b> '+labels[id]));
-  });
+  $('#scoreMsg').textContent = pct===100 ? '🌟 Perfect score! You know the rules for every role, and you can explain why they protect you and others. Keep modeling safe behavior.'
+    : pct>=80 ? '👏 Great job! You understand the rules for pedestrians, cyclists and passengers. Review the items you missed to make it even stronger.'
+    : pct>=60 ? '👍 Good effort! You have the basics. Use “Review my answers” to read the explanations, then try again.'
+    : '💪 Keep practicing! Re-read the rules for each role, study the guided examples, and restart the activity.';
 }
-$('#reviewBtn').addEventListener('click',function(){ show(2,true); });
-$('#restartBtn').addEventListener('click',function(){
-  buildExercises(); window.__resetSteps();
-  $$('.role').forEach(function(r){ r.setAttribute('aria-expanded','false'); });
-  show(0,true);
+$('#reviewBtn').addEventListener('click',function(){
+  for(var i=0;i<slides.length;i++) if(slides[i].hasAttribute('data-review')){ show(i,true); return; }
 });
+$('#restartBtn').addEventListener('click',function(){ buildAll(); show(0,true); });
 
-buildExercises();
+buildAll();
 show(0,false);
 })();
 </script>
