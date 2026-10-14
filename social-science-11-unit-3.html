@@ -166,6 +166,47 @@ textarea{width:100%;min-height:110px;border:2px solid var(--line);border-radius:
 .summary{display:none;text-align:center;padding:22px}
 .summary.show{display:block}
 .summary .big{font-size:2.4rem;font-weight:900;color:var(--blue)}
+
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}
+.chain span{background:var(--sky);border-radius:8px;padding:5px 10px}
+.chain b{color:var(--terra)}
+.venn{display:grid;gap:0;grid-template-columns:1fr 1.1fr 1fr;margin:8px 0}
+.vn{padding:12px 16px;font-size:.86rem;border:2px solid var(--blue)}
+.vn h4{margin-bottom:.3em}
+.vn.a{background:var(--sky);border-radius:50px 0 0 50px / 40px 0 0 40px}
+.vn.c{background:var(--gold-soft);border-left:0;border-right:0}
+.vn.b{background:var(--green-soft);border-color:var(--green);border-radius:0 50px 50px 0 / 0 40px 40px 0}
+.vn.c{border-color:var(--gold)}
+@media (max-width:760px){.venn{grid-template-columns:1fr}.vn.a,.vn.b{border-radius:12px}.vn.c{border:2px solid var(--gold);border-radius:12px;margin:6px 0}}
+.rf,.cmp{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.rf>div{border-radius:12px;padding:12px 16px;font-size:.9rem}
+.roots{background:var(--terra-soft)}.fruits{background:var(--green-soft)}
+.cmp>div{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--terra);border-radius:10px;padding:10px 16px;font-size:.9rem}
+.cmp>div:nth-child(2){border-top-color:var(--blue)}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) 28px;gap:10px;align-items:center;margin-bottom:8px;font-size:.88rem}
+@media (max-width:640px){.mrow{grid-template-columns:1fr 28px}.mrow .l{grid-column:1/3}}
+select{width:100%;font:inherit;font-size:.85rem;padding:7px 8px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+select.right{border-color:var(--good);background:var(--good-soft)}select.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.mark{font-weight:900;text-align:center}
+.srow{padding:10px 0;border-top:1px dashed var(--line)}
+.srow:first-of-type{border-top:0}
+.srow p{margin:0 0 6px;font-size:.9rem}
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cat{border:2px solid var(--line);background:var(--bg);border-radius:999px;padding:4px 12px;font-size:.8rem;font-weight:700}
+.cat:hover:not(:disabled){border-color:var(--blue)}
+.cat.right{background:var(--good-soft);border-color:var(--good)}.cat.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.srow .note{font-size:.8rem;margin-top:4px}
+.ord{list-style:none;margin:0 0 10px;padding:0}
+.ord li{display:flex;gap:8px;align-items:center;background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:8px 10px;margin-bottom:6px;font-size:.88rem}
+.ord li span{flex:1}
+.ord li.right{background:var(--good-soft);border-color:var(--good)}.ord li.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.ord button{border:1px solid var(--line);background:var(--surface);border-radius:6px;width:30px;height:30px}
+.qmap{width:100%;max-width:560px;height:auto;display:block;margin:0 auto 8px;background:var(--sky);border-radius:12px;border:1px solid var(--line)}
+.qmap path.d{fill:#cdd5dc;stroke:#fff;stroke-width:1.4;cursor:pointer}
+.qmap path.d:hover{fill:var(--gold)}
+.qmap path.d.right{fill:#2e9f64}.qmap path.d.wrong{fill:#d6422b}
+.qmap.done path.d{cursor:default}
+.qmap.done path.d:hover:not(.right):not(.wrong){fill:#cdd5dc}
 footer{margin-top:40px;background:var(--blue-deep);color:#cfe0f5;font-size:.82rem;text-align:center}
 footer .wrap{padding:18px 16px}
 .sr{position:absolute;left:-9999px}
@@ -232,6 +273,7 @@ footer .wrap{padding:18px 16px}
     <h4 style="margin-top:18px">The French Revolution (1789)</h4>
     <p>The French people overthrew the absolute monarchy and the privileges of nobles and clergy. The <b>Declaration of the Rights of Man and of the Citizen</b> proclaimed liberty, equality and national sovereignty.</p>
     <div class="quote">"Men are born and remain free and equal in rights."<cite>Declaration of the Rights of Man and of the Citizen, 1789, Article 1</cite></div>
+    <div class="key"><b>Sapere aude</b> ("Dare to know"): Immanuel Kant used this motto in 1784 to define the Enlightenment as people daring to use their own reason instead of accepting authority without question. Reason challenged absolute power and became the intellectual engine of the revolutions.</div>
     <h4>How the ideas reached Latin America</h4>
     <ul class="tight">
       <li>Educated <b>criollos</b> (American-born people of Spanish descent) read Enlightenment works and resented colonial rules that gave top posts to Spain-born officials.</li>
@@ -239,6 +281,16 @@ footer .wrap{padding:18px 16px}
       <li>Other models: the independence of the United States (1776) and the Haitian Revolution (1791–1804), the first successful uprising of enslaved people.</li>
       <li>In 1808 Napoleon invaded Spain. The crown's authority collapsed, and local juntas began claiming that sovereignty returned to the people.</li>
     </ul>
+    <h4>From ideas (causes) to events (effects)</h4>
+    <div class="chain">
+      <span>Locke &amp; natural rights</span><b>→</b><span>U.S. independence, 1776</span><b>→</b><span>Rousseau &amp; Montesquieu</span><b>→</b><span>French Revolution, 1789</span><b>→</b><span>Texts and translations cross the Atlantic</span><b>→</b><span>Juntas and independence wars, 1808–1826</span>
+    </div>
+    <h4 style="margin-top:16px">Venn diagram: Enlightenment and the French Revolution vs. American emancipation</h4>
+    <div class="venn">
+      <div class="vn a"><h4>Mainly Europe</h4><ul class="tight"><li><b>Political:</b> challenge to absolute monarchy and divine right</li><li><b>Economic:</b> a rising bourgeoisie wants free enterprise</li><li><b>Social:</b> end of privileges of nobles and clergy</li></ul></div>
+      <div class="vn c"><h4>In common</h4><ul class="tight"><li><b>Political:</b> popular sovereignty, republic, written constitution</li><li><b>Economic:</b> freedom of trade and property</li><li><b>Social:</b> liberty and equality before the law</li></ul></div>
+      <div class="vn b"><h4>Mainly America</h4><ul class="tight"><li><b>Political:</b> independence from Spain; criollo-led juntas</li><li><b>Economic:</b> end of colonial trade monopolies</li><li><b>Social:</b> questions of slavery, castes and Indigenous peoples; unity of the new nations</li></ul></div>
+    </div>
     <h4>Simón Bolívar (1783–1830), "El Libertador"</h4>
     <p>Born in Caracas, Bolívar studied under Simón Rodríguez and read Enlightenment authors. After a trip to Europe he promised to free his homeland. He led armies that liberated what are now Venezuela, Colombia, Ecuador, Peru and Bolivia.</p>
     <ul class="tight">
@@ -247,6 +299,11 @@ footer .wrap{padding:18px 16px}
       <li><b>Congress of Panama (1826):</b> his proposal for an alliance of the new republics, the dream of the <b>Patria Grande</b>, a united Latin America.</li>
       <li>He died in 1830, disappointed by the divisions among the new countries, yet his legacy of freedom and unity remains.</li>
     </ul>
+    <h4>Bolívar's routes and the idea of unity</h4>
+    <div class="chain">
+      <span>Caracas</span><b>→</b><span>Angostura (1819)</span><b>→</b><span>Crossing the Andes, Boyacá (1819)</span><b>→</b><span>Carabobo (1821)</span><b>→</b><span>Quito, Pichincha (1822)</span><b>→</b><span>Junín &amp; Ayacucho (1824)</span><b>→</b><span>Bolivia (1825)</span>
+    </div>
+    <p style="margin-top:12px">Bolívar's thought combined <b>freedom</b> (end of colonial rule) with <b>unionism</b> (the new nations should act together). These ideas echo in later thinkers: <b>Rubén Darío</b> promoted the cultural unity of Spanish America, and <b>Augusto C. Sandino</b> defended national sovereignty and the dream of a united Latin America.</p>
     <div class="nic"><b>Nicaraguan connection:</b> Central America declared independence from Spain on 15 September 1821. Bolívar's call for American unity and the ideas of sovereignty later inspired Nicaraguan thinkers such as Rubén Darío and Benjamín Zeledón.</div>
   </div>
 
@@ -275,7 +332,18 @@ footer .wrap{padding:18px 16px}
       <li>In Latin America, thinkers like José Carlos Mariátegui (Peru) adapted Marxism to Indigenous and peasant realities, and it influenced twentieth-century liberation movements.</li>
       <li>It is also debated and criticized: scholars discuss its predictions, its economic theory and the political systems built in its name.</li>
     </ul>
-    <div class="nic"><b>Nicaraguan connection:</b> Questions about inequality, land and who benefits from a country's wealth appear throughout Nicaraguan history. Studying Marxism helps you analyze those debates critically.</div>
+    <h4>Roots and fruits</h4>
+    <div class="rf">
+      <div class="roots"><h4>🌱 Roots (influences)</h4><ul class="tight"><li><b>Hegel:</b> the dialectic, change through contradiction</li><li><b>Feuerbach:</b> a materialist view of human life</li><li><b>French utopian socialism:</b> visions of a fairer society</li><li><b>British political economy:</b> labor, value and capital</li></ul></div>
+      <div class="fruits"><h4>🍎 Fruits (characteristics)</h4><ul class="tight"><li><b>Historical materialism</b></li><li><b>Dialectical materialism</b></li><li><b>Class struggle</b></li><li><b>Surplus value and alienation</b></li></ul></div>
+    </div>
+    <h4 style="margin-top:16px">Impact on inequality and social change</h4>
+    <ul class="tight">
+      <li>Marxism explains inequality as <i>structural</i>: built into how property, work and power are organized, not just individual bad luck.</li>
+      <li>Its critique fed labor unions, socialist parties and reforms such as limits on working hours, labor laws and social security.</li>
+      <li>Debates about wealth gaps and social justice today still use its vocabulary, though scholars disagree on how well it explains or solves inequality.</li>
+    </ul>
+    <div class="nic"><b>Nicaraguan connection:</b> Questions about inequality, land and who benefits from a country's wealth appear throughout Nicaraguan history. In the twentieth century, Marxist ideas were one influence, together with nationalism, Sandino's thought and Christian social teaching, on movements for social justice in Nicaragua. Studying them helps you analyze those debates critically.</div>
   </div>
 
   <!-- Topic 3 -->
@@ -290,6 +358,12 @@ footer .wrap{padding:18px 16px}
       <div class="mini"><h4>José Carlos Mariátegui (Peru)</h4>Linked Marxism with the situation of Indigenous peoples.</div>
       <div class="mini"><h4>Paulo Freire &amp; Enrique Dussel</h4>Pedagogy of the Oppressed and the philosophy of liberation, twentieth century.</div>
     </div>
+    <h4 style="margin-top:18px">Does a Latin American philosophy exist?</h4>
+    <div class="cmp">
+      <div><h4>Leopoldo Zea (Mexico, 1912–2004)</h4><p>Says <b>yes</b>: our philosophy is reflection on our own history and circumstances, and the affirmation of our identity. His philosophy of liberation supports the ideas of dignity and sovereignty.</p></div>
+      <div><h4>Augusto Salazar Bondy (Peru, 1925–1974)</h4><p>In <i>¿Existe una filosofía de nuestra América?</i> (1968) he argues that economic dependence has made our philosophy largely an <b>imitation</b> of foreign thought, and that overcoming domination is the path to an authentic one.</p></div>
+    </div>
+    <div class="quote">"Injértese en nuestras repúblicas el mundo; pero el tronco ha de ser el de nuestras repúblicas."<cite>José Martí, "Nuestra América," 1891 (graft the world onto our republics, but let the trunk be our own)</cite></div>
     <h4 style="margin-top:18px">Rubén Darío (1867–1916)</h4>
     <p>Born in Metapa (today Ciudad Darío), Nicaragua, he became the leading voice of <b>Modernismo</b>, the first Latin American literary movement to influence Spain and the world. He renewed the Spanish language with new rhythms, images and cosmopolitan themes.</p>
     <ul class="tight">
@@ -299,6 +373,8 @@ footer .wrap{padding:18px 16px}
       <li>He died in León, Nicaragua, in 1916; his tomb is in the León Cathedral. He is called the "Prince of Castilian letters."</li>
     </ul>
     <div class="quote">"Eres los Estados Unidos, eres el futuro invasor de la América ingenua que tiene sangre indígena, que aún reza a Jesucristo y aún habla en español."<cite>Rubén Darío, "A Roosevelt," 1904</cite></div>
+    <div class="quote">"Ten cuidado. ¡Vive la América española! Hay mil cachorros sueltos del León Español."<cite>Rubén Darío, "A Roosevelt" (the "cubs of the Spanish Lion" are the young Spanish-American nations)</cite></div>
+    <p>Darío's warning links to the modern Nicaraguan emphasis on anti-imperialism and sovereignty. In class debates, connect his words to the idea of a Christian, Socialist and Solidarity model.</p>
     <div class="nic"><b>Nicaraguan connection:</b> Darío made Nicaragua a literary capital of the Spanish-speaking world. Each year the Rubén Darío International Poetry Festival is held in Granada, and León hosts his museum and tomb.</div>
   </div>
 
@@ -319,6 +395,12 @@ footer .wrap{padding:18px 16px}
       <div class="mini"><h4>Anti-imperialism</h4>He opposed governments kept in power by foreign troops and the loss of national decision-making.</div>
       <div class="mini"><h4>Ethics &amp; patriotism</h4>He refused personal advantage, accepted sacrifice and put the nation before himself.</div>
     </div>
+    <h4 style="margin-top:14px">Formation and the Knox Note</h4>
+    <ul class="tight">
+      <li><b>Formation:</b> he trained as a lawyer. Doctrinal Liberalism, the idea of <b>international law</b> and Darío-style patriotism shaped his conviction that Nicaragua must be master of its own destiny.</li>
+      <li><b>The canal:</b> Zelaya refused to hand over control of a Nicaraguan interoceanic canal on humiliating terms, defending the nation's right to decide about its own resources.</li>
+      <li><b>The Knox Note (December 1909):</b> a U.S. message that condemned Zelaya's government and broke diplomatic relations. It violated Nicaragua's sovereignty and self-determination, and Zelaya resigned that month.</li>
+    </ul>
     <h4 style="margin-top:14px">The 1912 campaign and death</h4>
     <ul class="tight">
       <li>He led the patriotic resistance against the Díaz government and U.S. intervention, and gathered popular support.</li>
@@ -326,7 +408,14 @@ footer .wrap{padding:18px 16px}
       <li>He was captured and executed on <b>4 October 1912</b> in Niquinohomo. He is buried in Catarina.</li>
       <li>In Niquinohomo, a young Augusto C. Sandino witnessed these events. The memory later inspired Sandino's own struggle for sovereignty.</li>
     </ul>
-    <div class="key"><b>Why he matters:</b> Zeledón links the Enlightenment idea of <i>popular sovereignty</i> and Bolívar's dream of free American nations to a concrete Nicaraguan defense of national independence.</div>
+    <h4>Coyotepe, the last letter and Sandino</h4>
+    <ul class="tight">
+      <li><b>Geography:</b> Coyotepe and La Barranca are hills near Masaya that overlook the route toward the capital. Their relief made them a strong position against a larger force.</li>
+      <li><b>The last letter to his wife, Esther:</b> expresses <i>patriotism, sacrifice and honor</i>. He chose not to surrender even though he knew he would probably die.</li>
+      <li><b>A break with tradition:</b> many elites sought foreign backing; Zeledón's ethics placed national sovereignty above any bargain, a moral foundation of Nicaraguan anti-imperialism.</li>
+      <li><b>Sandino:</b> the young Augusto C. Sandino saw Zeledón's body in Niquinohomo. That memory became a political philosophy and later led to the Army in Defense of National Sovereignty.</li>
+    </ul>
+    <div class="key"><b>Why he matters (slogan: sovereignty is not negotiable):</b> Zeledón links the Enlightenment idea of <i>popular sovereignty</i> and Bolívar's dream of free American nations to a concrete Nicaraguan defense of national independence.</div>
     <div class="nic"><b>Nicaraguan connection:</b> This is part of national heritage. Historic sites such as Coyotepe Fortress and the town of Catarina keep his memory alive.</div>
   </div>
 </section>
@@ -388,8 +477,15 @@ footer .wrap{padding:18px 16px}
   <p class="lead">You get feedback right after each answer. Retry as many times as you like; options are shuffled each time.</p>
   <div class="ptabs" role="tablist" aria-label="Practice type">
     <button class="ptab" role="tab" aria-selected="true" data-p="mcq">Concept MCQs</button>
+    <button class="ptab" role="tab" aria-selected="false" data-p="tf">True / False</button>
+    <button class="ptab" role="tab" aria-selected="false" data-p="cloze">Fill in the blank</button>
     <button class="ptab" role="tab" aria-selected="false" data-p="voc">Vocabulary check</button>
-    <button class="ptab" role="tab" aria-selected="false" data-p="ana">Analysis questions</button>
+    <button class="ptab" role="tab" aria-selected="false" data-p="match">Matching</button>
+    <button class="ptab" role="tab" aria-selected="false" data-p="sort">Sort it (Venn &amp; roots)</button>
+    <button class="ptab" role="tab" aria-selected="false" data-p="order">Timeline order</button>
+    <button class="ptab" role="tab" aria-selected="false" data-p="map">Map challenge</button>
+    <button class="ptab" role="tab" aria-selected="false" data-p="src">Source analysis</button>
+    <button class="ptab" role="tab" aria-selected="false" data-p="wr">Written response</button>
   </div>
   <div class="scorebar"><b id="scoreTxt">Score: 0 / 0</b><div class="prog" aria-hidden="true"><i id="progBar"></i></div><span id="progTxt"></span><button class="btn alt" id="resetBtn" type="button">Restart this set</button></div>
   <div id="quiz"></div>
@@ -447,7 +543,12 @@ const VOC=[
  ["Sovereignty","A nation's right to govern itself without outside control."],
  ["Patriotism","Love for and willingness to serve and defend one's homeland."],
  ["Dialectic","A process in which opposing ideas or forces clash and produce change or a new synthesis."],
- ["Intervention","One state's use of force or pressure in the affairs of another, e.g., the 1912 landing of U.S. Marines in Nicaragua."]
+ ["Intervention","One state's use of force or pressure in the affairs of another, e.g., the 1912 landing of U.S. Marines in Nicaragua."],
+ ["Sapere aude","Latin for \"dare to know\"; Kant's motto urging people to use their own reason."],
+ ["Unionism","The idea, central to Bolívar, that the new nations should unite and act together."],
+ ["Self-determination","The right of a people to decide freely its own political status and future."],
+ ["Structural inequality","Unfairness built into the organization of property, work and power, not just individual cases."],
+ ["International law","Rules that govern relations among states, which Zeledón used to defend Nicaragua's sovereignty."]
 ];
 $('#vgrid').innerHTML=VOC.map(([t,d])=>`<button type="button" class="vcard"><div class="t">${esc(t)}</div><div class="d">${esc(d)}</div><div class="hint">Tap to flip</div></button>`).join('');
 $$('.vcard').forEach(c=>c.onclick=()=>c.classList.toggle('open'));
@@ -530,7 +631,7 @@ const MCQ=[
  {q:"Who are the proletariat in Marxist theory?",o:["Owners of factories, mines and large machines","Nobles who inherit large estates","Workers who sell their labor","Officials who administer the state"],a:2,w:"The proletariat sells its labor; the bourgeoisie owns the means of production."},
  {q:"Which context most directly shaped the ideas of Marx and Engels?",o:["The Spanish conquest of the Americas","The invention of the printing press in Europe","The Cold War arms race between two powers","The Industrial Revolution"],a:3,w:"Factory exploitation and urban poverty in 19th-century Europe led them to analyze capitalism."},
  {q:"\"The economic base shapes laws, politics and ideas.\" Which concept does this describe?",o:["Enlightenment natural rights","Historical materialism","Modernismo","Popular sovereignty"],a:1,w:"Historical materialism holds that how people produce their living shapes institutions and ideas."},
- {q:"Which pairing of thinker and work is correct?",o:["Bolívar and Das Kapital","Darío and The Social Contract","Montesquieu and Nuestra América","Rodó and Ariel"],a:3,w:"José Enrique Rodó wrote Ariel (1900). Das Kapital is Marx's, The Social Contract is Rousseau's, and Nuestra América is Martí's."},
+ {q:"Which pairing of thinker and work is correct?",o:["Bolívar and Das Kapital","Darío and The Social Contract","Montesquieu and Nuestra América","Martí and Nuestra América"],a:3,w:"José Martí wrote Nuestra América (1891). Das Kapital is Marx's, and The Social Contract is Rousseau's."},
  {q:"Rubén Darío led which literary movement?",o:["Modernismo","Romanticism","Costumbrismo","Neoclassicism"],a:0,w:"Darío's Azul… (1888) launched Modernismo, which renewed Spanish-language poetry on both sides of the Atlantic."},
  {q:"What is the main message of Darío's poem \"A Roosevelt\"?",o:["Praise for the Panama Canal","A farewell to Spanish colonial rule","A warning about U.S. expansion in Latin America","A love poem to Nicaragua's lakes"],a:2,w:"The poem is addressed to President Theodore Roosevelt and warns against imperial expansion while defending Hispanic identity."},
  {q:"In which town was Rubén Darío born?",o:["León","Granada","Bluefields","Metapa"],a:3,w:"He was born in Metapa in 1867; the town is now Ciudad Darío. He died and is buried in León."},
@@ -541,84 +642,284 @@ const MCQ=[
  {q:"In his Angostura Address (1819) Bolívar argued for...",o:["restoring Spanish monarchy","a strong republic with separated powers","ending all written laws","rule by a council of clergy"],a:1,w:"Bolívar defended a republic with a constitution and divided powers; Gran Colombia was founded the same year."},
  {q:"In which year did Marx and Engels publish The Communist Manifesto?",o:["1789","1848","1867","1917"],a:1,w:"The Manifesto appeared in 1848. 1789 is the French Revolution, 1867 is Das Kapital, and 1917 is the Russian Revolution."},
  {q:"Why is the Haitian Revolution (1791–1804) significant for Latin America?",o:["It founded Gran Colombia","It ended the French monarchy in 1789","It was the first successful uprising of enslaved people","It created the Congress of Panama"],a:2,w:"Haiti showed that enslaved people could win freedom and independence, inspiring and alarming leaders across the Americas."},
- {q:"José Carlos Mariátegui adapted Marxism to the realities of...",o:["Industrial workers in Germany","Colonial planters in Cuba","Church schools in Spain","Indigenous and peasant communities of Peru"],a:3,w:"Mariátegui linked socialism with the situation of Indigenous peoples in the Andes."}
+ {q:"José Carlos Mariátegui adapted Marxism to the realities of...",o:["Industrial workers in Germany","Colonial planters in Cuba","Church schools in Spain","Indigenous and peasant communities of Peru"],a:3,w:"Mariátegui linked socialism with the situation of Indigenous peoples in the Andes."},
+ {q:"Kant's motto \"Sapere aude\" invites people to...",o:["obey tradition without question","use their own reason","wait for royal permission","trust only religious authority"],a:1,w:"\"Dare to know\" urges people to think for themselves instead of accepting authority blindly."},
+ {q:"The 1789 Declaration of the Rights of Man and of the Citizen mainly proclaimed...",o:["liberty, equality and national sovereignty","the divine rights of absolute kings","special privileges for nobles and clergy","trade monopolies for the colonies"],a:0,w:"It declared that people are born free and equal in rights and that sovereignty resides in the nation."},
+ {q:"Bolívar's central political ideal combined independence with...",o:["union of the American republics","rule by a hereditary monarch","independence only for Venezuela","annexation to a foreign empire"],a:0,w:"His unionism envisioned free republics acting together, expressed in Gran Colombia and the Congress of Panama."},
+ {q:"In Marx's dialectic, historical change comes from...",o:["lasting harmony between all social classes","contradictions and conflicts within society","decisions taken only by monarchs and nobles","a slow and conflict-free improvement"],a:1,w:"Marx adapted Hegel's dialectic: tensions between opposing forces, such as classes, drive change."},
+ {q:"Surplus value refers to...",o:["the profit owners keep from workers' unpaid labor","the wages paid for a full day of work","taxes charged on imported goods","savings kept in national banks"],a:0,w:"For Marx, workers create more value than they receive in wages; the owner keeps the difference."},
+ {q:"Which reforms were pushed by movements influenced by Marxist critiques of inequality?",o:["Labor laws, unions and social security","Privileges for nobles and the clergy","Colonial trade monopolies","Tax exemptions for all large estates"],a:0,w:"Workers' movements won rules on working hours, wages and social protection."},
+ {q:"Leopoldo Zea argued that Latin American philosophy...",o:["reflects our own history and affirms our identity","is only a copy of European thought","cannot exist until every country is wealthy","should avoid any discussion of social problems"],a:0,w:"Zea (Mexico) held that our philosophy exists as reflection on our own circumstances."},
+ {q:"Augusto Salazar Bondy argued that philosophy in dependent countries tends to be...",o:["an imitation of foreign thought","fully original and authentic","controlled by Indigenous councils","unaffected by economics"],a:0,w:"For Salazar Bondy (Peru), economic dependence and underdevelopment produce inauthentic, imitative thought."},
+ {q:"José Martí's Nuestra América urges Latin Americans to...",o:["know their own reality and resist domination","copy European governments without any changes","welcome foreign rulers to fix local problems","treat Indigenous peoples as outsiders in their own land"],a:0,w:"Martí called for governments and ideas rooted in the real needs of the American peoples."},
+ {q:"In \"A Roosevelt,\" the \"cachorros del León Español\" are...",o:["young soldiers of Roosevelt's Rough Riders","the Spanish American peoples, still young","wild lions sold to Spanish zoos","Spanish officers sent to command Cuba"],a:1,w:"Darío uses the image to say Hispanic America is alive and ready to defend itself."},
+ {q:"Which influences shaped Zeledón's training and convictions?",o:["Law studies and liberal ideas","Naval academy studies in Spain","Seminary education in Rome","Military school in Washington"],a:0,w:"He trained as a lawyer; doctrinal liberalism, international law and Darío-style patriotism shaped him."},
+ {q:"The Knox Note (1909) was...",o:["a Nicaraguan law claiming ownership of the canal","a treaty giving Nicaragua the Panama Canal","a U.S. message condemning Zelaya's government","a Spanish decree restoring colonial rule"],a:2,w:"Secretary of State Knox's note denounced Zelaya, broke relations and violated Nicaragua's sovereignty."},
+ {q:"Why did Zelaya refuse to give up canal control on humiliating terms?",o:["He defended Nicaragua's right to decide about its resources","He preferred to sell the rights to a Spanish colonial company","He thought a canal would never be possible","He wanted Panama to control the route"],a:0,w:"Zelaya treated the canal as a matter of national sovereignty and self-determination."},
+ {q:"Why were Coyotepe and La Barranca important in 1912?",o:["They overlooked the route to the capital and aided defense","They were old colonial ports on the Pacific coast","They were major coffee markets on the Caribbean coast","They marked the border between Honduras and Nicaragua"],a:0,w:"Their relief gave Zeledón's forces a strong position over the way toward Managua."},
+ {q:"What did the young Sandino witness in Niquinohomo in 1912?",o:["The signing of the Knox Note in Managua","Zeledón's body being carried through the town","A battle between Liberal and Conservative armies in town","The proclamation of Gran Colombia"],a:1,w:"The sight deeply marked Sandino and became the seed of his struggle for sovereignty."},
+ {q:"Zeledón's last letter to his wife Esther shows values such as...",o:["greed, fear and personal revenge","patriotism, sacrifice and honor","neutrality, comfort and wealth","obedience to the commands of foreign officers"],a:1,w:"He expressed patriotism, sacrifice and honor and chose not to surrender."}
 ];
-const ANA=[
- {type:"mc",src:"\"The principle of all sovereignty resides essentially in the nation.\"",cite:"Declaration of the Rights of Man and of the Citizen, 1789, Article 3",
+const TF=[
+ ["\"Sapere aude\" means \"dare to know.\"",true,"Kant used it to describe the Enlightenment as daring to use one's own reason."],
+ ["The Declaration of the Rights of Man and of the Citizen was written by Simón Bolívar.",false,"It was produced in 1789 during the French Revolution, not by Bolívar."],
+ ["Gran Colombia was founded in 1819.",true,"Bolívar's Angostura Address and the creation of Gran Colombia both date from 1819."],
+ ["Marx believed that history is driven mainly by great kings and generals.",false,"Marx stressed class struggle and material conditions, not great leaders."],
+ ["In Marxist theory, the bourgeoisie owns the means of production.",true,"The proletariat sells its labor; the bourgeoisie owns factories, land and machines."],
+ ["Leopoldo Zea was a Peruvian philosopher who argued that Latin American philosophy is an imitation.",false,"Zea was Mexican and defended an authentic philosophy. The Peruvian Salazar Bondy argued about imitation."],
+ ["Rubén Darío wrote \"A Roosevelt\" to praise U.S. expansion in Latin America.",false,"The poem warns about U.S. expansion and defends Hispanic American identity."],
+ ["The Knox Note was issued shortly before Zelaya's resignation in 1909.",true,"The note in December 1909 condemned Zelaya's government, who resigned that same month."],
+ ["In 1912 Benjamín Zeledón fought on the same side as the U.S. Marines.",false,"He fought against the Díaz government and the U.S. intervention."],
+ ["Coyotepe and La Barranca are hills near Masaya.",true,"They overlook the route toward the capital and were Zeledón's last stronghold."],
+ ["Martí's Nuestra América was published in 1891.",true,"Martí's essay urges Latin Americans to know their own reality and resist domination."],
+ ["The Haitian Revolution had no connection to later Latin American independence movements.",false,"It showed that independence and emancipation were possible and influenced debates across the Americas."],
+ ["Marxist critiques of inequality fed labor unions, socialist parties and social reforms.",true,"Movements inspired by these ideas pushed for labor laws, wage rules and social protection."],
+ ["Sandino's struggle had no connection with Zeledón's legacy.",false,"Sandino witnessed Zeledón's death, which became a seed of his philosophy of sovereignty."]
+];
+const CLOZE=[
+ ["Kant summarized the Enlightenment with the motto ___ aude.",["Sapere","Libertas","Veritas","Ratio"],0,"\"Sapere aude\" means \"dare to know.\""],
+ ["Rousseau's idea of ___ sovereignty says political power belongs to the people.",["popular","divine","colonial","hereditary"],0,"Popular sovereignty places authority in the people."],
+ ["Marx called the owners of the means of production the ___.",["bourgeoisie","proletariat","criollos","clergy"],0,"The bourgeoisie owns the means of production; the proletariat sells its labor."],
+ ["Marx and Engels explained change through the ___, in which contradictions clash.",["dialectic","plebiscite","junta","concordat"],0,"The dialectic, inherited from Hegel, sees change arising from contradictions."],
+ ["Rubén Darío's movement, ___, renewed Spanish-language poetry.",["Modernismo","Realismo","Costumbrismo","Positivismo"],0,"Modernismo was launched with Darío's Azul… in 1888."],
+ ["For Salazar Bondy, dependent countries tend to produce philosophy that is an ___ of foreign thought.",["imitation","invention","abolition","expansion"],0,"Dependence leads to imitative, inauthentic thought, in his view."],
+ ["Zeledón made his last stand at Coyotepe and La ___ near Masaya.",["Barranca","Cumbre","Laguna","Pradera"],0,"The hills of Coyotepe and La Barranca overlook the route toward Managua."],
+ ["The 1909 U.S. message condemning Zelaya's government is called the ___ Note.",["Knox","Monroe","Dawes","Hay"],0,"The Knox Note was followed by Zelaya's resignation."]
+];
+const MATCH=[
+ {t:"Match each thinker with the key idea.",p:[["Locke","Natural rights"],["Montesquieu","Separation of powers"],["Rousseau","Popular sovereignty and social contract"],["Kant","Sapere aude: use your own reason"],["Marx","Class struggle"]]},
+ {t:"Match each person with a key work or role.",p:[["Simón Bolívar","Jamaica Letter and Gran Colombia"],["Marx and Engels","The Communist Manifesto"],["José Martí","Nuestra América"],["Rubén Darío","Azul… and \"A Roosevelt\""],["Salazar Bondy","¿Existe una filosofía de nuestra América?"],["Benjamín Zeledón","Defender of Coyotepe and La Barranca"]]},
+ {t:"Match each place with its connection to Unit III.",p:[["Metapa (Ciudad Darío)","Birthplace of Rubén Darío"],["León","Darío's tomb in the Cathedral"],["Masaya (Coyotepe)","Zeledón's last stand, 1912"],["Niquinohomo","Zeledón executed; Sandino's hometown"],["Catarina","Where Zeledón is buried"]]},
+ {t:"Match each date with the event.",p:[["1789","French Revolution begins"],["1815","Jamaica Letter"],["1848","The Communist Manifesto"],["1909","Knox Note and Zelaya's resignation"],["1912","Death of Benjamín Zeledón"]]}
+];
+const SORT=[
+ {t:"Venn diagram: where does each idea belong?",c:["Enlightenment / French Revolution","Latin American emancipation","Both"],i:[
+  ["Authority comes from the people",2],["Criollos resent Spanish-born officials",1],["Separation of powers",2],["Declaration of the Rights of Man (1789)",0],["Bolívar's dream of a united Patria Grande",1],["Reason used to critique absolute monarchy",0],["Struggle against Spanish colonial rule",1],["Liberty and equality before the law",2]]},
+ {t:"Roots and fruits of Marxist philosophy: influence or characteristic?",c:["Root (influence)","Fruit (characteristic)"],i:[
+  ["Hegel's dialectic",0],["British political economy",0],["French utopian socialism",0],["Historical materialism",1],["Class struggle",1],["Surplus value",1],["Dialectical materialism",1]]},
+ {t:"Who said it? Leopoldo Zea, Augusto Salazar Bondy, or both?",c:["Leopoldo Zea","Salazar Bondy","Both"],i:[
+  ["Mexican philosopher",0],["Peruvian philosopher",1],["Argues dependence has produced imitation",1],["Philosophy should affirm our own history and identity",0],["Concerned with the liberation of Latin America",2]]}
+];
+const ORDER=[
+ {t:"Order these events from earliest to latest (use ↑ and ↓).",e:[["1762","Rousseau publishes The Social Contract"],["1789","French Revolution begins"],["1808","Napoleon invades Spain"],["1815","Bolívar writes the Jamaica Letter"],["1819","Angostura Address and Gran Colombia"],["1826","Congress of Panama"]]},
+ {t:"Order these Nicaraguan and regional events from earliest to latest.",e:[["1821","Central America declares independence"],["1867","Rubén Darío is born"],["1893","Zelaya's Liberal Revolution"],["1909","Knox Note; Zelaya resigns"],["1912","Zeledón dies at Masaya"],["1916","Rubén Darío dies in León"]]}
+];
+const MAPQ=[
+ {q:"Tap the department where Zeledón made his last stand at Coyotepe and La Barranca.",a:"Masaya",w:"Coyotepe and La Barranca are hills at Masaya, overlooking the route toward the capital."},
+ {q:"Tap the department where Rubén Darío's tomb lies in the Cathedral.",a:"León",w:"Darío died in León in 1916 and is buried in its Cathedral."},
+ {q:"Tap the department that contains Ciudad Darío (Metapa), where Darío was born.",a:"Matagalpa",w:"Metapa, now Ciudad Darío, is in Matagalpa department."},
+ {q:"Tap the department that holds the capital, Managua, seat of Zelaya's government.",a:"Managua",w:"Managua is the capital; the Knox Note and the crisis of 1909 played out around it."}
+];
+const SRC=[
+ {src:"\"The principle of all sovereignty resides essentially in the nation.\"",cite:"Declaration of the Rights of Man and of the Citizen, 1789, Article 3",
   q:"How could Latin American criollos use this idea against Spanish rule?",
   o:["Power comes from the people, so a distant king lacks automatic authority","Colonies must obey the Spanish crown until the king personally agrees to set them free","Only nobles and clergy may decide how a nation is governed","Sovereignty belongs to whoever commands the strongest army"],a:0,
   w:"Popular or national sovereignty challenges the claim that a monarch rules by birth or divine right, giving independence movements a principle to appeal to."},
- {type:"mc",src:"\"The history of all hitherto existing society is the history of class struggles.\"",cite:"Marx and Engels, The Communist Manifesto, 1848",
+ {src:"\"The history of all hitherto existing society is the history of class struggles.\"",cite:"Marx and Engels, The Communist Manifesto, 1848",
   q:"Which statement best interprets this claim?",
   o:["Great leaders alone decide the direction of history in every era","Religious belief is the only real cause of wars","Wealth has no effect on how a society is organized","Class conflict over wealth and power drives change"],a:3,
   w:"Marx saw conflict between owners and workers (and earlier groups such as lords and serfs) as the engine of historical change."},
- {type:"mc",src:"\"Eres los Estados Unidos, eres el futuro invasor de la América ingenua que tiene sangre indígena...\"",cite:"Rubén Darío, \"A Roosevelt,\" 1904",
+ {src:"\"Eres los Estados Unidos, eres el futuro invasor de la América ingenua que tiene sangre indígena...\"",cite:"Rubén Darío, \"A Roosevelt,\" 1904",
   q:"What does this passage reveal about Darío's view?",
   o:["He hopes that Latin America will one day merge with the United States","He fears foreign domination and defends Latin American identity","He praises colonial rulers for protecting Indigenous peoples","He argues that poetry should avoid politics and history"],a:1,
   w:"Darío uses poetry to warn about expanding U.S. power and to affirm Hispanic and Indigenous heritage, an anti-imperialist stance."},
- {type:"mc",src:"Fact: In 1912 U.S. Marines landed in Nicaragua at the request of President Adolfo Díaz, and Benjamín Zeledón resisted until his execution on 4 October.",cite:"Historical summary",
+ {src:"Fact: In 1912 U.S. Marines landed in Nicaragua at the request of President Adolfo Díaz, and Benjamín Zeledón resisted until his execution on 4 October.",cite:"Historical summary",
   q:"Which concept best explains why Zeledón is considered a National Hero?",
   o:["Support for foreign troops to restore order in the country","Neutrality between two rival political parties","Pursuit of personal wealth and power","Defense of national sovereignty against intervention"],a:3,
   w:"Zeledón's willingness to give his life against foreign intervention makes him a symbol of national sovereignty and patriotism."},
- {type:"wr",src:"Bolívar dreamed of a united Latin America (Patria Grande), but the new republics divided into separate countries.",cite:"Prompt",
+ {src:"\"Man is born free, and everywhere he is in chains.\"",cite:"Jean-Jacques Rousseau, The Social Contract, 1762",
+  q:"What criticism of society does this line express?",
+  o:["Chains are needed to keep any society orderly and peaceful","Existing political arrangements limit a freedom people naturally have","Freedom is a gift granted only by monarchs to loyal subjects","People prefer to live without any laws or institutions"],a:1,
+  w:"Rousseau argues that people are naturally free but that unjust political systems restrict that freedom, an idea that inspired revolutionary movements."},
+ {src:"\"Injértese en nuestras repúblicas el mundo; pero el tronco ha de ser el de nuestras repúblicas.\"",cite:"José Martí, \"Nuestra América,\" 1891",
+  q:"What does Martí mean?",
+  o:["Reject every foreign idea completely and stay isolated","Replace local traditions with European customs and laws","Borrow ideas from the world, but build on our own roots","Wait for outside powers to design the new republics"],a:2,
+  w:"Martí invites Latin America to learn from the world while keeping its own reality and history as the trunk."},
+ {src:"\"Ten cuidado. ¡Vive la América española! Hay mil cachorros sueltos del León Español.\"",cite:"Rubén Darío, \"A Roosevelt,\" 1904",
+  q:"What message does Darío send to Roosevelt?",
+  o:["Spain will soon reconquer its former colonies","The United States should become the guardian of Latin America","Lions are the official emblem of Roosevelt's party","Hispanic America is alive and will defend itself"],a:3,
+  w:"The \"cubs of the Spanish Lion\" are the young nations of Spanish America, which Darío says should not be underestimated."},
+ {src:"Scenario: Facing a larger force that included U.S. Marines, Zeledón refused to surrender and wrote to his wife Esther, aware that he would probably die.",cite:"Based on the Unit III curriculum",
+  q:"Which interpretation fits his thinking best?",
+  o:["Resistance was pointless, so he acted out of despair","Sovereignty is not negotiable, even at the cost of his life","He hoped for fame and a future post in government","He believed foreign powers would reward his surrender"],a:1,
+  w:"His decision reflects the principle that national sovereignty and honor cannot be traded away."},
+ {src:"Scenario: A country buys most of its technology and ideas from abroad and rarely produces its own theories.",cite:"Discussion case",
+  q:"Which thesis does this best illustrate?",
+  o:["Zea's view that Latin American philosophy cannot express identity","Salazar Bondy's link between dependence and imitation","Marx's claim that history has no turning points","Bolívar's plan to restore Spanish rule"],a:1,
+  w:"Salazar Bondy argued that economic dependence leads to imitative, inauthentic thought."},
+ {src:"Scenario: After union pressure, a government introduces an eight-hour workday and unemployment insurance.",cite:"Discussion case",
+  q:"Which idea does this scenario most clearly reflect?",
+  o:["Divine right of kings","Separation of powers","Colonial mercantilism","Reforms responding to class inequality and worker movements"],a:3,
+  w:"Marxist critiques of inequality helped inspire labor movements and reforms that reduced exploitation."}
+];
+const WR=[
+ {src:"Bolívar dreamed of a united Latin America (Patria Grande), but the new republics divided into separate countries.",cite:"Prompt",
   q:"Explain how TWO Enlightenment ideas (e.g., natural rights, popular sovereignty, separation of powers) influenced emancipation in Latin America. Use at least two sentences.",
   keys:[["Idea 1: names an Enlightenment idea (natural rights, popular sovereignty, separation of powers, social contract...)",["natural right","sovereign","separation of power","social contract","liberty","equality","reason"]],
         ["Idea 2: names a second idea or the French Revolution",["french revolution","declaration","rights of man","tolerance","separation","republic","constitution"]],
         ["Connection: links ideas to Latin American independence, criollos or colonial rule",["independence","criollo","colon","spain","emancip","latin america","bolívar","bolivar","free"]]],
   model:"Enlightenment thinkers such as Locke and Rousseau argued that people have natural rights and that sovereignty belongs to the people. The French Revolution turned these ideas into the Declaration of the Rights of Man. Latin American criollos used them to argue that Spanish colonial rule was illegitimate, and leaders like Bolívar built new republics on principles such as separation of powers and liberty."},
- {type:"wr",src:"Compare how Rubén Darío and Benjamín Zeledón each expressed resistance to foreign domination.",cite:"Prompt",
+ {src:"Compare how Rubén Darío and Benjamín Zeledón each expressed resistance to foreign domination.",cite:"Prompt",
   q:"Write 2–4 sentences comparing the two. Identify the means each used (poetry or armed resistance) and the shared value behind them.",
   keys:[["Darío: mentions poetry, writing or \"A Roosevelt\"",["poem","poet","poetry","roosevelt","modernis","writ","literat"]],
         ["Zeledón: mentions armed resistance, Coyotepe, 1912 or Marines",["armed","soldier","coyotepe","1912","marines","battle","fought","general","intervention","resist"]],
         ["Shared value: sovereignty, patriotism, identity, anti-imperialism or dignity",["sovereign","patriot","identity","anti-imperial","dignity","independence","homeland","nation"]]],
-  model:"Rubén Darío used poetry, especially \"A Roosevelt,\" to warn Latin America about U.S. expansion and to defend Hispanic identity, while Benjamín Zeledón took up arms in 1912 against U.S. Marines and a government sustained by foreign troops. Their tools were different, but both defended national sovereignty and the dignity of Nicaragua and Latin America."}
+  model:"Rubén Darío used poetry, especially \"A Roosevelt,\" to warn Latin America about U.S. expansion and to defend Hispanic identity, while Benjamín Zeledón took up arms in 1912 against U.S. Marines and a government sustained by foreign troops. Their tools were different, but both defended national sovereignty and the dignity of Nicaragua and Latin America."},
+ {src:"Zelaya refused to hand over canal control on humiliating terms; in 1909 the United States issued the Knox Note and Zelaya resigned.",cite:"Prompt",
+  q:"Argue why Zelaya's refusal can be seen as a defense of national sovereignty, and explain how the Knox Note violated it. Use at least three sentences.",
+  keys:[["Canal: mentions the canal or Nicaragua's resources",["canal","resource","natural"]],
+        ["Sovereignty: mentions sovereignty, self-determination or the right to decide",["sovereign","self-determination","right to decide","decide","autonom","independen"]],
+        ["Knox Note: mentions U.S. pressure, interference, intervention or the note",["knox","pressure","interven","interfer","united states","u.s.","imperial"]]],
+  model:"Zelaya refused to give control of a Nicaraguan canal on humiliating terms because he believed the country had the right to decide about its own resources. The Knox Note, a U.S. message condemning his government, was an act of pressure and interference that denied Nicaragua's self-determination, and it was followed by his resignation in 1909."},
+ {src:"Leopoldo Zea says a Latin American philosophy exists; Augusto Salazar Bondy says dependence has made it an imitation.",cite:"Prompt (class discussion)",
+  q:"Explain both positions and state which one you find more convincing, with one reason. Remember to paraphrase the other view fairly.",
+  keys:[["Zea: authentic, own history, identity, liberation",["zea","own history","identity","authentic","liberation","exists"]],
+        ["Salazar Bondy: dependence, imitation, inauthentic",["salazar","depend","imitat","inauthentic","underdevelop","copy"]],
+        ["Your position: gives an opinion and a reason",["i think","i believe","in my opinion","more convincing","because","reason"]]],
+  model:"Zea holds that Latin American philosophy exists as reflection on our own history and as an affirmation of identity, while Salazar Bondy argues that economic dependence has made it largely an imitation of foreign thought. I find the combination convincing: dependence is a real obstacle, but reflecting on our own reality, as Zea proposes, is how we can overcome it."},
+ {src:"Zeledón's last letter to his wife Esther expresses patriotism, sacrifice and honor, and he refused to surrender.",cite:"Prompt (mini critical essay)",
+  q:"Explain why Zeledón is an ethical, political and patriotic reference for the anti-imperialist struggle. Mention his influences and one link to Sandino. Use at least three sentences.",
+  keys:[["Influences: law, liberalism, international law or Darío-style patriotism",["law","lawyer","liberal","international","dar","patriot"]],
+        ["Ethics and patriotism: sovereignty, sacrifice, honor, did not surrender",["sovereign","sacrific","honor","surrender","ethic","patriot","dignity"]],
+        ["Link to Sandino or later struggle",["sandino","niquinohomo","legacy","later","inspired","army"]]],
+  model:"Zeledón, trained as a lawyer, was shaped by doctrinal liberalism, international law and a Darío-style patriotism that held Nicaragua must be master of its destiny. His refusal to surrender and his sacrifice at Coyotepe made him an ethical and political reference for anti-imperialism. The young Sandino saw his body in Niquinohomo, and that memory became a philosophy of sovereignty that led to the Army in Defense of National Sovereignty."}
 ];
 
 /* ---------- quiz engine ---------- */
-let mode='mcq', answered=0, correct=0, total=0;
+let mode='mcq', ans=0, cor=0, tot=0;
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
 const quiz=$('#quiz'), summary=$('#summary');
+function rec(c,m){ans+=m;cor+=c;updateScore();}
 function updateScore(){
-  $('#scoreTxt').textContent=`Score: ${correct} / ${answered}`;
-  $('#progTxt').textContent=`${answered} of ${total} answered`;
-  $('#progBar').style.width=(total?answered/total*100:0)+'%';
-  if(total&&answered===total){
-    const pct=Math.round(correct/total*100);
-    const msg=pct>=90?'Excellent work!':pct>=70?'Good job. Review the questions you missed.':'Keep studying. Re-read the concepts and try again.';
+  $('#scoreTxt').textContent=`Score: ${cor} / ${ans}`;
+  $('#progTxt').textContent=`${ans} of ${tot} answered`;
+  $('#progBar').style.width=(tot?ans/tot*100:0)+'%';
+  if(tot&&ans===tot){
+    const pct=Math.round(cor/tot*100);
+    const msg=pct>=90?'Excellent work!':pct>=70?'Good job. Review the items you missed.':'Keep studying. Re-read the concepts and try again.';
     summary.className='card summary show';
-    summary.innerHTML=`<div class="big">${pct}%</div><p><b>${correct} of ${total} correct.</b> ${msg}</p><button class="btn" type="button" id="againBtn">Try this set again</button>`;
+    summary.innerHTML=`<div class="big">${pct}%</div><p><b>${cor} of ${tot} correct.</b> ${msg}</p><button class="btn" type="button" id="againBtn">Try this set again</button>`;
     $('#againBtn').onclick=()=>build(mode);
   }
 }
-function mcCard(item,idx,label){
+const box=(label,i,body)=>{const c=document.createElement('div');c.className='q';c.innerHTML=`<div class="num">${label} ${i+1}</div>${body}`;return c;};
+function mcCard(item,idx,label,fixed){
   const card=document.createElement('div');card.className='q';
-  const order=shuffle(item.o.map((t,i)=>({t,i})));
+  const order=(fixed?item.o.map((t,i)=>({t,i})):shuffle(item.o.map((t,i)=>({t,i}))));
   card.innerHTML=`<div class="num">${label} ${idx+1}</div>${item.src?`<div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div>`:''}<p class="stem">${esc(item.q)}</p><div class="opts"></div><div class="fb" role="status"></div>`;
-  const box=$('.opts',card), fb=$('.fb',card);
+  const bx=$('.opts',card), fb=$('.fb',card);
   order.forEach(op=>{
     const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=op.t;
     b.onclick=()=>{
       const ok=op.i===item.a;
-      $$('.opt',box).forEach((x,k)=>{x.disabled=true;if(order[k].i===item.a)x.classList.add('right');});
+      $$('.opt',bx).forEach((x,k)=>{x.disabled=true;if(order[k].i===item.a)x.classList.add('right');});
       if(!ok)b.classList.add('wrong');
       fb.className='fb show '+(ok?'ok':'no');
       fb.innerHTML=`<b class="h">${ok?'✔ Correct!':'✘ Not quite.'}</b>${esc(item.w)}`;
-      answered++;if(ok)correct++;updateScore();
+      rec(ok?1:0,1);
     };
-    box.appendChild(b);
+    bx.appendChild(b);
   });
   return card;
 }
-function vocCards(){
-  return shuffle(VOC).slice(0,12).map((v,i)=>{
+function vocItems(){
+  return shuffle(VOC).slice(0,12).map(v=>{
     const dist=shuffle(VOC.filter(x=>x[0]!==v[0])).slice(0,3).map(x=>x[0]);
-    return mcCard({q:`Which term matches this definition? “${v[1]}”`,o:[v[0],...dist],a:0,w:`“${v[0]}”: ${v[1]}`},i,'Term');
+    return {q:`Which term matches this definition? “${v[1]}”`,o:[v[0],...dist],a:0,w:`“${v[0]}”: ${v[1]}`};
   });
+}
+function matchCard(set,idx){
+  const rights=shuffle(set.p.map(p=>p[1]));
+  const card=box('Matching',idx,`<p class="stem">${esc(set.t)}</p><div class="rows"></div><p style="margin:8px 0 0"><button type="button" class="btn">Check my matches</button></p><div class="fb" role="status"></div>`);
+  const rows=$('.rows',card);
+  set.p.forEach(([l])=>{
+    const r=document.createElement('div');r.className='mrow';
+    r.innerHTML=`<div class="l"><b>${esc(l)}</b></div><select aria-label="${esc(l)}"><option value="">Choose…</option>${rights.map(x=>`<option>${esc(x)}</option>`).join('')}</select><div class="mark"></div>`;
+    rows.appendChild(r);
+  });
+  const btn=$('.btn',card),fb=$('.fb',card);
+  btn.onclick=()=>{
+    const sels=$$('select',card);
+    if(sels.some(x=>!x.value)){fb.className='fb show no';fb.innerHTML='<b class="h">Almost there</b>Choose an answer for every row first.';return;}
+    let n=0;const wrong=[];
+    sels.forEach((se,i)=>{const ok=se.value===set.p[i][1];if(ok)n++;else wrong.push(`<li><b>${esc(set.p[i][0])}</b> → ${esc(set.p[i][1])}</li>`);se.disabled=true;se.classList.add(ok?'right':'wrong');se.nextElementSibling.textContent=ok?'✔':'✘';});
+    btn.disabled=true;
+    const all=n===set.p.length;
+    fb.className='fb show '+(all?'ok':'no');
+    fb.innerHTML=`<b class="h">${n} of ${set.p.length} correct</b>${all?'Great matching!':'Correct matches for the ones you missed:<ul class="check">'+wrong.join('')+'</ul>'}`;
+    rec(n,set.p.length);
+  };
+  card.dataset.w=set.p.length;return card;
+}
+function sortCard(set,idx){
+  const card=box('Sort it',idx,`<p class="stem">${esc(set.t)}</p><div class="rows"></div><div class="fb" role="status"></div>`);
+  const rows=$('.rows',card);let done=0,good=0;
+  set.i.forEach(([txt,c])=>{
+    const r=document.createElement('div');r.className='srow';
+    r.innerHTML=`<p>${esc(txt)}</p><div class="cats">${set.c.map((n,k)=>`<button type="button" class="cat" data-k="${k}">${esc(n)}</button>`).join('')}</div><div class="note"></div>`;
+    $$('.cat',r).forEach(b=>b.onclick=()=>{
+      const k=+b.dataset.k,ok=k===c;
+      $$('.cat',r).forEach(x=>{x.disabled=true;if(+x.dataset.k===c)x.classList.add('right');});
+      if(!ok)b.classList.add('wrong');
+      $('.note',r).innerHTML=ok?'<b style="color:var(--good)">✔ Correct</b>':`<b style="color:var(--bad)">✘ It belongs under “${esc(set.c[c])}”.</b>`;
+      done++;if(ok)good++;rec(ok?1:0,1);
+      if(done===set.i.length){const fb=$('.fb',card);fb.className='fb show '+(good===done?'ok':'no');fb.innerHTML=`<b class="h">${good} of ${done} sorted correctly</b>`;}
+    });
+    rows.appendChild(r);
+  });
+  card.dataset.w=set.i.length;return card;
+}
+function orderCard(set,idx){
+  let arr=set.e.map((e,i)=>({i,t:e[1],y:e[0]}));
+  do{arr=shuffle(arr);}while(arr.every((x,k)=>x.i===k));
+  const card=box('Timeline',idx,`<p class="stem">${esc(set.t)}</p><ul class="ord"></ul><p style="margin:0"><button type="button" class="btn">Check order</button></p><div class="fb" role="status"></div>`);
+  const ul=$('.ord',card),btn=$('.btn',card),fb=$('.fb',card);
+  let locked=false;
+  const draw=()=>{
+    ul.innerHTML='';
+    arr.forEach((x,k)=>{
+      const li=document.createElement('li');
+      li.innerHTML=`<span>${locked?`<b>${esc(x.y)}</b> · `:''}${esc(x.t)}</span>${locked?'':'<button type="button" aria-label="Move up">↑</button><button type="button" aria-label="Move down">↓</button>'}`;
+      if(locked)li.classList.add(x.i===k?'right':'wrong');
+      if(!locked){const [u,d]=$$('button',li);u.onclick=()=>{if(k>0){[arr[k-1],arr[k]]=[arr[k],arr[k-1]];draw();}};d.onclick=()=>{if(k<arr.length-1){[arr[k+1],arr[k]]=[arr[k],arr[k+1]];draw();}};}
+      ul.appendChild(li);
+    });
+  };
+  draw();
+  btn.onclick=()=>{
+    locked=true;btn.disabled=true;const n=arr.filter((x,k)=>x.i===k).length;draw();
+    const ok=n===arr.length;fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML=`<b class="h">${n} of ${arr.length} in the right place</b>${ok?'Perfect timeline!':'Correct order: '+set.e.map(e=>esc(e[0])).join(' → ')}`;
+    rec(n,arr.length);
+  };
+  card.dataset.w=arr.length;return card;
+}
+function mapCard(item,idx){
+  const card=box('Map',idx,`<p class="stem">${esc(item.q)}</p><svg class="qmap" viewBox="-12 -8 495 492" role="group" aria-label="Map of Nicaragua"></svg><div class="fb" role="status"></div>`);
+  const sv=$('svg',card),fb=$('.fb',card);
+  MAP.lakes.forEach(d=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','#7cc0f5');sv.appendChild(p);});
+  const ps=[];
+  MAP.d.forEach(dep=>{
+    const p=document.createElementNS(NS,'path');p.setAttribute('d',dep.d);p.setAttribute('class','d');p.setAttribute('tabindex',0);p.setAttribute('role','button');p.setAttribute('aria-label',dep.n);
+    const ti=document.createElementNS(NS,'title');ti.textContent=dep.n;p.appendChild(ti);
+    const go=()=>{
+      if(sv.classList.contains('done'))return;
+      sv.classList.add('done');const ok=dep.n===item.a;
+      p.classList.add(ok?'right':'wrong');
+      if(!ok)ps.forEach(q=>{if(q.dep===item.a)q.el.classList.add('right');});
+      fb.className='fb show '+(ok?'ok':'no');
+      fb.innerHTML=`<b class="h">${ok?'✔ Correct!':'✘ That was '+esc(dep.n)+'.'}</b>${ok?'':`The answer is <b>${esc(item.a)}</b>. `}${esc(item.w)}`;
+      rec(ok?1:0,1);
+    };
+    p.onclick=go;p.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}};
+    sv.appendChild(p);ps.push({el:p,dep:dep.n});
+  });
+  return card;
 }
 function wrCard(item,idx){
   const card=document.createElement('div');card.className='q';
-  card.innerHTML=`<div class="num">Analysis ${idx+1} · written</div><div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div><p class="stem">${esc(item.q)}</p><textarea aria-label="Your answer" placeholder="Write your answer here..."></textarea><p style="margin:8px 0 0"><button type="button" class="btn">Check my answer</button> <span class="legend" id="wc"></span></p><div class="fb" role="status"></div>`;
-  const ta=$('textarea',card),btn=$('.btn',card),fb=$('.fb',card),wc=$('#wc',card);
+  card.innerHTML=`<div class="num">Written ${idx+1}</div><div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div><p class="stem">${esc(item.q)}</p><textarea aria-label="Your answer" placeholder="Write your answer here..."></textarea><p style="margin:8px 0 0"><button type="button" class="btn">Check my answer</button> <span class="legend wc"></span></p><div class="fb" role="status"></div>`;
+  const ta=$('textarea',card),btn=$('.btn',card),fb=$('.fb',card),wc=$('.wc',card);
   let done=false;
   ta.oninput=()=>{wc.textContent=(ta.value.trim().split(/\s+/).filter(Boolean).length)+' words';};
   btn.onclick=()=>{
@@ -628,17 +929,24 @@ function wrCard(item,idx){
     const n=hits.filter(h=>h[1]).length, ok=n===item.keys.length;
     fb.className='fb show '+(ok?'ok':'no');
     fb.innerHTML=`<b class="h">${n} of ${item.keys.length} key ideas found</b><ul class="check">${hits.map(([l,h])=>`<li>${h?'✔':'✘'} ${esc(l)}</li>`).join('')}</ul><b>Model answer:</b> ${esc(item.model)}<br><small>This keyword check is a guide. Compare meaning with the model and ask your teacher if unsure.</small>`;
-    if(!done){done=true;answered++;if(n>=2)correct++;updateScore();}
+    if(!done){done=true;rec(n>=2?1:0,1);}
   };
   return card;
 }
 function build(m){
-  mode=m;answered=0;correct=0;quiz.innerHTML='';summary.className='card summary';
+  mode=m;ans=0;cor=0;quiz.innerHTML='';summary.className='card summary';
   let cards=[];
-  if(m==='mcq')cards=shuffle(MCQ).slice(0,12).map((it,i)=>mcCard(it,i,'Question'));
-  if(m==='voc')cards=vocCards();
-  if(m==='ana')cards=ANA.map((it,i)=>it.type==='mc'?mcCard(it,i,'Analysis'):wrCard(it,i));
-  total=cards.length;cards.forEach(c=>quiz.appendChild(c));updateScore();
+  if(m==='mcq')cards=shuffle(MCQ).slice(0,12).map((it,i)=>[mcCard(it,i,'Question'),1]);
+  if(m==='tf')cards=shuffle(TF).slice(0,10).map((t,i)=>[mcCard({q:t[0],o:['True','False'],a:t[1]?0:1,w:t[2]},i,'True or false?',true),1]);
+  if(m==='cloze')cards=shuffle(CLOZE).map((c,i)=>[mcCard({q:c[0],o:c[1],a:c[2],w:c[3]},i,'Fill in the blank'),1]);
+  if(m==='voc')cards=vocItems().map((it,i)=>[mcCard(it,i,'Term'),1]);
+  if(m==='match')cards=MATCH.map((x,i)=>{const c=matchCard(x,i);return [c,+c.dataset.w];});
+  if(m==='sort')cards=SORT.map((x,i)=>{const c=sortCard(x,i);return [c,+c.dataset.w];});
+  if(m==='order')cards=ORDER.map((x,i)=>{const c=orderCard(x,i);return [c,+c.dataset.w];});
+  if(m==='map')cards=shuffle(MAPQ).map((x,i)=>[mapCard(x,i),1]);
+  if(m==='src')cards=shuffle(SRC).slice(0,8).map((x,i)=>[mcCard(x,i,'Analysis'),1]);
+  if(m==='wr')cards=shuffle(WR).slice(0,3).map((x,i)=>[wrCard(x,i),1]);
+  tot=cards.reduce((a,c)=>a+c[1],0);cards.forEach(c=>quiz.appendChild(c[0]));updateScore();
 }
 $$('.ptab').forEach(b=>b.onclick=()=>{$$('.ptab').forEach(x=>x.setAttribute('aria-selected',x===b));build(b.dataset.p);});
 $('#resetBtn').onclick=()=>{build(mode);quiz.scrollIntoView({behavior:'smooth',block:'start'});};
