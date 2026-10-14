@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Complex Numbers – Advanced Algebra</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --ink: #2c3a4a;
+    --muted: #66758a;
+    --primary: #4a6fa5;
+    --primary-dark: #35557f;
+    --primary-soft: #e3ebf5;
+    --accent: #8fb3a0;
+    --ok: #3f8f6b;
+    --ok-bg: #e4f3ec;
+    --warn: #b7791f;
+    --warn-bg: #fbf1dc;
+    --bad: #b5524f;
+    --bad-bg: #f8e6e5;
+    --line: #d9e0e8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    letter-spacing: .2px;
+  }
+  header {
+    background: linear-gradient(135deg, #dfe8f3, #eef3f0);
+    border-bottom: 4px solid var(--primary);
+    text-align: center;
+    padding: 2rem 1rem 1.5rem;
+  }
+  header h1 {
+    margin: 0; font-weight: 600;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--primary-dark);
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+  header .class-name { margin: .4rem 0 0; font-size: clamp(1.2rem, 3.5vw, 1.6rem); font-weight: 500; }
+  header .details { margin: .2rem 0 0; color: var(--muted); font-weight: 300; font-size: 1.1rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
+
+  .tabs { display: flex; gap: .5rem; border-bottom: 2px solid var(--line); margin-bottom: 1.2rem; }
+  .tab-btn {
+    font: inherit; font-weight: 500; font-size: 1.05rem;
+    padding: .7rem 1.2rem; border: none; border-radius: 8px 8px 0 0;
+    background: transparent; color: var(--muted); cursor: pointer;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: background .2s, color .2s;
+  }
+  .tab-btn:hover { background: var(--primary-soft); color: var(--primary-dark); }
+  .tab-btn[aria-selected="true"] { background: var(--primary); color: #fff; }
+  .tab-btn:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #9ab7dd; outline-offset: 2px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 1.2rem 1.4rem; margin-bottom: 1.2rem;
+    box-shadow: 0 1px 3px rgba(40,60,90,.05);
+  }
+  h2 { margin: 0 0 .6rem; font-weight: 500; color: var(--primary-dark); font-size: 1.5rem; }
+  h3 { margin: 0 0 .5rem; font-weight: 500; color: var(--primary-dark); font-size: 1.2rem; }
+  p { margin: .5rem 0; font-weight: 300; font-size: 1.05rem; }
+  ul { font-weight: 300; font-size: 1.05rem; padding-left: 1.3rem; }
+  .formula {
+    background: var(--primary-soft); border-left: 5px solid var(--primary);
+    padding: .8rem 1rem; margin: .8rem 0; border-radius: 6px;
+    font-size: 1.3rem; font-weight: 500; text-align: center;
+  }
+  .formula small { display: block; font-size: .95rem; font-weight: 300; color: var(--muted); margin-top: .2rem; }
+  .note { background: var(--warn-bg); border-left: 5px solid var(--warn); padding: .6rem 1rem; border-radius: 6px; }
+  .frac { display: inline-block; text-align: center; vertical-align: middle; margin: 0 .15rem; }
+  .frac span { display: block; padding: 0 .25rem; }
+  .frac span:first-child { border-bottom: 1.5px solid currentColor; }
+  .solution { background: #f7f9fb; border: 1px dashed var(--line); border-radius: 8px; padding: .6rem 1rem; margin-top: .6rem; }
+  .solution p { margin: .25rem 0; }
+  .example-title { color: var(--primary); font-weight: 500; margin-bottom: .2rem; }
+
+  table.data { border-collapse: collapse; margin: .6rem auto; font-weight: 300; }
+  table.data th, table.data td { border: 1px solid var(--line); padding: .3rem .9rem; text-align: center; }
+  table.data th { background: var(--primary-soft); font-weight: 500; }
+  table.data caption { caption-side: top; font-weight: 500; color: var(--primary-dark); padding-bottom: .3rem; }
+  .table-wrap { overflow-x: auto; }
+
+  .scorebar {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .6rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: .8rem 1.2rem; margin-bottom: 1.2rem;
+  }
+  .scorebar strong { color: var(--primary-dark); font-weight: 500; }
+  .progress { flex: 1 1 160px; height: 10px; background: var(--line); border-radius: 6px; overflow: hidden; }
+  .progress div { height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+  .problem .q-num { color: var(--primary); font-weight: 600; letter-spacing: 1px; }
+  .answer-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: .7rem; }
+  .answer-row input[type="text"] {
+    font: inherit; padding: .5rem .8rem; width: 190px;
+    border: 2px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .answer-row input:disabled { background: #eef1f5; }
+  .unit-label { color: var(--muted); font-weight: 300; margin-left: -.2rem; }
+  .options { display: grid; gap: .4rem; margin-top: .6rem; }
+  .options label {
+    display: flex; gap: .6rem; align-items: center; padding: .45rem .8rem;
+    border: 2px solid var(--line); border-radius: 8px; cursor: pointer; font-weight: 300; font-size: 1.05rem;
+    background: #fff; transition: background .15s, border-color .15s;
+  }
+  .options label:hover { background: var(--primary-soft); }
+  .options label.disabled { cursor: default; background: #eef1f5; }
+  .options label.picked-wrong { border-color: var(--bad); background: var(--bad-bg); }
+  .options label.picked-right { border-color: var(--ok); background: var(--ok-bg); }
+  .options input { accent-color: var(--primary); }
+  button.btn {
+    font: inherit; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    background: var(--primary); color: #fff; border: none; border-radius: 8px;
+    padding: .55rem 1.2rem; cursor: pointer; transition: background .2s;
+  }
+  button.btn:hover:not(:disabled) { background: var(--primary-dark); }
+  button.btn:disabled { background: #b8c3d1; cursor: not-allowed; }
+  button.btn.secondary { background: #fff; color: var(--primary-dark); border: 2px solid var(--primary); }
+  button.btn.secondary:hover { background: var(--primary-soft); }
+  .attempts { margin-left: auto; color: var(--muted); font-weight: 300; }
+  .dots { display: inline-flex; gap: 5px; vertical-align: middle; margin-left: .3rem; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 1px solid #6f9783; }
+  .dot.used { background: #d9e0e8; border-color: #b8c3d1; }
+  .feedback { margin-top: .7rem; padding: .6rem 1rem; border-radius: 8px; display: none; font-weight: 400; }
+  .feedback.show { display: block; }
+  .feedback.ok { background: var(--ok-bg); color: #276348; border-left: 5px solid var(--ok); }
+  .feedback.bad { background: var(--bad-bg); color: #8a3b39; border-left: 5px solid var(--bad); }
+  .feedback.hint { background: var(--warn-bg); color: #835a14; border-left: 5px solid var(--warn); }
+  .feedback .sol { font-weight: 300; margin-top: .3rem; }
+  .final { display: none; text-align: center; }
+  .final.show { display: block; }
+  .final h2 { font-size: 1.8rem; }
+  footer { text-align: center; color: var(--muted); font-weight: 300; font-size: .9rem; padding-bottom: 1.5rem; }
+  @media (max-width: 520px) {
+    .tab-btn { padding: .6rem .7rem; font-size: .9rem; flex: 1; }
+    .attempts { margin-left: 0; width: 100%; }
+  }
+  .rad { border-top: 1.5px solid currentColor; padding: 0 2px; margin-left: 1px; }
+  .cycle { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin: .6rem 0; }
+  .cycle div { background: var(--primary-soft); border-radius: 8px; padding: .4rem 1rem; text-align: center; font-weight: 500; }
+  .cycle small { display: block; font-weight: 300; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Lincoln International Academy</h1>
+  <p class="class-name">Advanced Algebra &middot; 11th Grade</p>
+  <p class="details">Teacher: Eduardo Vásquez</p>
+</header>
+
+<main>
+  <div class="tabs" role="tablist" aria-label="Page sections">
+    <button class="tab-btn" role="tab" id="tab-learn" aria-controls="panel-learn" aria-selected="true">Lesson &amp; Examples</button>
+    <button class="tab-btn" role="tab" id="tab-practice" aria-controls="panel-practice" aria-selected="false" tabindex="-1">Practice</button>
+  </div>
+
+  <!-- ============ TAB 1: LESSON ============ -->
+  <section class="panel active" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn">
+    <div class="card">
+      <h2>Complex Numbers</h2>
+      <p>Complex numbers extend the real numbers so that every negative number has a square root. In this lesson you will simplify square roots of negative numbers, find powers of <em>i</em>, and add, subtract, multiply and divide complex numbers.</p>
+      <div class="formula">
+        <em>i</em> = &radic;<span class="rad">&minus;1</span> &nbsp;&nbsp; and &nbsp;&nbsp; <em>i</em>&sup2; = &minus;1
+        <small>A complex number has the form <em>a</em> + <em>bi</em>, where <em>a</em> is the real part and <em>b</em> is the imaginary part.</small>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>1. Simplifying square roots of negative numbers</h3>
+      <p>For a positive number <em>a</em>:</p>
+      <div class="formula">&radic;<span class="rad">&minus;<em>a</em></span> = <em>i</em>&radic;<span class="rad"><em>a</em></span></div>
+      <p>Then simplify the radical by pulling out perfect-square factors, e.g. &radic;<span class="rad">18</span> = &radic;<span class="rad">9&middot;2</span> = 3&radic;<span class="rad">2</span>.</p>
+      <div class="note"><strong>Watch out:</strong> the rule &radic;<span class="rad"><em>a</em></span>&middot;&radic;<span class="rad"><em>b</em></span> = &radic;<span class="rad"><em>ab</em></span> only works when <em>a</em> and <em>b</em> are not negative. Rewrite each square root with <em>i</em> <u>first</u>, then multiply.</div>
+    </div>
+
+    <div class="card">
+      <h3>2. Powers of <em>i</em></h3>
+      <p>The powers of <em>i</em> repeat in a cycle of 4:</p>
+      <div class="cycle">
+        <div><em>i</em>&sup1; = <em>i</em></div>
+        <div><em>i</em>&sup2; = &minus;1</div>
+        <div><em>i</em>&sup3; = &minus;<em>i</em></div>
+        <div><em>i</em>&#8308; = 1</div>
+      </div>
+      <p><strong>Shortcut:</strong> divide the exponent by 4 and use the <strong>remainder</strong>.</p>
+      <ul>
+        <li>Remainder 0 &rarr; 1 &nbsp;&nbsp; Remainder 1 &rarr; <em>i</em> &nbsp;&nbsp; Remainder 2 &rarr; &minus;1 &nbsp;&nbsp; Remainder 3 &rarr; &minus;<em>i</em></li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>3. Operations with complex numbers</h3>
+      <ul>
+        <li><strong>Add / subtract:</strong> combine the real parts and combine the imaginary parts. (<em>a</em> + <em>bi</em>) + (<em>c</em> + <em>di</em>) = (<em>a</em> + <em>c</em>) + (<em>b</em> + <em>d</em>)<em>i</em>. Distribute the minus sign when subtracting.</li>
+        <li><strong>Multiply:</strong> use FOIL / distribution, then replace <em>i</em>&sup2; with &minus;1.</li>
+        <li><strong>Conjugate:</strong> the conjugate of <em>a</em> + <em>bi</em> is <em>a</em> &minus; <em>bi</em>. Their product is a real number: (<em>a</em> + <em>bi</em>)(<em>a</em> &minus; <em>bi</em>) = <em>a</em>&sup2; + <em>b</em>&sup2;.</li>
+        <li><strong>Divide:</strong> multiply the numerator and denominator by the conjugate of the denominator, then write the result as <em>a</em> + <em>bi</em>.</li>
+        <li><strong>Modulus (absolute value):</strong> |<em>a</em> + <em>bi</em>| = &radic;<span class="rad"><em>a</em>&sup2; + <em>b</em>&sup2;</span>.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>4. Quadratic equations with complex solutions</h3>
+      <p>If the discriminant <em>b</em>&sup2; &minus; 4<em>ac</em> is negative, the quadratic formula gives two complex solutions that are conjugates of each other.</p>
+      <div class="formula"><em>x</em> = <span class="frac"><span>&minus;<em>b</em> &plusmn; &radic;<span class="rad"><em>b</em>&sup2; &minus; 4<em>ac</em></span></span><span>2<em>a</em></span></span></div>
+    </div>
+
+    <h2>Worked examples</h2>
+
+    <div class="card">
+      <div class="example-title">Example 1 &mdash; Simplify &radic;<span class="rad">&minus;72</span></div>
+      <div class="solution">
+        <p>&radic;<span class="rad">&minus;72</span> = <em>i</em>&radic;<span class="rad">72</span> = <em>i</em>&radic;<span class="rad">36&middot;2</span> = <strong>6<em>i</em>&radic;<span class="rad">2</span></strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 2 &mdash; Multiply &radic;<span class="rad">&minus;6</span> &middot; &radic;<span class="rad">&minus;24</span></div>
+      <div class="solution">
+        <p>Rewrite with <em>i</em> first: (<em>i</em>&radic;<span class="rad">6</span>)(<em>i</em>&radic;<span class="rad">24</span>) = <em>i</em>&sup2;&radic;<span class="rad">144</span> = (&minus;1)(12) = <strong>&minus;12</strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 3 &mdash; Simplify <em>i</em>&sup2;&sup3;</div>
+      <div class="solution">
+        <p>23 &divide; 4 = 5 remainder 3, so <em>i</em>&sup2;&sup3; = <em>i</em>&sup3; = <strong>&minus;<em>i</em></strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 4 &mdash; Add, subtract and multiply</div>
+      <div class="solution">
+        <p>(6 + 4<em>i</em>) + (&minus;2 + 9<em>i</em>) = <strong>4 + 13<em>i</em></strong></p>
+        <p>(6 + 4<em>i</em>) &minus; (&minus;2 + 9<em>i</em>) = 6 + 2 + (4 &minus; 9)<em>i</em> = <strong>8 &minus; 5<em>i</em></strong></p>
+        <p>(3 + 2<em>i</em>)(1 &minus; 4<em>i</em>) = 3 &minus; 12<em>i</em> + 2<em>i</em> &minus; 8<em>i</em>&sup2; = 3 &minus; 10<em>i</em> + 8 = <strong>11 &minus; 10<em>i</em></strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 5 &mdash; Divide (2 + 3<em>i</em>) &divide; (4 &minus; <em>i</em>)</div>
+      <div class="solution">
+        <p>Multiply top and bottom by the conjugate 4 + <em>i</em>:</p>
+        <p>Numerator: (2 + 3<em>i</em>)(4 + <em>i</em>) = 8 + 2<em>i</em> + 12<em>i</em> + 3<em>i</em>&sup2; = 5 + 14<em>i</em></p>
+        <p>Denominator: (4 &minus; <em>i</em>)(4 + <em>i</em>) = 16 + 1 = 17</p>
+        <p>Result: <strong><span class="frac"><span>5</span><span>17</span></span> + <span class="frac"><span>14</span><span>17</span></span><em>i</em></strong></p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 6 &mdash; Solve <em>x</em>&sup2; + 4<em>x</em> + 13 = 0</div>
+      <div class="solution">
+        <p>Discriminant: 4&sup2; &minus; 4(1)(13) = 16 &minus; 52 = &minus;36</p>
+        <p><em>x</em> = (&minus;4 &plusmn; &radic;<span class="rad">&minus;36</span>)/2 = (&minus;4 &plusmn; 6<em>i</em>)/2 = <strong>&minus;2 &plusmn; 3<em>i</em></strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 2: PRACTICE ============ -->
+  <section class="panel" id="panel-practice" role="tabpanel" aria-labelledby="tab-practice" hidden>
+    <div class="card">
+      <h2>Practice Problems</h2>
+      <p>You have <strong>3 attempts</strong> for each problem and you get feedback right away. For multiple-choice problems, select one answer. For the other problems, type your answer in the form <strong>a + bi</strong> (examples: <code>3 - 4i</code>, <code>-2i</code>, <code>5</code>, <code>1/2 + 5/2i</code>). You may also use decimals.</p>
+    </div>
+
+    <div class="scorebar">
+      <div>Solved: <strong id="solvedCount">0</strong> / <span id="totalCount"></span></div>
+      <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+      <div>Points: <strong id="points">0</strong></div>
+    </div>
+
+    <div id="problems"></div>
+
+    <div class="card final" id="finalCard">
+      <h2>Practice complete!</h2>
+      <p id="finalMsg"></p>
+      <button class="btn secondary" id="resetBtn" type="button">Try again</button>
+    </div>
+  </section>
+</main>
+
+<footer>Lincoln International Academy &middot; Advanced Algebra &middot; Complex numbers</footer>
+
+<script>
+(function () {
+  /* ---------- Tabs ---------- */
+  var tabs = [document.getElementById('tab-learn'), document.getElementById('tab-practice')];
+  function showTab(idx) {
+    tabs.forEach(function (t, i) {
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      var on = i === idx;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      panel.classList.toggle('active', on);
+      panel.hidden = !on;
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showTab(i); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        showTab(n); tabs[n].focus();
+      }
+    });
+  });
+
+  /* ---------- Helpers for math markup ---------- */
+  function R(x) { return '&radic;<span class="rad">' + x + '</span>'; }
+  var I = '<em>i</em>';
+  function P(n) { return I + '<sup>' + n + '</sup>'; }
+
+  /* ---------- Problems ----------
+     mc: { q, opts:[...], ans:index, hint, sol }
+     cx: { q, re, im, hint, sol }   (typed answer a + bi) */
+  var MAX_ATTEMPTS = 3;
+  var problems = [
+    { q: 'Simplify ' + R('&minus;49') + '.',
+      opts: ['7', '7' + I, '&minus;7' + I, '49' + I], ans: 1,
+      hint: 'Write ' + R('&minus;49') + ' = ' + I + R('49') + ', and 49 is a perfect square.',
+      sol: R('&minus;49') + ' = ' + I + R('49') + ' = 7' + I + '.' },
+    { q: 'Simplify ' + R('&minus;18') + '.',
+      opts: ['9' + I + R('2'), '3' + I + R('2'), '3' + R('2'), '2' + I + R('3')], ans: 1,
+      hint: '18 = 9 &middot; 2, and 9 is a perfect square.',
+      sol: R('&minus;18') + ' = ' + I + R('18') + ' = ' + I + R('9&middot;2') + ' = 3' + I + R('2') + '.' },
+    { q: 'Simplify ' + R('&minus;75') + '.',
+      opts: ['5' + I + R('3'), '3' + I + R('5'), '25' + I + R('3'), '5' + R('3')], ans: 0,
+      hint: '75 = 25 &middot; 3.',
+      sol: R('&minus;75') + ' = ' + I + R('25&middot;3') + ' = 5' + I + R('3') + '.' },
+    { q: 'Simplify ' + R('&minus;12') + '.',
+      opts: ['3' + I + R('2'), '6' + I, '2' + I + R('3'), '4' + I + R('3')], ans: 2,
+      hint: '12 = 4 &middot; 3.',
+      sol: R('&minus;12') + ' = ' + I + R('4&middot;3') + ' = 2' + I + R('3') + '.' },
+    { q: 'Simplify ' + R('&minus;98') + '.',
+      opts: ['9' + I + R('2'), '7' + I + R('2'), '2' + I + R('7'), '14' + I], ans: 1,
+      hint: '98 = 49 &middot; 2.',
+      sol: R('&minus;98') + ' = ' + I + R('49&middot;2') + ' = 7' + I + R('2') + '.' },
+    { q: 'Simplify ' + R('&minus;8') + ' &middot; ' + R('&minus;2') + '.',
+      opts: ['4', '&minus;4', '4' + I, '&minus;4' + I], ans: 1,
+      hint: 'Do not use the product rule with negatives. Write each as ' + I + R('...') + ' first, then multiply.',
+      sol: '(2' + I + R('2') + ')(' + I + R('2') + ') = 2' + P(2) + '&middot;2 = 4' + P(2) + ' = &minus;4.' },
+    { q: 'Simplify ' + R('&minus;3') + ' &middot; ' + R('&minus;12') + '. (Enter a number.)',
+      type: 'cx', re: -6, im: 0,
+      hint: '(' + I + R('3') + ')(2' + I + R('3') + ') = 2' + P(2) + '&middot;3.',
+      sol: '(' + I + R('3') + ')(2' + I + R('3') + ') = 2' + P(2) + '&middot;3 = &minus;6.' },
+    { q: 'Write 3 + ' + R('&minus;16') + ' in the form <em>a</em> + <em>bi</em>.',
+      type: 'cx', re: 3, im: 4,
+      hint: R('&minus;16') + ' = ' + I + R('16') + '.',
+      sol: '3 + ' + R('&minus;16') + ' = 3 + 4' + I + '.' },
+    { q: 'Solve <em>x</em>&sup2; + 25 = 0.',
+      opts: ['<em>x</em> = &plusmn;5', '<em>x</em> = &plusmn;5' + I, '<em>x</em> = 5' + I + ' only', 'No solution exists'], ans: 1,
+      hint: '<em>x</em>&sup2; = &minus;25, so <em>x</em> = &plusmn;' + R('&minus;25') + '.',
+      sol: '<em>x</em>&sup2; = &minus;25, so <em>x</em> = &plusmn;5' + I + '.' },
+    { q: 'Solve <em>x</em>&sup2; + 12 = 0.',
+      opts: ['<em>x</em> = &plusmn;2' + R('3'), '<em>x</em> = &plusmn;2' + I + R('3'), '<em>x</em> = &plusmn;3' + I + R('2'), '<em>x</em> = &plusmn;6' + I], ans: 1,
+      hint: '<em>x</em>&sup2; = &minus;12, and ' + R('&minus;12') + ' = 2' + I + R('3') + '.',
+      sol: '<em>x</em>&sup2; = &minus;12, so <em>x</em> = &plusmn;' + R('&minus;12') + ' = &plusmn;2' + I + R('3') + '.' },
+    { q: 'Simplify ' + P(7) + '.',
+      type: 'cx', re: 0, im: -1,
+      hint: '7 &divide; 4 leaves remainder 3. Then ' + P(3) + ' = ?',
+      sol: 'Remainder 3: ' + P(7) + ' = ' + P(3) + ' = &minus;' + I + '.' },
+    { q: 'Simplify ' + P(12) + '.',
+      type: 'cx', re: 1, im: 0,
+      hint: '12 is a multiple of 4.',
+      sol: 'Remainder 0: ' + P(12) + ' = (' + P(4) + ')<sup>3</sup> = 1.' },
+    { q: 'Simplify ' + P(50) + '.',
+      type: 'cx', re: -1, im: 0,
+      hint: '50 &divide; 4 = 12 remainder 2.',
+      sol: 'Remainder 2: ' + P(50) + ' = ' + P(2) + ' = &minus;1.' },
+    { q: 'Simplify ' + P(101) + '.',
+      type: 'cx', re: 0, im: 1,
+      hint: '101 &divide; 4 = 25 remainder 1.',
+      sol: 'Remainder 1: ' + P(101) + ' = ' + I + '.' },
+    { q: 'Simplify 3' + P(6) + ' &minus; 2' + P(3) + '. (Answer in the form <em>a</em> + <em>bi</em>.)',
+      type: 'cx', re: -3, im: 2,
+      hint: P(6) + ' = &minus;1 and ' + P(3) + ' = &minus;' + I + '.',
+      sol: '3(&minus;1) &minus; 2(&minus;' + I + ') = &minus;3 + 2' + I + '.' },
+    { q: 'Simplify ' + P(15) + ' + ' + P(8) + '.',
+      type: 'cx', re: 1, im: -1,
+      hint: '15 has remainder 3 when divided by 4, and 8 has remainder 0.',
+      sol: P(15) + ' = ' + P(3) + ' = &minus;' + I + ' and ' + P(8) + ' = 1, so the sum is 1 &minus; ' + I + '.' },
+    { q: 'Add: (3 + 2' + I + ') + (5 &minus; 7' + I + ').',
+      type: 'cx', re: 8, im: -5,
+      hint: 'Add the real parts, then add the imaginary parts.',
+      sol: '(3 + 5) + (2 &minus; 7)' + I + ' = 8 &minus; 5' + I + '.' },
+    { q: 'Subtract: (4 &minus; 3' + I + ') &minus; (1 + 6' + I + ').',
+      type: 'cx', re: 3, im: -9,
+      hint: 'Distribute the minus sign to both parts of the second number.',
+      sol: '(4 &minus; 1) + (&minus;3 &minus; 6)' + I + ' = 3 &minus; 9' + I + '.' },
+    { q: 'Multiply: (2 + 3' + I + ')(4 &minus; ' + I + ').',
+      type: 'cx', re: 11, im: 10,
+      hint: 'FOIL: 8 &minus; 2' + I + ' + 12' + I + ' &minus; 3' + P(2) + '.',
+      sol: '8 &minus; 2' + I + ' + 12' + I + ' &minus; 3' + P(2) + ' = 8 + 10' + I + ' + 3 = 11 + 10' + I + '.' },
+    { q: 'Multiply: (3 + 4' + I + ')(3 &minus; 4' + I + ').',
+      type: 'cx', re: 25, im: 0,
+      hint: 'These are conjugates: (<em>a</em> + <em>bi</em>)(<em>a</em> &minus; <em>bi</em>) = <em>a</em>&sup2; + <em>b</em>&sup2;.',
+      sol: '9 + 16 = 25.' },
+    { q: 'Simplify: (1 + ' + I + ')&sup2;.',
+      type: 'cx', re: 0, im: 2,
+      hint: 'Expand: 1 + 2' + I + ' + ' + P(2) + '.',
+      sol: '1 + 2' + I + ' + ' + P(2) + ' = 1 + 2' + I + ' &minus; 1 = 2' + I + '.' },
+    { q: 'Simplify: (2 &minus; 3' + I + ')&sup2;.',
+      type: 'cx', re: -5, im: -12,
+      hint: 'Expand: 4 &minus; 12' + I + ' + 9' + P(2) + '.',
+      sol: '4 &minus; 12' + I + ' + 9(&minus;1) = &minus;5 &minus; 12' + I + '.' },
+    { q: 'Multiply: (5 + 2' + I + ')(&minus;1 + 3' + I + ').',
+      type: 'cx', re: -11, im: 13,
+      hint: 'FOIL: &minus;5 + 15' + I + ' &minus; 2' + I + ' + 6' + P(2) + '.',
+      sol: '&minus;5 + 15' + I + ' &minus; 2' + I + ' &minus; 6 = &minus;11 + 13' + I + '.' },
+    { q: 'Divide: 4 &divide; (1 + ' + I + ').',
+      type: 'cx', re: 2, im: -2,
+      hint: 'Multiply top and bottom by the conjugate 1 &minus; ' + I + '.',
+      sol: '4(1 &minus; ' + I + ')/[(1 + ' + I + ')(1 &minus; ' + I + ')] = (4 &minus; 4' + I + ')/2 = 2 &minus; 2' + I + '.' },
+    { q: 'Divide: (7 &minus; ' + I + ') &divide; (1 + ' + I + ').',
+      type: 'cx', re: 3, im: -4,
+      hint: 'Multiply by (1 &minus; ' + I + ')/(1 &minus; ' + I + '). The denominator becomes 2.',
+      sol: '(7 &minus; ' + I + ')(1 &minus; ' + I + ') = 7 &minus; 7' + I + ' &minus; ' + I + ' + ' + P(2) + ' = 6 &minus; 8' + I + '; divided by 2 gives 3 &minus; 4' + I + '.' },
+    { q: 'Divide: (5 + 10' + I + ') &divide; (3 &minus; 4' + I + ').',
+      type: 'cx', re: -1, im: 2,
+      hint: 'Multiply by the conjugate 3 + 4' + I + '. The denominator becomes 9 + 16 = 25.',
+      sol: '(5 + 10' + I + ')(3 + 4' + I + ') = 15 + 20' + I + ' + 30' + I + ' + 40' + P(2) + ' = &minus;25 + 50' + I + '; divided by 25 gives &minus;1 + 2' + I + '.' },
+    { q: 'Divide: (3 + 2' + I + ') &divide; (1 &minus; ' + I + '). (Fractions or decimals are fine.)',
+      type: 'cx', re: 0.5, im: 2.5,
+      hint: 'Multiply by (1 + ' + I + ')/(1 + ' + I + '). Numerator: 3 + 3' + I + ' + 2' + I + ' + 2' + P(2) + '.',
+      sol: 'Numerator = 1 + 5' + I + ', denominator = 2, so the result is 1/2 + (5/2)' + I + '.' },
+    { q: 'What is the conjugate of 6 &minus; 5' + I + '?',
+      type: 'cx', re: 6, im: 5,
+      hint: 'Change the sign of the imaginary part.',
+      sol: 'The conjugate of 6 &minus; 5' + I + ' is 6 + 5' + I + '.' },
+    { q: 'Find |5 &minus; 12' + I + '| (the modulus). (Enter a number.)',
+      type: 'cx', re: 13, im: 0,
+      hint: '|<em>a</em> + <em>bi</em>| = ' + R('<em>a</em>&sup2; + <em>b</em>&sup2;') + '.',
+      sol: R('25 + 144') + ' = ' + R('169') + ' = 13.' },
+    { q: 'Solve <em>x</em>&sup2; &minus; 6<em>x</em> + 13 = 0.',
+      opts: ['<em>x</em> = 3 &plusmn; 2' + I, '<em>x</em> = 3 &plusmn; 4' + I, '<em>x</em> = &minus;3 &plusmn; 2' + I, '<em>x</em> = 6 &plusmn; 2' + I], ans: 0,
+      hint: 'Discriminant: 36 &minus; 52 = &minus;16, so ' + R('&minus;16') + ' = 4' + I + '. Then divide by 2.',
+      sol: '<em>x</em> = (6 &plusmn; ' + R('&minus;16') + ')/2 = (6 &plusmn; 4' + I + ')/2 = 3 &plusmn; 2' + I + '.' }
+  ];
+
+  var state = [];
+  var container = document.getElementById('problems');
+  var solvedEl = document.getElementById('solvedCount');
+  var pointsEl = document.getElementById('points');
+  var barEl = document.getElementById('progressBar');
+  var finalCard = document.getElementById('finalCard');
+  document.getElementById('totalCount').textContent = problems.length;
+
+  /* ---------- Parse a typed complex number (a + bi) ---------- */
+  function num(str) {
+    var m = str.match(/^(\d*\.?\d+)(?:\/(\d*\.?\d+))?$/);
+    if (!m) return NaN;
+    var n = parseFloat(m[1]);
+    if (m[2] !== undefined) { var d = parseFloat(m[2]); if (d === 0) return NaN; n /= d; }
+    return n;
+  }
+  function parseComplex(raw) {
+    var s = raw.replace(/\s+/g, '').replace(/[−–—]/g, '-').replace(/[*·×]/g, '').replace(/I/g, 'i').replace(/,/g, '.');
+    if (!s) return null;
+    var div = 1, m = s.match(/^\((.+)\)\/(\d*\.?\d+)$/);
+    if (m) { s = m[1]; div = parseFloat(m[2]); if (!div) return null; }
+    else if (/^\(.*\)$/.test(s)) s = s.slice(1, -1);
+    var terms = s.split(/(?=[+-])/), re = 0, im = 0;
+    for (var k = 0; k < terms.length; k++) {
+      var t = terms[k];
+      if (!t) return null;
+      var sign = 1;
+      if (t[0] === '+') t = t.slice(1); else if (t[0] === '-') { sign = -1; t = t.slice(1); }
+      var tm, v;
+      if ((tm = t.match(/^(.*)i\/(\d*\.?\d+)$/))) {          // e.g. 5i/2
+        v = tm[1] === '' ? 1 : num(tm[1]); var dd = parseFloat(tm[2]);
+        if (isNaN(v) || !dd) return null;
+        im += sign * v / dd;
+      } else if (t.slice(-1) === 'i') {                        // e.g. 3i, 3/4i, i
+        var body = t.slice(0, -1);
+        v = body === '' ? 1 : num(body);
+        if (isNaN(v)) return null;
+        im += sign * v;
+      } else {                                                 // real part
+        v = num(t);
+        if (isNaN(v)) return null;
+        re += sign * v;
+      }
+    }
+    return { re: re / div, im: im / div };
+  }
+
+  function dots(used) {
+    var h = '';
+    for (var i = 0; i < MAX_ATTEMPTS; i++) h += '<span class="dot' + (i < used ? ' used' : '') + '"></span>';
+    return h;
+  }
+
+  function build() {
+    container.innerHTML = '';
+    state = problems.map(function () { return { used: 0, done: false, correct: false, points: 0 }; });
+    problems.forEach(function (p, i) {
+      var isMC = !!p.opts;
+      var div = document.createElement('div');
+      div.className = 'card problem';
+      var optsHTML = '';
+      if (isMC) {
+        optsHTML = '<div class="options" role="radiogroup" aria-label="Choices for problem ' + (i + 1) + '">' +
+          p.opts.map(function (o, k) {
+            return '<label><input type="radio" name="q' + i + '" value="' + k + '"><span>' + o + '</span></label>';
+          }).join('') + '</div>';
+      }
+      div.innerHTML =
+        '<span class="q-num">PROBLEM ' + (i + 1) + '</span>' +
+        '<p>' + p.q + '</p>' + optsHTML +
+        '<div class="answer-row">' +
+          (isMC ? '' : '<input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Answer to problem ' + (i + 1) + '" placeholder="e.g. 3 - 4i">') +
+          '<button class="btn" type="button">Check</button>' +
+          '<span class="attempts">Attempts left: <span class="dots">' + dots(0) + '</span></span>' +
+        '</div>' +
+        '<div class="feedback" role="status" aria-live="polite"></div>';
+      container.appendChild(div);
+
+      var input = div.querySelector('input[type="text"]');
+      var radios = div.querySelectorAll('input[type="radio"]');
+      var btn = div.querySelector('button');
+      var fb = div.querySelector('.feedback');
+      var dotsEl = div.querySelector('.dots');
+
+      function show(cls, html) { fb.className = 'feedback show ' + cls; fb.innerHTML = html; }
+      function lock() {
+        btn.disabled = true;
+        if (input) input.disabled = true;
+        Array.prototype.forEach.call(radios, function (r) { r.disabled = true; r.parentNode.classList.add('disabled'); });
+      }
+
+      function check() {
+        var st = state[i];
+        if (st.done) return;
+        var ok, picked = null;
+        if (isMC) {
+          Array.prototype.forEach.call(radios, function (r) { if (r.checked) picked = r; });
+          if (!picked) { show('hint', 'Please select an answer first. (This did not use an attempt.)'); return; }
+          ok = parseInt(picked.value, 10) === p.ans;
+        } else {
+          var c = parseComplex(input.value);
+          if (!c) { show('hint', 'Please enter your answer in the form a + bi, e.g. 3 - 4i, 5, -2i or 1/2 + 5/2i. (This did not use an attempt.)'); return; }
+          ok = Math.abs(c.re - p.re) <= 0.005 && Math.abs(c.im - p.im) <= 0.005;
+        }
+        st.used++;
+        dotsEl.innerHTML = dots(st.used);
+        var left = MAX_ATTEMPTS - st.used;
+        if (ok) {
+          st.done = st.correct = true;
+          st.points = MAX_ATTEMPTS - st.used + 1;
+          if (picked) picked.parentNode.classList.add('picked-right');
+          show('ok', '&#10003; Correct! Well done.' + (st.used === 1 ? ' First try!' : '') + '<div class="sol">' + p.sol + '</div>');
+          lock();
+        } else if (left === 0) {
+          st.done = true;
+          if (picked) picked.parentNode.classList.add('picked-wrong');
+          if (isMC) radios[p.ans].parentNode.classList.add('picked-right');
+          show('bad', '&#10007; Not quite. You have used all 3 attempts.<div class="sol"><strong>Solution:</strong> ' + p.sol + '</div>');
+          lock();
+        } else {
+          var msg = '&#10007; Not correct. You have ' + left + ' attempt' + (left > 1 ? 's' : '') + ' left.';
+          if (st.used >= 2) msg += '<div class="sol"><strong>Hint:</strong> ' + p.hint + '</div>';
+          show('bad', msg);
+          if (input) input.select();
+          if (picked) picked.checked = false;
+        }
+        update();
+      }
+      btn.addEventListener('click', check);
+      if (input) input.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
+    });
+    update();
+  }
+
+  function update() {
+    var solved = 0, pts = 0, finished = 0;
+    state.forEach(function (s) {
+      if (s.correct) solved++;
+      if (s.done) finished++;
+      pts += s.points;
+    });
+    solvedEl.textContent = solved;
+    pointsEl.textContent = pts + ' / ' + (problems.length * MAX_ATTEMPTS);
+    barEl.style.width = (finished / problems.length * 100) + '%';
+    if (finished === problems.length) {
+      var pct = Math.round(solved / problems.length * 100);
+      var msg = 'You solved ' + solved + ' of ' + problems.length + ' problems (' + pct + '%) and earned ' + pts + ' points. ';
+      msg += pct === 100 ? 'Excellent work!' : pct >= 70 ? 'Good job! Review the solutions you missed.' : 'Keep practicing — review the lesson and try again.';
+      document.getElementById('finalMsg').textContent = msg;
+      finalCard.classList.add('show');
+    } else {
+      finalCard.classList.remove('show');
+    }
+  }
+
+  document.getElementById('resetBtn').addEventListener('click', function () {
+    build();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  build();
+})();
+</script>
+</body>
+</html>
