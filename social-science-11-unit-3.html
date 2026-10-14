@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Unit III Emancipation Philosophy | 11th Social Science</title>
-<meta name="description" content="Interactive review for 11th grade Social Science, Unit III: Philosophy of Emancipation and the Heroic Legacy. Concepts, map of Nicaragua, and practice with instant feedback.">
+<meta name="description" content="Interactive review for 11th grade Social Science, Unit III: Philosophy of Emancipation and the Heroic Legacy. Four lessons with concepts, a map of Nicaragua, practice with instant feedback, and score summaries.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
@@ -210,6 +210,46 @@ select.right{border-color:var(--good);background:var(--good-soft)}select.wrong{b
 footer{margin-top:40px;background:var(--blue-deep);color:#cfe0f5;font-size:.82rem;text-align:center}
 footer .wrap{padding:18px 16px}
 .sr{position:absolute;left:-9999px}
+.wrap.wide{max-width:1280px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:26px;align-items:start;padding-bottom:10px}
+.mapcol{position:sticky;top:62px;max-height:calc(100vh - 74px);overflow:auto;padding-top:36px}
+.mapcard{padding:14px 16px}
+.mapcard h3{margin-bottom:.2em}
+.mapcard .tg{display:inline-flex;gap:6px;align-items:center;font-size:.78rem;margin-bottom:8px;cursor:pointer}
+.mapcard .info{margin-top:10px;padding:10px 12px;background:var(--sky);border-radius:10px;min-height:0}
+.mapcard .info h4{margin-bottom:.2em}
+.mapcard .info p{margin:0 0 .6em}
+.mapcard .nic{font-size:.8rem}
+.mapcard .chip{font-size:.66rem}
+.pin.dim{opacity:.3}
+.pbtn.dim{opacity:.45}
+@media (max-width:1000px){.layout{grid-template-columns:1fr}.mapcol{position:static;max-height:none;padding-top:0}}
+nav.sticky button{white-space:nowrap;background:transparent;border:0;color:var(--ink);font-size:.88rem;font-weight:700;padding:8px 14px;border-radius:8px}
+nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(--gold-soft);color:var(--blue-deep)}
+:root[data-theme="dark"] nav.sticky button[aria-selected="true"]{color:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) nav.sticky button[aria-selected="true"]{color:var(--gold)}}
+.tabpanel{padding-top:34px}
+.tabpanel[hidden],.lsub[hidden]{display:none}
+.kicker2{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);font-weight:700;margin:0 0 .3rem}
+.lhead h2{margin-bottom:.4em}
+.subnav{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px}
+.subnav button{border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 16px;font-weight:700;font-size:.88rem}
+.subnav button[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+:root[data-theme="dark"] .subnav button[aria-selected="true"]{color:#0a1626}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .subnav button[aria-selected="true"]{color:#0a1626}}
+.goal[role="button"]{cursor:pointer}.goal[role="button"]:hover{border-color:var(--blue)}
+.lcard{display:flex;flex-direction:column;gap:4px;text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);font-size:.88rem}
+.lcard b{color:var(--blue);font-size:1rem}.lcard:hover{border-color:var(--gold)}
+.stbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem}
+.stbl th,.stbl td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+.stbl th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.muted{color:var(--muted)}
+.stot{background:var(--gold-soft);border-left:5px solid var(--gold);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:.92rem}
+.namel{display:block;font-weight:700;font-size:.88rem;margin:8px 0}
+.nameIn{display:block;width:100%;max-width:420px;margin-top:4px;font:inherit;padding:9px 12px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.copyline{background:var(--sky);border-radius:8px;padding:8px 12px;font-size:.88rem;word-break:break-word}
+@media print{header.top,nav.sticky,.mapcol,.subnav,footer,.btn,.theme-btn{display:none!important}.layout{display:block}.tabpanel[hidden]{display:none}}
+
 </style>
 </head>
 <body>
@@ -233,35 +273,70 @@ footer .wrap{padding:18px 16px}
   <div class="zig" aria-hidden="true"></div>
 </header>
 
-<nav class="sticky" aria-label="Sections"><div class="wrap">
-  <a href="#overview">Overview</a><a href="#concepts">Concepts</a><a href="#timeline">Timeline</a><a href="#vocab">Vocabulary</a><a href="#map">Map of Nicaragua</a><a href="#practice">Practice</a>
+<nav class="sticky" id="mainNav" aria-label="Lessons"><div class="wrap wide" role="tablist">
+  <button type="button" role="tab" data-t="home" aria-selected="true">🏠 Home</button>
+  <button type="button" role="tab" data-t="l1" aria-selected="false">Lesson 1</button>
+  <button type="button" role="tab" data-t="l2" aria-selected="false">Lesson 2</button>
+  <button type="button" role="tab" data-t="l3" aria-selected="false">Lesson 3</button>
+  <button type="button" role="tab" data-t="l4" aria-selected="false">Lesson 4</button>
+  <button type="button" role="tab" data-t="sum" aria-selected="false">🏅 My scores</button>
 </div></nav>
 
-<main class="wrap">
+<div class="wrap wide layout">
+<main id="panels">
 
-<section id="overview">
+<section class="tabpanel" id="p-home">
+<div id="overview">
   <h2>What you will learn</h2>
   <p class="lead">Between 1750 and 1912, ideas about freedom, equality and justice crossed oceans and shaped the new nations of Latin America, including Nicaragua. This unit follows those ideas and the people who turned them into action.</p>
   <div class="grid">
-    <div class="card goal"><div class="n">1</div><h4>Enlightenment, French Revolution, Bolívar</h4><p style="font-size:.9rem;margin:0">How new ideas about rights and sovereignty inspired emancipation in Latin America.</p></div>
-    <div class="card goal"><div class="n">2</div><h4>Marxist philosophy</h4><p style="font-size:.9rem;margin:0">Context, influences, characteristics, inequality and social transformation.</p></div>
-    <div class="card goal"><div class="n">3</div><h4>Latin American thought &amp; Rubén Darío</h4><p style="font-size:.9rem;margin:0">Main thinkers and the regional impact of Darío's poetry and ideas.</p></div>
-    <div class="card goal"><div class="n">4</div><h4>Benjamín Zeledón</h4><p style="font-size:.9rem;margin:0">Anti-imperialism, ethics, patriotism and sovereignty in his letters and proclamations.</p></div>
+    <div class="card goal" role="button" tabindex="0" data-goto="l1:study"><div class="n">1</div><h4>Enlightenment, French Revolution, Bolívar</h4><p style="font-size:.9rem;margin:0">How new ideas about rights and sovereignty inspired emancipation in Latin America.</p></div>
+    <div class="card goal" role="button" tabindex="0" data-goto="l2:study"><div class="n">2</div><h4>Marxist philosophy</h4><p style="font-size:.9rem;margin:0">Context, influences, characteristics, inequality and social transformation.</p></div>
+    <div class="card goal" role="button" tabindex="0" data-goto="l3:study"><div class="n">3</div><h4>Latin American thought &amp; Rubén Darío</h4><p style="font-size:.9rem;margin:0">Main thinkers and the regional impact of Darío's poetry and ideas.</p></div>
+    <div class="card goal" role="button" tabindex="0" data-goto="l4:study"><div class="n">4</div><h4>Benjamín Zeledón</h4><p style="font-size:.9rem;margin:0">Anti-imperialism, ethics, patriotism and sovereignty in his letters and proclamations.</p></div>
   </div>
   <div class="key"><b>Skills you will practice:</b> (1) <i>Conceptual</i>, explain how two Enlightenment ideas influenced Latin American emancipation; (2) <i>Procedural</i>, interpret a source and support your reading with quotations; (3) <i>Attitudinal</i>, respect other viewpoints in a philosophical dialogue by paraphrasing a classmate before you respond.</div>
+</div>
+<section style="padding-top:12px"><h2>Lessons</h2>
+  <div class="grid">
+    <button class="lcard" type="button" data-goto="l1:study"><b>Lesson 1</b><span>Enlightenment, French Revolution and Bolívar</span></button>
+    <button class="lcard" type="button" data-goto="l2:study"><b>Lesson 2</b><span>Marxist philosophy</span></button>
+    <button class="lcard" type="button" data-goto="l3:study"><b>Lesson 3</b><span>Latin American thought and Rubén Darío</span></button>
+    <button class="lcard" type="button" data-goto="l4:study"><b>Lesson 4</b><span>Benjamín Zeledón</span></button>
+  </div>
+</section>
+<div id="timeline">
+  <h2>Timeline of ideas and events</h2>
+  <div class="card">
+    <div class="timeline">
+      <div class="tl"><b>1689</b> · Locke's <i>Two Treatises of Government</i> defend natural rights.</div>
+      <div class="tl"><b>1748 / 1762</b> · Montesquieu's <i>Spirit of the Laws</i>; Rousseau's <i>Social Contract</i>.</div>
+      <div class="tl"><b>1776</b> · United States Declaration of Independence.</div>
+      <div class="tl"><b>1789</b> · French Revolution and the Declaration of the Rights of Man.</div>
+      <div class="tl"><b>1791–1804</b> · Haitian Revolution.</div>
+      <div class="tl"><b>1808–1810</b> · Napoleon invades Spain; first juntas in Spanish America.</div>
+      <div class="tl"><b>1815</b> · Bolívar writes the Jamaica Letter.</div>
+      <div class="tl"><b>1819</b> · Angostura Address; Gran Colombia created.</div>
+      <div class="tl nicx"><b>1821</b> · Central America declares independence (15 September).</div>
+      <div class="tl"><b>1826</b> · Congress of Panama. <b>1830</b> · Bolívar dies.</div>
+      <div class="tl"><b>1848</b> · <i>The Communist Manifesto</i>. <b>1867</b> · <i>Das Kapital</i>.</div>
+      <div class="tl nicx"><b>1867</b> · Rubén Darío is born in Metapa. <b>1879</b> · Benjamín Zeledón is born.</div>
+      <div class="tl nicx"><b>1888</b> · <i>Azul…</i> begins Modernismo. <b>1893</b> · Zelaya's Liberal Revolution.</div>
+      <div class="tl nicx"><b>1905</b> · <i>Cantos de vida y esperanza</i>. <b>1909</b> · Zelaya resigns.</div>
+      <div class="tl nicx"><b>1912</b> · U.S. Marines land; Zeledón killed on 4 October.</div>
+      <div class="tl nicx"><b>1916</b> · Rubén Darío dies in León.</div>
+    </div>
+    <p class="legend">Gold dots mark world and Latin American events. Terracotta dots mark Nicaraguan events.</p>
+  </div>
+</div>
 </section>
 
-<section id="concepts">
-  <h2>Core concepts</h2>
-  <div class="tabs" role="tablist" aria-label="Topics">
-    <button class="tab" role="tab" aria-selected="true" aria-controls="t1" id="b1">1 · Enlightenment &amp; Bolívar</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="t2" id="b2">2 · Marxism</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="t3" id="b3">3 · Latin American thought &amp; Darío</button>
-    <button class="tab" role="tab" aria-selected="false" aria-controls="t4" id="b4">4 · Benjamín Zeledón</button>
+<section class="tabpanel" id="p-l1" hidden>
+  <div class="lhead"><p class="kicker2">Lesson 1 of 4</p><h2>Enlightenment, French Revolution and the legacy of Bolívar</h2>
+    <div class="subnav" role="tablist" aria-label="Lesson 1 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button><button type="button" role="tab" data-s="score" aria-selected="false">🏅 My score</button></div>
   </div>
-
-  <!-- Topic 1 -->
-  <div class="card panel" id="t1" role="tabpanel" aria-labelledby="b1">
+  <div class="lsub" data-sub="study">
+<div class="card" id="t1">
     <h3>Enlightenment, French Revolution and the legacy of Simón Bolívar</h3>
     <p>The <b>Enlightenment</b> was an eighteenth-century European movement that trusted <i>reason</i> more than tradition or absolute monarchy. Its thinkers argued that people have rights by nature and that government exists to protect them.</p>
     <div class="two">
@@ -306,9 +381,20 @@ footer .wrap{padding:18px 16px}
     <p style="margin-top:12px">Bolívar's thought combined <b>freedom</b> (end of colonial rule) with <b>unionism</b> (the new nations should act together). These ideas echo in later thinkers: <b>Rubén Darío</b> promoted the cultural unity of Spanish America, and <b>Augusto C. Sandino</b> defended national sovereignty and the dream of a united Latin America.</p>
     <div class="nic"><b>Nicaraguan connection:</b> Central America declared independence from Spain on 15 September 1821. Bolívar's call for American unity and the ideas of sovereignty later inspired Nicaraguan thinkers such as Rubén Darío and Benjamín Zeledón.</div>
   </div>
-
-  <!-- Topic 2 -->
-  <div class="card panel" id="t2" role="tabpanel" aria-labelledby="b2" hidden>
+    <h3 style="margin-top:22px">Key vocabulary</h3>
+    <p class="lead">Tap a card to reveal its meaning.</p>
+    <div class="vgrid"></div>
+    <p style="margin-top:20px"><button class="btn" type="button" data-goto="l1:practice">Ready? Go to the practice →</button></p>
+  </div>
+  <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
+  <div class="lsub" data-sub="score" hidden><div class="card scoreView" data-l="1"></div></div>
+</section>
+<section class="tabpanel" id="p-l2" hidden>
+  <div class="lhead"><p class="kicker2">Lesson 2 of 4</p><h2>Marxist philosophy</h2>
+    <div class="subnav" role="tablist" aria-label="Lesson 2 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button><button type="button" role="tab" data-s="score" aria-selected="false">🏅 My score</button></div>
+  </div>
+  <div class="lsub" data-sub="study">
+<div class="card" id="t2">
     <h3>Marxist philosophy: context, characteristics and transformations</h3>
     <p><b>Karl Marx</b> (1818–1883) and <b>Friedrich Engels</b> (1820–1895) developed their ideas in nineteenth-century Europe, where the <b>Industrial Revolution</b> created huge wealth alongside harsh factory work, child labor, low wages and crowded cities.</p>
     <h4>Influences</h4>
@@ -345,9 +431,20 @@ footer .wrap{padding:18px 16px}
     </ul>
     <div class="nic"><b>Nicaraguan connection:</b> Questions about inequality, land and who benefits from a country's wealth appear throughout Nicaraguan history. In the twentieth century, Marxist ideas were one influence, together with nationalism, Sandino's thought and Christian social teaching, on movements for social justice in Nicaragua. Studying them helps you analyze those debates critically.</div>
   </div>
-
-  <!-- Topic 3 -->
-  <div class="card panel" id="t3" role="tabpanel" aria-labelledby="b3" hidden>
+    <h3 style="margin-top:22px">Key vocabulary</h3>
+    <p class="lead">Tap a card to reveal its meaning.</p>
+    <div class="vgrid"></div>
+    <p style="margin-top:20px"><button class="btn" type="button" data-goto="l2:practice">Ready? Go to the practice →</button></p>
+  </div>
+  <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
+  <div class="lsub" data-sub="score" hidden><div class="card scoreView" data-l="2"></div></div>
+</section>
+<section class="tabpanel" id="p-l3" hidden>
+  <div class="lhead"><p class="kicker2">Lesson 3 of 4</p><h2>Latin American thought and Rubén Darío</h2>
+    <div class="subnav" role="tablist" aria-label="Lesson 3 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button><button type="button" role="tab" data-s="score" aria-selected="false">🏅 My score</button></div>
+  </div>
+  <div class="lsub" data-sub="study">
+<div class="card" id="t3">
     <h3>Latin American philosophical thought and Rubén Darío</h3>
     <p>Latin American thought asks: <i>Who are we? How can we be free and just on our own terms?</i> Thinkers combined European ideas with local realities, Indigenous heritage and the experience of colonialism.</p>
     <div class="two">
@@ -377,9 +474,20 @@ footer .wrap{padding:18px 16px}
     <p>Darío's warning links to the modern Nicaraguan emphasis on anti-imperialism and sovereignty. In class debates, connect his words to the idea of a Christian, Socialist and Solidarity model.</p>
     <div class="nic"><b>Nicaraguan connection:</b> Darío made Nicaragua a literary capital of the Spanish-speaking world. Each year the Rubén Darío International Poetry Festival is held in Granada, and León hosts his museum and tomb.</div>
   </div>
-
-  <!-- Topic 4 -->
-  <div class="card panel" id="t4" role="tabpanel" aria-labelledby="b4" hidden>
+    <h3 style="margin-top:22px">Key vocabulary</h3>
+    <p class="lead">Tap a card to reveal its meaning.</p>
+    <div class="vgrid"></div>
+    <p style="margin-top:20px"><button class="btn" type="button" data-goto="l3:practice">Ready? Go to the practice →</button></p>
+  </div>
+  <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
+  <div class="lsub" data-sub="score" hidden><div class="card scoreView" data-l="3"></div></div>
+</section>
+<section class="tabpanel" id="p-l4" hidden>
+  <div class="lhead"><p class="kicker2">Lesson 4 of 4</p><h2>Benjamín Zeledón and the anti-imperialist legacy</h2>
+    <div class="subnav" role="tablist" aria-label="Lesson 4 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button><button type="button" role="tab" data-s="score" aria-selected="false">🏅 My score</button></div>
+  </div>
+  <div class="lsub" data-sub="study">
+<div class="card" id="t4">
     <h3>Benjamín Zeledón: anti-imperialism, ethics, patriotism and sovereignty</h3>
     <p><b>Benjamín Zeledón Rodríguez</b> (1879–1912) was a lawyer, Liberal soldier and patriot, now honored as a <b>National Hero</b> of Nicaragua.</p>
     <h4>Historical context</h4>
@@ -418,81 +526,34 @@ footer .wrap{padding:18px 16px}
     <div class="key"><b>Why he matters (slogan: sovereignty is not negotiable):</b> Zeledón links the Enlightenment idea of <i>popular sovereignty</i> and Bolívar's dream of free American nations to a concrete Nicaraguan defense of national independence.</div>
     <div class="nic"><b>Nicaraguan connection:</b> This is part of national heritage. Historic sites such as Coyotepe Fortress and the town of Catarina keep his memory alive.</div>
   </div>
-</section>
-
-<section id="timeline">
-  <h2>Timeline of ideas and events</h2>
-  <div class="card">
-    <div class="timeline">
-      <div class="tl"><b>1689</b> · Locke's <i>Two Treatises of Government</i> defend natural rights.</div>
-      <div class="tl"><b>1748 / 1762</b> · Montesquieu's <i>Spirit of the Laws</i>; Rousseau's <i>Social Contract</i>.</div>
-      <div class="tl"><b>1776</b> · United States Declaration of Independence.</div>
-      <div class="tl"><b>1789</b> · French Revolution and the Declaration of the Rights of Man.</div>
-      <div class="tl"><b>1791–1804</b> · Haitian Revolution.</div>
-      <div class="tl"><b>1808–1810</b> · Napoleon invades Spain; first juntas in Spanish America.</div>
-      <div class="tl"><b>1815</b> · Bolívar writes the Jamaica Letter.</div>
-      <div class="tl"><b>1819</b> · Angostura Address; Gran Colombia created.</div>
-      <div class="tl nicx"><b>1821</b> · Central America declares independence (15 September).</div>
-      <div class="tl"><b>1826</b> · Congress of Panama. <b>1830</b> · Bolívar dies.</div>
-      <div class="tl"><b>1848</b> · <i>The Communist Manifesto</i>. <b>1867</b> · <i>Das Kapital</i>.</div>
-      <div class="tl nicx"><b>1867</b> · Rubén Darío is born in Metapa. <b>1879</b> · Benjamín Zeledón is born.</div>
-      <div class="tl nicx"><b>1888</b> · <i>Azul…</i> begins Modernismo. <b>1893</b> · Zelaya's Liberal Revolution.</div>
-      <div class="tl nicx"><b>1905</b> · <i>Cantos de vida y esperanza</i>. <b>1909</b> · Zelaya resigns.</div>
-      <div class="tl nicx"><b>1912</b> · U.S. Marines land; Zeledón killed on 4 October.</div>
-      <div class="tl nicx"><b>1916</b> · Rubén Darío dies in León.</div>
-    </div>
-    <p class="legend">Gold dots mark world and Latin American events. Terracotta dots mark Nicaraguan events.</p>
+    <h3 style="margin-top:22px">Key vocabulary</h3>
+    <p class="lead">Tap a card to reveal its meaning.</p>
+    <div class="vgrid"></div>
+    <p style="margin-top:20px"><button class="btn" type="button" data-goto="l4:practice">Ready? Go to the practice →</button></p>
   </div>
+  <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
+  <div class="lsub" data-sub="score" hidden><div class="card scoreView" data-l="4"></div></div>
 </section>
-
-<section id="vocab">
-  <h2>Key vocabulary</h2>
-  <p class="lead">Tap a card to reveal its meaning, then test yourself in the practice section.</p>
-  <div class="vgrid" id="vgrid"></div>
-</section>
-
-<section id="map">
-  <h2>Map of Nicaragua and its regions</h2>
-  <p class="lead">Nicaragua is the largest country in Central America. Tap any department to see its region, or a numbered marker to learn about a place from this unit.</p>
-  <div class="toggles">
-    <label><input type="checkbox" id="tgPins" checked> Show places from this unit</label>
-  </div>
-  <div class="mapbox">
-    <div>
-      <svg id="mapSvg" viewBox="-12 -8 495 492" role="img" aria-label="Map of Nicaragua showing the Pacific, Central and Caribbean regions with their departments"></svg>
-      <div class="mlegend"><span><i style="background:#f4c20d"></i>Pacific</span><span><i style="background:#b8c81a"></i>Central</span><span><i style="background:#00903f"></i>Caribbean</span></div>
-      <div id="pinList" style="margin-top:10px"></div>
-      <p class="legend">Shapes are simplified from a regional climate map. Light blue shapes are Lake Managua (Xolotlán) and Lake Nicaragua (Cocibolca).</p>
-    </div>
-    <div class="card info" id="info" aria-live="polite">
-      <h3>Select a region</h3>
-      <p>Nicaragua is usually described in three regions: the <b>Pacific</b>, the <b>Central</b> and the <b>Caribbean Coast</b>. Politically it has 15 departments and 2 autonomous regions.</p>
-      <p class="legend">Tap the map to begin.</p>
-    </div>
-  </div>
-</section>
-
-<section id="practice">
-  <h2>Practice</h2>
-  <p class="lead">You get feedback right after each answer. Retry as many times as you like; options are shuffled each time.</p>
-  <div class="ptabs" role="tablist" aria-label="Practice type">
-    <button class="ptab" role="tab" aria-selected="true" data-p="mcq">Concept MCQs</button>
-    <button class="ptab" role="tab" aria-selected="false" data-p="tf">True / False</button>
-    <button class="ptab" role="tab" aria-selected="false" data-p="cloze">Fill in the blank</button>
-    <button class="ptab" role="tab" aria-selected="false" data-p="voc">Vocabulary check</button>
-    <button class="ptab" role="tab" aria-selected="false" data-p="match">Matching</button>
-    <button class="ptab" role="tab" aria-selected="false" data-p="sort">Sort it (Venn &amp; roots)</button>
-    <button class="ptab" role="tab" aria-selected="false" data-p="order">Timeline order</button>
-    <button class="ptab" role="tab" aria-selected="false" data-p="map">Map challenge</button>
-    <button class="ptab" role="tab" aria-selected="false" data-p="src">Source analysis</button>
-    <button class="ptab" role="tab" aria-selected="false" data-p="wr">Written response</button>
-  </div>
-  <div class="scorebar"><b id="scoreTxt">Score: 0 / 0</b><div class="prog" aria-hidden="true"><i id="progBar"></i></div><span id="progTxt"></span><button class="btn alt" id="resetBtn" type="button">Restart this set</button></div>
-  <div id="quiz"></div>
-  <div class="card summary" id="summary"></div>
-</section>
+<section class="tabpanel" id="p-sum" hidden><div class="card scoreView" data-l="all"></div></section>
 
 </main>
+
+<aside class="mapcol" aria-label="Map of Nicaragua">
+  <div class="card mapcard">
+    <h3>Map of Nicaragua</h3>
+    <p class="legend" style="margin:0 0 6px">Tap a department for its region, or a numbered marker for a place from this unit.</p>
+    <label class="tg"><input type="checkbox" id="tgPins" checked> Show places from this unit</label>
+    <svg id="mapSvg" viewBox="-12 -8 495 492" role="img" aria-label="Map of Nicaragua showing the Pacific, Central and Caribbean regions with their departments"></svg>
+    <div class="mlegend"><span><i style="background:#f4c20d"></i>Pacific</span><span><i style="background:#b8c81a"></i>Central</span><span><i style="background:#00903f"></i>Caribbean</span></div>
+    <div id="pinList" style="margin-top:8px"></div>
+    <div class="info" id="info" aria-live="polite">
+      <h4>Select a region</h4>
+      <p style="font-size:.85rem">Nicaragua has three regions: the <b>Pacific</b>, the <b>Central</b> and the <b>Caribbean Coast</b>. Politically it has 15 departments and 2 autonomous regions.</p>
+    </div>
+    <p class="legend">Shapes simplified from a regional climate map. Light blue: Lake Managua and Lake Nicaragua.</p>
+  </div>
+</aside>
+</div>
 
 <footer><div class="zig" aria-hidden="true"></div><div class="wrap">Lincoln International Academy · Social Science 11th · Based on the 2026–2027 yearly plan, Unit III · Prepared with Ms. Kathya López's curriculum map</div></footer>
 
@@ -508,21 +569,7 @@ $('#themeBtn').onclick=()=>{
   root.dataset.theme=dark?'light':'dark';
 };
 
-/* nav highlight */
-const links=$$('nav.sticky a');
-const secs=links.map(a=>$(a.getAttribute('href')));
-addEventListener('scroll',()=>{
-  let cur=0; secs.forEach((s,i)=>{ if(s.getBoundingClientRect().top<120) cur=i; });
-  links.forEach((a,i)=>a.classList.toggle('on',i===cur));
-},{passive:true});
 
-/* concept tabs */
-$$('.tab').forEach(b=>b.onclick=()=>{
-  $$('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));
-  $$('#concepts .panel').forEach(p=>p.hidden=p.id!==b.getAttribute('aria-controls'));
-});
-
-/* ---------- vocabulary ---------- */
 const VOC=[
  ["Enlightenment","An 18th-century movement that valued reason, science and individual rights over tradition and absolute monarchy."],
  ["Natural rights","Rights people have simply by being human (life, liberty, property), not granted by a ruler."],
@@ -549,11 +596,10 @@ const VOC=[
  ["Self-determination","The right of a people to decide freely its own political status and future."],
  ["Structural inequality","Unfairness built into the organization of property, work and power, not just individual cases."],
  ["International law","Rules that govern relations among states, which Zeledón used to defend Nicaragua's sovereignty."]
+ ,["Philosophy of liberation","A Latin American current (Zea, Dussel) linking thought with freeing peoples from domination and dependence."],
+ ["Authentic philosophy","Thought that arises from a people's own history and reality instead of copying foreign models."],
+ ["Dependence","A condition in which a country's economy and decisions rely on more powerful outside countries."]
 ];
-$('#vgrid').innerHTML=VOC.map(([t,d])=>`<button type="button" class="vcard"><div class="t">${esc(t)}</div><div class="d">${esc(d)}</div><div class="hint">Tap to flip</div></button>`).join('');
-$$('.vcard').forEach(c=>c.onclick=()=>c.classList.toggle('open'));
-
-/* ---------- map ---------- */
 const NS='http://www.w3.org/2000/svg';
 const MAP={lakes:["M188 329L188 350L189 352L195 354L195 358L190 360L188 364L188 370L191 372L191 379L198 387L198 393L202 402L210 411L219 416L219 423L213 424L215 428L239 431L249 429L250 432L271 431L286 434L288 436L298 435L300 433L300 415L298 411L292 408L288 397L274 383L270 376L267 375L266 371L258 362L252 359L242 349L232 349L219 332L208 330L200 324Z", "M116 294L118 299L124 303L124 309L125 304L132 308L135 308L140 304L145 304L147 306L147 310L145 313L146 318L164 316L164 299L158 304L155 302L154 294L150 291L147 281L143 281L141 285L131 289L127 294L120 294L118 292Z"],d:[{"n":"Chinandega","r":"pacific","d":"M105 202L99 199L91 199L86 205L86 218L87 219L83 222L81 226L73 231L44 230L40 233L40 236L36 238L29 233L28 229L22 223L17 222L13 227L9 229L7 233L7 239L21 249L27 250L30 253L30 257L34 260L38 266L57 283L60 284L71 283L76 281L81 276L88 265L99 254L106 254L110 251L111 236L104 219Z","l":[80,245]},{"n":"León","r":"pacific","d":"M130 217L125 217L116 221L109 221L109 227L113 237L112 252L106 256L98 257L75 284L65 287L65 291L94 311L100 317L108 333L111 333L111 328L114 325L120 325L126 319L124 311L124 304L118 300L116 294L118 292L122 294L127 294L134 287L142 284L141 275L143 271L149 266L150 246L140 243L135 240L134 235L136 232L136 225Z","l":[121,261]},{"n":"Managua","r":"pacific","d":"M165 319L156 319L151 321L146 320L144 318L146 313L145 306L141 306L135 311L130 308L126 308L126 311L128 314L127 321L122 326L114 328L113 338L116 345L126 357L135 355L150 339L150 335L143 336L139 334L132 335L127 334L126 332L127 331L150 332L152 336L155 338L159 338L160 337L159 328L164 324ZM145 271L143 279L150 283L151 289L156 295L158 301L162 301L163 299L166 298L170 304L168 312L169 320L182 318L193 311L193 306L186 299L185 293L181 288L180 281L176 280L169 273L153 269Z","l":[131,331]},{"n":"Masaya","r":"pacific","d":"M165 331L163 332L163 337L159 341L159 344L166 348L171 348L177 338L177 332ZM185 320L166 323L166 327L167 328L182 328L185 323Z","l":[172,327]},{"n":"Granada","r":"pacific","d":"M189 359L185 358L169 359L169 366L167 368L168 375L169 376L174 375L178 369L185 370L189 363ZM199 320L193 319L187 322L184 327L184 330L181 333L172 350L172 354L174 356L188 356L186 344L184 341L185 336L191 327L198 325Z","l":[181,356]},{"n":"Carazo","r":"pacific","d":"M149 343L135 357L129 359L129 364L136 369L142 377L150 380L157 386L160 386L165 378L165 368L167 365L168 351L161 346L153 343Z","l":[150,362]},{"n":"Rivas","r":"pacific","d":"M209 383L208 389L210 391L213 392L221 391L224 399L233 399L233 392L230 390L224 390L221 381L213 380ZM177 372L177 374L173 378L167 379L162 385L162 391L171 397L176 403L182 406L195 420L202 431L208 432L215 422L216 417L202 403L198 395L198 390L196 385L190 379L191 374L189 372L181 373Z","l":[190,401]},{"n":"Nueva Segovia","r":"central","d":"M201 141L197 140L194 137L193 133L187 133L175 122L175 119L169 119L160 128L159 131L150 139L149 145L143 150L137 150L135 148L129 149L125 146L121 146L119 148L113 149L110 147L105 147L102 149L102 156L112 158L119 165L134 164L140 166L150 166L152 168L157 168L157 165L160 162L163 162L171 170L172 175L181 174L185 177L189 177L197 172L196 165L197 159L200 153Z","l":[175,150]},{"n":"Madriz","r":"central","d":"M104 159L103 168L105 171L105 178L107 181L105 188L109 192L108 201L111 201L115 198L118 189L125 182L130 182L133 184L141 184L148 180L153 180L156 182L163 182L170 179L169 171L163 165L160 165L156 171L153 171L151 169L138 168L132 166L121 168L112 160Z","l":[134,176]},{"n":"Estelí","r":"central","d":"M125 184L120 189L116 199L105 209L105 214L111 219L116 219L124 215L131 215L139 227L136 238L140 241L151 242L152 237L156 234L162 233L165 227L165 222L152 209L155 204L156 184L153 182L148 182L141 186L133 186L130 184Z","l":[136,203]},{"n":"Jinotega","r":"central","d":"M277 65L266 64L266 71L262 76L262 80L265 85L261 91L248 93L239 103L238 108L234 112L229 113L226 119L222 119L212 127L207 128L206 130L207 140L202 143L202 151L198 159L198 172L191 176L189 179L187 179L184 176L178 175L173 177L167 182L162 182L157 189L158 202L155 207L155 210L167 222L172 223L178 228L183 228L187 226L206 209L218 193L226 191L227 185L238 173L238 165L236 162L239 160L239 157L242 153L250 153L264 144L271 148L274 148L278 144L291 121L290 107L294 99L294 91L287 90L282 86L279 80L280 68Z","l":[222,148]},{"n":"Matagalpa","r":"central","d":"M270 213L263 215L255 215L247 209L241 208L229 193L219 195L208 209L187 228L179 231L173 226L168 226L162 235L156 236L154 238L152 246L151 266L164 270L168 270L177 278L182 278L198 267L211 264L219 264L226 259L235 259L239 256L247 260L251 264L255 264L257 267L262 267L266 262L269 250L262 249L258 245L257 231L260 228L263 228L269 221Z","l":[232,240]},{"n":"Boaco","r":"central","d":"M278 257L273 252L270 252L266 266L261 270L257 270L255 267L250 266L249 264L241 259L237 259L234 262L227 261L220 266L203 268L190 273L184 278L183 287L187 293L188 299L196 307L196 311L193 313L195 320L209 329L213 329L213 323L218 312L218 306L222 301L230 298L249 298L256 296L263 290L272 289L275 286L277 277L282 270L282 266L278 260Z","l":[228,277]},{"n":"Chontales","r":"central","d":"M286 271L283 271L281 273L278 285L272 291L264 292L259 296L250 300L245 301L232 300L222 303L220 313L216 320L215 331L219 331L224 335L233 349L238 348L244 350L252 358L260 362L268 372L271 372L278 367L282 366L288 358L294 356L301 349L319 349L322 346L322 342L313 339L306 333L305 323L299 310L301 306L301 302L299 299L297 299L294 296L292 291L293 281Z","l":[254,334]},{"n":"Río San Juan","r":"central","d":"M272 373L273 380L290 398L291 404L295 407L295 409L301 413L303 418L302 421L303 433L299 437L291 440L287 437L283 437L281 435L266 434L266 439L286 447L293 447L308 437L315 435L318 437L324 437L326 440L331 440L337 446L341 446L346 443L352 452L358 454L362 458L362 465L368 464L371 467L377 467L382 465L387 470L400 470L407 466L413 466L418 464L416 450L412 450L405 439L394 437L391 431L378 433L375 429L366 428L358 418L351 413L346 413L344 411L345 407L342 403L334 400L330 396L324 393L323 383L327 378L327 373L323 367L324 359L320 351L301 351L294 358L287 361L282 368Z","l":[329,418]},{"n":"RACCN","r":"caribbean","d":"M459 18L455 18L452 16L447 17L445 15L441 15L438 18L430 16L429 20L424 25L421 25L418 29L417 28L411 29L405 35L399 35L399 37L395 40L389 40L387 42L370 41L365 46L361 46L358 43L355 43L354 52L343 50L339 54L333 57L329 56L326 53L319 53L316 51L307 51L299 36L290 37L285 43L282 43L278 47L277 54L281 58L280 65L284 70L282 73L283 83L286 87L298 89L296 99L293 105L294 119L289 128L289 132L283 138L279 146L274 151L266 147L262 147L251 155L242 157L240 161L241 173L229 186L229 189L234 197L242 206L246 206L254 212L260 212L262 209L272 208L275 211L274 216L286 217L290 214L301 211L303 206L306 203L325 200L348 200L352 196L360 197L368 194L387 198L406 199L408 207L407 212L411 212L419 216L423 222L429 222L426 205L427 177L425 176L428 175L430 171L430 168L428 166L431 163L432 155L431 149L440 120L447 114L448 111L455 103L462 86L461 69L458 68L454 59L453 47L451 43L445 44L438 35L438 33L447 23L449 23L452 27L455 27L457 22L459 21Z","l":[355,132]},{"n":"RACCS","r":"caribbean","d":"M420 276L419 281L423 290L421 292L421 295L435 293L435 286L430 275ZM267 222L263 226L262 229L259 229L257 231L257 234L259 237L258 245L259 248L269 249L278 257L278 261L280 265L289 274L289 277L293 283L293 295L301 303L299 307L299 312L303 318L307 335L314 340L322 343L320 347L320 353L324 360L323 368L327 374L327 377L324 380L323 385L324 394L328 395L333 400L341 403L345 408L345 412L350 413L356 417L365 428L373 428L377 433L381 433L389 430L392 433L393 437L401 436L396 412L396 400L399 395L406 394L407 386L411 381L418 379L418 368L413 351L409 350L409 355L407 356L399 348L407 341L407 333L405 330L408 329L409 327L412 330L412 332L415 332L416 328L416 318L413 316L416 313L417 304L416 300L412 300L410 298L410 285L406 285L405 283L408 277L416 275L423 269L423 261L418 254L418 251L421 249L427 250L431 249L433 239L430 226L422 224L418 218L412 215L405 214L403 203L399 201L389 201L370 197L362 198L360 200L352 199L348 203L323 203L315 205L308 205L305 207L304 211L301 214L293 218L290 218L286 221L278 220L273 223Z","l":[352,278]}]};
 const COL={pacific:'#f4c20d',central:'#b8c81a',caribbean:'#00903f'};
@@ -572,11 +618,11 @@ const REG={
   unit:"Unit III link: Indigenous and Afro-descendant worldviews (Unit I) are strongest here, a reminder that emancipation and rights remain living questions."}
 };
 const PINS=[
- {n:"Managua",xy:[136,328],t:"Capital of Nicaragua and birthplace of Benjamín Zeledón (1879)."},
- {n:"León",xy:[104,276],t:"Colonial city where Rubén Darío died in 1916 and where his tomb lies in the Cathedral. His former home is a museum."},
- {n:"Ciudad Darío (Metapa)",xy:[176,268],t:"Birthplace of Rubén Darío in 1867. The town was renamed in his honor."},
- {n:"Masaya · Coyotepe · Niquinohomo",xy:[172,334],t:"The battle of Coyotepe and La Barranca near Masaya (3–4 Oct 1912) was Zeledón's last stand against U.S. Marines and government troops. He was executed in Niquinohomo on 4 Oct 1912 and is buried in nearby Catarina. Sandino, born in Niquinohomo, witnessed these events."},
- {n:"Granada",xy:[182,354],t:"Colonial city on Lake Nicaragua; home of the Rubén Darío International Poetry Festival and of 19th-century Conservative elites."}
+ {n:"Managua",l:[4],xy:[136,328],t:"Capital of Nicaragua and birthplace of Benjamín Zeledón (1879)."},
+ {n:"León",l:[3],xy:[104,276],t:"Colonial city where Rubén Darío died in 1916 and where his tomb lies in the Cathedral. His former home is a museum."},
+ {n:"Ciudad Darío (Metapa)",l:[3],xy:[176,268],t:"Birthplace of Rubén Darío in 1867. The town was renamed in his honor."},
+ {n:"Masaya · Coyotepe · Niquinohomo",l:[4],xy:[172,334],t:"The battle of Coyotepe and La Barranca near Masaya (3–4 Oct 1912) was Zeledón's last stand against U.S. Marines and government troops. He was executed in Niquinohomo on 4 Oct 1912 and is buried in nearby Catarina. Sandino, born in Niquinohomo, witnessed these events."},
+ {n:"Granada",l:[3],xy:[182,354],t:"Colonial city on Lake Nicaragua; home of the Rubén Darío International Poetry Festival and of 19th-century Conservative elites."}
 ];
 const svg=$('#mapSvg');
 const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;};
@@ -604,11 +650,11 @@ const pinG=mk('g',{id:'pinG'});
 const pinList=$('#pinList');
 PINS.forEach((pn,i)=>{
   const g=mk('g',{class:'pin',tabindex:0,role:'button','aria-label':pn.n,transform:`translate(${pn.xy[0]},${pn.xy[1]})`},pinG);
-  mk('circle',{r:6.5},g);
+  mk('circle',{r:6.5},g);g.dataset.l=(pn.l||[]).join(',');
   const t=mk('text',{x:0,y:3.2,'text-anchor':'middle'},g);t.textContent=i+1;
   const show=e=>{e.stopPropagation();selPin(pn);};
   g.onclick=show;g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(e);}};
-  const li=document.createElement('button');li.type='button';li.className='chip pbtn';li.textContent=(i+1)+' · '+pn.n;li.onclick=()=>selPin(pn);pinList.appendChild(li);
+  const li=document.createElement('button');li.type='button';li.className='chip pbtn';li.dataset.l=(pn.l||[]).join(',');li.textContent=(i+1)+' · '+pn.n;li.onclick=()=>selPin(pn);pinList.appendChild(li);
 });
 $('#tgPins').onchange=e=>{pinG.style.display=e.target.checked?'':'none';pinList.style.display=e.target.checked?'':'none';};
 function selReg(k,dep){
@@ -621,7 +667,7 @@ function selPin(pn){
   $('#info').innerHTML=`<h3>📍 ${esc(pn.n)}</h3><p>${esc(pn.t)}</p><p class="legend">Tap a department to see its region.</p>`;
 }
 
-/* ---------- practice data ---------- */
+
 const MCQ=[
  {q:"Which Enlightenment idea holds that political power ultimately comes from the people?",o:["Popular sovereignty","Divine right of kings","Natural selection","Mercantile balance"],a:0,w:"Popular sovereignty (Rousseau) says legitimate government rests on the consent of the people. Divine right claims authority comes from God to a king."},
  {q:"Which thinker is most associated with the separation of powers?",o:["Jean-Jacques Rousseau","Montesquieu","Voltaire","Karl Marx"],a:1,w:"Montesquieu argued that dividing government into legislative, executive and judicial branches prevents tyranny. Rousseau is linked to the social contract."},
@@ -685,30 +731,6 @@ const CLOZE=[
  ["For Salazar Bondy, dependent countries tend to produce philosophy that is an ___ of foreign thought.",["imitation","invention","abolition","expansion"],0,"Dependence leads to imitative, inauthentic thought, in his view."],
  ["Zeledón made his last stand at Coyotepe and La ___ near Masaya.",["Barranca","Cumbre","Laguna","Pradera"],0,"The hills of Coyotepe and La Barranca overlook the route toward Managua."],
  ["The 1909 U.S. message condemning Zelaya's government is called the ___ Note.",["Knox","Monroe","Dawes","Hay"],0,"The Knox Note was followed by Zelaya's resignation."]
-];
-const MATCH=[
- {t:"Match each thinker with the key idea.",p:[["Locke","Natural rights"],["Montesquieu","Separation of powers"],["Rousseau","Popular sovereignty and social contract"],["Kant","Sapere aude: use your own reason"],["Marx","Class struggle"]]},
- {t:"Match each person with a key work or role.",p:[["Simón Bolívar","Jamaica Letter and Gran Colombia"],["Marx and Engels","The Communist Manifesto"],["José Martí","Nuestra América"],["Rubén Darío","Azul… and \"A Roosevelt\""],["Salazar Bondy","¿Existe una filosofía de nuestra América?"],["Benjamín Zeledón","Defender of Coyotepe and La Barranca"]]},
- {t:"Match each place with its connection to Unit III.",p:[["Metapa (Ciudad Darío)","Birthplace of Rubén Darío"],["León","Darío's tomb in the Cathedral"],["Masaya (Coyotepe)","Zeledón's last stand, 1912"],["Niquinohomo","Zeledón executed; Sandino's hometown"],["Catarina","Where Zeledón is buried"]]},
- {t:"Match each date with the event.",p:[["1789","French Revolution begins"],["1815","Jamaica Letter"],["1848","The Communist Manifesto"],["1909","Knox Note and Zelaya's resignation"],["1912","Death of Benjamín Zeledón"]]}
-];
-const SORT=[
- {t:"Venn diagram: where does each idea belong?",c:["Enlightenment / French Revolution","Latin American emancipation","Both"],i:[
-  ["Authority comes from the people",2],["Criollos resent Spanish-born officials",1],["Separation of powers",2],["Declaration of the Rights of Man (1789)",0],["Bolívar's dream of a united Patria Grande",1],["Reason used to critique absolute monarchy",0],["Struggle against Spanish colonial rule",1],["Liberty and equality before the law",2]]},
- {t:"Roots and fruits of Marxist philosophy: influence or characteristic?",c:["Root (influence)","Fruit (characteristic)"],i:[
-  ["Hegel's dialectic",0],["British political economy",0],["French utopian socialism",0],["Historical materialism",1],["Class struggle",1],["Surplus value",1],["Dialectical materialism",1]]},
- {t:"Who said it? Leopoldo Zea, Augusto Salazar Bondy, or both?",c:["Leopoldo Zea","Salazar Bondy","Both"],i:[
-  ["Mexican philosopher",0],["Peruvian philosopher",1],["Argues dependence has produced imitation",1],["Philosophy should affirm our own history and identity",0],["Concerned with the liberation of Latin America",2]]}
-];
-const ORDER=[
- {t:"Order these events from earliest to latest (use ↑ and ↓).",e:[["1762","Rousseau publishes The Social Contract"],["1789","French Revolution begins"],["1808","Napoleon invades Spain"],["1815","Bolívar writes the Jamaica Letter"],["1819","Angostura Address and Gran Colombia"],["1826","Congress of Panama"]]},
- {t:"Order these Nicaraguan and regional events from earliest to latest.",e:[["1821","Central America declares independence"],["1867","Rubén Darío is born"],["1893","Zelaya's Liberal Revolution"],["1909","Knox Note; Zelaya resigns"],["1912","Zeledón dies at Masaya"],["1916","Rubén Darío dies in León"]]}
-];
-const MAPQ=[
- {q:"Tap the department where Zeledón made his last stand at Coyotepe and La Barranca.",a:"Masaya",w:"Coyotepe and La Barranca are hills at Masaya, overlooking the route toward the capital."},
- {q:"Tap the department where Rubén Darío's tomb lies in the Cathedral.",a:"León",w:"Darío died in León in 1916 and is buried in its Cathedral."},
- {q:"Tap the department that contains Ciudad Darío (Metapa), where Darío was born.",a:"Matagalpa",w:"Metapa, now Ciudad Darío, is in Matagalpa department."},
- {q:"Tap the department that holds the capital, Managua, seat of Zelaya's government.",a:"Managua",w:"Managua is the capital; the Knox Note and the crisis of 1909 played out around it."}
 ];
 const SRC=[
  {src:"\"The principle of all sovereignty resides essentially in the nation.\"",cite:"Declaration of the Rights of Man and of the Citizen, 1789, Article 3",
@@ -785,172 +807,384 @@ const WR=[
   model:"Zeledón, trained as a lawyer, was shaped by doctrinal liberalism, international law and a Darío-style patriotism that held Nicaragua must be master of its destiny. His refusal to surrender and his sacrifice at Coyotepe made him an ethical and political reference for anti-imperialism. The young Sandino saw his body in Niquinohomo, and that memory became a philosophy of sovereignty that led to the Army in Defense of National Sovereignty."}
 ];
 
-/* ---------- quiz engine ---------- */
-let mode='mcq', ans=0, cor=0, tot=0;
-const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-const quiz=$('#quiz'), summary=$('#summary');
-function rec(c,m){ans+=m;cor+=c;updateScore();}
-function updateScore(){
-  $('#scoreTxt').textContent=`Score: ${cor} / ${ans}`;
-  $('#progTxt').textContent=`${ans} of ${tot} answered`;
-  $('#progBar').style.width=(tot?ans/tot*100:0)+'%';
-  if(tot&&ans===tot){
-    const pct=Math.round(cor/tot*100);
-    const msg=pct>=90?'Excellent work!':pct>=70?'Good job. Review the items you missed.':'Keep studying. Re-read the concepts and try again.';
-    summary.className='card summary show';
-    summary.innerHTML=`<div class="big">${pct}%</div><p><b>${cor} of ${tot} correct.</b> ${msg}</p><button class="btn" type="button" id="againBtn">Try this set again</button>`;
-    $('#againBtn').onclick=()=>build(mode);
+/* ---------- additions to banks ---------- */
+TF.push(
+ ["Marx and Engels published The Communist Manifesto in 1917.",false,"It appeared in 1848. 1917 is the year of the Russian Revolution."],
+ ["Alienation describes workers feeling estranged from what they produce and from their own labor.",true,"Marx used alienation to describe how wage labor separates workers from their product and activity."],
+ ["Rubén Darío was born in León.",false,"He was born in Metapa (now Ciudad Darío). León is where he died and is buried."],
+ ["In ¿Existe una filosofía de nuestra América?, Salazar Bondy asks whether an authentic Latin American philosophy exists.",true,"The 1968 book argues that dependence and underdevelopment have produced imitative thought."],
+ ["The Congress of Panama took place in 1826.",true,"Bolívar convened it to promote an alliance of the new American republics."],
+ ["Benjamín Zeledón is buried in Catarina.",true,"He was executed in Niquinohomo on 4 October 1912 and buried in nearby Catarina."]
+);
+CLOZE.push(
+ ["The Declaration of the Rights of Man and of the Citizen was adopted in ___.",["1789","1815","1848","1919"],0,"It was adopted in 1789 during the French Revolution."],
+ ["In 1819 Bolívar helped found the Republic of Gran ___.",["Colombia","Venezuela","Bolivia","Panamá"],0,"Gran Colombia united present-day Venezuela, Colombia, Ecuador and Panama."],
+ ["Marx called the working class that sells its labor the ___.",["proletariat","bourgeoisie","clergy","nobility"],0,"The proletariat sells its labor; the bourgeoisie owns the means of production."],
+ ["Marx's idea that economic conditions drive history is called historical ___.",["materialism","idealism","liberalism","nationalism"],0,"Historical materialism says material conditions shape institutions and ideas."],
+ ["Leopoldo Zea was a philosopher from ___.",["Mexico","Peru","Cuba","Chile"],0,"Zea was Mexican; Salazar Bondy was Peruvian."],
+ ["José Martí's famous essay is titled Nuestra ___.",["América","Patria","Tierra","Historia"],0,"\"Nuestra América\" appeared in 1891."],
+ ["Benjamín Zeledón was executed in the town of ___.",["Niquinohomo","Bluefields","Estelí","Rivas"],0,"He was executed in Niquinohomo on 4 October 1912."],
+ ["Sandino later led the Army in Defense of National ___.",["Sovereignty","Unity","Security","Heritage"],0,"The Army in Defense of the National Sovereignty grew out of Sandino's struggle."]
+);
+SRC.push(
+ {src:"\"Sapere aude! Have the courage to use your own understanding!\"",cite:"Immanuel Kant, \"What Is Enlightenment?\", 1784",
+  q:"What does Kant urge people to do?",
+  o:["Think for themselves instead of obeying blindly","Wait for the king to decide everything for them","Avoid reason when discussing politics","Allow only scholars to question religious authority"],a:0,
+  w:"Kant defines the Enlightenment as daring to use your own reason, the intellectual engine of the revolutions."},
+ {src:"Scenario: In 1819 delegates meet at Angostura to draft a constitution with elected leaders and separate legislative, executive and judicial powers.",cite:"Discussion case",
+  q:"Which Enlightenment idea is most visible here?",
+  o:["Separation of powers","Divine right of kings","Colonial monopoly","Hereditary privilege"],a:0,
+  w:"Dividing government among branches, as Montesquieu proposed, appears in Bolívar's Angostura Address."},
+ {src:"\"Proletarios de todos los países, uníos.\" (Workers of the world, unite!)",cite:"Marx and Engels, The Communist Manifesto, 1848",
+  q:"What idea does this slogan express?",
+  o:["Workers share common interests across borders and should act together","Workers of each nation should compete with other countries' workers","Factory owners should lead the workers' organizations","Workers should avoid politics and focus on charity"],a:0,
+  w:"The slogan calls for class solidarity beyond national borders."},
+ {src:"Scenario: A factory owner pays workers a fixed daily wage, sells the goods for far more than the cost of wages and materials, and keeps the difference as profit.",cite:"Discussion case",
+  q:"Which Marxist concept does this illustrate?",
+  o:["Alienation of the owner","Popular sovereignty","Separation of powers","Surplus value"],a:3,
+  w:"Surplus value is the value workers create beyond their wages, kept by the owner as profit."},
+ {src:"Scenario: A president refuses to give a foreign power control of a canal under terms seen as humiliating; the foreign government answers with a diplomatic note condemning him.",cite:"Discussion case (Zelaya and the Knox Note)",
+  q:"Which tension does this illustrate?",
+  o:["National sovereignty against foreign pressure","Class struggle inside a single factory","A rivalry between two literary movements","A dispute over the inventions of the Industrial Revolution"],a:0,
+  w:"Zelaya defended Nicaragua's right to decide about its canal; the Knox Note was foreign pressure against that decision."},
+ {src:"Scenario: A teenager sees a national hero's body after his execution; years later he organizes an army to defend the country's sovereignty.",cite:"Discussion case (Zeledón and Sandino)",
+  q:"Which historical relationship does this describe?",
+  o:["Zeledón's example inspiring Sandino","Bolívar's influence on the French Revolution","Marx's influence on the Haitian Revolution","Darío's role in founding Gran Colombia"],a:0,
+  w:"Sandino saw Zeledón's body in Niquinohomo; the memory became the seed of his struggle."}
+);
+WR.push(
+ {src:"Marxism grew from earlier ideas and produced new concepts.",cite:"Prompt",
+  q:"Name TWO influences (roots) and TWO characteristics (fruits) of Marxist philosophy, and say how they help explain inequality. Use at least three sentences.",
+  keys:[["Roots: Hegel, Feuerbach, utopian socialism or political economy",["hegel","feuerbach","utopian","political economy","smith","ricardo","dialectic"]],
+        ["Fruits: historical materialism, class struggle, surplus value, alienation",["materialism","class struggle","surplus","alienation","dialectical","class"]],
+        ["Inequality: links to unequal ownership or exploitation",["inequal","exploit","own","wealth","property","unfair"]]],
+  model:"Marxism grew from Hegel's dialectic and from British political economy, along with French utopian socialism. Its fruits include historical materialism and the idea of class struggle, as well as surplus value. Together they explain inequality as the result of unequal ownership of the means of production and the exploitation of workers' labor."},
+ {src:"A Venn diagram compares the Enlightenment and French Revolution with emancipation in America.",cite:"Prompt",
+  q:"Name one idea the two share, one feature that belongs mainly to American emancipation, and explain why Bolívar's legacy matters. Use at least three sentences.",
+  keys:[["Shared idea: liberty, sovereignty, republic, constitution, equality",["liberty","sovereign","constitution","republic","equal","rights"]],
+        ["American feature: independence from Spain, criollos, colonial rule, slavery, unity",["spain","criollo","colon","independence","slavery","indigenous","unity"]],
+        ["Bolívar: unity, freedom, Gran Colombia, liberator",["bolívar","bolivar","unity","union","gran colombia","liberator","patria grande"]]],
+  model:"Both movements defended liberty and popular sovereignty and wanted written constitutions. Emancipation in America was also a struggle against Spanish colonial rule, led by criollos and facing questions about slavery and Indigenous peoples. Bolívar matters because he led armies that freed several nations and promoted their unity in dreams like Gran Colombia and the Patria Grande."},
+ {src:"Darío warned the United States: \"Ten cuidado. ¡Vive la América española!\"",cite:"Prompt",
+  q:"In a short paragraph, connect Darío's warning to the anti-imperialist defense of sovereignty today. Include one phrase from the poem or its meaning. Use at least three sentences.",
+  keys:[["Warning: mentions Darío's warning, the poem or Roosevelt",["roosevelt","warn","poem","darío","dario","cachorro","león","leon"]],
+        ["Anti-imperialism or sovereignty",["sovereign","anti-imperial","imperial","domination","independence","self-determination"]],
+        ["Today: connects to the present in Nicaragua or Latin America",["today","current","nicaragua","modern","now","present","still"]]],
+  model:"In \"A Roosevelt\" Darío warns that Hispanic America is alive and that its \"cubs of the Spanish Lion\" will not accept domination. That warning connects with today's anti-imperialist defense of sovereignty and the right of nations such as Nicaragua to decide their own destiny."},
+ {src:"Workers' movements pushed for shorter workdays, fair wages and social security.",cite:"Prompt",
+  q:"Explain how Marxist critiques helped explain structural inequality and give one reform won by workers' movements. Use at least two sentences.",
+  keys:[["Structural inequality: ownership, class, exploitation",["structural","class","exploit","ownership","property","inequal"]],
+        ["A reform: eight-hour day, wages, unions, social security, labor laws",["eight","hour","wage","union","social security","labor law","labour","insurance"]],
+        ["Relevance: justice, society or today",["today","still","justice","reform","relevant","modern","society"]]],
+  model:"Marxist critiques showed that inequality is structural: it comes from how property and work are organized and from class relations. Workers' movements influenced by these ideas won reforms such as the eight-hour day, unions and social security, and the debate about social justice continues today."}
+);
+
+const MATCH_BY={
+ 1:[{t:"Match each thinker with the key idea.",p:[["Locke","Natural rights"],["Montesquieu","Separation of powers"],["Rousseau","Popular sovereignty and social contract"],["Voltaire","Tolerance and free expression"],["Kant","Sapere aude: use your own reason"]]},
+    {t:"Match each date with the event.",p:[["1789","French Revolution begins"],["1808","Napoleon invades Spain"],["1815","Jamaica Letter"],["1819","Angostura Address and Gran Colombia"],["1826","Congress of Panama"]]}],
+ 2:[{t:"Match each Marxist concept with its meaning.",p:[["Bourgeoisie","Owners of the means of production"],["Proletariat","Workers who sell their labor"],["Surplus value","Profit from workers' unpaid labor"],["Alienation","Estrangement from one's labor and its product"],["Historical materialism","Economic conditions shape society and ideas"]]},
+    {t:"Match each item with its role in Marxism.",p:[["The Communist Manifesto","Published in 1848"],["Das Kapital","Analysis of capitalism, 1867"],["Hegel","Source of the dialectic"],["Smith and Ricardo","British political economy"],["Mariátegui","Adapted Marxism to Indigenous Peru"]]}],
+ 3:[{t:"Match each thinker with a work or idea.",p:[["José Martí","Nuestra América"],["Rubén Darío","Azul… and \"A Roosevelt\""],["Salazar Bondy","¿Existe una filosofía de nuestra América?"],["Leopoldo Zea","Philosophy of liberation and Latin American identity"]]},
+    {t:"Match each place with its connection to Darío.",p:[["Metapa (Ciudad Darío)","Birthplace"],["León","Place of death; tomb in the Cathedral"],["Granada","Home of the poetry festival named for him"]]}],
+ 4:[{t:"Match each place with its connection to Zeledón.",p:[["Masaya (Coyotepe)","Site of the last stand, 1912"],["Niquinohomo","Place of execution; Sandino's hometown"],["Catarina","Burial place"],["Managua","Capital and seat of Zelaya's government"]]},
+    {t:"Match each date with the event.",p:[["1893","Zelaya's Liberal Revolution"],["1909","Knox Note and Zelaya's resignation"],["1912","Death of Benjamín Zeledón"]]}]
+};
+const SORT_BY={
+ 1:[{t:"Venn diagram: where does each idea belong?",c:["Enlightenment / French Revolution","Latin American emancipation","Both"],i:[
+  ["Authority comes from the people",2],["Criollos resent Spanish-born officials",1],["Separation of powers",2],["Declaration of the Rights of Man (1789)",0],["Bolívar's dream of a united Patria Grande",1],["Reason used to critique absolute monarchy",0],["Struggle against Spanish colonial rule",1],["Liberty and equality before the law",2]]}],
+ 2:[{t:"Roots and fruits of Marxist philosophy: influence or characteristic?",c:["Root (influence)","Fruit (characteristic)"],i:[
+  ["Hegel's dialectic",0],["British political economy",0],["French utopian socialism",0],["Historical materialism",1],["Class struggle",1],["Surplus value",1],["Dialectical materialism",1]]}],
+ 3:[{t:"Who said it? Leopoldo Zea, Augusto Salazar Bondy, or both?",c:["Leopoldo Zea","Salazar Bondy","Both"],i:[
+  ["Mexican philosopher",0],["Peruvian philosopher",1],["Argues dependence has produced imitation",1],["Philosophy should affirm our own history and identity",0],["Concerned with the liberation of Latin America",2]]}],
+ 4:[{t:"When did it happen? Sort each event by period.",c:["Zelaya era (before 1909)","The 1909 crisis","Zeledón's 1912 campaign"],i:[
+  ["Zelaya's Liberal Revolution",0],["Zelaya refuses humiliating canal terms",0],["The Knox Note condemns Zelaya's government",1],["Zelaya resigns",1],["U.S. Marines land in Nicaragua",2],["Zeledón's forces hold Coyotepe and La Barranca",2],["Zeledón is executed in Niquinohomo",2]]}]
+};
+const ORDER_BY={
+ 1:[{t:"Order these events from earliest to latest (use ↑ and ↓).",e:[["1762","Rousseau publishes The Social Contract"],["1789","French Revolution begins"],["1808","Napoleon invades Spain"],["1815","Bolívar writes the Jamaica Letter"],["1819","Angostura Address and Gran Colombia"],["1826","Congress of Panama"]]}],
+ 2:[{t:"Order these events from earliest to latest (use ↑ and ↓).",e:[["c. 1760–1840","Industrial Revolution transforms Europe"],["1818","Karl Marx is born"],["1848","The Communist Manifesto"],["1867","Das Kapital"],["1917","Russian Revolution"]]}],
+ 3:[{t:"Order these events from earliest to latest (use ↑ and ↓).",e:[["1867","Rubén Darío is born"],["1888","Azul… launches Modernismo"],["1891","Martí publishes Nuestra América"],["1905","Cantos de vida y esperanza"],["1916","Rubén Darío dies in León"],["1968","Salazar Bondy asks ¿Existe una filosofía de nuestra América?"]]}],
+ 4:[{t:"Order these events from earliest to latest (use ↑ and ↓).",e:[["1879","Benjamín Zeledón is born"],["1893","Zelaya's Liberal Revolution"],["1909","Knox Note; Zelaya resigns"],["1912","Zeledón dies after the battle at Masaya"],["1927","Sandino's army begins its resistance"]]}]
+};
+const MAPQ_BY={
+ 3:[{q:"Tap the department where Rubén Darío's tomb lies in the Cathedral.",a:"León",w:"Darío died in León in 1916 and is buried in its Cathedral."},
+    {q:"Tap the department that contains Ciudad Darío (Metapa), where Darío was born.",a:"Matagalpa",w:"Metapa, now Ciudad Darío, is in Matagalpa department."}],
+ 4:[{q:"Tap the department where Zeledón made his last stand at Coyotepe and La Barranca.",a:"Masaya",w:"Coyotepe and La Barranca are hills at Masaya, overlooking the route toward the capital."},
+    {q:"Tap the department that holds the capital, Managua, seat of Zelaya's government.",a:"Managua",w:"Managua is the capital; the crisis of 1909 played out around Zelaya's government there."}]
+};
+
+/* ---------- lesson data ---------- */
+const LN={1:"Enlightenment, French Revolution and Bolívar",2:"Marxist philosophy",3:"Latin American thought and Rubén Darío",4:"Benjamín Zeledón"};
+const ACT=[['mcq','Concept MCQs'],['tf','True / False'],['cloze','Fill in the blank'],['voc','Vocabulary check'],['match','Matching'],['sort','Sort it'],['order','Timeline order'],['map','Map challenge'],['src','Source analysis'],['wr','Written response']];
+const IDX={
+ mcq:{1:[0,1,2,3,4,16,18,20,21,22],2:[5,6,7,17,19,23,24,25],3:[8,9,10,11,26,27,28,29],4:[12,13,14,15,30,31,32,33,34,35]},
+ tf:{1:[0,1,2,11,18],2:[3,4,12,14,15],3:[5,6,10,16,17],4:[7,8,9,13,19]},
+ cloze:{1:[0,1,8,9],2:[2,3,10,11],3:[4,5,12,13],4:[6,7,14,15]},
+ src:{1:[0,4,10,11],2:[1,9,12,13],3:[2,5,6,8],4:[3,7,14,15]},
+ wr:{1:[0,6],2:[5,8],3:[3,7],4:[1,2,4]}
+};
+const pick=(a,ix)=>ix.map(i=>a[i]);
+const VLES={
+ 1:["Enlightenment","Natural rights","Popular sovereignty","Separation of powers","Criollo","Emancipation","Gran Colombia","Patria Grande","Sapere aude","Unionism"],
+ 2:["Bourgeoisie","Proletariat","Means of production","Historical materialism","Surplus value","Alienation","Dialectic","Structural inequality"],
+ 3:["Modernismo","Anti-imperialism","Philosophy of liberation","Authentic philosophy","Dependence"],
+ 4:["Anti-imperialism","Sovereignty","Patriotism","Intervention","Self-determination","International law"]
+};
+const vocFor=l=>VLES[l].map(t=>VOC.find(v=>v[0]===t));
+const hasAct=(l,t)=>t!=='map'||!!MAPQ_BY[l];
+
+/* ---------- storage ---------- */
+const KEY='u3-progress-v1';
+let state={name:'',scores:{}};
+try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&typeof o==='object'){state.name=String(o.name||'');state.scores=o.scores||{};}}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}};
+const pctOf=(c,t)=>t?Math.round(c/t*100):0;
+function recordScore(l,t,c,tt){
+  const k=l+':'+t,p=state.scores[k];
+  if(!p||c/tt>=p.c/p.t)state.scores[k]={c,t:tt};
+  save();renderScores();
+}
+function lessonTotals(l){
+  let c=0,t=0,n=0,m=0;
+  ACT.forEach(([k])=>{if(!hasAct(l,k))return;m++;const s=state.scores[l+':'+k];if(s){c+=s.c;t+=s.t;n++;}});
+  return {c,t,n,m};
+}
+
+/* ---------- practice factory ---------- */
+function makePractice(l,rootEl){
+  const acts=ACT.filter(a=>hasAct(l,a[0]));
+  rootEl.innerHTML=`<div class="ptabs" role="tablist" aria-label="Activity type">${acts.map((a,i)=>`<button class="ptab" role="tab" aria-selected="${i===0}" data-p="${a[0]}">${a[1]}</button>`).join('')}</div>
+  <div class="scorebar"><b class="scoreTxt">Score: 0 / 0</b><div class="prog" aria-hidden="true"><i class="progBar"></i></div><span class="progTxt"></span><button class="btn alt resetBtn" type="button">Restart this set</button></div>
+  <div class="quiz"></div><div class="card summary"></div>`;
+  const quiz=$('.quiz',rootEl),summary=$('.summary',rootEl);
+  let mode='mcq',ans=0,cor=0,tot=0;
+  const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  function rec(c,m){ans+=m;cor+=c;update();}
+  function update(){
+    $('.scoreTxt',rootEl).textContent=`Score: ${cor} / ${ans}`;
+    $('.progTxt',rootEl).textContent=`${ans} of ${tot} answered`;
+    $('.progBar',rootEl).style.width=(tot?ans/tot*100:0)+'%';
+    if(tot&&ans===tot){
+      const pct=pctOf(cor,tot);
+      const msg=pct>=90?'Excellent work!':pct>=70?'Good job. Review the items you missed.':'Keep studying. Re-read the lesson and try again.';
+      summary.className='card summary show';
+      summary.innerHTML=`<div class="big">${pct}%</div><p><b>${cor} of ${tot} correct.</b> ${msg} Your score was saved on the “My score” page.</p><button class="btn againBtn" type="button">Try this set again</button>`;
+      $('.againBtn',summary).onclick=()=>build(mode);
+      recordScore(l,mode,cor,tot);
+    }
   }
-}
-const box=(label,i,body)=>{const c=document.createElement('div');c.className='q';c.innerHTML=`<div class="num">${label} ${i+1}</div>${body}`;return c;};
-function mcCard(item,idx,label,fixed){
-  const card=document.createElement('div');card.className='q';
-  const order=(fixed?item.o.map((t,i)=>({t,i})):shuffle(item.o.map((t,i)=>({t,i}))));
-  card.innerHTML=`<div class="num">${label} ${idx+1}</div>${item.src?`<div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div>`:''}<p class="stem">${esc(item.q)}</p><div class="opts"></div><div class="fb" role="status"></div>`;
-  const bx=$('.opts',card), fb=$('.fb',card);
-  order.forEach(op=>{
-    const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=op.t;
-    b.onclick=()=>{
-      const ok=op.i===item.a;
-      $$('.opt',bx).forEach((x,k)=>{x.disabled=true;if(order[k].i===item.a)x.classList.add('right');});
-      if(!ok)b.classList.add('wrong');
-      fb.className='fb show '+(ok?'ok':'no');
-      fb.innerHTML=`<b class="h">${ok?'✔ Correct!':'✘ Not quite.'}</b>${esc(item.w)}`;
-      rec(ok?1:0,1);
-    };
-    bx.appendChild(b);
-  });
-  return card;
-}
-function vocItems(){
-  return shuffle(VOC).slice(0,12).map(v=>{
-    const dist=shuffle(VOC.filter(x=>x[0]!==v[0])).slice(0,3).map(x=>x[0]);
-    return {q:`Which term matches this definition? “${v[1]}”`,o:[v[0],...dist],a:0,w:`“${v[0]}”: ${v[1]}`};
-  });
-}
-function matchCard(set,idx){
-  const rights=shuffle(set.p.map(p=>p[1]));
-  const card=box('Matching',idx,`<p class="stem">${esc(set.t)}</p><div class="rows"></div><p style="margin:8px 0 0"><button type="button" class="btn">Check my matches</button></p><div class="fb" role="status"></div>`);
-  const rows=$('.rows',card);
-  set.p.forEach(([l])=>{
-    const r=document.createElement('div');r.className='mrow';
-    r.innerHTML=`<div class="l"><b>${esc(l)}</b></div><select aria-label="${esc(l)}"><option value="">Choose…</option>${rights.map(x=>`<option>${esc(x)}</option>`).join('')}</select><div class="mark"></div>`;
-    rows.appendChild(r);
-  });
-  const btn=$('.btn',card),fb=$('.fb',card);
-  btn.onclick=()=>{
-    const sels=$$('select',card);
-    if(sels.some(x=>!x.value)){fb.className='fb show no';fb.innerHTML='<b class="h">Almost there</b>Choose an answer for every row first.';return;}
-    let n=0;const wrong=[];
-    sels.forEach((se,i)=>{const ok=se.value===set.p[i][1];if(ok)n++;else wrong.push(`<li><b>${esc(set.p[i][0])}</b> → ${esc(set.p[i][1])}</li>`);se.disabled=true;se.classList.add(ok?'right':'wrong');se.nextElementSibling.textContent=ok?'✔':'✘';});
-    btn.disabled=true;
-    const all=n===set.p.length;
-    fb.className='fb show '+(all?'ok':'no');
-    fb.innerHTML=`<b class="h">${n} of ${set.p.length} correct</b>${all?'Great matching!':'Correct matches for the ones you missed:<ul class="check">'+wrong.join('')+'</ul>'}`;
-    rec(n,set.p.length);
-  };
-  card.dataset.w=set.p.length;return card;
-}
-function sortCard(set,idx){
-  const card=box('Sort it',idx,`<p class="stem">${esc(set.t)}</p><div class="rows"></div><div class="fb" role="status"></div>`);
-  const rows=$('.rows',card);let done=0,good=0;
-  set.i.forEach(([txt,c])=>{
-    const r=document.createElement('div');r.className='srow';
-    r.innerHTML=`<p>${esc(txt)}</p><div class="cats">${set.c.map((n,k)=>`<button type="button" class="cat" data-k="${k}">${esc(n)}</button>`).join('')}</div><div class="note"></div>`;
-    $$('.cat',r).forEach(b=>b.onclick=()=>{
-      const k=+b.dataset.k,ok=k===c;
-      $$('.cat',r).forEach(x=>{x.disabled=true;if(+x.dataset.k===c)x.classList.add('right');});
-      if(!ok)b.classList.add('wrong');
-      $('.note',r).innerHTML=ok?'<b style="color:var(--good)">✔ Correct</b>':`<b style="color:var(--bad)">✘ It belongs under “${esc(set.c[c])}”.</b>`;
-      done++;if(ok)good++;rec(ok?1:0,1);
-      if(done===set.i.length){const fb=$('.fb',card);fb.className='fb show '+(good===done?'ok':'no');fb.innerHTML=`<b class="h">${good} of ${done} sorted correctly</b>`;}
+  const box=(label,i,body)=>{const c=document.createElement('div');c.className='q';c.innerHTML=`<div class="num">${label} ${i+1}</div>${body}`;return c;};
+  function mcCard(item,idx,label,fixed){
+    const card=document.createElement('div');card.className='q';
+    const order=(fixed?item.o.map((t,i)=>({t,i})):shuffle(item.o.map((t,i)=>({t,i}))));
+    card.innerHTML=`<div class="num">${label} ${idx+1}</div>${item.src?`<div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div>`:''}<p class="stem">${esc(item.q)}</p><div class="opts"></div><div class="fb" role="status"></div>`;
+    const bx=$('.opts',card),fb=$('.fb',card);
+    order.forEach(op=>{
+      const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=op.t;
+      b.onclick=()=>{
+        const ok=op.i===item.a;
+        $$('.opt',bx).forEach((x,k)=>{x.disabled=true;if(order[k].i===item.a)x.classList.add('right');});
+        if(!ok)b.classList.add('wrong');
+        fb.className='fb show '+(ok?'ok':'no');
+        fb.innerHTML=`<b class="h">${ok?'✔ Correct!':'✘ Not quite.'}</b>${esc(item.w)}`;
+        rec(ok?1:0,1);
+      };
+      bx.appendChild(b);
     });
-    rows.appendChild(r);
-  });
-  card.dataset.w=set.i.length;return card;
-}
-function orderCard(set,idx){
-  let arr=set.e.map((e,i)=>({i,t:e[1],y:e[0]}));
-  do{arr=shuffle(arr);}while(arr.every((x,k)=>x.i===k));
-  const card=box('Timeline',idx,`<p class="stem">${esc(set.t)}</p><ul class="ord"></ul><p style="margin:0"><button type="button" class="btn">Check order</button></p><div class="fb" role="status"></div>`);
-  const ul=$('.ord',card),btn=$('.btn',card),fb=$('.fb',card);
-  let locked=false;
-  const draw=()=>{
-    ul.innerHTML='';
-    arr.forEach((x,k)=>{
-      const li=document.createElement('li');
-      li.innerHTML=`<span>${locked?`<b>${esc(x.y)}</b> · `:''}${esc(x.t)}</span>${locked?'':'<button type="button" aria-label="Move up">↑</button><button type="button" aria-label="Move down">↓</button>'}`;
-      if(locked)li.classList.add(x.i===k?'right':'wrong');
-      if(!locked){const [u,d]=$$('button',li);u.onclick=()=>{if(k>0){[arr[k-1],arr[k]]=[arr[k],arr[k-1]];draw();}};d.onclick=()=>{if(k<arr.length-1){[arr[k+1],arr[k]]=[arr[k],arr[k+1]];draw();}};}
-      ul.appendChild(li);
+    return card;
+  }
+  function matchCard(set,idx){
+    const rights=shuffle(set.p.map(p=>p[1]));
+    const card=box('Matching',idx,`<p class="stem">${esc(set.t)}</p><div class="rows"></div><p style="margin:8px 0 0"><button type="button" class="btn">Check my matches</button></p><div class="fb" role="status"></div>`);
+    const rows=$('.rows',card);
+    set.p.forEach(([lft])=>{
+      const r=document.createElement('div');r.className='mrow';
+      r.innerHTML=`<div class="l"><b>${esc(lft)}</b></div><select aria-label="${esc(lft)}"><option value="">Choose…</option>${rights.map(x=>`<option>${esc(x)}</option>`).join('')}</select><div class="mark"></div>`;
+      rows.appendChild(r);
     });
-  };
-  draw();
-  btn.onclick=()=>{
-    locked=true;btn.disabled=true;const n=arr.filter((x,k)=>x.i===k).length;draw();
-    const ok=n===arr.length;fb.className='fb show '+(ok?'ok':'no');
-    fb.innerHTML=`<b class="h">${n} of ${arr.length} in the right place</b>${ok?'Perfect timeline!':'Correct order: '+set.e.map(e=>esc(e[0])).join(' → ')}`;
-    rec(n,arr.length);
-  };
-  card.dataset.w=arr.length;return card;
-}
-function mapCard(item,idx){
-  const card=box('Map',idx,`<p class="stem">${esc(item.q)}</p><svg class="qmap" viewBox="-12 -8 495 492" role="group" aria-label="Map of Nicaragua"></svg><div class="fb" role="status"></div>`);
-  const sv=$('svg',card),fb=$('.fb',card);
-  MAP.lakes.forEach(d=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','#7cc0f5');sv.appendChild(p);});
-  const ps=[];
-  MAP.d.forEach(dep=>{
-    const p=document.createElementNS(NS,'path');p.setAttribute('d',dep.d);p.setAttribute('class','d');p.setAttribute('tabindex',0);p.setAttribute('role','button');p.setAttribute('aria-label',dep.n);
-    const ti=document.createElementNS(NS,'title');ti.textContent=dep.n;p.appendChild(ti);
-    const go=()=>{
-      if(sv.classList.contains('done'))return;
-      sv.classList.add('done');const ok=dep.n===item.a;
-      p.classList.add(ok?'right':'wrong');
-      if(!ok)ps.forEach(q=>{if(q.dep===item.a)q.el.classList.add('right');});
-      fb.className='fb show '+(ok?'ok':'no');
-      fb.innerHTML=`<b class="h">${ok?'✔ Correct!':'✘ That was '+esc(dep.n)+'.'}</b>${ok?'':`The answer is <b>${esc(item.a)}</b>. `}${esc(item.w)}`;
-      rec(ok?1:0,1);
+    const btn=$('.btn',card),fb=$('.fb',card);
+    btn.onclick=()=>{
+      const sels=$$('select',card);
+      if(sels.some(x=>!x.value)){fb.className='fb show no';fb.innerHTML='<b class="h">Almost there</b>Choose an answer for every row first.';return;}
+      let n=0;const wrong=[];
+      sels.forEach((se,i)=>{const ok=se.value===set.p[i][1];if(ok)n++;else wrong.push(`<li><b>${esc(set.p[i][0])}</b> → ${esc(set.p[i][1])}</li>`);se.disabled=true;se.classList.add(ok?'right':'wrong');se.nextElementSibling.textContent=ok?'✔':'✘';});
+      btn.disabled=true;const all=n===set.p.length;
+      fb.className='fb show '+(all?'ok':'no');
+      fb.innerHTML=`<b class="h">${n} of ${set.p.length} correct</b>${all?'Great matching!':'Correct matches for the ones you missed:<ul class="check">'+wrong.join('')+'</ul>'}`;
+      rec(n,set.p.length);
     };
-    p.onclick=go;p.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}};
-    sv.appendChild(p);ps.push({el:p,dep:dep.n});
-  });
-  return card;
+    return [card,set.p.length];
+  }
+  function sortCard(set,idx){
+    const card=box('Sort it',idx,`<p class="stem">${esc(set.t)}</p><div class="rows"></div><div class="fb" role="status"></div>`);
+    const rows=$('.rows',card);let done=0,good=0;
+    set.i.forEach(([txt,c])=>{
+      const r=document.createElement('div');r.className='srow';
+      r.innerHTML=`<p>${esc(txt)}</p><div class="cats">${set.c.map((n,k)=>`<button type="button" class="cat" data-k="${k}">${esc(n)}</button>`).join('')}</div><div class="note"></div>`;
+      $$('.cat',r).forEach(b=>b.onclick=()=>{
+        const k=+b.dataset.k,ok=k===c;
+        $$('.cat',r).forEach(x=>{x.disabled=true;if(+x.dataset.k===c)x.classList.add('right');});
+        if(!ok)b.classList.add('wrong');
+        $('.note',r).innerHTML=ok?'<b style="color:var(--good)">✔ Correct</b>':`<b style="color:var(--bad)">✘ It belongs under “${esc(set.c[c])}”.</b>`;
+        done++;if(ok)good++;
+        if(done===set.i.length){const fb=$('.fb',card);fb.className='fb show '+(good===done?'ok':'no');fb.innerHTML=`<b class="h">${good} of ${done} sorted correctly</b>`;}
+        rec(ok?1:0,1);
+      });
+      rows.appendChild(r);
+    });
+    return [card,set.i.length];
+  }
+  function orderCard(set,idx){
+    let arr=set.e.map((e,i)=>({i,t:e[1],y:e[0]}));
+    do{arr=shuffle(arr);}while(arr.every((x,k)=>x.i===k));
+    const card=box('Timeline',idx,`<p class="stem">${esc(set.t)}</p><ul class="ord"></ul><p style="margin:0"><button type="button" class="btn">Check order</button></p><div class="fb" role="status"></div>`);
+    const ul=$('.ord',card),btn=$('.btn',card),fb=$('.fb',card);
+    let locked=false;
+    const draw=()=>{
+      ul.innerHTML='';
+      arr.forEach((x,k)=>{
+        const li=document.createElement('li');
+        li.innerHTML=`<span>${locked?`<b>${esc(x.y)}</b> · `:''}${esc(x.t)}</span>${locked?'':'<button type="button" aria-label="Move up">↑</button><button type="button" aria-label="Move down">↓</button>'}`;
+        if(locked)li.classList.add(x.i===k?'right':'wrong');
+        if(!locked){const [u,d]=$$('button',li);u.onclick=()=>{if(k>0){[arr[k-1],arr[k]]=[arr[k],arr[k-1]];draw();}};d.onclick=()=>{if(k<arr.length-1){[arr[k+1],arr[k]]=[arr[k],arr[k+1]];draw();}};}
+        ul.appendChild(li);
+      });
+    };
+    draw();
+    btn.onclick=()=>{
+      locked=true;btn.disabled=true;const n=arr.filter((x,k)=>x.i===k).length;draw();
+      const ok=n===arr.length;fb.className='fb show '+(ok?'ok':'no');
+      fb.innerHTML=`<b class="h">${n} of ${arr.length} in the right place</b>${ok?'Perfect timeline!':'Correct order: '+set.e.map(e=>esc(e[0])).join(' → ')}`;
+      rec(n,arr.length);
+    };
+    return [card,arr.length];
+  }
+  function mapCard(item,idx){
+    const card=box('Map',idx,`<p class="stem">${esc(item.q)}</p><svg class="qmap" viewBox="-12 -8 495 492" role="group" aria-label="Map of Nicaragua"></svg><div class="fb" role="status"></div>`);
+    const sv=$('svg',card),fb=$('.fb',card);
+    MAP.lakes.forEach(d=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','#7cc0f5');sv.appendChild(p);});
+    const ps=[];
+    MAP.d.forEach(dep=>{
+      const p=document.createElementNS(NS,'path');p.setAttribute('d',dep.d);p.setAttribute('class','d');p.setAttribute('tabindex',0);p.setAttribute('role','button');p.setAttribute('aria-label',dep.n);
+      const ti=document.createElementNS(NS,'title');ti.textContent=dep.n;p.appendChild(ti);
+      const go=()=>{
+        if(sv.classList.contains('done'))return;
+        sv.classList.add('done');const ok=dep.n===item.a;
+        p.classList.add(ok?'right':'wrong');
+        if(!ok)ps.forEach(q=>{if(q.dep===item.a)q.el.classList.add('right');});
+        fb.className='fb show '+(ok?'ok':'no');
+        fb.innerHTML=`<b class="h">${ok?'✔ Correct!':'✘ That was '+esc(dep.n)+'.'}</b>${ok?'':`The answer is <b>${esc(item.a)}</b>. `}${esc(item.w)}`;
+        rec(ok?1:0,1);
+      };
+      p.onclick=go;p.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}};
+      sv.appendChild(p);ps.push({el:p,dep:dep.n});
+    });
+    return [card,1];
+  }
+  function wrCard(item,idx){
+    const card=document.createElement('div');card.className='q';
+    card.innerHTML=`<div class="num">Written ${idx+1}</div><div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div><p class="stem">${esc(item.q)}</p><textarea aria-label="Your answer" placeholder="Write your answer here..."></textarea><p style="margin:8px 0 0"><button type="button" class="btn">Check my answer</button> <span class="legend wc"></span></p><div class="fb" role="status"></div>`;
+    const ta=$('textarea',card),btn=$('.btn',card),fb=$('.fb',card),wc=$('.wc',card);
+    let done=false;
+    ta.oninput=()=>{wc.textContent=(ta.value.trim().split(/\s+/).filter(Boolean).length)+' words';};
+    btn.onclick=()=>{
+      const txt=ta.value.toLowerCase();
+      if(txt.trim().split(/\s+/).filter(Boolean).length<15){fb.className='fb show no';fb.innerHTML='<b class="h">Add more detail</b>Write at least 15 words so we can check your key ideas.';return;}
+      const hits=item.keys.map(([lab,ws])=>[lab,ws.some(w=>txt.includes(w))]);
+      const n=hits.filter(h=>h[1]).length,ok=n===item.keys.length;
+      fb.className='fb show '+(ok?'ok':'no');
+      fb.innerHTML=`<b class="h">${n} of ${item.keys.length} key ideas found</b><ul class="check">${hits.map(([lb,h])=>`<li>${h?'✔':'✘'} ${esc(lb)}</li>`).join('')}</ul><b>Model answer:</b> ${esc(item.model)}<br><small>This keyword check is a guide. Compare meaning with the model and ask your teacher if unsure.</small>`;
+      if(!done){done=true;rec(n>=2?1:0,1);}
+    };
+    return [card,1];
+  }
+  function build(m){
+    mode=m;ans=0;cor=0;quiz.innerHTML='';summary.className='card summary';
+    let cards=[];
+    const one=(f)=>(x,i)=>[f(x,i),1];
+    if(m==='mcq')cards=shuffle(pick(MCQ,IDX.mcq[l])).slice(0,6).map((it,i)=>[mcCard(it,i,'Question'),1]);
+    if(m==='tf')cards=shuffle(pick(TF,IDX.tf[l])).map((t,i)=>[mcCard({q:t[0],o:['True','False'],a:t[1]?0:1,w:t[2]},i,'True or false?',true),1]);
+    if(m==='cloze')cards=shuffle(pick(CLOZE,IDX.cloze[l])).map((c,i)=>[mcCard({q:c[0],o:c[1],a:c[2],w:c[3]},i,'Fill in the blank'),1]);
+    if(m==='voc'){const terms=vocFor(l);cards=shuffle(terms).slice(0,8).map((v,i)=>{const dist=shuffle(VOC.filter(x=>x[0]!==v[0])).slice(0,3).map(x=>x[0]);return [mcCard({q:`Which term matches this definition? “${v[1]}”`,o:[v[0],...dist],a:0,w:`“${v[0]}”: ${v[1]}`},i,'Term'),1];});}
+    if(m==='match')cards=MATCH_BY[l].map((x,i)=>matchCard(x,i));
+    if(m==='sort')cards=SORT_BY[l].map((x,i)=>sortCard(x,i));
+    if(m==='order')cards=ORDER_BY[l].map((x,i)=>orderCard(x,i));
+    if(m==='map')cards=shuffle(MAPQ_BY[l]).map((x,i)=>mapCard(x,i));
+    if(m==='src')cards=shuffle(pick(SRC,IDX.src[l])).map((x,i)=>[mcCard(x,i,'Analysis'),1]);
+    if(m==='wr')cards=shuffle(pick(WR,IDX.wr[l])).slice(0,2).map((x,i)=>wrCard(x,i));
+    tot=cards.reduce((a,c)=>a+c[1],0);cards.forEach(c=>quiz.appendChild(c[0]));update();
+  }
+  $$('.ptab',rootEl).forEach(b=>b.onclick=()=>{$$('.ptab',rootEl).forEach(x=>x.setAttribute('aria-selected',x===b));build(b.dataset.p);});
+  $('.resetBtn',rootEl).onclick=()=>{build(mode);quiz.scrollIntoView({behavior:'smooth',block:'start'});};
+  build('mcq');
 }
-function wrCard(item,idx){
-  const card=document.createElement('div');card.className='q';
-  card.innerHTML=`<div class="num">Written ${idx+1}</div><div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div><p class="stem">${esc(item.q)}</p><textarea aria-label="Your answer" placeholder="Write your answer here..."></textarea><p style="margin:8px 0 0"><button type="button" class="btn">Check my answer</button> <span class="legend wc"></span></p><div class="fb" role="status"></div>`;
-  const ta=$('textarea',card),btn=$('.btn',card),fb=$('.fb',card),wc=$('.wc',card);
-  let done=false;
-  ta.oninput=()=>{wc.textContent=(ta.value.trim().split(/\s+/).filter(Boolean).length)+' words';};
-  btn.onclick=()=>{
-    const txt=ta.value.toLowerCase();
-    if(txt.trim().split(/\s+/).filter(Boolean).length<15){fb.className='fb show no';fb.innerHTML='<b class="h">Add more detail</b>Write at least 15 words so we can check your key ideas.';return;}
-    const hits=item.keys.map(([lab,ws])=>[lab,ws.some(w=>txt.includes(w))]);
-    const n=hits.filter(h=>h[1]).length, ok=n===item.keys.length;
-    fb.className='fb show '+(ok?'ok':'no');
-    fb.innerHTML=`<b class="h">${n} of ${item.keys.length} key ideas found</b><ul class="check">${hits.map(([l,h])=>`<li>${h?'✔':'✘'} ${esc(l)}</li>`).join('')}</ul><b>Model answer:</b> ${esc(item.model)}<br><small>This keyword check is a guide. Compare meaning with the model and ask your teacher if unsure.</small>`;
-    if(!done){done=true;rec(n>=2?1:0,1);}
-  };
-  return card;
+
+/* ---------- score views ---------- */
+function copyText(txt,btn){
+  const done=()=>{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);};
+  try{navigator.clipboard.writeText(txt).then(done,()=>fallback());}catch(e){fallback();}
+  function fallback(){const t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(e){}t.remove();}
 }
-function build(m){
-  mode=m;ans=0;cor=0;quiz.innerHTML='';summary.className='card summary';
-  let cards=[];
-  if(m==='mcq')cards=shuffle(MCQ).slice(0,12).map((it,i)=>[mcCard(it,i,'Question'),1]);
-  if(m==='tf')cards=shuffle(TF).slice(0,10).map((t,i)=>[mcCard({q:t[0],o:['True','False'],a:t[1]?0:1,w:t[2]},i,'True or false?',true),1]);
-  if(m==='cloze')cards=shuffle(CLOZE).map((c,i)=>[mcCard({q:c[0],o:c[1],a:c[2],w:c[3]},i,'Fill in the blank'),1]);
-  if(m==='voc')cards=vocItems().map((it,i)=>[mcCard(it,i,'Term'),1]);
-  if(m==='match')cards=MATCH.map((x,i)=>{const c=matchCard(x,i);return [c,+c.dataset.w];});
-  if(m==='sort')cards=SORT.map((x,i)=>{const c=sortCard(x,i);return [c,+c.dataset.w];});
-  if(m==='order')cards=ORDER.map((x,i)=>{const c=orderCard(x,i);return [c,+c.dataset.w];});
-  if(m==='map')cards=shuffle(MAPQ).map((x,i)=>[mapCard(x,i),1]);
-  if(m==='src')cards=shuffle(SRC).slice(0,8).map((x,i)=>[mcCard(x,i,'Analysis'),1]);
-  if(m==='wr')cards=shuffle(WR).slice(0,3).map((x,i)=>[wrCard(x,i),1]);
-  tot=cards.reduce((a,c)=>a+c[1],0);cards.forEach(c=>quiz.appendChild(c[0]));updateScore();
+function scoreHTML(l){
+  const rows=ACT.filter(a=>hasAct(l,a[0])).map(([k,lab])=>{const s=state.scores[l+':'+k];return `<tr><td>${lab}</td><td>${s?`${s.c} / ${s.t}`:'<span class="muted">Not completed</span>'}</td><td>${s?pctOf(s.c,s.t)+'%':'—'}</td></tr>`;}).join('');
+  const T=lessonTotals(l);
+  return `<h3>My score · Lesson ${l}</h3><p class="lead">${esc(LN[l])}</p>
+  <label class="namel">Student name <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(state.name)}"></label>
+  <table class="stbl"><thead><tr><th>Activity</th><th>Score</th><th>%</th></tr></thead><tbody>${rows}</tbody></table>
+  <div class="stot"><b>Lesson score:</b> ${T.t?`${T.c} / ${T.t} (${pctOf(T.c,T.t)}%)`:'no activities completed yet'}<br><small>${T.n} of ${T.m} activities completed. Finish each activity set to record its score; your best score for each activity is kept.</small></div>
+  <p class="copyline">${esc(state.name||'(name)')} · Unit III, Lesson ${l} · ${T.t?`${T.c}/${T.t} (${pctOf(T.c,T.t)}%)`:'no score yet'}</p>
+  <p><button class="btn copyBtn" type="button" data-l="${l}">Copy my score</button> <button class="btn alt printBtn" type="button">Print</button></p>`;
 }
-$$('.ptab').forEach(b=>b.onclick=()=>{$$('.ptab').forEach(x=>x.setAttribute('aria-selected',x===b));build(b.dataset.p);});
-$('#resetBtn').onclick=()=>{build(mode);quiz.scrollIntoView({behavior:'smooth',block:'start'});};
-build('mcq');
+function sumHTML(){
+  let C=0,TT=0;
+  const rows=[1,2,3,4].map(l=>{const T=lessonTotals(l);C+=T.c;TT+=T.t;return `<tr><td>Lesson ${l}: ${esc(LN[l])}</td><td>${T.n} / ${T.m}</td><td>${T.t?`${T.c} / ${T.t}`:'—'}</td><td>${T.t?pctOf(T.c,T.t)+'%':'—'}</td></tr>`;}).join('');
+  return `<h2>My scores</h2><p class="lead">Your score on the activities of all four lessons. Only your name and your scores are shown; your answers are not recorded.</p>
+  <label class="namel">Student name <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(state.name)}"></label>
+  <table class="stbl"><thead><tr><th>Lesson</th><th>Activities done</th><th>Score</th><th>%</th></tr></thead><tbody>${rows}</tbody></table>
+  <div class="stot"><b>Unit III total:</b> ${TT?`${C} / ${TT} (${pctOf(C,TT)}%)`:'no activities completed yet'}</div>
+  <p class="copyline">${esc(state.name||'(name)')} · Unit III · ${[1,2,3,4].map(l=>{const T=lessonTotals(l);return `L${l}: ${T.t?T.c+'/'+T.t:'—'}`;}).join(' · ')} · Total ${TT?C+'/'+TT+' ('+pctOf(C,TT)+'%)':'—'}</p>
+  <p><button class="btn copyBtn" type="button" data-l="all">Copy my scores</button> <button class="btn alt printBtn" type="button">Print</button> <button class="btn alt resetScores" type="button">Clear saved scores</button></p>`;
+}
+function renderScores(){
+  $$('.scoreView').forEach(v=>{const act=document.activeElement;const keep=act&&v.contains(act)&&act.classList.contains('nameIn');const pos=keep?act.selectionStart:0;v.innerHTML=v.dataset.l==='all'?sumHTML():scoreHTML(+v.dataset.l);wire(v);if(keep){const n=$('.nameIn',v);n.focus();try{n.setSelectionRange(pos,pos);}catch(e){}}});
+}
+function wire(v){
+  const ni=$('.nameIn',v);
+  ni.oninput=()=>{state.name=ni.value;save();renderScores();};
+  $$('.copyBtn',v).forEach(b=>b.onclick=()=>copyText($('.copyline',v).textContent,b));
+  $$('.printBtn',v).forEach(b=>b.onclick=()=>window.print());
+  const rs=$('.resetScores',v);if(rs)rs.onclick=()=>{if(confirm('Clear all saved scores on this device?')){state.scores={};save();renderScores();}};
+}
+
+/* ---------- tabs ---------- */
+const TABS=['home','l1','l2','l3','l4','sum'];
+function showTab(id,sub){
+  if(!TABS.includes(id))id='home';
+  TABS.forEach(t=>{$('#p-'+t).hidden=t!==id;});
+  $$('#mainNav button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===id));
+  const l=id[0]==='l'?+id[1]:0;
+  $$('.pin').forEach(p=>{const ls=(p.dataset.l||'').split(',');p.classList.toggle('dim',!!l&&!ls.includes(String(l)));});
+  $$('#pinList .pbtn').forEach(b=>{const ls=(b.dataset.l||'').split(',');b.classList.toggle('dim',!!l&&!ls.includes(String(l)));});
+  if(l)showSub(l,sub||'study');
+  try{history.replaceState(null,'','#'+id);}catch(e){}
+  scrollTo({top:0});
+}
+function showSub(l,sub){
+  const p=$('#p-l'+l);
+  $$('.lsub',p).forEach(s=>s.hidden=s.dataset.sub!==sub);
+  $$('.subnav button',p).forEach(b=>b.setAttribute('aria-selected',b.dataset.s===sub));
+}
+$$('#mainNav button').forEach(b=>b.onclick=()=>showTab(b.dataset.t));
+$$('[data-goto]').forEach(b=>b.onclick=()=>{const [t,s]=b.dataset.goto.split(':');showTab(t,s);});
+[1,2,3,4].forEach(l=>{
+  const p=$('#p-l'+l);
+  $$('.subnav button',p).forEach(b=>b.onclick=()=>{showSub(l,b.dataset.s);});
+  $('.vgrid',p).innerHTML=vocFor(l).map(([t,d])=>`<button type="button" class="vcard"><div class="t">${esc(t)}</div><div class="d">${esc(d)}</div><div class="hint">Tap to flip</div></button>`).join('');
+  $$('.vcard',p).forEach(c=>c.onclick=()=>c.classList.toggle('open'));
+  makePractice(l,$('.practiceRoot',p));
+});
+renderScores();
+showTab((location.hash||'').slice(1)||'home');
+
 })();
 </script>
 </body>
