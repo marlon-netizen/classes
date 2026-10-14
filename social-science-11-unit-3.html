@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit III Emancipation Philosophy | 11th Social Science</title>
+<meta name="description" content="Interactive review for 11th grade Social Science, Unit III: Philosophy of Emancipation and the Heroic Legacy. Concepts, map of Nicaragua, and practice with instant feedback.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0067c6; --blue-deep:#0b3d7a; --sky:#e6f1fb; --gold:#f2b705; --gold-soft:#fdf3cf;
+  --terra:#c8553d; --terra-soft:#fbe7e1; --green:#2e8b57; --green-soft:#e2f3e8;
+  --bg:#fbf7ee; --surface:#ffffff; --ink:#22262e; --muted:#5b6270; --line:#e4dccb;
+  --good:#1f7a4d; --good-soft:#def2e6; --bad:#b3372a; --bad-soft:#fae3df;
+  --shadow:0 1px 2px rgba(20,30,50,.07),0 6px 18px rgba(20,30,50,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --blue:#6db3f2; --blue-deep:#0a2a52; --sky:#14283f; --gold:#f5c93a; --gold-soft:#3a3010;
+    --terra:#ee8f78; --terra-soft:#38211b; --green:#6cc795; --green-soft:#17301f;
+    --bg:#10151d; --surface:#18202b; --ink:#e8ebf0; --muted:#a2adbd; --line:#2d3947;
+    --good:#66cc95; --good-soft:#15301f; --bad:#f08a7c; --bad-soft:#38201d; --shadow:0 1px 2px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --blue:#6db3f2; --blue-deep:#0a2a52; --sky:#14283f; --gold:#f5c93a; --gold-soft:#3a3010;
+  --terra:#ee8f78; --terra-soft:#38211b; --green:#6cc795; --green-soft:#17301f;
+  --bg:#10151d; --surface:#18202b; --ink:#e8ebf0; --muted:#a2adbd; --line:#2d3947;
+  --good:#66cc95; --good-soft:#15301f; --bad:#f08a7c; --bad-soft:#38201d; --shadow:0 1px 2px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.75 "Merriweather",Georgia,serif}
+h1,h2,h3,h4{font-family:"Merriweather",Georgia,serif;line-height:1.3;margin:0 0 .5em}
+h2{font-size:1.65rem;font-weight:900} h3{font-size:1.2rem;font-weight:700} h4{font-size:1rem;font-weight:700}
+p{margin:0 0 1em} a{color:var(--blue)}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+section{padding:36px 0 8px}
+
+/* Chorotega-style zigzag band */
+.zig{height:14px;background:
+  linear-gradient(135deg,var(--gold) 25%,transparent 25%) -14px 0/28px 14px,
+  linear-gradient(225deg,var(--gold) 25%,transparent 25%) -14px 0/28px 14px,
+  linear-gradient(315deg,var(--terra) 25%,transparent 25%) 0 0/28px 14px,
+  linear-gradient(45deg,var(--terra) 25%,transparent 25%) 0 0/28px 14px,var(--blue-deep)}
+
+header.top{background:linear-gradient(180deg,#0067c6 0%,#0b3d7a 100%);color:#fff;position:relative;overflow:hidden}
+header.top .wrap{display:flex;flex-wrap:wrap;gap:20px;align-items:center;padding-top:30px;padding-bottom:26px;position:relative;z-index:1}
+.crest{flex:0 0 auto;width:120px;height:auto;filter:drop-shadow(0 3px 6px rgba(0,0,0,.35))}
+.titles{flex:1 1 320px}
+.kicker{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#ffe08a;margin:0 0 .4rem;font-weight:700}
+h1{font-size:clamp(1.6rem,4.4vw,2.5rem);font-weight:900;color:#fff;margin:0 0 .4rem}
+.sub{margin:0;color:#dbe9fa;font-size:.98rem}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pill{font-size:.78rem;padding:3px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3)}
+.volcanoes{position:absolute;right:0;bottom:0;width:min(520px,70%);opacity:.22;z-index:0}
+.theme-btn{position:absolute;top:10px;right:12px;z-index:2;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:8px;padding:3px 10px;font-size:.78rem}
+
+nav.sticky{position:sticky;top:0;z-index:30;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+nav.sticky .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:6px;padding-bottom:6px}
+nav.sticky a{white-space:nowrap;text-decoration:none;color:var(--ink);font-size:.85rem;font-weight:700;padding:7px 12px;border-radius:8px}
+nav.sticky a:hover,nav.sticky a.on{background:var(--gold-soft);color:var(--blue-deep)}
+:root[data-theme="dark"] nav.sticky a.on{color:var(--gold)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px 22px;margin-bottom:18px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.goal{border-top:5px solid var(--gold)} .goal:nth-child(2){border-top-color:var(--terra)} .goal:nth-child(3){border-top-color:var(--green)} .goal:nth-child(4){border-top-color:var(--blue)}
+.goal .n{font-size:1.9rem;font-weight:900;color:var(--blue);line-height:1}
+.lead{font-size:1.02rem;color:var(--muted)}
+
+/* concept tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tab{border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 14px;font-weight:700;font-size:.85rem}
+.tab[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#0a1626}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0a1626}}
+.panel[hidden]{display:none}
+.panel h3{color:var(--blue)}
+.key{background:var(--gold-soft);border-left:5px solid var(--gold);border-radius:8px;padding:12px 16px;margin:14px 0;font-size:.95rem}
+.key b{color:var(--terra)}
+.quote{border-left:4px solid var(--terra);margin:14px 0;padding:6px 16px;font-style:italic;background:var(--terra-soft);border-radius:0 8px 8px 0;font-size:.95rem}
+.quote cite{display:block;font-style:normal;font-size:.8rem;color:var(--muted);margin-top:4px}
+.two{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.mini{background:var(--sky);border-radius:10px;padding:12px 16px;font-size:.92rem}
+.mini h4{color:var(--blue);margin-bottom:.3em}
+ul.tight{margin:.3em 0 1em;padding-left:1.2em} ul.tight li{margin-bottom:.35em}
+.nic{background:var(--green-soft);border:1px dashed var(--green);border-radius:10px;padding:12px 16px;font-size:.93rem;margin-top:12px}
+.nic b{color:var(--green)}
+
+/* timeline */
+.timeline{position:relative;margin:10px 0 0;padding-left:26px;border-left:4px solid var(--blue)}
+.tl{position:relative;margin-bottom:14px;font-size:.92rem}
+.tl:before{content:"";position:absolute;left:-36px;top:5px;width:16px;height:16px;border-radius:50%;background:var(--gold);border:3px solid var(--blue)}
+.tl.nicx:before{background:var(--terra)}
+.tl b{color:var(--blue)}
+
+/* vocab flip */
+.vgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.vcard{background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:14px;min-height:112px;text-align:left;transition:.15s}
+.vcard:hover{border-color:var(--blue)}
+.vcard .t{font-weight:900;color:var(--blue);font-size:.98rem}
+.vcard .d{display:none;font-size:.82rem;line-height:1.6;margin-top:6px}
+.vcard.open{background:var(--gold-soft);border-color:var(--gold)} .vcard.open .d{display:block}
+.vcard .hint{font-size:.72rem;color:var(--muted);margin-top:6px}
+.vcard.open .hint{display:none}
+
+/* map */
+.mapbox{display:grid;gap:18px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+@media (max-width:760px){.mapbox{grid-template-columns:1fr}}
+#mapSvg{width:100%;height:auto;background:var(--sky);border-radius:14px;border:1px solid var(--line)}
+.reg{cursor:pointer;stroke:#fff;stroke-width:2;transition:opacity .15s,filter .15s}
+.reg:hover,.reg:focus{filter:brightness(1.12);outline:none}
+.reg.sel{stroke:var(--ink);stroke-width:3}
+.lbl{font:900 13px "Merriweather",serif;fill:#fff;pointer-events:none;paint-order:stroke;stroke:rgba(0,0,0,.35);stroke-width:3px}
+.pin{cursor:pointer}
+.pin circle{fill:var(--gold);stroke:#222;stroke-width:1.5}
+.pin text{font:900 10px "Merriweather",serif;fill:#222;pointer-events:none}
+.pbtn{border:0;cursor:pointer;font-family:inherit}.pbtn:hover{background:var(--gold-soft)}
+.info{min-height:260px}
+.info h3{margin-bottom:.2em}
+.chip{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:999px;margin:2px 4px 2px 0;background:var(--sky);color:var(--blue-deep)}
+:root[data-theme="dark"] .chip{color:var(--blue)}
+.toggles{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;font-size:.82rem}
+.toggles label{display:flex;gap:6px;align-items:center;background:var(--surface);border:1px solid var(--line);padding:4px 10px;border-radius:999px;cursor:pointer}
+.legend{font-size:.78rem;color:var(--muted);margin-top:8px}
+
+/* practice */
+.ptabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.ptab{border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 16px;font-weight:700;font-size:.88rem}
+.ptab[aria-selected="true"]{background:var(--terra);border-color:var(--terra);color:#fff}
+:root[data-theme="dark"] .ptab[aria-selected="true"]{color:#1a0d09}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ptab[aria-selected="true"]{color:#1a0d09}}
+.scorebar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:14px;font-size:.88rem}
+.prog{flex:1 1 180px;height:10px;background:var(--line);border-radius:999px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--green));transition:width .3s}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.q .num{font-size:.75rem;font-weight:700;color:var(--terra);letter-spacing:.08em;text-transform:uppercase}
+.q p.stem{font-weight:700;margin:.2em 0 .8em}
+.src{background:var(--sky);border-left:4px solid var(--blue);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.9rem;font-style:italic;margin:0 0 .9em}
+.src small{display:block;font-style:normal;color:var(--muted);margin-top:3px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:9px 14px;margin-bottom:8px;font-size:.9rem;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--blue)}
+.opt:disabled{cursor:default}
+.opt.right{background:var(--good-soft);border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.fb{display:none;margin-top:6px;padding:10px 14px;border-radius:10px;font-size:.88rem}
+.fb.show{display:block}
+.fb.ok{background:var(--good-soft);border-left:5px solid var(--good)}
+.fb.no{background:var(--bad-soft);border-left:5px solid var(--bad)}
+.fb b.h{display:block;margin-bottom:2px}
+textarea{width:100%;min-height:110px;border:2px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:.9rem;background:var(--bg);color:var(--ink);resize:vertical}
+.btn{background:var(--blue);color:#fff;border:0;border-radius:10px;padding:9px 18px;font-weight:700;font-size:.88rem}
+:root[data-theme="dark"] .btn{color:#0a1626}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0a1626}}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.check{list-style:none;padding:0;margin:8px 0}
+.check li{padding:3px 0;font-size:.88rem}
+.summary{display:none;text-align:center;padding:22px}
+.summary.show{display:block}
+.summary .big{font-size:2.4rem;font-weight:900;color:var(--blue)}
+footer{margin-top:40px;background:var(--blue-deep);color:#cfe0f5;font-size:.82rem;text-align:center}
+footer .wrap{padding:18px 16px}
+.sr{position:absolute;left:-9999px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">☾ Theme</button>
+  <svg class="volcanoes" viewBox="0 0 520 120" aria-hidden="true">
+    <path d="M0 120 L70 50 L90 64 L120 20 L150 60 L190 40 L240 90 L290 30 L320 52 L360 12 L400 70 L440 44 L520 120Z" fill="#fff"/>
+  </svg>
+  <div class="wrap">
+    <svg class="crest" viewBox="0 0 120 112" role="img" aria-label="Nicaraguan emblem: triangle with five volcanoes, rainbow and Phrygian cap">
+      <defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9fd4ff"/><stop offset="1" stop-color="#e9f6ff"/></linearGradient>
+      <clipPath id="tri"><path d="M60 6 L112 100 L8 100Z"/></clipPath></defs>
+      <path d="M60 6 L112 100 L8 100Z" fill="url(#sk)" stroke="#f2b705" stroke-width="5" stroke-linejoin="round"/>
+      <g clip-path="url(#tri)">
+        <path d="M60 20 m-26 30 a26 26 0 0 1 52 0" fill="none" stroke="#e34a4a" stroke-width="2.4"/>
+        <path d="M60 22 m-22 28 a22 22 0 0 1 44 0" fill="none" stroke="#f2b705" stroke-width="2.4"/>
+        <path d="M60 24 m-18 26 a18 18 0 0 1 36 0" fill="none" stroke="#3aa65b" stroke-width="2.4"/>
+        <path d="M60 26 m-14 24 a14 14 0 0 1 28 0" fill="none" stroke="#2a70d6" stroke-width="2.4"/>
+        <g fill="#6a4a3a"><path d="M18 90 L30 62 L42 90Z"/><path d="M36 90 L48 66 L60 90Z"/><path d="M52 90 L64 60 L76 90Z"/><path d="M68 90 L80 66 L92 90Z"/><path d="M82 90 L94 62 L106 90Z"/></g>
+        <path d="M0 88 Q30 82 60 88 T120 88 V120 H0Z" fill="#2a70d6"/>
+        <path d="M0 96 Q30 90 60 96 T120 96 V120 H0Z" fill="#1c55ad"/>
+      </g>
+      <path d="M52 56 q8 -14 16 0 l-2 8 h-12z" fill="#e34a4a" stroke="#fff" stroke-width="1"/>
+      <g stroke="#f2b705" stroke-width="1.6"><path d="M60 40 v-8 M50 44 l-5 -6 M70 44 l5 -6"/></g>
+    </svg>
+    <div class="titles">
+      <p class="kicker">Lincoln International Academy · 11th Grade Social Science</p>
+      <h1>Unit III: Philosophy of Emancipation and the Heroic Legacy</h1>
+      <p class="sub">Study guide and practice · MINED Semester I · Q2 · 18 class hours</p>
+      <div class="pills"><span class="pill">Enlightenment &amp; Bolívar</span><span class="pill">Marxist philosophy</span><span class="pill">Rubén Darío</span><span class="pill">Benjamín Zeledón</span></div>
+    </div>
+  </div>
+  <div class="zig" aria-hidden="true"></div>
+</header>
+
+<nav class="sticky" aria-label="Sections"><div class="wrap">
+  <a href="#overview">Overview</a><a href="#concepts">Concepts</a><a href="#timeline">Timeline</a><a href="#vocab">Vocabulary</a><a href="#map">Map of Nicaragua</a><a href="#practice">Practice</a>
+</div></nav>
+
+<main class="wrap">
+
+<section id="overview">
+  <h2>What you will learn</h2>
+  <p class="lead">Between 1750 and 1912, ideas about freedom, equality and justice crossed oceans and shaped the new nations of Latin America, including Nicaragua. This unit follows those ideas and the people who turned them into action.</p>
+  <div class="grid">
+    <div class="card goal"><div class="n">1</div><h4>Enlightenment, French Revolution, Bolívar</h4><p style="font-size:.9rem;margin:0">How new ideas about rights and sovereignty inspired emancipation in Latin America.</p></div>
+    <div class="card goal"><div class="n">2</div><h4>Marxist philosophy</h4><p style="font-size:.9rem;margin:0">Context, influences, characteristics, inequality and social transformation.</p></div>
+    <div class="card goal"><div class="n">3</div><h4>Latin American thought &amp; Rubén Darío</h4><p style="font-size:.9rem;margin:0">Main thinkers and the regional impact of Darío's poetry and ideas.</p></div>
+    <div class="card goal"><div class="n">4</div><h4>Benjamín Zeledón</h4><p style="font-size:.9rem;margin:0">Anti-imperialism, ethics, patriotism and sovereignty in his letters and proclamations.</p></div>
+  </div>
+  <div class="key"><b>Skills you will practice:</b> (1) <i>Conceptual</i>, explain how two Enlightenment ideas influenced Latin American emancipation; (2) <i>Procedural</i>, interpret a source and support your reading with quotations; (3) <i>Attitudinal</i>, respect other viewpoints in a philosophical dialogue by paraphrasing a classmate before you respond.</div>
+</section>
+
+<section id="concepts">
+  <h2>Core concepts</h2>
+  <div class="tabs" role="tablist" aria-label="Topics">
+    <button class="tab" role="tab" aria-selected="true" aria-controls="t1" id="b1">1 · Enlightenment &amp; Bolívar</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="t2" id="b2">2 · Marxism</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="t3" id="b3">3 · Latin American thought &amp; Darío</button>
+    <button class="tab" role="tab" aria-selected="false" aria-controls="t4" id="b4">4 · Benjamín Zeledón</button>
+  </div>
+
+  <!-- Topic 1 -->
+  <div class="card panel" id="t1" role="tabpanel" aria-labelledby="b1">
+    <h3>Enlightenment, French Revolution and the legacy of Simón Bolívar</h3>
+    <p>The <b>Enlightenment</b> was an eighteenth-century European movement that trusted <i>reason</i> more than tradition or absolute monarchy. Its thinkers argued that people have rights by nature and that government exists to protect them.</p>
+    <div class="two">
+      <div class="mini"><h4>John Locke</h4><b>Natural rights:</b> life, liberty and property. A government that violates them loses legitimacy.</div>
+      <div class="mini"><h4>Jean-Jacques Rousseau</h4><b>Popular sovereignty:</b> power belongs to the people, who form a "social contract."</div>
+      <div class="mini"><h4>Montesquieu</h4><b>Separation of powers:</b> legislative, executive and judicial branches check each other.</div>
+      <div class="mini"><h4>Voltaire</h4><b>Tolerance and free expression</b> against religious fanaticism and censorship.</div>
+    </div>
+    <h4 style="margin-top:18px">The French Revolution (1789)</h4>
+    <p>The French people overthrew the absolute monarchy and the privileges of nobles and clergy. The <b>Declaration of the Rights of Man and of the Citizen</b> proclaimed liberty, equality and national sovereignty.</p>
+    <div class="quote">"Men are born and remain free and equal in rights."<cite>Declaration of the Rights of Man and of the Citizen, 1789, Article 1</cite></div>
+    <h4>How the ideas reached Latin America</h4>
+    <ul class="tight">
+      <li>Educated <b>criollos</b> (American-born people of Spanish descent) read Enlightenment works and resented colonial rules that gave top posts to Spain-born officials.</li>
+      <li>Antonio Nariño translated and printed the Declaration of Rights in Bogotá in 1794.</li>
+      <li>Other models: the independence of the United States (1776) and the Haitian Revolution (1791–1804), the first successful uprising of enslaved people.</li>
+      <li>In 1808 Napoleon invaded Spain. The crown's authority collapsed, and local juntas began claiming that sovereignty returned to the people.</li>
+    </ul>
+    <h4>Simón Bolívar (1783–1830), "El Libertador"</h4>
+    <p>Born in Caracas, Bolívar studied under Simón Rodríguez and read Enlightenment authors. After a trip to Europe he promised to free his homeland. He led armies that liberated what are now Venezuela, Colombia, Ecuador, Peru and Bolivia.</p>
+    <ul class="tight">
+      <li><b>Jamaica Letter (1815):</b> analyzes why Spanish America deserved independence and imagines possible futures for the new nations.</li>
+      <li><b>Angostura Address (1819):</b> argues for a strong republic with separation of powers; the Republic of <b>Gran Colombia</b> is founded the same year.</li>
+      <li><b>Congress of Panama (1826):</b> his proposal for an alliance of the new republics, the dream of the <b>Patria Grande</b>, a united Latin America.</li>
+      <li>He died in 1830, disappointed by the divisions among the new countries, yet his legacy of freedom and unity remains.</li>
+    </ul>
+    <div class="nic"><b>Nicaraguan connection:</b> Central America declared independence from Spain on 15 September 1821. Bolívar's call for American unity and the ideas of sovereignty later inspired Nicaraguan thinkers such as Rubén Darío and Benjamín Zeledón.</div>
+  </div>
+
+  <!-- Topic 2 -->
+  <div class="card panel" id="t2" role="tabpanel" aria-labelledby="b2" hidden>
+    <h3>Marxist philosophy: context, characteristics and transformations</h3>
+    <p><b>Karl Marx</b> (1818–1883) and <b>Friedrich Engels</b> (1820–1895) developed their ideas in nineteenth-century Europe, where the <b>Industrial Revolution</b> created huge wealth alongside harsh factory work, child labor, low wages and crowded cities.</p>
+    <h4>Influences</h4>
+    <ul class="tight">
+      <li><b>German philosophy</b> (Hegel): history moves through contradictions, called the <i>dialectic</i>. Marx gave this a material basis.</li>
+      <li><b>French utopian socialism</b> (Saint-Simon, Fourier): imagined fairer societies, but without a method to build them.</li>
+      <li><b>British political economy</b> (Adam Smith, David Ricardo): analysis of labor, value and capital.</li>
+    </ul>
+    <h4>Main characteristics</h4>
+    <div class="two">
+      <div class="mini"><h4>Historical materialism</h4>How people produce what they need (the <i>economic base</i>) shapes laws, politics, religion and ideas (the <i>superstructure</i>).</div>
+      <div class="mini"><h4>Class struggle</h4>Societies are divided between those who own the <b>means of production</b> (<b>bourgeoisie</b>) and those who sell their labor (<b>proletariat</b>).</div>
+      <div class="mini"><h4>Surplus value &amp; alienation</h4>Owners keep value that workers create beyond their wages; workers become estranged from their product and themselves.</div>
+      <div class="mini"><h4>Social transformation</h4>Capitalism would be replaced by socialism and, eventually, a classless society without exploitation.</div>
+    </div>
+    <div class="quote">"The history of all hitherto existing society is the history of class struggles."<cite>Marx and Engels, The Communist Manifesto, 1848</cite></div>
+    <h4>Key works and impact</h4>
+    <ul class="tight">
+      <li><i>The Communist Manifesto</i> (1848) and <i>Das Kapital</i> (1867).</li>
+      <li>Inspired labor unions, socialist parties and revolutions, including Russia in 1917.</li>
+      <li>In Latin America, thinkers like José Carlos Mariátegui (Peru) adapted Marxism to Indigenous and peasant realities, and it influenced twentieth-century liberation movements.</li>
+      <li>It is also debated and criticized: scholars discuss its predictions, its economic theory and the political systems built in its name.</li>
+    </ul>
+    <div class="nic"><b>Nicaraguan connection:</b> Questions about inequality, land and who benefits from a country's wealth appear throughout Nicaraguan history. Studying Marxism helps you analyze those debates critically.</div>
+  </div>
+
+  <!-- Topic 3 -->
+  <div class="card panel" id="t3" role="tabpanel" aria-labelledby="b3" hidden>
+    <h3>Latin American philosophical thought and Rubén Darío</h3>
+    <p>Latin American thought asks: <i>Who are we? How can we be free and just on our own terms?</i> Thinkers combined European ideas with local realities, Indigenous heritage and the experience of colonialism.</p>
+    <div class="two">
+      <div class="mini"><h4>Simón Rodríguez</h4>Educator who argued that Americans must create their own original institutions.</div>
+      <div class="mini"><h4>Andrés Bello</h4>Venezuelan scholar; shaped education, grammar and law in the new republics.</div>
+      <div class="mini"><h4>José Martí (Cuba)</h4><i>Nuestra América</i> (1891): know our own history and resist outside domination.</div>
+      <div class="mini"><h4>José Enrique Rodó (Uruguay)</h4><i>Ariel</i> (1900): defended spiritual and cultural values against pure materialism.</div>
+      <div class="mini"><h4>José Carlos Mariátegui (Peru)</h4>Linked Marxism with the situation of Indigenous peoples.</div>
+      <div class="mini"><h4>Paulo Freire &amp; Enrique Dussel</h4>Pedagogy of the Oppressed and the philosophy of liberation, twentieth century.</div>
+    </div>
+    <h4 style="margin-top:18px">Rubén Darío (1867–1916)</h4>
+    <p>Born in Metapa (today Ciudad Darío), Nicaragua, he became the leading voice of <b>Modernismo</b>, the first Latin American literary movement to influence Spain and the world. He renewed the Spanish language with new rhythms, images and cosmopolitan themes.</p>
+    <ul class="tight">
+      <li><b>Azul…</b> (1888): launched Modernismo. <b>Prosas profanas</b> (1896) and <b>Cantos de vida y esperanza</b> (1905) followed.</li>
+      <li>His poem <b>"A Roosevelt"</b> warns about United States expansion in Latin America and defends Hispanic identity.</li>
+      <li>He promoted cultural unity among Spanish-speaking nations, a cultural form of the Patria Grande.</li>
+      <li>He died in León, Nicaragua, in 1916; his tomb is in the León Cathedral. He is called the "Prince of Castilian letters."</li>
+    </ul>
+    <div class="quote">"Eres los Estados Unidos, eres el futuro invasor de la América ingenua que tiene sangre indígena, que aún reza a Jesucristo y aún habla en español."<cite>Rubén Darío, "A Roosevelt," 1904</cite></div>
+    <div class="nic"><b>Nicaraguan connection:</b> Darío made Nicaragua a literary capital of the Spanish-speaking world. Each year the Rubén Darío International Poetry Festival is held in Granada, and León hosts his museum and tomb.</div>
+  </div>
+
+  <!-- Topic 4 -->
+  <div class="card panel" id="t4" role="tabpanel" aria-labelledby="b4" hidden>
+    <h3>Benjamín Zeledón: anti-imperialism, ethics, patriotism and sovereignty</h3>
+    <p><b>Benjamín Zeledón Rodríguez</b> (1879–1912) was a lawyer, Liberal soldier and patriot, now honored as a <b>National Hero</b> of Nicaragua.</p>
+    <h4>Historical context</h4>
+    <ul class="tight">
+      <li>President José Santos Zelaya (Liberal Revolution of 1893) pursued modernization and an independent course. His government came into conflict with the United States over canal and financial interests.</li>
+      <li>In 1909 a Conservative rebellion, backed by U.S. interests, and the U.S. <i>Knox Note</i> pushed Zelaya out. The United States then supported conservative governments, including that of Adolfo Díaz.</li>
+      <li>In 1912, when Díaz asked for U.S. military help, U.S. Marines landed in Nicaragua.</li>
+    </ul>
+    <h4>His thought and actions</h4>
+    <div class="two">
+      <div class="mini"><h4>Influences</h4>Liberal and Enlightenment ideas of law and rights, Bolívar's call for American unity, and Latin American nationalism.</div>
+      <div class="mini"><h4>Letters &amp; proclamations</h4>He wrote to foreign officials and to the Nicaraguan people, rejecting foreign intervention and calling on citizens to defend the homeland.</div>
+      <div class="mini"><h4>Anti-imperialism</h4>He opposed governments kept in power by foreign troops and the loss of national decision-making.</div>
+      <div class="mini"><h4>Ethics &amp; patriotism</h4>He refused personal advantage, accepted sacrifice and put the nation before himself.</div>
+    </div>
+    <h4 style="margin-top:14px">The 1912 campaign and death</h4>
+    <ul class="tight">
+      <li>He led the patriotic resistance against the Díaz government and U.S. intervention, and gathered popular support.</li>
+      <li>On 3–4 October 1912 he defended the hills of <b>Coyotepe</b> and <b>La Barranca</b> near Masaya. Superior U.S. and government forces prevailed.</li>
+      <li>He was captured and executed on <b>4 October 1912</b> in Niquinohomo. He is buried in Catarina.</li>
+      <li>In Niquinohomo, a young Augusto C. Sandino witnessed these events. The memory later inspired Sandino's own struggle for sovereignty.</li>
+    </ul>
+    <div class="key"><b>Why he matters:</b> Zeledón links the Enlightenment idea of <i>popular sovereignty</i> and Bolívar's dream of free American nations to a concrete Nicaraguan defense of national independence.</div>
+    <div class="nic"><b>Nicaraguan connection:</b> This is part of national heritage. Historic sites such as Coyotepe Fortress and the town of Catarina keep his memory alive.</div>
+  </div>
+</section>
+
+<section id="timeline">
+  <h2>Timeline of ideas and events</h2>
+  <div class="card">
+    <div class="timeline">
+      <div class="tl"><b>1689</b> · Locke's <i>Two Treatises of Government</i> defend natural rights.</div>
+      <div class="tl"><b>1748 / 1762</b> · Montesquieu's <i>Spirit of the Laws</i>; Rousseau's <i>Social Contract</i>.</div>
+      <div class="tl"><b>1776</b> · United States Declaration of Independence.</div>
+      <div class="tl"><b>1789</b> · French Revolution and the Declaration of the Rights of Man.</div>
+      <div class="tl"><b>1791–1804</b> · Haitian Revolution.</div>
+      <div class="tl"><b>1808–1810</b> · Napoleon invades Spain; first juntas in Spanish America.</div>
+      <div class="tl"><b>1815</b> · Bolívar writes the Jamaica Letter.</div>
+      <div class="tl"><b>1819</b> · Angostura Address; Gran Colombia created.</div>
+      <div class="tl nicx"><b>1821</b> · Central America declares independence (15 September).</div>
+      <div class="tl"><b>1826</b> · Congress of Panama. <b>1830</b> · Bolívar dies.</div>
+      <div class="tl"><b>1848</b> · <i>The Communist Manifesto</i>. <b>1867</b> · <i>Das Kapital</i>.</div>
+      <div class="tl nicx"><b>1867</b> · Rubén Darío is born in Metapa. <b>1879</b> · Benjamín Zeledón is born.</div>
+      <div class="tl nicx"><b>1888</b> · <i>Azul…</i> begins Modernismo. <b>1893</b> · Zelaya's Liberal Revolution.</div>
+      <div class="tl nicx"><b>1905</b> · <i>Cantos de vida y esperanza</i>. <b>1909</b> · Zelaya resigns.</div>
+      <div class="tl nicx"><b>1912</b> · U.S. Marines land; Zeledón killed on 4 October.</div>
+      <div class="tl nicx"><b>1916</b> · Rubén Darío dies in León.</div>
+    </div>
+    <p class="legend">Gold dots mark world and Latin American events. Terracotta dots mark Nicaraguan events.</p>
+  </div>
+</section>
+
+<section id="vocab">
+  <h2>Key vocabulary</h2>
+  <p class="lead">Tap a card to reveal its meaning, then test yourself in the practice section.</p>
+  <div class="vgrid" id="vgrid"></div>
+</section>
+
+<section id="map">
+  <h2>Map of Nicaragua and its regions</h2>
+  <p class="lead">Nicaragua is the largest country in Central America. Tap a region or a place marker to learn about it. This is a simplified, schematic map.</p>
+  <div class="toggles">
+    <label><input type="checkbox" id="tgPins" checked> Show places from this unit</label>
+  </div>
+  <div class="mapbox">
+    <div>
+      <svg id="mapSvg" viewBox="-30 -20 620 540" role="img" aria-label="Schematic map of Nicaragua showing the Pacific, Central-North and Caribbean regions"></svg>
+      <div id="pinList" style="margin-top:10px"></div>
+      <p class="legend">Borders and shapes are approximate. Blue ovals are Lake Managua (Xolotlán) and Lake Nicaragua (Cocibolca).</p>
+    </div>
+    <div class="card info" id="info" aria-live="polite">
+      <h3>Select a region</h3>
+      <p>Nicaragua is usually described in three natural regions: the <b>Pacific Lowlands</b>, the <b>Central-North Highlands</b> and the <b>Caribbean Coast</b>. Politically it has 15 departments and 2 autonomous regions.</p>
+      <p class="legend">Tap the map to begin.</p>
+    </div>
+  </div>
+</section>
+
+<section id="practice">
+  <h2>Practice</h2>
+  <p class="lead">You get feedback right after each answer. Retry as many times as you like; options are shuffled each time.</p>
+  <div class="ptabs" role="tablist" aria-label="Practice type">
+    <button class="ptab" role="tab" aria-selected="true" data-p="mcq">Concept MCQs</button>
+    <button class="ptab" role="tab" aria-selected="false" data-p="voc">Vocabulary check</button>
+    <button class="ptab" role="tab" aria-selected="false" data-p="ana">Analysis questions</button>
+  </div>
+  <div class="scorebar"><b id="scoreTxt">Score: 0 / 0</b><div class="prog" aria-hidden="true"><i id="progBar"></i></div><span id="progTxt"></span><button class="btn alt" id="resetBtn" type="button">Restart this set</button></div>
+  <div id="quiz"></div>
+  <div class="card summary" id="summary"></div>
+</section>
+
+</main>
+
+<footer><div class="zig" aria-hidden="true"></div><div class="wrap">Lincoln International Academy · Social Science 11th · Based on the 2026–2027 yearly plan, Unit III · Prepared with Ms. Kathya López's curriculum map</div></footer>
+
+<script>
+(function(){
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+/* theme */
+const root=document.documentElement;
+$('#themeBtn').onclick=()=>{
+  const dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme=dark?'light':'dark';
+};
+
+/* nav highlight */
+const links=$$('nav.sticky a');
+const secs=links.map(a=>$(a.getAttribute('href')));
+addEventListener('scroll',()=>{
+  let cur=0; secs.forEach((s,i)=>{ if(s.getBoundingClientRect().top<120) cur=i; });
+  links.forEach((a,i)=>a.classList.toggle('on',i===cur));
+},{passive:true});
+
+/* concept tabs */
+$$('.tab').forEach(b=>b.onclick=()=>{
+  $$('.tab').forEach(x=>x.setAttribute('aria-selected',x===b));
+  $$('#concepts .panel').forEach(p=>p.hidden=p.id!==b.getAttribute('aria-controls'));
+});
+
+/* ---------- vocabulary ---------- */
+const VOC=[
+ ["Enlightenment","An 18th-century movement that valued reason, science and individual rights over tradition and absolute monarchy."],
+ ["Natural rights","Rights people have simply by being human (life, liberty, property), not granted by a ruler."],
+ ["Popular sovereignty","The idea that political power belongs to the people, who authorize the government."],
+ ["Separation of powers","Dividing government into legislative, executive and judicial branches so none becomes too strong."],
+ ["Criollo","A person of Spanish descent born in the Americas."],
+ ["Emancipation","Becoming free from control, whether colonial rule, slavery or oppression."],
+ ["Gran Colombia","The republic founded in 1819 by Bolívar, uniting present-day Venezuela, Colombia, Ecuador and Panama."],
+ ["Patria Grande","The ideal of a united Latin America, cooperating as one large homeland."],
+ ["Bourgeoisie","In Marxist theory, the class that owns the means of production."],
+ ["Proletariat","In Marxist theory, the working class that sells its labor to survive."],
+ ["Means of production","The land, factories, machines and resources used to produce goods."],
+ ["Historical materialism","Marx's view that economic conditions and class relations drive historical change."],
+ ["Surplus value","Value that workers create beyond their wages, kept by the owner as profit."],
+ ["Alienation","In Marx's thought, the estrangement of workers from their labor, its products and themselves."],
+ ["Modernismo","Late 19th-century Latin American literary movement led by Rubén Darío that renewed Spanish-language poetry."],
+ ["Anti-imperialism","Opposition to one country dominating another politically, militarily or economically."],
+ ["Sovereignty","A nation's right to govern itself without outside control."],
+ ["Patriotism","Love for and willingness to serve and defend one's homeland."],
+ ["Dialectic","A process in which opposing ideas or forces clash and produce change or a new synthesis."],
+ ["Intervention","One state's use of force or pressure in the affairs of another, e.g., the 1912 landing of U.S. Marines in Nicaragua."]
+];
+$('#vgrid').innerHTML=VOC.map(([t,d])=>`<button type="button" class="vcard"><div class="t">${esc(t)}</div><div class="d">${esc(d)}</div><div class="hint">Tap to flip</div></button>`).join('');
+$$('.vcard').forEach(c=>c.onclick=()=>c.classList.toggle('open'));
+
+/* ---------- map ---------- */
+const NS='http://www.w3.org/2000/svg';
+const P=([lo,la])=>[(lo+87.9)*110,(15.2-la)*110];
+const pts=a=>a.map(p=>P(p).map(n=>n.toFixed(1)).join(',')).join(' ');
+const HOND=[[-87.0,13.5],[-86.7,13.77],[-86.2,13.78],[-85.7,13.9],[-85.0,14.35],[-84.5,14.6],[-83.7,14.85],[-83.15,15.0]];
+const COAST=[[-83.15,15.0],[-83.4,14.4],[-83.45,13.8],[-83.55,13.0],[-83.65,12.3],[-83.7,11.7],[-83.8,11.2],[-83.7,10.95]];
+const CR=[[-83.7,10.95],[-84.3,10.95],[-84.7,11.0],[-85.1,11.1],[-85.65,11.12]];
+const PACB=[[-86.5,13.1],[-86.15,12.6],[-85.9,12.1],[-85.75,11.6],[-85.65,11.12]];
+const PACC=[[-87.69,12.9],[-87.3,13.05],[-87.0,13.5]];
+const PACIFIC=[...PACC, ...PACB.slice(0).concat([]) ];
+const pacific=[[-87.0,13.5],...PACB,[-86.2,11.6],[-86.8,12.1],[-87.2,12.5],[-87.69,12.9],[-87.3,13.05]];
+const central=[...HOND.slice(0,5),[-85.15,13.4],[-85.1,12.6],[-85.0,11.95],[-85.9,12.1],[-86.15,12.6],[-86.5,13.1]];
+const carib=[...HOND.slice(4),...COAST.slice(1),...CR,[-85.75,11.6],[-85.9,12.1],[-85.0,11.95],[-85.1,12.6],[-85.15,13.4]];
+const REG={
+ pacific:{name:"Pacific Lowlands",col:"#c8553d",poly:pacific,lab:[-86.55,12.25],
+  chips:["Chinandega","León","Managua","Masaya","Granada","Carazo","Rivas"],
+  txt:"Smallest region in area but home to most of the population. A chain of volcanoes, fertile soils and two large lakes make it the country's economic and political center. It holds the capital, Managua, and the colonial cities of León and Granada.",
+  unit:"Unit III link: Rubén Darío lived and died in León; Zeledón was born in Managua and made his last stand near Masaya."},
+ central:{name:"Central-North Highlands",col:"#2e8b57",poly:central,lab:[-85.95,13.55],
+  chips:["Nueva Segovia","Madriz","Estelí","Jinotega","Matagalpa","Boaco","Chontales"],
+  txt:"Cool mountains and valleys, known for coffee, cattle, tobacco and cloud forests. Settlements are older farming and mining communities, and the area has a long tradition of peasant life.",
+  unit:"Unit III link: Rubén Darío was born in Metapa (now Ciudad Darío), in Matagalpa department at the edge of this region."},
+ carib:{name:"Caribbean Coast",col:"#0067c6",poly:carib,lab:[-84.4,13.6],
+  chips:["North Caribbean Coast Autonomous Region (RACCN)","South Caribbean Coast Autonomous Region (RACCS)","Río San Juan"],
+  txt:"The largest region, about half the national territory, with tropical rainforest, rivers, lagoons and the Bosawás and Indio Maíz reserves. It is home to Miskitu, Mayangna, Rama, Creole and Garífuna communities and several languages. Two autonomous regions, created under the 1987 Autonomy Statute, govern their own affairs within Nicaragua. The Río San Juan department is often grouped with it in the south.",
+  unit:"Unit III link: Indigenous and Afro-descendant worldviews (Unit I) are strongest here, a reminder that emancipation and rights remain living questions."}
+};
+const PINS=[
+ {n:"Managua",ll:[-86.27,12.13],t:"Capital of Nicaragua and birthplace of Benjamín Zeledón (1879). The Lake Managua shore later became the center of national government."},
+ {n:"León",ll:[-86.88,12.43],t:"Colonial city where Rubén Darío died in 1916 and where his tomb lies in the Cathedral. His former home is a museum."},
+ {n:"Ciudad Darío (Metapa)",ll:[-86.1,12.73],t:"Birthplace of Rubén Darío in 1867. The town was renamed in his honor."},
+ {n:"Masaya · Coyotepe · Niquinohomo",ll:[-86.09,11.9],t:"The battle of Coyotepe and La Barranca near Masaya (3–4 Oct 1912) was Zeledón's last stand against U.S. Marines and government troops. He was executed in Niquinohomo on 4 Oct 1912 and is buried in nearby Catarina. Sandino, born in Niquinohomo, witnessed these events."},
+ {n:"Granada",ll:[-85.96,11.93],t:"Colonial city on Lake Nicaragua; home of the Rubén Darío International Poetry Festival and of 19th-century Conservative elites."}
+];
+const svg=$("#mapSvg");
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;};
+const bg=mk('rect',{x:0,y:0,width:540,height:490,fill:'none'});
+const order=['carib','central','pacific'];
+const polys={};
+order.forEach(k=>{
+  const r=REG[k];
+  polys[k]=mk('polygon',{points:pts(r.poly),fill:r.col,class:'reg',tabindex:0,role:'button','aria-label':r.name});
+  polys[k].onclick=()=>selReg(k);
+  polys[k].onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selReg(k);}};
+});
+// RACCN / RACCS divider
+const d1=P([-85.14,13.0]),d2=P([-83.56,13.0]);
+mk('line',{x1:d1[0],y1:d1[1],x2:d2[0],y2:d2[1],stroke:'#fff','stroke-width':2,'stroke-dasharray':'6 5','pointer-events':'none'});
+// lakes
+const lakeM=P([-86.35,12.35]), lakeN=P([-85.45,11.55]);
+mk('ellipse',{cx:lakeM[0],cy:lakeM[1],rx:30,ry:20,fill:'#7cc0f5',stroke:'#fff','stroke-width':1.5,transform:`rotate(-20 ${lakeM[0]} ${lakeM[1]})`,'pointer-events':'none'});
+mk('ellipse',{cx:lakeN[0],cy:lakeN[1],rx:66,ry:30,fill:'#7cc0f5',stroke:'#fff','stroke-width':1.5,transform:`rotate(28 ${lakeN[0]} ${lakeN[1]})`,'pointer-events':'none'});
+// labels
+Object.keys(REG).forEach(k=>{if(k==='pacific')return;const p=P(REG[k].lab);const t=mk('text',{x:p[0],y:p[1],'text-anchor':'middle',class:'lbl'});t.textContent=REG[k].name;});
+{const p=P([-86.9,12.8]);const t=mk('text',{x:p[0],y:p[1],'text-anchor':'middle',class:'lbl',transform:`rotate(-43 ${p[0]} ${p[1]})`});t.textContent='PACIFIC';t.style.fontSize='11px';}
+const pr=P([-84.35,12.3]),ps=P([-84.35,12.7]);
+[['RACCN',-84.3,13.35],['RACCS',-84.3,12.45]].forEach(([n,lo,la])=>{const p=P([lo,la]);const t=mk('text',{x:p[0],y:p[1],'text-anchor':'middle',class:'lbl','font-size':11});t.textContent=n;t.style.fontSize='11px';});
+// Pacific label tags
+const tag=(txt,ll)=>{const p=P(ll);const t=mk('text',{x:p[0],y:p[1],'text-anchor':'middle','pointer-events':'none'});t.textContent=txt;t.setAttribute('style','font:700 9px Merriweather,serif;fill:#0b3d7a;opacity:.8');};
+// Costa Rica / Honduras / Oceans labels
+const outer=(txt,ll,rot=0)=>{const p=P(ll);const t=mk('text',{x:p[0],y:p[1],'text-anchor':'middle','pointer-events':'none',transform:rot?`rotate(${rot} ${p[0]} ${p[1]})`:''});t.textContent=txt;t.setAttribute('style','font:italic 700 11px Merriweather,serif;fill:var(--muted)');};
+outer('HONDURAS',[-86.0,14.7]);outer('COSTA RICA',[-85.0,10.7]);outer('Caribbean Sea',[-82.95,12.5],-90);outer('Pacific Ocean',[-87.4,11.7],-38);
+// pins
+const pinG=mk('g',{id:'pinG'});
+const pinList=$('#pinList');
+PINS.forEach((pn,i)=>{
+  const p=P(pn.ll);
+  const g=mk('g',{class:'pin',tabindex:0,role:'button','aria-label':pn.n,transform:`translate(${p[0]},${p[1]})`},pinG);
+  mk('circle',{r:8},g);
+  const t=mk('text',{x:0,y:3.5,'text-anchor':'middle'},g);t.textContent=i+1;
+  const show=e=>{e.stopPropagation();selPin(pn);};
+  g.onclick=show;g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(e);}};
+  const li=document.createElement('button');li.type='button';li.className='chip pbtn';li.textContent=(i+1)+' · '+pn.n;li.onclick=()=>selPin(pn);pinList.appendChild(li);
+});
+$('#tgPins').onchange=e=>{pinG.style.display=e.target.checked?'':'none';pinList.style.display=e.target.checked?'':'none';};
+function selReg(k){
+  Object.values(polys).forEach(p=>p.classList.remove('sel'));polys[k].classList.add('sel');
+  const r=REG[k];
+  $('#info').innerHTML=`<h3>${esc(r.name)}</h3><div>${r.chips.map(c=>`<span class="chip">${esc(c)}</span>`).join('')}</div><p style="margin-top:10px">${esc(r.txt)}</p><div class="nic"><b>${esc(r.unit.split(':')[0])}:</b>${esc(r.unit.slice(r.unit.indexOf(':')+1))}</div>`;
+}
+function selPin(pn){
+  $('#info').innerHTML=`<h3>📍 ${esc(pn.n)}</h3><p>${esc(pn.t)}</p><p class="legend">Tap a region to see its description.</p>`;
+}
+
+/* ---------- practice data ---------- */
+const MCQ=[
+ {q:"Which Enlightenment idea says political power ultimately belongs to the people?",o:["Divine right of kings","Popular sovereignty","Mercantilism","Absolute monarchy"],a:1,w:"Popular sovereignty (Rousseau) holds that legitimate government comes from the people. Divine right and absolute monarchy claim the opposite."},
+ {q:"Montesquieu is most associated with which concept?",o:["Social contract","Class struggle","Separation of powers","Surplus value"],a:2,w:"Montesquieu argued that dividing power among legislative, executive and judicial branches prevents tyranny."},
+ {q:"Why did Enlightenment and French Revolution ideas appeal to Latin American criollos?",o:["They supported Spanish colonial trade rules","They gave arguments against arbitrary colonial authority and for equal rights","They asked colonies to stay loyal to the king","They were forbidden in Europe, so they were exotic"],a:1,w:"Criollos faced limits on high office and trade; ideas of rights and sovereignty gave them principles to challenge colonial rule."},
+ {q:"What was the Jamaica Letter (1815)?",o:["A treaty between Spain and Colombia","Bolívar's analysis of why Spanish America should be independent and what its future might be","A Marxist pamphlet","A proclamation by Benjamín Zeledón"],a:1,w:"In the Jamaica Letter Bolívar explained the causes of independence and reflected on the political future of the Americas."},
+ {q:"What did Bolívar hope to achieve with the Congress of Panama (1826)?",o:["An alliance and closer unity among the new American republics","A return to Spanish rule","The end of the Industrial Revolution","A U.S. protectorate over Central America"],a:0,w:"The Congress expressed his dream of a united Latin America, the Patria Grande."},
+ {q:"In Marxist theory, who are the proletariat?",o:["Owners of factories","The working class who sell their labor","The clergy","Government officials"],a:1,w:"The proletariat sells its labor; the bourgeoisie owns the means of production."},
+ {q:"Which historical context directly shaped Marx's ideas?",o:["The Industrial Revolution and its working conditions","The invention of the printing press","The Spanish Conquest","The Cold War"],a:0,w:"Factory exploitation and urban poverty in 19th-century Europe led Marx and Engels to analyze capitalism."},
+ {q:"\"The economic base shapes laws, politics and ideas.\" This describes...",o:["Natural rights","Historical materialism","Modernismo","Popular sovereignty"],a:1,w:"Historical materialism says material conditions of production influence society's institutions and ideas."},
+ {q:"Which pair correctly matches thinker and work?",o:["Rodó, Ariel","Bolívar, Das Kapital","Darío, The Social Contract","Montesquieu, Nuestra América"],a:0,w:"José Enrique Rodó wrote Ariel (1900). Das Kapital is Marx's; The Social Contract is Rousseau's; Nuestra América is Martí's."},
+ {q:"Rubén Darío is best known as the leader of...",o:["Modernismo in Spanish-language literature","The Haitian Revolution","Gran Colombia","The Liberal Revolution of 1893"],a:0,w:"Darío's Azul… and later books made Modernismo a force that influenced Spain as well."},
+ {q:"What is the main concern of Darío's poem \"A Roosevelt\"?",o:["Praise for U.S. expansion","Warning against U.S. domination and defense of Hispanic American identity","A love story","A call to restore Spanish rule"],a:1,w:"The poem addresses U.S. President Theodore Roosevelt, warning of imperial expansion in Latin America."},
+ {q:"Where was Rubén Darío born?",o:["León","Metapa (now Ciudad Darío)","Granada","Bluefields"],a:1,w:"He was born in Metapa in 1867; the town now bears his name. He died and is buried in León."},
+ {q:"Which event pushed President Zelaya out of power in 1909?",o:["A Conservative rebellion backed by U.S. interests and U.S. diplomatic pressure","The Congress of Panama","A Marxist revolution","The Haitian Revolution"],a:0,w:"Opposition to Zelaya's independent policies, plus the U.S. Knox Note, led to his resignation."},
+ {q:"Benjamín Zeledón's stand in October 1912 was mainly against...",o:["Spanish colonial troops","Foreign intervention and a government supported by U.S. forces","The Central American Federation","A Mexican invasion"],a:1,w:"He led resistance to the Díaz government and the landing of U.S. Marines."},
+ {q:"Which value best summarizes Zeledón's legacy?",o:["Seeking power at any cost","Putting national sovereignty and dignity above personal safety","Neutrality in all conflicts","Loyalty to foreign powers"],a:1,w:"His letters and actions show patriotism, ethics and defense of national sovereignty."},
+ {q:"Where did the battle of Coyotepe and La Barranca take place?",o:["Near Masaya","Near Bluefields","In Estelí","In Rivas"],a:0,w:"The hills of Coyotepe and La Barranca are near Masaya, in the Pacific region."}
+];
+const ANA=[
+ {type:"mc",src:"\"The principle of all sovereignty resides essentially in the nation.\"",cite:"Declaration of the Rights of Man and of the Citizen, 1789, Article 3",
+  q:"How would Latin American criollos use this idea against Spanish rule?",
+  o:["By arguing that power comes from the people, so a distant king has no automatic right to rule","By arguing that Spain must receive more taxes","By proving that sovereignty belongs to the clergy","By defending the colonial caste system"],a:0,
+  w:"Popular or national sovereignty challenges the claim that a monarch rules by birth or divine right, giving independence movements a principle to appeal to."},
+ {type:"mc",src:"\"The history of all hitherto existing society is the history of class struggles.\"",cite:"Marx and Engels, The Communist Manifesto, 1848",
+  q:"Which statement best interprets this claim?",
+  o:["Historical change is driven mainly by conflicts between social classes over wealth and power","History is controlled only by great leaders","Wars are always caused by religion","Economic conditions never affect society"],a:0,
+  w:"Marx saw conflict between owners and workers (and earlier groups such as lords and serfs) as the motor of historical change."},
+ {type:"mc",src:"\"Eres los Estados Unidos, eres el futuro invasor de la América ingenua que tiene sangre indígena...\"",cite:"Rubén Darío, \"A Roosevelt,\" 1904",
+  q:"What does this passage reveal about Darío's view?",
+  o:["He fears foreign domination and defends the identity of Latin America","He wants Latin America to become part of the United States","He rejects all poetry","He celebrates colonial rule"],a:0,
+  w:"Darío uses poetry to warn about expanding U.S. power and to affirm Hispanic and Indigenous heritage, an anti-imperialist stance."},
+ {type:"mc",src:"Fact: In 1912 U.S. Marines landed in Nicaragua at the request of President Adolfo Díaz, and Benjamín Zeledón resisted until his execution on 4 October.",cite:"Historical summary",
+  q:"Which concept best explains why Zeledón is a National Hero?",
+  o:["Defense of sovereignty against intervention","Support for foreign troops","Neutrality","Pursuit of personal wealth"],a:0,
+  w:"Zeledón's willingness to give his life against foreign intervention makes him a symbol of national sovereignty and patriotism."},
+ {type:"wr",src:"Bolívar dreamed of a united Latin America (Patria Grande), but the new republics divided into separate countries.",cite:"Prompt",
+  q:"Explain how TWO Enlightenment ideas (e.g., natural rights, popular sovereignty, separation of powers) influenced emancipation in Latin America. Use at least two sentences.",
+  keys:[["Idea 1: names an Enlightenment idea (natural rights, popular sovereignty, separation of powers, social contract...)",["natural right","sovereign","separation of power","social contract","liberty","equality","reason"]],
+        ["Idea 2: names a second idea or the French Revolution",["french revolution","declaration","rights of man","tolerance","separation","republic","constitution"]],
+        ["Connection: links ideas to Latin American independence, criollos or colonial rule",["independence","criollo","colon","spain","emancip","latin america","bolívar","bolivar","free"]]],
+  model:"Enlightenment thinkers such as Locke and Rousseau argued that people have natural rights and that sovereignty belongs to the people. The French Revolution turned these ideas into the Declaration of the Rights of Man. Latin American criollos used them to argue that Spanish colonial rule was illegitimate, and leaders like Bolívar built new republics on principles such as separation of powers and liberty."},
+ {type:"wr",src:"Compare how Rubén Darío and Benjamín Zeledón each expressed resistance to foreign domination.",cite:"Prompt",
+  q:"Write 2–4 sentences comparing the two. Identify the means each used (poetry or armed resistance) and the shared value behind them.",
+  keys:[["Darío: mentions poetry, writing or \"A Roosevelt\"",["poem","poet","poetry","roosevelt","modernis","writ","literat"]],
+        ["Zeledón: mentions armed resistance, Coyotepe, 1912 or Marines",["armed","soldier","coyotepe","1912","marines","battle","fought","general","intervention","resist"]],
+        ["Shared value: sovereignty, patriotism, identity, anti-imperialism or dignity",["sovereign","patriot","identity","anti-imperial","dignity","independence","homeland","nation"]]],
+  model:"Rubén Darío used poetry, especially \"A Roosevelt,\" to warn Latin America about U.S. expansion and to defend Hispanic identity, while Benjamín Zeledón took up arms in 1912 against U.S. Marines and a government sustained by foreign troops. Their tools were different, but both defended national sovereignty and the dignity of Nicaragua and Latin America."}
+];
+
+/* ---------- quiz engine ---------- */
+let mode='mcq', answered=0, correct=0, total=0;
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const quiz=$('#quiz'), summary=$('#summary');
+function updateScore(){
+  $('#scoreTxt').textContent=`Score: ${correct} / ${answered}`;
+  $('#progTxt').textContent=`${answered} of ${total} answered`;
+  $('#progBar').style.width=(total?answered/total*100:0)+'%';
+  if(total&&answered===total){
+    const pct=Math.round(correct/total*100);
+    const msg=pct>=90?'Excellent work!':pct>=70?'Good job. Review the questions you missed.':'Keep studying. Re-read the concepts and try again.';
+    summary.className='card summary show';
+    summary.innerHTML=`<div class="big">${pct}%</div><p><b>${correct} of ${total} correct.</b> ${msg}</p><button class="btn" type="button" id="againBtn">Try this set again</button>`;
+    $('#againBtn').onclick=()=>build(mode);
+  }
+}
+function mcCard(item,idx,label){
+  const card=document.createElement('div');card.className='q';
+  const order=shuffle(item.o.map((t,i)=>({t,i})));
+  card.innerHTML=`<div class="num">${label} ${idx+1}</div>${item.src?`<div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div>`:''}<p class="stem">${esc(item.q)}</p><div class="opts"></div><div class="fb" role="status"></div>`;
+  const box=$('.opts',card), fb=$('.fb',card);
+  order.forEach(op=>{
+    const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=op.t;
+    b.onclick=()=>{
+      const ok=op.i===item.a;
+      $$('.opt',box).forEach((x,k)=>{x.disabled=true;if(order[k].i===item.a)x.classList.add('right');});
+      if(!ok)b.classList.add('wrong');
+      fb.className='fb show '+(ok?'ok':'no');
+      fb.innerHTML=`<b class="h">${ok?'✔ Correct!':'✘ Not quite.'}</b>${esc(item.w)}`;
+      answered++;if(ok)correct++;updateScore();
+    };
+    box.appendChild(b);
+  });
+  return card;
+}
+function vocCards(){
+  return shuffle(VOC).slice(0,12).map((v,i)=>{
+    const dist=shuffle(VOC.filter(x=>x[0]!==v[0])).slice(0,3).map(x=>x[0]);
+    return mcCard({q:`Which term matches this definition? “${v[1]}”`,o:[v[0],...dist],a:0,w:`“${v[0]}”: ${v[1]}`},i,'Term');
+  });
+}
+function wrCard(item,idx){
+  const card=document.createElement('div');card.className='q';
+  card.innerHTML=`<div class="num">Analysis ${idx+1} · written</div><div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div><p class="stem">${esc(item.q)}</p><textarea aria-label="Your answer" placeholder="Write your answer here..."></textarea><p style="margin:8px 0 0"><button type="button" class="btn">Check my answer</button> <span class="legend" id="wc"></span></p><div class="fb" role="status"></div>`;
+  const ta=$('textarea',card),btn=$('.btn',card),fb=$('.fb',card),wc=$('#wc',card);
+  let done=false;
+  ta.oninput=()=>{wc.textContent=(ta.value.trim().split(/\s+/).filter(Boolean).length)+' words';};
+  btn.onclick=()=>{
+    const txt=ta.value.toLowerCase();
+    if(txt.trim().split(/\s+/).filter(Boolean).length<15){fb.className='fb show no';fb.innerHTML='<b class="h">Add more detail</b>Write at least 15 words so we can check your key ideas.';return;}
+    const hits=item.keys.map(([lab,ws])=>[lab,ws.some(w=>txt.includes(w))]);
+    const n=hits.filter(h=>h[1]).length, ok=n===item.keys.length;
+    fb.className='fb show '+(ok?'ok':'no');
+    fb.innerHTML=`<b class="h">${n} of ${item.keys.length} key ideas found</b><ul class="check">${hits.map(([l,h])=>`<li>${h?'✔':'✘'} ${esc(l)}</li>`).join('')}</ul><b>Model answer:</b> ${esc(item.model)}<br><small>This keyword check is a guide. Compare meaning with the model and ask your teacher if unsure.</small>`;
+    if(!done){done=true;answered++;if(n>=2)correct++;updateScore();}
+  };
+  return card;
+}
+function build(m){
+  mode=m;answered=0;correct=0;quiz.innerHTML='';summary.className='card summary';
+  let cards=[];
+  if(m==='mcq')cards=shuffle(MCQ).slice(0,12).map((it,i)=>mcCard(it,i,'Question'));
+  if(m==='voc')cards=vocCards();
+  if(m==='ana')cards=ANA.map((it,i)=>it.type==='mc'?mcCard(it,i,'Analysis'):wrCard(it,i));
+  total=cards.length;cards.forEach(c=>quiz.appendChild(c));updateScore();
+}
+$$('.ptab').forEach(b=>b.onclick=()=>{$$('.ptab').forEach(x=>x.setAttribute('aria-selected',x===b));build(b.dataset.p);});
+$('#resetBtn').onclick=()=>{build(mode);quiz.scrollIntoView({behavior:'smooth',block:'start'});};
+build('mcq');
+})();
+</script>
+</body>
+</html>
