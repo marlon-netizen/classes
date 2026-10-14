@@ -257,6 +257,8 @@ nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(-
 .mbox h3{margin-bottom:.4em}
 .mclose{position:absolute;top:8px;right:12px;border:0;background:transparent;font-size:1.6rem;line-height:1;color:var(--muted)}
 .bigscore{font-size:2.2rem;font-weight:900;color:var(--blue);margin:6px 0}
+.mtbl{width:100%;border-collapse:collapse;font-size:.85rem;margin:4px 0}.mtbl td{padding:5px 8px;border-bottom:1px solid var(--line)}.mtbl td:last-child{text-align:right;font-weight:700}.mtbl tr.now td{background:var(--gold-soft)}
+.linkbtn{border:0;background:none;color:var(--muted);text-decoration:underline;font-size:.78rem;padding:6px}
 .bigscore small{font-size:1rem;color:var(--terra);margin-left:10px}
 .mbtns{display:flex;flex-wrap:wrap;gap:8px;margin:0}
 body.modal-open{overflow:hidden}
@@ -264,9 +266,10 @@ body.modal-open{overflow:hidden}
  body.pm header.top,body.pm nav.sticky,body.pm .layout,body.pm footer{display:none!important}
  body.pm .modal{position:static;background:none;display:block;padding:0}
  body.pm .mbox{box-shadow:none;max-width:none}
- body.pm .mclose,body.pm .mbtns,body.pm .nameIn,body.pm .namel{display:none}
+ body.pm .mclose,body.pm .mbtns,body.pm .nameRow,body.pm .mbox .legend{display:none}
  body:not(.pm) .modal{display:none}
 }
+.mtbl .muted{font-weight:400}
 
 </style>
 </head>
@@ -946,42 +949,99 @@ const VLES={
 const vocFor=l=>VLES[l].map(t=>VOC.find(v=>v[0]===t));
 const hasAct=(l,t)=>t!=='map'||!!MAPQ_BY[l];
 
-/* ---------- name storage ---------- */
-const KEY='u3-student-name-v1';
-let studentName='';
-try{studentName=String(localStorage.getItem(KEY)||'');}catch(e){}
-const saveName=()=>{try{localStorage.setItem(KEY,studentName);}catch(e){}};
+/* ---------- storage and scoring ---------- */
+const KEY='u3-progress-v2';
+let state={name:'',scores:{}};
+try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&typeof o==='object'){state.name=String(o.name||'');state.scores=(o.scores&&typeof o.scores==='object')?o.scores:{};}}}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}};
 const pctOf=(c,t)=>t?Math.round(c/t*100):0;
+const sum=a=>a.reduce((x,y)=>x+y,0);
+function maxPts(l,t){
+  switch(t){
+    case'mcq':return Math.min(6,IDX.mcq[l].length);
+    case'tf':return IDX.tf[l].length;
+    case'cloze':return IDX.cloze[l].length;
+    case'voc':return Math.min(8,VLES[l].length);
+    case'match':return sum(MATCH_BY[l].map(x=>x.p.length));
+    case'sort':return sum(SORT_BY[l].map(x=>x.i.length));
+    case'order':return sum(ORDER_BY[l].map(x=>x.e.length));
+    case'map':return MAPQ_BY[l]?MAPQ_BY[l].length:0;
+    case'src':return IDX.src[l].length;
+    case'wr':return Math.min(2,IDX.wr[l].length);
+  }
+  return 0;
+}
+function commit(l,t,c,a){
+  const k=l+':'+t,p=state.scores[k];
+  if(!p||c>=p.c){state.scores[k]={c,a};save();}
+}
+function lessonScore(l){
+  const rows=ACT.filter(x=>hasAct(l,x[0])).map(([k,lab])=>{const t=maxPts(l,k),p=state.scores[l+':'+k];return {k,lab,t,c:p?p.c:0,done:!!p&&p.a>0};});
+  const C=sum(rows.map(r=>r.c)),T=sum(rows.map(r=>r.t));
+  return {rows,C,T,n:rows.filter(r=>r.done).length,m:rows.length};
+}
 
 /* ---------- score pop-up ---------- */
 const modal=$('#scoreModal');
 let cur=null;
-const lineText=()=>`${studentName.trim()||'(name)'} · Unit III, Lesson ${cur.l} · ${cur.label} · ${cur.cor}/${cur.tot} (${pctOf(cur.cor,cur.tot)}%)`;
+const lineText=()=>{const S=lessonScore(cur.l);return `${state.name.trim()||'(name)'} · Unit III, Lesson ${cur.l} (${LN[cur.l]}) · Overall score ${S.C}/${S.T} (${pctOf(S.C,S.T)}%)`;};
 function copyText(txt,btn){
   const done=()=>{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);};
   const fallback=()=>{const t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(e){}t.remove();};
   try{navigator.clipboard.writeText(txt).then(done,fallback);}catch(e){fallback();}
 }
+function loadScript(src){return new Promise((res,rej)=>{if(document.querySelector('script[data-lib="'+src+'"]'))return res();const s=document.createElement('script');s.src=src;s.dataset.lib=src;s.onload=res;s.onerror=()=>rej(new Error('load'));document.head.appendChild(s);});}
+const LIBS=['https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js','https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'];
+const preloadLibs=()=>{LIBS.forEach(u=>loadScript(u).catch(()=>{}));};
+async function savePdf(btn){
+  const old=btn.textContent;btn.disabled=true;btn.textContent='Preparing PDF…';
+  const S=lessonScore(cur.l);
+  try{
+    await Promise.all(LIBS.map(loadScript));
+    const box=$('.mbox',modal);
+    const canvas=await window.html2canvas(box,{scale:2,backgroundColor:getComputedStyle(box).backgroundColor,useCORS:true,
+      onclone:(doc)=>{const b=doc.querySelector('#scoreModal .mbox');b.style.maxHeight='none';b.style.overflow='visible';b.style.width='440px';
+        ['.mclose','.mbtns','.nameRow','.legend'].forEach(q=>b.querySelectorAll(q).forEach(e=>e.remove()));
+        const who=doc.createElement('p');who.style.cssText='font-weight:700;margin:6px 0 10px';who.textContent='Student: '+(state.name.trim()||'(no name)');
+        b.querySelector('h3').after(who);}});
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF({unit:'mm',format:'a4'});
+    const W=210,mx=22,iw=W-mx*2,ih=canvas.height*iw/canvas.width;
+    pdf.setFontSize(11);pdf.setTextColor(11,61,122);pdf.text('Lincoln International Academy · Social Science 11th',mx,16);
+    pdf.setTextColor(90,98,112);pdf.setFontSize(9);pdf.text('Unit III: Philosophy of Emancipation and the Heroic Legacy',mx,21);
+    pdf.addImage(canvas.toDataURL('image/jpeg',0.92),'JPEG',mx,28,iw,Math.min(ih,250));
+    const d=new Date().toLocaleDateString();
+    pdf.setFontSize(8);pdf.text(`Saved on ${d} · ${state.name.trim()||'(no name)'} · Lesson ${cur.l} overall ${S.C}/${S.T} (${pctOf(S.C,S.T)}%)`,mx,290);
+    const nm=(state.name.trim()||'student').replace(/[^\w\-]+/g,'_');
+    pdf.save(`Unit3_Lesson${cur.l}_${nm}.pdf`);
+  }catch(e){
+    document.body.classList.add('pm');window.print();setTimeout(()=>document.body.classList.remove('pm'),500);
+  }
+  btn.disabled=false;btn.textContent=old;
+}
 function openScore(info){
-  cur=info;
-  const {l,label,cor,ans,tot}=cur,pct=pctOf(cor,tot),inc=ans<tot;
+  cur=info;preloadLibs();
+  const l=info.l,S=lessonScore(l),pct=pctOf(S.C,S.T);
+  const rows=S.rows.map(r=>`<tr class="${r.k===info.current?'now':''}"><td>${esc(r.lab)}</td><td>${r.done?`${r.c} / ${r.t}`:'<span class="muted">Not done</span>'}</td></tr>`).join('');
   modal.innerHTML=`<div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mTitle">
     <button type="button" class="mclose" aria-label="Close">×</button>
-    <p class="kicker2">Lesson ${l} · ${esc(label)}</p>
-    <h3 id="mTitle">${inc?'Submit your score':'Activity complete!'}</h3>
-    ${inc?`<div class="fb show no"><b class="h">Not finished</b>You answered ${ans} of ${tot}. Unanswered items count as 0. Keep working or submit now.</div>`:''}
-    <div class="bigscore">${cor} / ${tot}<small>${pct}%</small></div>
-    <label class="namel">Student name <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(studentName)}"></label>
+    <p class="kicker2">Lesson ${l} · ${esc(LN[l])}</p>
+    <h3 id="mTitle">Overall score</h3>
+    <div class="bigscore">${S.C} / ${S.T}<small>${pct}%</small></div>
+    <table class="mtbl"><tbody>${rows}</tbody></table>
+    <p class="legend" style="margin:6px 0">${S.n} of ${S.m} activities done. Activities not done count as 0. Your best score in each activity is kept.</p>
+    <label class="namel nameRow">Student name <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(state.name)}"></label>
     <p class="copyline"></p>
-    <p class="legend" style="margin:6px 0 10px">Only your name and score are shown; your answers are not included.</p>
-    <p class="mbtns"><button type="button" class="btn copyBtn">Copy my score</button> <button type="button" class="btn alt printBtn">Print</button> <button type="button" class="btn alt closeBtn">${inc?'Keep working':'Close'}</button></p>
+    <p class="legend" style="margin:6px 0 10px">Only your name and scores are included; your answers are not.</p>
+    <p class="mbtns"><button type="button" class="btn pdfBtn">Save as PDF</button> <button type="button" class="btn alt copyBtn">Copy my score</button> <button type="button" class="btn alt closeBtn">Close</button> <button type="button" class="linkbtn clearBtn">Clear saved scores</button></p>
   </div>`;
-  const ni=$('.nameIn',modal),cl=$('.copyline',modal),cb=$('.copyBtn',modal);
-  const refresh=()=>{cl.textContent=lineText();cb.disabled=!studentName.trim();cb.title=cb.disabled?'Type your name first':'';};
-  ni.oninput=()=>{studentName=ni.value;saveName();refresh();};
+  const ni=$('.nameIn',modal),cl=$('.copyline',modal),cb=$('.copyBtn',modal),pb=$('.pdfBtn',modal);
+  const refresh=()=>{cl.textContent=lineText();const e=!state.name.trim();cb.disabled=e;pb.disabled=e;cb.title=pb.title=e?'Type your name first':'';};
+  ni.oninput=()=>{state.name=ni.value;save();refresh();};
   cb.onclick=()=>copyText(lineText(),cb);
-  $('.printBtn',modal).onclick=()=>{if(!studentName.trim()){ni.focus();return;}document.body.classList.add('pm');window.print();setTimeout(()=>document.body.classList.remove('pm'),500);};
+  pb.onclick=()=>savePdf(pb);
   $('.closeBtn',modal).onclick=closeScore;$('.mclose',modal).onclick=closeScore;
+  $('.clearBtn',modal).onclick=()=>{if(confirm('Clear all saved scores on this device?')){state.scores={};save();openScore(info);}};
   refresh();modal.hidden=false;document.body.classList.add('modal-open');
   setTimeout(()=>ni.focus(),30);
 }
@@ -997,10 +1057,9 @@ function makePractice(l,rootEl){
   <div class="quiz"></div><p class="submitRow"><button class="btn submitBtn" type="button">Submit my score</button></p>`;
   const quiz=$('.quiz',rootEl);
   let mode='mcq',ans=0,cor=0,tot=0,shown=false;
-  const labelOf=()=>(ACT.find(a=>a[0]===mode)||[,mode])[1];
-  const submit=()=>openScore({l,label:labelOf(),cor,ans,tot});
+  const submit=()=>{commit(l,mode,cor,ans);openScore({l,current:mode});};
   const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
-  function rec(c,m){ans+=m;cor+=c;update();}
+  function rec(c,m){ans+=m;cor+=c;commit(l,mode,cor,ans);update();}
   function update(){
     $('.scoreTxt',rootEl).textContent=`Score: ${cor} / ${ans}`;
     $('.progTxt',rootEl).textContent=`${ans} of ${tot} answered`;
