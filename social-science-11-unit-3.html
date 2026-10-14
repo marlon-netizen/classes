@@ -111,13 +111,17 @@ ul.tight{margin:.3em 0 1em;padding-left:1.2em} ul.tight li{margin-bottom:.35em}
 .mapbox{display:grid;gap:18px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
 @media (max-width:760px){.mapbox{grid-template-columns:1fr}}
 #mapSvg{width:100%;height:auto;background:var(--sky);border-radius:14px;border:1px solid var(--line)}
-.reg{cursor:pointer;stroke:#fff;stroke-width:2;transition:opacity .15s,filter .15s}
-.reg:hover,.reg:focus{filter:brightness(1.12);outline:none}
-.reg.sel{stroke:var(--ink);stroke-width:3}
-.lbl{font:900 13px "Merriweather",serif;fill:#fff;pointer-events:none;paint-order:stroke;stroke:rgba(0,0,0,.35);stroke-width:3px}
+.reg{cursor:pointer;stroke:#fff;stroke-width:1.6;stroke-linejoin:round;transition:opacity .15s,filter .15s}
+.reg:hover,.reg:focus{filter:brightness(1.1);outline:none}
+#mapSvg.has-sel .reg:not(.sel){opacity:.45}
+.reg.sel{stroke:#222;stroke-width:1.2}
+.dl{font:700 6.5px "Merriweather",serif;fill:#2b2b2b;pointer-events:none;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.55);stroke-width:1.5px}
+.rl{font:900 17px "Merriweather",serif;fill:#063d1d;pointer-events:none;text-anchor:middle}
+.mlegend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:.8rem}
+.mlegend i{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:6px;vertical-align:-2px}
 .pin{cursor:pointer}
-.pin circle{fill:var(--gold);stroke:#222;stroke-width:1.5}
-.pin text{font:900 10px "Merriweather",serif;fill:#222;pointer-events:none}
+.pin circle{fill:#d6422b;stroke:#fff;stroke-width:1.5}
+.pin text{font:900 9px "Merriweather",serif;fill:#fff;pointer-events:none}
 .pbtn{border:0;cursor:pointer;font-family:inherit}.pbtn:hover{background:var(--gold-soft)}
 .info{min-height:260px}
 .info h3{margin-bottom:.2em}
@@ -175,9 +179,8 @@ footer .wrap{padding:18px 16px}
     <path d="M0 120 L70 50 L90 64 L120 20 L150 60 L190 40 L240 90 L290 30 L320 52 L360 12 L400 70 L440 44 L520 120Z" fill="#fff"/>
   </svg>
   <div class="wrap">
-    <svg class="crest" viewBox="0 0 120 106" role="img" aria-label="Silhouette of Nicaragua">
-      <path d="M10.6 56.6 L19.2 53.3 L25.8 43.4 L32.4 37.5 L43.4 37.2 L54.4 34.6 L69.8 24.7 L80.8 19.2 L98.4 13.7 L110.5 10.4 L105.0 23.6 L103.9 36.8 L101.7 54.4 L99.5 69.8 L98.4 83.0 L96.2 94.0 L98.4 99.5 L85.2 99.5 L76.4 98.4 L67.6 96.2 L55.5 95.8 L43.4 85.2 L30.2 74.2 L21.4 65.4Z" fill="#f2b705" stroke="#fff" stroke-width="2.5" stroke-linejoin="round"/>
-      <circle cx="41.9" cy="73.5" r="3.5" fill="#c8553d" stroke="#fff" stroke-width="1.5"/>
+    <svg class="crest" viewBox="0 0 465 471" role="img" aria-label="Silhouette of Nicaragua">
+      <path d="M458 19L444 16L439 19L431 17L425 26L412 30L406 36L400 36L396 41L390 41L388 43L371 42L366 47L360 47L356 44L355 53L344 51L334 58L330 58L325 54L306 52L298 37L291 38L286 44L283 44L279 48L278 53L282 57L281 65L267 65L267 72L263 77L265 89L260 93L249 94L240 104L239 109L235 113L230 114L227 120L223 120L213 128L208 129L207 142L196 141L192 134L186 134L174 123L174 120L170 120L151 140L150 146L144 151L136 151L124 147L120 149L106 148L103 150L103 155L105 156L104 167L108 180L106 187L109 189L109 200L111 201L109 207L105 207L104 203L98 200L92 200L87 206L87 221L74 232L45 231L41 234L39 239L35 239L18 223L10 230L8 238L22 248L28 249L31 252L31 256L44 270L58 282L66 284L66 290L95 310L101 316L107 330L114 333L119 347L130 357L130 363L137 368L143 376L151 379L158 385L162 385L163 390L183 405L196 419L203 430L207 431L210 428L220 428L239 431L249 429L250 432L266 432L267 438L287 446L292 446L307 436L316 434L325 436L327 439L332 439L338 445L348 443L353 451L363 457L363 464L370 464L372 466L383 464L386 470L402 470L406 465L417 463L415 451L411 451L404 440L400 438L395 413L396 396L400 393L405 393L407 383L417 378L417 369L412 352L410 351L409 356L405 356L399 351L399 346L406 340L405 329L412 328L414 331L415 327L414 313L416 305L415 301L409 299L409 286L405 285L405 278L417 273L422 268L422 262L417 255L417 250L420 248L429 249L432 241L429 227L425 226L425 222L428 221L425 206L425 183L429 170L431 144L439 119L454 102L461 85L460 70L457 69L453 60L452 48L450 44L444 45L437 36L437 32L444 23L450 22L454 26Z" fill="#f2b705" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
     </svg>
     <div class="titles">
       <p class="kicker">Lincoln International Academy · 11th Grade Social Science</p>
@@ -361,19 +364,20 @@ footer .wrap{padding:18px 16px}
 
 <section id="map">
   <h2>Map of Nicaragua and its regions</h2>
-  <p class="lead">Nicaragua is the largest country in Central America. Tap a region or a place marker to learn about it. This is a simplified, schematic map.</p>
+  <p class="lead">Nicaragua is the largest country in Central America. Tap any department to see its region, or a numbered marker to learn about a place from this unit.</p>
   <div class="toggles">
     <label><input type="checkbox" id="tgPins" checked> Show places from this unit</label>
   </div>
   <div class="mapbox">
     <div>
-      <svg id="mapSvg" viewBox="-30 -20 620 540" role="img" aria-label="Schematic map of Nicaragua showing the Pacific, Central-North and Caribbean regions"></svg>
+      <svg id="mapSvg" viewBox="-12 -8 495 492" role="img" aria-label="Map of Nicaragua showing the Pacific, Central and Caribbean regions with their departments"></svg>
+      <div class="mlegend"><span><i style="background:#f4c20d"></i>Pacific</span><span><i style="background:#b8c81a"></i>Central</span><span><i style="background:#00903f"></i>Caribbean</span></div>
       <div id="pinList" style="margin-top:10px"></div>
-      <p class="legend">Borders and shapes are approximate. Blue ovals are Lake Managua (Xolotlán) and Lake Nicaragua (Cocibolca).</p>
+      <p class="legend">Shapes are simplified from a regional climate map. Light blue shapes are Lake Managua (Xolotlán) and Lake Nicaragua (Cocibolca).</p>
     </div>
     <div class="card info" id="info" aria-live="polite">
       <h3>Select a region</h3>
-      <p>Nicaragua is usually described in three natural regions: the <b>Pacific Lowlands</b>, the <b>Central-North Highlands</b> and the <b>Caribbean Coast</b>. Politically it has 15 departments and 2 autonomous regions.</p>
+      <p>Nicaragua is usually described in three regions: the <b>Pacific</b>, the <b>Central</b> and the <b>Caribbean Coast</b>. Politically it has 15 departments and 2 autonomous regions.</p>
       <p class="legend">Tap the map to begin.</p>
     </div>
   </div>
@@ -450,86 +454,70 @@ $$('.vcard').forEach(c=>c.onclick=()=>c.classList.toggle('open'));
 
 /* ---------- map ---------- */
 const NS='http://www.w3.org/2000/svg';
-const P=([lo,la])=>[(lo+87.9)*110,(15.2-la)*110];
-const pts=a=>a.map(p=>P(p).map(n=>n.toFixed(1)).join(',')).join(' ');
-const HOND=[[-87.0,13.5],[-86.7,13.77],[-86.2,13.78],[-85.7,13.9],[-85.0,14.35],[-84.5,14.6],[-83.7,14.85],[-83.15,15.0]];
-const COAST=[[-83.15,15.0],[-83.4,14.4],[-83.45,13.8],[-83.55,13.0],[-83.65,12.3],[-83.7,11.7],[-83.8,11.2],[-83.7,10.95]];
-const CR=[[-83.7,10.95],[-84.3,10.95],[-84.7,11.0],[-85.1,11.1],[-85.65,11.12]];
-const PACB=[[-86.5,13.1],[-86.15,12.6],[-85.9,12.1],[-85.75,11.6],[-85.65,11.12]];
-const PACC=[[-87.69,12.9],[-87.3,13.05],[-87.0,13.5]];
-const PACIFIC=[...PACC, ...PACB.slice(0).concat([]) ];
-const pacific=[[-87.0,13.5],...PACB,[-86.2,11.6],[-86.8,12.1],[-87.2,12.5],[-87.69,12.9],[-87.3,13.05]];
-const central=[...HOND.slice(0,5),[-85.15,13.4],[-85.1,12.6],[-85.0,11.95],[-85.9,12.1],[-86.15,12.6],[-86.5,13.1]];
-const carib=[...HOND.slice(4),...COAST.slice(1),...CR,[-85.75,11.6],[-85.9,12.1],[-85.0,11.95],[-85.1,12.6],[-85.15,13.4]];
+const MAP={lakes:["M188 329L188 350L189 352L195 354L195 358L190 360L188 364L188 370L191 372L191 379L198 387L198 393L202 402L210 411L219 416L219 423L213 424L215 428L239 431L249 429L250 432L271 431L286 434L288 436L298 435L300 433L300 415L298 411L292 408L288 397L274 383L270 376L267 375L266 371L258 362L252 359L242 349L232 349L219 332L208 330L200 324Z", "M116 294L118 299L124 303L124 309L125 304L132 308L135 308L140 304L145 304L147 306L147 310L145 313L146 318L164 316L164 299L158 304L155 302L154 294L150 291L147 281L143 281L141 285L131 289L127 294L120 294L118 292Z"],d:[{"n":"Chinandega","r":"pacific","d":"M105 202L99 199L91 199L86 205L86 218L87 219L83 222L81 226L73 231L44 230L40 233L40 236L36 238L29 233L28 229L22 223L17 222L13 227L9 229L7 233L7 239L21 249L27 250L30 253L30 257L34 260L38 266L57 283L60 284L71 283L76 281L81 276L88 265L99 254L106 254L110 251L111 236L104 219Z","l":[80,245]},{"n":"León","r":"pacific","d":"M130 217L125 217L116 221L109 221L109 227L113 237L112 252L106 256L98 257L75 284L65 287L65 291L94 311L100 317L108 333L111 333L111 328L114 325L120 325L126 319L124 311L124 304L118 300L116 294L118 292L122 294L127 294L134 287L142 284L141 275L143 271L149 266L150 246L140 243L135 240L134 235L136 232L136 225Z","l":[121,261]},{"n":"Managua","r":"pacific","d":"M165 319L156 319L151 321L146 320L144 318L146 313L145 306L141 306L135 311L130 308L126 308L126 311L128 314L127 321L122 326L114 328L113 338L116 345L126 357L135 355L150 339L150 335L143 336L139 334L132 335L127 334L126 332L127 331L150 332L152 336L155 338L159 338L160 337L159 328L164 324ZM145 271L143 279L150 283L151 289L156 295L158 301L162 301L163 299L166 298L170 304L168 312L169 320L182 318L193 311L193 306L186 299L185 293L181 288L180 281L176 280L169 273L153 269Z","l":[131,331]},{"n":"Masaya","r":"pacific","d":"M165 331L163 332L163 337L159 341L159 344L166 348L171 348L177 338L177 332ZM185 320L166 323L166 327L167 328L182 328L185 323Z","l":[172,327]},{"n":"Granada","r":"pacific","d":"M189 359L185 358L169 359L169 366L167 368L168 375L169 376L174 375L178 369L185 370L189 363ZM199 320L193 319L187 322L184 327L184 330L181 333L172 350L172 354L174 356L188 356L186 344L184 341L185 336L191 327L198 325Z","l":[181,356]},{"n":"Carazo","r":"pacific","d":"M149 343L135 357L129 359L129 364L136 369L142 377L150 380L157 386L160 386L165 378L165 368L167 365L168 351L161 346L153 343Z","l":[150,362]},{"n":"Rivas","r":"pacific","d":"M209 383L208 389L210 391L213 392L221 391L224 399L233 399L233 392L230 390L224 390L221 381L213 380ZM177 372L177 374L173 378L167 379L162 385L162 391L171 397L176 403L182 406L195 420L202 431L208 432L215 422L216 417L202 403L198 395L198 390L196 385L190 379L191 374L189 372L181 373Z","l":[190,401]},{"n":"Nueva Segovia","r":"central","d":"M201 141L197 140L194 137L193 133L187 133L175 122L175 119L169 119L160 128L159 131L150 139L149 145L143 150L137 150L135 148L129 149L125 146L121 146L119 148L113 149L110 147L105 147L102 149L102 156L112 158L119 165L134 164L140 166L150 166L152 168L157 168L157 165L160 162L163 162L171 170L172 175L181 174L185 177L189 177L197 172L196 165L197 159L200 153Z","l":[175,150]},{"n":"Madriz","r":"central","d":"M104 159L103 168L105 171L105 178L107 181L105 188L109 192L108 201L111 201L115 198L118 189L125 182L130 182L133 184L141 184L148 180L153 180L156 182L163 182L170 179L169 171L163 165L160 165L156 171L153 171L151 169L138 168L132 166L121 168L112 160Z","l":[134,176]},{"n":"Estelí","r":"central","d":"M125 184L120 189L116 199L105 209L105 214L111 219L116 219L124 215L131 215L139 227L136 238L140 241L151 242L152 237L156 234L162 233L165 227L165 222L152 209L155 204L156 184L153 182L148 182L141 186L133 186L130 184Z","l":[136,203]},{"n":"Jinotega","r":"central","d":"M277 65L266 64L266 71L262 76L262 80L265 85L261 91L248 93L239 103L238 108L234 112L229 113L226 119L222 119L212 127L207 128L206 130L207 140L202 143L202 151L198 159L198 172L191 176L189 179L187 179L184 176L178 175L173 177L167 182L162 182L157 189L158 202L155 207L155 210L167 222L172 223L178 228L183 228L187 226L206 209L218 193L226 191L227 185L238 173L238 165L236 162L239 160L239 157L242 153L250 153L264 144L271 148L274 148L278 144L291 121L290 107L294 99L294 91L287 90L282 86L279 80L280 68Z","l":[222,148]},{"n":"Matagalpa","r":"central","d":"M270 213L263 215L255 215L247 209L241 208L229 193L219 195L208 209L187 228L179 231L173 226L168 226L162 235L156 236L154 238L152 246L151 266L164 270L168 270L177 278L182 278L198 267L211 264L219 264L226 259L235 259L239 256L247 260L251 264L255 264L257 267L262 267L266 262L269 250L262 249L258 245L257 231L260 228L263 228L269 221Z","l":[232,240]},{"n":"Boaco","r":"central","d":"M278 257L273 252L270 252L266 266L261 270L257 270L255 267L250 266L249 264L241 259L237 259L234 262L227 261L220 266L203 268L190 273L184 278L183 287L187 293L188 299L196 307L196 311L193 313L195 320L209 329L213 329L213 323L218 312L218 306L222 301L230 298L249 298L256 296L263 290L272 289L275 286L277 277L282 270L282 266L278 260Z","l":[228,277]},{"n":"Chontales","r":"central","d":"M286 271L283 271L281 273L278 285L272 291L264 292L259 296L250 300L245 301L232 300L222 303L220 313L216 320L215 331L219 331L224 335L233 349L238 348L244 350L252 358L260 362L268 372L271 372L278 367L282 366L288 358L294 356L301 349L319 349L322 346L322 342L313 339L306 333L305 323L299 310L301 306L301 302L299 299L297 299L294 296L292 291L293 281Z","l":[254,334]},{"n":"Río San Juan","r":"central","d":"M272 373L273 380L290 398L291 404L295 407L295 409L301 413L303 418L302 421L303 433L299 437L291 440L287 437L283 437L281 435L266 434L266 439L286 447L293 447L308 437L315 435L318 437L324 437L326 440L331 440L337 446L341 446L346 443L352 452L358 454L362 458L362 465L368 464L371 467L377 467L382 465L387 470L400 470L407 466L413 466L418 464L416 450L412 450L405 439L394 437L391 431L378 433L375 429L366 428L358 418L351 413L346 413L344 411L345 407L342 403L334 400L330 396L324 393L323 383L327 378L327 373L323 367L324 359L320 351L301 351L294 358L287 361L282 368Z","l":[329,418]},{"n":"RACCN","r":"caribbean","d":"M459 18L455 18L452 16L447 17L445 15L441 15L438 18L430 16L429 20L424 25L421 25L418 29L417 28L411 29L405 35L399 35L399 37L395 40L389 40L387 42L370 41L365 46L361 46L358 43L355 43L354 52L343 50L339 54L333 57L329 56L326 53L319 53L316 51L307 51L299 36L290 37L285 43L282 43L278 47L277 54L281 58L280 65L284 70L282 73L283 83L286 87L298 89L296 99L293 105L294 119L289 128L289 132L283 138L279 146L274 151L266 147L262 147L251 155L242 157L240 161L241 173L229 186L229 189L234 197L242 206L246 206L254 212L260 212L262 209L272 208L275 211L274 216L286 217L290 214L301 211L303 206L306 203L325 200L348 200L352 196L360 197L368 194L387 198L406 199L408 207L407 212L411 212L419 216L423 222L429 222L426 205L427 177L425 176L428 175L430 171L430 168L428 166L431 163L432 155L431 149L440 120L447 114L448 111L455 103L462 86L461 69L458 68L454 59L453 47L451 43L445 44L438 35L438 33L447 23L449 23L452 27L455 27L457 22L459 21Z","l":[355,132]},{"n":"RACCS","r":"caribbean","d":"M420 276L419 281L423 290L421 292L421 295L435 293L435 286L430 275ZM267 222L263 226L262 229L259 229L257 231L257 234L259 237L258 245L259 248L269 249L278 257L278 261L280 265L289 274L289 277L293 283L293 295L301 303L299 307L299 312L303 318L307 335L314 340L322 343L320 347L320 353L324 360L323 368L327 374L327 377L324 380L323 385L324 394L328 395L333 400L341 403L345 408L345 412L350 413L356 417L365 428L373 428L377 433L381 433L389 430L392 433L393 437L401 436L396 412L396 400L399 395L406 394L407 386L411 381L418 379L418 368L413 351L409 350L409 355L407 356L399 348L407 341L407 333L405 330L408 329L409 327L412 330L412 332L415 332L416 328L416 318L413 316L416 313L417 304L416 300L412 300L410 298L410 285L406 285L405 283L408 277L416 275L423 269L423 261L418 254L418 251L421 249L427 250L431 249L433 239L430 226L422 224L418 218L412 215L405 214L403 203L399 201L389 201L370 197L362 198L360 200L352 199L348 203L323 203L315 205L308 205L305 207L304 211L301 214L293 218L290 218L286 221L278 220L273 223Z","l":[352,278]}]};
+const COL={pacific:'#f4c20d',central:'#b8c81a',caribbean:'#00903f'};
 const REG={
- pacific:{name:"Pacific Lowlands",col:"#c8553d",poly:pacific,lab:[-86.55,12.25],
+ pacific:{name:"Pacific Region",
   chips:["Chinandega","León","Managua","Masaya","Granada","Carazo","Rivas"],
-  txt:"Smallest region in area but home to most of the population. A chain of volcanoes, fertile soils and two large lakes make it the country's economic and political center. It holds the capital, Managua, and the colonial cities of León and Granada.",
+  txt:"Dry tropical lowlands with about six months of rain, a chain of volcanoes, fertile soils and the two great lakes. It is the smallest region in area but home to most of the population, and it holds the capital, Managua, and the colonial cities of León and Granada.",
   unit:"Unit III link: Rubén Darío lived and died in León; Zeledón was born in Managua and made his last stand near Masaya."},
- central:{name:"Central-North Highlands",col:"#2e8b57",poly:central,lab:[-85.95,13.55],
-  chips:["Nueva Segovia","Madriz","Estelí","Jinotega","Matagalpa","Boaco","Chontales"],
-  txt:"Cool mountains and valleys, known for coffee, cattle, tobacco and cloud forests. Settlements are older farming and mining communities, and the area has a long tradition of peasant life.",
-  unit:"Unit III link: Rubén Darío was born in Metapa (now Ciudad Darío), in Matagalpa department at the edge of this region."},
- carib:{name:"Caribbean Coast",col:"#0067c6",poly:carib,lab:[-84.4,13.6],
-  chips:["North Caribbean Coast Autonomous Region (RACCN)","South Caribbean Coast Autonomous Region (RACCS)","Río San Juan"],
-  txt:"The largest region, about half the national territory, with tropical rainforest, rivers, lagoons and the Bosawás and Indio Maíz reserves. It is home to Miskitu, Mayangna, Rama, Creole and Garífuna communities and several languages. Two autonomous regions, created under the 1987 Autonomy Statute, govern their own affairs within Nicaragua. The Río San Juan department is often grouped with it in the south.",
+ central:{name:"Central Region",
+  chips:["Nueva Segovia","Madriz","Estelí","Jinotega","Matagalpa","Boaco","Chontales","Río San Juan"],
+  txt:"Pre-mountain climate with seven to eight rainy months. Cooler highlands and valleys known for coffee, cattle and tobacco, with a long tradition of peasant life. Río San Juan, along the southern border, is also grouped here.",
+  unit:"Unit III link: Rubén Darío was born in Metapa (now Ciudad Darío), in Matagalpa department."},
+ caribbean:{name:"Caribbean Coast",
+  chips:["North Caribbean Coast Autonomous Region (RACCN)","South Caribbean Coast Autonomous Region (RACCS)"],
+  txt:"The largest region, about half the national territory, with tropical rainforest, rivers, lagoons and the Bosawás reserve. It is home to Miskitu, Mayangna, Rama, Creole and Garífuna communities. Two autonomous regions, created by the 1987 Autonomy Statute, govern their own affairs within Nicaragua.",
   unit:"Unit III link: Indigenous and Afro-descendant worldviews (Unit I) are strongest here, a reminder that emancipation and rights remain living questions."}
 };
 const PINS=[
- {n:"Managua",ll:[-86.27,12.13],t:"Capital of Nicaragua and birthplace of Benjamín Zeledón (1879). The Lake Managua shore later became the center of national government."},
- {n:"León",ll:[-86.88,12.43],t:"Colonial city where Rubén Darío died in 1916 and where his tomb lies in the Cathedral. His former home is a museum."},
- {n:"Ciudad Darío (Metapa)",ll:[-86.1,12.73],t:"Birthplace of Rubén Darío in 1867. The town was renamed in his honor."},
- {n:"Masaya · Coyotepe · Niquinohomo",ll:[-86.09,11.9],t:"The battle of Coyotepe and La Barranca near Masaya (3–4 Oct 1912) was Zeledón's last stand against U.S. Marines and government troops. He was executed in Niquinohomo on 4 Oct 1912 and is buried in nearby Catarina. Sandino, born in Niquinohomo, witnessed these events."},
- {n:"Granada",ll:[-85.96,11.93],t:"Colonial city on Lake Nicaragua; home of the Rubén Darío International Poetry Festival and of 19th-century Conservative elites."}
+ {n:"Managua",xy:[136,328],t:"Capital of Nicaragua and birthplace of Benjamín Zeledón (1879)."},
+ {n:"León",xy:[104,276],t:"Colonial city where Rubén Darío died in 1916 and where his tomb lies in the Cathedral. His former home is a museum."},
+ {n:"Ciudad Darío (Metapa)",xy:[176,268],t:"Birthplace of Rubén Darío in 1867. The town was renamed in his honor."},
+ {n:"Masaya · Coyotepe · Niquinohomo",xy:[172,334],t:"The battle of Coyotepe and La Barranca near Masaya (3–4 Oct 1912) was Zeledón's last stand against U.S. Marines and government troops. He was executed in Niquinohomo on 4 Oct 1912 and is buried in nearby Catarina. Sandino, born in Niquinohomo, witnessed these events."},
+ {n:"Granada",xy:[182,354],t:"Colonial city on Lake Nicaragua; home of the Rubén Darío International Poetry Festival and of 19th-century Conservative elites."}
 ];
-const svg=$("#mapSvg");
+const svg=$('#mapSvg');
 const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;};
-const bg=mk('rect',{x:0,y:0,width:540,height:490,fill:'none'});
-const order=['carib','central','pacific'];
-const polys={};
-order.forEach(k=>{
-  const r=REG[k];
-  polys[k]=mk('polygon',{points:pts(r.poly),fill:r.col,class:'reg',tabindex:0,role:'button','aria-label':r.name});
-  polys[k].onclick=()=>selReg(k);
-  polys[k].onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();selReg(k);}};
+// lakes first (islands of Rivas are drawn later, on top)
+MAP.lakes.forEach(d=>mk('path',{d,fill:'#7cc0f5',stroke:'#fff','stroke-width':1,'pointer-events':'none'}));
+const paths=[];
+MAP.d.forEach(dep=>{
+  const p=mk('path',{d:dep.d,fill:COL[dep.r],class:'reg',tabindex:0,role:'button','aria-label':dep.n+', '+REG[dep.r].name});
+  p.dataset.r=dep.r;
+  const ti=document.createElementNS(NS,'title');ti.textContent=dep.n;p.appendChild(ti);
+  const go=()=>selReg(dep.r,dep.n);
+  p.onclick=go;p.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}};
+  paths.push(p);
 });
-// RACCN / RACCS divider
-const d1=P([-85.14,13.0]),d2=P([-83.56,13.0]);
-mk('line',{x1:d1[0],y1:d1[1],x2:d2[0],y2:d2[1],stroke:'#fff','stroke-width':2,'stroke-dasharray':'6 5','pointer-events':'none'});
-// lakes
-const lakeM=P([-86.35,12.35]), lakeN=P([-85.45,11.55]);
-mk('ellipse',{cx:lakeM[0],cy:lakeM[1],rx:30,ry:20,fill:'#7cc0f5',stroke:'#fff','stroke-width':1.5,transform:`rotate(-20 ${lakeM[0]} ${lakeM[1]})`,'pointer-events':'none'});
-mk('ellipse',{cx:lakeN[0],cy:lakeN[1],rx:66,ry:30,fill:'#7cc0f5',stroke:'#fff','stroke-width':1.5,transform:`rotate(28 ${lakeN[0]} ${lakeN[1]})`,'pointer-events':'none'});
-// labels
-Object.keys(REG).forEach(k=>{if(k==='pacific')return;const p=P(REG[k].lab);const t=mk('text',{x:p[0],y:p[1],'text-anchor':'middle',class:'lbl'});t.textContent=REG[k].name;});
-{const p=P([-86.9,12.8]);const t=mk('text',{x:p[0],y:p[1],'text-anchor':'middle',class:'lbl',transform:`rotate(-43 ${p[0]} ${p[1]})`});t.textContent='PACIFIC';t.style.fontSize='11px';}
-const pr=P([-84.35,12.3]),ps=P([-84.35,12.7]);
-[['RACCN',-84.3,13.35],['RACCS',-84.3,12.45]].forEach(([n,lo,la])=>{const p=P([lo,la]);const t=mk('text',{x:p[0],y:p[1],'text-anchor':'middle',class:'lbl','font-size':11});t.textContent=n;t.style.fontSize='11px';});
-// Pacific label tags
-const tag=(txt,ll)=>{const p=P(ll);const t=mk('text',{x:p[0],y:p[1],'text-anchor':'middle','pointer-events':'none'});t.textContent=txt;t.setAttribute('style','font:700 9px Merriweather,serif;fill:#0b3d7a;opacity:.8');};
-// Costa Rica / Honduras / Oceans labels
-const outer=(txt,ll,rot=0)=>{const p=P(ll);const t=mk('text',{x:p[0],y:p[1],'text-anchor':'middle','pointer-events':'none',transform:rot?`rotate(${rot} ${p[0]} ${p[1]})`:''});t.textContent=txt;t.setAttribute('style','font:italic 700 11px Merriweather,serif;fill:var(--muted)');};
-outer('HONDURAS',[-86.0,14.7]);outer('COSTA RICA',[-85.0,10.7]);outer('Caribbean Sea',[-82.95,12.5],-90);outer('Pacific Ocean',[-87.4,11.7],-38);
+const hide=['Managua','Masaya','Granada'];
+MAP.d.forEach(dep=>{
+  if(hide.includes(dep.n))return;
+  const r=dep.r==='caribbean';
+  const t=mk('text',{x:dep.l[0],y:dep.l[1]+(r?0:2.5),class:r?'rl':'dl'});t.textContent=dep.n;
+});
+const outer=(txt,x,y,rot=0)=>{const t=mk('text',{x,y,'text-anchor':'middle','pointer-events':'none',transform:rot?`rotate(${rot} ${x} ${y})`:''});t.textContent=txt;t.setAttribute('style','font:italic 700 9px Merriweather,serif;fill:var(--muted)');};
+outer('HONDURAS',60,14);outer('Pacific Ocean',38,350,-40);outer('Caribbean Sea',472,262,-90);outer('COSTA RICA',330,470);
 // pins
 const pinG=mk('g',{id:'pinG'});
 const pinList=$('#pinList');
 PINS.forEach((pn,i)=>{
-  const p=P(pn.ll);
-  const g=mk('g',{class:'pin',tabindex:0,role:'button','aria-label':pn.n,transform:`translate(${p[0]},${p[1]})`},pinG);
-  mk('circle',{r:8},g);
-  const t=mk('text',{x:0,y:3.5,'text-anchor':'middle'},g);t.textContent=i+1;
+  const g=mk('g',{class:'pin',tabindex:0,role:'button','aria-label':pn.n,transform:`translate(${pn.xy[0]},${pn.xy[1]})`},pinG);
+  mk('circle',{r:6.5},g);
+  const t=mk('text',{x:0,y:3.2,'text-anchor':'middle'},g);t.textContent=i+1;
   const show=e=>{e.stopPropagation();selPin(pn);};
   g.onclick=show;g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(e);}};
   const li=document.createElement('button');li.type='button';li.className='chip pbtn';li.textContent=(i+1)+' · '+pn.n;li.onclick=()=>selPin(pn);pinList.appendChild(li);
 });
 $('#tgPins').onchange=e=>{pinG.style.display=e.target.checked?'':'none';pinList.style.display=e.target.checked?'':'none';};
-function selReg(k){
-  Object.values(polys).forEach(p=>p.classList.remove('sel'));polys[k].classList.add('sel');
+function selReg(k,dep){
+  paths.forEach(p=>p.classList.toggle('sel',p.dataset.r===k));
+  svg.classList.add('has-sel');
   const r=REG[k];
-  $('#info').innerHTML=`<h3>${esc(r.name)}</h3><div>${r.chips.map(c=>`<span class="chip">${esc(c)}</span>`).join('')}</div><p style="margin-top:10px">${esc(r.txt)}</p><div class="nic"><b>${esc(r.unit.split(':')[0])}:</b>${esc(r.unit.slice(r.unit.indexOf(':')+1))}</div>`;
+  $('#info').innerHTML=`<h3>${esc(r.name)}</h3>${dep?`<p style="font-size:.85rem;margin:0 0 .4rem;color:var(--muted)">You selected: <b>${esc(dep)}</b></p>`:''}<div>${r.chips.map(c=>`<span class="chip" style="${c.startsWith(dep||'§')?'background:var(--gold);color:#222':''}">${esc(c)}</span>`).join('')}</div><p style="margin-top:10px">${esc(r.txt)}</p><div class="nic"><b>${esc(r.unit.split(':')[0])}:</b>${esc(r.unit.slice(r.unit.indexOf(':')+1))}</div>`;
 }
 function selPin(pn){
-  $('#info').innerHTML=`<h3>📍 ${esc(pn.n)}</h3><p>${esc(pn.t)}</p><p class="legend">Tap a region to see its description.</p>`;
+  $('#info').innerHTML=`<h3>📍 ${esc(pn.n)}</h3><p>${esc(pn.t)}</p><p class="legend">Tap a department to see its region.</p>`;
 }
 
 /* ---------- practice data ---------- */
