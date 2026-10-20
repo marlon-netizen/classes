@@ -27,6 +27,21 @@ To add a page: drop the .html file into the right folder and run this script.
 import argparse, html, pathlib, re, sys
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
+# every folder has its OWN look (colours + font): nothing visual is shared between folders - only the database and the sign-in code
+THEMES = {
+    "faith-formation": dict(font="Lora:wght@400;500;600;700", family="'Lora',Georgia,serif",
+        light=dict(bg="#f6f1ea", surface="#fffcf8", ink="#2b1d22", muted="#6a5a5f", line="#e3d5cb", primary="#7a2e3b", warm="#b8893b", soft="#f3e6e8", head="#4a1a25", headink="#f6ecdc", eyebrow="#e0c28a"),
+        dark=dict(bg="#1a1214", surface="#241a1d", ink="#efe6e8", muted="#b4a2a8", line="#3b2c31", primary="#e2a3ae", warm="#d9b36a", soft="#2e2024")),
+    "ciencias-sociales": dict(font="Merriweather:wght@400;700", family="'Merriweather',Georgia,serif",
+        light=dict(bg="#eef2ea", surface="#fbfdf9", ink="#1f2a22", muted="#55655a", line="#d3ddcc", primary="#2f6b4a", warm="#c0762b", soft="#e1eee5", head="#1d3d2c", headink="#eef4ea", eyebrow="#d8c08a"),
+        dark=dict(bg="#101712", surface="#18221b", ink="#e3ece5", muted="#97aa9d", line="#2a3a2f", primary="#8fd0a9", warm="#e0a25e", soft="#1c2a21")),
+    "math-physics": dict(font="Oswald:wght@300;400;500;600;700", family="'Oswald','Arial Narrow',system-ui,sans-serif",
+        light=dict(bg="#eef1f5", surface="#fbfcfe", ink="#17212e", muted="#566475", line="#d2d9e3", primary="#1f4e8c", warm="#2b7a76", soft="#e1eaf6", head="#14263f", headink="#eef2f8", eyebrow="#8fd0cb"),
+        dark=dict(bg="#0e141c", surface="#161e29", ink="#e5ebf3", muted="#9aa8ba", line="#2a3646", primary="#9dc1f0", warm="#58b5ae", soft="#1a2636")),
+}
+DEFAULT_THEME = dict(font="Oswald:wght@300;400;500;600;700", family="'Oswald','Arial Narrow',system-ui,sans-serif",
+    light=dict(bg="#f3f0e9", surface="#fffdf9", ink="#1e2937", muted="#5a6575", line="#ddd6c7", primary="#1f3a5f", warm="#b4763a", soft="#e6edf5", head="#1b2f4b", headink="#f3f0e9", eyebrow="#d3b48a"),
+    dark=dict(bg="#11161d", surface="#18202a", ink="#e5e9ef", muted="#9aa5b5", line="#2d3947", primary="#9dbce6", warm="#d9a165", soft="#1b2838"))
 AREAS = [
     dict(folder="faith-formation", name="Faith Formation",
          blurb="Religion and values lessons: scripture, doctrine and Growing in Values."),
@@ -97,18 +112,42 @@ a.card:hover{transform:translateY(-2px);border-color:var(--primary)}a.card h3{ma
 a.card .tag{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--warm);font-weight:600;margin-bottom:4px}
 footer{border-top:1px solid var(--line);padding:18px 0 40px;color:var(--muted);font-size:.9rem}footer a{color:var(--primary)}
 """
-FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-         '<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">')
 
 
-def hub(title, sub, cards, footer):
+def themed_css(th):
+    """HUB_CSS with this folder's own palette and font."""
+    L, D = th["light"], th["dark"]
+    css = HUB_CSS
+    root_l = "--bg:%(bg)s;--surface:%(surface)s;--ink:%(ink)s;--muted:%(muted)s;--line:%(line)s;--primary:%(primary)s;--warm:%(warm)s;--soft:%(soft)s" % L
+    root_d = "--bg:%(bg)s;--surface:%(surface)s;--ink:%(ink)s;--muted:%(muted)s;--line:%(line)s;--primary:%(primary)s;--warm:%(warm)s;--soft:%(soft)s" % D
+    lines = css.strip("\n").split("\n")
+    lines[0] = ":root{%s}" % root_l
+    lines[1] = "@media (prefers-color-scheme: dark){:root{%s}}" % root_d
+    css = "\n".join(lines)
+    css = css.replace("font:17px/1.6 'Oswald','Arial Narrow',system-ui,sans-serif", "font:17px/1.6 %s" % th["family"])
+    css = css.replace("header{background:#1b2f4b;color:#f3f0e9;", "header{background:%s;color:%s;" % (L["head"], L["headink"]))
+    css = css.replace("color:#d3b48a}", "color:%s}" % L["eyebrow"]).replace("header p{margin:.2em 0 0;color:#cfd8e6}", "header p{margin:.2em 0 0;color:%s;opacity:.85}" % L["headink"])
+    return css + "\n"
+
+
+def fonts(th):
+    return ('<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+            '<link href="https://fonts.googleapis.com/css2?family=%s&display=swap" rel="stylesheet">' % th["font"])
+
+
+FONTS = fonts(DEFAULT_THEME)
+LIA_HUB = '<meta name="lia-hub" content="1">\n<script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script>\n'
+
+
+def hub(title, sub, cards, footer, theme=None, signin=False):
+    th = theme or DEFAULT_THEME
     body = "\n".join('<a class="card" href="%s"><span class="tag">%s</span><h3>%s</h3><p>%s</p></a>' % (
         html.escape(h), html.escape(t), html.escape(n), html.escape(d)) for h, t, n, d in cards)
     return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n'
-            '<title>%s | Lincoln International Academy</title>\n%s\n<style>%s</style>\n</head>\n<body>\n'
+            '<title>%s | Lincoln International Academy</title>\n%s\n%s<style>%s</style>\n</head>\n<body>\n'
             '<header><div class="wrap"><div class="eyebrow">Student learning site</div><div class="school">Lincoln International Academy</div><p>%s</p></div></header>\n'
             '<main><div class="wrap"><div class="grid">\n%s\n</div></div></main>\n<footer><div class="wrap">%s</div></footer>\n</body>\n</html>\n'
-            % (html.escape(title), FONTS, HUB_CSS, html.escape(sub), body, footer))
+            % (html.escape(title), fonts(th), LIA_HUB if signin else "", themed_css(th), html.escape(sub), body, footer))
 
 
 def main():
@@ -138,7 +177,7 @@ def main():
                 (folder / old).unlink()
         (folder / "index.html").write_text(hub(
             area["name"], area["blurb"], cards,
-            '<a href="../index.html">← All subjects</a>'), encoding="utf8")
+            '<a href="../index.html">← All subjects</a>', theme=THEMES[area["folder"]], signin=True), encoding="utf8")
         root_cards.append((area["folder"] + "/", "%d lessons" % len(files), area["name"], area["blurb"]))
         print("%-18s %2d pages connected" % (area["folder"], len(files)))
     (ROOT / "index.html").write_text(hub(
@@ -149,19 +188,29 @@ def main():
     tdir.mkdir(exist_ok=True)
     (tdir / "admin.html").write_text(template, encoding="utf8")
     (tdir / "scores.html").write_text(scores_template, encoding="utf8")
-    tcards = "\n".join(
-        '<div class="card"><span class="tag">%s</span><h3>%s</h3><p>%s</p><p class="acts"><a class="btn" href="scores.html?area=%s">Scores &amp; progress</a>'
-        '<a class="btn ghost" href="admin.html?area=%s">Students &amp; codes</a><a class="btn ghost" href="../%s/" target="_blank" rel="noopener">Student lessons ↗</a></p></div>'
-        % (html.escape("%d lessons" % len([p for p in (ROOT / a["folder"]).glob("*.html") if p.name not in SKIP])), html.escape(a["name"]), html.escape(a["blurb"]), a["folder"], a["folder"], a["folder"])
-        for a in AREAS)
+    (tdir / "access.html").write_text((ROOT / "shared" / "access.template.html").read_text(encoding="utf8"), encoding="utf8")
+    tcards = []
+    for ar in AREAS:
+        th = THEMES[ar["folder"]]["light"]
+        lessons = sorted(p for p in (ROOT / ar["folder"]).glob("*.html") if p.name not in SKIP)
+        lis = "".join('<li><a href="../%s/%s" target="_blank" rel="noopener">%s</a><code>%s</code></li>' % (
+            ar["folder"], p.name, html.escape(page_info(p)[1]), p.name) for p in lessons)
+        tcards.append(
+            '<section class="card" style="--primary:%s;--warm:%s;--soft:%s"><span class="tag">%d lessons</span><h3>%s</h3><p>%s</p>'
+            '<p class="acts"><a class="btn" href="scores.html?area=%s">Scores &amp; progress</a><a class="btn" href="admin.html?area=%s">Students &amp; codes</a>'
+            '<a class="btn" href="access.html?area=%s">Assign lessons</a><a class="btn ghost" href="../%s/" target="_blank" rel="noopener">Student menu ↗</a></p>'
+            '<details><summary>All lesson links</summary><ul class="lessons">%s</ul></details></section>'
+            % (th["primary"], th["warm"], th["soft"], len(lessons), html.escape(ar["name"]), html.escape(ar["blurb"]), ar["folder"], ar["folder"], ar["folder"], ar["folder"], lis))
+    tcards = "\n".join(tcards)
     (tdir / "index.html").write_text(
         '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta name="robots" content="noindex,nofollow">\n'
         '<title>Teacher tools | Lincoln International Academy</title>\n' + FONTS + '\n<style>' + HUB_CSS +
         '.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}.card h3{margin:0 0 .3em;font-size:1.25rem;color:var(--primary)}.card p{margin:.2em 0 .8em;color:var(--muted)}'
         '.acts{display:flex;flex-wrap:wrap;gap:8px}.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:.9rem;border-radius:8px;padding:7px 14px;border:1px solid var(--primary);background:var(--primary);color:#fff}'
-        '.btn.ghost{background:transparent;color:var(--primary)}.note{background:var(--soft);border-radius:10px;padding:12px 16px;margin:18px 0 0;color:var(--muted);font-size:.95rem}</style>\n</head>\n<body>\n'
+        '.btn.ghost{background:transparent;color:var(--primary)}details{margin-top:6px}summary{cursor:pointer;color:var(--primary);font-weight:600}ul.lessons{list-style:none;margin:8px 0 0;padding:0}ul.lessons li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;padding:5px 0;border-bottom:1px solid var(--line)}ul.lessons a{color:var(--primary);text-decoration:none}ul.lessons code{font-size:.78rem;color:var(--muted)}.note{background:var(--soft);border-radius:10px;padding:12px 16px;margin:18px 0 0;color:var(--muted);font-size:.95rem}</style>\n</head>\n<body>\n'
         '<header><div class="wrap"><div class="eyebrow">Teacher tools</div><div class="school">Lincoln International Academy</div><p>Scores, progress, students and access codes for every subject.</p></div></header>\n'
         '<main><div class="wrap"><div class="grid">\n' + tcards + '\n</div>'
+        '<p class="note"><b>Student site:</b> <a href="../index.html">front page</a> · <a href="../math-physics/">Math &amp; Physics</a> · <a href="../ciencias-sociales/">Ciencias Sociales</a> · <a href="../faith-formation/">Faith Formation</a></p>'
         '<p class="note"><b>Sign in</b> with your teacher account on the page you open (one login works for all of them). '
         'This area is not linked from the student pages; students only ever see the lessons. First time? Follow <code>supabase/README.md</code>.</p></div></main>\n'
         '<footer><div class="wrap"><a href="../index.html">← Student site</a></div></footer>\n</body>\n</html>\n', encoding="utf8")

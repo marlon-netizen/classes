@@ -48,7 +48,7 @@
   var AREA = CFG.area || 'default';
   var PAGE = (document.querySelector('meta[name="lia-page"]') || {}).content ||
     (location.pathname.split('/').pop() || 'index').replace(/\.html?$/i, '').replace(/[^a-z0-9-]/gi, '-').toLowerCase() || 'index';
-  var K_CODE = 'lia-code:' + AREA, K_NAME = 'lia-name:' + AREA, K_MIRROR = 'lia-mirror:' + AREA + ':' + PAGE, K_RELOAD = 'lia-reloaded:' + AREA + ':' + PAGE;
+  var K_ACCESS = 'lia-access:' + AREA, HUB = !!document.querySelector('meta[name="lia-hub"]'), K_CODE = 'lia-code:' + AREA, K_NAME = 'lia-name:' + AREA, K_MIRROR = 'lia-mirror:' + AREA + ':' + PAGE, K_RELOAD = 'lia-reloaded:' + AREA + ':' + PAGE;
   var BASE = String(CFG.url).replace(/\/+$/, '') + '/rest/v1/rpc/';
 
   var _get = Storage.prototype.getItem, _set = Storage.prototype.setItem, _rem = Storage.prototype.removeItem;
@@ -58,6 +58,8 @@
 
   var code = lsGet(K_CODE) || '';
   var student = { name: lsGet(K_NAME) || '' };
+  var access = null, blocked = false;      // access: which lessons this student's grade + class may open
+  try { access = JSON.parse(lsGet(K_ACCESS) || 'null'); } catch (e) { access = null; }
   var mirror = null;            // { owner, state:{key:string}, dirty }
   var applying = false, reloading = false, inflight = false, timer = null, retry = null;
   var sum = { solved: 0, total: 0, score: 0, max: 0 }, reported = false;
@@ -67,7 +69,7 @@
   function saveMirror() { if (mirror) lsSet(K_MIRROR, JSON.stringify(mirror)); }
 
   /* ---------- keeping the page's own localStorage in step ---------- */
-  function trackable(k) { return k && !/^lia-(code|name|mirror|reloaded|theme|admin-session)/.test(String(k)); }   // the module's own keys and the theme are not student work
+  function trackable(k) { return k && !/^lia-(code|name|mirror|reloaded|theme|admin-session|access)/.test(String(k)); }   // the module's own keys and the theme are not student work
   function applyState(state, previous) {      // write a saved state into localStorage (silently)
     applying = true;
     try {
@@ -92,11 +94,11 @@
 
   Storage.prototype.setItem = function (k, v) {
     _set.apply(this, arguments);
-    try { if (this === localStorage && !applying && !reloading && code && mirror && trackable(k)) onWrite(String(k), String(v)); } catch (e) {}
+    try { if (this === localStorage && !applying && !reloading && !blocked && code && mirror && trackable(k)) onWrite(String(k), String(v)); } catch (e) {}
   };
   Storage.prototype.removeItem = function (k) {
     _rem.apply(this, arguments);
-    try { if (this === localStorage && !applying && !reloading && code && mirror && trackable(k)) onWrite(String(k), null); } catch (e) {}
+    try { if (this === localStorage && !applying && !reloading && !blocked && code && mirror && trackable(k)) onWrite(String(k), null); } catch (e) {}
   };
   function onWrite(k, v) {
     if (v === null) delete mirror.state[k]; else mirror.state[k] = v;
@@ -126,7 +128,7 @@
     var n = 0; Object.keys(mirror.state).forEach(function (k) { try { var o = JSON.parse(mirror.state[k]); if (o && typeof o === 'object') Object.keys(o).forEach(function (x) { if (x.indexOf('ex_') === 0) n++; }); } catch (e) {} }); return n;
   }
   function push(keep) {
-    if (!code || !mirror || !mirror.dirty) return Promise.resolve();
+    if (blocked || !code || !mirror || !mirror.dirty) return Promise.resolve();
     if (inflight && !keep) return Promise.resolve();
     inflight = true; setStatus('Saving…', 'busy');
     var snap = JSON.stringify(mirror.state);
@@ -215,17 +217,45 @@
     });
   }
 
+  /* ---------- who may open what (set by the teacher: Assign lessons) ---------- */
+  function slug(f) { return String(f || '').split('?')[0].split('#')[0].split('/').pop().replace(/\.html?$/i, '').replace(/[^a-z0-9-]/gi, '-').toLowerCase() || 'index'; }
+  function canOpen(k) { return !access || !access.restricted || access.restricted.indexOf(k) < 0 || (access.allowed || []).indexOf(k) >= 0; }
+  function setAccess(a) { access = a && a.restricted ? a : null; if (access) lsSet(K_ACCESS, JSON.stringify(access)); else lsDel(K_ACCESS); }
+  function showBlock() {
+    blocked = true; clearTimeout(timer);
+    var g = document.getElementById('liaGate'); if (g) g.remove();
+    document.documentElement.classList.add('lia-locked');
+    g = document.createElement('div'); g.id = 'liaGate';
+    var who = [student.grade && ('Grade ' + student.grade), student.cls].filter(Boolean).join(' · ');
+    g.innerHTML = '<div class="lia-card"><div class="lia-brand">Lincoln International Academy</div><h2>Not available for your class</h2>' +
+      '<p>This lesson has not been assigned to ' + (who ? 'your class (' + who.replace(/[<>&]/g, '') + ')' : 'your class') + '. Go back to the menu to see your lessons.</p>' +
+      '<a class="lia-btn" style="display:block;text-align:center;text-decoration:none" href="index.html">☰ My lessons</a></div>';
+    document.body.appendChild(g);
+  }
+  function hubFilter() {      // on a folder menu: show only the lessons this student may open
+    if (!HUB) return;
+    var n = 0;
+    [].forEach.call(document.querySelectorAll('a.card[href]'), function (a) {
+      var ok = canOpen(slug(a.getAttribute('href'))); a.style.display = ok ? '' : 'none'; if (ok) n++;
+    });
+    var m = document.getElementById('liaNone');
+    if (!n) { if (!m) { m = document.createElement('p'); m.id = 'liaNone'; m.textContent = 'No lessons have been assigned to your class yet.'; var gr = document.querySelector('.grid'); (gr ? gr.parentNode : document.body).appendChild(m); } }
+    else if (m) m.remove();
+  }
+  function enforce() { if (!HUB && !canOpen(PAGE)) { showBlock(); return true; } hubFilter(); return false; }
+
   function signOut() {
     if (!confirm('Sign out? Your progress is already saved to your account.')) return;
     clearTimeout(timer);
-    var finish = function () { reloading = true; wipeKeys(mirror && mirror.state); lsDel(K_MIRROR); lsDel(K_CODE); lsDel(K_NAME); try { sessionStorage.removeItem(K_RELOAD); } catch (e) {} location.reload(); };
+    var finish = function () { reloading = true; wipeKeys(mirror && mirror.state); lsDel(K_MIRROR); lsDel(K_CODE); lsDel(K_NAME); lsDel(K_ACCESS); try { sessionStorage.removeItem(K_RELOAD); } catch (e) {} location.reload(); };
     push(true).then(finish, finish);
     setTimeout(finish, 2500);
   }
 
   /* ---------- sign-in flow (after the page has been parsed) ---------- */
   function afterLogin(got, firstTime) {
-    code = got.code; student = { name: got.info.name || student.name }; lsSet(K_CODE, code); if (student.name) lsSet(K_NAME, student.name);
+    code = got.code; student = { name: got.info.name || student.name, grade: got.info.grade || '', cls: got.info.class_name || '' }; lsSet(K_CODE, code); if (student.name) lsSet(K_NAME, student.name);
+    setAccess(got.info.access); if (enforce()) { chip(); return new Promise(function () {}); }
     return rpc('lia_get_progress', { p_area: AREA, p_code: code, p_page: PAGE }).then(function (r) {
       var remote = {};
       if (r && r.ok && r.state && typeof r.state === 'object') Object.keys(r.state).forEach(function (k) { remote[k] = String(r.state[k]); });
@@ -254,10 +284,11 @@
     }
     document.documentElement.classList.remove('lia-locked');
     chip();
+    enforce();                  // uses the last known access list while offline
     rpc('lia_login', { p_area: AREA, p_code: code }).then(function (r) {
-      if (r && r.ok) { student.name = r.name || student.name; if (student.name) lsSet(K_NAME, student.name); chip(); return afterLogin({ code: code, info: r }, false).then(watchProgress); }
+      if (r && r.ok) { student.name = r.name || student.name; student.grade = r.grade || ''; student.cls = r.class_name || ''; if (student.name) lsSet(K_NAME, student.name); chip(); return afterLogin({ code: code, info: r }, false).then(watchProgress); }
       // code no longer valid (or too many attempts): start over
-      reloading = true; wipeKeys(mirror && mirror.state); lsDel(K_MIRROR); lsDel(K_CODE); lsDel(K_NAME); mirror = null; code = ''; reloading = false;
+      reloading = true; wipeKeys(mirror && mirror.state); lsDel(K_MIRROR); lsDel(K_CODE); lsDel(K_NAME); lsDel(K_ACCESS); access = null; mirror = null; code = ''; reloading = false;
       var el = document.getElementById('liaUser'); if (el) el.remove();
       return gate(r && r.error === 'too_many' ? 'Too many attempts. Please wait a few minutes.' : 'Please sign in again.').then(function (got) { return afterLogin(got, true); });
     }, function () { setStatus('Offline – showing saved progress', 'off'); if (mirror && mirror.dirty) armRetry(); watchProgress(); });

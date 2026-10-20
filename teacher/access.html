@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Assign lessons | Lincoln International Academy</title>
+<script>
+/* one admin page for all subjects: ?area=faith-formation | ciencias-sociales | math-physics */
+(function(){var A=['faith-formation','ciencias-sociales','math-physics'],a=new URLSearchParams(location.search).get('area');
+if(A.indexOf(a)<0){try{a=localStorage.getItem('lia-teacher-area');}catch(e){}} if(A.indexOf(a)<0)a=A[2];
+try{localStorage.setItem('lia-teacher-area',a);}catch(e){} window.LIA_TEACHER_AREA=a;
+document.write('<script src="../'+a+'/lia-config.js"><\/script>');})();
+</script>
+<style>
+:root{--bg:#f3f0e9;--surface:#fffdf9;--surface-2:#f8f5ee;--ink:#1e2937;--muted:#5a6575;--line:#ddd6c7;--primary:#1f3a5f;--primary-ink:#fff;--accent:#2b7a76;--warm:#b4763a;--warm-soft:#f6ebdb;--good:#2c7a57;--good-soft:#e1f1e8;--mid:#6c8a2f;--mid-soft:#eef2dc;--low:#b4763a;--low-soft:#f6ebdb;--bad:#a94a3f;--bad-soft:#f6e4e1;--blue-soft:#e6edf5}
+@media (prefers-color-scheme: dark){:root{--bg:#11161d;--surface:#18202a;--surface-2:#1d2631;--ink:#e5e9ef;--muted:#9aa5b5;--line:#2d3947;--primary:#9dbce6;--primary-ink:#0f1722;--accent:#58b5ae;--warm:#d9a165;--warm-soft:#2d2519;--good:#5cc08f;--good-soft:#183024;--mid:#a6c25a;--mid-soft:#262e16;--low:#d9a165;--low-soft:#2d2519;--bad:#e08a7d;--bad-soft:#331e1c;--blue-soft:#1b2838}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header.top{background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+.wrap{max-width:1300px;margin:0 auto;padding:0 16px}
+header.top .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:12px}
+.eyebrow{font-size:.74rem;text-transform:uppercase;letter-spacing:.14em;color:#d3b48a}.school{font-family:Georgia,serif;font-size:1.45rem;font-weight:700}
+.who{font-size:.88rem;display:flex;gap:12px;align-items:center;color:#cfd8e6;flex-wrap:wrap}.who a{color:#cfd8e6}
+button,.btn{font:inherit;font-weight:600;font-size:.88rem;border-radius:8px;padding:6px 13px;cursor:pointer;border:1px solid var(--primary);background:var(--primary);color:var(--primary-ink)}
+button.ghost{background:transparent;color:var(--primary)}header.top button.ghost{color:#f3f0e9;border-color:rgba(255,255,255,.5)}button.small{padding:3px 10px;font-size:.8rem}
+input,select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:1px}
+main{padding:18px 0 60px}.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.login{max-width:420px;margin:40px auto}.login label{display:block;font-weight:600;font-size:.85rem;margin:10px 0 4px}.login input{width:100%}
+.msg{padding:9px 12px;border-radius:8px;margin:10px 0;font-size:.92rem}.msg.err{background:var(--bad-soft);color:var(--bad)}.msg.info{background:var(--blue-soft);color:var(--primary)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}.stat small{display:block;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:.68rem}.stat b{font-size:1.6rem}
+.stat.warn b{color:var(--low)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:12px}.toolbar .spacer{flex:1}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{border:0;border-right:1px solid var(--line);border-radius:0;background:var(--surface);color:var(--ink);padding:6px 12px}.seg button:last-child{border-right:0}.seg button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink)}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);align-items:center}.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.gridwrap{overflow:auto;max-height:72vh;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:.88rem}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);text-align:center;vertical-align:middle;background:var(--surface)}
+th{background:var(--surface-2);position:sticky;top:0;z-index:2;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);cursor:pointer;vertical-align:bottom;min-width:104px;max-width:150px}
+th small{display:block;text-transform:none;letter-spacing:0;font-weight:500;color:var(--muted)}
+th.sorted::after{content:" ▾"}th.sorted.asc::after{content:" ▴"}
+th:first-child,td:first-child{position:sticky;left:0;z-index:3;text-align:left;min-width:190px;border-right:2px solid var(--line)}th:first-child{z-index:4}
+td.name b{cursor:pointer;color:var(--primary)}td.name b:hover{text-decoration:underline}td.name small{display:block;color:var(--muted)}
+.flag{display:inline-block;font-size:.68rem;font-weight:700;padding:0 7px;border-radius:99px;background:var(--low-soft);color:var(--low);margin-left:4px}.flag.bad{background:var(--bad-soft);color:var(--bad)}
+.cell{border-radius:6px;padding:4px 6px;font-weight:700;line-height:1.25}.cell small{display:block;font-weight:500;opacity:.85;font-size:.72rem}
+.c-good{background:var(--good-soft);color:var(--good)}.c-mid{background:var(--mid-soft);color:var(--mid)}.c-low{background:var(--low-soft);color:var(--low)}.c-bad{background:var(--bad-soft);color:var(--bad)}.c-none{color:var(--muted);font-weight:400}
+.mini{height:5px;background:var(--line);border-radius:99px;margin-top:3px;overflow:hidden}.mini i{display:block;height:100%;background:currentColor}
+tr:hover td{background:var(--surface-2)}tr:hover td.name{background:var(--surface-2)}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);padding:20px;max-width:620px;width:calc(100% - 28px)}dialog::backdrop{background:rgba(0,0,0,.45)}dialog h2{margin:0 0 4px}
+.row{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:8px 0;border-bottom:1px solid var(--line)}.row .t{font-weight:600}.row .n{text-align:right;font-weight:700}.row .m{grid-column:1/-1;color:var(--muted);font-size:.8rem}
+.muted{color:var(--muted)}.actions{display:flex;gap:8px;margin-top:14px}
+@media print{header.top .who,.toolbar,#flagNote{display:none!important}.gridwrap{max-height:none;overflow:visible}body{background:#fff}}
+.mx th{cursor:default;min-width:120px}.mx th:first-child,.mx td:first-child{min-width:210px}.mx td{padding:6px}
+.mx input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent);cursor:pointer}
+.mx td.on{background:var(--good-soft)}.mx td.all{background:var(--surface-2)}
+.tag{display:inline-block;font-size:.66rem;font-weight:700;padding:0 7px;border-radius:99px;background:var(--blue-soft);color:var(--primary);text-transform:uppercase;letter-spacing:.05em}
+.tag.r{background:var(--warm-soft);color:var(--warm)}
+.mx .lnk{font-size:.74rem;font-weight:600;background:none;border:0;color:var(--primary);padding:0;text-decoration:underline;cursor:pointer;text-transform:none;letter-spacing:0}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div><div class="eyebrow">Assign lessons · <span id="areaName"></span></div><div class="school">Lincoln International Academy</div></div>
+  <div class="who" id="who" hidden><select id="areaSel" aria-label="Subject" style="padding:4px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.5);background:transparent;color:#f3f0e9"><option value="faith-formation">Faith Formation</option><option value="ciencias-sociales">Ciencias Sociales</option><option value="math-physics">Math &amp; Physics</option></select><a href="index.html">← Teacher tools</a><a id="lnkScores" href="scores.html">Scores</a><a id="lnkAdmin" href="admin.html">Students</a><a id="lnkLessons" href="#">Student lessons ↗</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
+</div></header>
+<main><div class="wrap">
+  <div class="card login" id="loginCard" hidden>
+    <h2 style="margin:0 0 4px">Teacher sign-in</h2><p class="muted" style="margin:0 0 8px">Same account as the other teacher pages.</p>
+    <form id="loginForm"><label for="lEmail">E-mail</label><input id="lEmail" type="email" autocomplete="username" required><label for="lPass">Password</label><input id="lPass" type="password" autocomplete="current-password" required>
+    <div class="actions"><button type="submit" id="lBtn">Sign in</button></div><div class="msg err" id="lErr" hidden></div></form>
+  </div>
+  <div class="msg info" id="setupMsg" hidden></div>
+  <div id="app" hidden>
+    <div class="card">
+      <p style="margin:0 0 6px"><b>Which lessons does each grade &amp; class see?</b> Tick a box to show that lesson to every student whose <i>Grade</i> and <i>Class</i> match the row (as typed in Students &amp; codes).
+      A lesson shows <span class="tag">everyone</span> until you un-tick a box for it; after that only the ticked rows see it. Students never see lessons that are not theirs, and cannot open them from a link either. Changes apply the next time the student opens a page.</p>
+      <div class="msg err" id="aErr" hidden></div>
+      <div class="gridwrap" style="margin-top:10px"><table class="mx" id="mx"><thead></thead><tbody></tbody></table></div>
+      <p class="muted" id="empty" hidden>No students yet – add some in Students &amp; codes, then come back to assign lessons.</p>
+    </div>
+  </div>
+</div></main>
+<script>
+(function(){
+'use strict';
+var CFG=window.LIA_CONFIG||{}, $=function(s){return document.querySelector(s);};
+var LIVE=CFG.url&&CFG.anonKey&&!/YOUR_SUPABASE/.test(CFG.url+CFG.anonKey), BASE=String(CFG.url||'').replace(/\/+$/,'');
+var PAGES=CFG.pages||{}, AREA=CFG.area||'default', SK='lia-admin-session:'+(CFG.url||''), sess=null, students=[];
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function msg(el,t,k){el.textContent=t||'';el.className='msg '+(k||'');el.hidden=!t;}
+function pageLabel(k){ return PAGES[k]||k; }
+/* ---------- auth + REST (same teacher session as admin.html) ---------- */
+function saveSess(j){ sess={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Date.now()+(j.expires_in||3600)*1000,email:(j.user&&j.user.email)||(sess&&sess.email)||''}; try{localStorage.setItem(SK,JSON.stringify(sess));}catch(e){} }
+function auth(body,grant){ return fetch(BASE+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{apikey:CFG.anonKey,'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json().then(function(j){ if(!r.ok) throw new Error(j.error_description||j.msg||j.message||'Sign-in failed'); return j; });}); }
+function refresh(){ if(!sess||!sess.refresh_token) return Promise.resolve(false); return auth({refresh_token:sess.refresh_token},'refresh_token').then(function(j){saveSess(j);return true;},function(){return false;}); }
+function api(path,method,body,prefer){
+  var go=function(){ var h={apikey:CFG.anonKey,Authorization:'Bearer '+sess.access_token}; if(body!==undefined) h['Content-Type']='application/json'; if(prefer) h.Prefer=prefer; return fetch(BASE+path,{method:method||'GET',headers:h,body:body===undefined?undefined:JSON.stringify(body)}); };
+  var pre=(sess&&sess.expires_at-Date.now()<60000)?refresh():Promise.resolve(true);
+  return pre.then(go).then(function(r){ if(r.status===401) return refresh().then(function(ok){ if(!ok){ out('Your session expired. Please sign in again.'); throw new Error('expired'); } return go(); }); return r; })
+    .then(function(r){ if(!r.ok) return r.json().catch(function(){return {};}).then(function(j){ throw new Error(j.message||('Request failed ('+r.status+')')); }); return r.status===204?null:r.text().then(function(x){return x?JSON.parse(x):null;}); });
+}
+function out(t){ sess=null; try{localStorage.removeItem(SK);}catch(e){} $('#app').hidden=true; $('#who').hidden=true; $('#loginCard').hidden=false; msg($('#lErr'),t,'err'); }
+
+var SENT={grade:'~',class_name:'~'};   // marks a lesson as "restricted" even when no real class is ticked
+var rows=[];
+function norm(x){ return String(x==null?'':x).trim().toLowerCase(); }
+function gkey(g,c){ return norm(g)+'||'+norm(c); }
+function isSent(r){ return r.grade===SENT.grade&&r.class_name===SENT.class_name; }
+function load(){
+  return Promise.all([api('/rest/v1/admins?select=user_id'),api('/rest/v1/students?select=grade,class_name&area=eq.'+encodeURIComponent(AREA)),api('/rest/v1/lesson_access?select=page_key,grade,class_name&area=eq.'+encodeURIComponent(AREA))])
+  .then(function(r){ if(!r[0]||!r[0].length){ out('This account is not an administrator yet (see supabase/README.md).'); return; } students=r[1]||[]; rows=r[2]||[]; render(); },
+    function(e){ if(e.message!=='expired') msg($('#aErr'),/lesson_access/.test(e.message)?'The database needs the latest supabase/schema.sql (run it again in the SQL Editor).':e.message,'err'); $('#app').hidden=false; $('#loginCard').hidden=true; $('#who').hidden=false; });
+}
+function groups(){
+  var m={}; function add(g,c,n){ var k=gkey(g,c); if(!m[k]) m[k]={grade:String(g||'').trim(),cls:String(c||'').trim(),n:0}; m[k].n+=n; }
+  students.forEach(function(s){ add(s.grade,s.class_name,1); });
+  rows.forEach(function(r){ if(!isSent(r)) add(r.grade,r.class_name,0); });
+  return Object.keys(m).map(function(k){return m[k];}).sort(function(a,b){ return (a.cls.localeCompare(b.cls))||(a.grade.localeCompare(b.grade,undefined,{numeric:true})); });
+}
+function restricted(p){ return rows.some(function(r){return r.page_key===p;}); }
+function sees(g,p){ return !restricted(p)||rows.some(function(r){return r.page_key===p&&!isSent(r)&&gkey(r.grade,r.class_name)===gkey(g.grade,g.cls);}); }
+function label(g){ return (g.grade?'Grade '+g.grade:'(no grade)')+' · '+(g.cls||'(no class)'); }
+function render(){
+  $('#loginCard').hidden=true; $('#app').hidden=false; $('#who').hidden=false; $('#whoMail').textContent=(sess&&sess.email)||''; msg($('#aErr'),'');
+  var G=groups(), P=Object.keys(PAGES).sort(function(a,b){return pageLabel(a).localeCompare(pageLabel(b));});
+  $('#empty').hidden=!!G.length; $('#mx').hidden=!G.length;
+  $('#mx thead').innerHTML='<tr><th style="cursor:default">Grade · class</th>'+P.map(function(p){ return '<th title="'+esc(pageLabel(p))+'">'+esc(pageLabel(p))+'<small>'+(restricted(p)?'<span class="tag r">chosen classes</span> <button class="lnk" data-all="'+esc(p)+'" type="button">show to everyone</button>':'<span class="tag">everyone</span>')+'</small></th>'; }).join('')+'<th style="cursor:default">All</th></tr>';
+  $('#mx tbody').innerHTML=G.map(function(g,i){
+    return '<tr data-g="'+i+'"><td class="name"><b style="cursor:default;color:inherit">'+esc(label(g))+'</b><small>'+g.n+' student'+(g.n===1?'':'s')+'</small></td>'+
+      P.map(function(p){ var on=sees(g,p); return '<td class="'+(restricted(p)?(on?'on':''):'all')+'"><input type="checkbox" data-p="'+esc(p)+'" '+(on?'checked':'')+' aria-label="'+esc(label(g)+' – '+pageLabel(p))+'"></td>'; }).join('')+
+      '<td><button class="ghost small" data-row="1" type="button">all</button> <button class="ghost small" data-row="0" type="button">none</button></td></tr>';
+  }).join('');
+  window._G=G;
+}
+function busy(f){ document.body.style.cursor='progress'; return f().then(function(){ return load(); }).catch(function(e){ if(e.message!=='expired') msg($('#aErr'),e.message,'err'); load(); }).then(function(){ document.body.style.cursor=''; }); }
+function row(p,g){ return {area:AREA,page_key:p,grade:g.grade,class_name:g.cls}; }
+function ins(list){ return list.length?api('/rest/v1/lesson_access?on_conflict=area,page_key,grade,class_name','POST',list,'resolution=ignore-duplicates,return=minimal'):Promise.resolve(); }
+function del(p,r){ return api('/rest/v1/lesson_access?area=eq.'+encodeURIComponent(AREA)+'&page_key=eq.'+encodeURIComponent(p)+'&grade=eq.'+encodeURIComponent(r.grade)+'&class_name=eq.'+encodeURIComponent(r.class_name),'DELETE'); }
+function setOne(g,p,on){   // returns a promise
+  var G=window._G, sent={area:AREA,page_key:p,grade:SENT.grade,class_name:SENT.class_name};
+  if(!restricted(p)){ if(on) return Promise.resolve(); return ins([sent].concat(G.filter(function(x){return x!==g;}).map(function(x){return row(p,x);}))); }
+  if(on) return ins([row(p,g)]);
+  return Promise.all(rows.filter(function(r){return r.page_key===p&&!isSent(r)&&gkey(r.grade,r.class_name)===gkey(g.grade,g.cls);}).map(function(r){return del(p,r);}));
+}
+$('#mx').addEventListener('change',function(e){ var c=e.target; if(!c.dataset.p) return; var g=window._G[+c.closest('tr').dataset.g]; busy(function(){ return setOne(g,c.dataset.p,c.checked); }); });
+$('#mx').addEventListener('click',function(e){
+  var b=e.target.closest('button'); if(!b) return;
+  if(b.dataset.all){ busy(function(){ return api('/rest/v1/lesson_access?area=eq.'+encodeURIComponent(AREA)+'&page_key=eq.'+encodeURIComponent(b.dataset.all),'DELETE'); }); return; }
+  if(b.dataset.row!=null){ var g=window._G[+b.closest('tr').dataset.g], on=b.dataset.row==='1'; var P=Object.keys(PAGES);
+    busy(function(){ return P.reduce(function(pr,p){ return pr.then(function(){ var cur=restricted(p)?sees(g,p):true; if(cur===on) return; return setOne(g,p,on).then(function(){ return api('/rest/v1/lesson_access?select=page_key,grade,class_name&area=eq.'+encodeURIComponent(AREA)).then(function(r){ rows=r||[]; }); }); }); },Promise.resolve()); }); }
+});
+$('#btnRefresh').addEventListener('click',function(){ load(); }); $('#btnOut').addEventListener('click',function(){ out(''); });
+$('#areaName').textContent=CFG.areaName||'';
+(function(){var s=document.getElementById('areaSel'); if(s){ s.value=window.LIA_TEACHER_AREA; s.style.color='#f3f0e9'; s.addEventListener('change',function(){ location.search='?area='+s.value; }); } })();
+$('#lnkAdmin').href='admin.html?area='+window.LIA_TEACHER_AREA; $('#lnkScores').href='scores.html?area='+window.LIA_TEACHER_AREA; $('#lnkLessons').href='../'+window.LIA_TEACHER_AREA+'/'; $('#lnkLessons').target='_blank'; document.title='Assign lessons · '+(CFG.areaName||'');
+$('#loginForm').addEventListener('submit',function(ev){ ev.preventDefault(); $('#lBtn').disabled=true; msg($('#lErr'),''); auth({email:$('#lEmail').value.trim(),password:$('#lPass').value},'password').then(function(j){ saveSess(j); sess.email=$('#lEmail').value.trim(); return load(); }).catch(function(e){ msg($('#lErr'),e.message,'err'); }).then(function(){ $('#lBtn').disabled=false; }); });
+if(!LIVE) msg($('#setupMsg'),'Supabase is not connected yet. Fill in the subject folder\'s lia-config.js (see supabase/README.md).','info');
+else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=null; } if(sess) load().catch(function(){ out(''); }); else $('#loginCard').hidden=false; }
+})();
+</script>
+</body>
+</html>
