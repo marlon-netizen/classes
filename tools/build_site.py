@@ -185,6 +185,18 @@ def main():
     print("root index.html (teacher sign-in) written")
 
 
+THEME_JS = "<script>\n(function(){var r=document.documentElement,mq=matchMedia('(prefers-color-scheme: dark)');\ntry{var t=localStorage.getItem('lia-theme');if(t==='light'||t==='dark')r.setAttribute('data-theme',t);}catch(e){}\nvar wrap=document.querySelector('header .wrap'),who=document.getElementById('who');if(!wrap)return;\nvar hr=document.createElement('div');hr.className='hr';if(who)hr.appendChild(who);wrap.appendChild(hr);\nvar b=document.createElement('button');b.type='button';b.id='btnTheme';b.className='ghost small tg';hr.appendChild(b);\nfunction eff(){return r.getAttribute('data-theme')||(mq.matches?'dark':'light');}\nfunction lab(){b.textContent=eff()==='dark'?'☀ Light':'☾ Dark';b.setAttribute('aria-label','Switch to '+(eff()==='dark'?'light':'dark')+' mode');}\nb.addEventListener('click',function(){var n=eff()==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('lia-theme',n);}catch(e){}lab();});\nif(mq.addEventListener)mq.addEventListener('change',lab);lab();})();\n</script>\n"
+
+
+def darkify(css):
+    """Make the prefers-color-scheme dark palette also available as an explicit light/dark switch (data-theme on <html>)."""
+    def f(m):
+        return '@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){%s}}\n:root[data-theme="dark"]{%s}' % (m.group(1), m.group(1))
+    css = re.sub(r"@media \(prefers-color-scheme: dark\)\{:root\{([^{}]*)\}\}", f, css, 1)
+    return re.sub(r"@media \(prefers-color-scheme: dark\)\{\.(a\d)\{([^{}]*)\}\}",
+                  lambda m: '@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .%s{%s}}\n:root[data-theme="dark"] .%s{%s}' % (m.group(1), m.group(2), m.group(1), m.group(2)), css)
+
+
 def teacher_home():
     css_areas, cards = "", []
     for n, ar in enumerate(AREAS):
@@ -196,11 +208,12 @@ def teacher_home():
         rows = "".join('<li><div><b>%s</b><a class="lk" data-rel="%s/%s" href="%s/%s" target="_blank" rel="noopener"></a></div><button class="btn ghost sm" type="button" data-copy>Copy link</button></li>'
                        % (html.escape(page_info(p)[1]), ar["folder"], p.name, ar["folder"], p.name) for p in lessons)
         cards.append(
-            '<section class="card a%d"><span class="tag">%d lessons</span><h3>%s</h3><p>%s</p>'
+            '<section class="card a%d" data-area="%s"><span class="tag">%d lessons</span><h3>%s</h3><p>%s</p>'
+            '<p class="pv"><span>Teacher preview code:</span> <code data-pv>…</code> <button class="btn ghost sm" type="button" data-copycode>Copy</button></p>'
             '<p class="acts"><a class="btn" href="teacher/scores.html?area=%s">Scores &amp; progress</a><a class="btn" href="teacher/admin.html?area=%s">Students &amp; codes</a>'
             '<a class="btn" href="teacher/access.html?area=%s">Assign lessons</a></p>'
             '<details open><summary>Links to share with students</summary><ul class="lessons">%s</ul></details></section>'
-            % (n, len(lessons), html.escape(ar["name"]), html.escape(ar["blurb"]), ar["folder"], ar["folder"], ar["folder"], rows))
+            % (n, ar["folder"], len(lessons), html.escape(ar["name"]), html.escape(ar["blurb"]), ar["folder"], ar["folder"], ar["folder"], rows))
     js = r"""
 (function(){
 'use strict';
@@ -211,10 +224,13 @@ function save(j){ sess={access_token:j.access_token,refresh_token:j.refresh_toke
 function auth(body,grant){ return fetch(BASE+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{apikey:CFG.anonKey,'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json().then(function(j){ if(!r.ok) throw new Error(j.error_description||j.msg||j.message||'Sign-in failed'); return j; });}); }
 function check(){ var go=function(){ return fetch(BASE+'/rest/v1/admins?select=user_id',{headers:{apikey:CFG.anonKey,Authorization:'Bearer '+sess.access_token}}); };
   return go().then(function(r){ if(r.status===401&&sess.refresh_token) return auth({refresh_token:sess.refresh_token},'refresh_token').then(function(j){save(j);return go();}); return r; }).then(function(r){ if(!r.ok) throw new Error('expired'); return r.json(); }).then(function(a){ if(!a||!a.length) throw new Error('This account is not an administrator yet (see supabase/README.md).'); }); }
-function show(){ $('#gate').hidden=true; $('#home').hidden=false; $('#who').hidden=false; $('#whoMail').textContent=(sess&&sess.email)||'';
+function fmt(c){ c=String(c||'').toUpperCase(); return c.replace(/(.{4})(?=.)/g,'$1-'); }
+function previews(){ fetch(BASE+'/rest/v1/students?select=area,code&is_preview=eq.true',{headers:{apikey:CFG.anonKey,Authorization:'Bearer '+sess.access_token}}).then(function(r){return r.ok?r.json():[];}).then(function(rows){
+  [].forEach.call(document.querySelectorAll('section[data-area]'),function(sec){ var m=rows.filter(function(x){return x.area===sec.dataset.area;})[0], c=sec.querySelector('[data-pv]'); c.textContent=m?fmt(m.code):'not created yet'; c.dataset.code=m?fmt(m.code):''; sec.querySelector('[data-copycode]').hidden=!m; }); },function(){}); }
+function show(){ previews(); $('#gate').hidden=true; $('#home').hidden=false; $('#who').hidden=false; $('#whoMail').textContent=(sess&&sess.email)||'';
   [].forEach.call(document.querySelectorAll('a.lk'),function(a){ var u=new URL(a.dataset.rel,location.href).href; a.textContent=u; a.href=u; }); }
 function out(t){ sess=null; try{localStorage.removeItem(SK);}catch(e){} $('#home').hidden=true; $('#who').hidden=true; $('#gate').hidden=false; msg(t); }
-document.addEventListener('click',function(e){ var b=e.target.closest('[data-copy]'); if(!b) return; var u=b.closest('li').querySelector('a.lk').href;
+document.addEventListener('click',function(e){ var cb=e.target.closest('[data-copycode]'); if(cb){ var c=cb.closest('.pv').querySelector('[data-pv]').dataset.code; try{navigator.clipboard.writeText(c);}catch(x){} var o=cb.textContent; cb.textContent='Copied ✓'; setTimeout(function(){cb.textContent=o;},1400); return; } var b=e.target.closest('[data-copy]'); if(!b) return; var u=b.closest('li').querySelector('a.lk').href;
   (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).catch(function(){ var t=document.createElement('textarea'); t.value=u; document.body.appendChild(t); t.select(); try{document.execCommand('copy');}catch(x){} t.remove(); }).then(function(){ var o=b.textContent; b.textContent='Copied ✓'; setTimeout(function(){b.textContent=o;},1400); }); });
 $('#btnOut').addEventListener('click',function(){ out(''); });
 $('#lf').addEventListener('submit',function(ev){ ev.preventDefault(); $('#lBtn').disabled=true; msg('');
@@ -224,7 +240,7 @@ else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=n
 })();
 """
     return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta name="robots" content="noindex,nofollow">\n'
-        '<title>Teacher tools | Lincoln International Academy</title>\n' + FONTS + '\n<script src="math-physics/lia-config.js"></script>\n<style>' + HUB_CSS + css_areas +
+        '<title>Teacher tools | Lincoln International Academy</title>\n' + FONTS + '\n<script src="math-physics/lia-config.js"></script>\n<style>' + darkify(HUB_CSS + css_areas) +
         '.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}.card h3{margin:0 0 .3em;font-size:1.25rem;color:var(--p)}.card p{margin:.2em 0 .8em;color:var(--muted)}'
         '.card .tag{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--w);font-weight:600}'
         '.acts{display:flex;flex-wrap:wrap;gap:8px}.btn{display:inline-block;text-decoration:none;font:inherit;font-weight:600;font-size:.9rem;border-radius:8px;padding:7px 14px;border:1px solid var(--p);background:var(--p);color:var(--pi);cursor:pointer}'
@@ -235,9 +251,11 @@ else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=n
         '.login{max-width:420px;margin:30px auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px}.login label{display:block;font-weight:600;font-size:.9rem;margin:12px 0 4px}'
         '.login input{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}.login .btn{margin-top:16px;width:100%;background:var(--primary);border-color:var(--primary);color:var(--bg)}'
         '.err{margin-top:10px;color:#c0504a;font-weight:600}.who{margin-left:auto;font-size:.85rem;display:flex;gap:10px;align-items:center;color:#cfd8e6}.who button{font:inherit;background:none;color:inherit;border:1px solid rgba(255,255,255,.5);border-radius:8px;padding:2px 10px;cursor:pointer}'
-        'header .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px}</style>\n</head>\n<body>\n'
+        'header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px}header .wrap>.hr{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}'
+        'header .tg{font:inherit;font-weight:600;font-size:.8rem;border-radius:8px;padding:4px 11px;cursor:pointer;background:transparent;color:#f3f0e9;border:1px solid rgba(255,255,255,.5)}'
+        '.pv{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;background:var(--soft);border-radius:8px;padding:8px 12px;margin:0 0 .8em!important;color:var(--ink)!important;font-size:.9rem}.pv code{font:700 1.05rem ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;color:var(--p)}</style>\n</head>\n<body>\n'
         '<header><div class="wrap"><div><div class="eyebrow">Teacher tools</div><div class="school">Lincoln International Academy</div></div>'
-        '<div class="who" id="who" hidden><span id="whoMail"></span><button type="button" id="btnOut">Sign out</button></div></header>\n'
+        '<div class="who" id="who" hidden><span id="whoMail"></span><button type="button" id="btnOut">Sign out</button></div></div></header>\n'
         '<main><div class="wrap">'
         '<div id="gate" hidden><form class="login" id="lf"><h2 style="margin:0">Teacher sign-in</h2><p style="color:var(--muted);margin:.2em 0 0">This area is for teachers only.</p>'
         '<label for="lEmail">E-mail</label><input id="lEmail" type="email" autocomplete="username" required><label for="lPass">Password</label><input id="lPass" type="password" autocomplete="current-password" required>'
@@ -245,7 +263,7 @@ else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=n
         '<div id="home" hidden><div class="grid">\n' + "\n".join(cards) + '\n</div>'
         '<p class="note"><b>Sharing with students:</b> there is no public student menu. Send each class the link to its lesson; the student signs in with their own code (one code per folder works for every lesson in it). '
         'A lesson that is not assigned to a student\'s grade and class stays closed to them.</p></div>'
-        '</div></main>\n<script>' + js + '</script>\n</body>\n</html>\n')
+        '</div></main>\n<script>' + js + '</script>\n' + THEME_JS + '</body>\n</html>\n')
 
 
 if __name__ == "__main__":

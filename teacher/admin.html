@@ -14,7 +14,8 @@ document.write('<script src="../'+a+'/lia-config.js"><\/script>');})();
 </script>
 <style>
 :root{--bg:#f3f0e9;--surface:#fffdf9;--surface-2:#f8f5ee;--ink:#1e2937;--muted:#5a6575;--line:#ddd6c7;--primary:#1f3a5f;--primary-ink:#fff;--accent:#2b7a76;--accent-soft:#e1efed;--warm:#b4763a;--warm-soft:#f6ebdb;--good:#2c7a57;--good-soft:#e1f1e8;--bad:#a94a3f;--bad-soft:#f6e4e1;--blue-soft:#e6edf5}
-@media (prefers-color-scheme: dark){:root{--bg:#11161d;--surface:#18202a;--surface-2:#1d2631;--ink:#e5e9ef;--muted:#9aa5b5;--line:#2d3947;--primary:#9dbce6;--primary-ink:#0f1722;--accent:#58b5ae;--accent-soft:#1a2f32;--warm:#d9a165;--warm-soft:#2d2519;--good:#5cc08f;--good-soft:#183024;--bad:#e08a7d;--bad-soft:#331e1c;--blue-soft:#1b2838}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#11161d;--surface:#18202a;--surface-2:#1d2631;--ink:#e5e9ef;--muted:#9aa5b5;--line:#2d3947;--primary:#9dbce6;--primary-ink:#0f1722;--accent:#58b5ae;--accent-soft:#1a2f32;--warm:#d9a165;--warm-soft:#2d2519;--good:#5cc08f;--good-soft:#183024;--bad:#e08a7d;--bad-soft:#331e1c;--blue-soft:#1b2838}}
+:root[data-theme="dark"]{--bg:#11161d;--surface:#18202a;--surface-2:#1d2631;--ink:#e5e9ef;--muted:#9aa5b5;--line:#2d3947;--primary:#9dbce6;--primary-ink:#0f1722;--accent:#58b5ae;--accent-soft:#1a2f32;--warm:#d9a165;--warm-soft:#2d2519;--good:#5cc08f;--good-soft:#183024;--bad:#e08a7d;--bad-soft:#331e1c;--blue-soft:#1b2838}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 header.top{background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
@@ -70,6 +71,14 @@ dialog h2{margin:0 0 6px}
   .slip .c{font:700 20pt ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;margin:6px 0}
   .slip small{color:#333}
 }
+
+header .wrap>.hr,header.top .wrap>.hr{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;justify-content:flex-end}
+.who{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;font-size:.85rem;color:#cfd8e6}
+.who a{white-space:nowrap;text-decoration:none;color:#f3f0e9;border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:4px 10px;font-weight:600;font-size:.82rem}.who a:hover{background:rgba(255,255,255,.14)}
+.who select{width:auto!important;font:inherit;font-size:.85rem;padding:4px 8px;border-radius:8px}.who #whoMail{opacity:.85}.who button,.hr .tg{white-space:nowrap}
+select option{background:#fff;color:#1e2937}:root[data-theme="dark"] select option{background:#18202a;color:#e5e9ef}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) select option{background:#18202a;color:#e5e9ef}}
+header .tg{font:inherit;font-weight:600;font-size:.8rem;border-radius:8px;padding:4px 11px;cursor:pointer;background:transparent;color:#f3f0e9;border:1px solid rgba(255,255,255,.5)}
 </style>
 </head>
 <body>
@@ -77,7 +86,7 @@ dialog h2{margin:0 0 6px}
 <header class="top">
   <div class="wrap">
     <div><div class="eyebrow">Teacher admin · <span id="areaName"></span></div><div class="school">Lincoln International Academy</div></div>
-    <div class="who" id="who" hidden><select id="areaSel" aria-label="Subject" style="padding:4px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.5);background:transparent;color:#f3f0e9"><option value="faith-formation">Faith Formation</option><option value="ciencias-sociales">Ciencias Sociales</option><option value="math-physics">Math &amp; Physics</option></select><a href="../index.html" style="color:#cfd8e6">← Teacher tools</a><a id="lnkAccess" href="access.html">Assign lessons</a><a id="lnkScores" href="scores.html" style="color:#cfd8e6">Scores &amp; progress</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
+    <div class="who" id="who" hidden><select id="areaSel" aria-label="Subject" style="border:1px solid rgba(255,255,255,.5);background:transparent;color:#f3f0e9"><option value="faith-formation">Faith Formation</option><option value="ciencias-sociales">Ciencias Sociales</option><option value="math-physics">Math &amp; Physics</option></select><a href="../index.html">← Teacher tools</a><a id="lnkAccess" href="access.html">Assign lessons</a><a id="lnkScores" href="scores.html">Scores &amp; progress</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
   </div>
 </header>
 
@@ -154,7 +163,7 @@ dialog h2{margin:0 0 6px}
 var CFG=window.LIA_CONFIG||{}, $=function(s){return document.querySelector(s);};
 var LIVE=CFG.url&&CFG.anonKey&&!/YOUR_SUPABASE/.test(CFG.url+CFG.anonKey);
 $('#areaName').textContent=CFG.areaName||'';
-(function(){var s=document.getElementById('areaSel'); if(s){ s.value=window.LIA_TEACHER_AREA; s.style.color='#f3f0e9'; s.addEventListener('change',function(){ location.search='?area='+s.value; }); } })();
+(function(){var s=document.getElementById('areaSel'); if(s){ s.value=window.LIA_TEACHER_AREA; s.addEventListener('change',function(){ location.search='?area='+s.value; }); } })();
 $('#lnkScores').href='scores.html?area='+window.LIA_TEACHER_AREA; $('#lnkAccess').href='access.html?area='+window.LIA_TEACHER_AREA; var BASE=String(CFG.url||'').replace(/\/+$/,'');
 var PAGES=CFG.pages||{}, AREA=CFG.area||'default';
 var SK='lia-admin-session:'+(CFG.url||''), sess=null, students=[], progress=[], editId=null, detId=null;
@@ -321,6 +330,17 @@ if(!LIVE){ msg($('#setupMsg'),'Supabase is not connected yet. Put your project U
 else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=null; }
   if(sess) load().catch(function(){ signedOut(''); }); else show($('#loginCard'),true); }
 })();
+</script>
+<script>
+(function(){var r=document.documentElement,mq=matchMedia('(prefers-color-scheme: dark)');
+try{var t=localStorage.getItem('lia-theme');if(t==='light'||t==='dark')r.setAttribute('data-theme',t);}catch(e){}
+var wrap=document.querySelector('header .wrap'),who=document.getElementById('who');if(!wrap)return;
+var hr=document.createElement('div');hr.className='hr';if(who)hr.appendChild(who);wrap.appendChild(hr);
+var b=document.createElement('button');b.type='button';b.id='btnTheme';b.className='ghost small tg';hr.appendChild(b);
+function eff(){return r.getAttribute('data-theme')||(mq.matches?'dark':'light');}
+function lab(){b.textContent=eff()==='dark'?'☀ Light':'☾ Dark';b.setAttribute('aria-label','Switch to '+(eff()==='dark'?'light':'dark')+' mode');}
+b.addEventListener('click',function(){var n=eff()==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('lia-theme',n);}catch(e){}lab();});
+if(mq.addEventListener)mq.addEventListener('change',lab);lab();})();
 </script>
 </body>
 </html>
