@@ -112,10 +112,24 @@ drop policy if exists "admins see themselves" on public.admins;
 create policy "admins see themselves" on public.admins
   for select to authenticated using (user_id = auth.uid());
 
+-- which grade + class sees which lesson (a lesson with no rows is visible to everybody)
+create table if not exists public.lesson_access (
+  area       text not null,
+  page_key   text not null,
+  grade      text not null default '',
+  class_name text not null default '',
+  primary key (area, page_key, grade, class_name)
+);
+alter table public.lesson_access enable row level security;
+drop policy if exists "admins manage lesson_access" on public.lesson_access;
+create policy "admins manage lesson_access" on public.lesson_access
+  for all to authenticated
+  using (public.lia_is_admin()) with check (public.lia_is_admin());
+
 -- the public key gets no direct table access at all
-revoke all on public.students, public.progress, public.admins, public.login_attempts from anon;
+revoke all on public.students, public.progress, public.admins, public.login_attempts, public.lesson_access from anon;
 revoke all on public.admins, public.login_attempts from authenticated;
-grant select, insert, update, delete on public.students, public.progress to authenticated;
+grant select, insert, update, delete on public.students, public.progress, public.lesson_access to authenticated;
 grant select on public.admins to authenticated;
 
 -- ---------- functions the student pages call -------------------------
@@ -124,6 +138,26 @@ drop function if exists public.lia_login(text);
 drop function if exists public.lia_get_progress(text, text);
 drop function if exists public.lia_save_progress(text, text, jsonb, integer, integer, integer);
 drop function if exists public.lia_save_progress(text, text, text, jsonb, integer, integer, integer);
+
+-- lessons of an area that are restricted, and the ones a grade + class may open
+create or replace function public.lia_access(p_area text, p_grade text, p_class text) returns json
+language sql security definer stable set search_path = public as $$
+  select json_build_object(
+    'restricted', coalesce((select json_agg(distinct page_key) from public.lesson_access where area = p_area), '[]'::json),
+    'allowed',    coalesce((select json_agg(distinct page_key) from public.lesson_access
+                             where area = p_area
+                               and lower(btrim(grade)) = lower(btrim(coalesce(p_grade, '')))
+                               and lower(btrim(class_name)) = lower(btrim(coalesce(p_class, '')))), '[]'::json))
+$$;
+
+create or replace function public.lia_can_open(p_area text, p_grade text, p_class text, p_page text) returns boolean
+language sql security definer stable set search_path = public as $$
+  select not exists (select 1 from public.lesson_access where area = p_area and page_key = p_page)
+      or exists (select 1 from public.lesson_access
+                  where area = p_area and page_key = p_page
+                    and lower(btrim(grade)) = lower(btrim(coalesce(p_grade, '')))
+                    and lower(btrim(class_name)) = lower(btrim(coalesce(p_class, ''))))
+$$;
 
 -- 1) sign in with a code
 create or replace function public.lia_login(p_area text, p_code text) returns json
@@ -151,7 +185,8 @@ begin
   end if;
 
   update public.students set last_login = now() where id = s.id;
-  return json_build_object('ok', true, 'name', s.full_name, 'grade', s.grade, 'class_name', s.class_name);
+  return json_build_object('ok', true, 'name', s.full_name, 'grade', s.grade, 'class_name', s.class_name,
+                           'access', public.lia_access(s.area, s.grade, s.class_name));
 end $$;
 
 -- 2) read a student's saved progress for one page
@@ -164,6 +199,9 @@ begin
   select * into s from public.students where area = p_area and code = public.lia_norm(p_code) and active;
   if not found then
     return json_build_object('ok', false, 'error', 'invalid_code');
+  end if;
+  if not public.lia_can_open(s.area, s.grade, s.class_name, p_page) then
+    return json_build_object('ok', false, 'error', 'not_allowed');
   end if;
   select * into r from public.progress where student_id = s.id and page_key = p_page;
   if not found then
@@ -192,6 +230,9 @@ begin
   if p_state is null or jsonb_typeof(p_state) <> 'object' or octet_length(p_state::text) > 400000 then
     return json_build_object('ok', false, 'error', 'bad_state');
   end if;
+  if not public.lia_can_open(s.area, s.grade, s.class_name, p_page) then
+    return json_build_object('ok', false, 'error', 'not_allowed');
+  end if;
   insert into public.progress (student_id, area, page_key, state, solved, total, examples, score, max_score, updated_at)
   values (s.id, s.area, p_page, p_state, greatest(coalesce(p_solved, 0), 0), greatest(coalesce(p_total, 0), 0),
           greatest(coalesce(p_examples, 0), 0), greatest(coalesce(p_score, 0), 0), greatest(coalesce(p_max_score, 0), 0), now())
@@ -201,6 +242,8 @@ begin
   return json_build_object('ok', true, 'updated_at', now());
 end $$;
 
+revoke all on function public.lia_access(text, text, text) from public;
+revoke all on function public.lia_can_open(text, text, text, text) from public;
 revoke all on function public.lia_login(text, text)                                   from public;
 revoke all on function public.lia_get_progress(text, text, text)                      from public;
 revoke all on function public.lia_save_progress(text, text, text, jsonb, integer, integer, integer, integer, integer) from public;

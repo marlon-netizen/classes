@@ -13,6 +13,7 @@ math-physics/                  all Math & Physics classes
 teacher/                       ALL teacher tools – not linked from any student page
   index.html                     teacher home (one button per subject)
   scores.html                    scores & progress dashboard
+  access.html                    assign lessons to each grade + class
   admin.html                     students & access codes
 shared/lia-sync.js             sign-in + saving module loaded by every lesson page
 shared/*.template.html         sources of the two teacher pages
@@ -67,6 +68,13 @@ Open `<your site>/teacher/` → **Scores & progress** for a subject (same teache
   practice pages and Rules on Wheels) show the student's **best** result.
 
 **Updating an existing database:** when a new version of `supabase/schema.sql` is published, paste and run it again – it is safe to re-run and keeps all data.
+
+## Showing each class only its lessons (Assign lessons)
+Open `<your site>/teacher/` → **Assign lessons** for a subject. Rows are every **grade + class** found in your student list (exactly as typed in
+*Students & codes*); columns are the lessons. A lesson is shown to **everyone** until you un-tick a box; after that only the ticked rows see it
+(**show to everyone** undoes it; **all / none** fill a row). Students see only their lessons in the folder menu, and a lesson that isn't theirs
+shows "Not available for your class" even from a direct link – the database refuses to save or load it as well.
+Re-run `supabase/schema.sql` once to enable this. Each folder also has its own look (colours and font); only the database and sign-in code are shared.
 
 ## How the student experience works
 1. Opening any lesson page shows a **Student sign-in** box (once per folder, per device).
