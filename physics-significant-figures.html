@@ -1,0 +1,901 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physics I – Significant Figures, Precision &amp; Accuracy | Lincoln International Academy</title>
+<meta name="description" content="Interactive review page: rules for counting significant figures, precision vs. accuracy, and significant-figure rules for calculations.">
+<script>try{var t=localStorage.getItem('lia-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f0e9; --surface:#fffdf9; --surface-2:#f8f5ee; --ink:#1e2937; --muted:#5a6575;
+  --line:#ddd6c7; --primary:#1f3a5f; --primary-ink:#ffffff; --accent:#2b7a76; --accent-soft:#e1efed;
+  --blue-soft:#e6edf6; --warm:#b4763a; --warm-soft:#f6ebdb; --good:#2c7a57; --good-soft:#e1f1e8;
+  --bad:#a94a3f; --bad-soft:#f6e4e1;
+  --shadow:0 1px 2px rgba(30,41,55,.06),0 4px 14px rgba(30,41,55,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+    --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+    --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+    --bad:#e08a7d; --bad-soft:#331e1c;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+  --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+  --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+  --bad:#e08a7d; --bad-soft:#331e1c;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 'Oswald','Arial Narrow',sans-serif;letter-spacing:.015em}
+h1,h2,h3,h4{font-family:'Oswald',sans-serif;font-weight:600;line-height:1.25;margin:0 0 .5em;color:var(--ink);letter-spacing:.01em}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{position:relative;background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.02em}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:#d3b48a;margin-bottom:2px}
+.meta{display:flex;gap:26px;flex-wrap:wrap}
+.meta div{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#aab7ca}
+.meta b{display:block;font-size:1.05rem;text-transform:none;letter-spacing:0;color:#f3f0e9;font-weight:600}
+.theme{position:absolute;top:12px;right:max(16px,calc((100vw - 1020px)/2 + 16px));display:inline-flex;border:1px solid rgba(255,255,255,.35);border-radius:99px;overflow:hidden;background:rgba(255,255,255,.08);z-index:5}
+.theme button{display:inline-flex;gap:6px;align-items:center;appearance:none;border:0;background:none;color:#e9e3f0;font:inherit;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;cursor:pointer}
+.theme button:hover{background:rgba(255,255,255,.14)}
+.theme button[aria-pressed="true"]{background:#f3f0e9;color:#1b2f4b}
+.theme button:focus-visible{outline:3px solid #e0b79c;outline-offset:-3px}
+@media (max-width:620px){header.top .wrap{padding-top:56px}}
+.lessonbar{background:var(--surface);border-bottom:1px solid var(--line)}
+.lessonbar .wrap{padding-top:14px;padding-bottom:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center}
+.lessonbar h1{font-size:clamp(1.15rem,2.6vw,1.45rem);margin:0}
+.lessonbar small{color:var(--muted)}
+.overall{display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--muted)}
+.bar{width:150px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+
+/* nav */
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:8px}
+nav.tabs button{appearance:none;border:0;background:none;font:inherit;font-weight:600;color:var(--muted);padding:10px 16px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;border-radius:8px 8px 0 0}
+nav.tabs button:hover{color:var(--ink);background:var(--surface-2)}
+nav.tabs button[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--warm)}
+
+main{padding:26px 0 60px}
+section.panel{display:none}
+section.panel.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:20px;box-shadow:var(--shadow)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.callout.blue{border-color:var(--primary);background:var(--blue-soft)}
+.callout b.t{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;color:var(--muted)}
+.callout p:last-child{margin-bottom:0}
+.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary)}
+.objectives{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.objectives li{display:flex;gap:12px;align-items:flex-start}
+.objectives li span{flex:none;width:26px;height:26px;border-radius:50%;background:var(--primary);color:var(--primary-ink);font-weight:700;font-size:.85rem;display:grid;place-items:center;margin-top:2px}
+.pnote{color:var(--muted);font-size:.86rem}
+
+/* math */
+.eq{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.2rem;text-align:center;padding:10px 6px;overflow-x:auto}
+.eq.big{font-size:1.35rem}
+.math{font-family:"Cambria Math",Cambria,Georgia,serif;white-space:nowrap}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.15}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em .08em}
+.frac>span:last-child{padding:.08em .25em 0}
+sub,sup{font-size:.7em;line-height:0}
+
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left}
+th{background:var(--surface-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+tr.hl td{background:var(--accent-soft)}
+
+/* controls */
+button.btn,.btn{appearance:none;font:inherit;font-weight:600;font-size:.92rem;border-radius:8px;padding:8px 16px;cursor:pointer;border:1px solid var(--primary);background:var(--primary);color:var(--primary-ink);transition:filter .15s,transform .05s}
+button.btn:hover{filter:brightness(1.12)} button.btn:active{transform:translateY(1px)}
+button.btn.ghost{background:transparent;color:var(--primary)}
+button.btn.ghost:hover{background:var(--blue-soft);filter:none}
+button.btn[disabled]{opacity:.45;cursor:not-allowed}
+input[type=text],select{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+input[type=text]{width:170px}
+input[type=text]:focus,button:focus-visible,input[type=range]:focus-visible,select:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:1px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.sliderrow{display:grid;grid-template-columns:150px 1fr 70px;gap:12px;align-items:center;margin:8px 0}
+.sliderrow output{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+@media (max-width:560px){.sliderrow{grid-template-columns:1fr 60px}.sliderrow label{grid-column:1/-1}}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+.status{padding:9px 14px;border-radius:8px;font-weight:600;font-size:.92rem;margin-top:8px;background:var(--good-soft);color:var(--good)}
+.status.warn{background:var(--warm-soft);color:var(--warm)}
+.status.bad{background:var(--bad-soft);color:var(--bad)}
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+.readout{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.readout small{display:block;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
+.readout b{font-size:1.3rem;font-variant-numeric:tabular-nums}
+.subhead{margin:26px 0 10px;font-size:1rem;text-transform:uppercase;letter-spacing:.09em;color:var(--primary);border-bottom:2px solid var(--line);padding-bottom:4px}
+
+/* sig-fig digits */
+.digits{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:2.2rem;letter-spacing:.06em;padding:12px 8px;text-align:center;overflow-x:auto;white-space:nowrap}
+.dg{display:inline-block;min-width:.55em;text-align:center;border-bottom:4px solid transparent;margin:0 1px}
+.dg.sig{background:var(--accent-soft);border-bottom-color:var(--accent);color:var(--ink)}
+.dg.no{color:var(--muted);border-bottom:4px dashed var(--bad);opacity:.85}
+.dg.sep{border-bottom-color:transparent;min-width:.2em}
+.dg.tail{color:var(--muted);font-size:.85em}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-size:.86rem;color:var(--muted);justify-content:center}
+.legend i{display:inline-block;width:22px;height:10px;vertical-align:middle;margin-right:6px;border-radius:2px}
+.legend .s{background:var(--accent-soft);border-bottom:3px solid var(--accent)}
+.legend .n{border-bottom:3px dashed var(--bad)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0}
+.chips button{appearance:none;font:inherit;font-size:.9rem;font-weight:500;background:var(--surface-2);border:1px solid var(--line);color:var(--ink);padding:5px 12px;border-radius:99px;cursor:pointer}
+.chips button:hover{border-color:var(--accent);background:var(--accent-soft)}
+.rules{counter-reset:r;list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.rules>li{counter-increment:r;display:grid;grid-template-columns:36px 1fr;gap:12px;align-items:start}
+.rules>li::before{content:counter(r);width:30px;height:30px;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-weight:700;margin-top:2px}
+.rules .ex{font-family:"Cambria Math",Cambria,Georgia,serif;color:var(--muted);font-size:.98rem}
+.rules .ex b{color:var(--accent)}
+
+/* targets */
+.targets{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.tcard{text-align:center;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--surface-2)}
+.tcard h4{margin:6px 0 2px;font-size:.95rem;text-transform:uppercase;letter-spacing:.06em;color:var(--primary)}
+.tcard p{font-size:.88rem;color:var(--muted);margin:0}
+svg.target{width:100%;max-width:240px;height:auto;display:block;margin:0 auto}
+svg.target .r1{fill:var(--surface)} svg.target .r2{fill:var(--blue-soft)}
+svg.target circle.ring{stroke:var(--line);stroke-width:1.2}
+svg.target .shot{fill:var(--bad);stroke:var(--surface);stroke-width:1.5}
+svg.target .mean{fill:none;stroke:var(--accent);stroke-width:2.5}
+svg.target .cross{stroke:var(--muted);stroke-width:1}
+.badge{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px}
+.badge.y{background:var(--good-soft);color:var(--good)} .badge.n{background:var(--bad-soft);color:var(--bad)}
+
+/* worked example stepper */
+.example{margin-bottom:22px}
+.example header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px}
+.problem-box{background:var(--blue-soft);border-radius:10px;padding:14px 16px;margin:10px 0 16px}
+.problem-box p:last-child{margin-bottom:0}
+.step{display:none;border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden;background:var(--surface)}
+.step.show{display:block;animation:fade .3s}
+.step>h4{margin:0;padding:9px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;text-transform:uppercase;letter-spacing:.09em;font-size:.82rem;color:var(--primary)}
+.step>h4 .n{width:24px;height:24px;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-size:.8rem;letter-spacing:0}
+.step .body{padding:12px 16px}
+.step .body>*:last-child{margin-bottom:0}
+.dots{display:flex;gap:6px;margin:6px 0 14px}
+.dots i{width:28px;height:6px;border-radius:99px;background:var(--line)} .dots i.on{background:var(--accent)}
+.final{font-weight:700;color:var(--good)}
+
+/* practice */
+.setpicker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.setpicker button{appearance:none;font:inherit;font-weight:600;background:var(--surface);border:1px solid var(--line);color:var(--ink);padding:9px 14px;border-radius:99px;cursor:pointer}
+.setpicker button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.setpicker button small{opacity:.75;font-weight:500;margin-left:4px}
+.prob{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 20px;margin-bottom:14px;box-shadow:var(--shadow)}
+.prob.done{border-color:var(--good)}
+.prob .num{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;display:flex;justify-content:space-between}
+.prob .num .bdg{color:var(--good)}
+.prob .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.ansrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:8px 0}
+.ansrow .u{color:var(--muted)}
+.opt{display:block;width:100%;text-align:left;font:inherit;padding:9px 12px;margin:6px 0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin-top:8px;font-size:.93rem}
+.fb.ok{color:var(--good)} .fb.no{color:var(--bad)} .fb.near{color:var(--warm)}
+.hintbox,.solbox{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.95rem}
+.hintbox{background:var(--warm-soft)} .solbox{background:var(--blue-soft)}
+.sethead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.sethead p{margin:0;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.linkbtn{background:none;border:0;color:var(--accent);font:inherit;text-decoration:underline;cursor:pointer;padding:0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="theme" role="group" aria-label="Color theme">
+    <button type="button" data-theme-set="light" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3L17 7M7 17l-1.7 1.7"/></g></svg><span>Light</span></button>
+    <button type="button" data-theme-set="dark" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><span>Dark</span></button>
+  </div>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Student Learning Page</div>
+      <div class="school">Lincoln International Academy</div>
+    </div>
+    <div class="meta">
+      <div>Class<b>Physics I</b></div>
+      <div>Teacher<b>Eduardo Vásquez</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="lessonbar">
+  <div class="wrap">
+    <div>
+      <h1>Measurement · Significant Figures</h1>
+      <small>Counting sig figs · Precision vs. accuracy · Sig figs in calculations · <a href="physics-language-of-physics.html">The Language of Physics →</a></small>
+    </div>
+    <div class="overall" aria-live="polite">
+      <span id="overallText">0 of 0 practice problems solved</span>
+      <div class="bar"><i id="overallBar"></i></div>
+    </div>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="Page sections">
+  <div class="wrap" role="tablist">
+    <button role="tab" id="t-review" data-tab="review" aria-selected="true">1 · Review</button>
+    <button role="tab" id="t-examples" data-tab="examples" aria-selected="false">2 · Worked Examples</button>
+    <button role="tab" id="t-practice" data-tab="practice" aria-selected="false">3 · Practice</button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===================== REVIEW ===================== -->
+<section class="panel active" id="review" aria-labelledby="t-review">
+
+  <div class="card">
+    <h2>What you should be able to do</h2>
+    <ul class="objectives">
+      <li><span>1</span><div><b>Count the significant figures</b> in any measured number, including zeros and scientific notation.</div></li>
+      <li><span>2</span><div><b>Tell precision from accuracy</b> and explain which kind of error affects each.</div></li>
+      <li><span>3</span><div><b>Apply the sig-fig rules</b> when adding, subtracting, multiplying and dividing measurements, and round correctly.</div></li>
+    </ul>
+    <p class="pnote" style="margin-top:12px">On this page: <a href="#part-a">A · Counting sig figs</a> · <a href="#part-b">B · Precision vs. accuracy</a> · <a href="#part-c">C · Sig figs in operations</a></p>
+  </div>
+
+  <!-- PART A -->
+  <div class="card" id="part-a">
+    <span class="pill">Part A</span>
+    <h2>Rules for counting significant figures</h2>
+    <p>Every measurement is limited by the instrument that made it. When you read a measuring tool, you record every digit you are <b>certain</b> of plus <b>one estimated digit</b>. Those digits together are the <b>significant figures</b> (sig figs) — they show how well you know the value.</p>
+    <div class="callout blue"><b class="t">Example</b>A ruler marked in millimeters shows a pencil ending between 12.3 cm and 12.4 cm. You estimate 12.34 cm: the digits 1, 2, 3 are certain and the 4 is estimated. That is <b>4 significant figures</b>.</div>
+
+    <ol class="rules">
+      <li><div><b>Nonzero digits are always significant.</b><div class="ex">4<b>5</b>6 → 3 sig figs &nbsp;·&nbsp; 2.<b>718</b> → 4 sig figs</div></div></li>
+      <li><div><b>Zeros between nonzero digits (“captive” zeros) are significant.</b><div class="ex">1<b>0</b>5 → 3 &nbsp;·&nbsp; 4.<b>00</b>7 → 4</div></div></li>
+      <li><div><b>Leading zeros are never significant.</b> They only show where the decimal point is.<div class="ex">0.0052 → 2 &nbsp;·&nbsp; 0.000<b>47</b> → 2</div></div></li>
+      <li><div><b>Trailing zeros are significant only if the number has a decimal point.</b><div class="ex">2.50 → 3 &nbsp;·&nbsp; 100. → 3 &nbsp;·&nbsp; 0.0120 → 3 &nbsp;·&nbsp; but 1200 → 2 and 300 → 1</div></div></li>
+      <li><div><b>In scientific notation, every digit in the coefficient is significant.</b> It is the best way to show exactly how many sig figs you mean.<div class="ex">4.50 × 10<sup>3</sup> → 3 &nbsp;·&nbsp; 4.5 × 10<sup>3</sup> → 2 &nbsp;·&nbsp; 6.02 × 10<sup>23</sup> → 3</div></div></li>
+      <li><div><b>Exact numbers have unlimited sig figs.</b> Counted values (12 eggs) and definitions (100 cm = 1 m) never limit your answer.<div class="ex">“4 sides” · “2 × radius” · 60 s = 1 min</div></div></li>
+    </ol>
+
+    <h3 class="subhead">Try it: sig-fig counter</h3>
+    <p>Type any number (you can use scientific notation like <span class="math">6.020e23</span> or <span class="math">4.5×10^3</span>) or tap an example. The significant digits are highlighted.</p>
+    <div class="row">
+      <label for="sfIn"><b>Number</b></label>
+      <input id="sfIn" type="text" value="0.004050" inputmode="decimal" autocomplete="off" spellcheck="false" aria-describedby="sfMsg">
+    </div>
+    <div class="chips" id="sfChips"></div>
+    <div class="digits" id="sfDigits" aria-live="polite"></div>
+    <div class="legend"><span><i class="s"></i>significant</span><span><i class="n"></i>not significant</span></div>
+    <div class="status" id="sfStatus" aria-live="polite"></div>
+    <p class="pnote" id="sfMsg" style="margin-top:8px"></p>
+
+    <h3 class="subhead">Quick reference</h3>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Number</th><th class="num">Sig figs</th><th>Why</th></tr></thead>
+      <tbody>
+        <tr><td class="math">3 407</td><td class="num">4</td><td>captive zero counts</td></tr>
+        <tr><td class="math">0.00820</td><td class="num">3</td><td>leading zeros don’t count; trailing zero after decimal does</td></tr>
+        <tr><td class="math">1 500</td><td class="num">2</td><td>no decimal point → trailing zeros are placeholders</td></tr>
+        <tr><td class="math">1 500.</td><td class="num">4</td><td>the decimal point makes the zeros significant</td></tr>
+        <tr><td class="math">1.500 × 10<sup>3</sup></td><td class="num">4</td><td>all coefficient digits count</td></tr>
+        <tr><td class="math">70.0</td><td class="num">3</td><td>zeros after the decimal point are significant</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+
+  <!-- PART B -->
+  <div class="card" id="part-b">
+    <span class="pill">Part B</span>
+    <h2>Precision vs. accuracy</h2>
+    <p>The two words are often used as if they mean the same thing, but in science they do not.</p>
+    <div class="grid2">
+      <div class="callout blue"><b class="t">Accuracy</b><p>How close a measurement is to the <b>true (accepted) value</b>.</p><p class="pnote" style="margin:0">Affected by <b>systematic error</b> — a consistent bias, such as a scale that was never zeroed.</p></div>
+      <div class="callout warm"><b class="t">Precision</b><p>How close repeated measurements are to <b>each other</b> (how reproducible they are). It is also limited by how finely the instrument is divided.</p><p class="pnote" style="margin:0">Affected by <b>random error</b> — unpredictable scatter, such as reaction time.</p></div>
+    </div>
+
+    <h3 class="subhead">The four cases</h3>
+    <p>Think of each dot as one trial and the bullseye as the true value. The teal circle marks the <em>average</em> of the trials.</p>
+    <div class="targets" id="fourTargets"></div>
+
+    <h3 class="subhead">Try it: shoot the target</h3>
+    <p>Change the <b>bias</b> (a systematic shift away from the bullseye) and the <b>spread</b> (random scatter) and see what happens to accuracy and precision.</p>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="tgBias">Bias (systematic)</label><input id="tgBias" type="range" min="0" max="70" step="1" value="0"><output id="tgBiasO"></output></div>
+        <div class="sliderrow"><label for="tgSpread">Spread (random)</label><input id="tgSpread" type="range" min="3" max="50" step="1" value="8"><output id="tgSpreadO"></output></div>
+        <div class="row"><button class="btn" id="tgNew" type="button">New set of shots</button></div>
+        <div class="readouts">
+          <div class="readout"><small>Average off by</small><b id="tgAcc">—</b></div>
+          <div class="readout"><small>Typical scatter</small><b id="tgPre">—</b></div>
+        </div>
+        <div class="status" id="tgStatus" aria-live="polite"></div>
+      </div>
+      <div id="tgSvg"></div>
+    </div>
+
+    <h3 class="subhead">Example with data</h3>
+    <p>Four students measure the free-fall acceleration. The accepted value is <b>9.81 m/s²</b>. Each did three trials.</p>
+    <div class="tablewrap">
+    <table id="paTable"></table>
+    </div>
+    <p class="pnote" style="margin-top:8px">Here “accurate” means the average is within 0.1 m/s² of 9.81, and “precise” means the three trials are within 0.1 m/s² of each other.</p>
+
+    <div class="callout">
+      <b class="t">Percent error</b>
+      <div class="eq">percent error = <span class="frac"><span>| measured − accepted |</span><span>accepted</span></span> × 100%</div>
+      <p>A small percent error means a measurement is <b>accurate</b>. Example: measured 9.50 m/s², accepted 9.81 m/s² → |−0.31| ÷ 9.81 × 100% = <b>3.2%</b>.</p>
+    </div>
+    <div class="callout warm"><b class="t">Don’t mix them up</b><p>Sig figs communicate <b>precision</b> (how finely you measured), <em>not</em> accuracy. A ruler with millimeter marks gives a more precise measurement than one with centimeter marks — but if the ruler is stretched, both can be inaccurate.</p></div>
+  </div>
+
+  <!-- PART C -->
+  <div class="card" id="part-c">
+    <span class="pill">Part C</span>
+    <h2>Rules for sig figs in calculations</h2>
+    <p>A calculated answer cannot be more certain than the measurements it came from. The rule you use depends on the operation.</p>
+    <div class="grid2">
+      <div class="callout blue">
+        <b class="t">Multiply &amp; divide</b>
+        <p>Keep as many <b>significant figures</b> as the measurement with the <b>fewest</b> sig figs.</p>
+        <div class="eq" style="padding:4px 0">4.56 × 1.4 = 6.384 → <b>6.4</b></div>
+        <p class="pnote" style="margin:0">1.4 has 2 sig figs, so the answer has 2.</p>
+      </div>
+      <div class="callout warm">
+        <b class="t">Add &amp; subtract</b>
+        <p>Keep as many <b>decimal places</b> as the measurement with the <b>fewest decimal places</b> (the least precise place value).</p>
+        <div class="eq" style="padding:4px 0">12.11 + 18.0 + 1.013 = 31.123 → <b>31.1</b></div>
+        <p class="pnote" style="margin:0">18.0 only goes to the tenths place, so the answer does too.</p>
+      </div>
+    </div>
+
+    <h3 class="subhead">Rounding</h3>
+    <ul>
+      <li>Look at the digit just to the right of the last digit you keep. If it is <b>0–4, round down</b> (leave the digit). If it is <b>5–9, round up</b>.</li>
+      <li><b>Round only at the end.</b> Keep one or two extra (“guard”) digits in the middle of a multi-step problem, then round the final answer.</li>
+      <li><b>Exact numbers</b> (counts, definitions) don’t limit the answer.</li>
+      <li>Use <b>scientific notation</b> when rounding leaves ambiguous trailing zeros: 1 234 rounded to 2 sig figs is <b>1.2 × 10<sup>3</sup></b>, not “1200”.</li>
+    </ul>
+
+    <div class="callout">
+      <b class="t">Mixed operations</b>
+      <p>Follow the order of operations. Apply the correct rule at each step but carry a guard digit, then round the final result by the rule for the <em>last</em> operation.</p>
+    </div>
+
+    <h3 class="subhead">Try it: sig-fig calculator</h3>
+    <p>Enter two measurements, pick an operation, and see the rule applied. Scientific notation like <span class="math">2.5e3</span> works too.</p>
+    <div class="row">
+      <input id="cA" type="text" value="4.56" aria-label="First number" inputmode="decimal" autocomplete="off" spellcheck="false" style="width:130px">
+      <select id="cOp" aria-label="Operation"><option value="*">×</option><option value="/">÷</option><option value="+">+</option><option value="-">−</option></select>
+      <input id="cB" type="text" value="1.4" aria-label="Second number" inputmode="decimal" autocomplete="off" spellcheck="false" style="width:130px">
+    </div>
+    <div class="readouts" id="cRead"></div>
+    <div class="status" id="cStatus" aria-live="polite"></div>
+    <p class="pnote" id="cRule" style="margin-top:8px"></p>
+  </div>
+</section>
+
+<!-- ===================== EXAMPLES ===================== -->
+<section class="panel" id="examples" aria-labelledby="t-examples">
+  <div class="card">
+    <h2>Worked examples</h2>
+    <p>Each example reveals one step at a time. Try to do the step in your head <em>before</em> you press <b>Next step</b>.</p>
+  </div>
+  <div id="exHost"></div>
+</section>
+
+<!-- ===================== PRACTICE ===================== -->
+<section class="panel" id="practice" aria-labelledby="t-practice">
+  <div class="card">
+    <h2>Practice</h2>
+    <p>Pick a set. For answers that need sig figs, <b>your number of sig figs matters</b> — you can type scientific notation like <span class="math">4.50e4</span> or <span class="math">4.50×10^4</span>. Use <b>Hint</b> if you’re stuck; the solution unlocks after two tries. Your progress is saved on this device.</p>
+    <div class="setpicker" id="picker" role="group" aria-label="Problem sets"></div>
+  </div>
+  <div id="setHost"></div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Lincoln International Academy · Physics I · Mr. Eduardo Vásquez<br>Practice problems written for this page.</div>
+    <div>Your progress is saved in this browser only. <button class="linkbtn" id="resetAll">Reset my progress</button></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+const $  = (s,e=document)=>e.querySelector(s);
+const $$ = (s,e=document)=>[...e.querySelectorAll(s)];
+const KEY='lia-physics1-sigfigs';
+let state={};
+try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+
+/* ---------- tabs ---------- */
+function showTab(name){
+  $$('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));
+  $$('section.panel').forEach(p=>p.classList.toggle('active',p.id===name));
+  if(location.hash!=='#'+name) history.replaceState(null,'','#'+name);
+  window.scrollTo({top:0});
+}
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+
+/* ---------- theme toggle ---------- */
+(function(){
+  const root=document.documentElement, mq=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+  const eff=()=>root.getAttribute('data-theme')||((mq&&mq.matches)?'dark':'light');
+  function sync(){ const t=eff(); $$('[data-theme-set]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeSet===t))); }
+  $$('[data-theme-set]').forEach(b=>b.addEventListener('click',()=>{
+    root.setAttribute('data-theme',b.dataset.themeSet);
+    try{ localStorage.setItem('lia-theme',b.dataset.themeSet); }catch(e){}
+    sync();
+  }));
+  if(mq&&mq.addEventListener) mq.addEventListener('change',sync);
+  sync();
+})();
+
+/* =====================================================
+   Sig-fig engine
+   ===================================================== */
+/* parse "0.0450", "1,200", "6.02e23", "4.5×10^3" -> info or null */
+function parseSF(raw){
+  let s=String(raw).trim().replace(/,/g,'').replace(/\s+/g,'');
+  s=s.replace(/[×x*·]10\^?/i,'e').replace(/[−–]/g,'-');
+  const m=s.match(/^([+-]?)(\d*\.?\d*)(?:e([+-]?\d+))?$/i);
+  if(!m || !/\d/.test(m[2])) return null;
+  const sign=m[1], mant=m[2], exp=m[3]?parseInt(m[3],10):0;
+  const hasDot=mant.indexOf('.')>=0;
+  const chars=mant.split('');                       // digits and '.'
+  const digs=chars.filter(c=>c!=='.');
+  const intDigits=hasDot?mant.indexOf('.'):digs.length;
+  let fn=digs.findIndex(c=>c!=='0');
+  if(fn<0){                                         // zero
+    return {sign,mant,exp,hasDot,chars,digs,fn:-1,ln:-1,sig:hasDot?digs.length-0:1,flags:null,value:0,lsp:hasDot?-(digs.length-intDigits):0,zero:true};
+  }
+  let ln=digs.length-1; while(digs[ln]==='0') ln--;
+  const last=hasDot?digs.length-1:ln;
+  const sig=last-fn+1;
+  const flags=digs.map((c,i)=>i>=fn&&i<=last);
+  const value=parseFloat((sign==='-'?'-':'')+mant+'e'+exp);
+  const lsp=exp+(intDigits-1-last);                 // power of ten of last significant digit
+  return {sign,mant,exp,hasDot,chars,digs,fn,ln,sig,flags,value,lsp,zero:false,hadExp:!!m[3]};
+}
+const sfCount=raw=>{ const p=parseSF(raw); return p?p.sig:null; };
+
+/* format x with n sig figs (sci notation if trailing zeros would be ambiguous) */
+function fmtSig(x,n){
+  if(x===0) return n>1?'0.'+'0'.repeat(n-1):'0';
+  let s=Math.abs(x).toPrecision(n);
+  if(s.indexOf('e')>=0){ s=Math.abs(x).toExponential(n-1); }
+  else if(s.indexOf('.')<0 && /0$/.test(s) && n>sigOfPlain(s)){ s=Math.abs(x).toExponential(n-1); }
+  if(s.indexOf('e')>=0){ const [c,e]=s.split('e'); s=c+' × 10<sup>'+parseInt(e,10)+'</sup>'; }
+  return (x<0?'−':'')+s;
+}
+function sigOfPlain(s){ return s.replace(/0+$/,'').replace('.','').length; }
+/* round x to power-of-ten place lsp (e.g. -2 = hundredths) */
+function fmtPlace(x,lsp){
+  const f=Math.pow(10,-lsp);
+  const r=Math.round(Math.abs(x)*f+1e-9)/f;
+  const sgn=x<0&&r!==0?'−':'';
+  if(lsp<=0) return sgn+r.toFixed(-lsp);
+  return sgn+String(r);
+}
+function placeName(lsp){
+  const names={'-4':'ten-thousandths','-3':'thousandths','-2':'hundredths','-1':'tenths','0':'ones','1':'tens','2':'hundreds','3':'thousands'};
+  return names[String(lsp)]||('10^'+lsp+' place');
+}
+const sfWord=n=>n+' sig fig'+(n===1?'':'s');
+
+/* ---------- Part A: counter ---------- */
+const sfIn=$('#sfIn');
+const SF_EX=['4506','0.00340','1200','1200.','1.200×10^3','0.0702','40.050','6.020e23','100.0','0.000450'];
+SF_EX.forEach(t=>{ const b=document.createElement('button'); b.type='button'; b.textContent=t.replace('e23','×10^23'); b.addEventListener('click',()=>{ sfIn.value=t; renderSF(); }); $('#sfChips').appendChild(b); });
+function renderSF(){
+  const p=parseSF(sfIn.value), d=$('#sfDigits'), st=$('#sfStatus'), msg=$('#sfMsg');
+  if(!p){ d.innerHTML=''; st.className='status warn'; st.textContent='Enter a number to count its significant figures.'; msg.textContent=''; return; }
+  let k=0, html='';
+  p.chars.forEach(c=>{
+    if(c==='.'){ html+='<span class="dg sep">.</span>'; return; }
+    const sig=p.zero?false:p.flags[k]; k++;
+    html+='<span class="dg '+(sig?'sig':'no')+'">'+c+'</span>';
+  });
+  if(p.exp) html+='<span class="dg sep tail"> × 10<sup>'+p.exp+'</sup></span>';
+  d.innerHTML=(p.sign==='-'?'−':'')+html;
+  const n=p.zero?(p.hasDot?p.digs.length-p.digs.length+0:0):p.sig;
+  if(p.zero){ st.className='status warn'; st.textContent='A value of zero — enter a nonzero measurement.'; msg.textContent=''; return; }
+  st.className='status'; st.textContent=sfWord(p.sig);
+  let why;
+  if(p.hadExp) why='In scientific notation every digit of the coefficient is significant.';
+  else if(!p.hasDot && p.ln<p.digs.length-1) why='No decimal point, so the trailing zeros are only placeholders (not significant).';
+  else if(p.hasDot && p.fn>0 && /^0\.?0*$|^0/.test(p.mant)) why='Leading zeros only locate the decimal point. '+(/0$/.test(p.mant)&&p.hasDot?'The trailing zero after the decimal point counts.':'');
+  else if(p.hasDot && /0$/.test(p.mant)) why='With a decimal point, trailing zeros are significant.';
+  else why='Nonzero digits and zeros between them are significant.';
+  msg.textContent=why;
+}
+sfIn.addEventListener('input',renderSF); renderSF();
+
+/* ---------- Part B: targets ---------- */
+function rng(seed){ let a=seed>>>0; return ()=>{ a|=0; a=a+0x6D2B79F5|0; let t=Math.imul(a^a>>>15,1|a); t=t+Math.imul(t^t>>>7,61|t)^t; return ((t^t>>>14)>>>0)/4294967296; }; }
+function shots(bias,spread,seed){
+  const r=rng(seed), out=[], ang=40*Math.PI/180;
+  const bx=bias*Math.cos(ang), by=-bias*Math.sin(ang);
+  for(let i=0;i<4;i++){                       // 4 random offsets + their mirror images -> mean = bias point exactly
+    const dx=(r()*2-1)*spread, dy=(r()*2-1)*spread;
+    out.push([110+bx+dx,110+by+dy],[110+bx-dx,110+by-dy]);
+  }
+  return out;
+}
+function stats(pts,bias){
+  const mx=pts.reduce((a,p)=>a+p[0],0)/pts.length, my=pts.reduce((a,p)=>a+p[1],0)/pts.length;
+  const acc=Math.hypot(mx-110,my-110);
+  const pre=pts.reduce((a,p)=>a+Math.hypot(p[0]-mx,p[1]-my),0)/pts.length;
+  return {mx,my,acc,pre};
+}
+const ACC_T=14, PRE_T=16;
+function targetSVG(pts,st){
+  let s='<svg class="target" viewBox="0 0 220 220" role="img" aria-label="Target with shots">';
+  [100,80,60,40,20].forEach((r,i)=>{ s+='<circle class="ring '+(i%2?'r2':'r1')+'" cx="110" cy="110" r="'+r+'"/>'; });
+  s+='<line class="cross" x1="110" x2="110" y1="6" y2="214"/><line class="cross" x1="6" x2="214" y1="110" y2="110"/>';
+  pts.forEach(p=>{ const x=Math.max(8,Math.min(212,p[0])), y=Math.max(8,Math.min(212,p[1])); s+='<circle class="shot" cx="'+x.toFixed(1)+'" cy="'+y.toFixed(1)+'" r="5"/>'; });
+  s+='<circle class="mean" cx="'+st.mx.toFixed(1)+'" cy="'+st.my.toFixed(1)+'" r="9"/></svg>';
+  return s;
+}
+const CASES=[
+  {t:'Accurate &amp; precise',d:'Tight cluster on the bullseye.',bias:0,spread:6,seed:3},
+  {t:'Precise, not accurate',d:'Tight cluster, but off target (systematic error).',bias:62,spread:6,seed:7},
+  {t:'Accurate, not precise',d:'Scattered, but centered on average.',bias:0,spread:40,seed:11},
+  {t:'Neither',d:'Scattered and off target.',bias:62,spread:40,seed:5}
+];
+$('#fourTargets').innerHTML=CASES.map(c=>{ const p=shots(c.bias,c.spread,c.seed); return '<div class="tcard">'+targetSVG(p,stats(p,c.bias))+'<h4>'+c.t+'</h4><p>'+c.d+'</p></div>'; }).join('');
+
+let tgSeed=21;
+function renderTarget(){
+  const bias=+$('#tgBias').value, spread=+$('#tgSpread').value;
+  $('#tgBiasO').textContent=bias; $('#tgSpreadO').textContent=spread;
+  const p=shots(bias,spread,tgSeed), st=stats(p,bias);
+  $('#tgSvg').innerHTML=targetSVG(p,st);
+  $('#tgAcc').textContent=st.acc.toFixed(0); $('#tgPre').textContent=st.pre.toFixed(0);
+  const a=st.acc<=ACC_T, pr=st.pre<=PRE_T, el=$('#tgStatus');
+  el.className='status'+((a&&pr)?'':(a||pr)?' warn':' bad');
+  el.textContent=a&&pr?'Accurate AND precise.':a?'Accurate (average on target) but NOT precise (scattered).':pr?'Precise (tight cluster) but NOT accurate (off target).':'Neither accurate nor precise.';
+}
+['#tgBias','#tgSpread'].forEach(id=>$(id).addEventListener('input',renderTarget));
+$('#tgNew').addEventListener('click',()=>{ tgSeed=Math.floor(Math.random()*1e6); renderTarget(); });
+renderTarget();
+
+/* data table */
+(function(){
+  const TRUE=9.81;
+  const rows=[['Ana',[9.79,9.82,9.81]],['Ben',[9.12,9.10,9.14]],['Carla',[8.60,10.90,9.95]],['Diego',[7.90,11.40,6.80]]];
+  let h='<thead><tr><th>Student</th><th>Trial 1</th><th>Trial 2</th><th>Trial 3</th><th class="num">Average</th><th>Accurate?</th><th>Precise?</th></tr></thead><tbody>';
+  rows.forEach(r=>{
+    const v=r[1], avg=v.reduce((a,b)=>a+b,0)/v.length, range=Math.max(...v)-Math.min(...v);
+    const acc=Math.abs(avg-TRUE)<=0.1, pre=range<=0.1;
+    h+='<tr><td><b>'+r[0]+'</b></td>'+v.map(x=>'<td class="math">'+x.toFixed(2)+'</td>').join('')+'<td class="num">'+avg.toFixed(2)+'</td><td><span class="badge '+(acc?'y':'n')+'">'+(acc?'Yes':'No')+'</span></td><td><span class="badge '+(pre?'y':'n')+'">'+(pre?'Yes':'No')+'</span></td></tr>';
+  });
+  $('#paTable').innerHTML=h+'</tbody>';
+})();
+
+/* ---------- Part C: calculator ---------- */
+function renderCalc(){
+  const a=parseSF($('#cA').value), b=parseSF($('#cB').value), op=$('#cOp').value;
+  const read=$('#cRead'), st=$('#cStatus'), rule=$('#cRule');
+  if(!a||!b||a.zero||b.zero){ read.innerHTML=''; st.className='status warn'; st.textContent='Enter two nonzero numbers.'; rule.textContent=''; return; }
+  let raw, rounded, ruleTxt, info1, info2;
+  if(op==='*'||op==='/'){
+    if(op==='/'&&b.value===0){ st.className='status bad'; st.textContent='Cannot divide by zero.'; return; }
+    raw=op==='*'?a.value*b.value:a.value/b.value;
+    const n=Math.min(a.sig,b.sig);
+    rounded=fmtSig(raw,n);
+    info1='<small>First number</small><b>'+sfWord(a.sig)+'</b>'; info2='<small>Second number</small><b>'+sfWord(b.sig)+'</b>';
+    ruleTxt='Multiply/divide: the answer keeps the fewest sig figs → '+sfWord(n)+'.';
+  } else {
+    raw=op==='+'?a.value+b.value:a.value-b.value;
+    const lsp=Math.max(a.lsp,b.lsp);
+    rounded=fmtPlace(raw,lsp);
+    info1='<small>First number</small><b>'+placeName(a.lsp)+'</b>'; info2='<small>Second number</small><b>'+placeName(b.lsp)+'</b>';
+    ruleTxt='Add/subtract: the answer is rounded to the least precise place → '+placeName(lsp)+'.';
+    if(raw===0){ rounded='0'; }
+  }
+  const shown=Math.abs(raw)<1e-3||Math.abs(raw)>1e9?raw.toExponential(6):String(+raw.toPrecision(10));
+  read.innerHTML='<div class="readout">'+info1+'</div><div class="readout">'+info2+'</div><div class="readout"><small>Calculator shows</small><b>'+shown+'</b></div>';
+  st.className='status'; st.innerHTML='Answer: <span class="math" style="font-size:1.25rem">'+rounded+'</span>';
+  rule.textContent=ruleTxt+(op==='+'||op==='-'?' (“Place” = the last significant digit of each number.)':'');
+}
+['#cA','#cB'].forEach(id=>$(id).addEventListener('input',renderCalc)); $('#cOp').addEventListener('change',renderCalc);
+renderCalc();
+
+/* =====================================================
+   Worked examples (stepper)
+   ===================================================== */
+const D=(n,r)=>'<span class="math">'+n+'</span>';
+const EX=[
+ {tag:'Counting', title:'Example 1 · Counting sig figs with zeros',
+  prob:'<p>How many significant figures are in each number?<br><span class="math"><b>(a)</b> 0.007 060 &nbsp; <b>(b)</b> 3 200 &nbsp; <b>(c)</b> 3 200. &nbsp; <b>(d)</b> 5.0 × 10<sup>4</sup></span></p>',
+  steps:[
+   ['Leading zeros',"<p>In (a) 0.007 060, the zeros <em>before</em> the first nonzero digit (the 7) are leading zeros — <b>not</b> significant.</p>"],
+   ['Captive and trailing zeros',"<p>After the 7 comes a zero (between 7 and 6 → captive, <b>significant</b>), the 6, then a final zero. There is a decimal point, so that trailing zero is <b>significant</b>.</p><p>Significant digits: <b>7, 0, 6, 0</b> → <b>4 sig figs</b>.</p>"],
+   ['Zeros with and without a decimal point',"<p>(b) 3 200 has no decimal point, so the trailing zeros are only placeholders → <b>2 sig figs</b>.</p><p>(c) 3 200. has a decimal point, so every digit counts → <b>4 sig figs</b>.</p>"],
+   ['Scientific notation',"<p>(d) In 5.0 × 10<sup>4</sup> the coefficient 5.0 has two digits, both significant → <b>2 sig figs</b>.</p><p class='final'>Answers: (a) 4 · (b) 2 · (c) 4 · (d) 2</p>"]
+  ]},
+ {tag:'Counting', title:'Example 2 · Writing a number in scientific notation to show its sig figs',
+  prob:'<p>The distance 45 000 m was measured to <b>3</b> significant figures. Write it so that is clear.</p>',
+  steps:[
+   ['The problem with 45 000',"<p>Written as 45 000, we can’t tell how many zeros are measured — by the rules, it has only 2 sig figs.</p>"],
+   ['Move the decimal point',"<p>Write 45 000 as a coefficient between 1 and 10: 4.5 × 10<sup>4</sup>.</p>"],
+   ['Show 3 sig figs',"<p>We need 3 significant digits, so include one more digit: the 0 after the 5.</p><p class='final'>4.50 × 10<sup>4</sup> m (3 sig figs)</p>"]
+  ]},
+ {tag:'Precision & accuracy', title:'Example 3 · Precision and accuracy from data',
+  prob:'<p>A student weighs a 50.00 g standard mass three times: <span class="math">47.12 g, 47.15 g, 47.13 g</span>. Describe the measurements.</p>',
+  steps:[
+   ['Compare the trials to each other',"<p>The three readings differ by only 0.03 g — they are very close together. The measurements are <b>precise</b>.</p>"],
+   ['Compare the average to the true value',"<p>Average = (47.12 + 47.15 + 47.13) ÷ 3 = 47.13 g. The accepted value is 50.00 g, so the average is off by about 2.87 g.</p>"],
+   ['Percent error',"<p>|47.13 − 50.00| ÷ 50.00 × 100% = <b>5.7%</b>.</p>"],
+   ['Conclusion',"<p>The readings are <b>precise but not accurate</b>. All three are shifted the same way, which points to a <b>systematic error</b> — for example, a scale that was not zeroed or calibrated.</p>"]
+  ]},
+ {tag:'Rounding', title:'Example 4 · Rounding',
+  prob:'<p>Round <span class="math">0.047 36</span> to 2 significant figures and <span class="math">8 253</span> to 2 significant figures.</p>',
+  steps:[
+   ['Find the first sig fig',"<p>0.047 36: leading zeros don’t count. The first significant digit is the 4, the second is the 7. Keep <b>0.047</b>…</p>"],
+   ['Look at the next digit',"<p>The digit after the 7 is 3 → less than 5, so <b>round down</b>: <b>0.047</b>.</p>"],
+   ['Second number',"<p>8 253: keep 8 and 2; the next digit is 5 → round up: 83 hundred. To avoid ambiguous zeros, use scientific notation.</p><p class='final'>0.047 and 8.3 × 10<sup>3</sup></p>"]
+  ]},
+ {tag:'Operations', title:'Example 5 · Multiplying and dividing',
+  prob:'<p>A car travels <b>164 m</b> in <b>4.0 s</b>. What is its average speed?</p>',
+  steps:[
+   ['Write the equation',"<p><i>v</i> = <span class='frac'><span>Δ<i>x</i></span><span>Δ<i>t</i></span></span> = <span class='frac'><span>164 m</span><span>4.0 s</span></span></p>"],
+   ['Count the sig figs',"<p>164 m → 3 sig figs. 4.0 s → <b>2 sig figs</b> (the fewest).</p>"],
+   ['Calculate',"<p>164 ÷ 4.0 = 41.0 (the calculator shows 41).</p>"],
+   ['Round using the rule',"<p>The answer must have 2 sig figs: <b>41 m/s</b>.</p>"]
+  ]},
+ {tag:'Operations', title:'Example 6 · Adding and subtracting',
+  prob:'<p>Three pieces of string have lengths <b>12.11 cm</b>, <b>18.0 cm</b> and <b>1.013 cm</b>. What is the total length?</p>',
+  steps:[
+   ['Add exactly',"<p>12.11 + 18.0 + 1.013 = 31.123 cm (calculator).</p>"],
+   ['Find the least precise measurement',"<p>12.11 → hundredths · 18.0 → <b>tenths</b> · 1.013 → thousandths. The least precise is 18.0, at the tenths place.</p>"],
+   ['Round to the tenths place',"<p>31.123 → the digit after the tenths place is 2 → round down.</p><p class='final'>31.1 cm</p>"],
+   ['Common mistake',"<p>Counting sig figs here is <em>wrong</em>: 31.1 has 3 sig figs, but the sum is limited by the <b>decimal place</b>, not by the number of sig figs.</p>"]
+  ]},
+ {tag:'Operations', title:'Example 7 · Adding with a measurement that has no decimal point',
+  prob:'<p>Add <b>1 250 g</b> and <b>34.5 g</b>.</p>',
+  steps:[
+   ['Place value of each number',"<p>1 250 has no decimal point, so its last significant digit is the 5 (tens place). 34.5 goes to the tenths place.</p>"],
+   ['Add exactly',"<p>1 250 + 34.5 = 1 284.5 g.</p>"],
+   ['Round to the tens place',"<p>The least precise place is the <b>tens</b> place → 1 284.5 rounds to 1 280.</p><p class='final'>1 280 g (3 sig figs) — or 1.28 × 10<sup>3</sup> g</p>"]
+  ]},
+ {tag:'Operations', title:'Example 8 · Mixed operations with an exact number',
+  prob:'<p>A square tile has sides of <b>3.25 cm</b>. Find its perimeter.</p>',
+  steps:[
+   ['Write the equation',"<p>Perimeter = 4 × side. The “4” counts the sides, so it is an <b>exact number</b> (unlimited sig figs).</p>"],
+   ['Calculate',"<p>4 × 3.25 cm = 13.00 cm.</p>"],
+   ['Apply the rule',"<p>Only 3.25 limits the answer: <b>3 sig figs</b>.</p><p class='final'>13.0 cm</p>"]
+  ]},
+ {tag:'Operations', title:'Example 9 · A two-step problem',
+  prob:'<p>Find <span class="math">(3.20 × 4.1) + 2.55</span> with the correct sig figs.</p>',
+  steps:[
+   ['Do the multiplication first',"<p>3.20 × 4.1 = 13.12. By the multiplication rule this has <b>2 sig figs</b> → 13 (ones place). Keep a guard digit for now: 13.1<u>2</u>.</p>"],
+   ['Now add',"<p>13.12 + 2.55 = 15.67.</p>"],
+   ['Round by the rule for the last operation',"<p>The sum is limited by the least precise place among the added values. The product 13 is only known to the <b>ones place</b>, so round to the ones place: 15.67 → 16.</p><p class='final'>16</p>"]
+  ]}
+];
+(function(){
+  const host=$('#exHost');
+  EX.forEach((ex,ei)=>{
+    const sec=document.createElement('div'); sec.className='card example';
+    sec.innerHTML='<header><h3 style="margin:0">'+ex.title+'</h3><span class="pill">'+ex.tag+'</span></header><div class="problem-box">'+ex.prob+'</div><div class="dots"></div>'+
+      ex.steps.map((s,i)=>'<div class="step"><h4><span class="n">'+(i+1)+'</span>'+s[0]+'</h4><div class="body">'+s[1]+'</div></div>').join('')+
+      '<div class="row"><button class="btn" type="button">Next step</button><button class="btn ghost" type="button" data-reset>Hide steps</button></div>';
+    host.appendChild(sec);
+    const steps=$$('.step',sec), dots=$('.dots',sec), next=$('button.btn:not(.ghost)',sec), rst=$('[data-reset]',sec);
+    dots.innerHTML=ex.steps.map(()=>'<i></i>').join('');
+    let n=0;
+    function draw(){
+      steps.forEach((s,i)=>s.classList.toggle('show',i<n));
+      $$('i',dots).forEach((d,i)=>d.classList.toggle('on',i<n));
+      next.textContent=n===0?'Show first step':n<steps.length?'Next step':'All steps shown';
+      next.disabled=n>=steps.length;
+    }
+    next.addEventListener('click',()=>{ if(n<steps.length){ n++; draw(); steps[n-1].scrollIntoView({block:'nearest',behavior:'smooth'}); } });
+    rst.addEventListener('click',()=>{ n=0; draw(); });
+    draw();
+  });
+})();
+
+/* =====================================================
+   Practice
+   ===================================================== */
+/* type: n = integer count | v = value with sig figs (a = target string) | mc */
+const SETS=[
+ {id:'A',name:'Counting sig figs',problems:[
+  {id:'A1',t:'n',q:'How many significant figures are in <span class="math">4506</span>?',a:4,h:['The zero is between two nonzero digits.'],s:'All four digits are significant: the nonzero digits count, and the zero is a captive zero. → <b>4</b>.'},
+  {id:'A2',t:'n',q:'How many significant figures are in <span class="math">0.00340</span>?',a:3,h:['Leading zeros never count.','There is a decimal point, so look at the final zero.'],s:'Leading zeros (0.00) are not significant. 3, 4 and the trailing 0 are (decimal point present). → <b>3</b>.'},
+  {id:'A3',t:'n',q:'How many significant figures are in <span class="math">1200</span> (no decimal point)?',a:2,h:['Is there a decimal point?'],s:'Without a decimal point, trailing zeros are placeholders. Only 1 and 2 count. → <b>2</b>.'},
+  {id:'A4',t:'n',q:'How many significant figures are in <span class="math">1200.</span> (with a decimal point at the end)?',a:4,h:['What does the decimal point change?'],s:'A decimal point makes the trailing zeros significant. → <b>4</b>.'},
+  {id:'A5',t:'n',q:'How many significant figures are in <span class="math">6.020 × 10<sup>23</sup></span>?',a:4,h:['In scientific notation, count the digits in the coefficient.'],s:'Coefficient 6.020 has four digits, all significant. → <b>4</b>.'},
+  {id:'A6',t:'n',q:'How many significant figures are in <span class="math">0.0702</span>?',a:3,h:['The zero between 7 and 2 is captive.'],s:'Leading zeros (0.0) don’t count, but 7, 0 and 2 do. → <b>3</b>.'},
+  {id:'A7',t:'n',q:'How many significant figures are in <span class="math">40.050</span>?',a:5,h:['Count the digits from 4 to the last 0, all of them are between nonzero digits or after the decimal point.'],s:'4, 0, 0, 5 and the final 0 (trailing zero after a decimal point) are all significant. → <b>5</b>.'},
+  {id:'A8',t:'mc',q:'Which number has exactly <b>3</b> significant figures?',o:['0.0045','3.050','1,200','0.00560'],a:3,h:['Count each option; ignore leading zeros.'],s:'0.00560 → 5, 6 and the trailing 0 = 3. (0.0045 has 2; 3.050 has 4; 1,200 has 2.)'},
+  {id:'A9',t:'mc',q:'A box holds <b>12</b> eggs and 100 cm = 1 m. How many sig figs do these <em>exact</em> numbers have?',o:['Unlimited — they never limit an answer','1','2','It depends on the instrument used'],a:0,h:['Were they measured, or counted/defined?'],s:'Counted values and definitions are exact, so they have an unlimited number of sig figs.'},
+  {id:'A10',t:'v',q:'Write <span class="math">45 000</span> in scientific notation with <b>3</b> significant figures.',a:'4.50e4',u:'',h:['Coefficient between 1 and 10, three digits.'],s:'4.50 × 10<sup>4</sup> — the coefficient shows exactly 3 sig figs.'}
+ ]},
+ {id:'B',name:'Precision vs. accuracy',problems:[
+  {id:'B1',t:'mc',q:'Which statement correctly defines <b>precision</b>?',o:['How close a measurement is to the accepted value','How close repeated measurements are to each other','How many digits a calculator shows','How large the measurement is'],a:1,h:['Think “reproducible”.'],s:'Precision is the closeness of repeated measurements to each other. (Closeness to the accepted value is accuracy.)'},
+  {id:'B2',t:'mc',q:'The true mass is 100.0 g. A student measures 82.1 g, 82.3 g and 82.2 g. These measurements are…',o:['accurate and precise','precise but not accurate','accurate but not precise','neither accurate nor precise'],a:1,h:['Are the three readings close to each other? Are they close to 100.0 g?'],s:'The readings agree with each other (precise) but are far from 100.0 g (not accurate).'},
+  {id:'B3',t:'mc',q:'The true temperature is 25.0 °C. Readings: 18 °C, 25 °C, 32 °C. These measurements are…',o:['accurate and precise','precise but not accurate','accurate (on average) but not precise','neither accurate nor precise'],a:2,h:['Find the average, and look at how spread out the readings are.'],s:'The average is 25 °C (accurate), but the readings are widely scattered (not precise).'},
+  {id:'B4',t:'mc',q:'A balance was never zeroed and reads 0.50 g too high every time. This is an example of…',o:['random error that lowers precision','systematic error that lowers accuracy','exact numbers','an unlimited number of sig figs'],a:1,h:['“Always the same amount off” is a consistent shift.'],s:'A consistent offset is a systematic error. It shifts all readings the same way, reducing accuracy (not precision).'},
+  {id:'B5',t:'mc',q:'Which measuring tool allows a <b>more precise</b> length measurement?',o:['A ruler marked in centimeters','A ruler marked in millimeters','They are equally precise','Neither — precision depends only on the user'],a:1,h:['Finer divisions let you read more certain digits.'],s:'Smaller divisions allow more certain digits plus an estimated one, so the millimeter ruler is more precise.'},
+  {id:'B6',t:'v',q:'Three trials give <span class="math">12.1 s, 12.3 s</span> and <span class="math">12.2 s</span>. What is the average time (keep the sig figs of the data)?',a:'12.2',u:'s',h:['Add and divide by 3 (exact).'],s:'(12.1 + 12.3 + 12.2) ÷ 3 = 12.2. The data have 3 sig figs (tenths place) → <b>12.2 s</b>.'},
+  {id:'B7',t:'v',q:'A student measures <b>9.50 m/s²</b> for <i>g</i>; the accepted value is 9.81 m/s². Find the percent error (give 2 sig figs).',a:'3.2',u:'%',h:['percent error = |measured − accepted| ÷ accepted × 100%.','|9.50 − 9.81| = 0.31'],s:'0.31 ÷ 9.81 × 100% = 3.16% → <b>3.2%</b>.'}
+ ]},
+ {id:'C',name:'Sig figs in operations',problems:[
+  {id:'C1',t:'v',q:'Calculate <span class="math">4.56 × 1.4</span>.',a:'6.4',u:'',h:['Which factor has fewer sig figs?'],s:'4.56 × 1.4 = 6.384. 1.4 has 2 sig figs → <b>6.4</b>.'},
+  {id:'C2',t:'v',q:'Calculate <span class="math">125.0 ÷ 5.0</span>.',a:'25',u:'',h:['125.0 has 4 sig figs, 5.0 has 2.'],s:'125.0 ÷ 5.0 = 25. Two sig figs → <b>25</b>.'},
+  {id:'C3',t:'v',q:'Calculate <span class="math">12.11 + 18.0 + 1.013</span>.',a:'31.1',u:'',h:['Addition: look at decimal places, not sig figs.','Which number has the fewest decimal places?'],s:'Sum = 31.123. 18.0 only goes to tenths → <b>31.1</b>.'},
+  {id:'C4',t:'v',q:'Calculate <span class="math">4.80 − 0.056</span>.',a:'4.74',u:'',h:['4.80 → hundredths. 0.056 → thousandths.'],s:'4.80 − 0.056 = 4.744. Round to hundredths → <b>4.74</b>.'},
+  {id:'C5',t:'v',q:'Calculate <span class="math">0.0032 × 150.0</span>.',a:'0.48',u:'',h:['0.0032 has only 2 sig figs.'],s:'0.0032 × 150.0 = 0.48 → 2 sig figs → <b>0.48</b>.'},
+  {id:'C6',t:'v',q:'A car goes <b>164 m</b> in <b>4.0 s</b>. Find its average speed.',a:'41',u:'m/s',h:['Divide distance by time.','4.0 has 2 sig figs.'],s:'164 ÷ 4.0 = 41 → 2 sig figs → <b>41 m/s</b>.'},
+  {id:'C7',t:'v',q:'A rectangle is <b>2.50 m</b> by <b>0.80 m</b>. Find its area.',a:'2.0',u:'m²',h:['0.80 has 2 sig figs.','Keep the trailing zero if the sig figs call for it.'],s:'2.50 × 0.80 = 2.000 → rounded to 2 sig figs → <b>2.0 m²</b>.'},
+  {id:'C8',t:'v',q:'A square tile has sides of <b>3.25 cm</b>. Its perimeter is 4 × 3.25 cm (the 4 is exact). Give the perimeter.',a:'13.0',u:'cm',h:['The exact number doesn’t limit the answer.'],s:'4 × 3.25 = 13.00 → 3 sig figs → <b>13.0 cm</b>.'},
+  {id:'C9',t:'v',q:'A block has mass <b>45.60 g</b> and volume <b>12.5 mL</b>. Find its density.',a:'3.65',u:'g/mL',h:['Density = mass ÷ volume.','12.5 has 3 sig figs.'],s:'45.60 ÷ 12.5 = 3.648 → 3 sig figs → <b>3.65 g/mL</b>.'},
+  {id:'C10',t:'v',q:'Add <b>1 250 g</b> and <b>34.5 g</b> (1 250 has no decimal point).',a:'1280',u:'g',h:['The last significant digit of 1 250 is in the tens place.'],s:'1 250 + 34.5 = 1 284.5; round to the tens place → <b>1 280 g</b>.'},
+  {id:'C11',t:'v',q:'Calculate <span class="math">(3.20 × 4.1) + 2.55</span>.',a:'16',u:'',h:['Multiply first: 3.20 × 4.1 = 13.12 → only 2 sig figs (ones place).','Then add and round to the ones place.'],s:'3.20 × 4.1 = 13.12 → 13 (ones place). 13.12 + 2.55 = 15.67 → round to ones place → <b>16</b>.'},
+  {id:'C12',t:'v',q:'Calculate <span class="math">(2.0 × 10<sup>3</sup>) × (3.50 × 10<sup>2</sup>)</span>. Answer in scientific notation.',a:'7.0e5',u:'',h:['2.0 × 10³ has 2 sig figs; 3.50 × 10² has 3.','Multiply coefficients, add exponents.'],s:'2.0 × 3.50 = 7.00 and 10³ × 10² = 10⁵ → 2 sig figs → <b>7.0 × 10<sup>5</sup></b>.'},
+  {id:'C13',t:'v',q:'Calculate <span class="math">100.0 − 0.46</span>.',a:'99.5',u:'',h:['100.0 goes to the tenths place.'],s:'100.0 − 0.46 = 99.54 → round to tenths → <b>99.5</b>.'},
+  {id:'C14',t:'mc',q:'When <b>adding or subtracting</b> measurements, the answer should have…',o:['the same number of sig figs as the measurement with the fewest sig figs','the same number of decimal places as the measurement with the fewest decimal places','the same number of sig figs as the largest number','as many digits as the calculator shows'],a:1,h:['Add/subtract → place value. Multiply/divide → sig figs.'],s:'For addition and subtraction, round to the least precise place value (fewest decimal places).'},
+  {id:'C15',t:'mc',q:'You add <span class="math">0.25</span> and <span class="math">10.1</span>. Which answer follows the rules?',o:['10.35','10.4','10','10.30'],a:1,h:['10.1 is only known to the tenths place.'],s:'0.25 + 10.1 = 10.35, which is rounded to the tenths place: <b>10.4</b>.'}
+ ]}
+];
+
+/* ---- answer checking ---- */
+function judge(p,raw){
+  if(p.t==='n'){
+    const v=parseInt(String(raw).trim(),10);
+    if(isNaN(v)) return null;
+    return v===p.a?'ok':'no';
+  }
+  const u=parseSF(raw); if(!u||u.zero) return null;
+  const t=parseSF(p.a);
+  const close=Math.abs(u.value-t.value)<=1e-9*Math.max(1,Math.abs(t.value));
+  if(close && u.sig===t.sig) return 'ok';
+  if(close) return 'sig';
+  // right digits, wrong exponent/scale?
+  return 'no';
+}
+
+function updateOverall(){
+  const all=SETS.flatMap(s=>s.problems), done=all.filter(p=>state[p.id]&&state[p.id].done).length;
+  $('#overallText').textContent=done+' of '+all.length+' practice problems solved';
+  $('#overallBar').style.width=(100*done/all.length)+'%';
+}
+let curSet=SETS[0].id;
+function buildPicker(){
+  const pk=$('#picker'); pk.innerHTML='';
+  SETS.forEach(s=>{
+    const d=s.problems.filter(p=>state[p.id]&&state[p.id].done).length;
+    const b=document.createElement('button'); b.type='button'; b.setAttribute('aria-pressed',String(s.id===curSet));
+    b.innerHTML='Set '+s.id+' · '+s.name+'<small>'+d+'/'+s.problems.length+'</small>';
+    b.addEventListener('click',()=>{ curSet=s.id; buildPicker(); renderSet(); });
+    pk.appendChild(b);
+  });
+}
+function renderSet(){
+  const set=SETS.find(s=>s.id===curSet), host=$('#setHost'); host.innerHTML='';
+  const done=set.problems.filter(p=>state[p.id]&&state[p.id].done).length;
+  const hd=document.createElement('div'); hd.className='sethead';
+  hd.innerHTML='<h3 style="margin:0">Set '+set.id+' · '+set.name+'</h3><p>'+done+' of '+set.problems.length+' solved</p>';
+  host.appendChild(hd);
+  set.problems.forEach((p,i)=>host.appendChild(probEl(p,i)));
+}
+function probEl(p,i){
+  const st=state[p.id]||(state[p.id]={tries:0,done:false,last:''});
+  const el=document.createElement('div'); el.className='prob'+(st.done?' done':'');
+  el.innerHTML='<div class="num"><span>Problem '+p.id+'</span><span class="bdg">'+(st.done?'✔ Solved':'')+'</span></div><p style="margin:6px 0 0">'+p.q+'</p>';
+  const fb=document.createElement('div'); fb.className='fb';
+  const hintHost=document.createElement('div'), solHost=document.createElement('div');
+  const acts=document.createElement('div'); acts.className='acts';
+  const hint=document.createElement('button'); hint.type='button'; hint.className='btn ghost'; hint.textContent='Hint';
+  const sol=document.createElement('button'); sol.type='button'; sol.className='btn ghost'; sol.textContent='Show solution';
+  let hintN=0, check=null, inp=null, opts=[];
+
+  function markDone(){ st.done=true; el.classList.add('done'); $('.bdg',el).textContent='✔ Solved'; }
+  function syncSol(){ const can=st.done||st.tries>=2; sol.disabled=!can; sol.title=can?'':'Unlocks after two tries'; }
+  function showSol(){ solHost.className='solbox'; solHost.innerHTML='<b>Solution:</b> '+p.s; }
+  function after(res){
+    st.tries++;
+    if(res==='ok'){
+      markDone(); fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+(st.tries===1?'First try — nice work.':'Well done for sticking with it.');
+      if(inp){ inp.disabled=true; if(check) check.disabled=true; }
+      opts.forEach(o=>o.disabled=true);
+    } else if(res==='sig'){
+      fb.className='fb near'; fb.innerHTML='<b>Right value, wrong number of sig figs.</b> Check how many sig figs the rules call for (use scientific notation if you need to show trailing zeros).';
+    } else {
+      fb.className='fb no'; fb.innerHTML='<b>Not quite.</b> '+(st.tries>=2?'Try a hint or open the solution.':'Check the rules and try again.');
+    }
+    save(); updateOverall(); buildPickerCounts(); syncSol();
+  }
+
+  if(p.t==='mc'){
+    const box=document.createElement('div');
+    p.o.forEach((txt,k)=>{
+      const b=document.createElement('button'); b.type='button'; b.className='opt'; b.innerHTML=txt;
+      if(st.done&&k===p.a) b.classList.add('right');
+      if(st.done) b.disabled=true;
+      b.addEventListener('click',()=>{
+        if(st.done) return;
+        if(k===p.a){ b.classList.add('right'); after('ok'); }
+        else { b.classList.add('wrong'); b.disabled=true; after('no'); }
+      });
+      opts.push(b); box.appendChild(b);
+    });
+    el.appendChild(box);
+  } else {
+    const row=document.createElement('div'); row.className='ansrow';
+    inp=document.createElement('input'); inp.type='text'; inp.autocomplete='off'; inp.spellcheck=false; inp.setAttribute('inputmode','text');
+    inp.setAttribute('aria-label','Answer to problem '+p.id); inp.placeholder=p.t==='n'?'number':'your answer';
+    inp.value=st.done?(st.last||''):'';
+    const u=document.createElement('span'); u.className='u'; u.innerHTML=p.u||'';
+    check=document.createElement('button'); check.type='button'; check.className='btn'; check.textContent='Check';
+    if(st.done){ inp.disabled=true; check.disabled=true; }
+    const go=()=>{
+      if(st.done) return;
+      const r=judge(p,inp.value);
+      if(r===null){ fb.className='fb near'; fb.textContent=p.t==='n'?'Enter a whole number.':'Enter a number (scientific notation like 4.50e4 is fine).'; return; }
+      if(r==='ok') st.last=inp.value.trim();
+      after(r);
+    };
+    check.addEventListener('click',go);
+    inp.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+    row.append(inp,u,check); el.appendChild(row);
+  }
+  hint.addEventListener('click',()=>{
+    const hs=p.h||[]; if(!hs.length) return;
+    hintN=Math.min(hintN+1,hs.length);
+    hintHost.className='hintbox'; hintHost.innerHTML='<b>Hint '+hintN+(hs.length>1?' of '+hs.length:'')+':</b> '+hs[hintN-1];
+    hint.textContent=hintN<hs.length?'Another hint':'Hint';
+  });
+  sol.addEventListener('click',()=>{ if(sol.disabled) return; if(solHost.innerHTML){ solHost.innerHTML=''; solHost.className=''; } else showSol(); });
+  acts.append(hint,sol); el.append(acts,fb,hintHost,solHost);
+  if(st.done) showSol();
+  syncSol();
+  return el;
+}
+function buildPickerCounts(){
+  $$('#picker button').forEach((b,i)=>{ const s=SETS[i], d=s.problems.filter(p=>state[p.id]&&state[p.id].done).length; $('small',b).textContent=d+'/'+s.problems.length; });
+  const set=SETS.find(s=>s.id===curSet), d=set.problems.filter(p=>state[p.id]&&state[p.id].done).length;
+  const hp=$('#setHost .sethead p'); if(hp) hp.textContent=d+' of '+set.problems.length+' solved';
+}
+
+$('#resetAll').addEventListener('click',()=>{ if(confirm('Clear all saved progress on this device?')){ state={}; save(); buildPicker(); renderSet(); updateOverall(); } });
+buildPicker(); renderSet(); updateOverall();
+const h=(location.hash||'').slice(1); if(['review','examples','practice'].includes(h)) showTab(h);
+window.LIA_SF={parseSF,fmtSig,fmtPlace,judge,SETS,shots,stats};
+})();
+</script>
+</body>
+</html>
