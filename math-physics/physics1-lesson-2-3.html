@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Physics I – Lesson 2.3 Falling Objects | Lincoln International Academy</title>
-<meta name="description" content="Interactive study page for Lesson 2.3: Falling Objects – free fall, constant acceleration, and take-it-further topics in angular kinematics and time dilation.">
+<meta name="description" content="Interactive study page for Physics I, Lesson 2.3: Falling Objects – free fall, constant acceleration, worked examples, practice and problem sets.">
 <script>try{var t=localStorage.getItem('lia-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -260,7 +260,7 @@ header.top{position:relative}
   <div class="wrap">
     <div>
       <h1>Lesson 2.3 · Falling Objects</h1>
-      <small>Chapter 2 · Motion in One Dimension · Section 3 · includes Take It Further and Problem Sets I and II</small>
+      <small>Chapter 2 · Motion in One Dimension · Section 3</small>
     </div>
     <div class="overall" aria-live="polite">
       <span id="overallText">0 of 0 practice problems solved</span>
@@ -289,7 +289,7 @@ header.top{position:relative}
       <li><span>1</span><div><b>Relate the motion of a freely falling body</b> to motion with constant acceleration.</div></li>
       <li><span>2</span><div><b>Calculate displacement, velocity, and time</b> during the motion of a freely falling object.</div></li>
     </ul>
-    <p class="pnote" style="margin-top:12px">Also in this lesson: <a href="#part-a">Free fall</a> · <a href="#part-b">Up-and-down motion</a> · <a href="#part-c">Equations</a> · <a href="#part-d">Skydiving</a> · <a href="#part-e">Take it further: angular kinematics</a> · <a href="#part-f">Physics on the edge: time dilation</a> · <a href="#part-g">Think Science</a></p>
+    <p class="pnote" style="margin-top:12px">In this lesson: <a href="#part-a">Free fall</a> · <a href="#part-b">Up-and-down motion</a> · <a href="#part-c">Equations</a> · <a href="#quicklab">Quick Lab</a> · <a href="#part-d">Skydiving</a></p>
   </div>
 
   <div class="card" id="part-a">
@@ -421,98 +421,6 @@ header.top{position:relative}
     <p class="pnote">The world record for the fastest terminal velocity (2015) was 148 m/s (331 mi/h).</p>
   </div>
 
-  <div class="card" id="part-e">
-    <span class="pill">Take it further</span>
-    <h2>Angular kinematics</h2>
-    <p>A point on an object that rotates about a fixed axis moves in a circle. We describe it with <b>angular</b> quantities: all points on a rigid rotating object (except on the axis) turn through the same angle in the same time.</p>
-    <h3>Measuring angles with radians</h3>
-    <div class="eq big">θ = <span class="frac"><span>arc length</span><span>radius</span></span> = <span class="frac"><span><i>s</i></span><span><i>r</i></span></span></div>
-    <p>The radian (rad) is a pure number: one radian is the angle for which the arc length equals the radius. One full revolution: <i>s</i> = 2π<i>r</i> → θ = 2π rad ≈ 6.28 rad. To convert degrees to radians:</p>
-    <div class="eq">θ (rad) = <span class="frac"><span>π</span><span>180°</span></span> θ (deg)</div>
-    <div class="callout blue"><b class="t">Key terms</b><b>Angular displacement</b> Δθ = Δ<i>s</i>/<i>r</i> · <b>Angular velocity</b> ω<sub>avg</sub> = Δθ/Δ<i>t</i> (rad/s) · <b>Angular acceleration</b> α<sub>avg</sub> = Δω/Δ<i>t</i> = (ω<sub>2</sub> − ω<sub>1</sub>)/(<i>t</i><sub>2</sub> − <i>t</i><sub>1</sub>) (rad/s²). Counterclockwise is positive; clockwise is negative. α has the same sign as ω when the rotation speeds up.</div>
-
-    <h4>Radians &amp; arc length explorer</h4>
-    <div class="grid2">
-      <div>
-        <div class="sliderrow"><label for="agDeg">Angle θ</label><input id="agDeg" type="range" min="0" max="360" step="5" value="60"><output id="agDegO"></output></div>
-        <div class="sliderrow"><label for="agR">Radius r</label><input id="agR" type="range" min="1" max="20" step="0.5" value="12"><output id="agRO"></output></div>
-        <div class="ctlrow"><b>Direction</b><div class="seg" id="agDir" role="group" aria-label="Rotation direction"><button type="button" data-d="1" aria-pressed="true">Counterclockwise (+)</button><button type="button" data-d="-1" aria-pressed="false">Clockwise (−)</button></div></div>
-        <div class="readouts">
-          <div class="readout"><small>θ in radians</small><b id="agRad">—</b></div>
-          <div class="readout"><small>Arc length s = rθ</small><b id="agS">—</b></div>
-        </div>
-        <div class="status" id="agStatus" aria-live="polite"></div>
-      </div>
-      <div id="agSvg"></div>
-    </div>
-
-    <h4>Spinning wheel (constant angular acceleration)</h4>
-    <div class="grid2">
-      <div>
-        <div class="sliderrow"><label for="whW">Initial ω<sub>i</sub></label><input id="whW" type="range" min="-10" max="10" step="0.5" value="4"><output id="whWO"></output></div>
-        <div class="sliderrow"><label for="whA">Angular accel. α</label><input id="whA" type="range" min="-4" max="4" step="0.25" value="-1.5"><output id="whAO"></output></div>
-        <div class="row"><button class="btn" id="whPlay" type="button">Spin (4 s)</button></div>
-        <div class="readouts">
-          <div class="readout"><small>t</small><b id="whT">0.0 s</b></div>
-          <div class="readout"><small>ω = ω<sub>i</sub> + αt</small><b id="whOm">—</b></div>
-          <div class="readout"><small>Δθ</small><b id="whTh">—</b></div>
-        </div>
-        <div class="status" id="whStatus" aria-live="polite"></div>
-      </div>
-      <div id="whSvg"></div>
-    </div>
-
-    <h4 style="margin-top:16px">Rotational ↔ linear: same equations, new symbols</h4>
-    <div class="tablewrap"><table>
-      <thead><tr><th>Rotational (constant α)</th><th>Linear (constant a)</th></tr></thead>
-      <tbody>
-        <tr><td class="math">ω<sub>f</sub> = ω<sub>i</sub> + αΔ<i>t</i></td><td class="math"><i>v</i><sub>f</sub> = <i>v</i><sub>i</sub> + <i>a</i>Δ<i>t</i></td></tr>
-        <tr><td class="math">Δθ = ω<sub>i</sub>Δ<i>t</i> + ½α(Δ<i>t</i>)²</td><td class="math">Δ<i>x</i> = <i>v</i><sub>i</sub>Δ<i>t</i> + ½<i>a</i>(Δ<i>t</i>)²</td></tr>
-        <tr><td class="math">ω<sub>f</sub>² = ω<sub>i</sub>² + 2αΔθ</td><td class="math"><i>v</i><sub>f</sub>² = <i>v</i><sub>i</sub>² + 2<i>a</i>Δ<i>x</i></td></tr>
-        <tr><td class="math">Δθ = ½(ω<sub>i</sub> + ω<sub>f</sub>)Δ<i>t</i></td><td class="math">Δ<i>x</i> = ½(<i>v</i><sub>i</sub> + <i>v</i><sub>f</sub>)Δ<i>t</i></td></tr>
-      </tbody></table></div>
-    <p class="pnote">Substitutions: θ ↔ <i>x</i>, ω ↔ <i>v</i>, α ↔ <i>a</i>. ω in these equations is the <em>instantaneous</em> angular velocity. They apply only to rotation about a fixed axis with constant angular acceleration.</p>
-    <p class="pnote"><b>Quick Lab idea (Radians and arc length):</b> draw a circle with a compass, cut wires equal to the radius and lay them along the circumference. About 6.28 radius-lengths fit around the circle, no matter the circle's size.</p>
-  </div>
-
-  <div class="card" id="part-f">
-    <span class="pill">Physics on the edge</span>
-    <h2>Special relativity and time dilation</h2>
-    <p>Before Einstein, everyone assumed Δ<i>t</i> was the same for every observer (time is "absolute"). In 1905 he showed that the speed of light is the same for any observer, so the observer beside the track, who sees the light pulse travel a <em>longer</em> path than the passenger on the train, must measure a <b>longer</b> time interval. This is <b>time dilation</b>:</p>
-    <div class="eq big">Δ<i>t</i>′ = <span class="frac"><span>Δ<i>t</i></span><span>√(1 − <i>v</i>²/<i>c</i>²)</span></span></div>
-    <p>Δ<i>t</i> is measured by the person on the train (or the moving clock); Δ<i>t</i>′ by the person beside the track; <i>c</i> = 3.00 × 10<sup>8</sup> m/s. At everyday speeds <i>v</i>²/<i>c</i>² is tiny, so Δ<i>t</i>′ ≈ Δ<i>t</i>. Near the speed of light the effect grows without limit. It has been confirmed with muons traveling at 0.9994<i>c</i> and with atomic clocks on jet planes.</p>
-    <div class="grid2">
-      <div>
-        <div class="sliderrow"><label for="rvV">Speed v/c</label><input id="rvV" type="range" min="0" max="0.999" step="0.001" value="0.8"><output id="rvVO"></output></div>
-        <div class="sliderrow"><label for="rvT">Δt on the train</label><input id="rvT" type="range" min="1" max="20" step="1" value="10"><output id="rvTO"></output></div>
-        <div class="row"><button class="btn ghost" data-rv="0.1" type="button">0.1c</button><button class="btn ghost" data-rv="0.5" type="button">0.5c</button><button class="btn ghost" data-rv="0.9" type="button">0.9c</button><button class="btn ghost" data-rv="0.99" type="button">0.99c</button><button class="btn ghost" data-rv="0.999" type="button">0.999c</button></div>
-        <div class="readouts">
-          <div class="readout"><small>Factor 1/√(1 − v²/c²)</small><b id="rvG">—</b></div>
-          <div class="readout"><small>Δt′ (observer beside track)</small><b id="rvTp">—</b></div>
-        </div>
-      </div>
-      <div id="rvBars"></div>
-    </div>
-  </div>
-
-  <div class="card" id="part-g">
-    <span class="pill">Think Science</span>
-    <h2>Theories in motion</h2>
-    <p>A <b>hypothesis</b> is a tentative, testable explanation supported by evidence. When a hypothesis proves reliable across a wide range of conditions, scientists combine it with related hypotheses to form a <b>theory</b>.</p>
-    <p><b>Falling objects.</b> Aristotle (4th century BCE) claimed that the speed of a falling object is directly related to its mass; this qualitative idea was accepted for nearly 2000 years. By about 1600 Galileo theorized that objects fall at the same speed, independent of mass, and supported it with experimental and observational evidence. Independent tests and Newton's theory of gravitation later displaced Aristotle's explanation.</p>
-    <h4>Conceptual challenge: estimating distance</h4>
-    <p>How far does a basketball player move during a game? Estimate with reasonable assumptions:</p>
-    <div class="grid2">
-      <div>
-        <div class="sliderrow"><label for="esT">Game length (min)</label><input id="esT" type="range" min="30" max="60" step="1" value="48"><output id="esTO"></output></div>
-        <div class="sliderrow"><label for="esP">Time moving (%)</label><input id="esP" type="range" min="20" max="100" step="5" value="60"><output id="esPO"></output></div>
-        <div class="sliderrow"><label for="esS">Average speed (m/s)</label><input id="esS" type="range" min="0.5" max="5" step="0.1" value="2.5"><output id="esSO"></output></div>
-      </div>
-      <div><div class="readouts"><div class="readout"><small>Estimated distance</small><b id="esD">—</b></div></div><p class="pnote" id="esN"></p></div>
-    </div>
-    <p class="pnote">Quick estimates let scientists narrow the range of possibilities and focus on the most reasonable hypotheses.</p>
-  </div>
-
   <div class="card">
     <h3>Remember when solving problems</h3>
     <ol>
@@ -553,7 +461,7 @@ header.top{position:relative}
 
 <footer>
   <div class="wrap">
-    <div>Lincoln International Academy · Physics I · Mr. Eduardo Vásquez<br>Content adapted from <i>Holt McDougal Physics</i>, Chapter 2 §3 (Falling Objects, Take It Further, Physics on the Edge, Think Science) and Sample Problem Sets I and II (© Houghton Mifflin Harcourt). Additional problems written for this page.</div>
+    <div>Lincoln International Academy · Physics I · Mr. Eduardo Vásquez<br>Content adapted from <i>Holt McDougal Physics</i>, Chapter 2 §3 (Falling Objects) and Sample Problem Sets I and II (© Houghton Mifflin Harcourt). Additional problems written for this page.</div>
     <div>Your progress is saved in this browser only. <button class="linkbtn" id="resetAll" data-lia-reset>Reset my progress</button></div>
   </div>
 </footer>
@@ -836,88 +744,6 @@ function lineChart(series,o){
   upd();
 })();
 
-/* ---------- angular: radians & arc length ---------- */
-(function(){
-  const D=$('#agDeg'), R=$('#agR'); let dir=1;
-  const gcd=(a,b)=>b?gcd(b,a%b):a;
-  function frac(deg){ if(deg===0) return '0'; if(deg%15) return null; let n=deg/15,d=12,k=gcd(n,d); n/=k; d/=k; return (n===1?'':n)+'π'+(d===1?'':'/'+d); }
-  function upd(){
-    const deg=+D.value, r=+R.value, th=deg*Math.PI/180, a=dir*th, s=r*a;
-    $('#agDegO').textContent=deg+'°'; $('#agRO').textContent=r+' m';
-    const fr=frac(deg); $('#agRad').textContent=(dir<0?'−':'')+th.toFixed(3)+' rad';
-    $('#agS').textContent=s.toFixed(2)+' m';
-    $('#agStatus').innerHTML=`θ = ${deg}° × π/180° = <b>${(dir<0?'−':'')+th.toFixed(3)} rad</b>${fr?` (= ${dir<0?'−':''}${fr} rad)`:''}. ${dir>0?'Counterclockwise → Δθ and s are positive.':'Clockwise → Δθ and s are negative.'}`;
-    const cx=130,cy=130,Rr=100, ex=cx+Rr*Math.cos(a), ey=cy-Rr*Math.sin(a);
-    const large=Math.abs(deg)>180?1:0, sweep=dir>0?0:1;
-    const arc=deg>=359.5?`<circle cx="${cx}" cy="${cy}" r="${Rr}" fill="none" stroke="var(--accent)" stroke-width="5"/>`:(deg>0?`<path d="M ${cx+Rr} ${cy} A ${Rr} ${Rr} 0 ${large} ${sweep} ${ex} ${ey}" fill="none" stroke="var(--accent)" stroke-width="5"/>`:'');
-    $('#agSvg').innerHTML=`<svg class="vt" viewBox="0 0 260 260" style="max-width:300px" role="img" aria-label="Angle measured on a circle">
-      <circle cx="${cx}" cy="${cy}" r="${Rr}" fill="none" stroke="var(--line)" stroke-width="2"/>${arc}
-      <line x1="${cx}" y1="${cy}" x2="${cx+Rr+18}" y2="${cy}" stroke="var(--muted)" stroke-width="2"/>
-      <line x1="${cx}" y1="${cy}" x2="${ex}" y2="${ey}" stroke="var(--warm)" stroke-width="3"/>
-      <circle cx="${ex}" cy="${ey}" r="7" fill="var(--hot)"/><circle cx="${cx}" cy="${cy}" r="3" fill="var(--ink)"/>
-      <text x="${cx+Rr+20}" y="${cy-6}" text-anchor="end">reference line</text><text x="${cx+22}" y="${cy-8}" class="lbl" style="fill:var(--ink)">θ</text></svg>`;
-  }
-  [D,R].forEach(e=>e.addEventListener('input',upd));
-  $$('#agDir button').forEach(b=>b.addEventListener('click',()=>{ dir=+b.dataset.d; $$('#agDir button').forEach(x=>x.setAttribute('aria-pressed',String(x===b))); upd(); }));
-  upd();
-})();
-
-/* ---------- angular: spinning wheel ---------- */
-(function(){
-  const W=$('#whW'), A_=$('#whA'); let raf=null, t0=0, playing=false, tcur=0;
-  function draw(t){
-    const w0=+W.value, al=+A_.value, th=w0*t+.5*al*t*t, om=w0+al*t, deg=th*180/Math.PI;
-    $('#whT').textContent=t.toFixed(1)+' s'; $('#whOm').textContent=(om>0?'+':'')+om.toFixed(2)+' rad/s'; $('#whTh').textContent=th.toFixed(1)+' rad';
-    let spokes=''; for(let i=0;i<8;i++) spokes+=`<line x1="110" y1="110" x2="110" y2="20" stroke="var(--line)" stroke-width="2" transform="rotate(${i*45} 110 110)"/>`;
-    $('#whSvg').innerHTML=`<svg class="vt" viewBox="0 0 220 220" style="max-width:240px" role="img" aria-label="Spinning wheel"><g transform="rotate(${-deg} 110 110)"><circle cx="110" cy="110" r="90" fill="none" stroke="var(--primary)" stroke-width="5"/>${spokes}<circle cx="110" cy="20" r="9" fill="var(--hot)"/></g><circle cx="110" cy="110" r="5" fill="var(--ink)"/><text x="10" y="16">counterclockwise = +</text></svg>`;
-  }
-  function labels(){
-    const w0=+W.value, al=+A_.value; $('#whWO').textContent=w0+' rad/s'; $('#whAO').textContent=al+' rad/s²';
-    const st=$('#whStatus');
-    if(al===0){ st.textContent='α = 0: the angular velocity stays constant.'; }
-    else if(w0===0){ st.textContent='Starting from rest: the wheel speeds up in the direction of α.'; }
-    else if(w0*al>0){ st.textContent='ω and α have the same sign → the wheel spins faster.'; }
-    else { st.textContent=`ω and α have opposite signs → the wheel slows down${(-w0/al)<4?`, stops at t = ${(-w0/al).toFixed(2)} s, then reverses`:''}.`; }
-    st.className='status';
-  }
-  function frame(now){
-    if(!playing) return; tcur=Math.min((now-t0)/1000,4); draw(tcur);
-    if(tcur<4) raf=requestAnimationFrame(frame); else playing=false;
-  }
-  $('#whPlay').addEventListener('click',()=>{ playing=true; t0=performance.now(); raf=requestAnimationFrame(frame); });
-  [W,A_].forEach(e=>e.addEventListener('input',()=>{ playing=false; tcur=0; labels(); draw(0); }));
-  labels(); draw(0);
-})();
-
-/* ---------- time dilation ---------- */
-(function(){
-  const V=$('#rvV'), T_=$('#rvT');
-  function upd(){
-    const b=+V.value, dt_=+T_.value, gm=1/Math.sqrt(1-b*b), tp=dt_*gm;
-    $('#rvVO').textContent=b.toFixed(3)+'c'; $('#rvTO').textContent=dt_+' s';
-    $('#rvG').textContent=gm.toFixed(3); $('#rvTp').textContent=tp.toFixed(2)+' s';
-    const max=Math.max(tp,dt_), w1=dt_/max*100, w2=tp/max*100;
-    $('#rvBars').innerHTML=`<div style="margin:6px 0"><small class="pnote">Δt on the train (passenger)</small><div class="meter"><i style="width:${w1}%;background:var(--accent)"></i></div><b>${dt_.toFixed(2)} s</b></div>
-      <div style="margin:14px 0 6px"><small class="pnote">Δt′ beside the track (observer)</small><div class="meter"><i style="width:${w2}%;background:var(--warm)"></i></div><b>${tp.toFixed(2)} s</b></div>
-      <p class="pnote">${b<0.1?'At everyday speeds the difference is far too small to notice.':b<0.9?'The observer beside the track measures a noticeably longer interval.':'Close to the speed of light the interval stretches enormously.'}</p>`;
-  }
-  [V,T_].forEach(e=>e.addEventListener('input',upd));
-  $$('[data-rv]').forEach(b=>b.addEventListener('click',()=>{ V.value=b.dataset.rv; upd(); }));
-  upd();
-})();
-
-/* ---------- estimation ---------- */
-(function(){
-  const T_=$('#esT'),P_=$('#esP'),S_=$('#esS');
-  function upd(){
-    const t=+T_.value,p=+P_.value,s=+S_.value, d=t*60*(p/100)*s;
-    $('#esTO').textContent=t+' min'; $('#esPO').textContent=p+' %'; $('#esSO').textContent=s.toFixed(1)+' m/s';
-    $('#esD').textContent=(d/1000).toFixed(1)+' km';
-    $('#esN').textContent=`distance ≈ (${t} min × 60 s/min) × ${p} % × ${s.toFixed(1)} m/s ≈ ${Math.round(d)} m. Walking is about 1.5 m/s and sprinting about 6 m/s, so an average near 2–3 m/s is reasonable.`;
-  }
-  [T_,P_,S_].forEach(e=>e.addEventListener('input',upd)); upd();
-})();
-
 /* ---------- ask widgets (worked examples) ---------- */
 function mkMC(host,ask,onDone){
   host.innerHTML=`<p>${ask.q}</p>`;
@@ -1044,17 +870,6 @@ const EX=[
      ask:{type:'num',q:'Calculate ½ × 9.81 × 9.56² (the distance in metres).',ans:.5*g*9.56*9.56,tol:0.01,unit:'m',why:'The wrench falls 448 m; Δy = −448 m (downward).'}},
     {name:'Evaluate', html:`<p>From the displacement the final speed can be found: ${vf} = ${vi} + ${A}${dt} = −9.81(9.56) = −93.8 m/s – nearly <b>340 km/h</b>. Check with ${EQ.vsq}: √(2(9.81)(448)) = 93.8 m/s ✔.</p>`,
      ask:{type:'num',q:'Convert 93.8 m/s to km/h (multiply by 3.6).',ans:93.8*3.6,tol:0.01,unit:'km/h',why:'93.8 × 3.6 ≈ 338 km/h, nearly 340 km/h.'}}
-   ]},
- { id:'E9', tag:'Take it further', title:'Angular kinematics: constant angular acceleration',
-   problem:'A wheel rotates counterclockwise with an angular velocity of <b>4.0 rad/s</b>. It then speeds up with a constant angular acceleration of <b>1.5 rad/s²</b> for <b>6.0 s</b>. Find (a) its final angular velocity and (b) the angle (in radians and in revolutions) through which it turns.',
-   steps:[
-    {name:'Analyze', html:G('ω<sub>i</sub> = +4.0 rad/s','α = +1.5 rad/s²','Δ<i>t</i> = 6.0 s')+G(U('ω<sub>f</sub> = ?'),U('Δθ = ?')),
-     ask:{type:'mc',q:'Why are ω<sub>i</sub> and α both positive?',opts:['Counterclockwise is positive, and α has the same sign as ω because the wheel speeds up','Because they are angles','Because radians are always positive'],correct:0,why:'By convention counterclockwise rotation is positive; α is positive when it increases the magnitude of a positive ω.'}},
-    {name:'Plan', html:`<p>The rotational equations mirror the linear ones (θ↔x, ω↔v, α↔a):</p><div class="eq">ω<sub>f</sub> = ω<sub>i</sub> + αΔ<i>t</i> &nbsp;&nbsp; Δθ = ω<sub>i</sub>Δ<i>t</i> + ½α(Δ<i>t</i>)²</div>`},
-    {name:'Solve', html:`<div class="eq">ω<sub>f</sub> = 4.0 + (1.5)(6.0) = <span class="boxed">13.0 rad/s</span></div><div class="eq">Δθ = (4.0)(6.0) + ½(1.5)(6.0)² = 24 + 27 = <span class="boxed">51 rad</span></div>`,
-     ask:{type:'num',q:'Calculate 4.0 × 6.0 + ½ × 1.5 × 6.0².',ans:51,tol:0.01,unit:'rad',why:'Δθ = 51 rad.'}},
-    {name:'Check your work', html:`<p>Revolutions: 51 rad ÷ 2π ≈ <b>8.1 rev</b>. Average angular velocity = (4.0 + 13.0)/2 = 8.5 rad/s, and 8.5 × 6.0 = 51 rad ✔.</p>`,
-     ask:{type:'num',q:'Convert 51 rad to revolutions (divide by 2π).',ans:51/(2*Math.PI),tol:0.01,unit:'rev',why:'≈ 8.1 revolutions.'}}
    ]}
 ];
 (function buildExamples(){
@@ -1226,10 +1041,6 @@ add(sa,null,'Formative 6(c): Use the position–time graph. Estimate the basketb
  [T('Initial velocity','m/s',3.0,{tol:0.12})],
  [`At the top ${vf} = 0 so ${vi} = −${A}·t<sub>top</sub> = 9.81 × t<sub>top</sub>. The peak occurs at about 0.3 s.`,`9.81 × 0.3 ≈ 2.9 m/s; or √(2 × 9.81 × 0.46) ≈ 3.0 m/s.`],
  [`The curve peaks at t ≈ 0.3 s: ${vi} = g·t<sub>top</sub> ≈ 9.81(0.30) ≈ <b>+3 m/s</b>`,`Check with the height: ${vi} = √(2g·Δy<sub>max</sub>) = √(2(9.81)(0.46)) ≈ 3.0 m/s ✔`,'The velocity–time graph is a straight line starting at +3 m/s, crossing zero at 0.3 s, with slope −9.81 m/s².'],{figure:bballFig});
-MC(sa,'Conceptual challenge — estimating distance: about how far does a basketball player move during a game? (Assume a 48-minute game, moving about 60 % of the time at an average of about 2.5 m/s.)',
- ['About 400 m','About 4 km','About 40 km','About 400 km'],[1],
- 'distance ≈ time × fraction moving × average speed = (48 × 60 s)(0.60)(2.5 m/s) ≈ 4300 m ≈ 4 km.','Multiply: seconds in the game × fraction moving × average speed.');
-
 /* ===== Problem Set I (Problem F: Falling Object) ===== */
 const s1='Problem F · Falling object (Sample Problem Set I)';
 add('p1',s1,'<b>(Sample)</b> Jason hits a volleyball so that it moves with an initial velocity of 6.0 m/s straight upward. If the volleyball starts from 2.0 m above the floor, how long will it be in the air before it strikes the floor?',
@@ -1317,60 +1128,106 @@ add('p2',s2,'The elevators in the Landmark Tower in Yokohama, Japan, are among t
  [`Maximum speed = 3.125(4.00) = <b>12.5 m/s</b> upward (this is also the velocity at 0.00 s)`,`1.00 s: 12.5 − 9.81 = <b>+2.7 m/s</b>`,`2.00 s: 12.5 − 19.62 = <b>−7.1 m/s</b>`,`3.00 s: 12.5 − 29.43 = <b>−16.9 m/s</b>`]);
 
 
-/* ===== Take it further ===== */
-const st='tf';
-add(st,'Angular kinematics',`(a) Convert 135° to radians. (b) Convert 5π/6 rad to degrees.`,
- [T('(a) 135° in radians','rad',135*Math.PI/180),T('(b) 5π/6 rad in degrees','°',150)],
- [`θ(rad) = (π/180°)·θ(deg). For (b) multiply by 180°/π.`,`(a) 135 × π/180 = 3π/4 ≈ 2.356 rad.`],
- [`(a) θ = (π/180°)(135°) = 3π/4 = <b>2.36 rad</b>`,`(b) θ = (5π/6)(180°/π) = <b>150°</b>`]);
-add(st,null,`A light bulb on a Ferris wheel of radius 12.0 m moves through an arc length of 20.0 m (counterclockwise). Find the angular displacement in (a) radians and (b) degrees.`,
- [T('(a) Δθ','rad',20/12),T('(b) Δθ','°',20/12*180/Math.PI)],
- [`Δθ = Δs/r (in radians). For degrees multiply by 180°/π.`,`20.0 ÷ 12.0 = 1.67 rad.`],
- [`(a) Δθ = Δ<i>s</i>/<i>r</i> = 20.0 m / 12.0 m = <b>1.67 rad</b>`,`(b) 1.667 rad × (180°/π) = <b>95.5°</b>`]);
-add(st,null,`(a) A wheel turns through an angle of 15.0 rad in 3.0 s. What is its average angular velocity? (b) A motor turns at 120 revolutions per minute. Express this angular velocity in rad/s.`,
- [T('(a) ω<sub>avg</sub>','rad/s',5.0),T('(b) ω','rad/s',120*2*Math.PI/60,{tol:0.04})],
- [`(a) ω<sub>avg</sub> = Δθ/Δ<i>t</i>. (b) 1 rev = 2π rad and 1 min = 60 s.`,`(b) 120 × 2π ÷ 60.`],
- [`(a) ω<sub>avg</sub> = 15.0 rad / 3.0 s = <b>5.0 rad/s</b>`,`(b) 120 rev/min × (2π rad/rev) × (1 min/60 s) = <b>12.6 rad/s</b>`]);
-add(st,null,`Looking down on a bicycle wheel, the wheel rotates clockwise. Its angular velocity increases from 2.0 rad/s to 8.0 rad/s (clockwise) in 3.0 s. Taking counterclockwise as positive, find the average angular acceleration. Is the wheel speeding up or slowing down?`,
- [T('Average angular acceleration','rad/s²',-2.0)],
- [`Clockwise is negative: ω<sub>1</sub> = −2.0 rad/s, ω<sub>2</sub> = −8.0 rad/s. α<sub>avg</sub> = (ω<sub>2</sub> − ω<sub>1</sub>)/Δ<i>t</i>.`,`(−8.0 − (−2.0)) ÷ 3.0.`],
- [`α<sub>avg</sub> = (−8.0 − (−2.0) rad/s)/(3.0 s) = <b>−2.0 rad/s²</b>`,`ω and α have the same sign (both negative), so the wheel is <b>speeding up</b>.`]);
-add(st,null,`A wheel has an initial angular velocity of +4.0 rad/s and a constant angular acceleration of +1.5 rad/s². After 6.0 s find (a) its angular velocity and (b) the angle through which it has turned.`,
- [T('(a) ω<sub>f</sub>','rad/s',13),T('(b) Δθ','rad',51)],
- [`ω<sub>f</sub> = ω<sub>i</sub> + αΔ<i>t</i> and Δθ = ω<sub>i</sub>Δ<i>t</i> + ½α(Δ<i>t</i>)².`,`(a) 4.0 + 1.5 × 6.0.`],
- [`(a) ω<sub>f</sub> = 4.0 + (1.5)(6.0) = <b>13 rad/s</b>`,`(b) Δθ = (4.0)(6.0) + ½(1.5)(6.0)² = <b>51 rad</b>`]);
-add(st,null,`A wheel starts from rest and has a constant angular acceleration of 2.0 rad/s². (a) What is its angular velocity after it has turned through 25 rad? (b) How long does this take?`,
- [T('(a) ω<sub>f</sub>','rad/s',sqrt(2*2*25)),T('(b) Δ<i>t</i>','s',sqrt(2*2*25)/2)],
- [`Use ω<sub>f</sub>² = ω<sub>i</sub>² + 2αΔθ with ω<sub>i</sub> = 0. Then Δ<i>t</i> = (ω<sub>f</sub> − ω<sub>i</sub>)/α.`,`√(2 × 2.0 × 25).`],
- [`(a) ω<sub>f</sub> = √(2αΔθ) = √(2(2.0)(25)) = <b>10 rad/s</b>`,`(b) Δ<i>t</i> = (10 − 0)/2.0 = <b>5.0 s</b>`]);
-MC(st,'When a rotating object is viewed from above, which statements about the sign convention are correct? (Select all that apply.)',
- ['Counterclockwise rotation gives a positive angular displacement','Clockwise rotation gives a negative angular velocity','Angular acceleration has the same sign as angular velocity when the object slows down','Angular acceleration has the same sign as angular velocity when the object speeds up'],[0,1,3],
- 'Counterclockwise = +, clockwise = −. α has the same sign as ω when |ω| increases (speeding up) and the opposite sign when |ω| decreases.','Compare with linear motion: same signs → speeding up.');
-add(st,'Special relativity',`A train moves at 0.800<i>c</i> relative to the track. A passenger measures a time interval of 10.0 s on the train. What time interval does an observer beside the track measure?`,
- [T('Δ<i>t</i>′','s',10/sqrt(1-.64))],
- [`Δ<i>t</i>′ = Δ<i>t</i> / √(1 − <i>v</i>²/<i>c</i>²), with <i>v</i>/<i>c</i> = 0.800.`,`√(1 − 0.64) = 0.6.`],
- [`Δ<i>t</i>′ = 10.0 s / √(1 − (0.800)²) = 10.0 / 0.600 = <b>16.7 s</b>`]);
-add(st,null,`A muon at rest lives for 2.20 µs. A muon moving at 0.9994<i>c</i> relative to the laboratory is observed. What lifetime is measured in the laboratory?`,
- [T('Lifetime','µs',2.2/sqrt(1-0.9994*0.9994),{tol:0.04})],
- [`Δ<i>t</i>′ = Δ<i>t</i>/√(1 − (<i>v</i>/<i>c</i>)²). Compute 1 − 0.9994² first (keep several decimals).`,`1 − 0.9994² = 0.001200…; its square root is 0.0346.`],
- [`1 − (0.9994)² = 0.00120; √0.00120 = 0.0346`,`Δ<i>t</i>′ = 2.20 µs / 0.0346 = <b>63.5 µs</b>`]);
-MC(st,'In the train-and-mirror thought experiment, why does the observer beside the track measure a <b>longer</b> time for the light pulse?',
- ['The observer\'s clock is broken','The light travels a longer path (at an angle) according to this observer, and the speed of light is the same for all observers, so it takes more time','Light travels faster for the observer beside the track','Light slows down inside the train'],[1],
- 'The postulate that the speed of light is the same for any observer plus the longer path means a longer time interval: time dilation.','Time = distance ÷ speed, with the speed fixed.');
-MC(st,'How is a scientific <b>theory</b> different from a hypothesis?',
- ['A theory is a guess; a hypothesis is a fact','A hypothesis is a tentative, testable explanation; a theory combines related hypotheses that have proven reliable across a wide range of conditions and been tested by independent researchers','They mean the same thing','A theory cannot be tested'],[1],
- 'Hypotheses are tested; those that hold up across many conditions are combined into theories.','Think of Galileo\'s evidence versus Aristotle\'s qualitative idea.');
-MC(st,'Aristotle\'s theory of falling objects is described as <b>qualitative</b>, whereas Galileo\'s approach was…',
- ['also qualitative','quantitative, supported by experimental and observational evidence that falling objects fall at the same rate independent of mass','based only on authority','impossible to test'],[1],
- 'Galileo collected measurements and used mathematics; later tests and Newton\'s theory of gravitation confirmed his conclusion.','Qualitative = descriptive; quantitative = measured.');
+/* ===== Extra free-fall practice ===== */
+const sx1='Dropped objects (starting from rest)';
+add('xp',sx1,'A coin is dropped from the top of the Leaning Tower of Pisa, <b>56 m</b> above the ground. Ignoring air resistance, (a) how long does it take to reach the ground and (b) how fast is it moving just before it lands?',
+ [T('(a) Time of fall','s',sqrt(2*56/g)),T('(b) Speed at the ground','m/s',sqrt(2*g*56),{abs:true})],
+ [`Dropped: ${vi} = 0, ${dx} = −56 m. Use ${EQ.disp2} to get ${dt} (it simplifies to ${dt} = √(2${dx}/${A})), then ${vf} = ${vi} + ${A}${dt}.`,`√(2 × 56 ÷ 9.81).`],
+ [`(a) ${dt} = √(${F('2(−56 m)','−9.81 m/s²')}) = <b>3.38 s</b>`,`(b) ${vf} = 0 + (−9.81)(3.38) = −33.1 m/s → speed <b>33.1 m/s</b>`]);
+add('xp',sx1,'An apple falls from a branch <b>3.2 m</b> above the ground. How long does it take to reach the ground, and what is its speed when it hits?',
+ [T('Time','s',sqrt(2*3.2/g)),T('Speed at the ground','m/s',sqrt(2*g*3.2),{abs:true})],
+ [`${vi} = 0, ${dx} = −3.2 m.`,`${dt} = √(2 × 3.2 ÷ 9.81).`],
+ [`${dt} = √(${F('2(3.2)','9.81')}) = <b>0.81 s</b>`,`${vf} = −√(2(9.81)(3.2)) = −7.9 m/s → speed <b>7.9 m/s</b>`]);
+add('xp',sx1,'A rock is dropped from rest and falls for <b>4.0 s</b> before it hits the bottom of a gorge. (a) How deep is the gorge? (b) What is the rock\'s velocity as it hits the bottom?',
+ [T('(a) Depth','m',.5*g*16),T('(b) Final velocity','m/s',-g*4)],
+ [`${dx} = ½${A}${dt}² and ${vf} = ${A}${dt}.`,`½ × 9.81 × 4.0².`],
+ [`(a) ${dx} = ½(−9.81)(4.0)² = −78.5 m → depth <b>78 m</b>`,`(b) ${vf} = (−9.81)(4.0) = <b>−39 m/s</b>`]);
+add('xp',sx1,'A diver steps off a <b>10.0 m</b> platform (so that her initial vertical velocity is zero). (a) How long is she in the air before reaching the water? (b) What is her speed as she enters the water?',
+ [T('(a) Time in the air','s',sqrt(2*10/g)),T('(b) Entry speed','m/s',sqrt(2*g*10),{abs:true})],
+ [`${vi} = 0, ${dx} = −10.0 m.`],
+ [`(a) ${dt} = √(2(10.0)/9.81) = <b>1.43 s</b>`,`(b) ${vf} = −√(2(9.81)(10.0)) = −14.0 m/s → <b>14.0 m/s</b>`]);
+add('xp',sx1,'A stone dropped from the top of a cliff takes <b>2.50 s</b> to reach the ground. How high is the cliff, and how fast is the stone moving when it lands?',
+ [T('Height of the cliff','m',.5*g*2.5*2.5),T('Landing speed','m/s',g*2.5,{abs:true})],
+ [`${vi} = 0 and ${dt} = 2.50 s are known.`],
+ [`${dx} = ½(−9.81)(2.50)² = −30.7 m → <b>30.7 m</b>`,`${vf} = (−9.81)(2.50) = −24.5 m/s → <b>24.5 m/s</b>`]);
+
+const sx2='Thrown upward';
+add('xp',sx2,'A ball is thrown straight up with an initial velocity of <b>+18.0 m/s</b>. Find (a) the time it takes to reach the top, (b) the maximum height above the release point and (c) the total time in the air before it returns to the release point.',
+ [T('(a) Time to the top','s',18/g),T('(b) Maximum height','m',18*18/(2*g)),T('(c) Total time in the air','s',36/g)],
+ [`At the top ${vf} = 0. (a) ${dt} = (${vf} − ${vi})/${A}. (b) ${EQ.vsq}. (c) The trip down takes as long as the trip up.`],
+ [`(a) ${dt} = ${F('0 − 18.0','−9.81')} = <b>1.83 s</b>`,`(b) ${dx} = ${F('0 − (18.0)²','2(−9.81)')} = <b>16.5 m</b>`,`(c) 2(1.83 s) = <b>3.67 s</b>`]);
+add('xp',sx2,'An arrow is shot straight up from the ground with an initial velocity of <b>+45 m/s</b>. Find (a) its height and (b) its velocity <b>2.0 s</b> after it is shot.',
+ [T('(a) Height after 2.0 s','m',45*2-.5*g*4),T('(b) Velocity after 2.0 s','m/s',45-g*2)],
+ [`${EQ.disp2} and ${EQ.vel} with ${A} = −9.81 m/s².`,`45(2.0) − ½(9.81)(2.0)².`],
+ [`(a) ${dx} = (45)(2.0) + ½(−9.81)(2.0)² = 90 − 19.6 = <b>70 m</b>`,`(b) ${vf} = 45 + (−9.81)(2.0) = <b>+25 m/s</b> (still rising)`]);
+add('xp',sx2,'A basketball thrown straight up reaches its highest point <b>1.20 s</b> after it leaves the player\'s hand. (a) What was its initial velocity? (b) How high above the hand does it rise?',
+ [T('(a) Initial velocity','m/s',g*1.2),T('(b) Maximum height','m',.5*g*1.44)],
+ [`At the top ${vf} = 0, so ${vi} = −${A}${dt}. For the height use the fall from the top: ½g${dt}².`],
+ [`(a) ${vi} = ${vf} − ${A}${dt} = 0 − (−9.81)(1.20) = <b>+11.8 m/s</b>`,`(b) ${dx} = ${F(vf+sq+' − '+vi+sq,'2'+A)} = ${F('−(11.8)²','2(−9.81)')} = <b>7.07 m</b>`]);
+add('xp',sx2,'A model rocket whose engine has stopped is moving straight up at <b>30.0 m/s</b> when it is <b>40.0 m</b> above the ground. (a) What is the greatest height it reaches above the ground? (b) What is its speed when it is <b>60.0 m</b> above the ground (on the way up)?',
+ [T('(a) Greatest height above the ground','m',40+900/(2*g)),T('(b) Speed at 60.0 m','m/s',sqrt(900-2*g*20))],
+ [`Work from the position where the engine stops: ${vi} = +30.0 m/s. (a) At the top ${vf} = 0: ${dx} = −${vi}²/(2${A}). Then add 40.0 m. (b) ${dx} = +20.0 m.`],
+ [`(a) ${dx} = ${F('0 − (30.0)²','2(−9.81)')} = 45.9 m → height = 40.0 + 45.9 = <b>85.9 m</b>`,`(b) ${vf} = +√((30.0)² + 2(−9.81)(20.0)) = √507.6 = <b>22.5 m/s</b>`]);
+add('xp',sx2,'A ball is thrown straight up with a speed of <b>14.0 m/s</b> from a balcony <b>8.0 m</b> above the street. It misses the balcony on the way down and lands in the street. (a) What is the ball\'s velocity just before it lands? (b) How long is the ball in the air?',
+ [T('(a) Landing velocity','m/s',-sqrt(196+2*g*8)),T('(b) Time in the air','s',(14+sqrt(196+2*g*8))/g)],
+ [`${vi} = +14.0 m/s, ${dx} = −8.0 m (the street is below the start), ${A} = −9.81 m/s². (a) ${EQ.vsq}, negative root. (b) ${dt} = (${vf} − ${vi})/${A}.`,`√(14.0² + 2 × 9.81 × 8.0) = 18.8.`],
+ [`(a) ${vf} = −√((14.0)² + 2(−9.81)(−8.0)) = −√352.96 = <b>−18.8 m/s</b>`,`(b) ${dt} = ${F('−18.8 − 14.0','−9.81')} = <b>3.34 s</b>`]);
+add('xp',sx2,'A basketball player has a vertical leap of <b>0.80 m</b>. (a) With what initial speed must she leave the floor? (b) How long is her "hang time" (the total time in the air)?',
+ [T('(a) Initial speed','m/s',sqrt(2*g*.8)),T('(b) Hang time','s',2*sqrt(2*g*.8)/g)],
+ [`At the top ${vf} = 0 and ${dx} = +0.80 m. (b) Total time = twice the time to the top.`],
+ [`(a) ${vi} = √(−2${A}${dx}) = √(2(9.81)(0.80)) = <b>3.96 m/s</b>`,`(b) ${dt}<sub>up</sub> = 3.96/9.81 = 0.404 s → hang time = <b>0.81 s</b>`]);
+
+const sx3='Thrown downward';
+add('xp',sx3,'A ball is thrown <b>downward</b> with an initial speed of <b>6.0 m/s</b> from a window <b>30.0 m</b> above the ground. (a) What is its velocity when it hits the ground? (b) How long does it take?',
+ [T('(a) Final velocity','m/s',-sqrt(36+2*g*30)),T('(b) Time','s',(sqrt(36+2*g*30)-6)/g)],
+ [`${vi} = −6.0 m/s (downward!), ${dx} = −30.0 m. (a) ${EQ.vsq}, negative root. (b) ${dt} = (${vf} − ${vi})/${A}.`],
+ [`(a) ${vf} = −√(36 + 588.6) = <b>−25.0 m/s</b>`,`(b) ${dt} = ${F('−25.0 − (−6.0)','−9.81')} = <b>1.94 s</b>`]);
+add('xp',sx3,'A boy throws a stone <b>downward</b> into a well with an initial speed of <b>3.0 m/s</b>. It hits the water <b>2.5 s</b> later. How deep is the water surface below the boy\'s hand?',
+ [T('Depth to the water','m',3*2.5+.5*g*6.25)],
+ [`${EQ.disp2} with ${vi} = −3.0 m/s.`,`3.0(2.5) + ½(9.81)(2.5)².`],
+ [`${dx} = (−3.0)(2.5) + ½(−9.81)(2.5)² = −7.5 − 30.7 = −38.2 m → <b>38 m</b>`]);
+
+const sx4='Other worlds';
+add('xp',sx4,'On the Moon, where the free-fall acceleration is <b>−1.62 m/s²</b>, an astronaut drops a rock from <b>2.0 m</b>. (a) How long does it take to land? (b) How fast is it moving just before it lands?',
+ [T('(a) Time','s',sqrt(2*2/1.62)),T('(b) Speed','m/s',sqrt(2*1.62*2),{abs:true})],
+ [`${vi} = 0, ${dx} = −2.0 m, ${A} = −1.62 m/s².`],
+ [`(a) ${dt} = √(2(−2.0)/(−1.62)) = <b>1.57 s</b>`,`(b) ${vf} = −1.62(1.57) = −2.5 m/s → <b>2.5 m/s</b>`]);
+add('xp',sx4,'An astronaut on the Moon (<i>a</i><sub>g</sub> = −1.62 m/s²) jumps straight up with an initial speed of <b>2.0 m/s</b>. How long is the astronaut in the air? (Compare with a jump at the same speed on Earth: 0.41 s.)',
+ [T('Time in the air','s',2*2/1.62)],
+ [`The astronaut returns to the starting height (${dx} = 0) with ${vf} = −2.0 m/s: ${dt} = (${vf} − ${vi})/${A}.`],
+ [`${dt} = ${F('−2.0 − 2.0','−1.62')} = <b>2.5 s</b> – six times longer than on Earth.`]);
+add('xp',sx4,'On Jupiter the free-fall acceleration is <b>−24.8 m/s²</b>. How long would it take an object dropped from rest to fall <b>10.0 m</b> there?',
+ [T('Time','s',sqrt(2*10/24.8))],
+ [`${dt} = √(2${dx}/${A}).`],
+ [`${dt} = √(${F('2(−10.0)','−24.8')}) = <b>0.898 s</b>`]);
+
+const sx5='Ratios and reasoning';
+MC('xp','Object A is dropped from 5.0 m and object B is dropped from 20.0 m (no air resistance). How does the time of fall of B compare with that of A?',
+ ['B takes twice as long','B takes four times as long','B takes the same time','B takes √2 times as long'],[0],
+ 'Δt = √(2h/g) so t ∝ √h. Four times the height gives √4 = 2 times the time.','How does the time depend on the height?',{sub:sx5});
+MC('xp','A ball is thrown straight up at <i>v</i>. A second ball is thrown straight up at <b>2<i>v</i></b>. Compared with the first, the second ball rises to…',
+ ['Four times the height','Twice the height','The same height','√2 times the height'],[0],
+ 'Maximum height h = v²/(2g), so doubling the speed quadruples the height. (The time in the air is only doubled.)','Use v_f² = v_i² + 2aΔy with v_f = 0.');
+MC('xp','Two balls are released at the same time from the same height: one is dropped, the other is thrown <b>horizontally</b>. Ignoring air resistance, which hits the ground first?',
+ ['They land at the same time','The dropped ball','The thrown ball','It depends on the mass'],[0],
+ 'The horizontal motion does not change the vertical motion: both start with zero vertical velocity and have a = −9.81 m/s², so they take the same time.','Compare the vertical motion of the two balls.');
+MC('xp','When a ball is thrown straight up, at which point of its path is its <b>speed</b> the greatest?',
+ ['At the release point and again just before it returns to the same height','At the very top','Half-way up','It is the same all the time'],[0],
+ 'The speed decreases on the way up, is zero at the top, and increases on the way down. The speeds at any given height going up and coming down are equal.','What happens to the speed at the top?');
+MC('xp','A stone is thrown straight up. Which graph of <b>velocity versus time</b> is correct (up is positive)?',
+ ['A straight line with a negative slope of −9.81 m/s² that crosses zero at the top','A horizontal line at +9.81 m/s','A straight line with a positive slope','A curve that flattens at the top'],[0],
+ 'Velocity changes steadily by −9.81 m/s every second, so the v–t graph is a straight line with slope −9.81 m/s² that crosses the time axis at the peak.','The slope of a v–t graph is the acceleration.');
+MC('xp','A freely falling object is dropped from rest. How far does it fall in its <b>second</b> second compared with its first second?',
+ ['Three times as far','Twice as far','The same distance','Four times as far'],[0],
+ 'In 1 s it falls ½g(1)² = 4.9 m; in 2 s it falls ½g(2)² = 19.6 m, so the second second adds 14.7 m = 3 × 4.9 m.','Compare ½gt² at t = 1 s and t = 2 s.');
 
 const SETS=[
  {id:'tb',name:'Textbook Practice',desc:'The Practice problems after Sample Problem F (Falling Object).'},
  {id:'p1',name:'Problem Set I',desc:'Sample Problem Set I – Problem F (falling object): the sample plus nine additional problems.'},
  {id:'p2',name:'Problem Set II',desc:'Sample Problem Set II – Problem F (falling object): the sample plus ten additional problems.'},
  {id:'ff',name:'More Free Fall',desc:'Additional free-fall problems: dropping, throwing up and down, other worlds, terminal velocity.'},
- {id:'fa',name:'Section 3 Assessment',desc:'Formative assessment, graph interpretation and the conceptual challenge.'},
- {id:'tf',name:'Take It Further',desc:'Angular kinematics, special relativity and time dilation, and Think Science.'}
+ {id:'xp',name:'Extra Practice',desc:'More problems on dropped, thrown-up and thrown-down objects, other worlds, and ratio reasoning.'},
+ {id:'fa',name:'Section 3 Assessment',desc:'Formative assessment and graph interpretation.'}
 ];
 
 P.forEach((p,i)=>{ p.id=p.set+(i+1); });
