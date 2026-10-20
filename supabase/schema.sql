@@ -139,6 +139,13 @@ drop function if exists public.lia_get_progress(text, text);
 drop function if exists public.lia_save_progress(text, text, jsonb, integer, integer, integer);
 drop function if exists public.lia_save_progress(text, text, text, jsonb, integer, integer, integer);
 
+-- a student's Class may list several subjects separated by "/" (e.g. "Physics II / Pre-Calculus"); one match is enough
+create or replace function public.lia_has_class(p_student_class text, p_class text) returns boolean
+language sql immutable set search_path = public as $$
+  select exists (select 1 from unnest(string_to_array(coalesce(p_student_class, ''), '/')) t
+                  where lower(btrim(t)) = lower(btrim(coalesce(p_class, ''))))
+$$;
+
 -- lessons of an area that are restricted, and the ones a grade + class may open
 create or replace function public.lia_access(p_area text, p_grade text, p_class text) returns json
 language sql security definer stable set search_path = public as $$
@@ -147,7 +154,7 @@ language sql security definer stable set search_path = public as $$
     'allowed',    coalesce((select json_agg(distinct page_key) from public.lesson_access
                              where area = p_area
                                and lower(btrim(grade)) = lower(btrim(coalesce(p_grade, '')))
-                               and lower(btrim(class_name)) = lower(btrim(coalesce(p_class, '')))), '[]'::json))
+                               and public.lia_has_class(p_class, class_name)), '[]'::json))
 $$;
 
 create or replace function public.lia_can_open(p_area text, p_grade text, p_class text, p_page text) returns boolean
@@ -156,7 +163,7 @@ language sql security definer stable set search_path = public as $$
       or exists (select 1 from public.lesson_access
                   where area = p_area and page_key = p_page
                     and lower(btrim(grade)) = lower(btrim(coalesce(p_grade, '')))
-                    and lower(btrim(class_name)) = lower(btrim(coalesce(p_class, ''))))
+                    and public.lia_has_class(p_class, class_name))
 $$;
 
 -- 1) sign in with a code
@@ -242,6 +249,7 @@ begin
   return json_build_object('ok', true, 'updated_at', now());
 end $$;
 
+revoke all on function public.lia_has_class(text, text) from public;
 revoke all on function public.lia_access(text, text, text) from public;
 revoke all on function public.lia_can_open(text, text, text, text) from public;
 revoke all on function public.lia_login(text, text)                                   from public;
