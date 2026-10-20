@@ -172,6 +172,33 @@
   .steps li { counter-increment: st; margin: .4rem 0; padding-left: 2.2rem; position: relative; }
   .steps li::before { content: counter(st); position: absolute; left: 0; top: .1rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--primary); color: var(--on-primary); text-align: center; font-size: .9rem; line-height: 1.6rem; font-weight: 500; }
   .lesson-tag { display: inline-block; background: var(--primary-soft); color: var(--primary-dark); border-radius: 6px; padding: .05rem .6rem; font-weight: 500; letter-spacing: 1px; font-size: .9rem; margin-bottom: .3rem; }
+
+  /* simulation */
+  .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.6rem; }
+  .sim-ctl label { display: flex; justify-content: space-between; font-weight: 500; color: var(--primary-dark); }
+  .sim-ctl output { font-weight: 600; color: var(--ink); }
+  .sim-ctl input[type="range"] { width: 100%; accent-color: var(--primary); margin: .3rem 0 0; }
+  .sim-btns { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+  .sim-btns .btn.sm, .sim-presets .btn.sm { padding: .4rem .9rem; font-size: .9rem; text-transform: none; letter-spacing: .3px; }
+  .sim-presets { margin-top: .8rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; color: var(--muted); font-weight: 300; }
+  .sim-svg { width: 100%; height: auto; display: block; }
+  .sim-svg text { font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif; font-size: 12px; fill: var(--muted); }
+  .sim-svg .axis { stroke: var(--muted); stroke-width: 1; }
+  .sim-svg .grid { stroke: var(--line); stroke-width: 1; }
+  .sim-svg .bar { fill: var(--primary); opacity: .75; stroke: var(--card); stroke-width: .5; }
+  .sim-svg .curve { fill: none; stroke: var(--warn); stroke-width: 2.5; }
+  .sim-svg .truep { stroke: var(--ok); stroke-width: 2; stroke-dasharray: 5 4; }
+  .sim-svg .lab { fill: var(--ink); font-size: 13px; }
+  .legend { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; justify-content: center; font-weight: 300; font-size: .95rem; margin-top: .3rem; }
+  .legend i { display: inline-block; width: 18px; height: 10px; margin-right: .4rem; border-radius: 2px; vertical-align: middle; }
+  .sim-last { background: var(--primary-soft); border-left: 5px solid var(--primary); border-radius: 6px; padding: .5rem 1rem; margin: .8rem 0; font-weight: 400; }
+  .sim-status { padding: .5rem 1rem; border-radius: 6px; margin-top: .8rem; font-weight: 400; }
+  .sim-status.good { background: var(--ok-bg); color: var(--ok-ink); border-left: 5px solid var(--ok); }
+  .sim-status.warn { background: var(--warn-bg); color: var(--warn-ink); border-left: 5px solid var(--warn); }
+  details.explore { border: 1px solid var(--line); border-radius: 8px; padding: .4rem 1rem; margin: .6rem 0; background: var(--card); }
+  details.explore summary { cursor: pointer; font-weight: 500; color: var(--primary-dark); }
+  details.explore[open] summary { margin-bottom: .3rem; }
+  @media (max-width: 640px) { .sim-grid { grid-template-columns: 1fr; } }
   .group-title { margin: 1.6rem 0 .8rem; color: var(--primary-dark); font-weight: 500; font-size: 1.3rem; border-bottom: 2px solid var(--line); padding-bottom: .2rem; }
 </style>
 <!--LIA-SYNC-START--><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
@@ -187,6 +214,7 @@
 <main>
   <div class="tabs" role="tablist" aria-label="Page sections">
     <button class="tab-btn" role="tab" id="tab-learn" aria-controls="panel-learn" aria-selected="true">Lesson &amp; Examples</button>
+    <button class="tab-btn" role="tab" id="tab-sim" aria-controls="panel-sim" aria-selected="false" tabindex="-1">Simulation</button>
     <button class="tab-btn" role="tab" id="tab-practice" aria-controls="panel-practice" aria-selected="false" tabindex="-1">Practice</button>
   </div>
 
@@ -236,7 +264,7 @@
       </ul>
       <p>When the conditions hold, <span class="hat">p</span> is approximately Normal, so we find probabilities with z-scores:</p>
       <div class="formula"><em>z</em> = <span class="frac"><span><span class="hat">p</span> &minus; <em>p</em></span><span>&sigma;<sub><span class="hat">p</span></sub></span></span></div>
-      <p><strong>Interpretation:</strong> the standard deviation &sigma;<sub><span class="hat">p</span></sub> is the typical distance between a sample proportion and the true <em>p</em> in repeated random samples of that size. Because &sigma;<sub><span class="hat">p</span></sub> has &radic;<em>n</em> in the denominator, <strong>quadrupling</strong> <em>n</em> cuts it in half.</p>
+      <p><strong>Interpretation:</strong> the standard deviation &sigma;<sub><span class="hat">p</span></sub> is the typical distance between a sample proportion and the true <em>p</em> in repeated random samples of that size. Because &sigma;<sub><span class="hat">p</span></sub> has &radic;<em>n</em> in the denominator, <strong>quadrupling</strong> <em>n</em> cuts it in half. See it happen in the <strong>Simulation</strong> tab.</p>
     </div>
 
     <!-- 3.3 -->
@@ -351,7 +379,75 @@
     </div>
   </section>
 
-  <!-- ============ TAB 2: PRACTICE ============ -->
+  <!-- ============ TAB 2: SIMULATION ============ -->
+  <section class="panel" id="panel-sim" role="tabpanel" aria-labelledby="tab-sim" hidden>
+    <div class="card">
+      <h2>Simulation: sampling distribution of <span class="hat">p</span></h2>
+      <p>Set a population proportion <em>p</em> and a sample size <em>n</em>. Each click draws random samples of size <em>n</em>; the simulation records each sample proportion <span class="hat">p</span> and builds the histogram. Compare it with what Lesson 3.2 predicts: center <em>p</em>, spread &sigma;<sub><span class="hat">p</span></sub> = &radic;<span class="rad"><em>p</em>(1 &minus; <em>p</em>) / <em>n</em></span>, and an approximately Normal shape when <em>np</em> &ge; 10 and <em>n</em>(1 &minus; <em>p</em>) &ge; 10.</p>
+    </div>
+
+    <div class="card">
+      <div class="sim-grid">
+        <div class="sim-ctl">
+          <label for="simP"><span>Population proportion <em>p</em></span> <output id="simPOut" for="simP">0.40</output></label>
+          <input type="range" id="simP" min="0.05" max="0.95" step="0.01" value="0.40">
+        </div>
+        <div class="sim-ctl">
+          <label for="simN"><span>Sample size <em>n</em></span> <output id="simNOut" for="simN">150</output></label>
+          <input type="range" id="simN" min="5" max="600" step="1" value="150">
+        </div>
+      </div>
+      <div class="sim-btns">
+        <button class="btn" type="button" data-draw="1">Draw 1 sample</button>
+        <button class="btn" type="button" data-draw="10">Draw 10</button>
+        <button class="btn" type="button" data-draw="100">Draw 100</button>
+        <button class="btn" type="button" data-draw="1000">Draw 1000</button>
+        <button class="btn secondary" type="button" id="simReset">Clear samples</button>
+      </div>
+      <div class="sim-presets">Try:
+        <button class="btn secondary sm" type="button" data-pre="0.4,150">p = 0.40, n = 150</button>
+        <button class="btn secondary sm" type="button" data-pre="0.4,600">p = 0.40, n = 600</button>
+        <button class="btn secondary sm" type="button" data-pre="0.05,30">p = 0.05, n = 30</button>
+        <button class="btn secondary sm" type="button" data-pre="0.5,10">p = 0.50, n = 10</button>
+      </div>
+      <p class="note" style="margin-top:.8rem">Changing <em>p</em> or <em>n</em> clears the samples so the histogram always shows one sampling distribution.</p>
+    </div>
+
+    <div class="card">
+      <div class="sim-last" id="simLast" aria-live="polite">Press &ldquo;Draw 1 sample&rdquo; to start.</div>
+      <svg class="sim-svg" id="simSvg" viewBox="0 0 640 320" role="img" aria-label="Histogram of simulated sample proportions with the Normal curve predicted by theory"></svg>
+      <div class="legend">
+        <span><i style="background:var(--primary);opacity:.75"></i>Simulated <span class="hat">p</span> values</span>
+        <span><i style="background:var(--warn)"></i>Normal model: mean <em>p</em>, SD &sigma;<sub><span class="hat">p</span></sub></span>
+        <span><i style="background:var(--ok)"></i>True <em>p</em></span>
+      </div>
+      <div class="table-wrap" style="margin-top:.8rem">
+        <table class="data" id="simTable">
+          <caption>Simulation results vs. theory</caption>
+          <tr><th></th><th>Simulated</th><th>Theory (Lesson 3.2)</th></tr>
+          <tr><th>Number of samples</th><td id="simCount">0</td><td>&mdash;</td></tr>
+          <tr><th>Mean of the <span class="hat">p</span> values</th><td id="simMean">&mdash;</td><td id="thMean">&mdash;</td></tr>
+          <tr><th>SD of the <span class="hat">p</span> values</th><td id="simSd">&mdash;</td><td id="thSd">&mdash;</td></tr>
+          <tr><th>Within 2 SD of <em>p</em></th><td id="simIn2">&mdash;</td><td>about 95% if Normal</td></tr>
+        </table>
+      </div>
+      <div class="sim-status" id="simStatus" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="card">
+      <h3>Explore (click to check your idea)</h3>
+      <details class="explore"><summary>1. With <em>p</em> = 0.40 and <em>n</em> = 150, draw 1000 samples. What do the mean and SD of the <span class="hat">p</span> values show?</summary>
+        <p>The mean is very close to 0.40 (<span class="hat">p</span> is an unbiased estimator of <em>p</em>) and the SD is close to &radic;(0.40 &middot; 0.60/150) = 0.04. About 95% of the values fall within 2 SD of <em>p</em>, between 0.32 and 0.48.</p></details>
+      <details class="explore"><summary>2. Change <em>n</em> from 150 to 600 (same <em>p</em>) and draw 1000 samples. What happens to the spread?</summary>
+        <p>Quadrupling <em>n</em> cuts the standard deviation in half (0.04 &rarr; 0.02). The center stays at <em>p</em>: a larger sample reduces <em>variability</em>, not bias.</p></details>
+      <details class="explore"><summary>3. Set <em>p</em> = 0.05 and <em>n</em> = 30. Is the distribution Normal? Why?</summary>
+        <p>No: it is skewed right and discrete. <em>np</em> = 1.5 is less than 10, so the large counts condition fails and the Normal model (orange curve) does not fit well.</p></details>
+      <details class="explore"><summary>4. Keep <em>n</em> = 150 and move <em>p</em> closer to 0.5. What changes in &sigma;<sub><span class="hat">p</span></sub>?</summary>
+        <p>The spread is largest at <em>p</em> = 0.5 because <em>p</em>(1 &minus; <em>p</em>) is largest there (0.25). For <em>p</em> = 0.9 and <em>n</em> = 150, &sigma; = &radic;(0.09/150) &asymp; 0.0245 is smaller.</p></details>
+    </div>
+  </section>
+
+  <!-- ============ TAB 3: PRACTICE ============ -->
   <section class="panel" id="panel-practice" role="tabpanel" aria-labelledby="tab-practice" hidden>
     <div class="card">
       <h2>Practice Problems</h2>
@@ -379,7 +475,7 @@
 <script>
 (function () {
   /* ---------- Tabs ---------- */
-  var tabs = [document.getElementById('tab-learn'), document.getElementById('tab-practice')];
+  var tabs = [document.getElementById('tab-learn'), document.getElementById('tab-sim'), document.getElementById('tab-practice')];
   function showTab(idx) {
     tabs.forEach(function (t, i) {
       var panel = document.getElementById(t.getAttribute('aria-controls'));
@@ -790,6 +886,156 @@
   });
 
   build(true);
+})();
+</script>
+
+<script>
+/* ---------- Simulation of the sampling distribution of p-hat ---------- */
+(function () {
+  var svg = document.getElementById('simSvg');
+  if (!svg) return;
+  var pIn = document.getElementById('simP'), nIn = document.getElementById('simN');
+  var pOut = document.getElementById('simPOut'), nOut = document.getElementById('simNOut');
+  var NS = 'http://www.w3.org/2000/svg';
+  var W = 640, Hh = 320, ML = 48, MR = 14, MT = 14, MB = 48;
+  var counts = [];            // integer successes of each simulated sample
+  var last = null;
+
+  function P() { return parseFloat(pIn.value); }
+  function Nn() { return parseInt(nIn.value, 10); }
+  function fmt(x, d) { return x.toFixed(d); }
+  function el(name, attrs, text) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  function hat(x) { return 'p̂'; }
+
+  function draw(k) {
+    var p = P(), n = Nn();
+    for (var i = 0; i < k; i++) {
+      var c = 0;
+      for (var j = 0; j < n; j++) if (Math.random() < p) c++;
+      counts.push(c);
+      last = c;
+    }
+    render();
+  }
+
+  function reset() { counts = []; last = null; render(); }
+
+  function niceStep(maxV, ticks) {
+    var raw = maxV / ticks, mag = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+    var f = raw / mag, nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10;
+    return nf * mag;
+  }
+
+  function render() {
+    var p = P(), n = Nn(), N = counts.length;
+    pOut.textContent = fmt(p, 2); nOut.textContent = n;
+    var sigma = Math.sqrt(p * (1 - p) / n);
+
+    // bins aligned with the possible values k/n
+    var lo = Math.max(0, p - 4 * sigma), hi = Math.min(1, p + 4 * sigma);
+    var k0 = Math.floor(lo * n), kHi = Math.ceil(hi * n);
+    var m = Math.max(1, Math.ceil(((kHi - k0 + 1) / 32)));           // counts per bin
+    var B = Math.ceil((kHi - k0 + 1) / m);
+    var bins = new Array(B); for (var b = 0; b < B; b++) bins[b] = 0;
+    counts.forEach(function (c) {
+      var idx = Math.floor((c - k0) / m);
+      bins[Math.max(0, Math.min(B - 1, idx))]++;
+    });
+    var xmin = (k0 - 0.5) / n, xmax = (k0 + B * m - 0.5) / n, binW = m / n;
+    function pdf(x) { return Math.exp(-0.5 * Math.pow((x - p) / sigma, 2)) / (sigma * Math.sqrt(2 * Math.PI)); }
+    var expMax = pdf(p) * binW * Math.max(N, 1);
+    var maxBar = Math.max.apply(null, bins);
+    var ymax = Math.max(maxBar, N ? expMax : 0, 5) * 1.12;
+    var step = niceStep(ymax, 5); ymax = Math.ceil(ymax / step) * step;
+
+    function X(v) { return ML + (v - xmin) / (xmax - xmin) * (W - ML - MR); }
+    function Y(v) { return Hh - MB - v / ymax * (Hh - MB - MT); }
+
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    // grid + y axis
+    for (var t = 0; t <= ymax + 1e-9; t += step) {
+      svg.appendChild(el('line', { x1: ML, x2: W - MR, y1: Y(t), y2: Y(t), 'class': 'grid' }));
+      svg.appendChild(el('text', { x: ML - 6, y: Y(t) + 4, 'text-anchor': 'end' }, String(Math.round(t * 100) / 100)));
+    }
+    // bars
+    bins.forEach(function (cnt, j) {
+      if (!cnt) return;
+      var x1 = X((k0 + j * m - 0.5) / n), x2 = X((k0 + (j + 1) * m - 0.5) / n);
+      svg.appendChild(el('rect', { x: x1, y: Y(cnt), width: Math.max(1, x2 - x1), height: Y(0) - Y(cnt), 'class': 'bar' }));
+    });
+    // axes
+    svg.appendChild(el('line', { x1: ML, x2: W - MR, y1: Y(0), y2: Y(0), 'class': 'axis' }));
+    svg.appendChild(el('line', { x1: ML, x2: ML, y1: MT, y2: Y(0), 'class': 'axis' }));
+    // x ticks
+    var xs = niceStep(xmax - xmin, 6), first = Math.ceil(xmin / xs) * xs;
+    for (var xv = first; xv <= xmax + 1e-9; xv += xs) {
+      svg.appendChild(el('line', { x1: X(xv), x2: X(xv), y1: Y(0), y2: Y(0) + 5, 'class': 'axis' }));
+      svg.appendChild(el('text', { x: X(xv), y: Y(0) + 19, 'text-anchor': 'middle' }, fmt(xv, xs < 0.01 ? 3 : 2)));
+    }
+    svg.appendChild(el('text', { x: (ML + W - MR) / 2, y: Hh - 8, 'text-anchor': 'middle', 'class': 'lab' }, 'Sample proportion ' + hat()));
+    var yl = el('text', { x: 14, y: (MT + Y(0)) / 2, 'text-anchor': 'middle', 'class': 'lab', transform: 'rotate(-90 14 ' + ((MT + Y(0)) / 2) + ')' }, 'Number of samples');
+    svg.appendChild(yl);
+    // Normal curve (scaled to counts)
+    if (N > 0) {
+      var d = '';
+      for (var i = 0; i <= 160; i++) {
+        var xv2 = xmin + (xmax - xmin) * i / 160;
+        d += (i ? 'L' : 'M') + X(xv2).toFixed(1) + ',' + Y(pdf(xv2) * binW * N).toFixed(1);
+      }
+      svg.appendChild(el('path', { d: d, 'class': 'curve' }));
+    }
+    // true p
+    svg.appendChild(el('line', { x1: X(p), x2: X(p), y1: MT, y2: Y(0), 'class': 'truep' }));
+
+    // stats
+    var cnt = document.getElementById('simCount');
+    cnt.textContent = N;
+    document.getElementById('thMean').textContent = fmt(p, 4);
+    document.getElementById('thSd').textContent = fmt(sigma, 4);
+    if (N > 0) {
+      var vals = counts.map(function (c) { return c / n; });
+      var mean = vals.reduce(function (a, b) { return a + b; }, 0) / N;
+      document.getElementById('simMean').textContent = fmt(mean, 4);
+      if (N > 1) {
+        var v = vals.reduce(function (a, b) { return a + (b - mean) * (b - mean); }, 0) / (N - 1);
+        document.getElementById('simSd').textContent = fmt(Math.sqrt(v), 4);
+      } else document.getElementById('simSd').textContent = '—';
+      var inside = vals.filter(function (x) { return Math.abs(x - p) <= 2 * sigma + 1e-12; }).length;
+      document.getElementById('simIn2').textContent = Math.round(inside / N * 1000) / 10 + '%';
+    } else {
+      ['simMean', 'simSd', 'simIn2'].forEach(function (id) { document.getElementById(id).textContent = '—'; });
+    }
+    document.getElementById('simLast').innerHTML = last === null
+      ? 'Press “Draw 1 sample” to start.'
+      : 'Last sample: <strong>' + last + '</strong> successes out of <strong>' + n + '</strong> → ' + hat() + ' = ' + last + '/' + n + ' = <strong>' + fmt(last / n, 3) + '</strong>';
+
+    // conditions
+    var np = n * p, nq = n * (1 - p), ok = np >= 10 && nq >= 10;
+    var st = document.getElementById('simStatus');
+    st.className = 'sim-status ' + (ok ? 'good' : 'warn');
+    st.innerHTML = 'Large counts: <em>np</em> = ' + fmt(np, 1) + ', <em>n</em>(1 − <em>p</em>) = ' + fmt(nq, 1) + ' → ' +
+      (ok ? '<strong>both ≥ 10</strong>, so the sampling distribution of ' + hat() + ' is approximately Normal.' :
+            '<strong>not both ≥ 10</strong>, so the distribution may be skewed and the Normal model is not appropriate.');
+  }
+
+  pIn.addEventListener('input', reset);
+  nIn.addEventListener('input', reset);
+  Array.prototype.forEach.call(document.querySelectorAll('[data-draw]'), function (b) {
+    b.addEventListener('click', function () { draw(parseInt(b.getAttribute('data-draw'), 10)); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-pre]'), function (b) {
+    b.addEventListener('click', function () {
+      var a = b.getAttribute('data-pre').split(',');
+      pIn.value = a[0]; nIn.value = a[1]; reset();
+    });
+  });
+  document.getElementById('simReset').addEventListener('click', reset);
+  render();
 })();
 </script>
 </body>
