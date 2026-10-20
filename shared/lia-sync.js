@@ -15,7 +15,7 @@
   'use strict';
   var CFG = window.LIA_CONFIG || {};
   var LIVE = !!(CFG.url && CFG.anonKey && !/YOUR_SUPABASE/.test(CFG.url + CFG.anonKey));
-  if (!LIVE) { window.LiaSync = { live: false }; return; }
+  if (!LIVE) { window.LiaSync = { live: false, name: function () { return ''; } }; return; }
 
   var AREA = CFG.area || 'default';
   var PAGE = (document.querySelector('meta[name="lia-page"]') || {}).content ||
@@ -235,5 +235,6 @@
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 
-  window.LiaSync = { live: true, area: AREA, page: PAGE, signOut: signOut };
+  /* name(): the signed-in student's registered name – pages use it instead of asking for a name again */
+  window.LiaSync = { live: true, area: AREA, page: PAGE, signOut: signOut, name: function () { return code ? (student.name || '') : ''; } };
 })();

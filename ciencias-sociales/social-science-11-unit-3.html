@@ -954,6 +954,8 @@ const hasAct=(l,t)=>t!=='map'||!!MAPQ_BY[l];
 const KEY='u3-progress-v2';
 let state={name:'',scores:{}};
 try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&typeof o==='object'){state.name=String(o.name||'');state.scores=(o.scores&&typeof o.scores==='object')?o.scores:{};}}}catch(e){}
+const signedName=()=>{try{return (window.LiaSync&&LiaSync.live&&LiaSync.name())||'';}catch(e){return '';}};   // registered name from the sign-in
+if(signedName()) state.name=signedName();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}};
 const pctOf=(c,t)=>t?Math.round(c/t*100):0;
 const sum=a=>a.reduce((x,y)=>x+y,0);
@@ -1031,7 +1033,7 @@ function openScore(info){
     <div class="bigscore">${S.C} / ${S.T}<small>${pct}%</small></div>
     <table class="mtbl"><tbody>${rows}</tbody></table>
     <p class="legend" style="margin:6px 0">${S.n} of ${S.m} activities done. Activities not done count as 0. Your best score in each activity is kept.</p>
-    <label class="namel nameRow">Student name <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(state.name)}"></label>
+    <label class="namel nameRow">${signedName()?'Student (from your sign-in)':'Student name'} <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(state.name)}"${signedName()?' readonly':''}></label>
     <p class="copyline"></p>
     <p class="legend" style="margin:6px 0 10px">Only your name and scores are included; your answers are not.</p>
     <p class="mbtns"><button type="button" class="btn pdfBtn">Save as PDF</button> <button type="button" class="btn alt copyBtn">Copy my score</button> <button type="button" class="btn alt closeBtn">Close</button> <button type="button" class="linkbtn clearBtn">Clear saved scores</button></p>
