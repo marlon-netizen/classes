@@ -53,7 +53,8 @@
   header .details { margin: .2rem 0 0; color: var(--muted); font-weight: 300; font-size: 1.1rem; }
   main { max-width: 900px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
 
-  .tabs { display: flex; gap: .5rem; border-bottom: 2px solid var(--line); margin-bottom: 1.2rem; }
+  .tabs { display: flex; gap: .5rem; border-bottom: 2px solid var(--line); margin-bottom: 1.2rem; overflow-x: auto; }
+  .tab-btn { white-space: nowrap; }
   .tab-btn {
     font: inherit; font-weight: 500; font-size: 1.05rem;
     padding: .7rem 1.2rem; border: none; border-radius: 8px 8px 0 0;
@@ -174,6 +175,12 @@
   .lesson-tag { display: inline-block; background: var(--primary-soft); color: var(--primary-dark); border-radius: 6px; padding: .05rem .6rem; font-weight: 500; letter-spacing: 1px; font-size: .9rem; margin-bottom: .3rem; }
 
   /* simulation */
+  .sim-ctl select { font: inherit; width: 100%; padding: .4rem .6rem; border: 2px solid var(--line); border-radius: 8px; background: var(--field); color: var(--ink); margin-top: .3rem; }
+  .sim-svg .ci-hit { stroke: var(--ok); stroke-width: 2.2; }
+  .sim-svg .ci-miss { stroke: var(--bad); stroke-width: 2.8; }
+  .sim-svg .dot-hit { fill: var(--ok); }
+  .sim-svg .dot-miss { fill: var(--bad); }
+
   .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.6rem; }
   .sim-ctl label { display: flex; justify-content: space-between; font-weight: 500; color: var(--primary-dark); }
   .sim-ctl output { font-weight: 600; color: var(--ink); }
@@ -214,7 +221,8 @@
 <main>
   <div class="tabs" role="tablist" aria-label="Page sections">
     <button class="tab-btn" role="tab" id="tab-learn" aria-controls="panel-learn" aria-selected="true">Lesson &amp; Examples</button>
-    <button class="tab-btn" role="tab" id="tab-sim" aria-controls="panel-sim" aria-selected="false" tabindex="-1">Simulation</button>
+    <button class="tab-btn" role="tab" id="tab-sim" aria-controls="panel-sim" aria-selected="false" tabindex="-1">Sampling Sim</button>
+    <button class="tab-btn" role="tab" id="tab-ci" aria-controls="panel-ci" aria-selected="false" tabindex="-1">CI Sim</button>
     <button class="tab-btn" role="tab" id="tab-practice" aria-controls="panel-practice" aria-selected="false" tabindex="-1">Practice</button>
   </div>
 
@@ -264,7 +272,7 @@
       </ul>
       <p>When the conditions hold, <span class="hat">p</span> is approximately Normal, so we find probabilities with z-scores:</p>
       <div class="formula"><em>z</em> = <span class="frac"><span><span class="hat">p</span> &minus; <em>p</em></span><span>&sigma;<sub><span class="hat">p</span></sub></span></span></div>
-      <p><strong>Interpretation:</strong> the standard deviation &sigma;<sub><span class="hat">p</span></sub> is the typical distance between a sample proportion and the true <em>p</em> in repeated random samples of that size. Because &sigma;<sub><span class="hat">p</span></sub> has &radic;<em>n</em> in the denominator, <strong>quadrupling</strong> <em>n</em> cuts it in half. See it happen in the <strong>Simulation</strong> tab.</p>
+      <p><strong>Interpretation:</strong> the standard deviation &sigma;<sub><span class="hat">p</span></sub> is the typical distance between a sample proportion and the true <em>p</em> in repeated random samples of that size. Because &sigma;<sub><span class="hat">p</span></sub> has &radic;<em>n</em> in the denominator, <strong>quadrupling</strong> <em>n</em> cuts it in half. See it happen in the <strong>Sampling Sim</strong> tab.</p>
     </div>
 
     <!-- 3.3 -->
@@ -304,7 +312,7 @@
         <li><strong>Interpreting the confidence level:</strong> if we repeatedly took random samples of the same size and built an interval from each, about <em>C</em>% of those intervals would capture the true proportion.</li>
         <li><strong>Common errors:</strong> &ldquo;There is a 95% probability that <em>p</em> is in (<em>a</em>, <em>b</em>)&rdquo; (the parameter is fixed; the <em>interval</em> is what varies), or &ldquo;95% of the population/sample is in the interval.&rdquo;</li>
         <li><strong>Justifying a claim:</strong> if a claimed value of <em>p</em> is <em>inside</em> the interval, it is a plausible value (no convincing evidence against it). If it is <em>outside</em>, the interval provides convincing evidence that the claim is not true. An interval entirely above 0.5 supports &ldquo;more than half&rdquo;.</li>
-        <li><strong>Why can an interval miss <em>p</em>?</strong> Random sampling variability: a 95% interval fails to capture <em>p</em> in about 5% of samples.</li>
+        <li><strong>Why can an interval miss <em>p</em>?</strong> Random sampling variability: a 95% interval fails to capture <em>p</em> in about 5% of samples. Watch it happen in the <strong>CI Sim</strong> tab.</li>
       </ul>
       <div class="table-wrap">
         <table class="data">
@@ -379,7 +387,7 @@
     </div>
   </section>
 
-  <!-- ============ TAB 2: SIMULATION ============ -->
+  <!-- ============ TAB 2: SAMPLING SIMULATION ============ -->
   <section class="panel" id="panel-sim" role="tabpanel" aria-labelledby="tab-sim" hidden>
     <div class="card">
       <h2>Simulation: sampling distribution of <span class="hat">p</span></h2>
@@ -447,7 +455,83 @@
     </div>
   </section>
 
-  <!-- ============ TAB 3: PRACTICE ============ -->
+  <!-- ============ TAB 3: CONFIDENCE INTERVAL SIMULATION ============ -->
+  <section class="panel" id="panel-ci" role="tabpanel" aria-labelledby="tab-ci" hidden>
+    <div class="card">
+      <h2>Simulation: what does &ldquo;95% confident&rdquo; mean?</h2>
+      <p>Each click takes new random samples of size <em>n</em> from a population with true proportion <em>p</em> and builds a one-sample <em>z</em>-interval <span class="hat">p</span> &plusmn; <em>z</em>*&radic;<span class="rad"><span class="hat">p</span>(1 &minus; <span class="hat">p</span>) / <em>n</em></span> from each one. A <span style="color:var(--ok-ink);font-weight:500">green</span> interval captures the true <em>p</em>; a <span style="color:var(--bad-ink);font-weight:500">red</span> interval misses it. In real life we never know <em>p</em>, but here we do, so we can check how often the method works.</p>
+    </div>
+
+    <div class="card">
+      <div class="sim-grid">
+        <div class="sim-ctl">
+          <label for="ciP"><span>True proportion <em>p</em></span> <output id="ciPOut" for="ciP">0.50</output></label>
+          <input type="range" id="ciP" min="0.05" max="0.95" step="0.01" value="0.50">
+        </div>
+        <div class="sim-ctl">
+          <label for="ciN"><span>Sample size <em>n</em></span> <output id="ciNOut" for="ciN">100</output></label>
+          <input type="range" id="ciN" min="10" max="600" step="1" value="100">
+        </div>
+        <div class="sim-ctl">
+          <label for="ciC"><span>Confidence level</span></label>
+          <select id="ciC">
+            <option value="90">90% (z* = 1.645)</option>
+            <option value="95" selected>95% (z* = 1.960)</option>
+            <option value="99">99% (z* = 2.576)</option>
+          </select>
+        </div>
+      </div>
+      <div class="sim-btns">
+        <button class="btn" type="button" data-ci="1">Draw 1 interval</button>
+        <button class="btn" type="button" data-ci="20">Draw 20</button>
+        <button class="btn" type="button" data-ci="100">Draw 100</button>
+        <button class="btn" type="button" data-ci="1000">Draw 1000</button>
+        <button class="btn secondary" type="button" id="ciReset">Clear intervals</button>
+      </div>
+      <div class="sim-presets">Try:
+        <button class="btn secondary sm" type="button" data-cipre="0.5,100,95">95%, n = 100</button>
+        <button class="btn secondary sm" type="button" data-cipre="0.5,100,99">99%, n = 100</button>
+        <button class="btn secondary sm" type="button" data-cipre="0.5,400,95">95%, n = 400</button>
+        <button class="btn secondary sm" type="button" data-cipre="0.05,30,95">p = 0.05, n = 30</button>
+      </div>
+      <p class="note" style="margin-top:.8rem">Changing a setting clears the intervals. The picture shows the most recent 100 intervals; the table counts <em>all</em> intervals drawn.</p>
+    </div>
+
+    <div class="card">
+      <div class="sim-last" id="ciLast" aria-live="polite">Press &ldquo;Draw 1 interval&rdquo; to start.</div>
+      <svg class="sim-svg" id="ciSvg" viewBox="0 0 640 460" role="img" aria-label="Confidence intervals from repeated random samples; green ones capture the true proportion and red ones miss it"></svg>
+      <div class="legend">
+        <span><i style="background:var(--ok)"></i>Captures <em>p</em></span>
+        <span><i style="background:var(--bad)"></i>Misses <em>p</em></span>
+        <span><i style="background:transparent;border-top:2px dashed var(--muted);height:0"></i>True <em>p</em></span>
+      </div>
+      <div class="table-wrap" style="margin-top:.8rem">
+        <table class="data">
+          <caption>Results of all intervals drawn</caption>
+          <tr><th>Intervals drawn</th><td id="ciCount">0</td></tr>
+          <tr><th>Intervals that capture <em>p</em></th><td id="ciHits">&mdash;</td></tr>
+          <tr><th>Percent that capture <em>p</em></th><td id="ciPct">&mdash;</td></tr>
+          <tr><th>Confidence level (what we expect)</th><td id="ciNom">95%</td></tr>
+          <tr><th>Average margin of error</th><td id="ciME">&mdash;</td></tr>
+        </table>
+      </div>
+      <div class="sim-status" id="ciStatus" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="card">
+      <h3>Explore (click to check your idea)</h3>
+      <details class="explore"><summary>1. Use 95% with <em>p</em> = 0.50 and <em>n</em> = 100. Draw 100 intervals several times. How many capture <em>p</em>?</summary>
+        <p>About 95 out of 100 (it varies from batch to batch, such as 92 or 97), and about 5 miss. The 95% describes the <strong>long-run success rate of the method</strong>, not the probability that one particular interval contains <em>p</em>: each interval either captures it or does not.</p></details>
+      <details class="explore"><summary>2. Switch to 99%. What happens to the number of misses and to the width of the intervals?</summary>
+        <p>Misses drop to about 1 in 100, but the intervals become wider because <em>z</em>* grows from 1.960 to 2.576. More confidence costs precision.</p></details>
+      <details class="explore"><summary>3. Go back to 95% and increase <em>n</em> from 100 to 400. What changes?</summary>
+        <p>The intervals are about half as wide (the margin of error is divided by &radic;4 = 2), but the capture rate is still about 95%. A bigger sample gives <em>precision</em>; it does not change the confidence level.</p></details>
+      <details class="explore"><summary>4. Set <em>p</em> = 0.05, <em>n</em> = 30 at 95% and draw 1000 intervals. Is the capture rate still near 95%?</summary>
+        <p>No, it is noticeably lower (around 80%). With <em>n</em><span class="hat">p</span> often below 10, the large counts condition fails and the <em>z</em>-interval does not work as advertised. Conditions matter!</p></details>
+    </div>
+  </section>
+
+  <!-- ============ TAB 4: PRACTICE ============ -->
   <section class="panel" id="panel-practice" role="tabpanel" aria-labelledby="tab-practice" hidden>
     <div class="card">
       <h2>Practice Problems</h2>
@@ -475,7 +559,7 @@
 <script>
 (function () {
   /* ---------- Tabs ---------- */
-  var tabs = [document.getElementById('tab-learn'), document.getElementById('tab-sim'), document.getElementById('tab-practice')];
+  var tabs = [document.getElementById('tab-learn'), document.getElementById('tab-sim'), document.getElementById('tab-ci'), document.getElementById('tab-practice')];
   function showTab(idx) {
     tabs.forEach(function (t, i) {
       var panel = document.getElementById(t.getAttribute('aria-controls'));
@@ -1035,6 +1119,115 @@
     });
   });
   document.getElementById('simReset').addEventListener('click', reset);
+  render();
+})();
+</script>
+
+<script>
+/* ---------- Simulation of confidence intervals for a proportion ---------- */
+(function () {
+  var svg = document.getElementById('ciSvg');
+  if (!svg) return;
+  var pIn = document.getElementById('ciP'), nIn = document.getElementById('ciN'), cIn = document.getElementById('ciC');
+  var ZS = { 90: 1.645, 95: 1.96, 99: 2.576 };
+  var NS = 'http://www.w3.org/2000/svg';
+  var W = 640, Hh = 460, ML = 20, MR = 20, MT = 28, MB = 40, MAXROWS = 100;
+  var shown = [], total = 0, hits = 0, sumME = 0, last = null;
+
+  function el(name, attrs, text) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  function fmt(x, d) { return x.toFixed(d); }
+  function niceStep(maxV, ticks) {
+    var raw = maxV / ticks, mag = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+    var f = raw / mag, nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10;
+    return nf * mag;
+  }
+  function params() { return { p: parseFloat(pIn.value), n: parseInt(nIn.value, 10), C: parseInt(cIn.value, 10) }; }
+
+  function draw(k) {
+    var q = params(), z = ZS[q.C];
+    for (var i = 0; i < k; i++) {
+      var c = 0;
+      for (var j = 0; j < q.n; j++) if (Math.random() < q.p) c++;
+      var ph = c / q.n, se = Math.sqrt(ph * (1 - ph) / q.n), me = z * se;
+      var iv = { c: c, ph: ph, se: se, me: me, lo: ph - me, hi: ph + me };
+      iv.hit = iv.lo <= q.p && q.p <= iv.hi;
+      total++; if (iv.hit) hits++; sumME += me;
+      shown.push(iv); if (shown.length > MAXROWS) shown.shift();
+      last = iv;
+    }
+    render();
+  }
+  function reset() { shown = []; total = 0; hits = 0; sumME = 0; last = null; render(); }
+
+  function render() {
+    var q = params(), z = ZS[q.C];
+    document.getElementById('ciPOut').textContent = fmt(q.p, 2);
+    document.getElementById('ciNOut').textContent = q.n;
+    var sigma = Math.sqrt(q.p * (1 - q.p) / q.n);
+    var lo = Math.max(0, q.p - 6 * sigma), hi = Math.min(1, q.p + 6 * sigma);
+    function X(v) { v = Math.max(lo, Math.min(hi, v)); return ML + (v - lo) / (hi - lo) * (W - ML - MR); }
+    var y0 = MT, y1 = Hh - MB, rowH = (y1 - y0) / MAXROWS;
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    // x axis + ticks
+    var xs = niceStep(hi - lo, 6), first = Math.ceil(lo / xs - 1e-9) * xs;
+    for (var xv = first; xv <= hi + 1e-9; xv += xs) {
+      svg.appendChild(el('line', { x1: X(xv), x2: X(xv), y1: y0, y2: y1, 'class': 'grid' }));
+      svg.appendChild(el('text', { x: X(xv), y: y1 + 18, 'text-anchor': 'middle' }, fmt(xv, xs < 0.01 ? 3 : 2)));
+    }
+    svg.appendChild(el('line', { x1: ML, x2: W - MR, y1: y1, y2: y1, 'class': 'axis' }));
+    svg.appendChild(el('text', { x: (ML + W - MR) / 2, y: Hh - 8, 'text-anchor': 'middle', 'class': 'lab' }, 'Proportion'));
+    // intervals
+    shown.forEach(function (iv, i) {
+      var y = y0 + rowH * (i + 0.5);
+      svg.appendChild(el('line', { x1: X(iv.lo), x2: X(iv.hi), y1: y, y2: y, 'class': iv.hit ? 'ci-hit' : 'ci-miss' }));
+      svg.appendChild(el('circle', { cx: X(iv.ph), cy: y, r: 1.8, 'class': iv.hit ? 'dot-hit' : 'dot-miss' }));
+    });
+    // true p
+    svg.appendChild(el('line', { x1: X(q.p), x2: X(q.p), y1: y0, y2: y1, stroke: 'var(--ink)', 'stroke-width': 1.6, 'stroke-dasharray': '5 4' }));
+    svg.appendChild(el('text', { x: X(q.p), y: y0 - 8, 'text-anchor': 'middle', 'class': 'lab' }, 'true p = ' + fmt(q.p, 2)));
+
+    // table
+    document.getElementById('ciCount').textContent = total;
+    document.getElementById('ciHits').textContent = total ? hits + ' of ' + total : '—';
+    document.getElementById('ciPct').textContent = total ? fmt(hits / total * 100, 1) + '%' : '—';
+    document.getElementById('ciNom').textContent = q.C + '%';
+    document.getElementById('ciME').textContent = total ? fmt(sumME / total, 4) : '—';
+    document.getElementById('ciLast').innerHTML = last === null ? 'Press “Draw 1 interval” to start.' :
+      'Last sample: p̂ = ' + last.c + '/' + q.n + ' = <strong>' + fmt(last.ph, 3) + '</strong>; SE = ' + fmt(last.se, 4) +
+      '; ME = ' + z + ' × ' + fmt(last.se, 4) + ' = ' + fmt(last.me, 4) +
+      '; interval = <strong>(' + fmt(Math.max(0, last.lo), 3) + ', ' + fmt(Math.min(1, last.hi), 3) + ')</strong> → ' +
+      (last.hit ? '<strong style="color:var(--ok-ink)">captures p ✓</strong>' : '<strong style="color:var(--bad-ink)">misses p ✗</strong>');
+    var st = document.getElementById('ciStatus');
+    if (total < 30) {
+      st.className = 'sim-status warn';
+      st.innerHTML = 'Draw more intervals (at least 100) to see the long-run capture rate settle near ' + q.C + '%.';
+    } else {
+      var pct = hits / total * 100, diff = Math.abs(pct - q.C);
+      var tol = 3 * Math.sqrt(q.C * (100 - q.C) / total) + 0.5;     // about 3 SDs of the simulated percentage
+      var good = diff <= tol;
+      st.className = 'sim-status ' + (good ? 'good' : 'warn');
+      st.innerHTML = good
+        ? 'Capture rate <strong>' + fmt(pct, 1) + '%</strong> is close to the confidence level of ' + q.C + '%: the method works as advertised.'
+        : 'Capture rate <strong>' + fmt(pct, 1) + '%</strong> is far from ' + q.C + '%. Check the conditions: with <em>np</em> = ' + fmt(q.n * q.p, 1) + ' and <em>n</em>(1 − <em>p</em>) = ' + fmt(q.n * (1 - q.p), 1) + ', the sample is too small for the <em>z</em>-interval.';
+    }
+  }
+
+  pIn.addEventListener('input', reset); nIn.addEventListener('input', reset); cIn.addEventListener('change', reset);
+  Array.prototype.forEach.call(document.querySelectorAll('[data-ci]'), function (b) {
+    b.addEventListener('click', function () { draw(parseInt(b.getAttribute('data-ci'), 10)); });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-cipre]'), function (b) {
+    b.addEventListener('click', function () {
+      var a = b.getAttribute('data-cipre').split(',');
+      pIn.value = a[0]; nIn.value = a[1]; cIn.value = a[2]; reset();
+    });
+  });
+  document.getElementById('ciReset').addEventListener('click', reset);
   render();
 })();
 </script>
