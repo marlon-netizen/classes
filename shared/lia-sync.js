@@ -15,7 +15,35 @@
   'use strict';
   var CFG = window.LIA_CONFIG || {};
   var LIVE = !!(CFG.url && CFG.anonKey && !/YOUR_SUPABASE/.test(CFG.url + CFG.anonKey));
-  if (!LIVE) { window.LiaSync = { live: false, name: function () { return ''; } }; return; }
+  /* ---------- light / dark toggle (every page that supports it, same stored choice) ---------- */
+  (function theme() {
+    var root = document.documentElement, mq = window.matchMedia ? matchMedia('(prefers-color-scheme: dark)') : null;
+    try { var t = localStorage.getItem('lia-theme'); if (t === 'light' || t === 'dark') root.setAttribute('data-theme', t); } catch (e) {}
+    function eff() { return root.getAttribute('data-theme') || ((mq && mq.matches) ? 'dark' : 'light'); }
+    function sync() { var e = eff(); [].forEach.call(document.querySelectorAll('[data-theme-set]'), function (b) { b.setAttribute('aria-pressed', String(b.dataset.themeSet === e)); }); }
+    function build() {
+      var css = ''; [].forEach.call(document.styleSheets, function (ss) { try { [].forEach.call(ss.cssRules, function (r) { css += r.cssText.slice(0, 120); }); } catch (e) {} });
+      var supports = /data-theme/.test(css);
+      var own = document.querySelector('[data-theme-set],#themeBtn,#theme,.themeBtn,#themeToggle,button[aria-label*="heme"]');
+      if (!supports || own) { sync(); return; }
+      var st = document.createElement('style');
+      st.textContent = '.lia-theme{position:absolute;top:10px;right:max(12px,calc((100vw - 1020px)/2 + 12px));display:inline-flex;border:1px solid rgba(128,128,128,.5);border-radius:99px;overflow:hidden;background:rgba(255,255,255,.14);z-index:50;font-family:inherit}' +
+        '.lia-theme button{appearance:none;border:0;background:none;color:inherit;font:600 .78rem/1 inherit;font-family:inherit;letter-spacing:.06em;text-transform:uppercase;padding:6px 11px;cursor:pointer;display:inline-flex;gap:5px;align-items:center}' +
+        '.lia-theme button[aria-pressed="true"]{background:#f3f0e9;color:#1b2f4b}@media print{.lia-theme{display:none}}';
+      document.head.appendChild(st);
+      var host = document.querySelector('header') || document.body;
+      if (getComputedStyle(host).position === 'static') host.style.position = 'relative';
+      var box = document.createElement('div'); box.className = 'lia-theme'; box.setAttribute('role', 'group'); box.setAttribute('aria-label', 'Color theme');
+      box.innerHTML = '<button type="button" data-theme-set="light" aria-pressed="false">☀ Light</button><button type="button" data-theme-set="dark" aria-pressed="false">☾ Dark</button>';
+      host.appendChild(box);
+      [].forEach.call(box.querySelectorAll('button'), function (b) { b.addEventListener('click', function () { root.setAttribute('data-theme', b.dataset.themeSet); try { localStorage.setItem('lia-theme', b.dataset.themeSet); } catch (e) {} sync(); }); });
+      sync();
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build); else build();
+  })();
+
+  if (!LIVE) { window.LiaSync = { live: false, name: function () { return ''; }, report: function () {} }; return; }
+  document.documentElement.classList.add('lia-live');
 
   var AREA = CFG.area || 'default';
   var PAGE = (document.querySelector('meta[name="lia-page"]') || {}).content ||
@@ -32,7 +60,7 @@
   var student = { name: lsGet(K_NAME) || '' };
   var mirror = null;            // { owner, state:{key:string}, dirty }
   var applying = false, reloading = false, inflight = false, timer = null, retry = null;
-  var sum = { solved: 0, total: 0 };
+  var sum = { solved: 0, total: 0, score: 0, max: 0 }, reported = false;
   var statusEl = null;
 
   try { mirror = JSON.parse(lsGet(K_MIRROR) || 'null'); } catch (e) { mirror = null; }
@@ -102,7 +130,12 @@
     if (inflight && !keep) return Promise.resolve();
     inflight = true; setStatus('Saving…', 'busy');
     var snap = JSON.stringify(mirror.state);
-    return rpc('lia_save_progress', { p_area: AREA, p_code: code, p_page: PAGE, p_state: mirror.state, p_solved: sum.solved, p_total: sum.total, p_examples: examplesDone() }, keep)
+    var args = { p_area: AREA, p_code: code, p_page: PAGE, p_state: mirror.state, p_solved: sum.solved, p_total: sum.total, p_examples: examplesDone(), p_score: reported ? sum.score : sum.solved, p_max_score: reported ? sum.max : sum.total };
+    return rpc('lia_save_progress', args, keep)
+      .catch(function (e) {   // database not yet updated with the score columns (schema.sql not re-run): save without them
+        if (!/http 404/.test(String(e && e.message))) throw e;
+        delete args.p_score; delete args.p_max_score; return rpc('lia_save_progress', args, keep);
+      })
       .then(function (r) {
         inflight = false;
         if (r && r.ok) { if (JSON.stringify(mirror.state) === snap) { mirror.dirty = false; saveMirror(); setStatus('Saved ✓'); } else schedule(); }
@@ -137,6 +170,8 @@
       '#liaUser .lia-save{padding:1px 9px;border-radius:99px;background:var(--good-soft,#e1f1e8);color:var(--good,#2c7a57)}' +
       '#liaUser .lia-save.busy{background:var(--blue-soft,#e6edf5);color:var(--primary,#1f3a5f)}' +
       '#liaUser .lia-save.off{background:var(--warm-soft,#f6ebdb);color:var(--warm,#b4763a)}' +
+      '#liaUser a.lia-menu{color:var(--primary,#1f3a5f);text-decoration:none;font-size:.8rem;border:1px solid var(--line,#ccc);border-radius:8px;padding:2px 9px}' +
+      '.lia-live [data-lia-reset]{display:none!important}' +
       '#liaUser button{font:inherit;font-size:.8rem;background:none;border:1px solid var(--line,#ccc);color:var(--primary,#1f3a5f);border-radius:8px;padding:2px 9px;cursor:pointer}' +
       '@media print{#liaUser{display:none}}';
     document.head.appendChild(st);
@@ -145,7 +180,7 @@
     var el = document.getElementById('liaUser');
     if (!el) {
       el = document.createElement('div'); el.id = 'liaUser';
-      el.innerHTML = '<span>👤 <span class="lia-name"></span></span><span class="lia-save" role="status" aria-live="polite">Saved ✓</span><button type="button">Sign out</button>';
+      el.innerHTML = '<span>👤 <span class="lia-name"></span></span><span class="lia-save" role="status" aria-live="polite">Saved ✓</span><a class="lia-menu" href="index.html">☰ Menu</a><button type="button">Sign out</button>';
       el.querySelector('button').addEventListener('click', signOut);
       document.body.appendChild(el);
     }
@@ -230,11 +265,26 @@
   /* pages that show "N of M … solved" in #overallText let the teacher see completion at a glance */
   function watchProgress() {
     var el = document.getElementById('overallText'); if (!el) return;
-    var read = function () { var m = /(\d+)\s+of\s+(\d+)/.exec(el.textContent || ''); if (m) { sum.solved = +m[1]; sum.total = +m[2]; } };
+    var read = function () { if (reported) return; var m = /(\d+)\s+of\s+(\d+)/.exec(el.textContent || ''); if (m) { sum.solved = +m[1]; sum.total = +m[2]; } };
     read(); if (window.MutationObserver) new MutationObserver(read).observe(el, { childList: true, characterData: true, subtree: true });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 
   /* name(): the signed-in student's registered name – pages use it instead of asking for a name again */
-  window.LiaSync = { live: true, area: AREA, page: PAGE, signOut: signOut, name: function () { return code ? (student.name || '') : ''; } };
+  /* report({solved,total,score,max}, {keepBest}) – pages call this so the teacher dashboard can show progress and scores.
+     keepBest: for pages that restart on every visit – the best result is kept (and saved) instead of the latest. */
+  function report(o, opts) {
+    try {
+      var r = { solved: +o.solved || 0, total: +o.total || 0, score: +o.score || 0, max: +o.max || 0 };
+      if (opts && opts.keepBest && mirror) {
+        var best = null; try { best = JSON.parse(mirror.state._lia_best || 'null'); } catch (e) {}
+        if (best && (best.solved > r.solved || (best.solved === r.solved && best.score >= r.score))) r = best;
+        else { try { localStorage.setItem('_lia_best', JSON.stringify(r)); } catch (e) {} }
+      }
+      var changed = r.solved !== sum.solved || r.total !== sum.total || r.score !== sum.score || r.max !== sum.max || !reported;
+      sum = r; reported = true;
+      if (changed && code && mirror) { mirror.dirty = true; saveMirror(); schedule(); }
+    } catch (e) {}
+  }
+  window.LiaSync = { live: true, area: AREA, page: PAGE, signOut: signOut, report: report, name: function () { return code ? (student.name || '') : ''; } };
 })();

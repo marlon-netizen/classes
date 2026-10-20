@@ -43,11 +43,15 @@ create table if not exists public.progress (
   solved      integer not null default 0,    -- practice problems solved
   total       integer not null default 0,    -- practice problems in the page
   examples    integer not null default 0,    -- worked examples completed
+  score       integer not null default 0,    -- points earned (pages that score)
+  max_score   integer not null default 0,    -- points available
   updated_at  timestamptz not null default now(),
   primary key (student_id, page_key)
 );
 
 alter table public.progress add column if not exists area text not null default 'default';
+alter table public.progress add column if not exists score integer not null default 0;
+alter table public.progress add column if not exists max_score integer not null default 0;
 create index if not exists progress_area on public.progress (area);
 
 create table if not exists public.admins (
@@ -119,6 +123,7 @@ grant select on public.admins to authenticated;
 drop function if exists public.lia_login(text);
 drop function if exists public.lia_get_progress(text, text);
 drop function if exists public.lia_save_progress(text, text, jsonb, integer, integer, integer);
+drop function if exists public.lia_save_progress(text, text, text, jsonb, integer, integer, integer);
 
 -- 1) sign in with a code
 create or replace function public.lia_login(p_area text, p_code text) returns json
@@ -170,7 +175,8 @@ end $$;
 -- 3) save a student's progress for one page
 create or replace function public.lia_save_progress(
   p_area text, p_code text, p_page text, p_state jsonb,
-  p_solved integer default 0, p_total integer default 0, p_examples integer default 0
+  p_solved integer default 0, p_total integer default 0, p_examples integer default 0,
+  p_score integer default 0, p_max_score integer default 0
 ) returns json
 language plpgsql security definer set search_path = public as $$
 declare
@@ -186,21 +192,21 @@ begin
   if p_state is null or jsonb_typeof(p_state) <> 'object' or octet_length(p_state::text) > 400000 then
     return json_build_object('ok', false, 'error', 'bad_state');
   end if;
-  insert into public.progress (student_id, area, page_key, state, solved, total, examples, updated_at)
+  insert into public.progress (student_id, area, page_key, state, solved, total, examples, score, max_score, updated_at)
   values (s.id, s.area, p_page, p_state, greatest(coalesce(p_solved, 0), 0), greatest(coalesce(p_total, 0), 0),
-          greatest(coalesce(p_examples, 0), 0), now())
+          greatest(coalesce(p_examples, 0), 0), greatest(coalesce(p_score, 0), 0), greatest(coalesce(p_max_score, 0), 0), now())
   on conflict (student_id, page_key) do update
      set state = excluded.state, solved = excluded.solved, total = excluded.total,
-         examples = excluded.examples, updated_at = now();
+         examples = excluded.examples, score = excluded.score, max_score = excluded.max_score, updated_at = now();
   return json_build_object('ok', true, 'updated_at', now());
 end $$;
 
 revoke all on function public.lia_login(text, text)                                   from public;
 revoke all on function public.lia_get_progress(text, text, text)                      from public;
-revoke all on function public.lia_save_progress(text, text, text, jsonb, integer, integer, integer) from public;
+revoke all on function public.lia_save_progress(text, text, text, jsonb, integer, integer, integer, integer, integer) from public;
 grant execute on function public.lia_login(text, text)                                   to anon, authenticated;
 grant execute on function public.lia_get_progress(text, text, text)                      to anon, authenticated;
-grant execute on function public.lia_save_progress(text, text, text, jsonb, integer, integer, integer) to anon, authenticated;
+grant execute on function public.lia_save_progress(text, text, text, jsonb, integer, integer, integer, integer, integer) to anon, authenticated;
 
 -- ---------- make yourself an admin (edit the e-mail, then run) ----------
 -- 1. Dashboard → Authentication → Users → Add user (e-mail + password, tick "Auto confirm")

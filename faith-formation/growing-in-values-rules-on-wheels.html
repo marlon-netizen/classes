@@ -147,6 +147,10 @@ button{cursor:pointer}
 footer{text-align:center;color:var(--muted);font-size:.82rem;padding:0 16px 30px}
 @media (max-width:560px){.nav{flex-wrap:wrap}.hint{order:3;flex-basis:100%}.tf{flex-direction:column}}
 @media (prefers-reduced-motion:reduce){.slide.active,.step.show,.fb.show,.shake{animation:none}.pbar i{transition:none}}
+
+/* dark mode (switched by the Light/Dark toggle or the device setting) */
+:root[data-theme="dark"]{ --bg:#14181e; --card:#1c222b; --ink:#e6eaef; --muted:#9aa6b4; --line:#313b48; --slate:#8fb0cf; --slate-deep:#b9d0e6; --slate-soft:#243242; --teal:#58b5ad; --teal-soft:#193230; --warm:#d9a165; --warm-soft:#33291d; --good:#5cc08f; --good-soft:#183024; --bad:#e58c85; --bad-soft:#38201f; --shadow:0 2px 6px rgba(0,0,0,.4); }
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){ --bg:#14181e; --card:#1c222b; --ink:#e6eaef; --muted:#9aa6b4; --line:#313b48; --slate:#8fb0cf; --slate-deep:#b9d0e6; --slate-soft:#243242; --teal:#58b5ad; --teal-soft:#193230; --warm:#d9a165; --warm-soft:#33291d; --good:#5cc08f; --good-soft:#183024; --bad:#e58c85; --bad-soft:#38201f; --shadow:0 2px 6px rgba(0,0,0,.4); } }
 </style>
 <!--LIA-SYNC-START--><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
 </head>
@@ -471,7 +475,12 @@ var items={};        // id -> {group,label,max,score|null,scored}
 var order=[];        // registration order
 
 function reg(id,group,label,max,scored){ items[id]={group:group,label:label,max:max,score:null,scored:scored!==false}; order.push(id); }
-function finish(id,score){ items[id].score=score; updateNav(); }
+function reportDeck(){   // tells the teacher dashboard how far the student is (best result is kept)
+  try{ var sc=order.filter(function(id){ return items[id].scored; }), done=sc.filter(function(id){ return items[id].score!==null; }), c=0, m=0;
+    sc.forEach(function(id){ m+=items[id].max; }); done.forEach(function(id){ c+=items[id].score; });
+    if(window.LiaSync) LiaSync.report({solved:done.length,total:sc.length,score:c,max:m},{keepBest:true}); }catch(e){}
+}
+function finish(id,score){ items[id].score=score; updateNav(); reportDeck(); }
 function itemsIn(g){ return order.filter(function(id){ return items[id].group===g; }); }
 function doneIn(g){ return itemsIn(g).filter(function(id){ return items[id].score!==null; }).length; }
 

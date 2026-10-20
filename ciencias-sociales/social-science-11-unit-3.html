@@ -976,13 +976,17 @@ function maxPts(l,t){
 }
 function commit(l,t,c,a){
   const k=l+':'+t,p=state.scores[k];
-  if(!p||c>=p.c){state.scores[k]={c,a};save();}
+  if(!p||c>=p.c){state.scores[k]={c,a};save();reportUnit();}
 }
 function lessonScore(l){
   const rows=ACT.filter(x=>hasAct(l,x[0])).map(([k,lab])=>{const t=maxPts(l,k),p=state.scores[l+':'+k];return {k,lab,t,c:p?p.c:0,done:!!p&&p.a>0};});
   const C=sum(rows.map(r=>r.c)),T=sum(rows.map(r=>r.t));
   return {rows,C,T,n:rows.filter(r=>r.done).length,m:rows.length};
 }
+
+/* tell the teacher dashboard how far the student is (all four lessons together) */
+function reportUnit(){try{let n=0,m=0,C=0,T=0;[1,2,3,4].forEach(l=>{const S=lessonScore(l);n+=S.n;m+=S.m;C+=S.C;T+=S.T;});if(window.LiaSync)LiaSync.report({solved:n,total:m,score:C,max:T});}catch(e){}}
+setTimeout(reportUnit,0);
 
 /* ---------- score pop-up ---------- */
 const modal=$('#scoreModal');
@@ -1036,7 +1040,7 @@ function openScore(info){
     <label class="namel nameRow">${signedName()?'Student (from your sign-in)':'Student name'} <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(state.name)}"${signedName()?' readonly':''}></label>
     <p class="copyline"></p>
     <p class="legend" style="margin:6px 0 10px">Only your name and scores are included; your answers are not.</p>
-    <p class="mbtns"><button type="button" class="btn pdfBtn">Save as PDF</button> <button type="button" class="btn alt copyBtn">Copy my score</button> <button type="button" class="btn alt closeBtn">Close</button> <button type="button" class="linkbtn clearBtn">Clear saved scores</button></p>
+    <p class="mbtns"><button type="button" class="btn pdfBtn">Save as PDF</button> <button type="button" class="btn alt copyBtn">Copy my score</button> <button type="button" class="btn alt closeBtn">Close</button></p>
   </div>`;
   const ni=$('.nameIn',modal),cl=$('.copyline',modal),cb=$('.copyBtn',modal),pb=$('.pdfBtn',modal);
   const refresh=()=>{cl.textContent=lineText();const e=!state.name.trim();cb.disabled=e;pb.disabled=e;cb.title=pb.title=e?'Type your name first':'';};
@@ -1044,7 +1048,6 @@ function openScore(info){
   cb.onclick=()=>copyText(lineText(),cb);
   pb.onclick=()=>savePdf(pb);
   $('.closeBtn',modal).onclick=closeScore;$('.mclose',modal).onclick=closeScore;
-  $('.clearBtn',modal).onclick=()=>{if(confirm('Clear all saved scores on this device?')){state.scores={};save();openScore(info);}};
   refresh();modal.hidden=false;document.body.classList.add('modal-open');
   setTimeout(()=>ni.focus(),30);
 }

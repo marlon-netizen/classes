@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Scores &amp; progress | Lincoln International Academy</title>
+<script src="lia-config.js"></script>
+<style>
+:root{--bg:#f3f0e9;--surface:#fffdf9;--surface-2:#f8f5ee;--ink:#1e2937;--muted:#5a6575;--line:#ddd6c7;--primary:#1f3a5f;--primary-ink:#fff;--accent:#2b7a76;--warm:#b4763a;--warm-soft:#f6ebdb;--good:#2c7a57;--good-soft:#e1f1e8;--mid:#6c8a2f;--mid-soft:#eef2dc;--low:#b4763a;--low-soft:#f6ebdb;--bad:#a94a3f;--bad-soft:#f6e4e1;--blue-soft:#e6edf5}
+@media (prefers-color-scheme: dark){:root{--bg:#11161d;--surface:#18202a;--surface-2:#1d2631;--ink:#e5e9ef;--muted:#9aa5b5;--line:#2d3947;--primary:#9dbce6;--primary-ink:#0f1722;--accent:#58b5ae;--warm:#d9a165;--warm-soft:#2d2519;--good:#5cc08f;--good-soft:#183024;--mid:#a6c25a;--mid-soft:#262e16;--low:#d9a165;--low-soft:#2d2519;--bad:#e08a7d;--bad-soft:#331e1c;--blue-soft:#1b2838}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header.top{background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+.wrap{max-width:1300px;margin:0 auto;padding:0 16px}
+header.top .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:12px}
+.eyebrow{font-size:.74rem;text-transform:uppercase;letter-spacing:.14em;color:#d3b48a}.school{font-family:Georgia,serif;font-size:1.45rem;font-weight:700}
+.who{font-size:.88rem;display:flex;gap:12px;align-items:center;color:#cfd8e6;flex-wrap:wrap}.who a{color:#cfd8e6}
+button,.btn{font:inherit;font-weight:600;font-size:.88rem;border-radius:8px;padding:6px 13px;cursor:pointer;border:1px solid var(--primary);background:var(--primary);color:var(--primary-ink)}
+button.ghost{background:transparent;color:var(--primary)}header.top button.ghost{color:#f3f0e9;border-color:rgba(255,255,255,.5)}button.small{padding:3px 10px;font-size:.8rem}
+input,select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:1px}
+main{padding:18px 0 60px}.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:16px}
+.login{max-width:420px;margin:40px auto}.login label{display:block;font-weight:600;font-size:.85rem;margin:10px 0 4px}.login input{width:100%}
+.msg{padding:9px 12px;border-radius:8px;margin:10px 0;font-size:.92rem}.msg.err{background:var(--bad-soft);color:var(--bad)}.msg.info{background:var(--blue-soft);color:var(--primary)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:16px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 14px}.stat small{display:block;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-size:.68rem}.stat b{font-size:1.6rem}
+.stat.warn b{color:var(--low)}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-bottom:12px}.toolbar .spacer{flex:1}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}.seg button{border:0;border-right:1px solid var(--line);border-radius:0;background:var(--surface);color:var(--ink);padding:6px 12px}.seg button:last-child{border-right:0}.seg button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink)}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:.78rem;color:var(--muted);align-items:center}.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+.gridwrap{overflow:auto;max-height:72vh;border:1px solid var(--line);border-radius:10px}
+table{border-collapse:separate;border-spacing:0;width:100%;font-size:.88rem}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);text-align:center;vertical-align:middle;background:var(--surface)}
+th{background:var(--surface-2);position:sticky;top:0;z-index:2;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);cursor:pointer;vertical-align:bottom;min-width:104px;max-width:150px}
+th small{display:block;text-transform:none;letter-spacing:0;font-weight:500;color:var(--muted)}
+th.sorted::after{content:" ▾"}th.sorted.asc::after{content:" ▴"}
+th:first-child,td:first-child{position:sticky;left:0;z-index:3;text-align:left;min-width:190px;border-right:2px solid var(--line)}th:first-child{z-index:4}
+td.name b{cursor:pointer;color:var(--primary)}td.name b:hover{text-decoration:underline}td.name small{display:block;color:var(--muted)}
+.flag{display:inline-block;font-size:.68rem;font-weight:700;padding:0 7px;border-radius:99px;background:var(--low-soft);color:var(--low);margin-left:4px}.flag.bad{background:var(--bad-soft);color:var(--bad)}
+.cell{border-radius:6px;padding:4px 6px;font-weight:700;line-height:1.25}.cell small{display:block;font-weight:500;opacity:.85;font-size:.72rem}
+.c-good{background:var(--good-soft);color:var(--good)}.c-mid{background:var(--mid-soft);color:var(--mid)}.c-low{background:var(--low-soft);color:var(--low)}.c-bad{background:var(--bad-soft);color:var(--bad)}.c-none{color:var(--muted);font-weight:400}
+.mini{height:5px;background:var(--line);border-radius:99px;margin-top:3px;overflow:hidden}.mini i{display:block;height:100%;background:currentColor}
+tr:hover td{background:var(--surface-2)}tr:hover td.name{background:var(--surface-2)}
+dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface);color:var(--ink);padding:20px;max-width:620px;width:calc(100% - 28px)}dialog::backdrop{background:rgba(0,0,0,.45)}dialog h2{margin:0 0 4px}
+.row{display:grid;grid-template-columns:1fr auto;gap:2px 14px;padding:8px 0;border-bottom:1px solid var(--line)}.row .t{font-weight:600}.row .n{text-align:right;font-weight:700}.row .m{grid-column:1/-1;color:var(--muted);font-size:.8rem}
+.muted{color:var(--muted)}.actions{display:flex;gap:8px;margin-top:14px}
+@media print{header.top .who,.toolbar,#flagNote{display:none!important}.gridwrap{max-height:none;overflow:visible}body{background:#fff}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div><div class="eyebrow">Scores &amp; progress · <span id="areaName"></span></div><div class="school">Lincoln International Academy</div></div>
+  <div class="who" id="who" hidden><a href="index.html">← Lessons</a><a href="admin.html">Manage students &amp; codes</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
+</div></header>
+<main><div class="wrap">
+  <div class="card login" id="loginCard" hidden>
+    <h2 style="margin:0 0 4px">Teacher sign-in</h2><p class="muted" style="margin:0 0 8px">Same account as the admin page.</p>
+    <form id="loginForm"><label for="lEmail">E-mail</label><input id="lEmail" type="email" autocomplete="username" required><label for="lPass">Password</label><input id="lPass" type="password" autocomplete="current-password" required>
+    <div class="actions"><button type="submit" id="lBtn">Sign in</button></div><div class="msg err" id="lErr" hidden></div></form>
+  </div>
+  <div class="msg info" id="setupMsg" hidden></div>
+  <div id="app" hidden>
+    <div class="stats" id="stats"></div>
+    <div class="card">
+      <div class="toolbar">
+        <input type="search" id="q" placeholder="Search students…" aria-label="Search students" style="width:200px">
+        <select id="fClass" aria-label="Filter by class"><option value="">All classes</option></select>
+        <div class="seg" id="viewSeg" role="group" aria-label="What to show"><button type="button" data-v="score" aria-pressed="true">Score</button><button type="button" data-v="progress" aria-pressed="false">Progress</button><button type="button" data-v="both" aria-pressed="false">Both</button></div>
+        <label class="muted"><input type="checkbox" id="chkAllPages"> include pages nobody has opened</label>
+        <span class="spacer"></span>
+        <button type="button" class="ghost" id="btnCsv">Export CSV</button><button type="button" class="ghost" id="btnPrint">Print</button>
+      </div>
+      <div class="legend"><span><i style="background:var(--good-soft);outline:1px solid var(--good)"></i>80 % +</span><span><i style="background:var(--mid-soft);outline:1px solid var(--mid)"></i>60–79 %</span><span><i style="background:var(--low-soft);outline:1px solid var(--low)"></i>40–59 %</span><span><i style="background:var(--bad-soft);outline:1px solid var(--bad)"></i>under 40 %</span><span>— not started</span>
+        <span id="flagNote" class="muted">· <span class="flag">attention</span> = no activity for 7+ days, or score under 60 %. Click a student or a column title for details / sorting.</span></div>
+      <div class="gridwrap" style="margin-top:10px"><table id="grid"><thead></thead><tbody></tbody></table></div>
+      <p class="muted" id="empty" hidden>No students yet. Add them in “Manage students &amp; codes”.</p>
+    </div>
+  </div>
+</div></main>
+<dialog id="dlg"><h2 id="dName"></h2><div class="muted" id="dMeta"></div><div id="dRows" style="margin-top:8px"></div><div class="actions"><span style="flex:1"></span><button type="button" id="dClose">Close</button></div></dialog>
+
+<script>
+(function(){
+'use strict';
+var CFG=window.LIA_CONFIG||{}, $=function(s){return document.querySelector(s);};
+var LIVE=CFG.url&&CFG.anonKey&&!/YOUR_SUPABASE/.test(CFG.url+CFG.anonKey), BASE=String(CFG.url||'').replace(/\/+$/,'');
+var PAGES=CFG.pages||{}, AREA=CFG.area||'default', SK='lia-admin-session:'+(CFG.url||''), sess=null, students=[], progress=[];
+var view='score', sortKey='name', sortDir=1;
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function msg(el,t,k){el.textContent=t||'';el.className='msg '+(k||'');el.hidden=!t;}
+function when(ts){ if(!ts) return 'never'; var d=new Date(ts),n=new Date(); return d.toDateString()===n.toDateString()?'today '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}):d.toLocaleDateString(); }
+function days(ts){ return ts?(Date.now()-new Date(ts).getTime())/864e5:Infinity; }
+function cls(p){ return p==null?'c-none':p>=80?'c-good':p>=60?'c-mid':p>=40?'c-low':'c-bad'; }
+
+/* ---------- auth + REST (same teacher session as admin.html) ---------- */
+function saveSess(j){ sess={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Date.now()+(j.expires_in||3600)*1000,email:(j.user&&j.user.email)||(sess&&sess.email)||''}; try{localStorage.setItem(SK,JSON.stringify(sess));}catch(e){} }
+function auth(body,grant){ return fetch(BASE+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{apikey:CFG.anonKey,'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json().then(function(j){ if(!r.ok) throw new Error(j.error_description||j.msg||j.message||'Sign-in failed'); return j; });}); }
+function refresh(){ if(!sess||!sess.refresh_token) return Promise.resolve(false); return auth({refresh_token:sess.refresh_token},'refresh_token').then(function(j){saveSess(j);return true;},function(){return false;}); }
+function api(path){
+  var go=function(){ return fetch(BASE+path,{headers:{apikey:CFG.anonKey,Authorization:'Bearer '+sess.access_token}}); };
+  var pre=(sess&&sess.expires_at-Date.now()<60000)?refresh():Promise.resolve(true);
+  return pre.then(go).then(function(r){ if(r.status===401) return refresh().then(function(ok){ if(!ok){ out('Your session expired. Please sign in again.'); throw new Error('expired'); } return go(); }); return r; })
+    .then(function(r){ if(!r.ok) return r.json().catch(function(){return {};}).then(function(j){ throw new Error(j.message||('Request failed ('+r.status+')')); }); return r.json(); });
+}
+function out(t){ sess=null; try{localStorage.removeItem(SK);}catch(e){} $('#app').hidden=true; $('#who').hidden=true; $('#loginCard').hidden=false; msg($('#lErr'),t,'err'); }
+function load(){
+  return Promise.all([api('/rest/v1/admins?select=user_id'),api('/rest/v1/students?select=id,full_name,grade,class_name,active,last_login&area=eq.'+encodeURIComponent(AREA)+'&order=full_name.asc'),api('/rest/v1/progress?select=student_id,page_key,solved,total,examples,score,max_score,updated_at&area=eq.'+encodeURIComponent(AREA))])
+  .then(function(r){ if(!r[0]||!r[0].length){ out('This account is not an administrator yet (see supabase/README.md).'); return; } students=r[1]||[]; progress=r[2]||[]; render(); });
+}
+
+/* ---------- numbers ---------- */
+function prog(r){ return r.total>0?Math.min(100,100*r.solved/r.total):null; }
+function scoreOf(r){ return r.max_score>0?100*r.score/r.max_score:prog(r); }
+function pageLabel(k){ return PAGES[k]||k; }
+function build(){
+  var by={}; progress.forEach(function(p){ (by[p.student_id]=by[p.student_id]||{})[p.page_key]=p; });
+  var keys={}; progress.forEach(function(p){ keys[p.page_key]=1; });
+  if($('#chkAllPages').checked) Object.keys(PAGES).forEach(function(k){ keys[k]=1; });
+  var cols=Object.keys(keys).sort();
+  var q=$('#q').value.trim().toLowerCase(), fc=$('#fClass').value;
+  var rows=students.filter(function(s){ if(fc&&s.class_name!==fc) return false; return !q||[s.full_name,s.class_name,s.grade].join(' ').toLowerCase().indexOf(q)>-1; }).map(function(s){
+    var pr=by[s.id]||{}, ps=0,pn=0,sc=0,mx=0,last=null;
+    cols.forEach(function(k){ var r=pr[k]; pn++; if(r){ var p=prog(r); ps+=p==null?100:p; if(r.max_score>0||r.total>0){ sc+=(r.max_score>0?r.score:r.solved); mx+=(r.max_score>0?r.max_score:r.total); } if(!last||r.updated_at>last) last=r.updated_at; } });
+    var avgP=pn?ps/pn:null, avgS=mx>0?100*sc/mx:null, idle=days(last), reasons=[];
+    if(s.active&&idle>=7) reasons.push(last?'no activity for '+Math.floor(idle)+' days':'never started');
+    if(avgS!=null&&avgS<60) reasons.push('low score');
+    return {s:s,pr:pr,avgP:avgP,avgS:avgS,last:last,reasons:reasons};
+  });
+  return {rows:rows,cols:cols};
+}
+function metric(r){ return view==='progress'?prog(r):scoreOf(r); }
+function sortVal(row,k){
+  if(k==='name') return row.s.full_name.toLowerCase(); if(k==='avgS') return row.avgS==null?-1:row.avgS; if(k==='avgP') return row.avgP==null?-1:row.avgP; if(k==='last') return row.last||'';
+  var r=row.pr[k]; if(!r) return -1; var m=metric(r); return m==null?0:m;
+}
+function render(){
+  $('#who').hidden=false; $('#loginCard').hidden=true; $('#app').hidden=false; $('#whoMail').textContent=sess.email||'';
+  var cl={}; students.forEach(function(s){ if(s.class_name) cl[s.class_name]=1; }); var sel=$('#fClass'),cur=sel.value;
+  sel.innerHTML='<option value="">All classes</option>'+Object.keys(cl).sort().map(function(c){return '<option>'+esc(c)+'</option>';}).join(''); sel.value=cl[cur]?cur:'';
+  var d=build(), rows=d.rows, cols=d.cols;
+  rows.sort(function(a,b){ var x=sortVal(a,sortKey),y=sortVal(b,sortKey); return (x<y?-1:x>y?1:0)*sortDir; });
+  var act=rows.filter(function(r){return r.s.active;}), week=act.filter(function(r){return days(r.last)<7;}).length, att=act.filter(function(r){return r.reasons.length;}).length;
+  function avg(a){ a=a.filter(function(x){return x!=null;}); return a.length?Math.round(a.reduce(function(s,x){return s+x;},0)/a.length)+'%':'—'; }
+  $('#stats').innerHTML=[['Students',rows.length,''],['Active this week',week+' / '+act.length,''],['Average progress',avg(rows.map(function(r){return r.avgP;})),''],['Average score',avg(rows.map(function(r){return r.avgS;})),''],['Need attention',att,att?'warn':'']].map(function(x){return '<div class="stat '+x[2]+'"><small>'+x[0]+'</small><b>'+x[1]+'</b></div>';}).join('');
+  $('#empty').hidden=!!students.length;
+  // header
+  var th='<tr><th data-k="name" class="'+(sortKey==='name'?'sorted'+(sortDir<0?' asc':''):'')+'">Student</th>'+
+    '<th data-k="avgS" class="'+(sortKey==='avgS'?'sorted'+(sortDir<0?' asc':''):'')+'">Overall score</th><th data-k="avgP" class="'+(sortKey==='avgP'?'sorted'+(sortDir<0?' asc':''):'')+'">Overall progress</th>'+
+    cols.map(function(k){ var vals=rows.map(function(r){var x=r.pr[k]; return x?metric(x):null;}).filter(function(v){return v!=null;}); var a=vals.length?Math.round(vals.reduce(function(s,v){return s+v;},0)/vals.length):null;
+      return '<th data-k="'+esc(k)+'" class="'+(sortKey===k?'sorted'+(sortDir<0?' asc':''):'')+'" title="'+esc(pageLabel(k))+'">'+esc(pageLabel(k))+'<small>class avg '+(a==null?'—':a+'%')+' · '+vals.length+' started</small></th>'; }).join('')+
+    '<th data-k="last" class="'+(sortKey==='last'?'sorted'+(sortDir<0?' asc':''):'')+'">Last activity</th></tr>';
+  $('#grid thead').innerHTML=th;
+  function cell(r){
+    if(!r) return '<td><span class="c-none">—</span></td>';
+    var p=prog(r), s=scoreOf(r), m=view==='progress'?p:s, txt;
+    if(view==='both') txt=(s==null?'saved':Math.round(s)+'%')+'<small>progress '+(p==null?'—':Math.round(p)+'%')+'</small>';
+    else txt=m==null?'saved':Math.round(m)+'%'+'<small>'+(r.total>0?r.solved+'/'+r.total+(view==='score'&&r.max_score>0&&r.max_score!==r.total?' · '+r.score+'/'+r.max_score+' pts':''):'')+'</small>';
+    return '<td title="'+esc(pageLabel(r.page_key)+' – saved '+when(r.updated_at))+'"><div class="cell '+cls(m)+'">'+txt+(m!=null?'<div class="mini"><i style="width:'+Math.round(m)+'%"></i></div>':'')+'</div></td>';
+  }
+  $('#grid tbody').innerHTML=rows.map(function(row){
+    var s=row.s, flags=(s.active?row.reasons.map(function(x){return '<span class="flag'+(x==='low score'?' bad':'')+'">'+esc(x)+'</span>';}).join(''):'<span class="flag bad">inactive</span>');
+    return '<tr data-id="'+s.id+'"><td class="name"><b>'+esc(s.full_name)+'</b>'+flags+'<small>'+esc([s.grade&&('Grade '+s.grade),s.class_name].filter(Boolean).join(' · '))+'</small></td>'+
+      '<td><div class="cell '+cls(row.avgS)+'">'+(row.avgS==null?'—':Math.round(row.avgS)+'%')+'</div></td><td><div class="cell '+cls(row.avgP)+'">'+(row.avgP==null?'—':Math.round(row.avgP)+'%')+'</div></td>'+
+      cols.map(function(k){return cell(row.pr[k]);}).join('')+'<td class="muted">'+esc(when(row.last))+'</td></tr>';
+  }).join('');
+  window._rows=rows; window._cols=cols;
+}
+function detail(id){
+  var row=(window._rows||[]).filter(function(r){return r.s.id===id;})[0]; if(!row) return; var s=row.s;
+  $('#dName').textContent=s.full_name; $('#dMeta').textContent=[s.grade&&('Grade '+s.grade),s.class_name,'last sign-in '+when(s.last_login)].filter(Boolean).join(' · ');
+  var list=Object.keys(row.pr).sort().map(function(k){ var r=row.pr[k], p=prog(r), sc=scoreOf(r);
+    return '<div class="row"><span class="t">'+esc(pageLabel(k))+'</span><span class="n '+cls(sc)+'" style="background:none">'+(sc==null?'saved':Math.round(sc)+'% score')+'</span><span class="m">'+(r.total>0?r.solved+' of '+r.total+' done ('+Math.round(p)+'%)':'progress saved')+(r.max_score>0?' · '+r.score+' / '+r.max_score+' points':'')+(r.examples?' · '+r.examples+' examples':'')+' · saved '+esc(when(r.updated_at))+'</span></div>'; }).join('');
+  $('#dRows').innerHTML=list||'<p class="muted">Nothing saved yet.</p>'; $('#dlg').showModal();
+}
+
+/* ---------- export ---------- */
+function csv(){
+  var d=build(), cols=d.cols; var head=['Name','Grade','Class','Active','Overall score %','Overall progress %','Last activity'].concat(cols.map(function(k){return pageLabel(k)+' – score %';}),cols.map(function(k){return pageLabel(k)+' – progress %';}));
+  var lines=[head].concat(d.rows.map(function(r){ var s=r.s; function f(v){return v==null?'':Math.round(v);} return [s.full_name,s.grade,s.class_name,s.active?'yes':'no',f(r.avgS),f(r.avgP),r.last||''].concat(cols.map(function(k){return r.pr[k]?f(scoreOf(r.pr[k])):'';}),cols.map(function(k){return r.pr[k]?f(prog(r.pr[k])):'';})); }));
+  var t='﻿'+lines.map(function(r){return r.map(function(v){v=v==null?'':String(v);return /[",\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;}).join(',');}).join('\r\n');
+  var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([t],{type:'text/csv'})); a.download='scores-'+AREA+'-'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
+}
+
+/* ---------- wiring ---------- */
+$('#grid').addEventListener('click',function(e){
+  var h=e.target.closest('th'); if(h){ var k=h.dataset.k; if(sortKey===k) sortDir=-sortDir; else { sortKey=k; sortDir=(k==='name')?1:-1; } render(); return; }
+  var b=e.target.closest('td.name b'); if(b) detail(b.closest('tr').dataset.id);
+});
+$('#viewSeg').addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; view=b.dataset.v; [].forEach.call($('#viewSeg').children,function(x){x.setAttribute('aria-pressed',String(x===b));}); render(); });
+['#q','#fClass','#chkAllPages'].forEach(function(s){ $(s).addEventListener('input',render); });
+$('#btnCsv').addEventListener('click',csv); $('#btnPrint').addEventListener('click',function(){ window.print(); });
+$('#dClose').addEventListener('click',function(){ $('#dlg').close(); });
+$('#btnRefresh').addEventListener('click',function(){ load(); }); $('#btnOut').addEventListener('click',function(){ out(''); });
+$('#areaName').textContent=CFG.areaName||''; document.title='Scores & progress · '+(CFG.areaName||'');
+$('#loginForm').addEventListener('submit',function(ev){ ev.preventDefault(); $('#lBtn').disabled=true; msg($('#lErr'),''); auth({email:$('#lEmail').value.trim(),password:$('#lPass').value},'password').then(function(j){ saveSess(j); sess.email=$('#lEmail').value.trim(); return load(); }).catch(function(e){ msg($('#lErr'),e.message,'err'); }).then(function(){ $('#lBtn').disabled=false; }); });
+if(!LIVE) msg($('#setupMsg'),'Supabase is not connected yet. Fill in lia-config.js (see supabase/README.md).','info');
+else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=null; } if(sess) load().catch(function(){ out(''); }); else $('#loginCard').hidden=false; }
+})();
+</script>
+</body>
+</html>

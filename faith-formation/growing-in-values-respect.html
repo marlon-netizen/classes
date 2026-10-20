@@ -326,7 +326,7 @@ footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;colo
   <div class="wrap">
     Lincoln International Academy · Growing in Values · Ms. Nathaly López · 8th Grade, Q02 Week 1.
     <br>Based on the lesson plan "Symbols and rights: respect on and off screen."
-    <div class="row" style="margin-top:10px"><button class="btn ghost" id="resetAll" type="button">Reset my scores</button></div>
+    <div class="row" style="margin-top:10px"><button class="btn ghost" id="resetAll" type="button" data-lia-reset>Reset my scores</button></div>
   </div>
 </footer>
 
@@ -385,7 +385,12 @@ const ACTS = [
 ];
 const TOTAL = ACTS.length;
 const scores = store.get('gv_q02w01_scores', {});
+function reportProgress(){   // tells the teacher dashboard how far this student is
+  try{ let c=0,t=0,n=0; ACTS.forEach(a=>{ const s=scores[a[0]]; if(s){ n++; c+=s[0]; t+=s[1]; } });
+    if(window.LiaSync) LiaSync.report({solved:n,total:TOTAL,score:c,max:t}); }catch(e){}
+}
 function paintProgress(){
+  reportProgress();
   const n = ACTS.filter(a => scores[a[0]]).length;
   $('#progText').textContent = n + ' of ' + TOTAL + ' activities';
   $('#progBar').style.width = (n/TOTAL*100) + '%';
