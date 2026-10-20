@@ -101,3 +101,11 @@ Pages that show `N of M … solved` in an element with `id="overallText"` also s
   Tables are closed to the public key (Row Level Security). Only administrator accounts can read or edit students.
 * Wrong codes are throttled (40 per 10 minutes per network address). Generated codes have 8 random characters; use long codes if you choose your own.
 * Codes are stored in readable form so you can print them again; keep the admin account password private.
+
+## Renaming a lesson page
+A page's key is its file name. After renaming a file, move its saved data and assignments to the new key in the SQL Editor (one `update` pair per renamed page):
+```sql
+update public.progress      set page_key = 'physics1-lesson-2-3' where page_key = 'physics-lesson-2-3';
+update public.lesson_access set page_key = 'physics1-lesson-2-3' where page_key = 'physics-lesson-2-3';
+```
+Links that were already shared with the old file name stop working: send the new links (teacher home → Copy link).

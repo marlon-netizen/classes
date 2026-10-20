@@ -21,8 +21,11 @@ Students receive **direct links only** (`<base>/<folder>/<lesson>.html`). Never 
 links between lessons that a student might not be assigned.
 
 ## 2. Adding a new lesson page (checklist)
-1. One self-contained `.html` file (inline CSS/JS, no build step) in the correct folder. File name = page key (`physics-lesson-2-4.html` → `physics-lesson-2-4`;
+1. One self-contained `.html` file (inline CSS/JS, no build step) in the correct folder. File name = page key (`physics1-lesson-2-4.html` → `physics1-lesson-2-4`;
    lower-case letters, digits, hyphens). To override, set `<meta name="lia-page" content="slug">`.
+   **Name by class, then lesson:** Physics I pages are `physics1-lesson-<chapter>-<section>-<topic>.html` (Chapters 1–2 belong to Physics I) and Physics II pages are
+   `physics2-lesson-<chapter>-<section>.html` (Chapters 9, 10 and 11 belong to Physics II). The class named in the `<title>`, the header "Class" box and the footer must match the file name prefix.
+   Renaming a page changes its key: also migrate `progress.page_key` and `lesson_access.page_key` in the database (see `supabase/README.md`).
 2. `<title>` = `Short lesson name | Lincoln International Academy` (the part before ` | ` becomes the label in every teacher table).
 3. Header (every page): school name **Lincoln International Academy**, class, teacher name, lesson title. Sober palette; **each folder has its own look**
    (colours/font – see `THEMES` in `tools/build_site.py`); pages inside a folder may vary but must not borrow another folder's look.

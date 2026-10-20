@@ -196,7 +196,7 @@
     var g = document.getElementById('liaGate'); if (g) g.remove();
     document.documentElement.classList.add('lia-locked');
     g = document.createElement('div'); g.id = 'liaGate';
-    var area = (CFG.areaName || '').replace(/[<>&]/g, '');
+    var area = (CFG.areaName || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     g.innerHTML = '<form class="lia-card" novalidate><div class="lia-brand">Lincoln International Academy' + (area ? ' · ' + area : '') + '</div><h2>Student sign-in</h2>' +
       '<p>Type the access code your teacher gave you. Your progress is saved to your account, so you can continue on any device.</p>' +
       '<label for="liaCode">Access code</label><input id="liaCode" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" placeholder="XXXX-XXXX">' +

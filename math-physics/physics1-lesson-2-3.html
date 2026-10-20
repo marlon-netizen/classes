@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Physics II – Lesson 2.3 Falling Objects | Lincoln International Academy</title>
+<title>Physics I – Lesson 2.3 Falling Objects | Lincoln International Academy</title>
 <meta name="description" content="Interactive study page for Lesson 2.3: Falling Objects – free fall, constant acceleration, and take-it-further topics in angular kinematics and time dilation.">
 <script>try{var t=localStorage.getItem('lia-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -250,7 +250,7 @@ header.top{position:relative}
       <div class="school">Lincoln International Academy</div>
     </div>
     <div class="meta">
-      <div>Class<b>Physics II</b></div>
+      <div>Class<b>Physics I</b></div>
       <div>Teacher<b>Eduardo Vásquez</b></div>
     </div>
   </div>
@@ -260,7 +260,7 @@ header.top{position:relative}
   <div class="wrap">
     <div>
       <h1>Lesson 2.3 · Falling Objects</h1>
-      <small>Chapter 2 · Motion in One Dimension · <a href="physics-lesson-2-2.html">← Lesson 2.2 · Acceleration</a> · <a href="physics-lesson-10-3.html">Lesson 10.3 · Second Law of Thermodynamics</a></small>
+      <small>Chapter 2 · Motion in One Dimension · Section 3 · includes Take It Further and Problem Sets I and II</small>
     </div>
     <div class="overall" aria-live="polite">
       <span id="overallText">0 of 0 practice problems solved</span>
@@ -553,7 +553,7 @@ header.top{position:relative}
 
 <footer>
   <div class="wrap">
-    <div>Lincoln International Academy · Physics II · Mr. Eduardo Vásquez<br>Content adapted from <i>Holt McDougal Physics</i>, Chapter 2 §3 (Falling Objects, Take It Further, Physics on the Edge, Think Science) (© Houghton Mifflin Harcourt). Additional problems written for this page.</div>
+    <div>Lincoln International Academy · Physics I · Mr. Eduardo Vásquez<br>Content adapted from <i>Holt McDougal Physics</i>, Chapter 2 §3 (Falling Objects, Take It Further, Physics on the Edge, Think Science) and Sample Problem Sets I and II (© Houghton Mifflin Harcourt). Additional problems written for this page.</div>
     <div>Your progress is saved in this browser only. <button class="linkbtn" id="resetAll" data-lia-reset>Reset my progress</button></div>
   </div>
 </footer>
@@ -563,7 +563,7 @@ header.top{position:relative}
 'use strict';
 const $  = (s,e=document)=>e.querySelector(s);
 const $$ = (s,e=document)=>[...e.querySelectorAll(s)];
-const KEY='lia-physics2-lesson-2-3';
+const KEY='lia-physics1-lesson-2-3';
 let state={};
 try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
 const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
@@ -1023,7 +1023,29 @@ const EX=[
     {name:'Check your work', html:`<p>Time up: 12.0/9.81 = 1.22 s; peak 7.3 m above the roof; fall 27.3 m takes √(2·27.3/9.81) = 2.36 s; total 1.22 + 2.36 = 3.58 s ✔.</p>`,
      ask:{type:'mc',q:'How would the landing speed change if the rock had been thrown <b>down</b> at 12.0 m/s from the same roof?',opts:['It would be the same: 23.2 m/s','It would be smaller','It would be greater'],correct:0,why:'Coming down past the roof edge, the thrown-up rock moves at 12.0 m/s downward — the same as the downward throw — so both reach the street at 23.2 m/s. (The time in the air differs.)'}}
    ]},
- { id:'E7', tag:'Take it further', title:'Angular kinematics: constant angular acceleration',
+{ id:'E7', tag:'Problem Set I · Problem F', title:'A volleyball hit straight up',
+   problem:'Jason hits a volleyball so that it moves with an initial velocity of <b>+6.0 m/s</b> straight upward. If the volleyball starts from <b>2.0 m</b> above the floor, how long will it be in the air before it strikes the floor?',
+   steps:[
+    {name:'Analyze', html:G(`${vi} = +6.0 m/s`,`${A} = −9.81 m/s²`,`${dx} = −2.0 m`)+G(U(`${dt} = ?`),U(`${vf} = ?`)),
+     ask:{type:'mc',q:'Why is the displacement Δ<i>y</i> equal to <b>−2.0 m</b> even though the ball first goes up?',opts:['Displacement compares the final position (the floor) with the start (2.0 m above it): 2.0 m lower','Because gravity is negative','Because the ball ends moving upward'],correct:0,why:'Only the start and end points matter for displacement. The ball ends 2.0 m below where it started, so Δy = −2.0 m (the up-and-down path does not change that).'}},
+    {name:'Plan', html:`<p>Both ${dt} and ${vf} are unknown. First find ${vf} with the equation that does <b>not</b> need time, then use the velocity equation to find ${dt}:</p><div class="eq">${EQ.vsq} &nbsp;→&nbsp; ${vf} = ±√(${vi}² + 2${A}${dx}) &nbsp;&nbsp; ${dt} = ${F(vf+' − '+vi,A)}</div>`,
+     ask:{type:'mc',q:'The square root gives ±. Which sign of <i>v</i><sub>f</sub> is correct just before the ball hits the floor?',opts:['Negative: the ball is moving downward','Positive: speed is always positive','Zero'],correct:0,why:'At the floor the ball is moving down, and down is negative in our coordinates.'}},
+    {name:'Calculate', html:`<div class="eq">${vf} = −√((6.0 m/s)² + 2(−9.81 m/s²)(−2.0 m)) = −√(36 + 39) = <span class="boxed">−8.7 m/s</span></div><div class="eq">${dt} = ${F('−8.7 m/s − 6.0 m/s','−9.81 m/s²')} = <span class="boxed">1.50 s</span></div>`,
+     ask:{type:'num',q:'Calculate (−8.66 − 6.0) ÷ (−9.81).',ans:(Math.sqrt(36+2*g*2)+6)/g,tol:0.01,unit:'s',why:'Δt ≈ 1.50 s.'}},
+    {name:'Check your work', html:`<p>1.50 s is a reasonable time for a ball hit upward at 6 m/s: it rises for 6.0/9.81 = 0.61 s to a peak 1.8 m higher, then falls 3.8 m in about 0.89 s. 0.61 + 0.89 = 1.50 s ✔.</p>`}
+   ]},
+ { id:'E8', tag:'Problem Set II · Problem F', title:'A wrench falls from the tallest building',
+   problem:'A construction worker on the top-most floor of the International Financial Center in Taipei accidentally knocks a wrench off a ledge. The wrench hits the ground <b>9.56 s</b> later. What is the distance between the top floor and the ground? Assume there is no air resistance.',
+   steps:[
+    {name:'Define', html:G(`${dt} = 9.56 s`,`${A} = −9.81 m/s²`,`${vi} = 0 m/s`)+G(U(`${dx} = ?`)),
+     ask:{type:'mc',q:'Why is <i>v</i><sub>i</sub> = 0?',opts:['The wrench is knocked off a ledge, not thrown: it starts from rest','Because gravity starts at zero','Because the building is tall'],correct:0,why:'A wrench that is just knocked off starts with no vertical velocity.'}},
+    {name:'Plan', html:`<p>Displacement is unknown and so is the final velocity. Time, acceleration and initial velocity are known, so use the displacement equation:</p><div class="eq">${EQ.disp2}</div>`},
+    {name:'Calculate', html:`<div class="eq">${dx} = (0)(9.56) + ½(−9.81)(9.56)² = <span class="boxed">−448 m</span></div>`,
+     ask:{type:'num',q:'Calculate ½ × 9.81 × 9.56² (the distance in metres).',ans:.5*g*9.56*9.56,tol:0.01,unit:'m',why:'The wrench falls 448 m; Δy = −448 m (downward).'}},
+    {name:'Evaluate', html:`<p>From the displacement the final speed can be found: ${vf} = ${vi} + ${A}${dt} = −9.81(9.56) = −93.8 m/s – nearly <b>340 km/h</b>. Check with ${EQ.vsq}: √(2(9.81)(448)) = 93.8 m/s ✔.</p>`,
+     ask:{type:'num',q:'Convert 93.8 m/s to km/h (multiply by 3.6).',ans:93.8*3.6,tol:0.01,unit:'km/h',why:'93.8 × 3.6 ≈ 338 km/h, nearly 340 km/h.'}}
+   ]},
+ { id:'E9', tag:'Take it further', title:'Angular kinematics: constant angular acceleration',
    problem:'A wheel rotates counterclockwise with an angular velocity of <b>4.0 rad/s</b>. It then speeds up with a constant angular acceleration of <b>1.5 rad/s²</b> for <b>6.0 s</b>. Find (a) its final angular velocity and (b) the angle (in radians and in revolutions) through which it turns.',
    steps:[
     {name:'Analyze', html:G('ω<sub>i</sub> = +4.0 rad/s','α = +1.5 rad/s²','Δ<i>t</i> = 6.0 s')+G(U('ω<sub>f</sub> = ?'),U('Δθ = ?')),
@@ -1208,6 +1230,93 @@ MC(sa,'Conceptual challenge — estimating distance: about how far does a basket
  ['About 400 m','About 4 km','About 40 km','About 400 km'],[1],
  'distance ≈ time × fraction moving × average speed = (48 × 60 s)(0.60)(2.5 m/s) ≈ 4300 m ≈ 4 km.','Multiply: seconds in the game × fraction moving × average speed.');
 
+/* ===== Problem Set I (Problem F: Falling Object) ===== */
+const s1='Problem F · Falling object (Sample Problem Set I)';
+add('p1',s1,'<b>(Sample)</b> Jason hits a volleyball so that it moves with an initial velocity of 6.0 m/s straight upward. If the volleyball starts from 2.0 m above the floor, how long will it be in the air before it strikes the floor?',
+ [T('Time in the air','s',(sqrt(36+2*g*2)+6)/g)],
+ [`${vi} = +6.0 m/s, ${dx} = −2.0 m, ${A} = −9.81 m/s². Find ${vf} first with ${EQ.vsq} (negative root), then ${dt} = (${vf} − ${vi})/${A}.`,`v<sub>f</sub> = −8.7 m/s; (−8.7 − 6.0) ÷ (−9.81).`],
+ [`${vf} = −√(36 + 39) = −8.7 m/s`,`${dt} = ${F('−8.7 − 6.0','−9.81')} = <b>1.50 s</b>`]);
+add('p1',s1,'The John Hancock Center in Chicago is the tallest building in the United States in which there are residential apartments. The Hancock Center is <b>343 m</b> tall. Suppose a resident accidentally causes a chunk of ice to fall from the roof. What would be the velocity of the ice as it hits the ground? Neglect air resistance.',
+ [T('Final velocity','m/s',-sqrt(2*g*343))],
+ [`Dropped: ${vi} = 0, ${dx} = −343 m. No time given → ${EQ.vsq}; pick the negative root (moving down).`,`−√(2 × 9.81 × 343).`],
+ [`${vf} = −√(0 + 2(−9.81)(−343)) = −√6730 = <b>−82.0 m/s</b> (downward)`]);
+add('p1',s1,'Brian Berg of Iowa built a house of cards <b>4.88 m</b> tall. Suppose Berg throws a ball from ground level with a velocity of <b>9.98 m/s</b> straight up. What is the velocity of the ball as it <b>first</b> passes the top of the card house?',
+ [T('Velocity at the top of the house','m/s',sqrt(9.98*9.98-2*g*4.88),{tol:.05})],
+ [`${vi} = +9.98 m/s, ${dx} = +4.88 m, ${A} = −9.81 m/s². ${EQ.vsq}. The ball is still rising the first time it passes, so choose the <b>positive</b> root.`,`√(9.98² − 2 × 9.81 × 4.88).`],
+ [`${vf} = +√((9.98)² + 2(−9.81)(4.88)) = √(99.6 − 95.7) = <b>+1.96 m/s</b> (still moving upward)`]);
+add('p1',s1,'The Willis Tower in Chicago is <b>443 m</b> tall. Suppose a book is dropped from the top of the building. What would be the book\'s velocity at a point <b>221 m above the ground</b>? Neglect air resistance.',
+ [T('Velocity','m/s',-sqrt(2*g*(443-221)))],
+ [`The book has fallen 443 − 221 = 222 m, so ${dx} = −222 m (not −221 m!).`,`−√(2 × 9.81 × 222).`],
+ [`${vf} = −√(2(−9.81)(−222)) = <b>−66.0 m/s</b>`]);
+add('p1',s1,'The tallest roller coaster in the world is the Desperado in Nevada. It has a lift height of <b>64 m</b>. If an archer shoots an arrow straight up in the air and the arrow passes the top of the roller coaster <b>3.0 s</b> after the arrow is shot, what is the initial speed of the arrow?',
+ [T('Initial speed','m/s',(64+.5*g*9)/3,{tol:.03})],
+ [`${dx} = +64 m, ${dt} = 3.0 s, ${A} = −9.81 m/s². Use ${EQ.disp2} and solve for ${vi}.`,`${vi} = (${dx} − ½${A}${dt}²)/${dt} = (64 + 44.1) ÷ 3.0.`],
+ [`${vi} = ${F(dx+' − ½'+A+'('+dt+')²',dt)} = ${F('64 − ½(−9.81)(3.0)²','3.0')} = <b>36 m/s</b>`]);
+add('p1',s1,'The tallest <i>Sequoia sempervirens</i> tree in California\'s Redwood National Park is <b>111 m</b> tall. Suppose an object is thrown <b>downward</b> from the top of the tree with a certain initial velocity. If the object reaches the ground in <b>3.80 s</b>, what is the object\'s initial velocity?',
+ [T('Initial velocity','m/s',(-111+.5*g*3.8*3.8)/3.8,{tol:.03})],
+ [`${dx} = −111 m, ${dt} = 3.80 s, ${A} = −9.81 m/s². Solve ${EQ.disp2} for ${vi}. The answer must be negative (thrown down).`,`(−111 + 0.5 × 9.81 × 3.80²) ÷ 3.80.`],
+ [`${vi} = ${F(dx+' − ½'+A+'('+dt+')²',dt)} = ${F('−111 − ½(−9.81)(3.80)²','3.80')} = <b>−10.6 m/s</b> (downward)`]);
+add('p1',s1,'The Westin Stamford Hotel in Detroit is <b>228 m</b> tall. If a worker on the roof drops a sandwich, how long does it take the sandwich to hit the ground, assuming there is no air resistance? (How would air resistance affect your answer?)',
+ [T('Time to hit the ground','s',sqrt(2*228/g))],
+ [`${vi} = 0, ${dx} = −228 m. Use ${EQ.disp2}: ${dt} = √(2${dx}/${A}).`],
+ [`${dt} = √(${F('2(−228 m)','−9.81 m/s²')}) = <b>6.82 s</b>`,`Air resistance reduces the downward acceleration, so the real fall would take <b>longer</b>.`]);
+add('p1',s1,'A man named Bungkas climbed a palm tree in 1970 and built himself a nest there. In 1994 he was still up there. Suppose Bungkas asks a villager for a newspaper, which is thrown to him straight up with an initial speed of <b>12.0 m/s</b>. When Bungkas catches the newspaper from his nest, the newspaper\'s velocity is <b>+3.0 m/s</b>, directed upward. Find the height at which the nest was built. Assume that the newspaper is thrown from a height of <b>1.50 m</b> above the ground.',
+ [T('Height of the nest above the ground','m',1.5+(144-9)/(2*g),{tol:.03})],
+ [`First find the displacement from the throw to the catch: ${EQ.vsq} → ${dx} = (${vf}² − ${vi}²)/(2${A}).`,`(3.0² − 12.0²) ÷ (2 × −9.81) = 6.88 m. Then add the 1.50 m release height.`],
+ [`${dx} = ${F('(3.0)² − (12.0)²','2(−9.81)')} = 6.88 m above the release point`,`Nest height = 1.50 m + 6.88 m = <b>8.4 m</b>`]);
+add('p1',s1,'Rob Colley set a record in "pole-sitting" when he spent 42 days in a barrel at the top of a flagpole with a height of <b>43 m</b>. Suppose a friend wanting to deliver an ice-cream sandwich to Colley throws the ice cream straight up from the ground with <b>just enough speed to reach the barrel</b>. How long does it take the ice-cream sandwich to reach the barrel?',
+ [T('Time to reach the barrel','s',sqrt(2*g*43)/g)],
+ [`"Just enough" means the velocity is 0 at the barrel: ${vf} = 0, ${dx} = +43 m. Find ${vi} with ${EQ.vsq}, then ${dt} = (${vf} − ${vi})/${A}.`,`v<sub>i</sub> = √(2 × 9.81 × 43) = 29.0 m/s.`],
+ [`${vi} = √(−2${A}${dx}) = √(2(9.81)(43)) = 29.0 m/s`,`${dt} = ${F('0 − 29.0 m/s','−9.81 m/s²')} = <b>2.96 s</b>`]);
+add('p1',s1,'A common flea is recorded to have jumped as high as <b>21 cm</b>. Assuming that the jump is entirely in the vertical direction and that air resistance is insignificant, calculate the time it takes the flea to reach a height of <b>7.0 cm</b> (on the way up).',
+ [T('Time to reach 7.0 cm','s',(sqrt(2*g*.21)-sqrt(2*g*.21-2*g*.07))/g,{tol:.05})],
+ [`First find the launch speed from the maximum height (21 cm = 0.21 m, ${vf} = 0 at the top): ${vi} = √(2g(0.21)) = 2.03 m/s.`,`Then solve ${dx} = 0.070 m = ${vi}${dt} − ½(9.81)${dt}² (a quadratic); take the <b>smaller</b> root (on the way up).`],
+ [`${vi} = √(2(9.81)(0.21)) = 2.03 m/s`,`4.905${dt}² − 2.03${dt} + 0.070 = 0 → ${dt} = <b>0.038 s</b> (the other root, 0.38 s, is on the way down)`]);
+
+/* ===== Problem Set II (Problem F: Falling object) ===== */
+const s2='Problem F · Falling object (Sample Problem Set II)';
+add('p2',s2,'<b>(Sample)</b> A construction worker on the top-most floor of the International Financial Center in Taipei knocks a wrench off a ledge. The wrench hits the ground 9.56 s later. What is the distance between the top floor and the ground? Assume no air resistance.',
+ [T('Distance fallen','m',.5*g*9.56*9.56)],[`${vi} = 0: ${dx} = ½${A}${dt}².`],[`${dx} = ½(−9.81 m/s²)(9.56 s)² = −448 m: <b>448 m</b> from the top floor to the ground`]);
+add('p2',s2,'Suppose a safety net at one of the floors of the International Financial Center catches the wrench in the sample problem. The wrench falls into the net with a velocity of <b>49.5 m/s downward</b>. How far above the ground is the safety net located? (Use the 448 m building height from the sample problem.)',
+ [T('Height of the net above the ground','m',.5*g*9.56*9.56-49.5*49.5/(2*g),{tol:.03})],
+ [`How far has the wrench fallen when it reaches 49.5 m/s? ${EQ.vsq} with ${vi} = 0: |${dx}| = ${vf}²/(2g). Then subtract from 448 m.`,`49.5² ÷ (2 × 9.81) = 124.9 m.`],
+ [`Distance fallen to the net: ${F('(49.5)²','2(9.81)')} = 125 m`,`Height of the net = 448 m − 125 m = <b>323 m</b>`]);
+add('p2',s2,'A gumdrop is released from rest at the top of the Empire State Building, which is 381 m tall. Disregarding air resistance, calculate the <b>displacement</b> of the gumdrop after 1.00 s, 2.00 s and 3.00 s. (Give signed values: down is negative.)',
+ [T('After 1.00 s','m',-.5*g*1,{tol:.03}),T('After 2.00 s','m',-.5*g*4,{tol:.03}),T('After 3.00 s','m',-.5*g*9,{tol:.03})],
+ [`${dx} = ½${A}(${dt})² with ${vi} = 0 and ${A} = −9.81 m/s².`],
+ [`1.00 s: ½(−9.81)(1.00)² = <b>−4.91 m</b>`,`2.00 s: ½(−9.81)(2.00)² = <b>−19.6 m</b>`,`3.00 s: ½(−9.81)(3.00)² = <b>−44.1 m</b>`]);
+add('p2',s2,'A small sandbag is dropped from rest from a hovering hot-air balloon. After 2.0 s, how far below the balloon is the sandbag?',
+ [T('Distance below the balloon','m',.5*g*4)],[`${vi} = 0, ${dt} = 2.0 s: |${dx}| = ½g${dt}².`],[`${dx} = ½(−9.81)(2.0)² = −19.6 m: the sandbag is <b>20 m</b> below the balloon.`]);
+add('p2',s2,'A physics student throws a softball straight up into the air with a speed of <b>17.5 m/s</b>. The ball is in the air for a total of <b>3.60 s</b> before it is caught at its original position. How high does the ball rise?',
+ [T('Maximum height','m',17.5*1.8-.5*g*1.8*1.8,{tol:.03})],
+ [`The ball takes half of the 3.60 s to reach the top: 1.80 s. Then ${dx} = ${vi}${dt} + ½${A}${dt}² with ${dt} = 1.80 s.`,`17.5(1.80) − ½(9.81)(1.80)².`],
+ [`${dx} = (17.5)(1.80) + ½(−9.81)(1.80)² = 31.5 − 15.9 = <b>15.6 m</b>`,`Check: (17.5)²/(2 × 9.81) = 15.6 m ✔`]);
+add('p2',s2,'A surface probe lands on a highland region of the planet Mercury. A few hours later the ground beneath the probe gives way and the probe falls, landing below its original position with a velocity of <b>11.2 m/s downward</b>. If the free-fall acceleration near Mercury\'s surface is <b>3.70 m/s²</b> downward, what is the probe\'s displacement?',
+ [T('Displacement','m',-11.2*11.2/(2*3.7),{tol:.03})],
+ [`The probe starts from rest: ${vi} = 0, ${vf} = −11.2 m/s, ${A} = −3.70 m/s². Use ${EQ.vsq} and solve for ${dx}.`,`(11.2)² ÷ (2 × 3.70), then give it a negative sign.`],
+ [`${dx} = ${F(vf+sq+' − '+vi+sq,'2'+A)} = ${F('(−11.2)² − 0','2(−3.70)')} = <b>−16.9 m</b> (16.9 m downward)`]);
+add('p2',s2,'A ball thrown vertically upward is caught by the thrower after <b>5.1 s</b>. Find the <b>maximum height</b> the ball reaches.',
+ [T('Maximum height','m',.5*g*2.55*2.55,{tol:.03})],
+ [`The time to reach the top is half the time in the air: 2.55 s. At the top ${vf} = 0.`,`Fall from the top: ½ × 9.81 × 2.55².`],
+ [`The ball reaches the top at ${dt} = 5.1/2 = 2.55 s. Treat the fall from the peak: ${dx} = ½(−9.81)(2.55)² = −31.9 m`,`Maximum height = <b>31.9 m</b>`]);
+add('p2',s2,'Find the initial velocity with which the ball in the previous problem was thrown.',
+ [T('Initial velocity','m/s',g*2.55,{tol:.03})],
+ [`At the top ${vf} = 0, so ${vi} = −${A}${dt} with ${dt} = 2.55 s.`],
+ [`${vi} = ${vf} − ${A}${dt} = 0 − (−9.81)(2.55) = <b>+25.0 m/s</b>`]);
+add('p2',s2,'An archer fires an arrow directly upward, then quickly runs from the launching spot to avoid being struck by the returning arrow. If the arrow\'s initial velocity is <b>85.1 m/s</b> upward, how long does the archer have to run away before the arrow lands?',
+ [T('Time before the arrow lands','s',2*85.1/g,{tol:.03})],
+ [`The arrow returns to the same height (${dx} = 0), arriving at −85.1 m/s. Use ${dt} = (${vf} − ${vi})/${A}.`],
+ [`${dt} = ${F('−85.1 − 85.1','−9.81')} = <b>17.3 s</b>`]);
+add('p2',s2,'A popular scene in recent action films shows a character in free fall speeding up to catch a freely falling parachute. Suppose a packed parachute is dropped from rest from an airplane and that a daredevil is launched <b>straight down</b> from the plane <b>3.00 s later</b>. Neglecting air resistance, the daredevil catches up to the parachute <b>4.00 s after the daredevil leaves the plane</b>. What are the daredevil\'s initial and final velocities?',
+ [T('Initial velocity','m/s',(-.5*g*49+.5*g*16)/4,{tol:.03}),T('Final velocity','m/s',(-.5*g*49+.5*g*16)/4-g*4,{tol:.03})],
+ [`When the daredevil catches up, the parachute has been falling for 3.00 + 4.00 = 7.00 s, so both have the same displacement ${dx} = ½${A}(7.00)² = −240 m.`,`For the daredevil: ${dx} = ${vi}(4.00) + ½${A}(4.00)² → solve for ${vi}; then ${vf} = ${vi} + ${A}(4.00).`],
+ [`Parachute: ${dx} = ½(−9.81)(7.00)² = −240.4 m`,`Daredevil: −240.4 = ${vi}(4.00) + ½(−9.81)(4.00)² → ${vi} = <b>−40.5 m/s</b>`,`${vf} = −40.5 + (−9.81)(4.00) = <b>−79.7 m/s</b>`]);
+add('p2',s2,'The elevators in the Landmark Tower in Yokohama, Japan, are among the fastest in the world. They accelerate upward at <b>3.125 m/s²</b> for <b>4.00 s</b> to reach their maximum speed. Suppose an empty elevator is moving upward with its maximum speed when the cable breaks, so that the elevator slows down, comes to a stop, and then begins to fall freely. What will the elevator\'s velocity be <b>0.00 s, 1.00 s, 2.00 s and 3.00 s</b> after the cable breaks?',
+ [T('At 0.00 s','m/s',3.125*4,{tol:.03}),T('At 1.00 s','m/s',12.5-g*1,{tol:.03}),T('At 2.00 s','m/s',12.5-g*2,{tol:.03}),T('At 3.00 s','m/s',12.5-g*3,{tol:.03})],
+ [`Maximum speed (from rest): ${vi} = 3.125 × 4.00. After the break the acceleration is −9.81 m/s²: ${vf} = ${vi} + ${A}${dt}.`],
+ [`Maximum speed = 3.125(4.00) = <b>12.5 m/s</b> upward (this is also the velocity at 0.00 s)`,`1.00 s: 12.5 − 9.81 = <b>+2.7 m/s</b>`,`2.00 s: 12.5 − 19.62 = <b>−7.1 m/s</b>`,`3.00 s: 12.5 − 29.43 = <b>−16.9 m/s</b>`]);
+
+
 /* ===== Take it further ===== */
 const st='tf';
 add(st,'Angular kinematics',`(a) Convert 135° to radians. (b) Convert 5π/6 rad to degrees.`,
@@ -1257,6 +1366,8 @@ MC(st,'Aristotle\'s theory of falling objects is described as <b>qualitative</b>
 
 const SETS=[
  {id:'tb',name:'Textbook Practice',desc:'The Practice problems after Sample Problem F (Falling Object).'},
+ {id:'p1',name:'Problem Set I',desc:'Sample Problem Set I – Problem F (falling object): the sample plus nine additional problems.'},
+ {id:'p2',name:'Problem Set II',desc:'Sample Problem Set II – Problem F (falling object): the sample plus ten additional problems.'},
  {id:'ff',name:'More Free Fall',desc:'Additional free-fall problems: dropping, throwing up and down, other worlds, terminal velocity.'},
  {id:'fa',name:'Section 3 Assessment',desc:'Formative assessment, graph interpretation and the conceptual challenge.'},
  {id:'tf',name:'Take It Further',desc:'Angular kinematics, special relativity and time dilation, and Think Science.'}
@@ -1378,7 +1489,7 @@ function renderProblem(p,n){
 $('#resetAll').addEventListener('click',()=>{ if(confirm('Clear all saved progress on this device?')){ state={}; save(); buildPicker(); renderSet(); } });
 buildPicker(); renderSet();
 const h=(location.hash||'').slice(1); if(['review','examples','practice'].includes(h)) showTab(h);
-window.LIA23={P,EX,parseNum,judge};
+window.LIA1={P,EX,parseNum,judge};
 })();
 </script>
 </body>

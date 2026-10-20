@@ -40,7 +40,7 @@ alter table public.students add column if not exists is_preview boolean not null
 create table if not exists public.progress (
   student_id  uuid not null references public.students(id) on delete cascade,
   area        text not null default 'default',
-  page_key    text not null,                 -- the page's file name, e.g. 'physics-lesson-2-3'
+  page_key    text not null,                 -- the page's file name, e.g. 'physics1-lesson-2-3'
   state       jsonb not null default '{}'::jsonb,
   solved      integer not null default 0,    -- practice problems solved
   total       integer not null default 0,    -- practice problems in the page

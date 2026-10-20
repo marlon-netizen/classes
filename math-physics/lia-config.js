@@ -10,12 +10,12 @@ window.LIA_CONFIG={
     'advanced-algebra-addition-rule': 'The Addition Rule – Advanced Algebra',
     'ap-stats-unit-2': 'AP Statistics – Lessons 2.8–2.12',
     'complex-numbers': 'Complex Numbers – Advanced Algebra',
-    'physics-language-of-physics': 'The Language of Physics – Physics I',
-    'physics-lesson-10-3': 'Physics II – Lesson 10.3',
-    'physics-lesson-11-2': 'Physics II – Lesson 11.2 Measuring Simple Harmonic Motion',
-    'physics-lesson-2-2': 'Physics II – Lesson 2.2 Acceleration',
-    'physics-lesson-2-2-practice': 'Physics I – Lesson 2.2 Practice Exercises',
-    'physics-lesson-2-3': 'Physics II – Lesson 2.3 Falling Objects',
-    'physics-significant-figures': 'Physics I – Significant Figures, Precision & Accuracy'
+    'physics1-lesson-1-2-significant-figures': 'Physics I – Lesson 1.2 Significant Figures, Precision & Accuracy',
+    'physics1-lesson-1-3-language-of-physics': 'Physics I – Lesson 1.3 The Language of Physics',
+    'physics1-lesson-2-2': 'Physics I – Lesson 2.2 Acceleration',
+    'physics1-lesson-2-2-practice': 'Physics I – Lesson 2.2 Practice Exercises',
+    'physics1-lesson-2-3': 'Physics I – Lesson 2.3 Falling Objects',
+    'physics2-lesson-10-3': 'Physics II – Lesson 10.3 Second Law of Thermodynamics',
+    'physics2-lesson-11-2': 'Physics II – Lesson 11.2 Measuring Simple Harmonic Motion'
   }
 };
