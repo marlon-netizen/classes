@@ -148,6 +148,14 @@
     .tab-btn { padding: .6rem .7rem; font-size: .9rem; flex: 1; }
     .attempts { margin-left: 0; width: 100%; }
   }
+
+  /* dark mode (same variables, switched by the Light/Dark toggle or the device setting) */
+  :root[data-theme="dark"]{ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
+  :root[data-theme="dark"] header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
+    :root:not([data-theme="light"]) header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  }
 </style>
 <!--LIA-SYNC-START--><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
 </head>
@@ -483,6 +491,7 @@
     solvedEl.textContent = solved;
     pointsEl.textContent = pts + ' / ' + (problems.length * MAX_ATTEMPTS);
     barEl.style.width = (finished / problems.length * 100) + '%';
+    try { if (window.LiaSync) LiaSync.report({ solved: solved, total: problems.length, score: pts, max: problems.length * MAX_ATTEMPTS }, { keepBest: true }); } catch (e) {}
     if (finished === problems.length) {
       var pct = Math.round(solved / problems.length * 100);
       var msg = 'You solved ' + solved + ' of ' + problems.length + ' problems (' + pct + '%) and earned ' + pts + ' points. ';

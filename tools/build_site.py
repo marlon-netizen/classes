@@ -6,7 +6,8 @@ Folder layout (each folder = one "area" with its own student list and codes):
     ciencias-sociales/   ...
     math-physics/        ...
     shared/lia-sync.js   the sign-in + progress-saving module every page loads
-    shared/admin.template.html   source of every folder's admin.html
+    shared/admin.template.html   source of every folder's admin.html (students, codes)
+    shared/scores.template.html  source of every folder's scores.html (teacher dashboard: scores & progress)
     index.html           the site's front page
 
 Run it any time you add or move a page (it is safe to run again and again):
@@ -33,7 +34,7 @@ AREAS = [
     dict(folder="math-physics", name="Math & Physics",
          blurb="All mathematics and physics classes: Algebra, AP Statistics, Physics I and Physics II."),
 ]
-SKIP = {"index.html", "admin.html"}
+SKIP = {"index.html", "admin.html", "scores.html"}
 START, END = "<!--LIA-SYNC-START-->", "<!--LIA-SYNC-END-->"
 BLOCK = START + '<script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script>' + END
 BLOCK_RE = re.compile(re.escape(START) + r".*?" + re.escape(END) + r"\n?", re.S)
@@ -117,6 +118,7 @@ def main():
     if bool(a.url) != bool(a.key):
         sys.exit("Give both --url and --key (or neither).")
     template = (ROOT / "shared" / "admin.template.html").read_text(encoding="utf8")
+    scores_template = (ROOT / "shared" / "scores.template.html").read_text(encoding="utf8")
     root_cards = []
     for area in AREAS:
         folder = ROOT / area["folder"]
@@ -131,14 +133,15 @@ def main():
         use = a.url and (not a.area or a.area == area["folder"])
         write_config(folder, area, pages, a.url if use else None, a.key if use else None)
         (folder / "admin.html").write_text(template, encoding="utf8")
+        (folder / "scores.html").write_text(scores_template, encoding="utf8")
         (folder / "index.html").write_text(hub(
             area["name"], area["blurb"], cards,
-            '<a href="../index.html">← All subjects</a> · <a href="admin.html">Teacher admin</a>'), encoding="utf8")
+            '<a href="../index.html">← All subjects</a> · Teachers: <a href="scores.html">Scores &amp; progress</a> · <a href="admin.html">Students &amp; codes</a>'), encoding="utf8")
         root_cards.append((area["folder"] + "/", "%d lessons" % len(files), area["name"], area["blurb"]))
         print("%-18s %2d pages connected" % (area["folder"], len(files)))
     (ROOT / "index.html").write_text(hub(
         "Student learning site", "Choose your subject, then sign in with the access code your teacher gave you.", root_cards,
-        "Each subject has its own student list and codes · Teachers: open a subject, then “Teacher admin”."), encoding="utf8")
+        "Each subject has its own student list and codes · Teachers: open a subject, then “Scores & progress” or “Students & codes”."), encoding="utf8")
     print("root index.html written")
 
 

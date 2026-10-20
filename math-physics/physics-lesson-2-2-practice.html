@@ -698,6 +698,9 @@ function openSubmit(){
   if(open){ w.hidden=false; w.textContent=`You still have ${open} question${open===1?'':'s'} that ${open===1?'isn’t':'aren’t'} finished. You can keep working, or submit now.`; }
   else w.hidden=true;
   nameIn.value=state._name||''; nameErr.textContent='';
+  let who=''; try{ who=(window.LiaSync&&LiaSync.live&&LiaSync.name())||''; }catch(e){}   // registered name from the sign-in
+  nameIn.readOnly=!!who; if(who) nameIn.value=who;
+  const nl=document.querySelector('label[for="studentName"]'); if(nl) nl.textContent=who?'Your results will be shown under the name from your sign-in:':'Enter your full name to see your results:';
   if(dlg.showModal) dlg.showModal(); else dlg.setAttribute('open','');
   setTimeout(()=>nameIn.focus(),30);
 }

@@ -954,6 +954,8 @@ const hasAct=(l,t)=>t!=='map'||!!MAPQ_BY[l];
 const KEY='u3-progress-v2';
 let state={name:'',scores:{}};
 try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&typeof o==='object'){state.name=String(o.name||'');state.scores=(o.scores&&typeof o.scores==='object')?o.scores:{};}}}catch(e){}
+const signedName=()=>{try{return (window.LiaSync&&LiaSync.live&&LiaSync.name())||'';}catch(e){return '';}};   // registered name from the sign-in
+if(signedName()) state.name=signedName();
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}};
 const pctOf=(c,t)=>t?Math.round(c/t*100):0;
 const sum=a=>a.reduce((x,y)=>x+y,0);
@@ -974,13 +976,17 @@ function maxPts(l,t){
 }
 function commit(l,t,c,a){
   const k=l+':'+t,p=state.scores[k];
-  if(!p||c>=p.c){state.scores[k]={c,a};save();}
+  if(!p||c>=p.c){state.scores[k]={c,a};save();reportUnit();}
 }
 function lessonScore(l){
   const rows=ACT.filter(x=>hasAct(l,x[0])).map(([k,lab])=>{const t=maxPts(l,k),p=state.scores[l+':'+k];return {k,lab,t,c:p?p.c:0,done:!!p&&p.a>0};});
   const C=sum(rows.map(r=>r.c)),T=sum(rows.map(r=>r.t));
   return {rows,C,T,n:rows.filter(r=>r.done).length,m:rows.length};
 }
+
+/* tell the teacher dashboard how far the student is (all four lessons together) */
+function reportUnit(){try{let n=0,m=0,C=0,T=0;[1,2,3,4].forEach(l=>{const S=lessonScore(l);n+=S.n;m+=S.m;C+=S.C;T+=S.T;});if(window.LiaSync)LiaSync.report({solved:n,total:m,score:C,max:T});}catch(e){}}
+setTimeout(reportUnit,0);
 
 /* ---------- score pop-up ---------- */
 const modal=$('#scoreModal');
@@ -1031,10 +1037,10 @@ function openScore(info){
     <div class="bigscore">${S.C} / ${S.T}<small>${pct}%</small></div>
     <table class="mtbl"><tbody>${rows}</tbody></table>
     <p class="legend" style="margin:6px 0">${S.n} of ${S.m} activities done. Activities not done count as 0. Your best score in each activity is kept.</p>
-    <label class="namel nameRow">Student name <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(state.name)}"></label>
+    <label class="namel nameRow">${signedName()?'Student (from your sign-in)':'Student name'} <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(state.name)}"${signedName()?' readonly':''}></label>
     <p class="copyline"></p>
     <p class="legend" style="margin:6px 0 10px">Only your name and scores are included; your answers are not.</p>
-    <p class="mbtns"><button type="button" class="btn pdfBtn">Save as PDF</button> <button type="button" class="btn alt copyBtn">Copy my score</button> <button type="button" class="btn alt closeBtn">Close</button> <button type="button" class="linkbtn clearBtn">Clear saved scores</button></p>
+    <p class="mbtns"><button type="button" class="btn pdfBtn">Save as PDF</button> <button type="button" class="btn alt copyBtn">Copy my score</button> <button type="button" class="btn alt closeBtn">Close</button></p>
   </div>`;
   const ni=$('.nameIn',modal),cl=$('.copyline',modal),cb=$('.copyBtn',modal),pb=$('.pdfBtn',modal);
   const refresh=()=>{cl.textContent=lineText();const e=!state.name.trim();cb.disabled=e;pb.disabled=e;cb.title=pb.title=e?'Type your name first':'';};
@@ -1042,7 +1048,6 @@ function openScore(info){
   cb.onclick=()=>copyText(lineText(),cb);
   pb.onclick=()=>savePdf(pb);
   $('.closeBtn',modal).onclick=closeScore;$('.mclose',modal).onclick=closeScore;
-  $('.clearBtn',modal).onclick=()=>{if(confirm('Clear all saved scores on this device?')){state.scores={};save();openScore(info);}};
   refresh();modal.hidden=false;document.body.classList.add('modal-open');
   setTimeout(()=>ni.focus(),30);
 }

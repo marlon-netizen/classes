@@ -53,12 +53,25 @@ Open `<your site>/math-physics/admin.html` (or `faith-formation/…`, `ciencias-
 Codes are not case-sensitive and ignore dashes/spaces (`k7m2-qx9p` = `K7M2QX9P`). The same code may exist in two
 different folders – they are different students. A deactivated student can no longer sign in.
 
+## Seeing scores and progress (teacher dashboard)
+Open `<folder>/scores.html` (link at the bottom of each folder's menu, and in the admin header) and sign in with the same teacher account.
+* A grid of **students × lesson pages** with colour-coded **score %** or **progress %** (switch with Score / Progress / Both).
+* **Class average** under every page title; **Overall score / progress** per student; last activity.
+* **Needs attention** flags: no activity for 7+ days, never started, or score under 60 %.
+* Sort by any column, filter by class, search, click a student for per-page details, **Export CSV**, **Print**.
+* Pages that don't score (e.g. reading-only slides) show "saved"; pages that restart each visit (the three algebra/language
+  practice pages and Rules on Wheels) show the student's **best** result.
+
+**Updating an existing database:** when a new version of `supabase/schema.sql` is published, paste and run it again – it is safe to re-run and keeps all data.
+
 ## How the student experience works
 1. Opening any lesson page shows a **Student sign-in** box (once per folder, per device).
 2. After signing in, the page restores the student's saved work from the database.
 3. Every answer is saved automatically (the small badge at the bottom-right shows **Saving… / Saved ✓**). Offline? Work is kept
    on the device and uploaded as soon as the connection returns.
 4. **Sign out** (same badge) removes the student's data from that computer – so the next student on a shared computer starts clean.
+5. The name on scores and results comes from the sign-in – students are never asked to type it again – and students cannot reset
+   their own scores (the teacher can, from the admin page). Every page has the same ☰ Menu link and a light/dark switch.
 
 ## Adding new pages
 Drop the `.html` file in the right folder and run `python3 tools/build_site.py`. It adds the sign-in/saving scripts to the page,
