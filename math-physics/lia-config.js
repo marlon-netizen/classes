@@ -16,6 +16,7 @@ window.LIA_CONFIG={
     'physics-lesson-2-2': 'Physics II – Lesson 2.2 Acceleration',
     'physics-lesson-2-2-practice': 'Physics I – Lesson 2.2 Practice Exercises',
     'physics-lesson-2-3': 'Physics II – Lesson 2.3 Falling Objects',
-    'physics-significant-figures': 'Physics I – Significant Figures, Precision & Accuracy'
+    'physics-significant-figures': 'Physics I – Significant Figures, Precision & Accuracy',
+    'physics1-lesson-2-3': 'Physics I – Lesson 2.3 Falling Objects'
   }
 };

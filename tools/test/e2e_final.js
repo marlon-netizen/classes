@@ -18,7 +18,7 @@ async function newCtx(b){ const c=await b.newContext({viewport:{width:1300,heigh
   await pg.fill('#lEmail','t@x.org'); await pg.fill('#lPass','bad'); await pg.click('#lBtn'); await pg.waitForTimeout(800);
   ok(await pg.$eval('#home',e=>e.hidden),'wrong password stays gated');
   await pg.fill('#lPass','secret'); await pg.click('#lBtn'); await pg.waitForSelector('#home:not([hidden])');
-  const links=await pg.$$eval('a.lk',a=>a.map(x=>x.textContent)); ok(links.length===17&&links.every(l=>/^file:\/\/\/home\/user\/classes\/(math-physics|ciencias-sociales|faith-formation)\//.test(l)),'home: 17 full links built from the site address');
+  const links=await pg.$$eval('a.lk',a=>a.map(x=>x.textContent)); ok(links.length===18&&links.every(l=>/^file:\/\/\/home\/user\/classes\/(math-physics|ciencias-sociales|faith-formation)\//.test(l)),'home: 18 full links built from the site address');
   await pg.reload(); await pg.waitForSelector('#home:not([hidden])'); ok(true,'session remembered on reload');
   await pg.screenshot({path:'home_light.png'});
   await pg.emulateMedia({colorScheme:'dark'}); await pg.screenshot({path:'home_dark.png'});
