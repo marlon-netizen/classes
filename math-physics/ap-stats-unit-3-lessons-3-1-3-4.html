@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AP Statistics – Lessons 3.1–3.4 | Lincoln International Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --ink: #2c3a4a;
+    --muted: #66758a;
+    --primary: #4a6fa5;
+    --primary-dark: #35557f;
+    --primary-soft: #e3ebf5;
+    --accent: #8fb3a0;
+    --ok: #3f8f6b;
+    --ok-bg: #e4f3ec;
+    --warn: #b7791f;
+    --warn-bg: #fbf1dc;
+    --bad: #b5524f;
+    --bad-bg: #f8e6e5;
+    --line: #d9e0e8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    letter-spacing: .2px;
+  }
+  header {
+    background: linear-gradient(135deg, #dfe8f3, #eef3f0);
+    border-bottom: 4px solid var(--primary);
+    text-align: center;
+    padding: 2rem 1rem 1.5rem;
+  }
+  header h1 {
+    margin: 0; font-weight: 600;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--primary-dark);
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+  header .class-name { margin: .4rem 0 0; font-size: clamp(1.2rem, 3.5vw, 1.6rem); font-weight: 500; }
+  header .details { margin: .2rem 0 0; color: var(--muted); font-weight: 300; font-size: 1.1rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
+
+  .tabs { display: flex; gap: .5rem; border-bottom: 2px solid var(--line); margin-bottom: 1.2rem; }
+  .tab-btn {
+    font: inherit; font-weight: 500; font-size: 1.05rem;
+    padding: .7rem 1.2rem; border: none; border-radius: 8px 8px 0 0;
+    background: transparent; color: var(--muted); cursor: pointer;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: background .2s, color .2s;
+  }
+  .tab-btn:hover { background: var(--primary-soft); color: var(--primary-dark); }
+  .tab-btn[aria-selected="true"] { background: var(--primary); color: #fff; }
+  .tab-btn:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #9ab7dd; outline-offset: 2px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 1.2rem 1.4rem; margin-bottom: 1.2rem;
+    box-shadow: 0 1px 3px rgba(40,60,90,.05);
+  }
+  h2 { margin: 0 0 .6rem; font-weight: 500; color: var(--primary-dark); font-size: 1.5rem; }
+  h3 { margin: 0 0 .5rem; font-weight: 500; color: var(--primary-dark); font-size: 1.2rem; }
+  p { margin: .5rem 0; font-weight: 300; font-size: 1.05rem; }
+  ul { font-weight: 300; font-size: 1.05rem; padding-left: 1.3rem; }
+  .formula {
+    background: var(--primary-soft); border-left: 5px solid var(--primary);
+    padding: .8rem 1rem; margin: .8rem 0; border-radius: 6px;
+    font-size: 1.3rem; font-weight: 500; text-align: center;
+  }
+  .formula small { display: block; font-size: .95rem; font-weight: 300; color: var(--muted); margin-top: .2rem; }
+  .note { background: var(--warn-bg); border-left: 5px solid var(--warn); padding: .6rem 1rem; border-radius: 6px; }
+  .frac { display: inline-block; text-align: center; vertical-align: middle; margin: 0 .15rem; }
+  .frac span { display: block; padding: 0 .25rem; }
+  .frac span:first-child { border-bottom: 1.5px solid currentColor; }
+  .solution { background: #f7f9fb; border: 1px dashed var(--line); border-radius: 8px; padding: .6rem 1rem; margin-top: .6rem; }
+  .solution p { margin: .25rem 0; }
+  .example-title { color: var(--primary); font-weight: 500; margin-bottom: .2rem; }
+
+  table.data { border-collapse: collapse; margin: .6rem auto; font-weight: 300; }
+  table.data th, table.data td { border: 1px solid var(--line); padding: .3rem .9rem; text-align: center; }
+  table.data th { background: var(--primary-soft); font-weight: 500; }
+  table.data caption { caption-side: top; font-weight: 500; color: var(--primary-dark); padding-bottom: .3rem; }
+  .table-wrap { overflow-x: auto; }
+
+  .scorebar {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .6rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: .8rem 1.2rem; margin-bottom: 1.2rem;
+  }
+  .scorebar strong { color: var(--primary-dark); font-weight: 500; }
+  .progress { flex: 1 1 160px; height: 10px; background: var(--line); border-radius: 6px; overflow: hidden; }
+  .progress div { height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+  .problem .q-num { color: var(--primary); font-weight: 600; letter-spacing: 1px; }
+  .answer-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: .7rem; }
+  .answer-row input[type="text"] {
+    font: inherit; padding: .5rem .8rem; width: 190px;
+    border: 2px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+  }
+  .answer-row input:disabled { background: #eef1f5; }
+  .unit-label { color: var(--muted); font-weight: 300; margin-left: -.2rem; }
+  .options { display: grid; gap: .4rem; margin-top: .6rem; }
+  .options label {
+    display: flex; gap: .6rem; align-items: center; padding: .45rem .8rem;
+    border: 2px solid var(--line); border-radius: 8px; cursor: pointer; font-weight: 300; font-size: 1.05rem;
+    background: #fff; transition: background .15s, border-color .15s;
+  }
+  .options label:hover { background: var(--primary-soft); }
+  .options label.disabled { cursor: default; background: #eef1f5; }
+  .options label.picked-wrong { border-color: var(--bad); background: var(--bad-bg); }
+  .options label.picked-right { border-color: var(--ok); background: var(--ok-bg); }
+  .options input { accent-color: var(--primary); }
+  button.btn {
+    font: inherit; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    background: var(--primary); color: #fff; border: none; border-radius: 8px;
+    padding: .55rem 1.2rem; cursor: pointer; transition: background .2s;
+  }
+  button.btn:hover:not(:disabled) { background: var(--primary-dark); }
+  button.btn:disabled { background: #b8c3d1; cursor: not-allowed; }
+  button.btn.secondary { background: #fff; color: var(--primary-dark); border: 2px solid var(--primary); }
+  button.btn.secondary:hover { background: var(--primary-soft); }
+  .attempts { margin-left: auto; color: var(--muted); font-weight: 300; }
+  .dots { display: inline-flex; gap: 5px; vertical-align: middle; margin-left: .3rem; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 1px solid #6f9783; }
+  .dot.used { background: #d9e0e8; border-color: #b8c3d1; }
+  .feedback { margin-top: .7rem; padding: .6rem 1rem; border-radius: 8px; display: none; font-weight: 400; }
+  .feedback.show { display: block; }
+  .feedback.ok { background: var(--ok-bg); color: #276348; border-left: 5px solid var(--ok); }
+  .feedback.bad { background: var(--bad-bg); color: #8a3b39; border-left: 5px solid var(--bad); }
+  .feedback.hint { background: var(--warn-bg); color: #835a14; border-left: 5px solid var(--warn); }
+  .feedback .sol { font-weight: 300; margin-top: .3rem; }
+  .final { display: none; text-align: center; }
+  .final.show { display: block; }
+  .final h2 { font-size: 1.8rem; }
+  footer { text-align: center; color: var(--muted); font-weight: 300; font-size: .9rem; padding-bottom: 1.5rem; }
+  @media (max-width: 520px) {
+    .tab-btn { padding: .6rem .7rem; font-size: .9rem; flex: 1; }
+    .attempts { margin-left: 0; width: 100%; }
+  }
+  .rad { border-top: 1.5px solid currentColor; padding: 0 2px; margin-left: 1px; }
+  .cycle { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin: .6rem 0; }
+  .cycle div { background: var(--primary-soft); border-radius: 8px; padding: .4rem 1rem; text-align: center; font-weight: 500; }
+  .cycle small { display: block; font-weight: 300; color: var(--muted); }
+
+  /* dark mode (same variables, switched by the Light/Dark toggle or the device setting) */
+  :root[data-theme="dark"]{ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
+  :root[data-theme="dark"] header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
+    :root:not([data-theme="light"]) header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  }
+  .hat { position: relative; display: inline-block; font-style: italic; }
+  .hat::before { content: '^'; position: absolute; left: 50%; top: -.38em; transform: translateX(-50%); font-style: normal; font-size: .9em; }
+  .sym { font-style: italic; }
+  .ref { font-size: .95rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: .8rem; padding-top: .5rem; }
+  .steps { counter-reset: st; list-style: none; padding-left: 0; }
+  .steps li { counter-increment: st; margin: .4rem 0; padding-left: 2.2rem; position: relative; }
+  .steps li::before { content: counter(st); position: absolute; left: 0; top: .1rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--primary); color: #fff; text-align: center; font-size: .9rem; line-height: 1.6rem; font-weight: 500; }
+  [data-theme="dark"] .steps li::before, :root[data-theme="dark"] .steps li::before { color: #12171e; }
+  .lesson-tag { display: inline-block; background: var(--primary-soft); color: var(--primary-dark); border-radius: 6px; padding: .05rem .6rem; font-weight: 500; letter-spacing: 1px; font-size: .9rem; margin-bottom: .3rem; }
+  .group-title { margin: 1.6rem 0 .8rem; color: var(--primary-dark); font-weight: 500; font-size: 1.3rem; border-bottom: 2px solid var(--line); padding-bottom: .2rem; }
+
+  /* dark mode (same variables, switched by the Light/Dark toggle or the device setting) */
+  :root[data-theme="dark"]{ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
+  :root[data-theme="dark"] header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
+    :root:not([data-theme="light"]) header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  }
+</style>
+<!--LIA-SYNC-START--><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+
+<header>
+  <h1>Lincoln International Academy</h1>
+  <p class="class-name">AP Statistics &middot; Unit 3: Lessons 3.1&ndash;3.4</p>
+  <p class="details">Inference for Categorical Data: Proportions &middot; Teacher: Eduardo Vásquez</p>
+</header>
+
+<main>
+  <div class="tabs" role="tablist" aria-label="Page sections">
+    <button class="tab-btn" role="tab" id="tab-learn" aria-controls="panel-learn" aria-selected="true">Lesson &amp; Examples</button>
+    <button class="tab-btn" role="tab" id="tab-practice" aria-controls="panel-practice" aria-selected="false" tabindex="-1">Practice</button>
+  </div>
+
+  <!-- ============ TAB 1: LESSON ============ -->
+  <section class="panel active" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn">
+    <div class="card">
+      <h2>From a sample to a population proportion</h2>
+      <p>Unit 3 asks one big question: <strong>what can a sample proportion tell us about the population proportion?</strong> In these four lessons you will learn to (3.1) judge estimators, (3.2) describe the sampling distribution of a sample proportion, (3.3) build a confidence interval for a population proportion, and (3.4) interpret it and use it to justify claims.</p>
+      <div class="formula">
+        <span class="hat">p</span> = <span class="frac"><span>number of successes</span><span><em>n</em></span></span>
+        <small>The sample proportion <span class="hat">p</span> (a statistic) estimates the population proportion <em>p</em> (a parameter).</small>
+      </div>
+      <p class="ref"><strong>Reference:</strong> Barron&rsquo;s <em>AP Statistics</em> &mdash; the chapters on sampling distributions and on confidence intervals for proportions. Barron&rsquo;s is organized differently from our course sequence, so use the topics, not the chapter order, to find the matching sections. Notation and the four-step write-up (State, Plan, Do, Conclude) follow AP exam conventions.</p>
+    </div>
+
+    <!-- 3.1 -->
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.1</span>
+      <h3>Estimators</h3>
+      <ul>
+        <li>A <strong>parameter</strong> is a number that describes a <em>population</em> (e.g. <em>p</em>, &mu;). It is usually unknown.</li>
+        <li>A <strong>statistic</strong> is a number computed from a <em>sample</em> (e.g. <span class="hat">p</span>, <span style="text-decoration:overline"><em>x</em></span>). It varies from sample to sample.</li>
+        <li>A <strong>point estimator</strong> is a statistic used to estimate a parameter; its value for one sample is a <strong>point estimate</strong>. The sample proportion <span class="hat">p</span> is a point estimator of <em>p</em>.</li>
+        <li>An estimator is <strong>unbiased</strong> if the mean of its sampling distribution equals the parameter it estimates. Individual estimates still miss the target &mdash; &ldquo;unbiased&rdquo; means <em>no systematic</em> over- or underestimating.</li>
+      </ul>
+      <div class="formula">Unbiased: &nbsp; &mu;<sub>statistic</sub> = parameter
+        <small>Unbiased: <span class="hat">p</span> for <em>p</em>, sample mean for &mu;, sample variance <em>s</em>&sup2; for &sigma;&sup2;. A statistic whose sampling distribution is centered above or below the parameter is biased.</small></div>
+      <div class="note"><strong>Remember:</strong> bias is about the <em>center</em> of the sampling distribution. A larger sample size does not remove bias; it reduces <em>variability</em>.</div>
+    </div>
+
+    <!-- 3.2 -->
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.2</span>
+      <h3>Sampling distribution of a sample proportion</h3>
+      <p>If we took every possible random sample of size <em>n</em> from a population with proportion <em>p</em>, the values of <span class="hat">p</span> form the <strong>sampling distribution</strong> of <span class="hat">p</span>.</p>
+      <div class="formula">
+        &mu;<sub><span class="hat">p</span></sub> = <em>p</em>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        &sigma;<sub><span class="hat">p</span></sub> = <span class="frac"><span>&radic;<span class="rad"><em>p</em>(1 &minus; <em>p</em>)</span></span><span>&radic;<span class="rad"><em>n</em></span></span></span> = &radic;<span class="rad"><span class="frac"><span><em>p</em>(1 &minus; <em>p</em>)</span><span><em>n</em></span></span></span>
+        <small>The formula for &sigma; requires independent observations.</small>
+      </div>
+      <p><strong>Conditions</strong> for using these formulas and a Normal model:</p>
+      <ul>
+        <li><strong>Random:</strong> data come from a random sample or randomized experiment.</li>
+        <li><strong>10% condition</strong> (independence when sampling without replacement): <em>n</em> &le; 0.10<em>N</em>.</li>
+        <li><strong>Large counts</strong> (approximately Normal): <em>np</em> &ge; 10 and <em>n</em>(1 &minus; <em>p</em>) &ge; 10.</li>
+      </ul>
+      <p>When the conditions hold, <span class="hat">p</span> is approximately Normal, so we find probabilities with z-scores:</p>
+      <div class="formula"><em>z</em> = <span class="frac"><span><span class="hat">p</span> &minus; <em>p</em></span><span>&sigma;<sub><span class="hat">p</span></sub></span></span></div>
+      <p><strong>Interpretation:</strong> the standard deviation &sigma;<sub><span class="hat">p</span></sub> is the typical distance between a sample proportion and the true <em>p</em> in repeated random samples of that size. Because &sigma;<sub><span class="hat">p</span></sub> has &radic;<em>n</em> in the denominator, <strong>quadrupling</strong> <em>n</em> cuts it in half.</p>
+    </div>
+
+    <!-- 3.3 -->
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.3</span>
+      <h3>Constructing a confidence interval for a population proportion</h3>
+      <p>The procedure is the <strong>one-sample <em>z</em>-interval for a population proportion</strong>:</p>
+      <div class="formula">
+        <span class="hat">p</span> &plusmn; <em>z</em>* &radic;<span class="rad"><span class="frac"><span><span class="hat">p</span>(1 &minus; <span class="hat">p</span>)</span><span><em>n</em></span></span></span>
+        <small>point estimate &plusmn; margin of error &nbsp;|&nbsp; ME = <em>z</em>* &times; SE &nbsp;|&nbsp; SE = &radic;(<span class="hat">p</span>(1 &minus; <span class="hat">p</span>)/<em>n</em>)</small>
+      </div>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Common critical values <em>z</em>*</caption>
+          <tr><th>Confidence level</th><th>90%</th><th>95%</th><th>99%</th></tr>
+          <tr><td><em>z</em>*</td><td>1.645</td><td>1.960</td><td>2.576</td></tr>
+        </table>
+      </div>
+      <p><strong>Four-step write-up:</strong></p>
+      <ol class="steps">
+        <li><strong>State:</strong> define the parameter in context (&ldquo;<em>p</em> = the true proportion of &hellip; in &hellip;&rdquo;) and the confidence level.</li>
+        <li><strong>Plan:</strong> name the procedure (one-sample <em>z</em>-interval for <em>p</em>) and verify conditions: random sample; 10% (<em>n</em> &le; 0.10<em>N</em>); large counts <em>n</em><span class="hat">p</span> &ge; 10 and <em>n</em>(1 &minus; <span class="hat">p</span>) &ge; 10.</li>
+        <li><strong>Do:</strong> compute <span class="hat">p</span>, the standard error, the margin of error and the interval.</li>
+        <li><strong>Conclude:</strong> interpret the interval in context (see 3.4).</li>
+      </ol>
+      <p><strong>Sample size for a desired margin of error</strong> (solve ME = <em>z</em>*&radic;(<span class="hat">p</span>(1 &minus; <span class="hat">p</span>)/<em>n</em>) for <em>n</em>):</p>
+      <div class="formula"><em>n</em> &ge; <span class="frac"><span><em>z</em>*</span><span>ME</span></span>&sup2; <span class="hat">p</span>(1 &minus; <span class="hat">p</span>)
+        <small>If there is no prior estimate, use <span class="hat">p</span> = 0.5 (the most conservative value). Always round <em>n</em> <u>up</u>.</small></div>
+    </div>
+
+    <!-- 3.4 -->
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.4</span>
+      <h3>Justifying a claim based on a confidence interval</h3>
+      <ul>
+        <li><strong>Interpreting the interval:</strong> &ldquo;We are <em>C</em>% confident that the interval from <em>a</em> to <em>b</em> captures the true proportion of [population in context].&rdquo;</li>
+        <li><strong>Interpreting the confidence level:</strong> if we repeatedly took random samples of the same size and built an interval from each, about <em>C</em>% of those intervals would capture the true proportion.</li>
+        <li><strong>Common errors:</strong> &ldquo;There is a 95% probability that <em>p</em> is in (<em>a</em>, <em>b</em>)&rdquo; (the parameter is fixed; the <em>interval</em> is what varies), or &ldquo;95% of the population/sample is in the interval.&rdquo;</li>
+        <li><strong>Justifying a claim:</strong> if a claimed value of <em>p</em> is <em>inside</em> the interval, it is a plausible value (no convincing evidence against it). If it is <em>outside</em>, the interval provides convincing evidence that the claim is not true. An interval entirely above 0.5 supports &ldquo;more than half&rdquo;.</li>
+        <li><strong>Why can an interval miss <em>p</em>?</strong> Random sampling variability: a 95% interval fails to capture <em>p</em> in about 5% of samples.</li>
+      </ul>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>What changes the width of the interval?</caption>
+          <tr><th>Change</th><th>Effect on margin of error</th></tr>
+          <tr><td>Higher confidence level (<em>z</em>* larger)</td><td>Wider</td></tr>
+          <tr><td>Larger sample size <em>n</em></td><td>Narrower (ME &prop; 1/&radic;<em>n</em>)</td></tr>
+          <tr><td><span class="hat">p</span> closer to 0.5</td><td>Wider (larger <span class="hat">p</span>(1 &minus; <span class="hat">p</span>))</td></tr>
+          <tr><td>Half the margin of error</td><td>Needs 4&times; the sample size</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <h2>Worked examples</h2>
+
+    <div class="card">
+      <div class="example-title">Example 1 (3.1) &mdash; Parameter, statistic and unbiasedness</div>
+      <p>A random sample of 250 students from a school of 2000 is asked about online textbooks: 90 prefer them. (a) Identify the parameter and the statistic. (b) A simulation of 1000 samples of size 250 from a population with <em>p</em> = 0.35 gives sample proportions centered at 0.351. What does that suggest?</p>
+      <div class="solution">
+        <p>(a) Parameter: <em>p</em> = proportion of <em>all</em> 2000 students who prefer online textbooks (unknown). Statistic: <span class="hat">p</span> = 90/250 = <strong>0.36</strong>, our point estimate.</p>
+        <p>(b) The mean of the simulated sampling distribution (0.351) is essentially equal to <em>p</em> = 0.35, which supports that <span class="hat">p</span> is an <strong>unbiased</strong> estimator of <em>p</em>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 2 (3.2) &mdash; Mean, SD and a probability</div>
+      <p>40% of all fans at a stadium prefer the home-team jersey. A random sample of <em>n</em> = 150 fans (far fewer than 10% of the stadium) is taken. Describe the sampling distribution of <span class="hat">p</span> and find P(<span class="hat">p</span> &gt; 0.45).</p>
+      <div class="solution">
+        <p>Conditions: random sample; 10% condition holds; <em>np</em> = 150(0.40) = 60 &ge; 10 and <em>n</em>(1 &minus; <em>p</em>) = 90 &ge; 10, so <span class="hat">p</span> is approximately Normal.</p>
+        <p>&mu;<sub><span class="hat">p</span></sub> = 0.40 &nbsp;&nbsp; &sigma;<sub><span class="hat">p</span></sub> = &radic;(0.40 &middot; 0.60/150) = &radic;0.0016 = <strong>0.04</strong></p>
+        <p><em>z</em> = (0.45 &minus; 0.40)/0.04 = 1.25, so P(<span class="hat">p</span> &gt; 0.45) = 1 &minus; 0.8944 = <strong>0.1056</strong></p>
+        <p>Interpretation: about 10.6% of random samples of 150 fans would have more than 45% preferring the home jersey.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 3 (3.3) &mdash; A 95% confidence interval</div>
+      <p>In a random sample of 400 voters (from a city of 90&#8239;000), 232 favor a proposal. Construct and interpret a 95% confidence interval for the proportion of all voters who favor it.</p>
+      <div class="solution">
+        <p><strong>State:</strong> <em>p</em> = the true proportion of all voters in the city who favor the proposal. 95% confidence.</p>
+        <p><strong>Plan:</strong> one-sample <em>z</em>-interval for <em>p</em>. Random sample &#10003;; 400 &lt; 10% of 90&#8239;000 &#10003;; 400(0.58) = 232 &ge; 10 and 400(0.42) = 168 &ge; 10 &#10003;.</p>
+        <p><strong>Do:</strong> <span class="hat">p</span> = 232/400 = 0.58; SE = &radic;(0.58 &middot; 0.42/400) &asymp; 0.0247; ME = 1.96(0.0247) &asymp; 0.0484.</p>
+        <p>Interval: 0.58 &plusmn; 0.0484 = <strong>(0.532, 0.628)</strong></p>
+        <p><strong>Conclude:</strong> We are 95% confident that the interval from 0.532 to 0.628 captures the true proportion of all voters in the city who favor the proposal.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 4 (3.3) &mdash; Sample size for a given margin of error</div>
+      <p>A pollster wants a 95% confidence interval with a margin of error of at most 0.03 and has no prior estimate of <em>p</em>. How many people should be sampled?</p>
+      <div class="solution">
+        <p><em>n</em> &ge; (1.96/0.03)&sup2;(0.5)(0.5) = 4268.4 &times; 0.25 &asymp; 1067.1</p>
+        <p>Round up: <strong><em>n</em> = 1068</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 5 (3.4) &mdash; Justifying a claim</div>
+      <p>A 95% confidence interval for the proportion of teens who sleep fewer than 8 hours on school nights is (0.58, 0.66). (a) Is there convincing evidence that a majority of teens sleep fewer than 8 hours? (b) A website claims the proportion is 0.70. What does the interval say?</p>
+      <div class="solution">
+        <p>(a) All plausible values (0.58 to 0.66) are above 0.50, so the interval provides convincing evidence that <strong>more than half</strong> of teens sleep fewer than 8 hours.</p>
+        <p>(b) 0.70 is not in the interval, so the interval gives convincing evidence that the true proportion is <strong>not</strong> 0.70.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 6 (3.4) &mdash; What happens to the margin of error?</div>
+      <p>A survey with <em>n</em> = 400 has a margin of error of 0.05 at 95% confidence. What margin of error would you expect with <em>n</em> = 1600 (same confidence level and about the same <span class="hat">p</span>)?</p>
+      <div class="solution">
+        <p>The sample size is multiplied by 4, so the margin of error is multiplied by 1/&radic;4 = 1/2: <strong>ME &asymp; 0.025</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB 2: PRACTICE ============ -->
+  <section class="panel" id="panel-practice" role="tabpanel" aria-labelledby="tab-practice" hidden>
+    <div class="card">
+      <h2>Practice Problems</h2>
+      <p>You have <strong>3 attempts</strong> for each problem and you get feedback right away. For multiple-choice problems, select one answer. For numeric problems, type a number (decimals, or a fraction like 3/8). Percent answers should be entered as decimals (0.25, not 25%). Round to at least 3 decimal places if needed; a small rounding tolerance is allowed. Problems are grouped by lesson (3.1&ndash;3.4).</p>
+    </div>
+
+    <div class="scorebar">
+      <div>Solved: <strong id="solvedCount">0</strong> / <span id="totalCount"></span></div>
+      <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+      <div>Points: <strong id="points">0</strong></div>
+    </div>
+
+    <div id="problems"></div>
+
+    <div class="card final" id="finalCard">
+      <h2>Practice complete!</h2>
+      <p id="finalMsg"></p>
+      <button class="btn secondary" id="resetBtn" data-lia-reset type="button">Try again</button>
+    </div>
+  </section>
+</main>
+
+<footer>Lincoln International Academy &middot; AP Statistics &middot; Lessons 3.1&ndash;3.4</footer>
+
+<script>
+(function () {
+  /* ---------- Tabs ---------- */
+  var tabs = [document.getElementById('tab-learn'), document.getElementById('tab-practice')];
+  function showTab(idx) {
+    tabs.forEach(function (t, i) {
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      var on = i === idx;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      panel.classList.toggle('active', on);
+      panel.hidden = !on;
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showTab(i); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        showTab(n); tabs[n].focus();
+      }
+    });
+  });
+
+  /* ---------- Markup helpers ---------- */
+  var H = '<span class="hat">p</span>';          // p-hat
+  var Pp = '<em>p</em>';
+  var N = '<em>n</em>';
+  function SD() { return '&sigma;<sub>' + H + '</sub>'; }
+  function R(x) { return '&radic;<span class="rad">' + x + '</span>'; }
+
+  /* ---------- Problems ----------
+     mc:  { g, q, opts:[...], ans:index, hint, sol }
+     num: { g, q, ans, tol, unit, hint, sol }        g = lesson group (3.1 ... 3.4) */
+  var MAX_ATTEMPTS = 3;
+  var GROUPS = {
+    '3.1': 'Lesson 3.1 &mdash; Estimators',
+    '3.2': 'Lesson 3.2 &mdash; Sampling distributions for sample proportions',
+    '3.3': 'Lesson 3.3 &mdash; Constructing a confidence interval for a proportion',
+    '3.4': 'Lesson 3.4 &mdash; Justifying a claim based on a confidence interval'
+  };
+  var problems = [
+    /* ===== 3.1 ===== */
+    { g: '3.1', q: 'A poll of 500 randomly selected voters in a city finds that 54% support a new park. Which of the following is a <strong>parameter</strong>?',
+      opts: ['The 54% found in the sample of 500 voters', 'The proportion of all voters in the city who support the park', 'The sample size, 500', 'The sample proportion ' + H],
+      ans: 1, hint: 'A parameter describes the whole population and is usually unknown.',
+      sol: 'The proportion of <em>all</em> voters in the city is a population value, so it is the parameter. The 54% (' + H + ') is a statistic.' },
+    { g: '3.1', q: 'The symbol ' + H + ' represents&hellip;',
+      opts: ['the population proportion', 'the sample proportion, a statistic', 'the sample size', 'the margin of error'], ans: 1,
+      hint: 'The hat means &ldquo;estimate from a sample&rdquo;.',
+      sol: H + ' is the sample proportion: a statistic used to estimate the parameter ' + Pp + '.' },
+    { g: '3.1', q: 'A statistic is an <strong>unbiased estimator</strong> of a parameter when&hellip;',
+      opts: ['it equals the parameter in every sample', 'the mean of its sampling distribution equals the parameter', 'it has the smallest possible standard deviation', 'it is computed from a very large sample'], ans: 1,
+      hint: 'Unbiased is about the center of the sampling distribution.',
+      sol: 'An estimator is unbiased if the mean of its sampling distribution equals the parameter. Individual samples can still miss.' },
+    { g: '3.1', q: 'Which statistic is an unbiased estimator of the population proportion ' + Pp + '?',
+      opts: ['2' + H, H + ' + 0.05', 'the sample proportion ' + H, 'the number of successes in the sample'], ans: 2,
+      hint: 'The mean of the sampling distribution of ' + H + ' is ' + Pp + '.',
+      sol: '&mu;<sub>' + H + '</sub> = ' + Pp + ', so ' + H + ' is unbiased. 2' + H + ' and ' + H + ' + 0.05 are centered at the wrong place.' },
+    { g: '3.1', q: 'In a random sample of 250 students, 90 prefer online textbooks. What is the point estimate ' + H + ' for the proportion of all students who prefer them?',
+      type: 'num', ans: 0.36, tol: 0.0005, unit: '',
+      hint: 'Divide the number of successes by the sample size.',
+      sol: H + ' = 90/250 = 0.36.' },
+    { g: '3.1', q: 'The true proportion is ' + Pp + ' = 0.30. Three simulations (1000 samples each) of three different estimators give sampling distributions centered at <strong>A: 0.30</strong>, <strong>B: 0.36</strong> and <strong>C: 0.25</strong>. Which estimator(s) appear unbiased?',
+      opts: ['A only', 'B only', 'C only', 'A, B and C'], ans: 0,
+      hint: 'Compare each center with the true value, 0.30.',
+      sol: 'Only A is centered at the true value 0.30. B overestimates and C underestimates systematically.' },
+    { g: '3.1', q: 'Which statement about unbiased estimators is <strong>true</strong>?',
+      opts: ['An unbiased estimator always gives exactly the true parameter value', 'Increasing the sample size makes a biased estimator unbiased', 'An unbiased estimator has a sampling distribution centered at the parameter, though a single estimate may be off', 'An unbiased estimator has no variability'], ans: 2,
+      hint: 'Unbiased does not mean exact or without variability.',
+      sol: 'Unbiased describes the center of the sampling distribution. Individual estimates vary, and larger samples reduce variability, not bias.' },
+    { g: '3.1', q: 'Two independent random samples come from the same population. In the first, 38 of 100 say &ldquo;yes&rdquo;; in the second, 63 of 150 say &ldquo;yes&rdquo;. Combining the data into one sample of 250, what is the point estimate ' + H + '?',
+      type: 'num', ans: 0.404, tol: 0.0005, unit: '',
+      hint: 'Add the successes (38 + 63) and divide by the combined sample size.',
+      sol: H + ' = (38 + 63)/(100 + 150) = 101/250 = 0.404.' },
+
+    /* ===== 3.2 ===== */
+    { g: '3.2', q: 'For samples of size ' + N + ' = 120 from a population with ' + Pp + ' = 0.35, what is the mean of the sampling distribution of ' + H + ', &mu;<sub>' + H + '</sub>?',
+      type: 'num', ans: 0.35, tol: 0.0005, unit: '',
+      hint: 'The sampling distribution of ' + H + ' is centered at the population proportion.',
+      sol: '&mu;<sub>' + H + '</sub> = ' + Pp + ' = 0.35.' },
+    { g: '3.2', q: 'Find the standard deviation of the sampling distribution of ' + H + ' when ' + Pp + ' = 0.40 and ' + N + ' = 150.',
+      type: 'num', ans: 0.04, tol: 0.0005, unit: '',
+      hint: '&sigma; = &radic;(0.40 &times; 0.60 / 150). Compute 0.24/150 first.',
+      sol: '&sigma;<sub>' + H + '</sub> = &radic;(0.40 &middot; 0.60/150) = &radic;0.0016 = 0.04.' },
+    { g: '3.2', q: 'Find &sigma;<sub>' + H + '</sub> when ' + Pp + ' = 0.5 and ' + N + ' = 100.',
+      type: 'num', ans: 0.05, tol: 0.0005, unit: '',
+      hint: '&radic;(0.5 &times; 0.5 / 100) = &radic;0.0025.',
+      sol: '&sigma;<sub>' + H + '</sub> = &radic;(0.25/100) = 0.05.' },
+    { g: '3.2', q: 'Find &sigma;<sub>' + H + '</sub> when ' + Pp + ' = 0.62 and ' + N + ' = 200. (Round to 4 decimal places.)',
+      type: 'num', ans: 0.0343, tol: 0.0003, unit: '',
+      hint: '0.62 &times; 0.38 = 0.2356; divide by 200, then take the square root.',
+      sol: '&sigma;<sub>' + H + '</sub> = &radic;(0.2356/200) = &radic;0.001178 &asymp; 0.0343.' },
+    { g: '3.2', q: 'If the sample size is <strong>quadrupled</strong> (same ' + Pp + '), by what factor does &sigma;<sub>' + H + '</sub> change? (Enter a decimal.)',
+      type: 'num', ans: 0.5, tol: 0.005, unit: '&times;',
+      hint: '&sigma; has &radic;' + N + ' in the denominator, and &radic;4 = 2.',
+      sol: 'The new &sigma; is the old one divided by &radic;4 = 2, so it is multiplied by 0.5.' },
+    { g: '3.2', q: 'A population has ' + Pp + ' = 0.04 and a random sample of ' + N + ' = 200 is taken. Is the large counts (Normal) condition satisfied?',
+      opts: ['Yes, because ' + N + ' = 200 is large', 'Yes, because ' + Pp + ' &lt; 0.5', 'No, because ' + N + Pp + ' = 8 is less than 10', 'No, because ' + N + '(1 &minus; ' + Pp + ') = 192 is less than 10'], ans: 2,
+      hint: 'Compute ' + N + Pp + ' and ' + N + '(1 &minus; ' + Pp + ') and compare each with 10.',
+      sol: N + Pp + ' = 200(0.04) = 8 &lt; 10, so the sampling distribution of ' + H + ' is not approximately Normal. (' + N + '(1 &minus; ' + Pp + ') = 192 is fine.)' },
+    { g: '3.2', q: 'For ' + Pp + ' = 0.20, what is the smallest sample size ' + N + ' for which both ' + N + Pp + ' &ge; 10 and ' + N + '(1 &minus; ' + Pp + ') &ge; 10?',
+      type: 'num', ans: 50, tol: 0.5, unit: '',
+      hint: 'Solve 0.20' + N + ' &ge; 10; then check the other inequality.',
+      sol: '0.20' + N + ' &ge; 10 gives ' + N + ' &ge; 50, and 0.80(50) = 40 &ge; 10 too. Smallest ' + N + ' = 50.' },
+    { g: '3.2', q: 'A random sample of 80 students is selected <strong>without replacement</strong> from a school of 600. Is the 10% condition met?',
+      opts: ['Yes, because 80 &le; 0.10(600) = 60', 'Yes, because the sample is random', 'No, because 80 &gt; 0.10(600) = 60', 'No, because 600 is not large'], ans: 2,
+      hint: 'Compare ' + N + ' with 10% of the population size.',
+      sol: '10% of 600 is 60, and ' + N + ' = 80 is larger than 60, so the 10% condition is not met.' },
+    { g: '3.2', q: 'For ' + Pp + ' = 0.40 and ' + N + ' = 150 (so &sigma;<sub>' + H + '</sub> = 0.04), find P(' + H + ' &gt; 0.45). (Normal model; give a decimal.)',
+      type: 'num', ans: 0.1056, tol: 0.003, unit: '',
+      hint: 'z = (0.45 &minus; 0.40)/0.04 = 1.25. Find the area to the right of z.',
+      sol: 'z = 1.25; P(Z &gt; 1.25) = 1 &minus; 0.8944 = 0.1056.' },
+    { g: '3.2', q: 'For ' + Pp + ' = 0.60 and ' + N + ' = 100, find P(' + H + ' &lt; 0.55). (Normal model; give a decimal.)',
+      type: 'num', ans: 0.1537, tol: 0.004, unit: '',
+      hint: '&sigma; = &radic;(0.6 &times; 0.4/100) &asymp; 0.0490, so z = (0.55 &minus; 0.60)/0.0490 &asymp; &minus;1.02.',
+      sol: '&sigma; &asymp; 0.0490; z &asymp; &minus;1.02; P(Z &lt; &minus;1.02) &asymp; 0.154.' },
+    { g: '3.2', q: 'For ' + Pp + ' = 0.30 and ' + N + ' = 200 (&sigma;<sub>' + H + '</sub> &asymp; 0.0324), find P(0.27 &lt; ' + H + ' &lt; 0.33). (Normal model; give a decimal.)',
+      type: 'num', ans: 0.6455, tol: 0.006, unit: '',
+      hint: 'Both endpoints are 0.03 from the mean: z = &plusmn;0.03/0.0324 &asymp; &plusmn;0.93.',
+      sol: 'z = &plusmn;0.926; P(&minus;0.926 &lt; Z &lt; 0.926) &asymp; 0.8227 &minus; 0.1773 = 0.645.' },
+    { g: '3.2', q: 'Which is the correct interpretation of &sigma;<sub>' + H + '</sub> = 0.04 for samples of 150 fans?',
+      opts: ['About 4% of the fans in each sample prefer the home jersey', 'In repeated random samples of 150 fans, sample proportions typically differ from the true ' + Pp + ' by about 0.04', 'The population proportion varies by 0.04 from sample to sample', 'The true proportion is within 0.04 of ' + H + ' with certainty'], ans: 1,
+      hint: 'Standard deviation of a sampling distribution = typical distance of the statistic from the parameter across samples.',
+      sol: '&sigma;<sub>' + H + '</sub> measures the typical distance between sample proportions and the true proportion in repeated samples of that size.' },
+
+    /* ===== 3.3 ===== */
+    { g: '3.3', q: 'Which procedure is appropriate for estimating a single population proportion from one random sample?',
+      opts: ['One-sample <em>t</em>-interval for a mean', 'One-sample <em>z</em>-interval for a proportion', 'Two-sample <em>z</em>-interval for a difference in proportions', 'Chi-square test'], ans: 1,
+      hint: 'One categorical variable, one sample, one proportion.',
+      sol: 'Estimating one population proportion calls for a one-sample <em>z</em>-interval for ' + Pp + '.' },
+    { g: '3.3', q: 'Which is the best statement of the parameter for a poll of 400 voters in a city asking whether they favor a proposal?',
+      opts: [H + ' = proportion of the 400 voters who favor the proposal', Pp + ' = the true proportion of all voters in the city who favor the proposal', '&mu; = the mean number of voters who favor the proposal', Pp + ' = 400'], ans: 1,
+      hint: 'Define the parameter in context: population, and what counts as a &ldquo;success&rdquo;.',
+      sol: 'The parameter is the proportion of the <em>whole population</em> (all voters in the city) that favors the proposal.' },
+    { g: '3.3', q: 'Which conditions must be verified before constructing a <em>z</em>-interval for ' + Pp + '?',
+      opts: ['Random sample; ' + N + ' &le; 10% of the population; ' + N + Pp + ' &ge; 10 and ' + N + '(1 &minus; ' + Pp + ') &ge; 10', 'Population is Normal; ' + N + ' &gt; 30', 'Random assignment; two groups', 'Only that ' + N + ' is at least 100'], ans: 0,
+      hint: 'In an interval, ' + Pp + ' is unknown, so the large counts check uses the sample counts: ' + N + H + ' and ' + N + '(1 &minus; ' + H + ').',
+      sol: 'Random sample, 10% condition, and at least 10 successes and 10 failures (checked with ' + H + ' for an interval).' },
+    { g: '3.3', q: 'What is the critical value <em>z</em>* for a <strong>95%</strong> confidence interval? (Use 3 decimals.)',
+      type: 'num', ans: 1.96, tol: 0.006, unit: '',
+      hint: 'The middle 95% of a standard Normal distribution leaves 2.5% in each tail.',
+      sol: '<em>z</em>* = 1.960.' },
+    { g: '3.3', q: 'What is the critical value <em>z</em>* for a <strong>90%</strong> confidence interval?',
+      type: 'num', ans: 1.645, tol: 0.006, unit: '',
+      hint: 'The middle 90% leaves 5% in each tail.',
+      sol: '<em>z</em>* = 1.645.' },
+    { g: '3.3', q: 'In a random sample of 400 voters, 232 favor a proposal. Compute the standard error of ' + H + '. (Round to 4 decimal places.)',
+      type: 'num', ans: 0.0247, tol: 0.0003, unit: '',
+      hint: H + ' = 232/400 = 0.58. Then SE = &radic;(0.58 &times; 0.42/400).',
+      sol: 'SE = &radic;(0.58 &middot; 0.42/400) = &radic;0.000609 &asymp; 0.0247.' },
+    { g: '3.3', q: 'Same sample (232 of 400). Compute the margin of error for a <strong>95%</strong> confidence interval. (Round to 4 decimal places.)',
+      type: 'num', ans: 0.0484, tol: 0.0005, unit: '',
+      hint: 'ME = <em>z</em>* &times; SE = 1.96 &times; 0.0247.',
+      sol: 'ME = 1.96(0.02468) &asymp; 0.0484.' },
+    { g: '3.3', q: 'Same sample (232 of 400). What is the <strong>lower limit</strong> of the 95% confidence interval for ' + Pp + '? (Round to 3 decimal places.)',
+      type: 'num', ans: 0.532, tol: 0.0015, unit: '',
+      hint: 'Lower limit = ' + H + ' &minus; ME = 0.58 &minus; 0.0484.',
+      sol: '0.58 &minus; 0.0484 = 0.532. (The interval is (0.532, 0.628).)' },
+    { g: '3.3', q: 'In a random sample of 250 students, 90 prefer online textbooks. Find the margin of error for a <strong>90%</strong> confidence interval. (Round to 4 decimal places.)',
+      type: 'num', ans: 0.0499, tol: 0.0006, unit: '',
+      hint: H + ' = 0.36, SE = &radic;(0.36 &times; 0.64/250) &asymp; 0.0304; use <em>z</em>* = 1.645.',
+      sol: 'SE &asymp; 0.03036; ME = 1.645 &times; 0.03036 &asymp; 0.0499.' },
+    { g: '3.3', q: 'Same sample (90 of 250). What is the <strong>upper limit</strong> of the 90% confidence interval? (Round to 3 decimal places.)',
+      type: 'num', ans: 0.41, tol: 0.0015, unit: '',
+      hint: 'Upper limit = ' + H + ' + ME = 0.36 + 0.0499.',
+      sol: '0.36 + 0.0499 = 0.410. The interval is (0.310, 0.410).' },
+    { g: '3.3', q: 'In a random sample of 1000 adults, 420 own a smartwatch. Find the margin of error for a <strong>99%</strong> confidence interval. (Round to 4 decimal places.)',
+      type: 'num', ans: 0.0402, tol: 0.0006, unit: '',
+      hint: H + ' = 0.42, SE = &radic;(0.42 &times; 0.58/1000) &asymp; 0.0156; <em>z</em>* = 2.576.',
+      sol: 'SE &asymp; 0.01561; ME = 2.576 &times; 0.01561 &asymp; 0.0402. Interval: (0.380, 0.460).' },
+    { g: '3.3', q: 'A pollster wants a 95% confidence interval with a margin of error of at most 0.03 and has <strong>no prior estimate</strong> of ' + Pp + '. What is the minimum sample size?',
+      type: 'num', ans: 1068, tol: 0.5, unit: '',
+      hint: 'Use ' + H + ' = 0.5: ' + N + ' &ge; (1.96/0.03)&sup2;(0.5)(0.5). Always round up.',
+      sol: N + ' &ge; (1.96/0.03)&sup2;(0.25) &asymp; 1067.1, so ' + N + ' = 1068.' },
+    { g: '3.3', q: 'A previous study found about 30% success. To get a 95% confidence interval with a margin of error of at most 0.04, what minimum sample size is needed?',
+      type: 'num', ans: 505, tol: 0.5, unit: '',
+      hint: N + ' &ge; (1.96/0.04)&sup2;(0.30)(0.70). Round up.',
+      sol: N + ' &ge; (49)&sup2;(0.21) = 2401(0.21) = 504.2, so ' + N + ' = 505.' },
+    { g: '3.3', q: 'A 95% confidence interval for a proportion is (0.42, 0.54). What is the sample proportion ' + H + ' (the point estimate)?',
+      type: 'num', ans: 0.48, tol: 0.0005, unit: '',
+      hint: 'The point estimate is the midpoint of the interval.',
+      sol: H + ' = (0.42 + 0.54)/2 = 0.48.' },
+    { g: '3.3', q: 'A 95% confidence interval for a proportion is (0.42, 0.54). What is the margin of error?',
+      type: 'num', ans: 0.06, tol: 0.0005, unit: '',
+      hint: 'ME is half the width of the interval.',
+      sol: 'ME = (0.54 &minus; 0.42)/2 = 0.06.' },
+
+    /* ===== 3.4 ===== */
+    { g: '3.4', q: 'A 95% confidence interval for the proportion of all students at a school who walk to school is (0.22, 0.34). Which is the best interpretation?',
+      opts: ['There is a 95% probability that the true proportion is between 0.22 and 0.34', 'We are 95% confident that the interval from 0.22 to 0.34 captures the true proportion of all students at the school who walk to school', '95% of students walk to school', 'The sample proportion is between 0.22 and 0.34 in 95% of samples'], ans: 1,
+      hint: 'The interpretation must mention the interval, the confidence level, and the population parameter in context.',
+      sol: 'Correct wording: &ldquo;We are 95% confident that the interval from 0.22 to 0.34 captures the true proportion of all students at the school who walk to school.&rdquo;' },
+    { g: '3.4', q: 'What does the <strong>95% confidence level</strong> mean?',
+      opts: ['95% of the data lie in the interval', 'If many random samples of the same size were taken and an interval built from each, about 95% of those intervals would capture the true proportion', 'The true proportion has a 95% chance of equaling ' + H, 'The interval is correct 95% of the time for this particular sample'], ans: 1,
+      hint: 'The confidence level describes the long-run success rate of the method.',
+      sol: 'The confidence level is the percentage of intervals, in repeated random sampling, that would capture the parameter.' },
+    { g: '3.4', q: 'A student writes: &ldquo;There is a 95% chance that the true proportion ' + Pp + ' is in my interval (0.22, 0.34).&rdquo; What is wrong with this?',
+      opts: ['Nothing, it is a correct interpretation', 'The parameter ' + Pp + ' is fixed, not random: either it is in this interval or it is not; the 95% describes the method', 'The interval should use 99%', 'It should say &ldquo;sample&rdquo; instead of &ldquo;true proportion&rdquo;'], ans: 1,
+      hint: 'Which quantity varies from sample to sample: the parameter or the interval?',
+      sol: 'The parameter is a fixed (unknown) number. The interval changes with each sample, so the confidence is in the <em>method</em>, not a probability about ' + Pp + '.' },
+    { g: '3.4', q: 'A 95% confidence interval for the proportion who support a measure is (0.46, 0.58). A candidate claims that exactly half (0.50) support it. What does the interval say about this claim?',
+      opts: ['0.50 is plausible, so the interval does not provide convincing evidence against the claim', 'The claim is false because the interval is not centered at 0.50', 'The claim is proven true', 'The interval provides convincing evidence that a majority support the measure'], ans: 0,
+      hint: 'Is 0.50 inside the interval?',
+      sol: '0.50 lies in (0.46, 0.58), so it is a plausible value; there is no convincing evidence against the claim (and also no proof that it is true).' },
+    { g: '3.4', q: 'A 95% confidence interval for the proportion of teens who sleep fewer than 8 hours on school nights is (0.58, 0.66). A news story claims the true proportion is 0.50. What is the best conclusion?',
+      opts: ['0.50 is plausible; the claim is supported', 'Because 0.50 is not in the interval, the interval provides convincing evidence that the true proportion is not 0.50 (it is greater)', 'Nothing can be concluded from an interval', 'The sample is biased'], ans: 1,
+      hint: 'Check whether 0.50 is among the plausible values.',
+      sol: '0.50 is below the entire interval, so there is convincing evidence the proportion is not 0.50; in fact, all plausible values are above 0.50.' },
+    { g: '3.4', q: 'Using the same sample, how does a <strong>99%</strong> confidence interval compare with a <strong>90%</strong> interval?',
+      opts: ['Narrower, because it is more accurate', 'Wider, because <em>z</em>* is larger', 'The same width', 'It depends on ' + H + ' only'], ans: 1,
+      hint: 'Compare critical values: 2.576 versus 1.645.',
+      sol: 'A higher confidence level uses a larger <em>z</em>*, so the margin of error and the interval are wider (more confidence, less precision).' },
+    { g: '3.4', q: 'With the same confidence level, what happens to the width of the interval if the sample size increases (and ' + H + ' stays about the same)?',
+      opts: ['It increases', 'It decreases', 'It stays the same', 'It becomes biased'], ans: 1,
+      hint: 'SE has ' + N + ' in the denominator inside the square root.',
+      sol: 'A larger ' + N + ' makes SE smaller, so the margin of error and the width decrease.' },
+    { g: '3.4', q: 'To cut the margin of error in <strong>half</strong> (same confidence level, same ' + H + '), the sample size must be multiplied by what factor?',
+      type: 'num', ans: 4, tol: 0.01, unit: '&times;',
+      hint: 'ME is proportional to 1/&radic;' + N + '.',
+      sol: 'ME &prop; 1/&radic;' + N + ', so halving ME needs &radic;' + N + ' doubled, i.e. ' + N + ' multiplied by 4.' },
+    { g: '3.4', q: 'A survey with ' + N + ' = 400 has margin of error 0.05 at 95% confidence. What is the approximate margin of error if ' + N + ' = 1600 (same confidence level and ' + H + ')?',
+      type: 'num', ans: 0.025, tol: 0.0005, unit: '',
+      hint: '1600 is 4 times 400.',
+      sol: 'ME is divided by &radic;4 = 2: 0.05/2 = 0.025.' },
+    { g: '3.4', q: 'If you construct 100 <strong>independent</strong> 95% confidence intervals (each from a new random sample), about how many would you expect to capture the true proportion?',
+      type: 'num', ans: 95, tol: 0.5, unit: '',
+      hint: 'Apply the confidence level to 100 intervals.',
+      sol: '95% of 100 &asymp; 95 intervals would capture the true proportion; about 5 would miss it.' },
+    { g: '3.4', q: 'Why might a 95% confidence interval <strong>fail</strong> to contain the true population proportion?',
+      opts: ['The interval was computed incorrectly', 'Random sampling variability: some random samples produce ' + H + ' far from ' + Pp + ', and about 5% of 95% intervals miss', 'Because ' + Pp + ' changes every day', 'Because the sample was too large'], ans: 1,
+      hint: 'The sample proportion varies from sample to sample.',
+      sol: 'Even with perfect procedure, chance can produce an unusual sample; in the long run about 5% of 95% intervals do not capture ' + Pp + '.' },
+    { g: '3.4', q: 'A 99% interval for the proportion of customers who prefer a new product is (0.47, 0.61). A company claims that more than half prefer it. Is the claim supported by the interval?',
+      opts: ['Yes, because the point estimate 0.54 is above 0.50', 'No, because 0.50 is a plausible value (it lies inside the interval), so there is not convincing evidence that more than half prefer it', 'Yes, because the upper limit is above 0.50', 'No, because 99% intervals cannot support claims'], ans: 1,
+      hint: 'Is 0.50 inside (0.47, 0.61)?',
+      sol: 'The interval contains values both below and above 0.50, so the claim of a majority is not convincingly supported.' }
+  ];
+
+  /* ---------- State (restored from localStorage; saved student work is synced by lia-sync) ---------- */
+  var KEY = 'apstats-u3-3-1-to-3-4';
+  var state = [];
+  var container = document.getElementById('problems');
+  var solvedEl = document.getElementById('solvedCount');
+  var pointsEl = document.getElementById('points');
+  var barEl = document.getElementById('progressBar');
+  var finalCard = document.getElementById('finalCard');
+  document.getElementById('totalCount').textContent = problems.length;
+
+  function freshState() { return problems.map(function () { return { used: 0, done: false, correct: false, points: 0 }; }); }
+  function loadState() {
+    try {
+      var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (Array.isArray(s) && s.length === problems.length) return s.map(function (x) {
+        return { used: x.used | 0, done: !!x.done, correct: !!x.correct, points: x.points | 0 };
+      });
+    } catch (e) {}
+    return freshState();
+  }
+  function saveState() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  function parseNumber(raw) {
+    var s = raw.trim().replace(/\s+/g, '').replace(',', '.').replace('−', '-');
+    var m = s.match(/^(-?\d*\.?\d+)\/(-?\d*\.?\d+)$/);
+    if (m) { var d = parseFloat(m[2]); return d === 0 ? NaN : parseFloat(m[1]) / d; }
+    if (/^-?\d*\.?\d+$/.test(s)) return parseFloat(s);
+    return NaN;
+  }
+
+  function dots(used) {
+    var h = '';
+    for (var i = 0; i < MAX_ATTEMPTS; i++) h += '<span class="dot' + (i < used ? ' used' : '') + '"></span>';
+    return h;
+  }
+
+  function build(restore) {
+    container.innerHTML = '';
+    state = restore ? loadState() : freshState();
+    var lastGroup = '';
+    problems.forEach(function (p, i) {
+      if (p.g !== lastGroup) {
+        lastGroup = p.g;
+        var gt = document.createElement('h3');
+        gt.className = 'group-title';
+        gt.innerHTML = GROUPS[p.g];
+        container.appendChild(gt);
+      }
+      var isMC = !!p.opts;
+      var div = document.createElement('div');
+      div.className = 'card problem';
+      var optsHTML = '';
+      if (isMC) {
+        optsHTML = '<div class="options" role="radiogroup" aria-label="Choices for problem ' + (i + 1) + '">' +
+          p.opts.map(function (o, k) {
+            return '<label><input type="radio" name="q' + i + '" value="' + k + '"><span>' + o + '</span></label>';
+          }).join('') + '</div>';
+      }
+      div.innerHTML =
+        '<span class="q-num">PROBLEM ' + (i + 1) + '</span>' +
+        '<p>' + p.q + '</p>' + optsHTML +
+        '<div class="answer-row">' +
+          (isMC ? '' : '<input type="text" inputmode="decimal" autocomplete="off" aria-label="Answer to problem ' + (i + 1) + '" placeholder="Your answer"><span class="unit-label">' + (p.unit || '') + '</span>') +
+          '<button class="btn" type="button">Check</button>' +
+          '<span class="attempts">Attempts left: <span class="dots">' + dots(state[i].used) + '</span></span>' +
+        '</div>' +
+        '<div class="feedback" role="status" aria-live="polite"></div>';
+      container.appendChild(div);
+
+      var input = div.querySelector('input[type="text"]');
+      var radios = div.querySelectorAll('input[type="radio"]');
+      var btn = div.querySelector('button');
+      var fb = div.querySelector('.feedback');
+      var dotsEl = div.querySelector('.dots');
+
+      function show(cls, html) { fb.className = 'feedback show ' + cls; fb.innerHTML = html; }
+      function lock() {
+        btn.disabled = true;
+        if (input) input.disabled = true;
+        Array.prototype.forEach.call(radios, function (r) { r.disabled = true; r.parentNode.classList.add('disabled'); });
+      }
+      function showFinal() {
+        if (state[i].correct) {
+          if (isMC) radios[p.ans].parentNode.classList.add('picked-right');
+          show('ok', '&#10003; Correct! Well done.<div class="sol">' + p.sol + '</div>');
+        } else {
+          if (isMC) radios[p.ans].parentNode.classList.add('picked-right');
+          show('bad', '&#10007; Not quite. You used all 3 attempts.<div class="sol"><strong>Solution:</strong> ' + p.sol + '</div>');
+        }
+        lock();
+      }
+
+      // restore saved progress
+      if (state[i].done) showFinal();
+      else if (state[i].used > 0) {
+        var l0 = MAX_ATTEMPTS - state[i].used;
+        show('bad', 'You have ' + l0 + ' attempt' + (l0 > 1 ? 's' : '') + ' left.' +
+          (state[i].used >= 2 ? '<div class="sol"><strong>Hint:</strong> ' + p.hint + '</div>' : ''));
+      }
+
+      function check() {
+        var st = state[i];
+        if (st.done) return;
+        var ok, picked = null;
+        if (isMC) {
+          Array.prototype.forEach.call(radios, function (r) { if (r.checked) picked = r; });
+          if (!picked) { show('hint', 'Please select an answer first. (This did not use an attempt.)'); return; }
+          ok = parseInt(picked.value, 10) === p.ans;
+        } else {
+          var v = parseNumber(input.value);
+          if (isNaN(v)) { show('hint', 'Please enter a number, e.g. 0.0484 or 3/8. (This did not use an attempt.)'); return; }
+          ok = Math.abs(v - p.ans) <= p.tol;
+        }
+        st.used++;
+        dotsEl.innerHTML = dots(st.used);
+        var left = MAX_ATTEMPTS - st.used;
+        if (ok) {
+          st.done = st.correct = true;
+          st.points = MAX_ATTEMPTS - st.used + 1;
+          if (picked) picked.parentNode.classList.add('picked-right');
+          show('ok', '&#10003; Correct! Well done.' + (st.used === 1 ? ' First try!' : '') + '<div class="sol">' + p.sol + '</div>');
+          lock();
+        } else if (left === 0) {
+          st.done = true;
+          if (picked) picked.parentNode.classList.add('picked-wrong');
+          if (isMC) radios[p.ans].parentNode.classList.add('picked-right');
+          show('bad', '&#10007; Not quite. You have used all 3 attempts.<div class="sol"><strong>Solution:</strong> ' + p.sol + '</div>');
+          lock();
+        } else {
+          var msg = '&#10007; Not correct. You have ' + left + ' attempt' + (left > 1 ? 's' : '') + ' left.';
+          if (st.used >= 2) msg += '<div class="sol"><strong>Hint:</strong> ' + p.hint + '</div>';
+          show('bad', msg);
+          if (input) input.select();
+          if (picked) picked.checked = false;
+        }
+        saveState();
+        update();
+      }
+      btn.addEventListener('click', check);
+      if (input) input.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
+    });
+    update();
+  }
+
+  function update() {
+    var solved = 0, pts = 0, finished = 0;
+    state.forEach(function (s) {
+      if (s.correct) solved++;
+      if (s.done) finished++;
+      pts += s.points;
+    });
+    solvedEl.textContent = solved;
+    pointsEl.textContent = pts + ' / ' + (problems.length * MAX_ATTEMPTS);
+    barEl.style.width = (finished / problems.length * 100) + '%';
+    try { if (window.LiaSync && LiaSync.report) LiaSync.report({ solved: finished, total: problems.length, score: pts, max: problems.length * MAX_ATTEMPTS }); } catch (e) {}
+    if (finished === problems.length) {
+      var pct = Math.round(solved / problems.length * 100);
+      var msg = 'You solved ' + solved + ' of ' + problems.length + ' problems (' + pct + '%) and earned ' + pts + ' points. ';
+      msg += pct === 100 ? 'Excellent work!' : pct >= 70 ? 'Good job! Review the solutions you missed.' : 'Keep practicing — review the lesson and try again.';
+      document.getElementById('finalMsg').textContent = msg;
+      finalCard.classList.add('show');
+    } else {
+      finalCard.classList.remove('show');
+    }
+  }
+
+  var resetBtn = document.getElementById('resetBtn');
+  if (resetBtn) resetBtn.addEventListener('click', function () {
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    build(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  build(true);
+})();
+</script>
+</body>
+</html>
