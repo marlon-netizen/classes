@@ -14,7 +14,8 @@ document.write('<script src="../'+a+'/lia-config.js"><\/script>');})();
 </script>
 <style>
 :root{--bg:#f3f0e9;--surface:#fffdf9;--surface-2:#f8f5ee;--ink:#1e2937;--muted:#5a6575;--line:#ddd6c7;--primary:#1f3a5f;--primary-ink:#fff;--accent:#2b7a76;--warm:#b4763a;--warm-soft:#f6ebdb;--good:#2c7a57;--good-soft:#e1f1e8;--mid:#6c8a2f;--mid-soft:#eef2dc;--low:#b4763a;--low-soft:#f6ebdb;--bad:#a94a3f;--bad-soft:#f6e4e1;--blue-soft:#e6edf5}
-@media (prefers-color-scheme: dark){:root{--bg:#11161d;--surface:#18202a;--surface-2:#1d2631;--ink:#e5e9ef;--muted:#9aa5b5;--line:#2d3947;--primary:#9dbce6;--primary-ink:#0f1722;--accent:#58b5ae;--warm:#d9a165;--warm-soft:#2d2519;--good:#5cc08f;--good-soft:#183024;--mid:#a6c25a;--mid-soft:#262e16;--low:#d9a165;--low-soft:#2d2519;--bad:#e08a7d;--bad-soft:#331e1c;--blue-soft:#1b2838}}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#11161d;--surface:#18202a;--surface-2:#1d2631;--ink:#e5e9ef;--muted:#9aa5b5;--line:#2d3947;--primary:#9dbce6;--primary-ink:#0f1722;--accent:#58b5ae;--warm:#d9a165;--warm-soft:#2d2519;--good:#5cc08f;--good-soft:#183024;--mid:#a6c25a;--mid-soft:#262e16;--low:#d9a165;--low-soft:#2d2519;--bad:#e08a7d;--bad-soft:#331e1c;--blue-soft:#1b2838}}
+:root[data-theme="dark"]{--bg:#11161d;--surface:#18202a;--surface-2:#1d2631;--ink:#e5e9ef;--muted:#9aa5b5;--line:#2d3947;--primary:#9dbce6;--primary-ink:#0f1722;--accent:#58b5ae;--warm:#d9a165;--warm-soft:#2d2519;--good:#5cc08f;--good-soft:#183024;--mid:#a6c25a;--mid-soft:#262e16;--low:#d9a165;--low-soft:#2d2519;--bad:#e08a7d;--bad-soft:#331e1c;--blue-soft:#1b2838}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 header.top{background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
@@ -58,12 +59,20 @@ dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface)
 .tag{display:inline-block;font-size:.66rem;font-weight:700;padding:0 7px;border-radius:99px;background:var(--blue-soft);color:var(--primary);text-transform:uppercase;letter-spacing:.05em}
 .tag.r{background:var(--warm-soft);color:var(--warm)}
 .mx .lnk{font-size:.74rem;font-weight:600;background:none;border:0;color:var(--primary);padding:0;text-decoration:underline;cursor:pointer;text-transform:none;letter-spacing:0}
+
+header .wrap>.hr,header.top .wrap>.hr{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;justify-content:flex-end}
+.who{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;font-size:.85rem;color:#cfd8e6}
+.who a{white-space:nowrap;text-decoration:none;color:#f3f0e9;border:1px solid rgba(255,255,255,.35);border-radius:8px;padding:4px 10px;font-weight:600;font-size:.82rem}.who a:hover{background:rgba(255,255,255,.14)}
+.who select{width:auto!important;font:inherit;font-size:.85rem;padding:4px 8px;border-radius:8px}.who #whoMail{opacity:.85}.who button,.hr .tg{white-space:nowrap}
+select option{background:#fff;color:#1e2937}:root[data-theme="dark"] select option{background:#18202a;color:#e5e9ef}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) select option{background:#18202a;color:#e5e9ef}}
+header .tg{font:inherit;font-weight:600;font-size:.8rem;border-radius:8px;padding:4px 11px;cursor:pointer;background:transparent;color:#f3f0e9;border:1px solid rgba(255,255,255,.5)}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
   <div><div class="eyebrow">Assign lessons · <span id="areaName"></span></div><div class="school">Lincoln International Academy</div></div>
-  <div class="who" id="who" hidden><select id="areaSel" aria-label="Subject" style="padding:4px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.5);background:transparent;color:#f3f0e9"><option value="faith-formation">Faith Formation</option><option value="ciencias-sociales">Ciencias Sociales</option><option value="math-physics">Math &amp; Physics</option></select><a href="../index.html">← Teacher tools</a><a id="lnkScores" href="scores.html">Scores</a><a id="lnkAdmin" href="admin.html">Students</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
+  <div class="who" id="who" hidden><select id="areaSel" aria-label="Subject" style="border:1px solid rgba(255,255,255,.5);background:transparent;color:#f3f0e9"><option value="faith-formation">Faith Formation</option><option value="ciencias-sociales">Ciencias Sociales</option><option value="math-physics">Math &amp; Physics</option></select><a href="../index.html">← Teacher tools</a><a id="lnkScores" href="scores.html">Scores</a><a id="lnkAdmin" href="admin.html">Students</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
 </div></header>
 <main><div class="wrap">
   <div class="card login" id="loginCard" hidden>
@@ -153,12 +162,23 @@ $('#mx').addEventListener('click',function(e){
 });
 $('#btnRefresh').addEventListener('click',function(){ load(); }); $('#btnOut').addEventListener('click',function(){ out(''); });
 $('#areaName').textContent=CFG.areaName||'';
-(function(){var s=document.getElementById('areaSel'); if(s){ s.value=window.LIA_TEACHER_AREA; s.style.color='#f3f0e9'; s.addEventListener('change',function(){ location.search='?area='+s.value; }); } })();
+(function(){var s=document.getElementById('areaSel'); if(s){ s.value=window.LIA_TEACHER_AREA; s.addEventListener('change',function(){ location.search='?area='+s.value; }); } })();
 $('#lnkAdmin').href='admin.html?area='+window.LIA_TEACHER_AREA; $('#lnkScores').href='scores.html?area='+window.LIA_TEACHER_AREA; document.title='Assign lessons · '+(CFG.areaName||'');
 $('#loginForm').addEventListener('submit',function(ev){ ev.preventDefault(); $('#lBtn').disabled=true; msg($('#lErr'),''); auth({email:$('#lEmail').value.trim(),password:$('#lPass').value},'password').then(function(j){ saveSess(j); sess.email=$('#lEmail').value.trim(); return load(); }).catch(function(e){ msg($('#lErr'),e.message,'err'); }).then(function(){ $('#lBtn').disabled=false; }); });
 if(!LIVE) msg($('#setupMsg'),'Supabase is not connected yet. Fill in the subject folder\'s lia-config.js (see supabase/README.md).','info');
 else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=null; } if(sess) load().catch(function(){ out(''); }); else $('#loginCard').hidden=false; }
 })();
+</script>
+<script>
+(function(){var r=document.documentElement,mq=matchMedia('(prefers-color-scheme: dark)');
+try{var t=localStorage.getItem('lia-theme');if(t==='light'||t==='dark')r.setAttribute('data-theme',t);}catch(e){}
+var wrap=document.querySelector('header .wrap'),who=document.getElementById('who');if(!wrap)return;
+var hr=document.createElement('div');hr.className='hr';if(who)hr.appendChild(who);wrap.appendChild(hr);
+var b=document.createElement('button');b.type='button';b.id='btnTheme';b.className='ghost small tg';hr.appendChild(b);
+function eff(){return r.getAttribute('data-theme')||(mq.matches?'dark':'light');}
+function lab(){b.textContent=eff()==='dark'?'☀ Light':'☾ Dark';b.setAttribute('aria-label','Switch to '+(eff()==='dark'?'light':'dark')+' mode');}
+b.addEventListener('click',function(){var n=eff()==='dark'?'light':'dark';r.setAttribute('data-theme',n);try{localStorage.setItem('lia-theme',n);}catch(e){}lab();});
+if(mq.addEventListener)mq.addEventListener('change',lab);lab();})();
 </script>
 </body>
 </html>
