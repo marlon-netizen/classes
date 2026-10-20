@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physics II – Lesson 11.2 Measuring Simple Harmonic Motion | Lincoln International Academy</title>
+<meta name="description" content="Interactive study page for Lesson 11.2: Measuring Simple Harmonic Motion – amplitude, period and frequency, the simple pendulum and the mass-spring system, with worked examples and practice problems.">
+<script>try{var t=localStorage.getItem('lia-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f0e9; --surface:#fffdf9; --surface-2:#f8f5ee; --ink:#1e2937; --muted:#5a6575;
+  --line:#ddd6c7; --primary:#1f3a5f; --primary-ink:#ffffff; --accent:#2b7a76; --accent-soft:#e1efed;
+  --blue-soft:#e6edf6; --warm:#b4763a; --warm-soft:#f6ebdb; --good:#2c7a57; --good-soft:#e1f1e8;
+  --bad:#a94a3f; --bad-soft:#f6e4e1; --hot:#c58a4d; --cold:#4f86a8; --work:#2b7a76;
+  --shadow:0 1px 2px rgba(30,41,55,.06),0 4px 14px rgba(30,41,55,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+    --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+    --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+    --bad:#e08a7d; --bad-soft:#331e1c; --hot:#c58a4d; --cold:#6aa3c7; --work:#58b5ae;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+  --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+  --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+  --bad:#e08a7d; --bad-soft:#331e1c; --hot:#c58a4d; --cold:#6aa3c7; --work:#58b5ae;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 'Oswald','Arial Narrow',sans-serif}
+h1,h2,h3,h4{font-family:'Oswald',sans-serif;font-weight:600;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:'Oswald',sans-serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:#d3b48a;margin-bottom:2px}
+.meta{display:flex;gap:26px;flex-wrap:wrap}
+.meta div{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#aab7ca}
+.meta b{display:block;font-size:1.05rem;text-transform:none;letter-spacing:0;color:#f3f0e9;font-weight:600}
+.lessonbar{background:var(--surface);border-bottom:1px solid var(--line)}
+.lessonbar .wrap{padding-top:14px;padding-bottom:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center}
+.lessonbar h1{font-size:clamp(1.15rem,2.6vw,1.45rem);margin:0}
+.lessonbar small{color:var(--muted)}
+.overall{display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--muted)}
+.bar{width:150px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+
+/* nav */
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:8px}
+nav.tabs button{appearance:none;border:0;background:none;font:inherit;font-weight:600;color:var(--muted);padding:10px 16px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;border-radius:8px 8px 0 0}
+nav.tabs button:hover{color:var(--ink);background:var(--surface-2)}
+nav.tabs button[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--warm)}
+:root[data-theme="dark"] nav.tabs button[aria-selected="true"]{color:var(--primary)}
+
+main{padding:26px 0 60px}
+section.panel{display:none}
+section.panel.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card>h3:first-child,.card>h2:first-child{margin-top:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.callout.blue{border-color:var(--primary);background:var(--blue-soft)}
+.callout b.t{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;color:var(--muted)}
+.law{font-family:'Oswald',sans-serif;font-size:1.15rem;font-style:italic}
+.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary)}
+.objectives{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.objectives li{display:flex;gap:12px;align-items:flex-start}
+.objectives li span{flex:none;width:26px;height:26px;border-radius:50%;background:var(--primary);color:var(--primary-ink);font-weight:700;font-size:.85rem;display:grid;place-items:center;margin-top:2px}
+
+/* math */
+.eq{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.2rem;text-align:center;padding:10px 6px;overflow-x:auto}
+.eq.big{font-size:1.35rem}
+.eq i,.math i{font-style:italic}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.15}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em .08em}
+.frac>span:last-child{padding:.08em .25em 0}
+sub{font-size:.7em;line-height:0}
+.math{font-family:"Cambria Math",Cambria,Georgia,serif;white-space:nowrap}
+
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left}
+th{background:var(--surface-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+
+/* controls */
+button.btn,.btn{appearance:none;font:inherit;font-weight:600;font-size:.92rem;border-radius:8px;padding:8px 16px;cursor:pointer;border:1px solid var(--primary);background:var(--primary);color:var(--primary-ink);transition:filter .15s,transform .05s}
+button.btn:hover{filter:brightness(1.12)} button.btn:active{transform:translateY(1px)}
+button.btn.ghost{background:transparent;color:var(--primary)}
+button.btn.ghost:hover{background:var(--blue-soft);filter:none}
+button.btn[disabled]{opacity:.45;cursor:not-allowed}
+:root[data-theme="dark"] button.btn.ghost{color:var(--primary)}
+input[type=text]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:150px}
+input[type=text]:focus,button:focus-visible,input[type=range]:focus-visible,summary:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:1px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.sliderrow{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:center;margin:8px 0}
+.sliderrow output{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+@media (max-width:560px){.sliderrow{grid-template-columns:1fr 80px}.sliderrow label{grid-column:1/-1}}
+
+details{border:1px solid var(--line);border-radius:8px;padding:2px 14px;margin:10px 0;background:var(--surface-2)}
+summary{cursor:pointer;font-weight:600;padding:8px 0}
+details[open]>summary{margin-bottom:4px}
+
+/* readouts */
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+.readout{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.readout small{display:block;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
+.readout b{font-size:1.4rem;font-family:'Oswald',sans-serif;font-variant-numeric:tabular-nums}
+.status{padding:9px 14px;border-radius:8px;font-weight:600;font-size:.92rem;margin-top:8px;background:var(--good-soft);color:var(--good)}
+.status.warn{background:var(--warm-soft);color:var(--warm)}
+.status.bad{background:var(--bad-soft);color:var(--bad)}
+svg.flow{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+svg.flow text{fill:var(--ink);font:600 12px 'Oswald','Arial Narrow',sans-serif}
+svg.flow .res-t{fill:#fff}
+.effbar{position:relative;height:16px;background:var(--line);border-radius:99px;margin:26px 0 30px}
+.effbar i.fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--accent);transition:width .15s}
+.effbar span.tick{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);opacity:.55}
+.effbar span.tick em{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-style:normal;font-size:.68rem;color:var(--muted);white-space:nowrap}
+.effbar span.tick.hi em{top:-20px}
+
+canvas{width:100%;max-width:520px;height:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);display:block}
+.meter{height:14px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0}
+.meter i{display:block;height:100%;background:var(--warm);width:0;transition:width .2s}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+
+/* dice */
+.hist{display:flex;align-items:flex-end;gap:4px;height:170px;border-bottom:2px solid var(--line);padding:0 2px;margin-top:12px}
+.hist div{flex:1;position:relative;background:var(--accent);border-radius:4px 4px 0 0;min-height:1px;transition:height .25s}
+.hist div b{position:absolute;top:-19px;left:0;right:0;text-align:center;font-size:.7rem;color:var(--muted);font-weight:600}
+.hist div.ghost{background:transparent;border:1.5px dashed var(--warm);border-bottom:0}
+.histx{display:flex;gap:4px;font-size:.78rem;color:var(--muted);text-align:center;padding:0 2px}
+.histx span{flex:1}
+.dice{font-size:2.2rem;letter-spacing:.2em;min-height:1.4em}
+
+/* stepper */
+.example{margin-bottom:22px}
+.example header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px}
+.problem-box{background:var(--blue-soft);border-radius:10px;padding:14px 16px;margin:10px 0 16px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.step{display:none;border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden;background:var(--surface)}
+.step.show{display:block;animation:fade .3s}
+.step>h4{margin:0;padding:9px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;font-family:'Oswald','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:.09em;font-size:.82rem;color:var(--primary)}
+.step>h4 .n{width:24px;height:24px;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-size:.8rem;letter-spacing:0}
+.step .body{padding:12px 16px}
+.step .ask{border-top:1px dashed var(--line);padding:12px 16px;background:var(--warm-soft)}
+.step .ask p{margin:0 0 8px;font-weight:600}
+.opt{display:block;width:100%;text-align:left;font:inherit;padding:9px 12px;margin:6px 0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--good);background:var(--good-soft);color:var(--ink)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin-top:8px;font-size:.93rem}
+.fb.ok{color:var(--good)} .fb.no{color:var(--bad)} .fb.near{color:var(--warm)}
+.fb b{font-weight:700}
+.dots{display:flex;gap:6px;margin:6px 0 14px}
+.dots i{width:28px;height:6px;border-radius:99px;background:var(--line)} .dots i.on{background:var(--accent)}
+.givenlist{display:flex;gap:10px 28px;flex-wrap:wrap;margin:4px 0}
+.givenlist span{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.1rem}
+.unk{color:var(--bad);font-style:italic}
+.boxed{display:inline-block;border:1.5px solid var(--bad);padding:2px 10px;border-radius:4px}
+
+/* practice */
+.setpicker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.setpicker button{appearance:none;font:inherit;font-weight:600;background:var(--surface);border:1px solid var(--line);color:var(--ink);padding:9px 14px;border-radius:99px;cursor:pointer}
+.setpicker button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.setpicker button small{opacity:.75;font-weight:500;margin-left:4px}
+.prob{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 20px;margin-bottom:14px;box-shadow:var(--shadow);position:relative}
+.prob.done{border-color:var(--good)}
+.prob .num{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;display:flex;justify-content:space-between}
+.prob .num .badge{color:var(--good)}
+.partrow{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin:8px 0}
+.partrow label{min-width:210px;font-size:.93rem}
+.partrow .u{color:var(--muted);min-width:34px}
+.partrow .ptag{font-weight:700}
+.prob .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.hintbox,.solbox{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.95rem}
+.hintbox{background:var(--warm-soft)} .solbox{background:var(--blue-soft)}
+.solbox ol{margin:6px 0 0;padding-left:20px}
+.pnote{color:var(--muted);font-size:.86rem}
+.sethead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.sethead p{margin:0;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.linkbtn{background:none;border:0;color:var(--accent);font:inherit;text-decoration:underline;cursor:pointer;padding:0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{appearance:none;border:0;background:none;font:inherit;font-weight:700;padding:8px 18px;cursor:pointer;color:var(--ink);min-width:54px;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink)}
+.ctlrow{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:8px 0}
+.ctlrow label.l{font-weight:600;min-width:100px}
+svg.vt{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+svg.vt text{fill:var(--muted);font:600 11px 'Oswald','Arial Narrow',sans-serif}
+svg.vt .lbl{fill:var(--ink)}
+svg.vt .axis{stroke:var(--muted);stroke-width:1.4}
+svg.vt .grid{stroke:var(--line);stroke-width:1}
+select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.vartable{width:100%;max-width:520px}
+.vartable td{padding:6px 10px}
+.vartable td:first-child{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.1rem}
+.eqcard{background:var(--blue-soft);border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin-top:10px}
+tr.hl td{background:var(--accent-soft);font-weight:700}
+.subhead{margin:26px 0 10px;font-size:1rem;font-family:'Oswald','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--primary);border-bottom:2px solid var(--line);padding-bottom:4px}
+.fig{margin:10px 0 6px}
+.figcap{font-size:.82rem;color:var(--muted);text-align:center}
+.opt input{margin-right:10px}
+
+body{letter-spacing:.015em}
+h1,h2,h3,h4{letter-spacing:.01em}
+.school{font-weight:700;letter-spacing:.02em}
+header.top{position:relative}
+.theme{position:absolute;top:12px;right:max(16px,calc((100vw - 1020px)/2 + 16px));display:inline-flex;border:1px solid rgba(255,255,255,.35);border-radius:99px;overflow:hidden;background:rgba(255,255,255,.08);z-index:5}
+.theme button{display:inline-flex;gap:6px;align-items:center;appearance:none;border:0;background:none;color:#e9e3f0;font:inherit;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;cursor:pointer}
+.theme button:hover{background:rgba(255,255,255,.14)}
+.theme button[aria-pressed="true"]{background:#f3f0e9;color:#1b2f4b}
+.theme button:focus-visible{outline:3px solid #e0b79c;outline-offset:-3px}
+@media (max-width:620px){header.top .wrap{padding-top:56px}}
+.lbl{fill:var(--ink)}
+.radic{display:inline-flex;align-items:center;vertical-align:middle}
+.radic::before{content:"\221A";font-size:1.7em;line-height:1;margin-right:1px}
+.radic>*{border-top:1.5px solid currentColor;padding:.05em .25em 0}
+.ctlrow select{max-width:100%}
+</style>
+<!--LIA-SYNC-START--><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+
+<header class="top">
+  <div class="theme" role="group" aria-label="Color theme">
+    <button type="button" data-theme-set="light" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3L17 7M7 17l-1.7 1.7"/></g></svg><span>Light</span></button>
+    <button type="button" data-theme-set="dark" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><span>Dark</span></button>
+  </div>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Student Learning Page</div>
+      <div class="school">Lincoln International Academy</div>
+    </div>
+    <div class="meta">
+      <div>Class<b>Physics II</b></div>
+      <div>Teacher<b>Eduardo Vásquez</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="lessonbar">
+  <div class="wrap">
+    <div>
+      <h1>Lesson 11.2 · Measuring Simple Harmonic Motion</h1>
+      <small>Chapter 11 · Vibrations and Waves · Section 2</small>
+    </div>
+    <div class="overall" aria-live="polite">
+      <span id="overallText">0 of 0 practice problems solved</span>
+      <div class="bar"><i id="overallBar"></i></div>
+    </div>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="Lesson sections">
+  <div class="wrap" role="tablist">
+    <button role="tab" id="t-review" data-tab="review" aria-selected="true">1 · Review</button>
+    <button role="tab" id="t-examples" data-tab="examples" aria-selected="false">2 · Worked Examples</button>
+    <button role="tab" id="t-practice" data-tab="practice" aria-selected="false">3 · Practice</button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+
+<!-- ===================== REVIEW ===================== -->
+<section class="panel active" id="review" aria-labelledby="t-review">
+
+  <div class="card">
+    <h2>What you should be able to do</h2>
+    <ul class="objectives">
+      <li><span>1</span><div><b>Identify the amplitude</b> of a vibration.</div></li>
+      <li><span>2</span><div><b>Recognize the relationship between period and frequency.</b></div></li>
+      <li><span>3</span><div><b>Calculate the period and frequency</b> of an object vibrating with simple harmonic motion.</div></li>
+    </ul>
+    <p class="pnote" style="margin-top:12px"><b>Key terms:</b> amplitude · period · frequency. &nbsp;In this lesson: <a href="#part-a">Amplitude, period, frequency</a> · <a href="#part-b">Simple pendulum</a> · <a href="#part-c">Mass-spring system</a> · <a href="#part-d">What changes the period?</a></p>
+  </div>
+
+  <div class="card" id="part-a">
+    <span class="pill">Part A</span>
+    <h2>Amplitude, period and frequency</h2>
+    <p>In the absence of friction, a moving trapeze always returns to the same maximum displacement after each swing. That maximum displacement from the equilibrium position is the <b>amplitude</b>. A pendulum's amplitude is measured by the <em>angle</em> between its equilibrium position and its maximum displacement; for a mass-spring system it is the <em>greatest stretch or compression</em> of the spring.</p>
+    <p>Imagine a ride swinging from maximum displacement on one side of equilibrium to maximum displacement on the other side and back again: that is <b>one complete cycle</b>.</p>
+    <div class="grid2">
+      <div class="callout blue"><b class="t">Period, <i>T</i></b>The time it takes to complete one full cycle. Unit: second (s). After a time <i>T</i> the object is back where it started.</div>
+      <div class="callout blue"><b class="t">Frequency, <i>f</i></b>The number of cycles (vibrations) per unit of time. Unit: hertz (Hz = s<sup>−1</sup>).</div>
+    </div>
+    <p>Period and frequency are both about time, which makes them easy to confuse. The period is <em>time per cycle</em>; the frequency is <em>cycles per time</em>, so they are <b>inverses</b> of each other:</p>
+    <div class="eq big"><i>f</i> = <span class="frac"><span>1</span><span><i>T</i></span></span> &nbsp;&nbsp;or&nbsp;&nbsp; <i>T</i> = <span class="frac"><span>1</span><span><i>f</i></span></span></div>
+    <p>Example: if one complete cycle takes 20 s, then <i>f</i> = 1/20 s = 0.05 Hz. In any problem where you know one of them, you can calculate the other.</p>
+
+    <h3 class="subhead">Try it: change the amplitude and the period</h3>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="oaA">Amplitude <i>A</i></label><input id="oaA" type="range" min="2" max="10" step="0.5" value="6"><output id="oaAo"></output></div>
+        <div class="sliderrow"><label for="oaT">Period <i>T</i></label><input id="oaT" type="range" min="0.5" max="4" step="0.1" value="2"><output id="oaTo"></output></div>
+        <div class="row"><button class="btn" id="oaGo" type="button">Start</button><button class="btn ghost" id="oaRst" type="button">Reset</button></div>
+        <div class="readouts">
+          <div class="readout"><small>Frequency <i>f</i> = 1/<i>T</i></small><b id="oaF">—</b></div>
+          <div class="readout"><small>Cycles completed</small><b id="oaN">0</b></div>
+          <div class="readout"><small>Displacement <i>x</i></small><b id="oaX">—</b></div>
+        </div>
+        <div class="status" id="oaStatus" aria-live="polite">Press Start. Then change <i>A</i> and <i>T</i> and watch which one changes the other.</div>
+      </div>
+      <div id="oaScene"></div>
+    </div>
+    <div id="oaGraph"></div>
+    <p class="pnote">The graph shows displacement <i>x</i> against time for three cycles. The distance from the centre line to the top is the amplitude; the horizontal distance of one full wave is the period. Notice that changing the <b>amplitude</b> does <b>not</b> change <i>T</i> or <i>f</i> (as long as the spring obeys Hooke's law).</p>
+
+    <h3 class="subhead">Measures of simple harmonic motion (Figure 2.2)</h3>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Term</th><th>Definition</th><th>SI unit</th></tr></thead>
+      <tbody>
+        <tr><td><b>amplitude</b></td><td>maximum displacement from equilibrium</td><td>radian (rad) for a pendulum angle, metre (m) for a spring</td></tr>
+        <tr><td><b>period, <i>T</i></b></td><td>time it takes to complete one full cycle</td><td>second (s)</td></tr>
+        <tr><td><b>frequency, <i>f</i></b></td><td>number of cycles or vibrations per unit of time</td><td>hertz (Hz = s<sup>−1</sup>)</td></tr>
+      </tbody></table></div>
+  </div>
+
+  <div class="card" id="part-b">
+    <span class="pill">Part B</span>
+    <h2>The period of a simple pendulum</h2>
+    <p>A simple pendulum and a mass-spring system both vibrate with simple harmonic motion, but each needs its own equation because the period depends on different physical factors. For a pendulum, the length is measured from the pivot to the centre of mass of the bob. Pull two pendulums of the <b>same length</b> but different bob masses aside by the same small distance and release them together: they complete each vibration in the same time. Change the amplitude of one (for small angles) and the periods are still equal. For small amplitudes the period of a pendulum does <b>not</b> depend on the mass or on the amplitude. It <b>does</b> depend on the <b>length</b> and on the <b>free-fall acceleration</b>.</p>
+    <div class="callout blue"><b class="t">Period of a simple pendulum in simple harmonic motion</b>
+      <div class="eq big"><i>T</i> = 2π <span class="radic"><span class="frac"><span><i>L</i></span><span><i>a</i><sub>g</sub></span></span></span></div>
+      <p style="margin:0">period = 2π × square root of (length divided by free-fall acceleration). Use <i>a</i><sub>g</sub> = 9.81 m/s² on Earth's surface unless the problem gives another value.</p>
+    </div>
+    <p><b>Why?</b> A shorter pendulum has a smaller arc to travel while the acceleration from the restoring force stays the same, so it has a shorter period. Mass does not matter for the same reason free fall does not depend on mass: a heavier bob feels a bigger restoring force but also needs a bigger force to reach the same acceleration. For small angles (less than 15°) a larger amplitude gives a larger restoring force and a longer path, and the two effects cancel.</p>
+
+    <h3 class="subhead">Pendulum lab: which settings change the period?</h3>
+    <div class="grid2">
+      <div>
+        <div class="ctlrow"><label class="l" for="pnWorld">World</label>
+          <select id="pnWorld"><option value="9.81">Earth (9.81 m/s²)</option><option value="1.62">Moon (1.62 m/s²)</option><option value="3.71">Mars (3.71 m/s²)</option><option value="8.87">Venus (8.87 m/s²)</option><option value="24.79">Jupiter (24.79 m/s²)</option></select></div>
+        <div class="sliderrow"><label for="pnL">Length <i>L</i></label><input id="pnL" type="range" min="0.2" max="10" step="0.05" value="2"><output id="pnLo"></output></div>
+        <div class="sliderrow"><label for="pnM">Bob mass</label><input id="pnM" type="range" min="0.1" max="5" step="0.1" value="1"><output id="pnMo"></output></div>
+        <div class="sliderrow"><label for="pnA">Amplitude θ</label><input id="pnA" type="range" min="2" max="14" step="1" value="10"><output id="pnAo"></output></div>
+        <div class="row"><button class="btn" id="pnGo" type="button">Start</button><button class="btn ghost" id="pnRst" type="button">Reset</button></div>
+        <div class="readouts">
+          <div class="readout"><small>Period <i>T</i></small><b id="pnT">—</b></div>
+          <div class="readout"><small>Frequency <i>f</i></small><b id="pnF">—</b></div>
+          <div class="readout"><small>Swings completed</small><b id="pnN">0</b></div>
+        </div>
+        <div class="status" id="pnStatus" aria-live="polite"></div>
+      </div>
+      <div id="pnScene"></div>
+    </div>
+    <div id="pnGraph"></div>
+    <p class="pnote">Solid curve: the selected world. Dashed: Earth. Drag the <b>mass</b> and <b>amplitude</b> sliders – the readouts do not move. Drag the <b>length</b> or switch <b>world</b> – they do.</p>
+    <div class="callout warm"><b class="t">Did you know?</b>Galileo is credited as the first person to notice that the motion of a pendulum depends on its length and is independent of its amplitude (for small angles). He supposedly observed a swinging chandelier at a cathedral in Pisa and measured its frequency by timing the swings with his pulse.</div>
+  </div>
+
+  <div class="card" id="part-c">
+    <span class="pill">Part C</span>
+    <h2>The period of a mass-spring system</h2>
+    <p>In a mass-spring system Hooke's law gives the restoring force, <i>F</i><sub>elastic</sub> = −<i>kx</i>, so the force depends on the displacement and the spring constant, <b>not on the mass</b>. A heavier mass therefore adds <em>inertia</em> without adding force: it accelerates less and takes more time to complete a cycle. So <b>a larger mass means a longer period</b>. A larger spring constant <i>k</i> (a stiffer spring) means a larger force for the same stretch, a larger acceleration and a <b>shorter period</b>.</p>
+    <div class="callout blue"><b class="t">Period of a mass-spring system in simple harmonic motion</b>
+      <div class="eq big"><i>T</i> = 2π <span class="radic"><span class="frac"><span><i>m</i></span><span><i>k</i></span></span></span></div>
+      <p style="margin:0">period = 2π × square root of (mass divided by spring constant). Changing the amplitude does not change the period – this holds only while the spring obeys Hooke's law.</p>
+    </div>
+
+    <h3 class="subhead">Mass-spring lab</h3>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="msM">Mass <i>m</i></label><input id="msM" type="range" min="0.1" max="5" step="0.1" value="1"><output id="msMo"></output></div>
+        <div class="sliderrow"><label for="msK">Spring constant <i>k</i></label><input id="msK" type="range" min="10" max="200" step="5" value="40"><output id="msKo"></output></div>
+        <div class="sliderrow"><label for="msA">Amplitude <i>A</i></label><input id="msA" type="range" min="2" max="10" step="0.5" value="6"><output id="msAo"></output></div>
+        <div class="row"><button class="btn" id="msGo" type="button">Start</button><button class="btn ghost" id="msRst" type="button">Reset</button></div>
+        <div class="readouts">
+          <div class="readout"><small>Period <i>T</i></small><b id="msT">—</b></div>
+          <div class="readout"><small>Frequency <i>f</i></small><b id="msF">—</b></div>
+          <div class="readout"><small>Cycles completed</small><b id="msN">0</b></div>
+        </div>
+        <div class="status" id="msStatus" aria-live="polite"></div>
+      </div>
+      <div id="msScene"></div>
+    </div>
+    <div id="msGraph"></div>
+    <p class="pnote">Solid curve: your spring. Dashed: a spring four times as stiff (4<i>k</i>) – its period is exactly half as long for every mass.</p>
+  </div>
+
+  <div class="card" id="part-d">
+    <span class="pill">Part D</span>
+    <h2>What changes the period? Scaling calculator</h2>
+    <p>Because <i>T</i> contains a <b>square root</b>, changing a quantity by a factor changes the period by the <em>square root</em> of that factor (or its inverse). Choose a system, a quantity and a factor, and see what happens to <i>T</i> and <i>f</i>.</p>
+    <div class="ctlrow">
+      <label class="l" for="scSys">System</label>
+      <select id="scSys"><option value="p">Simple pendulum</option><option value="s">Mass-spring system</option></select>
+      <label class="l" for="scVar">Change</label>
+      <select id="scVar"></select>
+      <label class="l" for="scFac">by a factor of</label>
+      <select id="scFac"><option value="0.25">¼</option><option value="0.5">½</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="9">9</option></select>
+    </div>
+    <div class="readouts">
+      <div class="readout"><small>Period becomes</small><b id="scT">—</b></div>
+      <div class="readout"><small>Frequency becomes</small><b id="scF">—</b></div>
+    </div>
+    <div class="status" id="scWhy" aria-live="polite"></div>
+    <div class="callout"><b class="t">Rule of thumb</b>Pendulum: <i>T</i> ∝ √<i>L</i> and <i>T</i> ∝ 1/√<i>a</i><sub>g</sub>, independent of mass and (small) amplitude. Mass-spring: <i>T</i> ∝ √<i>m</i> and <i>T</i> ∝ 1/√<i>k</i>, independent of amplitude.</div>
+  </div>
+
+  <div class="card">
+    <h2>Ready to practise?</h2>
+    <p>Go through the <b>Worked Examples</b> (Analyze → Plan → Solve → Check), then solve the textbook practice and the two problem sets in <b>Practice</b>.</p>
+    <div class="row"><button class="btn" data-goto="examples" type="button">Worked examples →</button><button class="btn ghost" data-goto="practice" type="button">Go to practice</button></div>
+  </div>
+</section>
+
+<!-- ===================== EXAMPLES ===================== -->
+<section class="panel" id="examples" aria-labelledby="t-examples">
+  <div class="card">
+    <h2>Step-by-step worked examples</h2>
+    <p>Each example follows <b>Analyze → Plan → Solve → Check</b>. Press <em>Next step</em> to reveal one step at a time. At most steps you'll answer a quick question first — that's where the thinking happens.</p>
+  </div>
+  <div id="exampleList"></div>
+</section>
+
+<!-- ===================== PRACTICE ===================== -->
+<section class="panel" id="practice" aria-labelledby="t-practice">
+  <div class="card">
+    <h2>Practice on your own</h2>
+    <p>Type your answer and press <b>Check</b> (or Enter) for immediate feedback. Stuck? Use <b>Hint</b>. After two tries you can open the full <b>Solution</b>.</p>
+    <ul>
+      <li>Use <i>a</i><sub>g</sub> = <i>g</i> = 9.81 m/s² unless the problem gives another value. Work in SI units: kilograms, metres and seconds (convert grams and centimetres first; a weight in newtons gives the mass as <i>m</i> = <i>W</i>/<i>g</i>).</li>
+      <li>Keep full precision in your calculator until the last step. You may enter answers like <span class="math">2.2</span>, <span class="math">3.5e-3</span> or <span class="math">2.00 x 10^4</span>. Answers within about 3 % are accepted.</li>
+    </ul>
+  </div>
+  <div class="setpicker" id="setPicker" role="group" aria-label="Problem sets"></div>
+  <div id="problemList"></div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Lincoln International Academy · Physics II · Mr. Eduardo Vásquez<br>Content adapted from <i>Holt McDougal Physics</i>, Chapter 11 §2 (Measuring Simple Harmonic Motion) and Sample Problem Sets I and II (© Houghton Mifflin Harcourt). Additional problems written for this page.</div>
+    <div>Your progress is saved to your student account. <button class="linkbtn" id="resetAll" data-lia-reset>Reset my progress</button></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+const $  = (s,e=document)=>e.querySelector(s);
+const $$ = (s,e=document)=>[...e.querySelectorAll(s)];
+const KEY='lia-physics2-lesson-11-2';
+let state={};
+try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+
+/* ---------- number parsing / judging ---------- */
+function parseNum(raw){
+  if(raw==null) return NaN;
+  let s=String(raw).trim().toLowerCase().replace(/,/g,'').replace(/\s+/g,'').replace(/[−–]/g,'-');
+  if(!s) return NaN;
+  const sup={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-'};
+  s=s.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g,m=>'^'+[...m].map(c=>sup[c]).join(''));
+  s=s.replace(/(n\/m|hz|kg|cm|km\/h|m\/s\^?2|m\/s²|m\/s|rad|s|m|g|n)$/,'');
+  const m=s.match(/^([+-]?(?:\d+\.?\d*|\.\d+))(?:(?:x|×|\*)10\^?\(?([+-]?\d+)\)?|e([+-]?\d+))?$/);
+  if(!m) return NaN;
+  let v=parseFloat(m[1]);
+  const ex=m[2]!==undefined?m[2]:m[3];
+  if(ex!==undefined) v*=Math.pow(10,parseInt(ex,10));
+  return v;
+}
+function judge(v,part){
+  if(!isFinite(v)) return {state:'no',msg:'I couldn\'t read that as a number. Try something like 2.2, −3.5e-3 or 1.38 x 10^4.'};
+  const tol=part.tol??0.03, ans=part.ans, A_=Math.abs(ans);
+  const cmp=part.abs? Math.abs(v):v;
+  const rel=Math.abs(cmp-(part.abs?A_:ans))/A_;
+  if(rel<=tol) return {state:'ok',msg:'Correct!'};
+  for(const t of (part.traps||[])){ if(Math.abs(v-t.v)/Math.abs(t.v)<=0.02) return {state:'no',msg:t.msg}; }
+  if(!part.abs && Math.abs(v+ans)/A_<=tol) return {state:'near',msg:'Right size, wrong sign. Check your signs.'};
+  if(ans>0 && v<0) return {state:'no',msg:'Period, frequency, length, mass and spring constant are positive here. Check your rearrangement.'};
+  const av=Math.abs(v);
+  const facts=[[1000,'Right digits, wrong power of ten — check grams ↔ kilograms (1 g = 10⁻³ kg) or cm ↔ m.'],[2*Math.PI,'Check the 2π: it multiplies the square root in T = 2π√(L/g) or 2π√(m/k), and f = 1/T.'],[4*Math.PI*Math.PI,'Check the 4π²: squaring T = 2π√(…) gives T² = 4π²(…). Did you forget to square T, or to include 4π²?'],[Math.sqrt(2),'Off by √2 — check whether a square root was missed or applied twice.'],[60,'Check your minutes ↔ seconds conversion (1 min = 60 s).'],[2,'Off by a factor of 2 — did you forget the 2 (or the ½) somewhere?']];
+  for(const [k,msg] of facts){
+    if(Math.abs(av*k-A_)/A_<=tol || Math.abs(av/k-A_)/A_<=tol) return {state:'near',msg};
+  }
+  if(rel<=0.12) return {state:'near',msg:'Close! Check your rounding or an intermediate value.'};
+  return {state:'no',msg:'Not quite. Re-read the question, check the equation you chose and the units, and try a hint if you need one.'};
+}
+
+
+/* ---------- tabs ---------- */
+function showTab(name){
+  $$('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));
+  $$('section.panel').forEach(p=>p.classList.toggle('active',p.id===name));
+  if(location.hash!=='#'+name) history.replaceState(null,'','#'+name);
+  window.scrollTo({top:0});
+}
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.addEventListener('click',e=>{ const g=e.target.closest('[data-goto]'); if(g) showTab(g.dataset.goto); });
+
+/* ---------- theme toggle ---------- */
+(function(){
+  const root=document.documentElement, mq=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+  const eff=()=>root.getAttribute('data-theme')||((mq&&mq.matches)?'dark':'light');
+  function sync(){ const t=eff(); $$('[data-theme-set]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeSet===t))); }
+  $$('[data-theme-set]').forEach(b=>b.addEventListener('click',()=>{
+    root.setAttribute('data-theme',b.dataset.themeSet);
+    try{ localStorage.setItem('lia-theme',b.dataset.themeSet); }catch(e){}
+    sync();
+  }));
+  if(mq&&mq.addEventListener) mq.addEventListener('change',sync);
+  sync();
+})();
+
+/* ---------- generic line chart ---------- */
+function lineChart(series,o){
+  const W=o.W||460,H=o.H||230,L=46,R=14,T=14,B=34;
+  const xmin=o.xmin||0,xmax=o.xmax,ymin=o.ymin,ymax=o.ymax;
+  const X=x=>L+(x-xmin)/(xmax-xmin)*(W-L-R), Y=y=>T+(1-(y-ymin)/(ymax-ymin))*(H-T-B);
+  const cl=y=>Math.max(ymin,Math.min(ymax,y));
+  const f=v=>String(+v.toPrecision(3));
+  let s=`<svg class="vt" viewBox="0 0 ${W} ${H}" role="img" aria-label="${o.aria||'Graph'}">`;
+  for(let i=0;i<=4;i++){ const v=ymin+(ymax-ymin)*i/4; s+=`<line class="grid" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L-6}" y="${Y(v)+4}" text-anchor="end">${f(v)}</text>`; }
+  for(let i=0;i<=4;i++){ const v=xmin+(xmax-xmin)*i/4; s+=`<text x="${X(v)}" y="${H-B+15}" text-anchor="middle">${f(v)}</text>`; }
+  if(ymin<0&&ymax>0) s+=`<line class="axis" x1="${L}" x2="${W-R}" y1="${Y(0)}" y2="${Y(0)}"/>`;
+  s+=`<line class="axis" x1="${L}" x2="${L}" y1="${T}" y2="${H-B}"/><line class="axis" x1="${L}" x2="${W-R}" y1="${H-B}" y2="${H-B}"/>`;
+  series.forEach(se=>{ s+=`<polyline fill="none" stroke="${se.color||'var(--accent)'}" stroke-width="${se.w||3}" ${se.dash?'stroke-dasharray="7 5"':''} stroke-linejoin="round" points="${se.pts.map(p=>X(p[0])+','+Y(cl(p[1]))).join(' ')}"/>`; if(se.label) s+=`<text x="${X(se.pts[se.pts.length-1][0])-4}" y="${Y(cl(se.pts[se.pts.length-1][1]))-6}" text-anchor="end" style="fill:${se.color}">${se.label}</text>`; });
+  if(o.mark){ s+=`<line x1="${X(o.mark[0])}" x2="${X(o.mark[0])}" y1="${T}" y2="${H-B}" stroke="var(--warm)" stroke-width="1.5" stroke-dasharray="4 4"/><circle cx="${X(o.mark[0])}" cy="${Y(cl(o.mark[1]))}" r="6" fill="var(--warm)"/>`; }
+  s+=`<text x="${L+4}" y="${T+8}">${o.ylab||''}</text><text x="${W-R}" y="${H-4}" text-anchor="end">${o.xlab||''}</text>`;
+  return s+'</svg>';
+}
+
+
+/* ---------- ask widgets (worked examples) ---------- */
+function mkMC(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  ask.opts.forEach((o,i)=>{
+    const b=document.createElement('button'); b.className='opt'; b.type='button'; b.innerHTML=o;
+    b.addEventListener('click',()=>{
+      if(i===ask.correct){ b.classList.add('right'); $$('.opt',host).forEach(x=>x.disabled=true); fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); onDone(); }
+      else { b.classList.add('wrong'); b.disabled=true; fb.className='fb no'; fb.innerHTML=(ask.wrong&&ask.wrong[i])||'Not quite — try another option.'; }
+    });
+    host.appendChild(b);
+  });
+  host.appendChild(fb);
+}
+function mkNum(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const row=document.createElement('div'); row.className='row';
+  const inp=document.createElement('input'); inp.type='text'; inp.setAttribute('aria-label','Your answer'); inp.placeholder='your answer'; inp.autocomplete='off';
+  const u=document.createElement('span'); u.className='math'; u.innerHTML=ask.unit||'';
+  const btn=document.createElement('button'); btn.className='btn'; btn.type='button'; btn.textContent='Check';
+  row.append(inp,u,btn); host.appendChild(row);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite'); host.appendChild(fb);
+  const go=()=>{
+    const j=judge(parseNum(inp.value),{ans:ask.ans,tol:ask.tol||0.02,traps:ask.traps,abs:ask.abs});
+    if(j.state==='ok'){ fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); inp.disabled=true; btn.disabled=true; onDone(); }
+    else { fb.className='fb '+j.state; fb.textContent=j.msg; }
+  };
+  btn.addEventListener('click',go); inp.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+}
+
+
+/* ---------- helpers for the labs ---------- */
+const TAU=2*Math.PI, G0=9.81;
+const R=x=>`<span class="radic"><span>${x}</span></span>`;
+const f2=(x,d=2)=>String(+(+x).toFixed(d));
+const sig=(x,n=3)=>String(+(+x).toPrecision(n));
+function runner(draw){
+  let run=false,last=0,raf=0;
+  function step(ts){ if(!run) return; const dt=last?Math.min(.05,(ts-last)/1000):0; last=ts; draw(dt); raf=requestAnimationFrame(step); }
+  return {
+    start(){ if(run) return; run=true; last=0; raf=requestAnimationFrame(step); },
+    stop(){ run=false; cancelAnimationFrame(raf); },
+    get running(){ return run; },
+    redraw(){ draw(0); }
+  };
+}
+function springPath(x1,x2,y,n=11,h=11){
+  const seg=(x2-x1-16)/n; let d=`M${x1},${y} L${x1+8},${y}`;
+  for(let i=0;i<n;i++) d+=` L${x1+8+seg*(i+.25)},${y-h} L${x1+8+seg*(i+.75)},${y+h}`;
+  return d+` L${x2-8},${y} L${x2},${y}`;
+}
+/* horizontal mass-spring scene; x in cm (right positive) */
+function springScene(x,A,mass){
+  const W=440,H=190,eq=250,sc=15,by=100,bh=44,bw=34+Math.min(30,mass*8),bx=eq+x*sc;
+  let s=`<svg class="flow" viewBox="0 0 ${W} ${H}" role="img" aria-label="Mass on a spring">`;
+  s+=`<rect x="12" y="52" width="12" height="96" fill="var(--muted)" opacity=".6"/><line x1="24" y1="${by+bh/2}" x2="${W-10}" y2="${by+bh/2}" stroke="var(--line)" stroke-width="3"/>`;
+  s+=`<line x1="${eq}" y1="34" x2="${eq}" y2="${H-26}" stroke="var(--muted)" stroke-dasharray="5 5"/><text x="${eq}" y="${H-10}" text-anchor="middle">x = 0</text>`;
+  [-1,1].forEach(sg=>{ const px=eq+sg*A*sc; s+=`<line x1="${px}" y1="44" x2="${px}" y2="${by-bh/2-4}" stroke="var(--warm)" stroke-dasharray="3 4"/><text x="${px}" y="38" text-anchor="middle" style="fill:var(--warm)">${sg<0?'−A':'+A'}</text>`; });
+  s+=`<line x1="${eq}" y1="58" x2="${eq+A*sc}" y2="58" stroke="var(--accent)" stroke-width="2"/><text x="${eq+A*sc/2}" y="52" text-anchor="middle" style="fill:var(--accent)">A = ${f2(A,1)} cm</text>`;
+  s+=`<path d="${springPath(24,bx-bw/2,by,11,11)}" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round"/>`;
+  s+=`<rect x="${bx-bw/2}" y="${by-bh/2}" width="${bw}" height="${bh}" rx="6" fill="var(--primary)" stroke="var(--ink)" stroke-width="1.5"/><text x="${bx}" y="${by+5}" text-anchor="middle" style="fill:var(--primary-ink)">m</text>`;
+  return s+'</svg>';
+}
+/* displacement-time graph with amplitude and period marked; ph = current phase (rad) */
+function waveChart(A,T,ph,ymaxCm,unit){
+  const W=480,H=240,L=48,Rr=16,Tp=18,B=40, X=t=>L+t/(3*T)*(W-L-Rr), Y=v=>Tp+(1-(v+ymaxCm)/(2*ymaxCm))*(H-Tp-B);
+  const wf=u=>A*Math.cos(TAU*u/T);
+  let pts=''; for(let i=0;i<=150;i++){ const t=3*T*i/150; pts+=X(t)+','+Y(wf(t))+' '; }
+  let s=`<svg class="vt" viewBox="0 0 ${W} ${H}" role="img" aria-label="Displacement versus time">`;
+  s+=`<line class="axis" x1="${L}" y1="${Tp-4}" x2="${L}" y2="${H-B}"/><line class="axis" x1="${L}" y1="${Y(0)}" x2="${W-Rr}" y2="${Y(0)}"/>`;
+  s+=`<line x1="${L}" x2="${W-Rr}" y1="${Y(A)}" y2="${Y(A)}" stroke="var(--warm)" stroke-dasharray="4 4"/><line x1="${L}" x2="${W-Rr}" y1="${Y(-A)}" y2="${Y(-A)}" stroke="var(--warm)" stroke-dasharray="4 4"/>`;
+  s+=`<text x="${L-5}" y="${Y(A)+4}" text-anchor="end" style="fill:var(--warm)">+A</text><text x="${L-5}" y="${Y(-A)+4}" text-anchor="end" style="fill:var(--warm)">−A</text><text x="${L-5}" y="${Y(0)+4}" text-anchor="end">0</text>`;
+  s+=`<polyline fill="none" stroke="var(--accent)" stroke-width="3" stroke-linejoin="round" points="${pts}"/>`;
+  const yb=H-B+16; s+=`<line x1="${X(0)}" y1="${yb}" x2="${X(T)}" y2="${yb}" stroke="var(--primary)" stroke-width="2"/><line x1="${X(0)}" y1="${yb-5}" x2="${X(0)}" y2="${yb+5}" stroke="var(--primary)" stroke-width="2"/><line x1="${X(T)}" y1="${yb-5}" x2="${X(T)}" y2="${yb+5}" stroke="var(--primary)" stroke-width="2"/><text x="${(X(0)+X(T))/2}" y="${yb+16}" text-anchor="middle" style="fill:var(--primary)">one period T = ${f2(T,2)} s</text>`;
+  const tm=((ph%(3*TAU))/TAU)*T; s+=`<line x1="${X(tm)}" x2="${X(tm)}" y1="${Tp}" y2="${H-B}" stroke="var(--warm)" stroke-width="1.5" stroke-dasharray="4 4"/><circle cx="${X(tm)}" cy="${Y(wf(tm))}" r="6" fill="var(--warm)"/>`;
+  s+=`<text x="${L+4}" y="${Tp+6}">x (${unit})</text><text x="${W-Rr}" y="${H-4}" text-anchor="end">t (s)</text>`;
+  return s+'</svg>';
+}
+
+/* ---------- Lab A: amplitude, period, frequency ---------- */
+(function(){
+  let ph=0;
+  const A=()=>+$('#oaA').value, T=()=>+$('#oaT').value;
+  function draw(dt){
+    const a=A(), t=T(); ph+=TAU*dt/t;
+    const x=a*Math.cos(ph);
+    $('#oaAo').textContent=f2(a,1)+' cm'; $('#oaTo').textContent=f2(t,1)+' s';
+    $('#oaF').textContent=f2(1/t,2)+' Hz'; $('#oaN').textContent=Math.floor(ph/TAU);
+    $('#oaX').textContent=(x>=0?'+':'−')+f2(Math.abs(x),1)+' cm';
+    $('#oaScene').innerHTML=springScene(x,a,1);
+    $('#oaGraph').innerHTML=waveChart(a,t,ph,10.5,'cm');
+  }
+  const r=runner(draw);
+  const msgs=()=>{ $('#oaStatus').className='status'; $('#oaStatus').innerHTML=`<i>T</i> = ${f2(T(),1)} s means <i>f</i> = 1/${f2(T(),1)} s = <b>${f2(1/T(),2)} Hz</b>: ${f2(1/T(),2)} cycles every second. The amplitude (${f2(A(),1)} cm) does not appear in this relationship.`; };
+  $('#oaGo').addEventListener('click',()=>{ if(r.running){ r.stop(); $('#oaGo').textContent='Start'; } else { r.start(); $('#oaGo').textContent='Pause'; } });
+  $('#oaRst').addEventListener('click',()=>{ r.stop(); ph=0; $('#oaGo').textContent='Start'; r.redraw(); });
+  ['#oaA','#oaT'].forEach(s=>$(s).addEventListener('input',()=>{ r.redraw(); msgs(); }));
+  r.redraw(); msgs();
+})();
+
+/* ---------- Lab B: simple pendulum ---------- */
+(function(){
+  let ph=0;
+  const g=()=>+$('#pnWorld').value, L=()=>+$('#pnL').value, per=(l,gg)=>TAU*Math.sqrt(l/gg);
+  function scene(th,l,m,thA){
+    const W=440,H=330,px=220,py=22,Lp=40+22*l,bob=8+m*3.2, bx=px+Lp*Math.sin(th), by=py+Lp*Math.cos(th);
+    let s=`<svg class="flow" viewBox="0 0 ${W} ${H}" role="img" aria-label="Simple pendulum">`;
+    s+=`<line x1="${px-60}" y1="${py}" x2="${px+60}" y2="${py}" stroke="var(--muted)" stroke-width="5" stroke-linecap="round"/>`;
+    s+=`<line x1="${px}" y1="${py}" x2="${px}" y2="${py+Lp+bob+8}" stroke="var(--muted)" stroke-dasharray="5 5"/>`;
+    const ax=px+Math.sin(thA)*(Lp*.6), ay=py+Math.cos(thA)*(Lp*.6), bxl=px-Math.sin(thA)*(Lp*.6);
+    s+=`<path d="M${bxl},${ay} A${Lp*.6},${Lp*.6} 0 0 0 ${ax},${ay}" fill="none" stroke="var(--warm)" stroke-width="2" stroke-dasharray="3 3"/>`;
+    s+=`<text x="${px+Lp*.6*Math.sin(thA)+8}" y="${py+Lp*.6*Math.cos(thA)+16}" style="fill:var(--warm)">θ = ${Math.round(thA*180/Math.PI)}°</text>`;
+    s+=`<line x1="${px}" y1="${py}" x2="${bx}" y2="${by}" stroke="var(--ink)" stroke-width="2"/><circle cx="${px}" cy="${py}" r="3.5" fill="var(--ink)"/>`;
+    s+=`<circle cx="${bx}" cy="${by}" r="${bob}" fill="var(--accent)" stroke="var(--ink)" stroke-width="1.5"/>`;
+    s+=`<text x="${px+10}" y="${py+Lp/2}" style="fill:var(--primary)">L = ${f2(l,2)} m</text>`;
+    return s+'</svg>';
+  }
+  function draw(dt){
+    const l=L(), gg=g(), m=+$('#pnM').value, a=+$('#pnA').value*Math.PI/180, T=per(l,gg);
+    const slow=T<0.8?0.8/T:1; ph+=TAU*dt/T/slow;
+    $('#pnLo').textContent=f2(l,2)+' m'; $('#pnMo').textContent=f2(m,1)+' kg'; $('#pnAo').textContent=Math.round(a*180/Math.PI)+'°';
+    $('#pnT').textContent=sig(T,3)+' s'; $('#pnF').textContent=sig(1/T,3)+' Hz'; $('#pnN').textContent=Math.floor(ph/TAU);
+    $('#pnScene').innerHTML=scene(a*Math.cos(ph),l,m,a);
+    const st=$('#pnStatus'); st.className='status'; st.innerHTML=`<i>T</i> = 2π√(${f2(l,2)}/${f2(gg,2)}) = <b>${sig(T,3)} s</b>. Mass and amplitude do not appear in the equation.`+(slow>1?` <span class="pnote">(Animation slowed ×${f2(slow,1)} so you can see it.)</span>`:'');
+    const pts=(gg_)=>{ const p=[]; for(let i=0;i<=60;i++){ const x=.2+9.8*i/60; p.push([x,per(x,gg_)]); } return p; };
+    const ymax=Math.max(2,Math.ceil(Math.max(per(10,gg),per(10,G0))));
+    const series=[{pts:pts(G0),color:'var(--muted)',dash:true,w:2,label:'Earth'}]; if(Math.abs(gg-G0)>.001) series.push({pts:pts(gg),color:'var(--accent)',w:3.5});
+    $('#pnGraph').innerHTML=lineChart(series,{xmax:10,ymin:0,ymax,xlab:'length L (m)',ylab:'period T (s)',mark:[l,T],aria:'Period versus length'});
+  }
+  const r=runner(draw);
+  $('#pnGo').addEventListener('click',()=>{ if(r.running){ r.stop(); $('#pnGo').textContent='Start'; } else { r.start(); $('#pnGo').textContent='Pause'; } });
+  $('#pnRst').addEventListener('click',()=>{ r.stop(); ph=0; $('#pnGo').textContent='Start'; r.redraw(); });
+  ['#pnWorld','#pnL','#pnM','#pnA'].forEach(s=>$(s).addEventListener('input',()=>r.redraw()));
+  r.redraw();
+})();
+
+/* ---------- Lab C: mass-spring ---------- */
+(function(){
+  let ph=0;
+  const per=(m,k)=>TAU*Math.sqrt(m/k);
+  function draw(dt){
+    const m=+$('#msM').value, k=+$('#msK').value, a=+$('#msA').value, T=per(m,k);
+    const slow=T<0.8?0.8/T:1; ph+=TAU*dt/T/slow;
+    $('#msMo').textContent=f2(m,1)+' kg'; $('#msKo').textContent=k+' N/m'; $('#msAo').textContent=f2(a,1)+' cm';
+    $('#msT').textContent=sig(T,3)+' s'; $('#msF').textContent=sig(1/T,3)+' Hz'; $('#msN').textContent=Math.floor(ph/TAU);
+    $('#msScene').innerHTML=springScene(a*Math.cos(ph),a,m);
+    const st=$('#msStatus'); st.className='status'; st.innerHTML=`<i>T</i> = 2π√(${f2(m,1)}/${k}) = <b>${sig(T,3)} s</b>. The amplitude does not appear in the equation.`+(slow>1?` <span class="pnote">(Animation slowed ×${f2(slow,1)} so you can see it.)</span>`:'');
+    const pts=kk=>{ const p=[]; for(let i=0;i<=50;i++){ const x=.1+4.9*i/50; p.push([x,per(x,kk)]); } return p; };
+    const ymax=Math.max(1,Math.ceil(per(5,k)*2)/2);
+    $('#msGraph').innerHTML=lineChart([{pts:pts(4*k),color:'var(--muted)',dash:true,w:2,label:'4k'},{pts:pts(k),color:'var(--accent)',w:3.5}],{xmax:5,ymin:0,ymax,xlab:'mass m (kg)',ylab:'period T (s)',mark:[m,T],aria:'Period versus mass'});
+  }
+  const r=runner(draw);
+  $('#msGo').addEventListener('click',()=>{ if(r.running){ r.stop(); $('#msGo').textContent='Start'; } else { r.start(); $('#msGo').textContent='Pause'; } });
+  $('#msRst').addEventListener('click',()=>{ r.stop(); ph=0; $('#msGo').textContent='Start'; r.redraw(); });
+  ['#msM','#msK','#msA'].forEach(s=>$(s).addEventListener('input',()=>r.redraw()));
+  r.redraw();
+})();
+
+/* ---------- Part D: scaling calculator ---------- */
+(function(){
+  const VARS={p:[['L','length L of the pendulum',.5,'<i>T</i> ∝ √<i>L</i>: a longer string means a longer arc, so a longer period.'],['g','free-fall acceleration a<sub>g</sub> (a different world)',-.5,'<i>T</i> ∝ 1/√<i>a</i><sub>g</sub>: a weaker gravitational pull makes the restoring force weaker, so the swing is slower.'],['m','mass of the bob',0,'The bob\'s mass cancels: a heavier bob feels a bigger restoring force but also needs a bigger force to accelerate – the period does not change.'],['A','amplitude (small angles, under 15°)',0,'For small angles the amplitude does not affect the period; the larger restoring force and the longer path cancel.']],
+    s:[['m','mass m on the spring',.5,'<i>T</i> ∝ √<i>m</i>: a heavier mass has more inertia and accelerates less, so each cycle takes longer.'],['k','spring constant k (a stiffer spring)',-.5,'<i>T</i> ∝ 1/√<i>k</i>: a stiffer spring gives a larger force and acceleration, so each cycle is shorter.'],['A','amplitude (spring obeys Hooke\'s law)',0,'The period does not depend on the amplitude: a bigger stretch gives a bigger force but a longer path.']]};
+  function fill(){ const s=$('#scSys').value; $('#scVar').innerHTML=VARS[s].map((v,i)=>`<option value="${i}">${v[1]}</option>`).join(''); upd(); }
+  function upd(){
+    const v=VARS[$('#scSys').value][+$('#scVar').value], fac=+$('#scFac').value, tf=Math.pow(fac,v[2]);
+    $('#scT').innerHTML='× '+sig(tf,3); $('#scF').innerHTML='× '+sig(1/tf,3);
+    const w=$('#scWhy'); w.className='status'+(v[2]===0?' warn':''); w.innerHTML=(v[2]===0?'<b>No change.</b> ':'')+v[3];
+  }
+  $('#scSys').addEventListener('change',fill); $('#scVar').addEventListener('change',upd); $('#scFac').addEventListener('change',upd);
+  fill();
+})();
+
+/* ---------- notation ---------- */
+const Tn='<i>T</i>', fn='<i>f</i>', Ln='<i>L</i>', mn='<i>m</i>', kn='<i>k</i>', ag='<i>a</i><sub>g</sub>', sq='<sup>2</sup>', PI='π', P2='4π²';
+const F=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const EQ={
+  fT:`${fn} = ${F('1',Tn)} &nbsp; or &nbsp; ${Tn} = ${F('1',fn)}`,
+  pend:`${Tn} = 2π${R(F(Ln,ag))}`,
+  pendL:`${Ln} = ${F(Tn+sq+ag,P2)}`,
+  pendg:`${ag} = ${F(P2+Ln,Tn+sq)}`,
+  spr:`${Tn} = 2π${R(F(mn,kn))}`,
+  sprK:`${kn} = ${F(P2+mn,Tn+sq)}`,
+  sprM:`${mn} = ${F(kn+Tn+sq,P2)} = ${F(kn,P2+fn+sq)}`
+};
+const S=(x,sf=3)=>{
+  if(x===0) return '0';
+  const e=Math.floor(Math.log10(Math.abs(x)));
+  if(e>=4||e<=-3){ const m=+(x/Math.pow(10,e)).toPrecision(sf); return `${m} × 10<sup>${e}</sup>`; }
+  return String(+x.toPrecision(sf));
+};
+const g=G0, pi2=4*Math.PI*Math.PI;
+const Tp=(L,gg=g)=>TAU*Math.sqrt(L/gg);          // pendulum period
+const Ts=(m,k)=>TAU*Math.sqrt(m/k);              // mass-spring period
+const Lp=(T,gg=g)=>T*T*gg/pi2;                   // pendulum length
+const gp=(L,T)=>pi2*L/(T*T);                     // free-fall acceleration from L and T
+const kp=(m,T)=>pi2*m/(T*T);                     // spring constant from m and T
+const mp=(k,T)=>k*T*T/pi2;                       // mass from k and T
+const GV=(...items)=>`<div class="givenlist">${items.map(i=>`<span>${i}</span>`).join('')}</div>`;
+const U=(x)=>`<span class="unk">${x}</span>`;
+
+/* ---------- worked examples ---------- */
+const EX=[
+ { id:'E1', tag:'Period and frequency', title:'A swinging ride',
+   problem:'An amusement-park ride swings from maximum displacement on one side to maximum displacement on the other and back again. One complete cycle takes <b>20 s</b>. What are the ride\'s period and frequency?',
+   steps:[
+    {name:'Analyze', html:GV(`${Tn} = 20 s`)+GV(U(`${fn} = ?`)),
+     ask:{type:'mc',q:'What does "one complete cycle" mean here?',opts:['Out to one side, across to the other side and back to the start','Only the swing from one side to the other','The time to reach the centre line'],correct:0,why:'A cycle returns the ride to where it started, moving the same way. The time for one such cycle is the period.',wrong:{1:'That is only half a cycle (T/2).'}}},
+    {name:'Plan', html:`<p>Frequency and period are inverses:</p><div class="eq">${EQ.fT}</div>`},
+    {name:'Solve', html:`<div class="eq">${fn} = ${F('1',Tn)} = ${F('1','20 s')} = <span class="boxed">0.05 Hz</span></div>`,
+     ask:{type:'num',q:'Calculate 1 ÷ 20.',ans:0.05,tol:0.01,unit:'Hz',why:'f = 0.05 cycles per second.'}},
+    {name:'Check your work', html:`<p>The unit of 1/s is s<sup>−1</sup> = hertz (Hz). In 60 s the ride makes 0.05 × 60 = <b>3 cycles</b>, which agrees with 60 s ÷ 20 s per cycle ✔.</p>`,
+     ask:{type:'mc',q:'If the ride were faster and its frequency doubled to 0.10 Hz, the period would be…',opts:['10 s (halved)','40 s (doubled)','20 s (unchanged)'],correct:0,why:'T = 1/f, so doubling f halves T.'}}
+   ]},
+ { id:'E2', tag:'Sample Problem B', title:'How tall is the tower?',
+   problem:'You need to know the height of a tower, but darkness obscures the ceiling. You note that a pendulum extending from the ceiling almost touches the floor and that its period is <b>12 s</b>. How tall is the tower?',
+   steps:[
+    {name:'Analyze', html:GV(`${Tn} = 12 s`,`${ag} = ${'<i>g</i>'} = 9.81 m/s²`)+GV(U(`${Ln} = ?`)),
+     ask:{type:'mc',q:'The bob\'s mass is not given. Do we need it?',opts:['No – the period of a simple pendulum does not depend on mass','Yes – a heavier bob swings more slowly','Yes – we need it to find the weight'],correct:0,why:'For a simple pendulum T depends only on L and a<sub>g</sub> (and not on mass or, for small angles, amplitude).',wrong:{1:'Mass cancels out of the pendulum period.'}}},
+    {name:'Plan', html:`<p>Use the pendulum equation and solve for ${Ln}:</p><div class="eq">${EQ.pend}</div><div class="eq">${F(Tn+R(ag),'2π')} = ${R(Ln)} &nbsp;→&nbsp; ${Ln} = ${F(Tn+sq+ag,P2)}</div>`,
+     ask:{type:'mc',q:'What is the first step in isolating <i>L</i> from <i>T</i> = 2π√(<i>L</i>/<i>a</i><sub>g</sub>)?',opts:['Divide by 2π, then square both sides','Square the answer at the end','Multiply both sides by 2π'],correct:0,why:'Divide by 2π to get T/2π = √(L/a_g); squaring removes the square root: L = a_g(T/2π)² = T²a_g/4π².'}},
+    {name:'Solve', html:`<div class="eq">${Ln} = ${F('(12 s)'+sq+'(9.81 m/s'+sq+')',P2)} = <span class="boxed">36 m</span></div>`,
+     ask:{type:'num',q:'Calculate 12² × 9.81 ÷ (4π²).',ans:Lp(12),tol:0.01,unit:'m',why:'L = 35.8 m ≈ 36 m.'}},
+    {name:'Check your work', html:`<p>Put <i>L</i> back in: <i>T</i> = 2π√(36/9.81) = 2π(1.92) = 12 s ✔. A 36 m ceiling is a very tall building (about 12 floors), which is realistic for a pendulum with a 12-second period.</p>`}
+   ]},
+ { id:'E3', tag:'Sample Problem C', title:'The mass of a pearl',
+   problem:'A large pearl was found in the Philippines in 1934. Suppose the pearl is placed on a spring scale whose spring constant is <b>362 N/m</b>. If the scale\'s platform oscillates with a frequency of <b>1.20 Hz</b>, what is the mass of the pearl?',
+   steps:[
+    {name:'Analyze', html:GV(`${kn} = 362 N/m`,`${fn} = 1.20 Hz`)+GV(U(`${mn} = ?`)),
+     ask:{type:'mc',q:'The mass-spring equation uses the <b>period</b>. Which relation connects it to the given frequency?',opts:['T = 1/f','T = f','T = 2πf'],correct:0,why:'Period and frequency are inverses: T = 1/f.'}},
+    {name:'Plan', html:`<p>Write the period of a mass-spring system as ${F('1',fn)} and solve for ${mn}:</p><div class="eq">${Tn} = 2π${R(F(mn,kn))} = ${F('1',fn)}</div><div class="eq">${mn} = ${F(kn,P2+fn+sq)}</div>`},
+    {name:'Solve', html:`<div class="eq">${mn} = ${F('362 N/m','4π²(1.20 Hz)²')} = <span class="boxed">6.37 kg</span></div>`,
+     ask:{type:'num',q:'Calculate 362 ÷ (4π² × 1.20²).',ans:362/(pi2*1.2*1.2),tol:0.01,unit:'kg',why:'m = 6.37 kg.'}},
+    {name:'Check your work', html:`<p>Find the period from the mass: <i>T</i> = 2π√(6.37/362) = 0.833 s, so <i>f</i> = 1/<i>T</i> = 1.20 Hz ✔. Units: (N/m)/s<sup>−2</sup> = (kg·m/s²)/(m·s<sup>−2</sup>) = kg ✔.</p>`,
+     ask:{type:'mc',q:'If the pearl were heavier, the platform would oscillate…',opts:['More slowly (lower frequency)','Faster (higher frequency)','At the same frequency'],correct:0,why:'A larger mass gives a longer period, so a lower frequency.'}}
+   ]},
+ { id:'E4', tag:'Problem Set I · B', title:'A pendulum across a river',
+   problem:'Two friends in France use a pendulum hanging from the world\'s highest railroad bridge to exchange messages across a river. One friend attaches a letter to the end of the pendulum and releases it so that it swings across the river to the other friend. The bridge is <b>130.0 m</b> above the river. How much time is needed for the letter to make <b>one swing across</b> the river? Assume the river is 16.0 m wide.',
+   steps:[
+    {name:'Analyze', html:GV(`${Ln} = 130.0 m`,`${ag} = 9.81 m/s²`)+GV(U(`<i>t</i> = time to cross = ${Tn}/2 = ?`)),
+     ask:{type:'mc',q:'One swing <em>across</em> the river goes from one side to the other. What fraction of a period is that?',opts:['One half of a period','One full period','One quarter of a period'],correct:0,why:'A full cycle goes there and back; crossing once is T/2.'}},
+    {name:'Plan', html:`<p>Find the period from the length, then divide by two. The width of the river is not needed for the calculation, but it must be small compared with the length so the equations for simple harmonic motion apply.</p><div class="eq">${EQ.pend} &nbsp;&nbsp; <i>t</i> = ${F(Tn,'2')}</div>`},
+    {name:'Solve', html:`<div class="eq">${Tn} = 2π${R(F('130.0 m','9.81 m/s²'))} = 22.9 s &nbsp;&nbsp; <i>t</i> = ${F('22.9 s','2')} = <span class="boxed">11.4 s</span></div>`,
+     ask:{type:'num',q:'Calculate 2π√(130.0 ÷ 9.81) ÷ 2.',ans:Tp(130)/2,tol:0.01,unit:'s',why:'t = 11.4 s.'}},
+    {name:'Check your work', html:`<p>Check the small-angle condition: half the river is 8.0 m, so sin θ = 8.0/130.0 → θ ≈ 3.5°, well below 15° ✔. So the simple harmonic equation is valid.</p>`,
+     ask:{type:'mc',q:'Which condition makes the pendulum equation valid for this swing?',opts:['The angle is small (under 15°)','The bob is light','The river is wide'],correct:0,why:'SHM approximates a pendulum only for small angles.'}}
+   ]},
+ { id:'E5', tag:'Problem Set I · C', title:'A car on four springs',
+   problem:'The body of a <b>1275 kg</b> car is supported on a frame by four springs. Two people riding in the car have a combined mass of <b>153 kg</b>. When driven over a pothole, the frame vibrates with a period of <b>0.840 s</b>. For the first few seconds the vibration approximates simple harmonic motion. Find the spring constant of a <b>single</b> spring.',
+   steps:[
+    {name:'Analyze', html:GV(`${mn} = ${F('1275 kg + 153 kg','4')} = 357 kg`,`${Tn} = 0.840 s`)+GV(U(`${kn} = ?`)),
+     ask:{type:'mc',q:'Why do we divide the total mass by 4?',opts:['Each of the four identical springs supports one quarter of the load','Because the period is 4 times longer','Because there are four people'],correct:0,why:'We want the constant of <em>one</em> spring, which carries 1/4 of the 1428 kg total.'}},
+    {name:'Plan', html:`<div class="eq">${EQ.spr}</div><div class="eq">${Tn+sq} = ${P2}${F(mn,kn)} &nbsp;→&nbsp; ${EQ.sprK}</div>`},
+    {name:'Solve', html:`<div class="eq">${kn} = ${F('4π²(357 kg)','(0.840 s)²')} = <span class="boxed">2.00 × 10<sup>4</sup> N/m</span></div>`,
+     ask:{type:'num',q:'Calculate 4π² × 357 ÷ 0.840². (Enter it as 19974 or 2.00e4.)',ans:kp(357,0.84),tol:0.01,unit:'N/m',why:'k ≈ 2.00 × 10⁴ N/m.'}},
+    {name:'Check your work', html:`<p>Recompute the period with this <i>k</i>: <i>T</i> = 2π√(357/19 974) = 0.840 s ✔. A stiffness of 20 000 N/m means 20 kN of force to compress one spring by 1 m – plausible for a car suspension.</p>`}
+   ]},
+ { id:'E6', tag:'Problem Set II · B', title:'Gravity on Dione',
+   problem:'A simple pendulum with a length of <b>1.00 m</b> would have a period of <b>13.3 s</b> on Saturn\'s icy moon, Dione. Find the acceleration of gravity on Dione.',
+   steps:[
+    {name:'Analyze', html:GV(`${Ln} = 1.00 m`,`${Tn} = 13.3 s`)+GV(U(`${ag} = ?`)),
+     ask:{type:'mc',q:'Compared with the same pendulum on Earth (T ≈ 2.0 s), the period on Dione is much longer. What does that tell you about <i>a</i><sub>g</sub> on Dione?',opts:['It is much smaller than on Earth','It is much larger than on Earth','It is the same'],correct:0,why:'T ∝ 1/√a_g: a long period means a weak gravitational pull.'}},
+    {name:'Plan', html:`<p>Square the pendulum equation and solve for the acceleration:</p><div class="eq">${Tn+sq} = ${F(P2+Ln,ag)} &nbsp;→&nbsp; ${EQ.pendg}</div>`},
+    {name:'Solve', html:`<div class="eq">${ag} = ${F('4π²(1.00 m)','(13.3 s)²')} = <span class="boxed">0.223 m/s²</span></div>`,
+     ask:{type:'num',q:'Calculate 4π² × 1.00 ÷ 13.3².',ans:gp(1,13.3),tol:0.02,unit:'m/s²',why:'a<sub>g</sub> ≈ 0.223 m/s².'}},
+    {name:'Check your work', html:`<p>The ratio to Earth: 9.81 ÷ 0.223 ≈ 44, so the period should be √44 ≈ 6.6 times the Earth value (2.01 s): 2.01 × 6.6 ≈ 13.3 s ✔. A person on Dione would weigh only about 2 % of their Earth weight.</p>`}
+   ]},
+ { id:'E7', tag:'Problem Set II · C', title:'A mass that vibrates like a mosquito\'s antenna hair',
+   problem:'The antennae of male mosquitoes have many hairs that receive sound signals from female mosquitoes. Female mosquitoes emit a frequency of about <b>230 Hz</b>. Suppose a mass is attached to a spring with a spring constant of <b>1.14 × 10<sup>4</sup> N/m</b>. How large is the mass if its oscillation frequency is the same as a mosquito\'s?',
+   steps:[
+    {name:'Analyze', html:GV(`${fn} = 230 Hz`,`${kn} = 1.14 × 10<sup>4</sup> N/m`)+GV(U(`${mn} = ?`)),
+     ask:{type:'mc',q:'A frequency of 230 Hz means…',opts:['230 cycles every second','One cycle every 230 s','230 seconds per cycle squared'],correct:0,why:'Hz = cycles per second, so T = 1/230 s ≈ 4.3 ms.'}},
+    {name:'Plan', html:`<p>Set ${Tn} = 1/${fn} in the mass-spring equation, then solve for ${mn}:</p><div class="eq">${F('1',fn+sq)} = ${F(P2+mn,kn)} &nbsp;→&nbsp; ${mn} = ${F(kn,P2+fn+sq)}</div>`},
+    {name:'Solve', html:`<div class="eq">${mn} = ${F('1.14 × 10<sup>4</sup> N/m','4π²(230 s<sup>−1</sup>)²')} = 5.46 × 10<sup>−3</sup> kg = <span class="boxed">5.46 g</span></div>`,
+     ask:{type:'num',q:'Calculate 1.14e4 ÷ (4π² × 230²) in <b>kilograms</b>. (Write it as 5.46e-3.)',ans:1.14e4/(pi2*230*230),tol:0.01,unit:'kg',why:'m = 5.46 × 10⁻³ kg = 5.46 g.',traps:[{v:5.46,msg:'That is the answer in <b>grams</b>. The question asked for kilograms: 5.46 g = 5.46 × 10⁻³ kg.'}]}},
+    {name:'Check your work', html:`<p>Recompute the period: <i>T</i> = 2π√(5.46 × 10⁻³ / 1.14 × 10⁴) = 2π(6.92 × 10⁻⁴) = 4.35 × 10⁻³ s = 1/230 s ✔. A mass of about 5 g on such a stiff spring vibrates hundreds of times per second.</p>`}
+   ]},
+ { id:'E8', tag:'Problem Set II · C (weight given)', title:'A sack of potatoes on a spring scale',
+   problem:'A <b>32 N</b> sack of potatoes vibrates with a period of <b>0.42 s</b> when placed on a spring scale. What is the spring constant?',
+   steps:[
+    {name:'Analyze', html:GV(`<i>W</i> = 32 N`,`${Tn} = 0.42 s`)+GV(U(`${mn} = ?`),U(`${kn} = ?`)),
+     ask:{type:'mc',q:'The problem gives a <b>weight</b> in newtons, but the period equation needs the <b>mass</b>. How do we get it?',opts:['m = W/g','m = W × g','m = W/2π'],correct:0,why:'Weight = mg, so m = W/g = 32/9.81 = 3.26 kg.',wrong:{1:'Weight is mass × g, so mass is weight ÷ g.'}}},
+    {name:'Plan', html:`<p>First ${mn} = <i>W</i>/<i>g</i>. Then solve the mass-spring equation for ${kn}:</p><div class="eq">${EQ.sprK}</div>`},
+    {name:'Solve', html:`<div class="eq">${mn} = ${F('32 N','9.81 m/s²')} = 3.26 kg</div><div class="eq">${kn} = ${F('4π²(3.26 kg)','(0.42 s)²')} = <span class="boxed">7.3 × 10<sup>2</sup> N/m</span></div>`,
+     ask:{type:'num',q:'Calculate 4π² × 3.262 ÷ 0.42².',ans:kp(32/g,0.42),tol:0.02,unit:'N/m',why:'k ≈ 730 N/m.'}},
+    {name:'Check your work', html:`<p>Static check: the sack stretches the scale by <i>x</i> = <i>W</i>/<i>k</i> = 32/730 = 0.044 m ≈ 4 cm, a believable stretch for a kitchen-type spring scale. Also, <i>T</i> = 2π√(<i>x</i>/<i>g</i>) = 2π√(0.0438/9.81) = 0.42 s ✔.</p>`}
+   ]}
+];
+
+/* ---------- practice problems ---------- */
+const T=(label,unit,ans,extra={})=>Object.assign({label,unit,ans},extra);
+const P=[]; const add=(set,sub,text,parts,h,sol,extra={})=>P.push(Object.assign({set,sub,text,parts,h,sol},extra));
+const MC=(set,text,opts,correct,why,hint,extra={})=>P.push(Object.assign({set,type:Array.isArray(correct)&&correct.length>1?'multi':'mc',text,opts,correct:[].concat(correct),why,h:[hint]},extra));
+const sqrt=Math.sqrt;
+const hP=`Pendulum: ${EQ.pend}. Solve for the unknown first, then substitute.`;
+
+/* ===== Textbook practice ===== */
+const sb='Simple Harmonic Motion of a Simple Pendulum · Sample Problem B practice';
+add('tb',sb,'If the period of the pendulum in the preceding sample problem were <b>24 s</b>, how tall would the tower be?',
+ [T('Height of the tower','m',Lp(24))],
+ [`Same method as the sample problem: ${EQ.pendL}.`,`24² × 9.81 ÷ (4π²).`],
+ [`${Ln} = ${F(Tn+sq+ag,P2)} = ${F('(24 s)²(9.81 m/s²)',P2)} = <b>1.4 × 10² m</b> (143 m)`]);
+add('tb',sb,'You are designing a pendulum clock to have a period of <b>1.0 s</b>. How long should the pendulum be?',
+ [T('Length','m',Lp(1.0))],
+ [`${EQ.pendL}`,`1.0² × 9.81 ÷ (4π²).`],
+ [`${Ln} = ${F('(1.0 s)²(9.81 m/s²)',P2)} = <b>0.25 m</b>`]);
+add('tb',sb,'A trapeze artist swings in simple harmonic motion with a period of <b>3.8 s</b>. Calculate the length of the cables supporting the trapeze.',
+ [T('Length of the cables','m',Lp(3.8))],
+ [`The trapeze is a simple pendulum: ${EQ.pendL}.`],
+ [`${Ln} = ${F('(3.8 s)²(9.81 m/s²)',P2)} = <b>3.6 m</b>`]);
+add('tb',sb,'Calculate the period and frequency of a <b>3.500 m</b> long pendulum at the following locations: (a) the North Pole, where <i>a</i><sub>g</sub> = 9.832 m/s²; (b) Chicago, where <i>a</i><sub>g</sub> = 9.803 m/s²; (c) Jakarta, Indonesia, where <i>a</i><sub>g</sub> = 9.782 m/s².',
+ [T('(a) Period, North Pole','s',Tp(3.5,9.832),{tol:.01}),T('(a) Frequency, North Pole','Hz',1/Tp(3.5,9.832),{tol:.01}),T('(b) Period, Chicago','s',Tp(3.5,9.803),{tol:.01}),T('(b) Frequency, Chicago','Hz',1/Tp(3.5,9.803),{tol:.01}),T('(c) Period, Jakarta','s',Tp(3.5,9.782),{tol:.01}),T('(c) Frequency, Jakarta','Hz',1/Tp(3.5,9.782),{tol:.01})],
+ [`${hP} Then ${fn} = 1/${Tn}.`,`(a) 2π√(3.500 ÷ 9.832).`],
+ [`(a) ${Tn} = 2π${R(F('3.500','9.832'))} = <b>3.749 s</b>, ${fn} = <b>0.2667 Hz</b>`,`(b) ${Tn} = <b>3.754 s</b>, ${fn} = <b>0.2664 Hz</b>`,`(c) ${Tn} = <b>3.758 s</b>, ${fn} = <b>0.2661 Hz</b>`,`The period is longest where gravity is weakest (Jakarta).`]);
+
+const sc='Simple Harmonic Motion of a Mass-Spring System · Sample Problem C practice';
+add('tb',sc,'A mass of <b>0.30 kg</b> is attached to a spring and is set into motion with a period of <b>0.24 s</b>. What is the spring constant of the spring?',
+ [T('Spring constant','N/m',kp(.30,.24))],
+ [`${EQ.sprK}`,`4π² × 0.30 ÷ 0.24².`],
+ [`${kn} = ${F('4π²(0.30 kg)','(0.24 s)²')} = <b>2.1 × 10² N/m</b>`]);
+add('tb',sc,'On Halloween, you see an "alien" that has one antenna made of a glittery foam ball connected to a spring. The spring oscillates with a period of <b>0.079 s</b> and has a spring constant of <b>63 N/m</b>. Find the mass of the ball.',
+ [T('Mass of the ball','kg',mp(63,.079))],
+ [`${EQ.sprM}`,`63 × 0.079² ÷ (4π²). The answer is small – a few grams.`],
+ [`${mn} = ${F('(63 N/m)(0.079 s)²',P2)} = 9.96 × 10<sup>−3</sup> kg = <b>1.0 × 10<sup>−2</sup> kg (≈ 10 g)</b>`]);
+add('tb',sc,'A <b>125 N</b> object vibrates with a period of <b>3.56 s</b> when hanging from a spring. What is the spring constant of the spring?',
+ [T('Spring constant','N/m',kp(125/g,3.56))],
+ [`125 N is a <b>weight</b>: first find the mass, ${mn} = <i>W</i>/<i>g</i>.`,`m = 12.7 kg; then k = 4π²m/T².`],
+ [`${mn} = ${F('125 N','9.81 m/s²')} = 12.7 kg`,`${kn} = ${F('4π²(12.7 kg)','(3.56 s)²')} = <b>39.7 N/m</b>`]);
+add('tb',sc,'Suppose a <b>2662 kg</b> giant seal is placed on a scale and produces a <b>20.0 cm</b> compression. If the seal and spring system are set into simple harmonic motion, what is the period of the oscillations? (First find <i>k</i>.)',
+ [T('Spring constant','N/m',2662*g/.2),T('Period','s',Ts(2662,2662*g/.2))],
+ [`At rest, the spring force balances the weight: ${kn}<i>x</i> = ${mn}<i>g</i>, so ${kn} = ${mn}<i>g</i>/<i>x</i> with <i>x</i> = 0.200 m.`,`Then ${Tn} = 2π√(${mn}/${kn}). (Note that this simplifies to 2π√(<i>x</i>/<i>g</i>).)`],
+ [`${kn} = ${F('(2662 kg)(9.81 m/s²)','0.200 m')} = <b>1.31 × 10<sup>5</sup> N/m</b>`,`${Tn} = 2π${R(F('2662 kg','1.31 × 10⁵ N/m'))} = <b>0.898 s</b>`]);
+add('tb',sc,'A spring of spring constant <b>30.0 N/m</b> is attached to different masses, and the system is set in motion. Find the period and frequency of vibration for masses of (a) 2.3 kg, (b) 15 g, (c) 1.9 kg.',
+ [T('(a) Period, 2.3 kg','s',Ts(2.3,30),{tol:.01}),T('(a) Frequency','Hz',1/Ts(2.3,30),{tol:.01}),T('(b) Period, 15 g','s',Ts(.015,30),{tol:.01}),T('(b) Frequency','Hz',1/Ts(.015,30),{tol:.01}),T('(c) Period, 1.9 kg','s',Ts(1.9,30),{tol:.01}),T('(c) Frequency','Hz',1/Ts(1.9,30),{tol:.01})],
+ [`${EQ.spr}, then ${fn} = 1/${Tn}. For (b) convert 15 g to 0.015 kg first.`],
+ [`(a) ${Tn} = 2π√(2.3/30.0) = <b>1.7 s</b>, ${fn} = <b>0.58 Hz</b>`,`(b) ${Tn} = 2π√(0.015/30.0) = <b>0.14 s</b>, ${fn} = <b>7.1 Hz</b>`,`(c) ${Tn} = 2π√(1.9/30.0) = <b>1.6 s</b>, ${fn} = <b>0.63 Hz</b>`]);
+
+/* ===== Problem Set I ===== */
+const s1b='Problem B · Simple harmonic motion of a simple pendulum';
+add('p1',s1b,'<b>(Sample)</b> Two friends use a pendulum hanging from a bridge 130.0 m above a river to exchange messages. How much time is needed for the letter to make <i>one swing</i> across the river?',
+ [T('Time for one swing across','s',Tp(130)/2)],[`One swing across is half a period. ${EQ.pend}`],[`${Tn} = 22.9 s; <i>t</i> = ${Tn}/2 = <b>11.4 s</b>`]);
+add('p1',s1b,'An earthworm found in Africa was <b>6.7 m</b> long. If this worm were a simple pendulum, what would its period be?',
+ [T('Period','s',Tp(6.7))],[hP],[`${Tn} = 2π√(6.7/9.81) = <b>5.2 s</b>`]);
+add('p1',s1b,'The shortest venomous snake, the spotted dwarf adder, has an average length of 20.0 cm. Suppose this snake hangs by its tail from a branch and holds a heavy prey with its jaws, simulating a pendulum with a length of <b>15.0 cm</b>. How long will it take the snake to swing through one period?',
+ [T('Period','s',Tp(.15))],[`Convert the length to metres first: 15.0 cm = 0.150 m.`],[`${Tn} = 2π√(0.150/9.81) = <b>0.777 s</b>`]);
+add('p1',s1b,'Bamboo can grow 88 cm in a day. If bamboo is grown for <b>four days</b> and then used to make a simple pendulum, what will the pendulum\'s period be?',
+ [T('Period','s',Tp(.88*4))],[`Length = 4 × 0.88 m = 3.52 m.`],[`${Ln} = 4(0.88 m) = 3.52 m; ${Tn} = 2π√(3.52/9.81) = <b>3.8 s</b>`]);
+add('p1',s1b,'A simple pendulum with a <b>frequency of 6.4 × 10<sup>−2</sup> Hz</b> is as long as the largest known specimen of Pacific giant seaweed. What is this length?',
+ [T('Length','m',Lp(1/.064))],[`First ${Tn} = 1/${fn}. Then ${EQ.pendL}.`,`T = 15.6 s.`],[`${Tn} = 1/(0.064 Hz) = 15.6 s; ${Ln} = ${F('(15.6 s)²(9.81 m/s²)',P2)} = <b>60 m</b> (6.1 × 10¹ m)`]);
+add('p1',s1b,'The deepest permafrost is found in Siberia, Russia. Suppose a shaft is drilled to the bottom of the frozen layer, and a simple pendulum with a length equal to the depth of the shaft oscillates within the shaft. In <b>1.00 h</b> the pendulum makes <b>48 oscillations</b>. Find the depth of the permafrost.',
+ [T('Depth (length of the pendulum)','m',Lp(3600/48),{tol:.03})],[`Period = time ÷ number of oscillations = 3600 s ÷ 48.`,`T = 75.0 s; L = T²g/(4π²).`],[`${Tn} = ${F('3600 s','48')} = 75.0 s`,`${Ln} = ${F('(75.0 s)²(9.81 m/s²)',P2)} = <b>1.40 × 10<sup>3</sup> m</b>`]);
+add('p1',s1b,'Ganymede, the largest of Jupiter\'s moons, is also the largest satellite in the solar system. Find the acceleration of gravity on Ganymede if a simple pendulum with a length of <b>1.00 m</b> has a period of <b>10.5 s</b>.',
+ [T('Free-fall acceleration','m/s²',gp(1,10.5),{tol:.04})],[`${EQ.pendg}`],[`${ag} = ${F('4π²(1.00 m)','(10.5 s)²')} = <b>0.358 m/s²</b>`]);
+
+const s1c='Problem C · Simple harmonic motion of a mass-spring system';
+add('p1',s1c,'<b>(Sample)</b> A 1275 kg car is supported on four springs; two passengers have a combined mass of 153 kg. The frame vibrates with a period of 0.840 s. Find the spring constant of a single spring.',
+ [T('Spring constant','N/m',kp((1275+153)/4,.84))],[`Each spring supports one quarter of the total mass.`],[`${mn} = 1428/4 = 357 kg; ${kn} = 4π²(357)/(0.840)² = <b>2.00 × 10<sup>4</sup> N/m</b>`]);
+add('p1',s1c,'The hummingbird makes a humming sound with its wings, which beat with a frequency of <b>90.0 Hz</b>. Suppose a mass is attached to a spring with a spring constant of <b>2.50 × 10<sup>2</sup> N/m</b>. How large is the mass if its oscillation frequency is <b>3.00 × 10<sup>−2</sup></b> times that of a hummingbird\'s wings?',
+ [T('Mass','kg',mp(250,1/(90*.03)),{tol:.03})],[`The mass oscillates at f = (3.00 × 10⁻²)(90.0 Hz) = 2.70 Hz. Then ${EQ.sprM}.`],[`${fn} = 0.0300 × 90.0 = 2.70 Hz`,`${mn} = ${F('250 N/m','4π²(2.70 Hz)²')} = <b>0.869 kg</b>`]);
+add('p1',s1c,'In 1986, a 35 × 10<sup>3</sup> kg watch was demonstrated in Canada. Suppose this watch is placed on a huge trailer that rests on a lightweight platform, and oscillations equal to <b>0.71 Hz</b> are induced. Find the <b>trailer\'s mass</b> if the platform acts like a spring scale with a spring constant equal to <b>1.0 × 10<sup>6</sup> N/m</b>.',
+ [T('Total oscillating mass','kg',mp(1e6,1/.71),{tol:.03}),T('Mass of the trailer','kg',mp(1e6,1/.71)-35e3,{tol:.05})],[`The spring supports the watch <em>and</em> the trailer. Find the total mass from f and k, then subtract the watch.`,`m<sub>total</sub> = k/(4π²f²).`],[`${mn}<sub>total</sub> = ${F('1.0 × 10⁶ N/m','4π²(0.71 Hz)²')} = 5.0 × 10⁴ kg`,`${mn}<sub>trailer</sub> = 5.02 × 10⁴ − 3.5 × 10⁴ ≈ <b>1.5 × 10<sup>4</sup> kg</b>`]);
+add('p1',s1c,'A double coconut can grow for 10 years and have a mass of <b>20.0 kg</b>. If a 20.0 kg double coconut oscillates on a spring <b>42.7 times each minute</b>, what is the spring constant of the spring?',
+ [T('Spring constant','N/m',kp(20,60/42.7),{tol:.03})],[`f = 42.7 per 60 s = 0.712 Hz, so T = 60/42.7 = 1.41 s.`],[`${Tn} = ${F('60 s','42.7')} = 1.405 s`,`${kn} = ${F('4π²(20.0 kg)','(1.405 s)²')} = <b>4.00 × 10<sup>2</sup> N/m</b>`]);
+add('p1',s1c,'The monument commemorating the Battle of San Jacinto in Texas stands almost 2.00 × 10<sup>2</sup> m and is topped by a 2.00 × 10<sup>5</sup> kg star. Imagine that a <b>2.00 × 10<sup>5</sup> kg</b> mass is placed on a spring platform. The platform requires <b>0.80 s</b> to oscillate from the top to the bottom positions. What is the spring constant of the spring supporting the platform?',
+ [T('Spring constant','N/m',kp(2e5,1.6),{tol:.03})],[`Top to bottom is only <b>half</b> a cycle, so the period is 2 × 0.80 s = 1.6 s.`],[`${Tn} = 2(0.80 s) = 1.6 s`,`${kn} = ${F('4π²(2.00 × 10⁵ kg)','(1.6 s)²')} = <b>3.1 × 10<sup>6</sup> N/m</b>`]);
+add('p1',s1c,'When two more people get into the car described in Sample Problem C, the total mass of all <b>four occupants</b> of the car becomes <b>255 kg</b>. Now what is the period of vibration of the car when it is driven over a pothole? (Use <i>k</i> = 2.00 × 10<sup>4</sup> N/m for each spring.)',
+ [T('Period','s',Ts((1275+255)/4,2e4),{tol:.03})],[`New total mass = 1275 kg + 255 kg = 1530 kg, shared by four springs.`],[`${mn} = ${F('1275 + 255','4')} = 382.5 kg per spring`,`${Tn} = 2π${R(F('382.5 kg','2.00 × 10⁴ N/m'))} = <b>0.869 s</b>`]);
+add('p1',s1c,'On average, a newborn human\'s mass is just over 3.0 kg. However, in 1955, a <b>10.2 kg</b> boy was born in Italy. Suppose this baby is placed in a crib hanging from springs with a total spring constant of <b>2.60 × 10<sup>2</sup> N/m</b>. If the cradle is rocked with simple harmonic motion, what is its period?',
+ [T('Period','s',Ts(10.2,260))],[`${EQ.spr}`],[`${Tn} = 2π${R(F('10.2 kg','260 N/m'))} = <b>1.24 s</b>`]);
+
+/* ===== Problem Set II ===== */
+const s2b='Problem B · Simple harmonic motion of a simple pendulum';
+add('p2',s2b,'<b>(Sample)</b> A simple pendulum with a length of 1.00 m would have a period of 13.3 s on Saturn\'s moon Dione. Find the acceleration of gravity on Dione.',
+ [T('Free-fall acceleration','m/s²',gp(1,13.3),{tol:.03})],[`${EQ.pendg}`],[`${ag} = ${F('4π²(1.00 m)','(13.3 s)²')} = <b>0.223 m/s²</b>`]);
+const grav=[['3.0 × 10<sup>−1</sup> m','Venus',.3,1.16],['65.0 cm','Mars',.65,2.62],['1.14 m','Mercury',1.14,3.55],['50.0 cm','Pluto',.5,2.99]];
+grav.forEach(([Ltxt,world,L,Tt])=>add('p2',s2b,`A simple pendulum with a length of <b>${Ltxt}</b> would have a period of <b>${Tt} s</b> on ${world}. Calculate the acceleration of gravity on ${world}.`,
+ [T('Free-fall acceleration','m/s²',gp(L,Tt),{tol:.03})],[`Convert the length to metres if necessary. ${EQ.pendg}`],[`${ag} = ${F('4π²('+sig(L,3)+' m)','('+Tt+' s)²')} = <b>${sig(gp(L,Tt),3)} m/s²</b>`]));
+[[1.0,'1.0'],[.5,'0.50'],[2.5,'2.5']].forEach(([f,txt])=>add('p2',s2b,`Find the length of a pendulum that oscillates with a frequency of <b>${txt} Hz</b>.`,
+ [T('Length','m',Lp(1/f),{tol:.03})],[`First find the period, ${Tn} = 1/${fn}. Then ${EQ.pendL}.`],[`${Tn} = 1/${txt} Hz = ${sig(1/f,3)} s`,`${Ln} = ${F('('+sig(1/f,3)+' s)²(9.81 m/s²)',P2)} = <b>${sig(Lp(1/f),3)} m</b>`]));
+[['6.200','Oslo, Norway','9.819'],['2.500','Quito, Ecuador','9.780'],['3.120','Cairo, Egypt','9.793']].forEach(([L,city,gg])=>add('p2',s2b,`Calculate the period and frequency of a <b>${L} m</b> long pendulum in ${city}, where <i>a</i><sub>g</sub> = ${gg} m/s².`,
+ [T('Period','s',Tp(+L,+gg),{tol:.01}),T('Frequency','Hz',1/Tp(+L,+gg),{tol:.01})],[hP+` Then ${fn} = 1/${Tn}.`],[`${Tn} = 2π${R(F(L,gg))} = <b>${sig(Tp(+L,+gg),4)} s</b>`,`${fn} = 1/${Tn} = <b>${sig(1/Tp(+L,+gg),4)} Hz</b>`]));
+
+const s2c='Problem C · Simple harmonic motion of a mass-spring system';
+add('p2',s2c,'<b>(Sample)</b> The antennae of male mosquitoes receive sound signals from female mosquitoes, which emit about 230 Hz. A mass on a spring with k = 1.14 × 10<sup>4</sup> N/m oscillates at that frequency. How large is the mass? (Answer in kilograms.)',
+ [T('Mass','kg',1.14e4/(pi2*230*230),{tol:.03})],[`${EQ.sprM}`],[`${mn} = ${F('1.14 × 10⁴ N/m','4π²(230 Hz)²')} = 5.46 × 10<sup>−3</sup> kg = <b>5.46 g</b>`]);
+add('p2',s2c,'Honeybee scouts inform other honeybees where to find food by flapping their wings and "waggle-dancing." During part of the dance, a scout bee\'s wings flap with a maximum frequency of <b>3.00 × 10<sup>2</sup> Hz</b>. Suppose a mass is attached to a spring with a spring constant of <b>8.65 × 10<sup>4</sup> N/m</b>. How large is the mass if its oscillation frequency is the same as the wings of a waggle-dancing bee?',
+ [T('Mass','kg',8.65e4/(pi2*300*300),{tol:.03})],[`${EQ.sprM}`],[`${mn} = ${F('8.65 × 10⁴ N/m','4π²(3.00 × 10² Hz)²')} = <b>2.43 × 10<sup>−2</sup> kg</b> (24.3 g)`]);
+add('p2',s2c,'When a mass of <b>25 g</b> is attached to a certain spring, it makes <b>20 complete vibrations in 4.0 s</b>. What is the spring constant of the spring?',
+ [T('Spring constant','N/m',kp(.025,4/20),{tol:.03})],[`Period = 4.0 s ÷ 20 = 0.20 s. Convert 25 g to 0.025 kg.`],[`${Tn} = ${F('4.0 s','20')} = 0.20 s`,`${kn} = ${F('4π²(0.025 kg)','(0.20 s)²')} = <b>25 N/m</b>`]);
+add('p2',s2c,'A farmer rides over a bumpy field on his tractor. The tractor seat is supported by a spring with a spring constant of <b>2.03 × 10<sup>3</sup> N/m</b>. As the tractor drives over a bump, the seat oscillates at a frequency of <b>0.79 Hz</b>. For the first few seconds, the vibration approximates simple harmonic motion. Find the farmer\'s mass if the tractor seat acts like a spring scale.',
+ [T('Farmer\'s mass','kg',2030/(pi2*.79*.79),{tol:.03})],[`${EQ.sprM}`],[`${mn} = ${F('2.03 × 10³ N/m','4π²(0.79 Hz)²')} = <b>82 kg</b>`]);
+add('p2',s2c,'A <b>32 N</b> sack of potatoes vibrates with a period of <b>0.42 s</b> when placed on a spring scale. What is the spring constant?',
+ [T('Spring constant','N/m',kp(32/g,.42),{tol:.03})],[`Find the mass from the weight first: m = W/g.`],[`${mn} = 32/9.81 = 3.26 kg; ${kn} = ${F('4π²(3.26)','(0.42)²')} = <b>7.3 × 10<sup>2</sup> N/m</b>`]);
+add('p2',s2c,'A <b>66 N</b> pumpkin vibrates with a period of <b>2.9 s</b> when attached to the end of a spring scale. What is the spring constant?',
+ [T('Spring constant','N/m',kp(66/g,2.9),{tol:.03})],[`m = W/g first.`],[`${mn} = 66/9.81 = 6.73 kg; ${kn} = ${F('4π²(6.73)','(2.9)²')} = <b>32 N/m</b>`]);
+add('p2',s2c,'As the wind moves the bough of a tree, it oscillates up and down. During the first few seconds, it approximates simple harmonic motion. If the bough has a weight of <b>87 N</b> and oscillates with a period of <b>0.64 s</b>, what is the spring constant of the bough?',
+ [T('Spring constant','N/m',kp(87/g,.64),{tol:.03})],[`m = W/g first.`],[`${mn} = 87/9.81 = 8.87 kg; ${kn} = ${F('4π²(8.87)','(0.64)²')} = <b>8.6 × 10<sup>2</sup> N/m</b>`]);
+add('p2',s2c,'A certain trampoline acts like a single spring with a spring constant of <b>364 N/m</b>. If a <b>24 kg</b> child jumps on the trampoline, what would be the period of oscillation?',
+ [T('Period','s',Ts(24,364))],[`${EQ.spr}`],[`${Tn} = 2π${R(F('24 kg','364 N/m'))} = <b>1.6 s</b>`]);
+add('p2',s2c,'Two children jump on their parent\'s bed. The combined mass of both kids is <b>55 kg</b>. The mattress is supported by <b>36 springs</b>, each with a spring constant of <b>458 N/m</b>. If the children jump at the same time, what would be the period of oscillation?',
+ [T('Total spring constant','N/m',36*458),T('Period','s',Ts(55,36*458))],[`The 36 springs share the load side by side, so their spring constants <b>add</b>: k<sub>total</sub> = 36 × 458 N/m.`],[`${kn}<sub>total</sub> = 36(458 N/m) = 1.65 × 10⁴ N/m`,`${Tn} = 2π${R(F('55 kg','1.65 × 10⁴ N/m'))} = <b>0.36 s</b>`]);
+add('p2',s2c,'An <b>8.2 kg</b> infant is placed in a jumper that is made of a seat suspended from a door frame by a spring. If the spring has a spring constant of <b>221 N/m</b>, calculate the period of oscillation.',
+ [T('Period','s',Ts(8.2,221))],[`${EQ.spr}`],[`${Tn} = 2π${R(F('8.2 kg','221 N/m'))} = <b>1.2 s</b>`]);
+add('p2',s2c,'Your friend\'s key chain is coiled like a spring. Three keys, each with a mass of <b>24 g</b>, are on the chain. When your friend removes the keys from a pocket, the keys bob up and down. If the key chain has a spring constant of <b>99 N/m</b>, what is the frequency of oscillation?',
+ [T('Frequency','Hz',1/Ts(.072,99),{tol:.03})],[`Total mass = 3 × 24 g = 72 g = 0.072 kg. Find ${Tn}, then ${fn} = 1/${Tn}.`],[`${mn} = 3(0.024 kg) = 0.072 kg`,`${Tn} = 2π${R(F('0.072 kg','99 N/m'))} = 0.169 s; ${fn} = 1/${Tn} = <b>5.9 Hz</b>`]);
+
+/* ===== Section 2 assessment and concepts ===== */
+const sa='Section 2 · Formative assessment';
+add('fa',sa,'The reading on a metronome indicates the number of oscillations per minute. What are the <b>frequency and period</b> of the metronome\'s vibration when the metronome is set at <b>180</b>?',
+ [T('Frequency','Hz',3.0),T('Period','s',1/3)],[`180 oscillations per minute = 180 ÷ 60 per second. Then ${Tn} = 1/${fn}.`],[`${fn} = ${F('180','60 s')} = <b>3.0 Hz</b>`,`${Tn} = 1/${fn} = <b>0.33 s</b>`]);
+add('fa',sa,'A child swings with a small amplitude on a playground swing with a <b>2.5 m</b> long chain. (a) What is the period of the child\'s motion? (b) What is the frequency of vibration?',
+ [T('(a) Period','s',Tp(2.5)),T('(b) Frequency','Hz',1/Tp(2.5))],[hP],[`(a) ${Tn} = 2π√(2.5/9.81) = <b>3.2 s</b>`,`(b) ${fn} = 1/${Tn} = <b>0.32 Hz</b>`]);
+add('fa',sa,'A <b>0.75 kg</b> mass attached to a vertical spring stretches the spring <b>0.30 m</b>. (a) What is the spring constant? (b) The mass-spring system is now placed on a horizontal surface and set vibrating. What is the period of the vibration?',
+ [T('(a) Spring constant','N/m',.75*g/.3),T('(b) Period','s',Ts(.75,.75*g/.3))],[`(a) At rest the spring force equals the weight: ${kn}<i>x</i> = ${mn}<i>g</i>.`,`(b) ${EQ.spr} with the k you found.`],[`(a) ${kn} = ${F('(0.75 kg)(9.81 m/s²)','0.30 m')} = <b>25 N/m</b>`,`(b) ${Tn} = 2π${R(F('0.75 kg','24.5 N/m'))} = <b>1.1 s</b> (a horizontal surface does not change the period)`]);
+MC('fa','<b>Critical thinking.</b> Two mass-spring systems vibrate with simple harmonic motion. The spring constants are equal and the mass of one system is <b>twice</b> that of the other. Which system has the greater period, and by what factor?',
+ ['The system with the larger mass, by a factor of √2 ≈ 1.41','The system with the larger mass, by a factor of 2','The system with the smaller mass, by a factor of √2','They have equal periods'],[0],'T = 2π√(m/k), so T ∝ √m: twice the mass gives √2 times the period.','Compare T for m and for 2m with the same k.');
+MC('fa','<b>Conceptual challenge – Pendulum on the Moon.</b> The free-fall acceleration on the Moon\'s surface is about one-sixth of that on Earth. Compared with an identical pendulum on Earth, the period of a pendulum on the Moon is…',
+ ['√6 ≈ 2.4 times longer','6 times longer','6 times shorter','The same – the period does not depend on gravity'],[0],'T ∝ 1/√a_g. With a_g six times smaller, T is √6 ≈ 2.4 times larger.','Replace a_g by a_g/6 in T = 2π√(L/a_g).');
+MC('fa','<b>Conceptual challenge – Pendulum clocks.</b> Why is a wound mainspring often used to provide energy to a pendulum clock?',
+ ['To replace the energy lost to friction and air resistance so the amplitude does not decrease','To change the period of the pendulum','To make the pendulum swing faster','To keep the pendulum from swinging too far'],[0],'Damping slowly removes mechanical energy. The mainspring gives back the lost energy so the amplitude (and the ticking) is maintained; the period itself is set by the length.','What happens to a real pendulum if nothing keeps pushing it?');
+MC('fa','Which of the following change the period of a simple pendulum swinging with a <b>small amplitude</b>? (Select all that apply.)',
+ ['The length of the pendulum','The free-fall acceleration at its location','The mass of the bob','The amplitude of the swing (under 15°)'],[0,1],'T = 2π√(L/a_g) depends only on L and a_g. Mass cancels, and small-angle amplitude has no effect.','Look at which symbols appear in the pendulum equation.');
+MC('fa','A pendulum swings from 12° to the left of vertical to 12° to the right and back. What is its <b>amplitude</b>?',
+ ['12°','24°','6°','It depends on the period'],[0],'Amplitude is the maximum displacement from the equilibrium position, measured from the vertical: 12°.','Amplitude is measured from equilibrium, not from one extreme to the other.');
+MC('fa','A vibrating object completes 5 cycles in 10 s. Its period and frequency are…',
+ ['T = 2 s, f = 0.5 Hz','T = 0.5 s, f = 2 Hz','T = 5 s, f = 10 Hz','T = 50 s, f = 0.02 Hz'],[0],'Period = time per cycle = 10 s ÷ 5 = 2 s; f = 1/T = 0.5 Hz.','T = (time) ÷ (number of cycles), and f = 1/T.');
+MC('fa','A mass on a spring vibrates with period <i>T</i>. If the <b>spring constant is quadrupled</b> (mass unchanged), the new period is…',
+ ['T/2','2T','T/4','4T'],[0],'T ∝ 1/√k: four times the stiffness halves the period.','The period contains √(m/k).');
+MC('fa','The amplitude of a mass-spring system\'s vibration is doubled (the spring still obeys Hooke\'s law). The period…',
+ ['Stays the same','Doubles','Is halved','Increases by √2'],[0],'A larger amplitude gives a larger force but a longer path; the effects cancel and T is unchanged.','Does the amplitude appear in T = 2π√(m/k)?');
+MC('fa','A pendulum has period <i>T</i> on Earth. A pendulum of <b>four times the length</b> has period…',
+ ['2T','4T','T/2','T/4'],[0],'T ∝ √L, so four times the length doubles the period.','Take the square root of the factor.');
+
+const SETS=[
+ {id:'tb',name:'Textbook Practice',desc:'The Practice problems after Sample Problems B (pendulum) and C (mass-spring).'},
+ {id:'p1',name:'Problem Set I',desc:'Sample Problem Set I – Problem B (simple pendulum) and Problem C (mass-spring system).'},
+ {id:'p2',name:'Problem Set II',desc:'Sample Problem Set II – Problem B (simple pendulum) and Problem C (mass-spring system).'},
+ {id:'fa',name:'Section 2 Assessment',desc:'Formative assessment, the conceptual challenges and quick concept checks.'}
+];
+
+/* ---------- worked examples ---------- */
+(function buildExamples(){
+  const host=$('#exampleList');
+  EX.forEach((ex,idx)=>{
+    const card=document.createElement('div'); card.className='card example'; card.id=ex.id;
+    card.innerHTML=`<header><h3 style="margin:0">Example ${idx+1} · ${ex.title}</h3><span class="pill">${ex.tag}</span></header>
+      <div class="problem-box">${ex.problem}</div>
+      <div class="dots"></div><ol class="steps"></ol><div class="row ctrl"></div>`;
+    const dots=$('.dots',card), list=$('.steps',card), ctrl=$('.ctrl',card);
+    const next=document.createElement('button'); next.className='btn'; next.type='button'; next.textContent='Start: reveal step 1';
+    const restart=document.createElement('button'); restart.className='btn ghost'; restart.type='button'; restart.textContent='Restart example'; restart.hidden=true;
+    ctrl.append(next,restart);
+    ex.steps.forEach((s,i)=>{
+      const d=document.createElement('i'); dots.appendChild(d);
+      const li=document.createElement('li'); li.className='step';
+      li.innerHTML=`<h4><span class="n">${i+1}</span>${s.name}</h4><div class="body">${s.html}</div>`;
+      if(s.ask){ const a=document.createElement('div'); a.className='ask'; li.appendChild(a); }
+      list.appendChild(li);
+    });
+    let cur=-1, needAsk=false;
+    function reveal(){
+      cur++; const li=list.children[cur], s=ex.steps[cur];
+      li.classList.add('show'); dots.children[cur].classList.add('on');
+      if(s.ask){
+        needAsk=true; next.disabled=true;
+        (s.ask.type==='num'?mkNum:mkMC)($('.ask',li),s.ask,()=>{ needAsk=false; next.disabled=false; refresh(); });
+      }
+      refresh(); li.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    function refresh(){
+      if(cur>=ex.steps.length-1 && !needAsk){ next.hidden=true; restart.hidden=false; if(!state['ex_'+ex.id]){ state['ex_'+ex.id]=1; save(); } }
+      else { next.textContent=needAsk?'Answer the question above to continue':(cur<0?'Start: reveal step 1':`Next step: ${ex.steps[cur+1]?.name||''}`); }
+    }
+    next.addEventListener('click',reveal);
+    restart.addEventListener('click',()=>{
+      cur=-1; needAsk=false; next.hidden=false; next.disabled=false; restart.hidden=true;
+      [...list.children].forEach((li,i)=>{ li.classList.remove('show'); const a=$('.ask',li); if(a) a.innerHTML=''; dots.children[i].classList.remove('on'); });
+      refresh(); card.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    host.appendChild(card);
+  });
+})();
+
+
+P.forEach((p,i)=>{ p.id=p.set+(i+1); });
+let curSet='tb';
+
+function setStats(sid){ const ps=P.filter(p=>p.set===sid); return {done:ps.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length,total:ps.length}; }
+function updateOverall(){
+  const done=P.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length;
+  $('#overallText').textContent=`${done} of ${P.length} practice problems solved`;
+  $('#overallBar').style.width=(100*done/P.length)+'%';
+  $$('#setPicker button').forEach(b=>{ const s=setStats(b.dataset.set); $('small',b).textContent=`${s.done}/${s.total}`; });
+}
+function buildPicker(){
+  const pk=$('#setPicker'); pk.innerHTML='';
+  SETS.forEach(s=>{
+    const b=document.createElement('button'); b.type='button'; b.dataset.set=s.id; b.setAttribute('aria-pressed',String(s.id===curSet));
+    b.innerHTML=`${s.name}<small></small>`; b.addEventListener('click',()=>{ curSet=s.id; buildPicker(); renderSet(); }); pk.appendChild(b);
+  });
+  updateOverall();
+}
+function renderSet(){
+  const host=$('#problemList'); host.innerHTML='';
+  const s=SETS.find(x=>x.id===curSet);
+  const head=document.createElement('div'); head.className='sethead'; head.innerHTML=`<p>${s.desc.replace(/_(\w+)/g,'<sub>$1</sub>')}</p>`; host.appendChild(head);
+  let last=null;
+  P.filter(p=>p.set===curSet).forEach((p,i)=>{
+    if(p.sub&&p.sub!==last){ const h=document.createElement('h3'); h.className='subhead'; h.textContent=p.sub; host.appendChild(h); last=p.sub; }
+    host.appendChild(renderProblem(p,i+1));
+  });
+}
+function renderProblem(p,n){
+  const st=state['p_'+p.id]=state['p_'+p.id]||{done:false,tries:0};
+  const el=document.createElement('div'); el.className='prob'+(st.done?' done':'');
+  el.innerHTML=`<div class="num"><span>Problem ${n}</span><span class="badge">${st.done?'✔ Solved':''}</span></div><p style="margin:6px 0 4px">${p.text}</p>`;
+  if(p.figure) el.insertAdjacentHTML('beforeend',p.figure());
+  const body=document.createElement('div'); el.appendChild(body);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  const hintHost=document.createElement('div'), solHost=document.createElement('div');
+  const acts=document.createElement('div'); acts.className='acts';
+  const check=document.createElement('button'); check.className='btn'; check.type='button'; check.textContent='Check';
+  const hint=document.createElement('button'); hint.className='btn ghost'; hint.type='button'; hint.textContent='Hint';
+  const sol=document.createElement('button'); sol.className='btn ghost'; sol.type='button';
+  let hintN=0, inputs=[], checkFn;
+
+  if(p.opts){
+    const multi=p.type==='multi';
+    p.opts.forEach((o,i)=>{
+      const lab=document.createElement('label'); lab.className='opt'; lab.style.display='block'; lab.style.cursor='pointer';
+      const inp=document.createElement('input'); inp.type=multi?'checkbox':'radio'; inp.name='q_'+p.id; inp.value=i;
+      lab.append(inp); lab.insertAdjacentHTML('beforeend',o); body.appendChild(lab); inputs.push(inp);
+    });
+    checkFn=()=>{
+      const sel=inputs.filter(i=>i.checked).map(i=>+i.value);
+      if(!sel.length){ fb.className='fb near'; fb.textContent='Select an answer first.'; return null; }
+      const ok=sel.length===p.correct.length&&p.correct.every(c=>sel.includes(c));
+      inputs.forEach(i=>i.parentElement.classList.remove('right','wrong'));
+      if(ok){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+p.why; return true; }
+      sel.forEach(v=>{ if(!p.correct.includes(v)) inputs[v].parentElement.classList.add('wrong'); });
+      fb.className='fb no'; fb.textContent='Not quite. Re-read the question and use the sign table, the graph or the equations to reason it out.';
+      return false;
+    };
+  } else {
+    p.parts.forEach((part,i)=>{
+      const row=document.createElement('div'); row.className='partrow';
+      const id=`in_${p.id}_${i}`;
+      row.innerHTML=`<label for="${id}">${part.label}</label>`;
+      const inp=document.createElement('input'); inp.type='text'; inp.id=id; inp.autocomplete='off'; inp.placeholder='your answer';
+      const u=document.createElement('span'); u.className='u'; u.textContent=part.unit;
+      const pf=document.createElement('span'); pf.className='fb'; pf.style.margin='0'; pf.setAttribute('aria-live','polite');
+      row.append(inp,u,pf); body.appendChild(row); inputs.push({inp,pf});
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') check.click(); });
+    });
+    checkFn=()=>{
+      let all=true, any=false;
+      inputs.forEach(({inp,pf},i)=>{
+        if(!inp.value.trim()){ pf.className='fb near'; pf.textContent='Enter a value.'; all=false; return; }
+        any=true;
+        const j=judge(parseNum(inp.value),p.parts[i]);
+        pf.className='fb '+j.state; pf.textContent=(j.state==='ok'?'✔ ':'')+j.msg;
+        if(j.state!=='ok') all=false;
+      });
+      fb.textContent=''; fb.className='fb';
+      return any?all:null;
+    };
+  }
+  function showSol(){
+    solHost.className='solbox';
+    solHost.innerHTML=p.sol?'<b>Worked solution</b><ol>'+p.sol.map(s=>`<li>${s}</li>`).join('')+'</ol>':'<b>Answer explained</b><p style="margin:4px 0 0">'+p.why+'</p>';
+  }
+  function syncSol(){
+    const open=!!solHost.innerHTML;
+    sol.disabled=!(st.done||st.tries>=2);
+    sol.textContent=sol.disabled?'Solution (after 2 tries)':(open?'Hide solution':'Show solution');
+  }
+  check.addEventListener('click',()=>{
+    const r=checkFn(); if(r===null) return;
+    st.tries++;
+    if(r){
+      if(!st.done){ st.done=true; el.classList.add('done'); $('.badge',el).textContent='✔ Solved'; }
+      if(p.parts){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+(st.tries===1?'First try — nice work.':'Well done for sticking with it.'); }
+    } else if(p.parts && st.tries>=2 && !st.done){ fb.className='fb near'; fb.textContent='Still stuck? Try another hint, or open the worked solution.'; }
+    save(); updateOverall(); syncSol();
+  });
+  hint.addEventListener('click',()=>{
+    const hs=p.h||[]; if(!hs.length) return;
+    hintN=Math.min(hintN+1,hs.length);
+    hintHost.className='hintbox'; hintHost.innerHTML=`<b>Hint ${hintN}${hs.length>1?' of '+hs.length:''}:</b> `+hs.slice(0,hintN).map((h,i)=>i===hintN-1?h:'<span class="pnote">'+h+'</span>').reverse().join('<br>');
+    hint.textContent=hintN<hs.length?'Another hint':'Hint';
+  });
+  sol.addEventListener('click',()=>{ if(sol.disabled) return; if(solHost.innerHTML){ solHost.innerHTML=''; solHost.className=''; } else showSol(); syncSol(); });
+  acts.append(check,hint,sol); el.append(acts,fb,hintHost,solHost);
+  syncSol();
+  return el;
+}
+
+if($('#resetAll')) $('#resetAll').addEventListener('click',()=>{ if(confirm('Clear all saved progress?')){ state={}; save(); buildPicker(); renderSet(); } });
+buildPicker(); renderSet();
+const h=(location.hash||'').slice(1); if(['review','examples','practice'].includes(h)) showTab(h);
+window.LIA112={P,EX,parseNum,judge};
+})();
+</script>
+</body>
+</html>
