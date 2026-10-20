@@ -46,8 +46,8 @@ links between lessons that a student might not be assigned.
   `solved/total` = activities completed / activities available (progress %); `score/max` = points (score %). Pages that restart on every visit
   (no persisted state) pass `{keepBest:true}` as 2nd argument so the best result is kept. Pages that show `N of M …` in `#overallText` are picked up automatically.
   Reading-only pages may report nothing (they show as "saved").
-* Keys starting `lia-` (`lia-code`, `lia-name`, `lia-mirror`, `lia-reloaded`, `lia-theme`, `lia-admin-session`, `lia-access`) belong to the module – a page must not use that prefix for its own state
-  except exactly as the module excludes (page-owned keys like `lia-physics2-…` ARE saved; keep them off the excluded list above).
+* Reserved localStorage keys (never written by a page, never saved as student work): `lia-code`, `lia-name`, `lia-mirror`, `lia-reloaded`, `lia-theme`, `lia-admin-session`, `lia-access` (each suffixed with the area/page where relevant).
+  Any other key – including page-owned ones such as `lia-physics2-…` – is saved. Don't invent new reserved names without adding them to `trackable()` in `shared/lia-sync.js`.
 * The page must still work if `LiaSync` is absent (no config / offline file preview): everything optional-chained.
 * The signed-in badge (`#liaUser`), the sign-in gate (`#liaGate`) and the "not available for your class" card are drawn by the module – don't restyle or duplicate them.
 
