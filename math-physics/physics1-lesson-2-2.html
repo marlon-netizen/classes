@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Physics II – Lesson 2.2 Acceleration | Lincoln International Academy</title>
+<title>Physics I – Lesson 2.2 Acceleration | Lincoln International Academy</title>
 <meta name="description" content="Interactive study page for Lesson 2.2: Acceleration – average acceleration, velocity-time graphs and the kinematic equations for constant acceleration.">
 
 <style>
@@ -231,7 +231,7 @@ tr.hl td{background:var(--accent-soft);font-weight:700}
       <div class="school">Lincoln International Academy</div>
     </div>
     <div class="meta">
-      <div>Class<b>Physics II</b></div>
+      <div>Class<b>Physics I</b></div>
       <div>Teacher<b>Eduardo Vásquez</b></div>
     </div>
   </div>
@@ -241,7 +241,7 @@ tr.hl td{background:var(--accent-soft);font-weight:700}
   <div class="wrap">
     <div>
       <h1>Lesson 2.2 · Acceleration</h1>
-      <small>Chapter 2 · Motion in One Dimension · <a href="physics-lesson-2-2-practice.html">Practice exercises →</a> · <a href="physics-lesson-2-3.html">Next: Lesson 2.3 · Falling Objects →</a> · <a href="physics-lesson-10-3.html">Go to Lesson 10.3 · Second Law of Thermodynamics →</a></small>
+      <small>Chapter 2 · Motion in One Dimension · <a href="physics1-lesson-2-2-practice.html">Practice exercises →</a> · <a href="physics1-lesson-2-3.html">Next: Lesson 2.3 · Falling Objects →</a></small>
     </div>
     <div class="overall" aria-live="polite">
       <span id="overallText">0 of 0 practice problems solved</span>
@@ -479,7 +479,7 @@ tr.hl td{background:var(--accent-soft);font-weight:700}
 
 <footer>
   <div class="wrap">
-    <div>Lincoln International Academy · Physics II · Mr. Eduardo Vásquez<br>Problems adapted from <i>Holt McDougal Physics</i>, Chapter 2 §2 and Sample Problem Sets B, C, D, E and I (© Houghton Mifflin Harcourt).</div>
+    <div>Lincoln International Academy · Physics I · Mr. Eduardo Vásquez<br>Problems adapted from <i>Holt McDougal Physics</i>, Chapter 2 §2 and Sample Problem Sets B, C, D, E and I (© Houghton Mifflin Harcourt).</div>
     <div>Your progress is saved in this browser only. <button class="linkbtn" id="resetAll" data-lia-reset>Reset my progress</button></div>
   </div>
 </footer>
@@ -489,7 +489,7 @@ tr.hl td{background:var(--accent-soft);font-weight:700}
 'use strict';
 const $  = (s,e=document)=>e.querySelector(s);
 const $$ = (s,e=document)=>[...e.querySelectorAll(s)];
-const KEY='lia-physics2-lesson-2-2';
+const KEY='lia-physics1-lesson-2-2';
 let state={};
 try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
 const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
