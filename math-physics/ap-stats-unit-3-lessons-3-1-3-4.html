@@ -106,6 +106,7 @@
   .scorebar strong { color: var(--primary-dark); font-weight: 500; }
   .progress { flex: 1 1 160px; height: 10px; background: var(--line); border-radius: 6px; overflow: hidden; }
   .progress div { height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+  .qtext { margin: .5rem 0; font-weight: 300; font-size: 1.05rem; }
   .problem .q-num { color: var(--primary); font-weight: 600; letter-spacing: 1px; }
   .answer-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: .7rem; }
   .answer-row input[type="text"] {
@@ -168,6 +169,7 @@
   .hat { position: relative; display: inline-block; font-style: italic; padding: 0 .03em; }
   .hat::before { content: '^'; position: absolute; left: 50%; top: -.38em; transform: translateX(-50%); font-style: normal; font-size: .9em; }
   .sym { font-style: italic; }
+  code { background: var(--primary-soft); color: var(--ink); padding: 0 .35em; border-radius: 4px; font-family: Consolas, "DejaVu Sans Mono", monospace; font-size: .92em; }
   .ref { font-size: .95rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: .8rem; padding-top: .5rem; }
   .steps { counter-reset: st; list-style: none; padding-left: 0; }
   .steps li { counter-increment: st; margin: .4rem 0; padding-left: 2.2rem; position: relative; }
@@ -229,90 +231,268 @@
   <!-- ============ TAB 1: LESSON ============ -->
   <section class="panel active" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn">
     <div class="card">
-      <h2>From a sample to a population proportion</h2>
-      <p>Unit 3 asks one big question: <strong>what can a sample proportion tell us about the population proportion?</strong> In these four lessons you will learn to (3.1) judge estimators, (3.2) describe the sampling distribution of a sample proportion, (3.3) build a confidence interval for a population proportion, and (3.4) interpret it and use it to justify claims.</p>
+      <h2>Sampling Distribution for Sample Proportions</h2>
+      <p>Unit 3 asks one big question: <strong>what can a sample proportion tell us about the population proportion?</strong> Lessons 3.1&ndash;3.4 take us from the idea of a sampling distribution, to the sampling distribution of <span class="hat">p</span>, to confidence intervals and the claims we can justify with them.</p>
+      <p><strong>Objectives</strong></p>
+      <ul>
+        <li>Understand the concept of a sampling distribution.</li>
+        <li>Describe the center, spread and shape of the sampling distribution of a sample proportion.</li>
+        <li>Verify that the conditions are met for the Normal approximation of the sampling distribution of <span class="hat">p</span>.</li>
+        <li>Construct and interpret a confidence interval for a population proportion, and justify claims with it.</li>
+        <li>Preview: describe and check the conditions for the sampling distribution of a <em>difference</em> of sample proportions (see the last card).</li>
+      </ul>
       <div class="formula">
         <span class="hat">p</span> = <span class="frac"><span>number of successes</span><span><em>n</em></span></span>
         <small>The sample proportion <span class="hat">p</span> (a statistic) estimates the population proportion <em>p</em> (a parameter).</small>
       </div>
-      <p class="ref"><strong>Reference:</strong> Barron&rsquo;s <em>AP Statistics</em> &mdash; the chapters on sampling distributions and on confidence intervals for proportions. Barron&rsquo;s is organized differently from our course sequence, so use the topics, not the chapter order, to find the matching sections. Notation and the four-step write-up (State, Plan, Do, Conclude) follow AP exam conventions.</p>
+      <p class="ref"><strong>References:</strong> class presentation <em>Sampling Distribution for Sample Proportions</em> (Lessons 3.1&ndash;3.4) and Barron&rsquo;s <em>AP Statistics</em> &mdash; the chapters on sampling distributions and on confidence intervals for proportions. Barron&rsquo;s is organized differently from our course sequence, so use the topics, not the chapter order, to find the matching sections.</p>
     </div>
 
-    <!-- 3.1 -->
+    <!-- ===== 3.1 ===== -->
+    <h2 class="group-title">Lesson 3.1 &mdash; Sampling distributions and estimators</h2>
+
     <div class="card">
       <span class="lesson-tag">LESSON 3.1</span>
-      <h3>Estimators</h3>
+      <h3>What is a sampling distribution?</h3>
       <ul>
-        <li>A <strong>parameter</strong> is a number that describes a <em>population</em> (e.g. <em>p</em>, &mu;). It is usually unknown.</li>
-        <li>A <strong>statistic</strong> is a number computed from a <em>sample</em> (e.g. <span class="hat">p</span>, <span style="text-decoration:overline"><em>x</em></span>). It varies from sample to sample.</li>
-        <li>A <strong>point estimator</strong> is a statistic used to estimate a parameter; its value for one sample is a <strong>point estimate</strong>. The sample proportion <span class="hat">p</span> is a point estimator of <em>p</em>.</li>
-        <li>An estimator is <strong>unbiased</strong> if the mean of its sampling distribution equals the parameter it estimates. Individual estimates still miss the target &mdash; &ldquo;unbiased&rdquo; means <em>no systematic</em> over- or underestimating.</li>
+        <li>A <strong>sample statistic</strong> (such as <span class="hat">p</span>) is a <strong>point estimator</strong> of a population <strong>parameter</strong> (such as <em>p</em>).</li>
+        <li>Estimators have <strong>variability</strong>: different random samples give different values. We model that variability with probability.</li>
+        <li>The <strong>sampling distribution</strong> of a statistic is the distribution of its values over <em>all possible samples of the same size</em> from the population.</li>
       </ul>
-      <div class="formula">Unbiased: &nbsp; &mu;<sub>statistic</sub> = parameter
-        <small>Unbiased: <span class="hat">p</span> for <em>p</em>, sample mean for &mu;, sample variance <em>s</em>&sup2; for &sigma;&sup2;. A statistic whose sampling distribution is centered above or below the parameter is biased.</small></div>
-      <div class="note"><strong>Remember:</strong> bias is about the <em>center</em> of the sampling distribution. A larger sample size does not remove bias; it reduces <em>variability</em>.</div>
+      <p><strong>Six key ideas</strong> (stated for sample means, and the same pattern appears for proportions):</p>
+      <ul>
+        <li>Averages vary less than individual values.</li>
+        <li>Averages based on larger samples vary less than averages based on smaller samples.</li>
+        <li>Central Limit Theorem (CLT): when the sample size is sufficiently large, the sampling distribution of the mean is approximately Normal.</li>
+        <li>The larger the sample size <em>n</em>, the closer the sampling distribution of <span style="text-decoration:overline"><em>x</em></span> is to a Normal distribution.</li>
+        <li>If the parent population is Normal, the sampling distribution of <span style="text-decoration:overline"><em>x</em></span> is Normal for <em>any</em> sample size.</li>
+        <li>The larger the sample size, the closer the <em>sample</em> distribution is to the population distribution.</li>
+      </ul>
+      <div class="note"><strong>CLT implications:</strong> the CLT is about the <em>shape</em> of the sampling distribution of <span style="text-decoration:overline"><em>x</em></span>, not its center or spread. Separately, &mu;<sub><span style="text-decoration:overline"><em>x</em></span></sub> = &mu; and &sigma;<sub><span style="text-decoration:overline"><em>x</em></span></sub> &asymp; &sigma;/&radic;<em>n</em>. For proportions, see Lesson 3.2.</div>
+      <p>Use the <strong>Sampling Sim</strong> tab to see a sampling distribution of <span class="hat">p</span> being built, one sample at a time.</p>
     </div>
 
-    <!-- 3.2 -->
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.1</span>
+      <h3>Biased and unbiased estimators</h3>
+      <ul>
+        <li>In a sampling distribution, <strong>bias</strong> means the distribution is <em>not centered</em> on the population parameter.</li>
+        <li>An estimator is <strong>unbiased</strong> if, on average, its value equals the parameter: the mean of its sampling distribution equals the parameter.</li>
+        <li>Unbiased: the sample proportion <span class="hat">p</span> (for <em>p</em>), the sample mean <span style="text-decoration:overline"><em>x</em></span> (for &mu;) and the sample slope <em>b</em> (for &beta;).</li>
+        <li>Biased: the <strong>sample maximum</strong>. The population maximum lies far to the right of the center of the sampling distribution of the sample maxima.</li>
+      </ul>
+      <div class="formula">Good estimator = unbiased + low variability
+        <small>Among unbiased estimators, the one whose sampling distribution has <em>less variability</em> is the better estimator.</small></div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 1 &mdash; Choosing an estimator (quality control)</div>
+      <p>Five new estimators are evaluated for the weight of professional baseballs. Each is tested every day for a month on samples of size <em>n</em> = 10, 20 and 40. The baseballs produced that month had a consistent mean weight of <strong>146 grams</strong>. The histograms of each estimator&rsquo;s values (from the class presentation) show:</p>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Summary of the five sampling distributions</caption>
+          <tr><th>Estimator</th><th>Center</th><th>Spread as <em>n</em> grows</th><th>Range at <em>n</em> = 40</th></tr>
+          <tr><td>A</td><td>about 144 (below 146)</td><td>very narrow</td><td>2 g</td></tr>
+          <tr><td>B</td><td>about 146</td><td>wide, narrows slowly</td><td>6 g</td></tr>
+          <tr><td>C</td><td>about 146</td><td>narrow, but <u>does not</u> narrow as <em>n</em> grows</td><td>4 g</td></tr>
+          <tr><td>D</td><td>about 146</td><td>narrows steadily as <em>n</em> grows</td><td>4 g</td></tr>
+          <tr><td>E</td><td>below 146</td><td>narrows as <em>n</em> grows</td><td>4 g</td></tr>
+        </table>
+      </div>
+      <p>(a) Which appear to be unbiased? (b) Which has the lowest variability for <em>n</em> = 40? (c) Which is best if the estimator will be used with <em>n</em> = 100?</p>
+      <div class="solution">
+        <p><strong>(a)</strong> B, C and D are unbiased: their sampling distributions are centered at about 146, the true mean.</p>
+        <p><strong>(b)</strong> Estimator A has the lowest variability for <em>n</em> = 40 (range 2 g, compared with 6, 4, 4 and 4 g), although it is biased.</p>
+        <p><strong>(c)</strong> Choose an <em>unbiased</em> estimator with <em>low variability</em>. Among B, C and D, D keeps tightening around 146 as <em>n</em> grows, while C stays the same width. Even though C looks better than D at <em>n</em> = 40, at <em>n</em> = 100 the answer is <strong>Estimator D</strong>.</p>
+      </div>
+    </div>
+
+    <!-- ===== 3.2 ===== -->
+    <h2 class="group-title">Lesson 3.2 &mdash; Sampling distribution of a sample proportion</h2>
+
     <div class="card">
       <span class="lesson-tag">LESSON 3.2</span>
-      <h3>Sampling distribution of a sample proportion</h3>
-      <p>If we took every possible random sample of size <em>n</em> from a population with proportion <em>p</em>, the values of <span class="hat">p</span> form the <strong>sampling distribution</strong> of <span class="hat">p</span>.</p>
+      <h3>From counts to proportions</h3>
+      <p>A proportion is about the presence or absence of an attribute: the population splits into &ldquo;haves&rdquo; and &ldquo;have-nots&rdquo;, and we count the &ldquo;yes&rdquo; answers. That is exactly a <strong>binomial</strong> setting, and when <em>n</em> is large enough the binomial is approximately Normal.</p>
+      <p>For the <strong>number of successes</strong> in a sample of size <em>n</em>:</p>
+      <div class="formula">mean = <em>np</em> &nbsp;&nbsp;and&nbsp;&nbsp; SD = &radic;<span class="rad"><em>np</em>(1 &minus; <em>p</em>)</span></div>
+      <p>To change the number of successes into the <strong>proportion</strong> of successes we divide by <em>n</em>. Dividing every value by a constant divides both the mean and the standard deviation by that constant (Unit 1):</p>
       <div class="formula">
         &mu;<sub><span class="hat">p</span></sub> = <em>p</em>
         &nbsp;&nbsp;&nbsp;&nbsp;
         &sigma;<sub><span class="hat">p</span></sub> = &radic;<span class="rad"><em>p</em>(1 &minus; <em>p</em>) / <em>n</em></span>
-        <small>The formula for &sigma; requires independent observations.</small>
+        <small>The sample proportion is an unbiased estimator of <em>p</em>, and the larger <em>n</em>, the tighter the clustering around <em>p</em>.</small>
       </div>
-      <p><strong>Conditions</strong> for using these formulas and a Normal model:</p>
+      <p><strong>Conditions</strong> for using the Normal model for <span class="hat">p</span>:</p>
       <ul>
-        <li><strong>Random:</strong> data come from a random sample or randomized experiment.</li>
-        <li><strong>10% condition</strong> (independence when sampling without replacement): <em>n</em> &le; 0.10<em>N</em>.</li>
-        <li><strong>Large counts</strong> (approximately Normal): <em>np</em> &ge; 10 and <em>n</em>(1 &minus; <em>p</em>) &ge; 10.</li>
+        <li><strong>Random:</strong> ideally a simple random sample (SRS).</li>
+        <li><strong>Normality (large counts):</strong> <em>np</em> &ge; 10 <u>and</u> <em>n</em>(1 &minus; <em>p</em>) &ge; 10.</li>
+        <li><strong>Independence (10% rule):</strong> <em>n</em> &le; 0.10<em>N</em>. We are really worried about independence; randomly selecting fewer than 10% of the population lets us assume it. If the sample is large relative to the population, different inference techniques are needed.</li>
       </ul>
-      <p>When the conditions hold, <span class="hat">p</span> is approximately Normal, so we find probabilities with z-scores:</p>
+      <p>When the conditions hold, <span class="hat">p</span> is approximately Normal, so probabilities come from z-scores or from a calculator (<code>normalcdf(lower, upper, mean, sd)</code>):</p>
       <div class="formula"><em>z</em> = <span class="frac"><span><span class="hat">p</span> &minus; <em>p</em></span><span>&sigma;<sub><span class="hat">p</span></sub></span></span></div>
-      <p><strong>Interpretation:</strong> the standard deviation &sigma;<sub><span class="hat">p</span></sub> is the typical distance between a sample proportion and the true <em>p</em> in repeated random samples of that size. Because &sigma;<sub><span class="hat">p</span></sub> has &radic;<em>n</em> in the denominator, <strong>quadrupling</strong> <em>n</em> cuts it in half. See it happen in the <strong>Sampling Sim</strong> tab.</p>
     </div>
 
-    <!-- 3.3 -->
+    <div class="card">
+      <div class="example-title">Example 2 &mdash; Which <em>p</em> allows a Normal model?</div>
+      <p>If we pick a simple random sample of size 80 from a large population, which of the following values of the population proportion <em>p</em> would allow use of the Normal model for the sampling distribution of <span class="hat">p</span>? (A) 0.10 &nbsp; (B) 0.15 &nbsp; (C) 0.90 &nbsp; (D) 0.95 &nbsp; (E) 0.99</p>
+      <div class="solution">
+        <p>Check <em>np</em> &ge; 10 <u>and</u> <em>n</em>(1 &minus; <em>p</em>) &ge; 10 with <em>n</em> = 80:</p>
+        <p>(A) 80(0.10) = 8 &lt; 10 &#10007; &nbsp; (B) 80(0.15) = 12 and 80(0.85) = 68 &#10003; &nbsp; (C) 80(0.10) = 8 &lt; 10 &#10007; &nbsp; (D), (E) fewer than 10 failures &#10007;</p>
+        <p>The answer is <strong>(B) 0.15</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 3 &mdash; The 10% rule</div>
+      <p>A student wants the mean lip ratio (outer edges of lips / upper ridges of lips) for students in her high school, and plans to randomly sample 50 of the 780 students. Does this satisfy the 10% rule, and what is the purpose of the rule?</p>
+      <div class="solution">
+        <p>10% of 780 is 78, and 50 &le; 78, so <strong>yes</strong>, the 10% rule is satisfied.</p>
+        <p>Purpose: when sampling without replacement, the observations are slightly dependent. Taking less than 10% of the population lets us <strong>treat the observations as independent</strong>, which the standard deviation formulas require.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 4 &mdash; A probability for <span class="hat">p</span></div>
+      <p>It is estimated that 80% of people with high math anxiety experience brain activity similar to physical pain when anticipating a math problem. In a simple random sample of 110 people with high math anxiety, what is the probability that <strong>less than 75%</strong> experience this brain activity?</p>
+      <div class="solution">
+        <p><strong>Conditions:</strong> the sample is random; <em>np</em> = 110(0.80) = 88 &ge; 10 and <em>n</em>(1 &minus; <em>p</em>) = 110(0.20) = 22 &ge; 10; and 110 is clearly less than 10% of all people with math anxiety.</p>
+        <p>So <span class="hat">p</span> is approximately Normal with mean 0.80 and &sigma;<sub><span class="hat">p</span></sub> = &radic;(0.80 &middot; 0.20/110) = <strong>0.0381</strong>.</p>
+        <p><code>normalcdf(&minus;100, 0.75, 0.80, 0.0381)</code> = <strong>0.0947</strong> (equivalently, <em>z</em> = (0.75 &minus; 0.80)/0.0381 &asymp; &minus;1.31).</p>
+        <p><strong>In conclusion:</strong> getting a sample proportion of 0.75 or less happens in about 9.5% of all possible samples of size 110 from this population.</p>
+      </div>
+    </div>
+
+    <!-- ===== 3.3 ===== -->
+    <h2 class="group-title">Lesson 3.3 &mdash; Confidence interval for a population proportion</h2>
+
     <div class="card">
       <span class="lesson-tag">LESSON 3.3</span>
-      <h3>Constructing a confidence interval for a population proportion</h3>
-      <p>The procedure is the <strong>one-sample <em>z</em>-interval for a population proportion</strong>:</p>
+      <h3>Confidence intervals: the idea</h3>
+      <p>Using what we know about sampling distributions, we can say how confident we are that a sample proportion lies within a margin of error of <em>p</em>, and then have the <em>same</em> confidence that <em>p</em> lies within that margin of the sample proportion. A confidence interval has two parts:</p>
+      <ul>
+        <li>The <strong>interval</strong> of plausible values: <strong>estimate &plusmn; margin of error</strong>.</li>
+        <li>The <strong>confidence level</strong>: the success rate of the method, i.e. the proportion of times repeated applications of the method would capture the true parameter. We do <em>not</em> say there is a 0.90, 0.95 or 0.99 <em>probability</em> that <em>p</em> is within the margin of error of one given sample proportion.</li>
+      </ul>
+      <p><strong>Conditions for inference:</strong> <em>independence</em> (random sampling and the 10% rule) and <em>Normality</em> of the sampling distribution. For a proportion, Normality means <em>n</em><span class="hat">p</span> &ge; 10 and <em>n</em>(1 &minus; <span class="hat">p</span>) &ge; 10. (For means you will check that the parent population is approximately Normal, or that <em>n</em> &ge; 30, or that small samples are free of strong skewness and outliers.)</p>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.3</span>
+      <h3>Standard error, margin of error and the interval</h3>
+      <p>The formula for &sigma;<sub><span class="hat">p</span></sub> needs the true <em>p</em>, which we do not know. The reasonable fix is to use <span class="hat">p</span> instead; the estimated standard deviation is called the <strong>standard error</strong>:</p>
       <div class="formula">
-        <span class="hat">p</span> &plusmn; <em>z</em>* &middot; &radic;<span class="rad"><span class="hat">p</span>(1 &minus; <span class="hat">p</span>) / <em>n</em></span>
-        <small>point estimate &plusmn; margin of error &nbsp;|&nbsp; ME = <em>z</em>* &times; SE &nbsp;|&nbsp; SE = &radic;(<span class="hat">p</span>(1 &minus; <span class="hat">p</span>)/<em>n</em>)</small>
+        &sigma;<sub><span class="hat">p</span></sub> &asymp; SE<sub><span class="hat">p</span></sub> = &radic;<span class="rad"><span class="hat">p</span>(1 &minus; <span class="hat">p</span>) / <em>n</em></span>
       </div>
+      <p><strong>Standard error vs margin of error:</strong> the standard error measures how far the sample statistic typically varies from the parameter. The margin of error is a <em>multiple</em> of the standard error, ME = <em>z</em>* &middot; SE, where the multiple is set by how confident we want to be.</p>
+      <div class="formula">
+        <span class="hat">p</span> &plusmn; <em>z</em>* &middot; SE<sub><span class="hat">p</span></sub>
+        <small>point estimate &plusmn; margin of error</small>
+      </div>
+      <p><em>z</em>* depends on the confidence level. On a graphing calculator find it with <code>invNorm</code> using the central area (for 95%, the lower tail is 0.025 and <em>z</em>* = 1.96). Common values:</p>
       <div class="table-wrap">
         <table class="data">
           <caption>Common critical values <em>z</em>*</caption>
-          <tr><th>Confidence level</th><th>90%</th><th>95%</th><th>99%</th></tr>
-          <tr><td><em>z</em>*</td><td>1.645</td><td>1.960</td><td>2.576</td></tr>
+          <tr><th>Confidence level</th><th>80%</th><th>90%</th><th>95%</th><th>98%</th><th>99%</th></tr>
+          <tr><td><em>z</em>*</td><td>1.282</td><td>1.645</td><td>1.960</td><td>2.326</td><td>2.576</td></tr>
         </table>
       </div>
-      <p><strong>Four-step write-up:</strong></p>
-      <ol class="steps">
-        <li><strong>State:</strong> define the parameter in context (&ldquo;<em>p</em> = the true proportion of &hellip; in &hellip;&rdquo;) and the confidence level.</li>
-        <li><strong>Plan:</strong> name the procedure (one-sample <em>z</em>-interval for <em>p</em>) and verify conditions: random sample; 10% (<em>n</em> &le; 0.10<em>N</em>); large counts <em>n</em><span class="hat">p</span> &ge; 10 and <em>n</em>(1 &minus; <span class="hat">p</span>) &ge; 10.</li>
-        <li><strong>Do:</strong> compute <span class="hat">p</span>, the standard error, the margin of error and the interval.</li>
-        <li><strong>Conclude:</strong> interpret the interval in context (see 3.4).</li>
-      </ol>
-      <p><strong>Sample size for a desired margin of error</strong> (solve ME = <em>z</em>*&radic;(<span class="hat">p</span>(1 &minus; <span class="hat">p</span>)/<em>n</em>) for <em>n</em>):</p>
-      <div class="formula"><em>n</em> &ge; (<span class="frac"><span><em>z</em>*</span><span>ME</span></span>)<sup>2</sup> &middot; <span class="hat">p</span>(1 &minus; <span class="hat">p</span>)
-        <small>If there is no prior estimate, use <span class="hat">p</span> = 0.5 (the most conservative value). Always round <em>n</em> <u>up</u>.</small></div>
+      <p>The calculator command <code>1-PropZInt(x, n, C-level)</code> returns the interval directly.</p>
     </div>
 
-    <!-- 3.4 -->
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.3</span>
+      <h3>How to write the solution</h3>
+      <ol class="steps">
+        <li><strong>Parameter:</strong> define <em>p</em> in context (&ldquo;<em>p</em> = the proportion of [population] who [success]&rdquo;).</li>
+        <li><strong>Procedure:</strong> name it &mdash; one-sample <em>z</em>-interval for a population proportion.</li>
+        <li><strong>Checks:</strong> independence (random sample; <em>n</em> &le; 10% of the population) and Normality (<em>n</em><span class="hat">p</span> &ge; 10 and <em>n</em>(1 &minus; <span class="hat">p</span>) &ge; 10).</li>
+        <li><strong>Mechanics:</strong> compute <span class="hat">p</span>, SE, ME and the interval (or use <code>1-PropZInt</code>).</li>
+        <li><strong>Conclusion in context:</strong> &ldquo;We are <em>C</em>% confident that the interval from <em>a</em> to <em>b</em> captures the true proportion of [population] who [success].&rdquo;</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 5 &mdash; A 99% interval</div>
+      <p>(a) If 42% of a simple random sample of 550 young adults say that whoever asks for the date should pay for the first date, find a 99% confidence interval for the true proportion of all young adults who would say so. (b) Does the interval give convincing evidence that <em>fewer than 50%</em> would say so? (c) Interpret the confidence level.</p>
+      <div class="solution">
+        <p><strong>(a)</strong> <em>p</em> = the proportion of all young adults who would say that whoever asks for the date should pay. Procedure: one-sample <em>z</em>-interval for <em>p</em>.</p>
+        <p>Checks: the sample is an SRS and 550 is clearly less than 10% of all young adults; <em>n</em><span class="hat">p</span> = 550(0.42) = 231 &ge; 10 and <em>n</em>(1 &minus; <span class="hat">p</span>) = 550(0.58) = 319 &ge; 10.</p>
+        <p>Mechanics: <em>z</em>* = 2.576; SE = &radic;(0.42 &middot; 0.58/550) &asymp; 0.021; ME = 2.576(0.021) &asymp; 0.054; interval = 0.42 &plusmn; 0.054 = <strong>(0.366, 0.474)</strong>.</p>
+        <p>Conclusion: we are 99% confident that the interval from 0.366 to 0.474 captures the true proportion of young adults who would say that whoever asks should pay for the first date.</p>
+        <p><strong>(b)</strong> Yes. The interval gives plausible values, and all of them are less than 0.50, so there is convincing evidence that fewer than 50% would say so.</p>
+        <p><strong>(c)</strong> If all possible samples of 550 young adults were interviewed, about 99% of the resulting confidence intervals would capture the true proportion.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 6 &mdash; A 95% interval and a claim</div>
+      <p>(a) In a simple random sample of couples kissing in public places (airports, beaches, parks), 80 out of 124 leaned their heads to the right. Establish a 95% confidence interval for the true proportion of public kissing couples who lean their heads to the right. (b) A sociologist claims that <em>over 60%</em> of all public kissing couples lean right. Does the interval give convincing evidence for the claim? (c) Interpret the confidence level.</p>
+      <div class="solution">
+        <p><strong>(a)</strong> Parameter: <em>p</em> = the proportion of all public kissing couples who lean their heads to the right. Procedure: one-sample <em>z</em>-interval for <em>p</em>.</p>
+        <p>Checks: SRS; we assume 124 is less than 10% of all public kissing couples; <em>n</em><span class="hat">p</span> = 80 &ge; 10 and <em>n</em>(1 &minus; <span class="hat">p</span>) = 44 &ge; 10.</p>
+        <p>Mechanics: <code>1-PropZInt(80, 124, 0.95)</code> = <strong>(0.561, 0.729)</strong>.</p>
+        <p>Conclusion: we are 95% confident that the interval from 0.561 to 0.729 captures the true proportion of all public kissing couples who lean their heads to the right.</p>
+        <p><strong>(b)</strong> No. The interval (0.561, 0.729) contains values below 0.60 as well as above it, so it does <em>not</em> give convincing evidence that over 60% lean right.</p>
+        <p><strong>(c)</strong> If all possible samples of 124 kissing couples were observed, about 95% of the resulting intervals would capture the true proportion.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 7 &mdash; Finding the confidence level from the margin of error</div>
+      <p>In a telephone survey of a random sample of 1000 high school seniors, 832 answered yes to &ldquo;Do you want to get married someday?&rdquo; (a) What is the parameter? (b) Are the conditions satisfied? (c) With what confidence can it be asserted that 83.2% &plusmn; 3% of the high school population want to get married someday?</p>
+      <div class="solution">
+        <p><strong>(a)</strong> <em>p</em> = the proportion of all high school seniors who would answer yes to the question.</p>
+        <p><strong>(b)</strong> Random sample, and 1000 is clearly less than 10% of all high school seniors; <em>n</em><span class="hat">p</span> = 832 &ge; 10 and <em>n</em>(1 &minus; <span class="hat">p</span>) = 168 &ge; 10. Yes.</p>
+        <p><strong>(c)</strong> <span class="hat">p</span> = 832/1000 = 0.832, so SE = &radic;(0.832 &middot; 0.168/1000) = 0.0118. We need <em>z</em>*(0.0118) = 0.03, so <em>z</em>* = 0.03/0.0118 &asymp; <strong>2.54</strong>. Then <code>normalcdf(&minus;2.54, 2.54)</code> = 0.9889.</p>
+        <p>So 83.2% &plusmn; 3% is a <strong>98.89%</strong> confidence interval for the proportion of all high school seniors who would answer yes.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.3</span>
+      <h3>Sample size for a desired margin of error</h3>
+      <p>Solve ME = <em>z</em>*&radic;(<span class="hat">p</span>(1 &minus; <span class="hat">p</span>)/<em>n</em>) for <em>n</em>:</p>
+      <div class="formula"><em>n</em> &ge; (<span class="frac"><span><em>z</em>*</span><span>ME</span></span>)<sup>2</sup> &middot; <span class="hat">p</span>(1 &minus; <span class="hat">p</span>)
+        <small>If there is no prior estimate, use <span class="hat">p</span> = 0.5 (the most conservative value). Always round <em>n</em> <u>up</u>.</small></div>
+      <div class="example-title" style="margin-top:.6rem">Example 8 &mdash; How many people?</div>
+      <p>A pollster wants a 95% interval with a margin of error of at most 0.03 and has no prior estimate of <em>p</em>.</p>
+      <div class="solution">
+        <p><em>n</em> &ge; (1.96/0.03)&sup2;(0.5)(0.5) = 4268.4 &times; 0.25 &asymp; 1067.1, so <strong><em>n</em> = 1068</strong>.</p>
+      </div>
+    </div>
+
+    <!-- ===== 3.4 ===== -->
+    <h2 class="group-title">Lesson 3.4 &mdash; Interpreting intervals and justifying claims</h2>
+
     <div class="card">
       <span class="lesson-tag">LESSON 3.4</span>
-      <h3>Justifying a claim based on a confidence interval</h3>
+      <h3>Two kinds of statements</h3>
+      <p>Two different statements come out of a confidence interval. Suppose (0.60, 0.66) is a 90% confidence interval for the proportion of all voters who favor a bond issue.</p>
       <ul>
-        <li><strong>Interpreting the interval:</strong> &ldquo;We are <em>C</em>% confident that the interval from <em>a</em> to <em>b</em> captures the true proportion of [population in context].&rdquo;</li>
-        <li><strong>Interpreting the confidence level:</strong> if we repeatedly took random samples of the same size and built an interval from each, about <em>C</em>% of those intervals would capture the true proportion.</li>
-        <li><strong>Common errors:</strong> &ldquo;There is a 95% probability that <em>p</em> is in (<em>a</em>, <em>b</em>)&rdquo; (the parameter is fixed; the <em>interval</em> is what varies), or &ldquo;95% of the population/sample is in the interval.&rdquo;</li>
-        <li><strong>Justifying a claim:</strong> if a claimed value of <em>p</em> is <em>inside</em> the interval, it is a plausible value (no convincing evidence against it). If it is <em>outside</em>, the interval provides convincing evidence that the claim is not true. An interval entirely above 0.5 supports &ldquo;more than half&rdquo;.</li>
-        <li><strong>Why can an interval miss <em>p</em>?</strong> Random sampling variability: a 95% interval fails to capture <em>p</em> in about 5% of samples. Watch it happen in the <strong>CI Sim</strong> tab.</li>
+        <li><strong>Interpret the interval:</strong> &ldquo;We are 90% confident that the interval from 0.60 to 0.66 captures the true proportion of all voters who favor the bond issue.&rdquo; (Between 60% and 66% of all voters favor it.)</li>
+        <li><strong>Interpret the confidence level:</strong> &ldquo;If this survey were conducted many times, about 90% of the resulting confidence intervals would contain the true proportion of voters who favor the bond issue.&rdquo;</li>
+      </ul>
+      <p><strong>Three common misconceptions</strong> about the 90% interval (0.60, 0.66):</p>
+      <div class="table-wrap">
+        <table class="data" style="text-align:left">
+          <tr><th>Misconception</th><th>Fact</th></tr>
+          <tr><td>#1: &ldquo;The true proportion of all voters is between 0.60 and 0.66.&rdquo;</td><td>The true proportion may or may not be in the interval; we are only 90% <em>confident</em> that it is.</td></tr>
+          <tr><td>#2: &ldquo;There is a 0.90 probability that the true proportion is between 0.60 and 0.66.&rdquo;</td><td>For a given interval, the true proportion either is or is not inside it, so the probability is 1 or 0. The 90% describes the <em>method</em>.</td></tr>
+          <tr><td>#3: &ldquo;If the survey were repeated, about 90% of the <em>sample proportions</em> would be in (0.60, 0.66).&rdquo;</td><td>(0.60, 0.66) is one specific interval from one sample proportion; it says nothing about other samples&rsquo; proportions. The 90% refers to the <em>intervals</em> capturing <em>p</em>.</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.4</span>
+      <h3>Justifying a claim from an interval</h3>
+      <ul>
+        <li>The interval is a set of <strong>plausible values</strong> for <em>p</em>.</li>
+        <li>If a claimed value is <em>inside</em> the interval, it is plausible: no convincing evidence against it.</li>
+        <li>If the claimed value is <em>outside</em> the interval, the interval gives convincing evidence that the claim is not true.</li>
+        <li>&ldquo;Fewer than 50%&rdquo; is supported only if <em>all</em> plausible values are below 0.50; &ldquo;over 60%&rdquo; is supported only if <em>all</em> are above 0.60.</li>
+        <li>Why can an interval miss <em>p</em>? Random sampling variability: a 95% interval fails to capture <em>p</em> in about 5% of samples. Watch it in the <strong>CI Sim</strong> tab.</li>
       </ul>
       <div class="table-wrap">
         <table class="data">
@@ -326,64 +506,32 @@
       </div>
     </div>
 
-    <h2>Worked examples</h2>
-
     <div class="card">
-      <div class="example-title">Example 1 (3.1) &mdash; Parameter, statistic and unbiasedness</div>
-      <p>A random sample of 250 students from a school of 2000 is asked about online textbooks: 90 prefer them. (a) Identify the parameter and the statistic. (b) A simulation of 1000 samples of size 250 from a population with <em>p</em> = 0.35 gives sample proportions centered at 0.351. What does that suggest?</p>
-      <div class="solution">
-        <p>(a) Parameter: <em>p</em> = proportion of <em>all</em> 2000 students who prefer online textbooks (unknown). Statistic: <span class="hat">p</span> = 90/250 = <strong>0.36</strong>, our point estimate.</p>
-        <p>(b) The mean of the simulated sampling distribution (0.351) is essentially equal to <em>p</em> = 0.35, which supports that <span class="hat">p</span> is an <strong>unbiased</strong> estimator of <em>p</em>.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="example-title">Example 2 (3.2) &mdash; Mean, SD and a probability</div>
-      <p>40% of all fans at a stadium prefer the home-team jersey. A random sample of <em>n</em> = 150 fans (far fewer than 10% of the stadium) is taken. Describe the sampling distribution of <span class="hat">p</span> and find P(<span class="hat">p</span> &gt; 0.45).</p>
-      <div class="solution">
-        <p>Conditions: random sample; 10% condition holds; <em>np</em> = 150(0.40) = 60 &ge; 10 and <em>n</em>(1 &minus; <em>p</em>) = 90 &ge; 10, so <span class="hat">p</span> is approximately Normal.</p>
-        <p>&mu;<sub><span class="hat">p</span></sub> = 0.40 &nbsp;&nbsp; &sigma;<sub><span class="hat">p</span></sub> = &radic;(0.40 &middot; 0.60/150) = &radic;0.0016 = <strong>0.04</strong></p>
-        <p><em>z</em> = (0.45 &minus; 0.40)/0.04 = 1.25, so P(<span class="hat">p</span> &gt; 0.45) = 1 &minus; 0.8944 = <strong>0.1056</strong></p>
-        <p>Interpretation: about 10.6% of random samples of 150 fans would have more than 45% preferring the home jersey.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="example-title">Example 3 (3.3) &mdash; A 95% confidence interval</div>
-      <p>In a random sample of 400 voters (from a city of 90&#8239;000), 232 favor a proposal. Construct and interpret a 95% confidence interval for the proportion of all voters who favor it.</p>
-      <div class="solution">
-        <p><strong>State:</strong> <em>p</em> = the true proportion of all voters in the city who favor the proposal. 95% confidence.</p>
-        <p><strong>Plan:</strong> one-sample <em>z</em>-interval for <em>p</em>. Random sample &#10003;; 400 &lt; 10% of 90&#8239;000 &#10003;; 400(0.58) = 232 &ge; 10 and 400(0.42) = 168 &ge; 10 &#10003;.</p>
-        <p><strong>Do:</strong> <span class="hat">p</span> = 232/400 = 0.58; SE = &radic;(0.58 &middot; 0.42/400) &asymp; 0.0247; ME = 1.96(0.0247) &asymp; 0.0484.</p>
-        <p>Interval: 0.58 &plusmn; 0.0484 = <strong>(0.532, 0.628)</strong></p>
-        <p><strong>Conclude:</strong> We are 95% confident that the interval from 0.532 to 0.628 captures the true proportion of all voters in the city who favor the proposal.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="example-title">Example 4 (3.3) &mdash; Sample size for a given margin of error</div>
-      <p>A pollster wants a 95% confidence interval with a margin of error of at most 0.03 and has no prior estimate of <em>p</em>. How many people should be sampled?</p>
-      <div class="solution">
-        <p><em>n</em> &ge; (1.96/0.03)&sup2;(0.5)(0.5) = 4268.4 &times; 0.25 &asymp; 1067.1</p>
-        <p>Round up: <strong><em>n</em> = 1068</strong>.</p>
-      </div>
-    </div>
-
-    <div class="card">
-      <div class="example-title">Example 5 (3.4) &mdash; Justifying a claim</div>
+      <div class="example-title">Example 9 &mdash; Using an interval to evaluate claims</div>
       <p>A 95% confidence interval for the proportion of teens who sleep fewer than 8 hours on school nights is (0.58, 0.66). (a) Is there convincing evidence that a majority of teens sleep fewer than 8 hours? (b) A website claims the proportion is 0.70. What does the interval say?</p>
       <div class="solution">
-        <p>(a) All plausible values (0.58 to 0.66) are above 0.50, so the interval provides convincing evidence that <strong>more than half</strong> of teens sleep fewer than 8 hours.</p>
+        <p>(a) All plausible values (0.58 to 0.66) are above 0.50, so there is convincing evidence that <strong>more than half</strong> of teens sleep fewer than 8 hours.</p>
         <p>(b) 0.70 is not in the interval, so the interval gives convincing evidence that the true proportion is <strong>not</strong> 0.70.</p>
       </div>
     </div>
 
     <div class="card">
-      <div class="example-title">Example 6 (3.4) &mdash; What happens to the margin of error?</div>
+      <div class="example-title">Example 10 &mdash; Margin of error and sample size</div>
       <p>A survey with <em>n</em> = 400 has a margin of error of 0.05 at 95% confidence. What margin of error would you expect with <em>n</em> = 1600 (same confidence level and about the same <span class="hat">p</span>)?</p>
       <div class="solution">
         <p>The sample size is multiplied by 4, so the margin of error is multiplied by 1/&radic;4 = 1/2: <strong>ME &asymp; 0.025</strong>.</p>
       </div>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LOOKING AHEAD</span>
+      <h3>Difference of two sample proportions</h3>
+      <p>The unit objectives also mention the sampling distribution of a <em>difference</em> of sample proportions, <span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub>, from two independent random samples. The class presentation lists it as an objective without worked content, so here is only the preview you will need later:</p>
+      <ul>
+        <li>Center: &mu; = <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>.</li>
+        <li>Spread (independent samples): &sigma; = &radic;( <em>p</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>)/<em>n</em><sub>1</sub> + <em>p</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>)/<em>n</em><sub>2</sub> ).</li>
+        <li>Conditions: both samples random and independent of each other; each sample is under 10% of its population; <em>n</em><sub>1</sub><em>p</em><sub>1</sub>, <em>n</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>), <em>n</em><sub>2</sub><em>p</em><sub>2</sub> and <em>n</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>) are all at least 10.</li>
+      </ul>
     </div>
   </section>
 
@@ -587,6 +735,12 @@
   var N = '<em>n</em>';
   function SD() { return '&sigma;<sub>' + H + '</sub>'; }
   function R(x) { return '&radic;<span class="rad">' + x + '</span>'; }
+  var EST_TABLE = '<div class="table-wrap"><table class="data"><caption>Sampling distributions of four estimators (true mean &mu; = 50 g)</caption>' +
+    '<tr><th>Estimator</th><th>Center</th><th>SD, <em>n</em> = 10</th><th>SD, <em>n</em> = 20</th><th>SD, <em>n</em> = 40</th></tr>' +
+    '<tr><td>W</td><td>50</td><td>8</td><td>5.7</td><td>4</td></tr>' +
+    '<tr><td>X</td><td>54</td><td>2</td><td>1.4</td><td>1</td></tr>' +
+    '<tr><td>Y</td><td>50</td><td>3</td><td>3</td><td>3</td></tr>' +
+    '<tr><td>Z</td><td>50</td><td>6</td><td>4.2</td><td>3</td></tr></table></div>';
 
   /* ---------- Problems ----------
      mc:  { g, q, opts:[...], ans:index, hint, sol }
@@ -632,6 +786,29 @@
       type: 'num', ans: 0.404, tol: 0.0005, unit: '',
       hint: 'Add the successes (38 + 63) and divide by the combined sample size.',
       sol: H + ' = (38 + 63)/(100 + 150) = 101/250 = 0.404.' },
+
+
+    /* similar to the class example: choosing an estimator */
+    { g: '3.1', q: EST_TABLE + '<p>A manufacturer tests four estimators of the true mean weight (&mu; = 50 g) of a part, using samples of size 10, 20 and 40. The table shows the center and the standard deviation of each sampling distribution. Which estimators appear to be <strong>unbiased</strong>?</p>',
+      opts: ['W, Y and Z', 'X only', 'W and X', 'All four estimators'], ans: 0,
+      hint: 'Unbiased means the sampling distribution is centered at the parameter, 50 g.',
+      sol: 'W, Y and Z are centered at 50 g, so they are unbiased. X is centered at 54 g: it is biased, even though it has very low variability.' },
+    { g: '3.1', q: EST_TABLE + '<p>Which estimator has the <strong>lowest variability</strong> when <em>n</em> = 40?</p>',
+      opts: ['W', 'X', 'Y', 'Z'], ans: 1,
+      hint: 'Compare the standard deviations in the last column.',
+      sol: 'X has the smallest standard deviation at <em>n</em> = 40 (1 g). Low variability alone does not make X a good estimator, because it is biased.' },
+    { g: '3.1', q: EST_TABLE + '<p>The chosen estimator will be used with samples of size <em>n</em> = 100. Which estimator is best?</p>',
+      opts: ['W', 'X', 'Y', 'Z'], ans: 3,
+      hint: 'Choose an unbiased estimator with low variability. Which unbiased estimators keep shrinking as <em>n</em> grows?',
+      sol: 'Only W, Y and Z are unbiased. Y stays at SD = 3 no matter how large <em>n</em> is. W and Z shrink with <em>n</em> (SD &prop; 1/&radic;<em>n</em>), and Z is smaller (about 1.9 g at <em>n</em> = 100, versus about 2.5 g for W). Choose <strong>Z</strong>.' },
+    { g: '3.1', q: 'Which of the following statistics is a <strong>biased</strong> estimator of its population parameter?',
+      opts: ['The sample proportion ' + H + ' for ' + Pp, 'The sample mean for &mu;', 'The sample maximum for the population maximum', 'The sample slope <em>b</em> for &beta;'], ans: 2,
+      hint: 'Where does the population maximum fall compared with the center of the sample maxima?',
+      sol: 'The sampling distribution of the sample maximum is not centered at the population maximum (the population maximum lies far to the right of its center). The other three are unbiased.' },
+    { g: '3.1', q: 'Two <strong>unbiased</strong> estimators of the same parameter are compared. Estimator 1 has a sampling distribution with SD = 4 and Estimator 2 has SD = 2 (same sample size). Which is the better estimator, and why?',
+      opts: ['Estimator 1, because it varies more', 'Estimator 2, because its sampling distribution has less variability', 'Neither, because both are unbiased', 'Estimator 1, because its mean is larger'], ans: 1,
+      hint: 'Both are centered in the right place. What else makes an estimator good?',
+      sol: 'Among unbiased estimators, the one with less variability gives estimates that are typically closer to the parameter, so Estimator 2 is better.' },
 
     /* ===== 3.2 ===== */
     { g: '3.2', q: 'For samples of size ' + N + ' = 120 from a population with ' + Pp + ' = 0.35, what is the mean of the sampling distribution of ' + H + ', &mu;<sub>' + H + '</sub>?',
@@ -682,6 +859,45 @@
       opts: ['About 4% of the fans in each sample prefer the home jersey', 'In repeated random samples of 150 fans, sample proportions typically differ from the true ' + Pp + ' by about 0.04', 'The population proportion varies by 0.04 from sample to sample', 'The true proportion is within 0.04 of ' + H + ' with certainty'], ans: 1,
       hint: 'Standard deviation of a sampling distribution = typical distance of the statistic from the parameter across samples.',
       sol: '&sigma;<sub>' + H + '</sub> measures the typical distance between sample proportions and the true proportion in repeated samples of that size.' },
+
+
+    /* similar to the class examples: counts, 10% rule, probabilities */
+    { g: '3.2', q: 'In a population, <em>p</em> = 0.80 of people have a certain trait. In a random sample of <em>n</em> = 110 people, the number of people with the trait has mean <em>np</em>. Find this mean.',
+      type: 'num', ans: 88, tol: 0.5, unit: 'people',
+      hint: 'Multiply 110 by 0.80.',
+      sol: 'mean = <em>np</em> = 110(0.80) = 88 people.' },
+    { g: '3.2', q: 'For the same situation (<em>n</em> = 110, <em>p</em> = 0.80), find the standard deviation of the <em>number</em> of people with the trait, &radic;(<em>np</em>(1 &minus; <em>p</em>)). (Round to 3 decimal places.)',
+      type: 'num', ans: 4.195, tol: 0.01, unit: 'people',
+      hint: '110 &times; 0.80 &times; 0.20 = 17.6.',
+      sol: '&radic;17.6 &asymp; 4.195.' },
+    { g: '3.2', q: 'To convert the count to a <strong>proportion</strong>, divide by <em>n</em> = 110. Using the standard deviation 4.195 from the previous problem, what is &sigma;<sub>' + H + '</sub>? (Round to 4 decimal places.)',
+      type: 'num', ans: 0.0381, tol: 0.0003, unit: '',
+      hint: 'Divide the standard deviation of the count by <em>n</em>.',
+      sol: '&sigma;<sub>' + H + '</sub> = 4.195/110 &asymp; 0.0381, the same as &radic;(0.80 &middot; 0.20/110).' },
+    { g: '3.2', q: 'If we pick a simple random sample of size 120 from a large population, which value of the population proportion ' + Pp + ' would allow use of the Normal model for the sampling distribution of ' + H + '?',
+      opts: ['0.02', '0.05', '0.08', '0.10', '0.96'], ans: 3,
+      hint: 'Check ' + N + Pp + ' &ge; 10 and ' + N + '(1 &minus; ' + Pp + ') &ge; 10 for each choice.',
+      sol: 'For 0.10: 120(0.10) = 12 and 120(0.90) = 108, both &ge; 10. The others fail: 0.02 &rarr; 2.4; 0.05 &rarr; 6; 0.08 &rarr; 9.6; 0.96 &rarr; 120(0.04) = 4.8.' },
+    { g: '3.2', q: 'A student plans to randomly sample 60 of the 450 students at her school to find their average commute time. Does this satisfy the 10% rule?',
+      opts: ['Yes, because 60 &le; 0.10(450) = 45', 'Yes, because the sample is random', 'No, because 60 &gt; 0.10(450) = 45', 'No, because 450 is not large'], ans: 2,
+      hint: 'Find 10% of 450 and compare with the sample size.',
+      sol: '10% of 450 is 45, and 60 is more than that, so the 10% rule is <strong>not</strong> satisfied.' },
+    { g: '3.2', q: 'The purpose of the 10% rule when sampling without replacement is&hellip;',
+      opts: ['to make the sampling distribution Normal', 'to let us treat the observations as independent', 'to make the sample larger', 'to guarantee the sample is random'], ans: 1,
+      hint: 'Sampling without replacement makes observations slightly dependent. What does a small sample fraction do?',
+      sol: 'When the sample is less than 10% of the population, the observations are close enough to independent for our formulas to apply.' },
+    { g: '3.2', q: 'It is estimated that 70% of the students at a large school use a music-streaming service. In a simple random sample of 150 students, what is the probability that <strong>less than 65%</strong> use it? (Normal model; give a decimal.)',
+      type: 'num', ans: 0.0907, tol: 0.003, unit: '',
+      hint: '&sigma; = &radic;(0.70 &middot; 0.30/150) &asymp; 0.0374, so z = (0.65 &minus; 0.70)/0.0374 &asymp; &minus;1.34.',
+      sol: 'Conditions: 150(0.70) = 105 &ge; 10, 150(0.30) = 45 &ge; 10. &sigma; &asymp; 0.0374, <code>normalcdf(&minus;100, 0.65, 0.70, 0.0374)</code> &asymp; 0.0907.' },
+    { g: '3.2', q: 'About 55% of all voters in a city favor a proposal. In a random sample of 200 voters, what is the probability that <strong>more than 60%</strong> favor it? (Normal model; give a decimal.)',
+      type: 'num', ans: 0.0776, tol: 0.003, unit: '',
+      hint: '&sigma; = &radic;(0.55 &middot; 0.45/200) &asymp; 0.0352, z = 0.05/0.0352 &asymp; 1.42. Find the area to the right.',
+      sol: '&sigma; &asymp; 0.0352, z &asymp; 1.42, P(Z &gt; 1.42) &asymp; 0.0776.' },
+    { g: '3.2', q: 'In the previous kind of problem we found P(' + H + ' &lt; 0.65) &asymp; 0.09 for samples of 150 students with <em>p</em> = 0.70. Which statement is the correct interpretation?',
+      opts: ['About 9% of all students use a streaming service', 'About 9% of all possible random samples of size 150 would have a sample proportion below 0.65', 'There is a 9% chance that ' + Pp + ' is below 0.65', 'The sample proportion is always 0.65'], ans: 1,
+      hint: 'A probability for ' + H + ' describes how often a sample proportion lands in an interval across many samples.',
+      sol: 'The probability describes the sampling distribution: about 9% of all possible samples of size 150 would give a sample proportion below 0.65.' },
 
     /* ===== 3.3 ===== */
     { g: '3.3', q: 'Which procedure is appropriate for estimating a single population proportion from one random sample?',
@@ -745,6 +961,49 @@
       hint: 'ME is half the width of the interval.',
       sol: 'ME = (0.54 &minus; 0.42)/2 = 0.06.' },
 
+
+    /* similar to the class examples: intervals, z*, finding the confidence level */
+    { g: '3.3', q: 'If 35% of a simple random sample of 480 adults say they exercise daily (168 of 480), find the <strong>lower limit</strong> of a 95% confidence interval for the true proportion of all adults who exercise daily. (Round to 3 decimal places.)',
+      type: 'num', ans: 0.307, tol: 0.0015, unit: '',
+      hint: 'SE = &radic;(0.35 &middot; 0.65/480) &asymp; 0.0218; ME = 1.96 &times; SE; lower limit = ' + H + ' &minus; ME.',
+      sol: 'SE &asymp; 0.02177, ME &asymp; 0.0427; interval = 0.35 &plusmn; 0.0427 = (0.307, 0.393).' },
+    { g: '3.3', q: 'In the same situation (168 of 480, 95% confidence), what is the margin of error? (Round to 4 decimal places.)',
+      type: 'num', ans: 0.0427, tol: 0.0006, unit: '',
+      hint: 'ME = <em>z</em>* &times; SE = 1.96 &times; 0.02177.',
+      sol: 'ME = 1.96(0.02177) &asymp; 0.0427.' },
+    { g: '3.3', q: 'In a simple random sample of 90 couples at a park, 54 were holding hands. Find the <strong>upper limit</strong> of a 95% confidence interval for the true proportion of couples holding hands. (Round to 3 decimal places.)',
+      type: 'num', ans: 0.701, tol: 0.0015, unit: '',
+      hint: ' ' + H + ' = 54/90 = 0.60, SE = &radic;(0.60 &middot; 0.40/90) &asymp; 0.0516, ME = 1.96 &times; SE &asymp; 0.101.',
+      sol: 'Check: 54 &ge; 10 and 36 &ge; 10. Interval = 0.60 &plusmn; 0.101 = (0.499, 0.701). (<code>1-PropZInt(54, 90, 0.95)</code>)' },
+    { g: '3.3', q: 'The interval from the previous problem is (0.499, 0.701). A researcher claims that <strong>over 60%</strong> of all couples hold hands. Does the interval give convincing evidence for this claim?',
+      opts: ['Yes, because the sample proportion is 0.60', 'Yes, because the upper limit is above 0.60', 'No, because the interval contains values below 0.60 (and 0.60 itself), so it does not show that the proportion is over 60%', 'No, because the interval is too wide to use'], ans: 2,
+      hint: 'For &ldquo;over 60%&rdquo; every plausible value must be greater than 0.60.',
+      sol: 'The interval (0.499, 0.701) includes plausible values at or below 0.60, so it does not give convincing evidence that more than 60% hold hands.' },
+    { g: '3.3', q: 'Find the critical value <em>z</em>* for a <strong>98%</strong> confidence interval. (Use <code>invNorm</code> with the central area; 3 decimals.)',
+      type: 'num', ans: 2.326, tol: 0.006, unit: '',
+      hint: 'A 98% central area leaves 1% in each tail: invNorm(0.01) in magnitude.',
+      sol: '<em>z</em>* = 2.326.' },
+    { g: '3.3', q: 'Find the critical value <em>z</em>* for an <strong>80%</strong> confidence interval. (3 decimals.)',
+      type: 'num', ans: 1.282, tol: 0.006, unit: '',
+      hint: 'An 80% central area leaves 10% in each tail: invNorm(0.10) in magnitude.',
+      sol: '<em>z</em>* = 1.282.' },
+    { g: '3.3', q: 'In a random sample of 800 high school students, 64% say they use social media daily. Someone asserts that 64% &plusmn; 4% of all students do. First, find SE (' + H + ' = 0.64). Then find <em>z</em>* so that <em>z</em>*&middot;SE = 0.04. What is <em>z</em>*? (Round to 2 decimal places.)',
+      type: 'num', ans: 2.36, tol: 0.02, unit: '',
+      hint: 'SE = &radic;(0.64 &middot; 0.36/800) &asymp; 0.01697. Then <em>z</em>* = 0.04/0.01697.',
+      sol: 'SE &asymp; 0.01697, so <em>z</em>* = 0.04/0.01697 &asymp; 2.36.' },
+    { g: '3.3', q: 'Continuing, use <em>z</em>* = 2.36 to find the confidence level of the interval 64% &plusmn; 4%. That is the area between &minus;2.36 and 2.36: <code>normalcdf(&minus;2.36, 2.36)</code>. (Enter a decimal.)',
+      type: 'num', ans: 0.9817, tol: 0.0025, unit: '',
+      hint: 'P(&minus;2.36 &lt; Z &lt; 2.36) = 2&Phi;(2.36) &minus; 1.',
+      sol: '<code>normalcdf(&minus;2.36, 2.36)</code> &asymp; 0.9817, so 64% &plusmn; 4% is about a 98.2% confidence interval.' },
+    { g: '3.3', q: 'Which statement about the <strong>standard error</strong> (SE) and the <strong>margin of error</strong> (ME) is correct?',
+      opts: ['They are the same thing', 'ME is a multiple of SE, where the multiple <em>z</em>* is set by the confidence level', 'SE is a multiple of ME', 'ME depends only on the confidence level, not on the sample'], ans: 1,
+      hint: 'ME = <em>z</em>* &middot; SE.',
+      sol: 'SE measures how far the statistic typically varies from the parameter; ME = <em>z</em>* &middot; SE, with <em>z</em>* chosen from the confidence level.' },
+    { g: '3.3', q: 'In a random sample of 300 customers, 165 prefer the new design. Find the margin of error for a 90% confidence interval for the proportion of all customers who prefer it. (Round to 4 decimal places.)',
+      type: 'num', ans: 0.0472, tol: 0.0006, unit: '',
+      hint: ' ' + H + ' = 0.55, SE = &radic;(0.55 &middot; 0.45/300) &asymp; 0.0287, <em>z</em>* = 1.645.',
+      sol: 'ME = 1.645 &times; 0.02872 &asymp; 0.0472. Interval = (0.503, 0.597).' },
+
     /* ===== 3.4 ===== */
     { g: '3.4', q: 'A 95% confidence interval for the proportion of all students at a school who walk to school is (0.22, 0.34). Which is the best interpretation?',
       opts: ['There is a 95% probability that the true proportion is between 0.22 and 0.34', 'We are 95% confident that the interval from 0.22 to 0.34 captures the true proportion of all students at the school who walk to school', '95% of students walk to school', 'The sample proportion is between 0.22 and 0.34 in 95% of samples'], ans: 1,
@@ -793,7 +1052,37 @@
     { g: '3.4', q: 'A 99% interval for the proportion of customers who prefer a new product is (0.47, 0.61). A company claims that more than half prefer it. Is the claim supported by the interval?',
       opts: ['Yes, because the point estimate 0.54 is above 0.50', 'No, because 0.50 is a plausible value (it lies inside the interval), so there is not convincing evidence that more than half prefer it', 'Yes, because the upper limit is above 0.50', 'No, because 99% intervals cannot support claims'], ans: 1,
       hint: 'Is 0.50 inside (0.47, 0.61)?',
-      sol: 'The interval contains values both below and above 0.50, so the claim of a majority is not convincingly supported.' }
+      sol: 'The interval contains values both below and above 0.50, so the claim of a majority is not convincingly supported.' },
+
+    /* similar to the class examples: interpreting intervals and claims */
+    { g: '3.4', q: 'A 90% confidence interval for the proportion of all voters who favor a bond issue is (0.60, 0.66). Which is the correct interpretation of the <strong>confidence level</strong>?',
+      opts: ['If the survey were repeated many times, about 90% of the resulting intervals would contain the true proportion', 'About 90% of the voters are in the interval', 'There is a 0.90 probability that the true proportion is in (0.60, 0.66)', 'About 90% of future sample proportions will fall in (0.60, 0.66)'], ans: 0,
+      hint: 'The confidence level is the success rate of the method over repeated samples.',
+      sol: 'The confidence level describes the method: about 90% of the intervals produced in repeated sampling capture the true proportion.' },
+    { g: '3.4', q: 'For the 90% interval (0.60, 0.66) above, which statement is a correct interpretation of the <strong>interval</strong>?',
+      opts: ['The true proportion is definitely between 0.60 and 0.66', 'We are 90% confident that the interval from 0.60 to 0.66 captures the true proportion of all voters who favor the bond issue', 'Ninety percent of voters favor the bond issue', 'The sample proportion is between 0.60 and 0.66 in 90% of samples'], ans: 1,
+      hint: 'Look for the wording &ldquo;we are C% confident that the interval from a to b captures&hellip;&rdquo;.',
+      sol: 'The interval is interpreted as: &ldquo;We are 90% confident that the interval from 0.60 to 0.66 captures the true proportion of all voters who favor the bond issue.&rdquo;' },
+    { g: '3.4', q: 'A student says: &ldquo;If this survey were conducted many times, about 90% of the <em>sample proportions</em> would be in the interval (0.60, 0.66).&rdquo; What is wrong?',
+      opts: ['Nothing, this is correct', '(0.60, 0.66) is one specific interval from one sample; it says nothing about the proportions of other samples. The 90% refers to the intervals capturing the true proportion', 'The interval should say 95%', 'Sample proportions are never in an interval'], ans: 1,
+      hint: 'Which quantity is the 90% about: the sample proportions or the intervals?',
+      sol: 'This is misconception #3. The confidence level is the success rate of the method (intervals capturing the true proportion), not the share of future sample proportions that land in one specific interval.' },
+    { g: '3.4', q: 'For one <em>specific</em> computed 90% confidence interval, such as (0.60, 0.66), what is the probability that the true proportion lies inside it?',
+      opts: ['0.90', '0.10', 'Either 1 or 0: the true proportion either is or is not inside this interval', 'It cannot be known whether 0.90 or 0.95'], ans: 2,
+      hint: 'The true proportion is a fixed number, and the interval is already computed.',
+      sol: 'Misconception #2: once the interval is computed, the true proportion either is within it or is not, so the probability is 1 or 0. The 0.90 describes the method.' },
+    { g: '3.4', q: 'A 95% confidence interval for the proportion of adults who own a bicycle is (0.31, 0.39). Does the interval give convincing evidence for the claim that <strong>fewer than 40%</strong> of all adults own a bicycle?',
+      opts: ['Yes, all the plausible values are less than 0.40', 'No, because the interval is not centered at 0.40', 'No, because 0.40 is not in the interval', 'Yes, because the sample proportion is 0.35'], ans: 0,
+      hint: 'Are all the values in the interval below 0.40?',
+      sol: 'Every plausible value (0.31 to 0.39) is below 0.40, so the interval gives convincing evidence that fewer than 40% own a bicycle.' },
+    { g: '3.4', q: 'A 95% confidence interval for a population proportion is (0.52, 0.64). Does it give convincing evidence that <strong>more than 50%</strong> of the population have the characteristic?',
+      opts: ['Yes, all plausible values are greater than 0.50', 'No, because the interval is wide', 'No, because 0.52 is close to 0.50', 'It depends on the sample size only'], ans: 0,
+      hint: 'Is every value in the interval above 0.50?',
+      sol: 'The whole interval (0.52 to 0.64) lies above 0.50, so there is convincing evidence that more than 50% have the characteristic.' },
+    { g: '3.4', q: 'Using the same interval, (0.52, 0.64), does it give convincing evidence that <strong>over 60%</strong> of the population have the characteristic?',
+      opts: ['Yes, because 0.64 is above 0.60', 'No, because the interval contains plausible values below 0.60', 'Yes, because the interval is above 0.50', 'No, because 0.60 is not in the interval'], ans: 1,
+      hint: 'For &ldquo;over 60%&rdquo; every plausible value must be above 0.60.',
+      sol: 'The interval includes values from 0.52 to 0.60, so 60% or less is still plausible; there is no convincing evidence that the proportion is over 60%.' }
   ];
 
   /* ---------- State (restored from localStorage; saved student work is synced by lia-sync) ---------- */
@@ -856,7 +1145,7 @@
       }
       div.innerHTML =
         '<span class="q-num">PROBLEM ' + (i + 1) + '</span>' +
-        '<p>' + p.q + '</p>' + optsHTML +
+        '<div class="qtext">' + p.q + '</div>' + optsHTML +
         '<div class="answer-row">' +
           (isMC ? '' : '<input type="text" inputmode="decimal" autocomplete="off" aria-label="Answer to problem ' + (i + 1) + '" placeholder="Your answer"><span class="unit-label">' + (p.unit || '') + '</span>') +
           '<button class="btn" type="button">Check</button>' +
