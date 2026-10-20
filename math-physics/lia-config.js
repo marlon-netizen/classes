@@ -12,6 +12,7 @@ window.LIA_CONFIG={
     'complex-numbers': 'Complex Numbers – Advanced Algebra',
     'physics-language-of-physics': 'The Language of Physics – Physics I',
     'physics-lesson-10-3': 'Physics II – Lesson 10.3',
+    'physics-lesson-11-2': 'Physics II – Lesson 11.2 Measuring Simple Harmonic Motion',
     'physics-lesson-2-2': 'Physics II – Lesson 2.2 Acceleration',
     'physics-lesson-2-2-practice': 'Physics I – Lesson 2.2 Practice Exercises',
     'physics-lesson-2-3': 'Physics II – Lesson 2.3 Falling Objects',
