@@ -24,6 +24,8 @@
     --bad: #b5524f;
     --bad-bg: #f8e6e5;
     --line: #d9e0e8;
+    --sol-bg: #f7f9fb; --field: #ffffff; --disabled: #eef1f5; --disabled-btn: #b8c3d1;
+    --on-primary: #ffffff; --ok-ink: #276348; --bad-ink: #8a3b39; --warn-ink: #835a14;
   }
   * { box-sizing: border-box; }
   body {
@@ -73,7 +75,7 @@
     transition: background .2s, color .2s;
   }
   .tab-btn:hover { background: var(--primary-soft); color: var(--primary-dark); }
-  .tab-btn[aria-selected="true"] { background: var(--primary); color: #fff; }
+  .tab-btn[aria-selected="true"] { background: var(--primary); color: var(--on-primary); }
   .tab-btn:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #9ab7dd; outline-offset: 2px; }
   .panel { display: none; }
   .panel.active { display: block; }
@@ -95,9 +97,9 @@
   .formula small { display: block; font-size: .95rem; font-weight: 300; color: var(--muted); margin-top: .2rem; }
   .note { background: var(--warn-bg); border-left: 5px solid var(--warn); padding: .6rem 1rem; border-radius: 6px; }
   .frac { display: inline-block; text-align: center; vertical-align: middle; margin: 0 .15rem; }
-  .frac span { display: block; padding: 0 .25rem; }
-  .frac span:first-child { border-bottom: 1.5px solid currentColor; }
-  .solution { background: #f7f9fb; border: 1px dashed var(--line); border-radius: 8px; padding: .6rem 1rem; margin-top: .6rem; }
+  .frac > span { display: block; padding: 0 .25rem; }
+  .frac > span:first-child { border-bottom: 1.5px solid currentColor; }
+  .solution { background: var(--sol-bg); border: 1px dashed var(--line); border-radius: 8px; padding: .6rem 1rem; margin-top: .6rem; }
   .solution p { margin: .25rem 0; }
   .example-title { color: var(--primary); font-weight: 500; margin-bottom: .2rem; }
 
@@ -118,27 +120,27 @@
   .answer-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: .7rem; }
   .answer-row input {
     font: inherit; padding: .5rem .8rem; width: 190px;
-    border: 2px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+    border: 2px solid var(--line); border-radius: 8px; background: var(--field); color: var(--ink);
   }
-  .answer-row input:disabled { background: #eef1f5; }
+  .answer-row input:disabled { background: var(--disabled); color: var(--muted); }
   button.btn {
     font: inherit; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
-    background: var(--primary); color: #fff; border: none; border-radius: 8px;
+    background: var(--primary); color: var(--on-primary); border: none; border-radius: 8px;
     padding: .55rem 1.2rem; cursor: pointer; transition: background .2s;
   }
   button.btn:hover:not(:disabled) { background: var(--primary-dark); }
-  button.btn:disabled { background: #b8c3d1; cursor: not-allowed; }
-  button.btn.secondary { background: #fff; color: var(--primary-dark); border: 2px solid var(--primary); }
+  button.btn:disabled { background: var(--disabled-btn); color: var(--muted); cursor: not-allowed; }
+  button.btn.secondary { background: var(--field); color: var(--primary-dark); border: 2px solid var(--primary); }
   button.btn.secondary:hover { background: var(--primary-soft); }
   .attempts { margin-left: auto; color: var(--muted); font-weight: 300; }
   .dots { display: inline-flex; gap: 5px; vertical-align: middle; margin-left: .3rem; }
   .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 1px solid #6f9783; }
-  .dot.used { background: #d9e0e8; border-color: #b8c3d1; }
+  .dot.used { background: var(--line); border-color: var(--line); }
   .feedback { margin-top: .7rem; padding: .6rem 1rem; border-radius: 8px; display: none; font-weight: 400; }
   .feedback.show { display: block; }
-  .feedback.ok { background: var(--ok-bg); color: #276348; border-left: 5px solid var(--ok); }
-  .feedback.bad { background: var(--bad-bg); color: #8a3b39; border-left: 5px solid var(--bad); }
-  .feedback.hint { background: var(--warn-bg); color: #835a14; border-left: 5px solid var(--warn); }
+  .feedback.ok { background: var(--ok-bg); color: var(--ok-ink); border-left: 5px solid var(--ok); }
+  .feedback.bad { background: var(--bad-bg); color: var(--bad-ink); border-left: 5px solid var(--bad); }
+  .feedback.hint { background: var(--warn-bg); color: var(--warn-ink); border-left: 5px solid var(--warn); }
   .feedback .sol { font-weight: 300; margin-top: .3rem; }
   .final { display: none; text-align: center; }
   .final.show { display: block; }
@@ -150,10 +152,10 @@
   }
 
   /* dark mode (same variables, switched by the Light/Dark toggle or the device setting) */
-  :root[data-theme="dark"]{ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
+  :root[data-theme="dark"]{ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; --sol-bg:#202b39; --field:#0f1620; --disabled:#243040; --disabled-btn:#3a4757; --on-primary:#0f1722; --ok-ink:#a6e6c3; --bad-ink:#f5bcb6; --warn-ink:#f3d58f; }
   :root[data-theme="dark"] header{ background:linear-gradient(135deg,#1b2635,#18262a); }
   @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
+    :root:not([data-theme="light"]){ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; --sol-bg:#202b39; --field:#0f1620; --disabled:#243040; --disabled-btn:#3a4757; --on-primary:#0f1722; --ok-ink:#a6e6c3; --bad-ink:#f5bcb6; --warn-ink:#f3d58f; }
     :root:not([data-theme="light"]) header{ background:linear-gradient(135deg,#1b2635,#18262a); }
   }
 </style>

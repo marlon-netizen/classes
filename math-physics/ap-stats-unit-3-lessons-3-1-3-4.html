@@ -24,6 +24,8 @@
     --bad: #b5524f;
     --bad-bg: #f8e6e5;
     --line: #d9e0e8;
+    --sol-bg: #f7f9fb; --field: #ffffff; --disabled: #eef1f5; --disabled-btn: #b8c3d1;
+    --on-primary: #ffffff; --ok-ink: #276348; --bad-ink: #8a3b39; --warn-ink: #835a14;
   }
   * { box-sizing: border-box; }
   body {
@@ -60,7 +62,7 @@
     transition: background .2s, color .2s;
   }
   .tab-btn:hover { background: var(--primary-soft); color: var(--primary-dark); }
-  .tab-btn[aria-selected="true"] { background: var(--primary); color: #fff; }
+  .tab-btn[aria-selected="true"] { background: var(--primary); color: var(--on-primary); }
   .tab-btn:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #9ab7dd; outline-offset: 2px; }
   .panel { display: none; }
   .panel.active { display: block; }
@@ -79,12 +81,13 @@
     padding: .8rem 1rem; margin: .8rem 0; border-radius: 6px;
     font-size: 1.3rem; font-weight: 500; text-align: center;
   }
-  .formula small { display: block; font-size: .95rem; font-weight: 300; color: var(--muted); margin-top: .2rem; }
+  .formula { font-family: "Cambria Math", "STIX Two Math", "Latin Modern Math", "Noto Serif", "DejaVu Serif", Georgia, serif; font-weight: 500; }
+  .formula small { font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif; display: block; font-size: .95rem; font-weight: 300; color: var(--muted); margin-top: .2rem; }
   .note { background: var(--warn-bg); border-left: 5px solid var(--warn); padding: .6rem 1rem; border-radius: 6px; }
   .frac { display: inline-block; text-align: center; vertical-align: middle; margin: 0 .15rem; }
-  .frac span { display: block; padding: 0 .25rem; }
-  .frac span:first-child { border-bottom: 1.5px solid currentColor; }
-  .solution { background: #f7f9fb; border: 1px dashed var(--line); border-radius: 8px; padding: .6rem 1rem; margin-top: .6rem; }
+  .frac > span { display: block; padding: 0 .25rem; }
+  .frac > span:first-child { border-bottom: 1.5px solid currentColor; }
+  .solution { background: var(--sol-bg); border: 1px dashed var(--line); border-radius: 8px; padding: .6rem 1rem; margin-top: .6rem; }
   .solution p { margin: .25rem 0; }
   .example-title { color: var(--primary); font-weight: 500; margin-bottom: .2rem; }
 
@@ -106,39 +109,39 @@
   .answer-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: .7rem; }
   .answer-row input[type="text"] {
     font: inherit; padding: .5rem .8rem; width: 190px;
-    border: 2px solid var(--line); border-radius: 8px; background: #fff; color: var(--ink);
+    border: 2px solid var(--line); border-radius: 8px; background: var(--field); color: var(--ink);
   }
-  .answer-row input:disabled { background: #eef1f5; }
+  .answer-row input:disabled { background: var(--disabled); color: var(--muted); }
   .unit-label { color: var(--muted); font-weight: 300; margin-left: -.2rem; }
   .options { display: grid; gap: .4rem; margin-top: .6rem; }
   .options label {
     display: flex; gap: .6rem; align-items: center; padding: .45rem .8rem;
     border: 2px solid var(--line); border-radius: 8px; cursor: pointer; font-weight: 300; font-size: 1.05rem;
-    background: #fff; transition: background .15s, border-color .15s;
+    background: var(--field); color: var(--ink); transition: background .15s, border-color .15s;
   }
   .options label:hover { background: var(--primary-soft); }
-  .options label.disabled { cursor: default; background: #eef1f5; }
+  .options label.disabled { cursor: default; background: var(--disabled); }
   .options label.picked-wrong { border-color: var(--bad); background: var(--bad-bg); }
   .options label.picked-right { border-color: var(--ok); background: var(--ok-bg); }
   .options input { accent-color: var(--primary); }
   button.btn {
     font: inherit; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
-    background: var(--primary); color: #fff; border: none; border-radius: 8px;
+    background: var(--primary); color: var(--on-primary); border: none; border-radius: 8px;
     padding: .55rem 1.2rem; cursor: pointer; transition: background .2s;
   }
   button.btn:hover:not(:disabled) { background: var(--primary-dark); }
-  button.btn:disabled { background: #b8c3d1; cursor: not-allowed; }
-  button.btn.secondary { background: #fff; color: var(--primary-dark); border: 2px solid var(--primary); }
+  button.btn:disabled { background: var(--disabled-btn); color: var(--muted); cursor: not-allowed; }
+  button.btn.secondary { background: var(--field); color: var(--primary-dark); border: 2px solid var(--primary); }
   button.btn.secondary:hover { background: var(--primary-soft); }
   .attempts { margin-left: auto; color: var(--muted); font-weight: 300; }
   .dots { display: inline-flex; gap: 5px; vertical-align: middle; margin-left: .3rem; }
   .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 1px solid #6f9783; }
-  .dot.used { background: #d9e0e8; border-color: #b8c3d1; }
+  .dot.used { background: var(--line); border-color: var(--line); }
   .feedback { margin-top: .7rem; padding: .6rem 1rem; border-radius: 8px; display: none; font-weight: 400; }
   .feedback.show { display: block; }
-  .feedback.ok { background: var(--ok-bg); color: #276348; border-left: 5px solid var(--ok); }
-  .feedback.bad { background: var(--bad-bg); color: #8a3b39; border-left: 5px solid var(--bad); }
-  .feedback.hint { background: var(--warn-bg); color: #835a14; border-left: 5px solid var(--warn); }
+  .feedback.ok { background: var(--ok-bg); color: var(--ok-ink); border-left: 5px solid var(--ok); }
+  .feedback.bad { background: var(--bad-bg); color: var(--bad-ink); border-left: 5px solid var(--bad); }
+  .feedback.hint { background: var(--warn-bg); color: var(--warn-ink); border-left: 5px solid var(--warn); }
   .feedback .sol { font-weight: 300; margin-top: .3rem; }
   .final { display: none; text-align: center; }
   .final.show { display: block; }
@@ -148,36 +151,28 @@
     .tab-btn { padding: .6rem .7rem; font-size: .9rem; flex: 1; }
     .attempts { margin-left: 0; width: 100%; }
   }
-  .rad { border-top: 1.5px solid currentColor; padding: 0 2px; margin-left: 1px; }
+  .rad { border-top: 1.5px solid currentColor; padding: 0 3px; margin-left: 1px; display: inline-block; line-height: .95; }
+  .rad:has(.hat) { padding-top: .35em; line-height: 1.1; }
   .cycle { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin: .6rem 0; }
   .cycle div { background: var(--primary-soft); border-radius: 8px; padding: .4rem 1rem; text-align: center; font-weight: 500; }
   .cycle small { display: block; font-weight: 300; color: var(--muted); }
 
   /* dark mode (same variables, switched by the Light/Dark toggle or the device setting) */
-  :root[data-theme="dark"]{ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
+  :root[data-theme="dark"]{ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; --sol-bg:#202b39; --field:#0f1620; --disabled:#243040; --disabled-btn:#3a4757; --on-primary:#0f1722; --ok-ink:#a6e6c3; --bad-ink:#f5bcb6; --warn-ink:#f3d58f; }
   :root[data-theme="dark"] header{ background:linear-gradient(135deg,#1b2635,#18262a); }
   @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
+    :root:not([data-theme="light"]){ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; --sol-bg:#202b39; --field:#0f1620; --disabled:#243040; --disabled-btn:#3a4757; --on-primary:#0f1722; --ok-ink:#a6e6c3; --bad-ink:#f5bcb6; --warn-ink:#f3d58f; }
     :root:not([data-theme="light"]) header{ background:linear-gradient(135deg,#1b2635,#18262a); }
   }
-  .hat { position: relative; display: inline-block; font-style: italic; }
+  .hat { position: relative; display: inline-block; font-style: italic; padding: 0 .03em; }
   .hat::before { content: '^'; position: absolute; left: 50%; top: -.38em; transform: translateX(-50%); font-style: normal; font-size: .9em; }
   .sym { font-style: italic; }
   .ref { font-size: .95rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: .8rem; padding-top: .5rem; }
   .steps { counter-reset: st; list-style: none; padding-left: 0; }
   .steps li { counter-increment: st; margin: .4rem 0; padding-left: 2.2rem; position: relative; }
-  .steps li::before { content: counter(st); position: absolute; left: 0; top: .1rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--primary); color: #fff; text-align: center; font-size: .9rem; line-height: 1.6rem; font-weight: 500; }
-  [data-theme="dark"] .steps li::before, :root[data-theme="dark"] .steps li::before { color: #12171e; }
+  .steps li::before { content: counter(st); position: absolute; left: 0; top: .1rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--primary); color: var(--on-primary); text-align: center; font-size: .9rem; line-height: 1.6rem; font-weight: 500; }
   .lesson-tag { display: inline-block; background: var(--primary-soft); color: var(--primary-dark); border-radius: 6px; padding: .05rem .6rem; font-weight: 500; letter-spacing: 1px; font-size: .9rem; margin-bottom: .3rem; }
   .group-title { margin: 1.6rem 0 .8rem; color: var(--primary-dark); font-weight: 500; font-size: 1.3rem; border-bottom: 2px solid var(--line); padding-bottom: .2rem; }
-
-  /* dark mode (same variables, switched by the Light/Dark toggle or the device setting) */
-  :root[data-theme="dark"]{ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
-  :root[data-theme="dark"] header{ background:linear-gradient(135deg,#1b2635,#18262a); }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; }
-    :root:not([data-theme="light"]) header{ background:linear-gradient(135deg,#1b2635,#18262a); }
-  }
 </style>
 <!--LIA-SYNC-START--><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
 </head>
@@ -230,7 +225,7 @@
       <div class="formula">
         &mu;<sub><span class="hat">p</span></sub> = <em>p</em>
         &nbsp;&nbsp;&nbsp;&nbsp;
-        &sigma;<sub><span class="hat">p</span></sub> = <span class="frac"><span>&radic;<span class="rad"><em>p</em>(1 &minus; <em>p</em>)</span></span><span>&radic;<span class="rad"><em>n</em></span></span></span> = &radic;<span class="rad"><span class="frac"><span><em>p</em>(1 &minus; <em>p</em>)</span><span><em>n</em></span></span></span>
+        &sigma;<sub><span class="hat">p</span></sub> = &radic;<span class="rad"><em>p</em>(1 &minus; <em>p</em>) / <em>n</em></span>
         <small>The formula for &sigma; requires independent observations.</small>
       </div>
       <p><strong>Conditions</strong> for using these formulas and a Normal model:</p>
@@ -250,7 +245,7 @@
       <h3>Constructing a confidence interval for a population proportion</h3>
       <p>The procedure is the <strong>one-sample <em>z</em>-interval for a population proportion</strong>:</p>
       <div class="formula">
-        <span class="hat">p</span> &plusmn; <em>z</em>* &radic;<span class="rad"><span class="frac"><span><span class="hat">p</span>(1 &minus; <span class="hat">p</span>)</span><span><em>n</em></span></span></span>
+        <span class="hat">p</span> &plusmn; <em>z</em>* &middot; &radic;<span class="rad"><span class="hat">p</span>(1 &minus; <span class="hat">p</span>) / <em>n</em></span>
         <small>point estimate &plusmn; margin of error &nbsp;|&nbsp; ME = <em>z</em>* &times; SE &nbsp;|&nbsp; SE = &radic;(<span class="hat">p</span>(1 &minus; <span class="hat">p</span>)/<em>n</em>)</small>
       </div>
       <div class="table-wrap">
@@ -268,7 +263,7 @@
         <li><strong>Conclude:</strong> interpret the interval in context (see 3.4).</li>
       </ol>
       <p><strong>Sample size for a desired margin of error</strong> (solve ME = <em>z</em>*&radic;(<span class="hat">p</span>(1 &minus; <span class="hat">p</span>)/<em>n</em>) for <em>n</em>):</p>
-      <div class="formula"><em>n</em> &ge; <span class="frac"><span><em>z</em>*</span><span>ME</span></span>&sup2; <span class="hat">p</span>(1 &minus; <span class="hat">p</span>)
+      <div class="formula"><em>n</em> &ge; (<span class="frac"><span><em>z</em>*</span><span>ME</span></span>)<sup>2</sup> &middot; <span class="hat">p</span>(1 &minus; <span class="hat">p</span>)
         <small>If there is no prior estimate, use <span class="hat">p</span> = 0.5 (the most conservative value). Always round <em>n</em> <u>up</u>.</small></div>
     </div>
 
