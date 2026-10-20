@@ -4,9 +4,14 @@
 --  It is safe to run again (it uses "if not exists" / "or replace").
 --
 --  How it works
+--  * The site has three areas (folders): faith-formation, ciencias-sociales,
+--    math-physics. Every student row belongs to one "area"; a student's code
+--    works on every page of that area and is unique inside the area.
+--    Use ONE Supabase project for all areas, or one project per area – this
+--    same script works for both (run it once in each project you use).
 --  * Students never touch the tables directly. The public ("anon") key can
 --    only call three functions: lia_login, lia_get_progress, lia_save_progress.
---    Each one needs a valid, active student code.
+--    Each one needs the area and a valid, active student code.
 --  * The teacher signs in to admin.html with a normal Supabase Auth account
 --    that is listed in the "admins" table. Admins can read/write everything.
 -- =====================================================================
@@ -14,6 +19,7 @@
 -- ---------- tables ---------------------------------------------------
 create table if not exists public.students (
   id          uuid primary key default gen_random_uuid(),
+  area        text not null default 'default',   -- 'faith-formation' | 'ciencias-sociales' | 'math-physics'
   code        text not null,                 -- stored upper-case, letters+digits only
   full_name   text not null,
   grade       text,
@@ -24,11 +30,15 @@ create table if not exists public.students (
   created_at  timestamptz not null default now(),
   last_login  timestamptz
 );
-create unique index if not exists students_code_key on public.students (code);
+-- upgrading an older copy of this script: add the column, then swap the unique index
+alter table public.students add column if not exists area text not null default 'default';
+drop index if exists public.students_code_key;
+create unique index if not exists students_area_code_key on public.students (area, code);
 
 create table if not exists public.progress (
   student_id  uuid not null references public.students(id) on delete cascade,
-  page_key    text not null,                 -- e.g. 'lesson-2-3'
+  area        text not null default 'default',
+  page_key    text not null,                 -- the page's file name, e.g. 'physics-lesson-2-3'
   state       jsonb not null default '{}'::jsonb,
   solved      integer not null default 0,    -- practice problems solved
   total       integer not null default 0,    -- practice problems in the page
@@ -36,6 +46,9 @@ create table if not exists public.progress (
   updated_at  timestamptz not null default now(),
   primary key (student_id, page_key)
 );
+
+alter table public.progress add column if not exists area text not null default 'default';
+create index if not exists progress_area on public.progress (area);
 
 create table if not exists public.admins (
   user_id     uuid primary key references auth.users(id) on delete cascade
@@ -102,8 +115,13 @@ grant select, insert, update, delete on public.students, public.progress to auth
 grant select on public.admins to authenticated;
 
 -- ---------- functions the student pages call -------------------------
+-- (older versions of these functions had no area argument: drop them first)
+drop function if exists public.lia_login(text);
+drop function if exists public.lia_get_progress(text, text);
+drop function if exists public.lia_save_progress(text, text, jsonb, integer, integer, integer);
+
 -- 1) sign in with a code
-create or replace function public.lia_login(p_code text) returns json
+create or replace function public.lia_login(p_area text, p_code text) returns json
 language plpgsql security definer set search_path = public as $$
 declare
   v_code text := public.lia_norm(p_code);
@@ -120,7 +138,7 @@ begin
     return json_build_object('ok', false, 'error', 'too_many');
   end if;
 
-  select * into s from public.students where code = v_code and active;
+  select * into s from public.students where area = p_area and code = v_code and active;
   if not found then
     insert into public.login_attempts (ip, ok) values (v_ip, false);
     delete from public.login_attempts where at < now() - interval '1 day';
@@ -132,13 +150,13 @@ begin
 end $$;
 
 -- 2) read a student's saved progress for one page
-create or replace function public.lia_get_progress(p_code text, p_page text) returns json
+create or replace function public.lia_get_progress(p_area text, p_code text, p_page text) returns json
 language plpgsql security definer set search_path = public as $$
 declare
   s public.students%rowtype;
   r public.progress%rowtype;
 begin
-  select * into s from public.students where code = public.lia_norm(p_code) and active;
+  select * into s from public.students where area = p_area and code = public.lia_norm(p_code) and active;
   if not found then
     return json_build_object('ok', false, 'error', 'invalid_code');
   end if;
@@ -151,25 +169,25 @@ end $$;
 
 -- 3) save a student's progress for one page
 create or replace function public.lia_save_progress(
-  p_code text, p_page text, p_state jsonb,
+  p_area text, p_code text, p_page text, p_state jsonb,
   p_solved integer default 0, p_total integer default 0, p_examples integer default 0
 ) returns json
 language plpgsql security definer set search_path = public as $$
 declare
   s public.students%rowtype;
 begin
-  select * into s from public.students where code = public.lia_norm(p_code) and active;
+  select * into s from public.students where area = p_area and code = public.lia_norm(p_code) and active;
   if not found then
     return json_build_object('ok', false, 'error', 'invalid_code');
   end if;
-  if p_page is null or p_page !~ '^[a-z0-9-]{1,60}$' then
+  if p_page is null or p_page !~ '^[a-z0-9-]{1,80}$' then
     return json_build_object('ok', false, 'error', 'bad_page');
   end if;
-  if p_state is null or jsonb_typeof(p_state) <> 'object' or octet_length(p_state::text) > 200000 then
+  if p_state is null or jsonb_typeof(p_state) <> 'object' or octet_length(p_state::text) > 400000 then
     return json_build_object('ok', false, 'error', 'bad_state');
   end if;
-  insert into public.progress (student_id, page_key, state, solved, total, examples, updated_at)
-  values (s.id, p_page, p_state, greatest(coalesce(p_solved, 0), 0), greatest(coalesce(p_total, 0), 0),
+  insert into public.progress (student_id, area, page_key, state, solved, total, examples, updated_at)
+  values (s.id, s.area, p_page, p_state, greatest(coalesce(p_solved, 0), 0), greatest(coalesce(p_total, 0), 0),
           greatest(coalesce(p_examples, 0), 0), now())
   on conflict (student_id, page_key) do update
      set state = excluded.state, solved = excluded.solved, total = excluded.total,
@@ -177,12 +195,12 @@ begin
   return json_build_object('ok', true, 'updated_at', now());
 end $$;
 
-revoke all on function public.lia_login(text)                                   from public;
-revoke all on function public.lia_get_progress(text, text)                      from public;
-revoke all on function public.lia_save_progress(text, text, jsonb, integer, integer, integer) from public;
-grant execute on function public.lia_login(text)                                   to anon, authenticated;
-grant execute on function public.lia_get_progress(text, text)                      to anon, authenticated;
-grant execute on function public.lia_save_progress(text, text, jsonb, integer, integer, integer) to anon, authenticated;
+revoke all on function public.lia_login(text, text)                                   from public;
+revoke all on function public.lia_get_progress(text, text, text)                      from public;
+revoke all on function public.lia_save_progress(text, text, text, jsonb, integer, integer, integer) from public;
+grant execute on function public.lia_login(text, text)                                   to anon, authenticated;
+grant execute on function public.lia_get_progress(text, text, text)                      to anon, authenticated;
+grant execute on function public.lia_save_progress(text, text, text, jsonb, integer, integer, integer) to anon, authenticated;
 
 -- ---------- make yourself an admin (edit the e-mail, then run) ----------
 -- 1. Dashboard → Authentication → Users → Add user (e-mail + password, tick "Auto confirm")
