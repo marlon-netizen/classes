@@ -159,62 +159,93 @@ def main():
         sys.exit("Give both --url and --key (or neither).")
     template = (ROOT / "shared" / "admin.template.html").read_text(encoding="utf8")
     scores_template = (ROOT / "shared" / "scores.template.html").read_text(encoding="utf8")
-    root_cards = []
     for area in AREAS:
         folder = ROOT / area["folder"]
         folder.mkdir(exist_ok=True)
         files = sorted(p for p in folder.glob("*.html") if p.name not in SKIP)
-        pages, cards = {}, []
+        pages = {}
         for p in files:
             connect(p)
             title, short, desc = page_info(p)
             pages[p.stem.lower()] = short
-            cards.append((p.name, "", title, desc))
         use = a.url and (not a.area or a.area == area["folder"])
         write_config(folder, area, pages, a.url if use else None, a.key if use else None)
-        for old in ("admin.html", "scores.html"):   # teacher tools live in teacher/ now
+        for old in ("admin.html", "scores.html", "index.html"):   # no student menu: lessons are shared by direct link only
             if (folder / old).exists():
                 (folder / old).unlink()
-        (folder / "index.html").write_text(hub(
-            area["name"], area["blurb"], cards,
-            '<a href="../index.html">← All subjects</a>', theme=THEMES[area["folder"]], signin=True), encoding="utf8")
-        root_cards.append((area["folder"] + "/", "%d lessons" % len(files), area["name"], area["blurb"]))
         print("%-18s %2d pages connected" % (area["folder"], len(files)))
-    (ROOT / "index.html").write_text(hub(
-        "Student learning site", "Choose your subject, then sign in with the access code your teacher gave you.", root_cards,
-        "Sign in on each lesson page with the access code your teacher gave you."), encoding="utf8")
-    # ---- teacher tools (separate from the student pages)
+    # ---- teacher tools: the site root is the (signed-in) teacher home; there is no public student index
     tdir = ROOT / "teacher"
     tdir.mkdir(exist_ok=True)
     (tdir / "admin.html").write_text(template, encoding="utf8")
     (tdir / "scores.html").write_text(scores_template, encoding="utf8")
     (tdir / "access.html").write_text((ROOT / "shared" / "access.template.html").read_text(encoding="utf8"), encoding="utf8")
-    tcards = []
-    for ar in AREAS:
-        th = THEMES[ar["folder"]]["light"]
+    (tdir / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=../index.html"><title>Teacher tools</title><a href="../index.html">Teacher tools</a>\n', encoding="utf8")
+    (ROOT / "index.html").write_text(teacher_home(), encoding="utf8")
+    print("root index.html (teacher sign-in) written")
+
+
+def teacher_home():
+    css_areas, cards = "", []
+    for n, ar in enumerate(AREAS):
+        th = THEMES[ar["folder"]]
+        L, D = th["light"], th["dark"]
+        css_areas += (".a%d{--p:%s;--pi:#fff;--w:%s}@media (prefers-color-scheme: dark){.a%d{--p:%s;--pi:#14181f;--w:%s}}\n"
+                      % (n, L["primary"], L["warm"], n, D["primary"], D["warm"]))
         lessons = sorted(p for p in (ROOT / ar["folder"]).glob("*.html") if p.name not in SKIP)
-        lis = "".join('<li><a href="../%s/%s" target="_blank" rel="noopener">%s</a><code>%s</code></li>' % (
-            ar["folder"], p.name, html.escape(page_info(p)[1]), p.name) for p in lessons)
-        tcards.append(
-            '<section class="card" style="--primary:%s;--warm:%s;--soft:%s"><span class="tag">%d lessons</span><h3>%s</h3><p>%s</p>'
-            '<p class="acts"><a class="btn" href="scores.html?area=%s">Scores &amp; progress</a><a class="btn" href="admin.html?area=%s">Students &amp; codes</a>'
-            '<a class="btn" href="access.html?area=%s">Assign lessons</a><a class="btn ghost" href="../%s/" target="_blank" rel="noopener">Student menu ↗</a></p>'
-            '<details><summary>All lesson links</summary><ul class="lessons">%s</ul></details></section>'
-            % (th["primary"], th["warm"], th["soft"], len(lessons), html.escape(ar["name"]), html.escape(ar["blurb"]), ar["folder"], ar["folder"], ar["folder"], ar["folder"], lis))
-    tcards = "\n".join(tcards)
-    (tdir / "index.html").write_text(
-        '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta name="robots" content="noindex,nofollow">\n'
-        '<title>Teacher tools | Lincoln International Academy</title>\n' + FONTS + '\n<style>' + HUB_CSS +
-        '.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}.card h3{margin:0 0 .3em;font-size:1.25rem;color:var(--primary)}.card p{margin:.2em 0 .8em;color:var(--muted)}'
-        '.acts{display:flex;flex-wrap:wrap;gap:8px}.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:.9rem;border-radius:8px;padding:7px 14px;border:1px solid var(--primary);background:var(--primary);color:#fff}'
-        '.btn.ghost{background:transparent;color:var(--primary)}details{margin-top:6px}summary{cursor:pointer;color:var(--primary);font-weight:600}ul.lessons{list-style:none;margin:8px 0 0;padding:0}ul.lessons li{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 12px;padding:5px 0;border-bottom:1px solid var(--line)}ul.lessons a{color:var(--primary);text-decoration:none}ul.lessons code{font-size:.78rem;color:var(--muted)}.note{background:var(--soft);border-radius:10px;padding:12px 16px;margin:18px 0 0;color:var(--muted);font-size:.95rem}</style>\n</head>\n<body>\n'
-        '<header><div class="wrap"><div class="eyebrow">Teacher tools</div><div class="school">Lincoln International Academy</div><p>Scores, progress, students and access codes for every subject.</p></div></header>\n'
-        '<main><div class="wrap"><div class="grid">\n' + tcards + '\n</div>'
-        '<p class="note"><b>Student site:</b> <a href="../index.html">front page</a> · <a href="../math-physics/">Math &amp; Physics</a> · <a href="../ciencias-sociales/">Ciencias Sociales</a> · <a href="../faith-formation/">Faith Formation</a></p>'
-        '<p class="note"><b>Sign in</b> with your teacher account on the page you open (one login works for all of them). '
-        'This area is not linked from the student pages; students only ever see the lessons. First time? Follow <code>supabase/README.md</code>.</p></div></main>\n'
-        '<footer><div class="wrap"><a href="../index.html">← Student site</a></div></footer>\n</body>\n</html>\n', encoding="utf8")
-    print("root index.html written")
+        rows = "".join('<li><div><b>%s</b><a class="lk" data-rel="%s/%s" href="%s/%s" target="_blank" rel="noopener"></a></div><button class="btn ghost sm" type="button" data-copy>Copy link</button></li>'
+                       % (html.escape(page_info(p)[1]), ar["folder"], p.name, ar["folder"], p.name) for p in lessons)
+        cards.append(
+            '<section class="card a%d"><span class="tag">%d lessons</span><h3>%s</h3><p>%s</p>'
+            '<p class="acts"><a class="btn" href="teacher/scores.html?area=%s">Scores &amp; progress</a><a class="btn" href="teacher/admin.html?area=%s">Students &amp; codes</a>'
+            '<a class="btn" href="teacher/access.html?area=%s">Assign lessons</a></p>'
+            '<details open><summary>Links to share with students</summary><ul class="lessons">%s</ul></details></section>'
+            % (n, len(lessons), html.escape(ar["name"]), html.escape(ar["blurb"]), ar["folder"], ar["folder"], ar["folder"], rows))
+    js = r"""
+(function(){
+'use strict';
+var CFG=window.LIA_CONFIG||{}, $=function(s){return document.querySelector(s);}, BASE=String(CFG.url||'').replace(/\/+$/,''), SK='lia-admin-session:'+(CFG.url||''), sess=null;
+var LIVE=CFG.url&&CFG.anonKey&&!/YOUR_SUPABASE/.test(CFG.url+CFG.anonKey);
+function msg(t){var e=$('#lErr');e.textContent=t||'';e.hidden=!t;}
+function save(j){ sess={access_token:j.access_token,refresh_token:j.refresh_token,expires_at:Date.now()+(j.expires_in||3600)*1000,email:(j.user&&j.user.email)||(sess&&sess.email)||''}; try{localStorage.setItem(SK,JSON.stringify(sess));}catch(e){} }
+function auth(body,grant){ return fetch(BASE+'/auth/v1/token?grant_type='+grant,{method:'POST',headers:{apikey:CFG.anonKey,'Content-Type':'application/json'},body:JSON.stringify(body)}).then(function(r){return r.json().then(function(j){ if(!r.ok) throw new Error(j.error_description||j.msg||j.message||'Sign-in failed'); return j; });}); }
+function check(){ var go=function(){ return fetch(BASE+'/rest/v1/admins?select=user_id',{headers:{apikey:CFG.anonKey,Authorization:'Bearer '+sess.access_token}}); };
+  return go().then(function(r){ if(r.status===401&&sess.refresh_token) return auth({refresh_token:sess.refresh_token},'refresh_token').then(function(j){save(j);return go();}); return r; }).then(function(r){ if(!r.ok) throw new Error('expired'); return r.json(); }).then(function(a){ if(!a||!a.length) throw new Error('This account is not an administrator yet (see supabase/README.md).'); }); }
+function show(){ $('#gate').hidden=true; $('#home').hidden=false; $('#who').hidden=false; $('#whoMail').textContent=(sess&&sess.email)||'';
+  [].forEach.call(document.querySelectorAll('a.lk'),function(a){ var u=new URL(a.dataset.rel,location.href).href; a.textContent=u; a.href=u; }); }
+function out(t){ sess=null; try{localStorage.removeItem(SK);}catch(e){} $('#home').hidden=true; $('#who').hidden=true; $('#gate').hidden=false; msg(t); }
+document.addEventListener('click',function(e){ var b=e.target.closest('[data-copy]'); if(!b) return; var u=b.closest('li').querySelector('a.lk').href;
+  (navigator.clipboard?navigator.clipboard.writeText(u):Promise.reject()).catch(function(){ var t=document.createElement('textarea'); t.value=u; document.body.appendChild(t); t.select(); try{document.execCommand('copy');}catch(x){} t.remove(); }).then(function(){ var o=b.textContent; b.textContent='Copied ✓'; setTimeout(function(){b.textContent=o;},1400); }); });
+$('#btnOut').addEventListener('click',function(){ out(''); });
+$('#lf').addEventListener('submit',function(ev){ ev.preventDefault(); $('#lBtn').disabled=true; msg('');
+  auth({email:$('#lEmail').value.trim(),password:$('#lPass').value},'password').then(function(j){ save(j); sess.email=$('#lEmail').value.trim(); return check(); }).then(show).catch(function(e){ out(''); msg(e.message); }).then(function(){ $('#lBtn').disabled=false; }); });
+if(!LIVE){ $('#gate').hidden=false; msg('Supabase is not connected yet (see supabase/README.md).'); }
+else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=null; } if(sess) check().then(show,function(){ out(''); }); else $('#gate').hidden=false; }
+})();
+"""
+    return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta name="robots" content="noindex,nofollow">\n'
+        '<title>Teacher tools | Lincoln International Academy</title>\n' + FONTS + '\n<script src="math-physics/lia-config.js"></script>\n<style>' + HUB_CSS + css_areas +
+        '.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}.card h3{margin:0 0 .3em;font-size:1.25rem;color:var(--p)}.card p{margin:.2em 0 .8em;color:var(--muted)}'
+        '.card .tag{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--w);font-weight:600}'
+        '.acts{display:flex;flex-wrap:wrap;gap:8px}.btn{display:inline-block;text-decoration:none;font:inherit;font-weight:600;font-size:.9rem;border-radius:8px;padding:7px 14px;border:1px solid var(--p);background:var(--p);color:var(--pi);cursor:pointer}'
+        '.btn.ghost{background:transparent;color:var(--p)}.btn.sm{padding:3px 10px;font-size:.8rem;white-space:nowrap}details{margin-top:6px}summary{cursor:pointer;color:var(--p);font-weight:600}'
+        'ul.lessons{list-style:none;margin:8px 0 0;padding:0}ul.lessons li{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line)}'
+        'ul.lessons b{display:block;font-weight:600;color:var(--ink);font-size:.95rem}ul.lessons a.lk{display:block;font-size:.74rem;color:var(--muted);word-break:break-all;text-decoration:none}'
+        '.note{background:var(--soft);border-radius:10px;padding:12px 16px;margin:18px 0 0;color:var(--muted);font-size:.95rem}'
+        '.login{max-width:420px;margin:30px auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:26px}.login label{display:block;font-weight:600;font-size:.9rem;margin:12px 0 4px}'
+        '.login input{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}.login .btn{margin-top:16px;width:100%;background:var(--primary);border-color:var(--primary);color:var(--bg)}'
+        '.err{margin-top:10px;color:#c0504a;font-weight:600}.who{margin-left:auto;font-size:.85rem;display:flex;gap:10px;align-items:center;color:#cfd8e6}.who button{font:inherit;background:none;color:inherit;border:1px solid rgba(255,255,255,.5);border-radius:8px;padding:2px 10px;cursor:pointer}'
+        'header .wrap{display:flex;flex-wrap:wrap;align-items:center;gap:8px 20px}</style>\n</head>\n<body>\n'
+        '<header><div class="wrap"><div><div class="eyebrow">Teacher tools</div><div class="school">Lincoln International Academy</div></div>'
+        '<div class="who" id="who" hidden><span id="whoMail"></span><button type="button" id="btnOut">Sign out</button></div></header>\n'
+        '<main><div class="wrap">'
+        '<div id="gate" hidden><form class="login" id="lf"><h2 style="margin:0">Teacher sign-in</h2><p style="color:var(--muted);margin:.2em 0 0">This area is for teachers only.</p>'
+        '<label for="lEmail">E-mail</label><input id="lEmail" type="email" autocomplete="username" required><label for="lPass">Password</label><input id="lPass" type="password" autocomplete="current-password" required>'
+        '<button class="btn" type="submit" id="lBtn">Sign in</button><div class="err" id="lErr" hidden></div></form></div>'
+        '<div id="home" hidden><div class="grid">\n' + "\n".join(cards) + '\n</div>'
+        '<p class="note"><b>Sharing with students:</b> there is no public student menu. Send each class the link to its lesson; the student signs in with their own code (one code per folder works for every lesson in it). '
+        'A lesson that is not assigned to a student\'s grade and class stays closed to them.</p></div>'
+        '</div></main>\n<script>' + js + '</script>\n</body>\n</html>\n')
 
 
 if __name__ == "__main__":

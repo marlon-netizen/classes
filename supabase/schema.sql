@@ -34,6 +34,8 @@ create table if not exists public.students (
 alter table public.students add column if not exists area text not null default 'default';
 drop index if exists public.students_code_key;
 create unique index if not exists students_area_code_key on public.students (area, code);
+-- teacher preview code(s): open every lesson as a student would see it; never shown in reports or code slips
+alter table public.students add column if not exists is_preview boolean not null default false;
 
 create table if not exists public.progress (
   student_id  uuid not null references public.students(id) on delete cascade,
@@ -193,7 +195,9 @@ begin
 
   update public.students set last_login = now() where id = s.id;
   return json_build_object('ok', true, 'name', s.full_name, 'grade', s.grade, 'class_name', s.class_name,
-                           'access', public.lia_access(s.area, s.grade, s.class_name));
+                           'access', case when s.is_preview then json_build_object('restricted', '[]'::json, 'allowed', '[]'::json)
+                                                  else public.lia_access(s.area, s.grade, s.class_name) end,
+                           'preview', s.is_preview);
 end $$;
 
 -- 2) read a student's saved progress for one page
@@ -207,7 +211,7 @@ begin
   if not found then
     return json_build_object('ok', false, 'error', 'invalid_code');
   end if;
-  if not public.lia_can_open(s.area, s.grade, s.class_name, p_page) then
+  if not s.is_preview and not public.lia_can_open(s.area, s.grade, s.class_name, p_page) then
     return json_build_object('ok', false, 'error', 'not_allowed');
   end if;
   select * into r from public.progress where student_id = s.id and page_key = p_page;
@@ -237,7 +241,7 @@ begin
   if p_state is null or jsonb_typeof(p_state) <> 'object' or octet_length(p_state::text) > 400000 then
     return json_build_object('ok', false, 'error', 'bad_state');
   end if;
-  if not public.lia_can_open(s.area, s.grade, s.class_name, p_page) then
+  if not s.is_preview and not public.lia_can_open(s.area, s.grade, s.class_name, p_page) then
     return json_build_object('ok', false, 'error', 'not_allowed');
   end if;
   insert into public.progress (student_id, area, page_key, state, solved, total, examples, score, max_score, updated_at)

@@ -63,7 +63,7 @@ dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface)
 <body>
 <header class="top"><div class="wrap">
   <div><div class="eyebrow">Assign lessons · <span id="areaName"></span></div><div class="school">Lincoln International Academy</div></div>
-  <div class="who" id="who" hidden><select id="areaSel" aria-label="Subject" style="padding:4px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.5);background:transparent;color:#f3f0e9"><option value="faith-formation">Faith Formation</option><option value="ciencias-sociales">Ciencias Sociales</option><option value="math-physics">Math &amp; Physics</option></select><a href="index.html">← Teacher tools</a><a id="lnkScores" href="scores.html">Scores</a><a id="lnkAdmin" href="admin.html">Students</a><a id="lnkLessons" href="#">Student lessons ↗</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
+  <div class="who" id="who" hidden><select id="areaSel" aria-label="Subject" style="padding:4px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.5);background:transparent;color:#f3f0e9"><option value="faith-formation">Faith Formation</option><option value="ciencias-sociales">Ciencias Sociales</option><option value="math-physics">Math &amp; Physics</option></select><a href="../index.html">← Teacher tools</a><a id="lnkScores" href="scores.html">Scores</a><a id="lnkAdmin" href="admin.html">Students</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
 </div></header>
 <main><div class="wrap">
   <div class="card login" id="loginCard" hidden>
@@ -109,7 +109,7 @@ function norm(x){ return String(x==null?'':x).trim().toLowerCase(); }
 function gkey(g,c){ return norm(g)+'||'+norm(c); }
 function isSent(r){ return r.grade===SENT.grade&&r.class_name===SENT.class_name; }
 function load(){
-  return Promise.all([api('/rest/v1/admins?select=user_id'),api('/rest/v1/students?select=grade,class_name&area=eq.'+encodeURIComponent(AREA)),api('/rest/v1/lesson_access?select=page_key,grade,class_name&area=eq.'+encodeURIComponent(AREA))])
+  return Promise.all([api('/rest/v1/admins?select=user_id'),api('/rest/v1/students?select=grade,class_name&is_preview=eq.false&area=eq.'+encodeURIComponent(AREA)),api('/rest/v1/lesson_access?select=page_key,grade,class_name&area=eq.'+encodeURIComponent(AREA))])
   .then(function(r){ if(!r[0]||!r[0].length){ out('This account is not an administrator yet (see supabase/README.md).'); return; } students=r[1]||[]; rows=r[2]||[]; render(); },
     function(e){ if(e.message!=='expired') msg($('#aErr'),/lesson_access/.test(e.message)?'The database needs the latest supabase/schema.sql (run it again in the SQL Editor).':e.message,'err'); $('#app').hidden=false; $('#loginCard').hidden=true; $('#who').hidden=false; });
 }
@@ -154,7 +154,7 @@ $('#mx').addEventListener('click',function(e){
 $('#btnRefresh').addEventListener('click',function(){ load(); }); $('#btnOut').addEventListener('click',function(){ out(''); });
 $('#areaName').textContent=CFG.areaName||'';
 (function(){var s=document.getElementById('areaSel'); if(s){ s.value=window.LIA_TEACHER_AREA; s.style.color='#f3f0e9'; s.addEventListener('change',function(){ location.search='?area='+s.value; }); } })();
-$('#lnkAdmin').href='admin.html?area='+window.LIA_TEACHER_AREA; $('#lnkScores').href='scores.html?area='+window.LIA_TEACHER_AREA; $('#lnkLessons').href='../'+window.LIA_TEACHER_AREA+'/'; $('#lnkLessons').target='_blank'; document.title='Assign lessons · '+(CFG.areaName||'');
+$('#lnkAdmin').href='admin.html?area='+window.LIA_TEACHER_AREA; $('#lnkScores').href='scores.html?area='+window.LIA_TEACHER_AREA; document.title='Assign lessons · '+(CFG.areaName||'');
 $('#loginForm').addEventListener('submit',function(ev){ ev.preventDefault(); $('#lBtn').disabled=true; msg($('#lErr'),''); auth({email:$('#lEmail').value.trim(),password:$('#lPass').value},'password').then(function(j){ saveSess(j); sess.email=$('#lEmail').value.trim(); return load(); }).catch(function(e){ msg($('#lErr'),e.message,'err'); }).then(function(){ $('#lBtn').disabled=false; }); });
 if(!LIVE) msg($('#setupMsg'),'Supabase is not connected yet. Fill in the subject folder\'s lia-config.js (see supabase/README.md).','info');
 else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=null; } if(sess) load().catch(function(){ out(''); }); else $('#loginCard').hidden=false; }

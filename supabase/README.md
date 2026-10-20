@@ -76,6 +76,12 @@ Open `<your site>/teacher/` → **Assign lessons** for a subject. Rows are every
 shows "Not available for your class" even from a direct link – the database refuses to save or load it as well.
 Re-run `supabase/schema.sql` once to enable this. Each folder also has its own look (colours and font); only the database and sign-in code are shared.
 
+## Teacher master code
+The setup script creates a **Teacher preview** account with a master code that works in all three folders: it opens every lesson exactly as a
+student sees it (even lessons assigned to a single class). It never appears in the dashboard or on code slips. To change it, edit that row in
+Students & codes (or delete it); to make another one in a folder run
+`insert into public.students (area, code, full_name, notes, is_preview) values ('math-physics', 'NEWCODE1', 'Teacher preview', '', true);`
+
 ## How the student experience works
 1. Opening any lesson page shows a **Student sign-in** box (once per folder, per device).
 2. After signing in, the page restores the student's saved work from the database.

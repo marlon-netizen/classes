@@ -182,7 +182,7 @@
     var el = document.getElementById('liaUser');
     if (!el) {
       el = document.createElement('div'); el.id = 'liaUser';
-      el.innerHTML = '<span>👤 <span class="lia-name"></span></span><span class="lia-save" role="status" aria-live="polite">Saved ✓</span><a class="lia-menu" href="index.html">☰ Menu</a><button type="button">Sign out</button>';
+      el.innerHTML = '<span>👤 <span class="lia-name"></span></span><span class="lia-save" role="status" aria-live="polite">Saved ✓</span><button type="button">Sign out</button>';
       el.querySelector('button').addEventListener('click', signOut);
       document.body.appendChild(el);
     }
@@ -228,8 +228,9 @@
     g = document.createElement('div'); g.id = 'liaGate';
     var who = [student.grade && ('Grade ' + student.grade), student.cls].filter(Boolean).join(' · ');
     g.innerHTML = '<div class="lia-card"><div class="lia-brand">Lincoln International Academy</div><h2>Not available for your class</h2>' +
-      '<p>This lesson has not been assigned to ' + (who ? 'your class (' + who.replace(/[<>&]/g, '') + ')' : 'your class') + '. Go back to the menu to see your lessons.</p>' +
-      '<a class="lia-btn" style="display:block;text-align:center;text-decoration:none" href="index.html">☰ My lessons</a></div>';
+      '<p>This lesson has not been assigned to ' + (who ? 'your class (' + who.replace(/[<>&]/g, '') + ')' : 'your class') + '. Please use the link your teacher gave you for your class.</p>' +
+      '<button class="lia-btn" type="button" id="liaOut">Sign out</button></div>';
+    g.querySelector('#liaOut').addEventListener('click', signOut);
     document.body.appendChild(g);
   }
   function hubFilter() {      // on a folder menu: show only the lessons this student may open
