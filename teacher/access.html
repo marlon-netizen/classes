@@ -74,7 +74,7 @@ dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface)
   <div class="msg info" id="setupMsg" hidden></div>
   <div id="app" hidden>
     <div class="card">
-      <p style="margin:0 0 6px"><b>Which lessons does each grade &amp; class see?</b> Tick a box to show that lesson to every student whose <i>Grade</i> and <i>Class</i> match the row (as typed in Students &amp; codes).
+      <p style="margin:0 0 6px"><b>Which lessons does each grade &amp; class see?</b> Tick a box to show that lesson to every student whose <i>Grade</i> and <i>Class</i> match the row (as typed in Students &amp; codes; a student whose Class lists several subjects separated by “/” is in each of those rows).
       A lesson shows <span class="tag">everyone</span> until you un-tick a box for it; after that only the ticked rows see it. Students never see lessons that are not theirs, and cannot open them from a link either. Changes apply the next time the student opens a page.</p>
       <div class="msg err" id="aErr" hidden></div>
       <div class="gridwrap" style="margin-top:10px"><table class="mx" id="mx"><thead></thead><tbody></tbody></table></div>
@@ -115,7 +115,7 @@ function load(){
 }
 function groups(){
   var m={}; function add(g,c,n){ var k=gkey(g,c); if(!m[k]) m[k]={grade:String(g||'').trim(),cls:String(c||'').trim(),n:0}; m[k].n+=n; }
-  students.forEach(function(s){ add(s.grade,s.class_name,1); });
+  students.forEach(function(s){ String(s.class_name||'').split('/').forEach(function(c){ add(s.grade,c,1); }); });   // a student may list several subjects: Physics II / Pre-Calculus
   rows.forEach(function(r){ if(!isSent(r)) add(r.grade,r.class_name,0); });
   return Object.keys(m).map(function(k){return m[k];}).sort(function(a,b){ return (a.cls.localeCompare(b.cls))||(a.grade.localeCompare(b.grade,undefined,{numeric:true})); });
 }
