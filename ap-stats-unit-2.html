@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="lia-page" content="ap-stats-unit-2">
 <title>AP Statistics – Lessons 2.8–2.12 | Lincoln International Academy</title>
 <meta name="description" content="Interactive study page for AP Statistics Unit 2: random variables, probability distributions, binomial and normal distributions, sampling distributions and the Central Limit Theorem.">
 <style>
@@ -213,6 +214,160 @@ table.dtable.small td{text-align:center}
 .objectives li span{width:auto;min-width:42px;height:26px;border-radius:99px;padding:0 8px;font-size:.78rem}
 
 </style>
+<!--LIA-SUPABASE-START (managed by supabase/apply_to_pages.py – do not edit between the markers)-->
+<script>
+/*LIA-CONFIG*/window.LIA_CONFIG={url:'http://127.0.0.1:54400',anonKey:'eyJmock.mock.mock'};/*END-LIA-CONFIG*/
+</script>
+<style>
+.lia-locked body>*:not(#liaGate){visibility:hidden!important}
+#liaGate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg,#f3f0e9);font-family:inherit}
+#liaGate .lia-card{width:100%;max-width:420px;background:var(--surface,#fff);color:var(--ink,#1e2937);border:1px solid var(--line,#ddd);border-radius:14px;padding:28px 26px;box-shadow:0 10px 40px rgba(0,0,0,.18)}
+#liaGate .lia-brand{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--warm,#b4763a);font-weight:700}
+#liaGate h2{margin:.3em 0 .4em;font-size:1.6rem}
+#liaGate p{margin:0 0 1em;color:var(--muted,#5a6575)}
+#liaGate label{display:block;font-weight:600;margin-bottom:6px}
+#liaGate input{width:100%;font:inherit;font-size:1.3rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;padding:12px;border:2px solid var(--line,#ddd);border-radius:10px;background:var(--surface,#fff);color:var(--ink,#1e2937)}
+#liaGate input:focus{outline:3px solid color-mix(in srgb,var(--accent,#2b7a76) 55%,transparent);border-color:var(--accent,#2b7a76)}
+#liaGate .lia-btn{width:100%;margin-top:14px;font:inherit;font-weight:700;font-size:1.05rem;padding:12px;border-radius:10px;border:0;cursor:pointer;background:var(--primary,#1f3a5f);color:var(--primary-ink,#fff)}
+#liaGate .lia-btn[disabled]{opacity:.6;cursor:wait}
+#liaGate .lia-err{min-height:1.4em;margin-top:10px;color:var(--bad,#a94a3f);font-weight:600}
+#liaGate .lia-small{margin:10px 0 0;font-size:.85rem}
+.lia-user{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-size:.88rem;color:var(--muted,#5a6575)}
+.lia-user b{color:var(--ink,#1e2937)}
+.lia-user .lia-save{padding:2px 10px;border-radius:99px;background:var(--good-soft,#e1f1e8);color:var(--good,#2c7a57);font-weight:600}
+.lia-user .lia-save.busy{background:var(--blue-soft,#e6edf5);color:var(--primary,#1f3a5f)}
+.lia-user .lia-save.off{background:var(--warm-soft,#f6ebdb);color:var(--warm,#b4763a)}
+.lia-user button{font:inherit;font-size:.85rem;background:none;border:1px solid var(--line,#ddd);color:var(--primary,#1f3a5f);border-radius:8px;padding:3px 10px;cursor:pointer}
+.lia-user button:hover{background:var(--blue-soft,#e6edf5)}
+</style>
+<script>
+/* LiaSync – student sign-in with a code + progress saved to Supabase.
+   If LIA_CONFIG is not filled in, the page works exactly as before (progress in this browser only). */
+(function(){
+'use strict';
+var CFG=window.LIA_CONFIG||{};
+var LIVE=!!(CFG.url&&CFG.anonKey&&!/YOUR_SUPABASE/.test(CFG.url+CFG.anonKey));
+var PAGE=(document.querySelector('meta[name="lia-page"]')||{}).content||location.pathname.split('/').pop().replace(/\.html$/,'').replace(/[^a-z0-9-]/gi,'-').toLowerCase()||'page';
+var K_CODE='lia-student-code', K_NAME='lia-student-name';
+var base=LIVE?String(CFG.url).replace(/\/+$/,'')+'/rest/v1/rpc/':'';
+var student=null, code='', cur={state:{},dirty:false}, timer=null, retry=null, sum={solved:0,total:0}, inflight=false, status=null;
+function ls(k,v){ try{ if(v===undefined) return localStorage.getItem(k); if(v===null) localStorage.removeItem(k); else localStorage.setItem(k,v); }catch(e){} return null; }
+var cacheKey=function(){ return 'lia-cache:'+code+':'+PAGE; };
+
+function headers(){ var h={'Content-Type':'application/json','apikey':CFG.anonKey}; if(/^eyJ/.test(CFG.anonKey)) h.Authorization='Bearer '+CFG.anonKey; return h; }
+function rpc(fn,args,keep){
+  var ctl=window.AbortController?new AbortController():null, to=setTimeout(function(){ if(ctl) ctl.abort(); },15000);
+  return fetch(base+fn,{method:'POST',headers:headers(),body:JSON.stringify(args),keepalive:!!keep,signal:ctl?ctl.signal:undefined})
+    .then(function(r){ clearTimeout(to); if(!r.ok) throw new Error('http '+r.status); return r.json(); },function(e){ clearTimeout(to); throw e; });
+}
+function merge(a,b){
+  var o={},k,x,y; for(k in a) o[k]=a[k];
+  for(k in b){ x=o[k]; y=b[k];
+    if(x===undefined) o[k]=y;
+    else if(x&&y&&typeof x==='object'&&typeof y==='object') o[k]={done:!!(x.done||y.done),tries:Math.max(x.tries||0,y.tries||0)};
+    else if(typeof x==='number'&&typeof y==='number') o[k]=Math.max(x,y);
+  } return o;
+}
+function readCache(){ try{ return JSON.parse(ls(cacheKey())||'null'); }catch(e){ return null; } }
+function writeCache(){ ls(cacheKey(),JSON.stringify({state:cur.state,dirty:cur.dirty})); }
+
+/* ---------- status chip ---------- */
+function chip(){
+  var wrap=document.querySelector('.lessonbar .wrap')||document.body, el=document.getElementById('liaUser');
+  if(!el){ el=document.createElement('div'); el.id='liaUser'; el.className='lia-user'; wrap.appendChild(el);
+    el.innerHTML='<span>👤 <b></b></span><span class="lia-save" role="status" aria-live="polite">Saved ✓</span><button type="button">Sign out</button>';
+    el.querySelector('button').addEventListener('click',signOut);
+  }
+  el.querySelector('b').textContent=(student&&student.name)||'';
+  status=el.querySelector('.lia-save');
+}
+function setStatus(t,cls){ if(!status) return; status.textContent=t; status.className='lia-save'+(cls?' '+cls:''); }
+
+/* ---------- saving ---------- */
+function examplesDone(s){ var n=0,k; for(k in s) if(k.indexOf('ex_')===0) n++; return n; }
+function push(keep){
+  if(!LIVE||!code||!cur.dirty) return Promise.resolve();
+  if(inflight&&!keep) return Promise.resolve();
+  inflight=true; setStatus('Saving…','busy');
+  var snap=JSON.stringify(cur.state);
+  return rpc('lia_save_progress',{p_code:code,p_page:PAGE,p_state:cur.state,p_solved:sum.solved,p_total:sum.total,p_examples:examplesDone(cur.state)},keep)
+    .then(function(r){
+      inflight=false;
+      if(r&&r.ok){ if(JSON.stringify(cur.state)===snap){ cur.dirty=false; writeCache(); setStatus('Saved ✓'); } else { schedule(); } }
+      else if(r&&r.error==='invalid_code'){ setStatus('Code no longer valid','off'); ls(K_CODE,null); }
+      else { setStatus('Could not save – retrying','off'); armRetry(); }
+    },function(){ inflight=false; setStatus('Offline – will save when connected','off'); armRetry(); });
+}
+function schedule(){ clearTimeout(timer); timer=setTimeout(function(){ push(false); },700); }
+function armRetry(){ if(retry) return; retry=setInterval(function(){ if(!cur.dirty){ clearInterval(retry); retry=null; return; } push(false); },15000); }
+window.addEventListener('online',function(){ push(false); });
+document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden'){ clearTimeout(timer); push(true); } });
+window.addEventListener('pagehide',function(){ clearTimeout(timer); push(true); });
+
+/* ---------- sign-in ---------- */
+function signOut(){
+  if(!confirm('Sign out? Your progress is already saved to your account.')) return;
+  clearTimeout(timer); push(true).then(function(){ ls(K_CODE,null); ls(K_NAME,null); location.reload(); });
+  setTimeout(function(){ ls(K_CODE,null); ls(K_NAME,null); location.reload(); },1500);
+}
+function showGate(msg){
+  var g=document.getElementById('liaGate'); if(g) g.remove();
+  g=document.createElement('div'); g.id='liaGate';
+  g.innerHTML='<form class="lia-card" novalidate><div class="lia-brand">Lincoln International Academy</div><h2>Student sign-in</h2>'+
+    '<p>Type the access code your teacher gave you. Your progress is saved to your account, on any device.</p>'+
+    '<label for="liaCode">Access code</label><input id="liaCode" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" placeholder="XXXX-XXXX">'+
+    '<button class="lia-btn" type="submit">Sign in</button><div class="lia-err" role="alert"></div>'+
+    '<p class="lia-small">No code yet? Ask your teacher.</p></form>';
+  document.body.appendChild(g);
+  var f=g.querySelector('form'), i=g.querySelector('input'), e=g.querySelector('.lia-err'), b=g.querySelector('button');
+  if(msg) e.textContent=msg; setTimeout(function(){ i.focus(); },50);
+  return new Promise(function(res){
+    f.addEventListener('submit',function(ev){
+      ev.preventDefault(); var c=i.value.replace(/[^A-Za-z0-9]/g,'').toUpperCase();
+      if(c.length<4){ e.textContent='Please type your full code.'; return; }
+      b.disabled=true; e.textContent='';
+      rpc('lia_login',{p_code:c}).then(function(r){
+        if(r&&r.ok){ res({code:c,info:r}); }
+        else { b.disabled=false; e.textContent=r&&r.error==='too_many'?'Too many attempts. Please wait a few minutes and try again.':'That code was not recognised. Check it and try again.'; i.select(); }
+      },function(){ b.disabled=false; e.textContent='Cannot reach the server. Check your internet connection and try again.'; });
+    });
+  });
+}
+function finish(info){
+  student={name:info.name,grade:info.grade,class_name:info.class_name}; ls(K_CODE,code); ls(K_NAME,info.name);
+  var g=document.getElementById('liaGate'); if(g) g.remove();
+  document.documentElement.classList.remove('lia-locked'); chip();
+}
+function loadProgress(){
+  var c=readCache();
+  return rpc('lia_get_progress',{p_code:code,p_page:PAGE}).then(function(r){
+    var remote=(r&&r.ok&&r.state&&typeof r.state==='object')?r.state:{};
+    if(c&&c.dirty){ cur.state=merge(remote,c.state); cur.dirty=true; } else { cur.state=remote; cur.dirty=false; }
+    writeCache(); if(cur.dirty) push(false);
+  },function(){ cur.state=(c&&c.state)||{}; cur.dirty=!!(c&&c.dirty); setStatus('Offline – showing saved progress','off'); armRetry(); });
+}
+function begin(fn){
+  var saved=ls(K_CODE);
+  var tryCode=saved?rpc('lia_login',{p_code:saved}).then(function(r){ return r&&r.ok?{code:saved,info:r}:null; },function(){ var n=ls(K_NAME); return n?{code:saved,info:{name:n},offline:true}:null; }):Promise.resolve(null);
+  tryCode.then(function(got){ return got||showGate(saved?'Please sign in again.':''); })
+    .then(function(got){ code=got.code; finish(got.info); return loadProgress(); })
+    .then(function(){ fn(); });
+}
+
+window.LiaSync={
+  live:LIVE, page:PAGE,
+  start:function(fn){ if(!LIVE){ fn(); return; } document.documentElement.classList.add('lia-locked'); begin(fn); },
+  load:function(key){ if(!LIVE){ try{ return JSON.parse(localStorage.getItem(key))||{}; }catch(e){ return {}; } } return cur.state; },
+  save:function(key,state){
+    if(!LIVE){ try{ localStorage.setItem(key,JSON.stringify(state)); }catch(e){} return; }
+    cur.state=state; cur.dirty=true; writeCache(); setStatus('Saving…','busy'); schedule();
+  },
+  summary:function(solved,total){ sum.solved=solved; sum.total=total; }
+};
+if(LIVE) document.documentElement.classList.add('lia-locked');
+})();
+</script>
+<!--LIA-SUPABASE-END-->
 </head>
 <body>
 
@@ -583,14 +738,14 @@ table.dtable.small td{text-align:center}
 </footer>
 
 <script>
-(function(){
+LiaSync.start(function(){
 'use strict';
 const $  = (s,e=document)=>e.querySelector(s);
 const $$ = (s,e=document)=>[...e.querySelectorAll(s)];
 const KEY='lia-apstats-unit2-lessons-2-8-to-2-12';
 let state={};
-try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
-const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+state=LiaSync.load(KEY);
+const save=()=>LiaSync.save(KEY,state);
 
 /* ================= math ================= */
 function erfc(x){
@@ -1344,6 +1499,7 @@ let curSet='d';
 function setStats(sid){ const ps=P.filter(p=>p.set===sid); return {done:ps.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length,total:ps.length}; }
 function updateOverall(){
   const done=P.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length;
+  LiaSync.summary(done,P.length);
   $('#overallText').textContent=`${done} of ${P.length} practice problems solved`;
   $('#overallBar').style.width=(100*done/P.length)+'%';
   $$('#setPicker button').forEach(b=>{ const s=setStats(b.dataset.set); $('small',b).textContent=`${s.done}/${s.total}`; });
@@ -1449,8 +1605,7 @@ $('#resetAll').addEventListener('click',()=>{ if(confirm('Clear all saved progre
 buildPicker(); renderSet();
 const h=(location.hash||'').slice(1); if(['review','examples','practice'].includes(h)) showTab(h);
 window.LIA3={P,EX,parseNum,judge,Phi,PhiInv,bpdf,bcdf};
-})();
-
+});
 </script>
 </body>
 </html>

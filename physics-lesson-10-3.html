@@ -1,0 +1,1234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="lia-page" content="lesson-10-3">
+<title>Physics II – Lesson 10.3 | Lincoln International Academy</title>
+<meta name="description" content="Interactive study page for Lesson 10.3: The Second Law of Thermodynamics – heat-engine efficiency and entropy.">
+<style>
+:root{
+  --bg:#f3f0e9; --surface:#fffdf9; --surface-2:#f8f5ee; --ink:#1e2937; --muted:#5a6575;
+  --line:#ddd6c7; --primary:#1f3a5f; --primary-ink:#ffffff; --accent:#2b7a76; --accent-soft:#e1efed;
+  --blue-soft:#e6edf6; --warm:#b4763a; --warm-soft:#f6ebdb; --good:#2c7a57; --good-soft:#e1f1e8;
+  --bad:#a94a3f; --bad-soft:#f6e4e1; --hot:#c58a4d; --cold:#4f86a8; --work:#2b7a76;
+  --shadow:0 1px 2px rgba(30,41,55,.06),0 4px 14px rgba(30,41,55,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+    --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+    --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+    --bad:#e08a7d; --bad-soft:#331e1c; --hot:#c58a4d; --cold:#6aa3c7; --work:#58b5ae;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+  --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+  --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+  --bad:#e08a7d; --bad-soft:#331e1c; --hot:#c58a4d; --cold:#6aa3c7; --work:#58b5ae;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,h4{font-family:Georgia,"Times New Roman",serif;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:Georgia,serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:#d3b48a;margin-bottom:2px}
+.meta{display:flex;gap:26px;flex-wrap:wrap}
+.meta div{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#aab7ca}
+.meta b{display:block;font-size:1.05rem;text-transform:none;letter-spacing:0;color:#f3f0e9;font-weight:600}
+.lessonbar{background:var(--surface);border-bottom:1px solid var(--line)}
+.lessonbar .wrap{padding-top:14px;padding-bottom:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center}
+.lessonbar h1{font-size:clamp(1.15rem,2.6vw,1.45rem);margin:0}
+.lessonbar small{color:var(--muted)}
+.overall{display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--muted)}
+.bar{width:150px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+
+/* nav */
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:8px}
+nav.tabs button{appearance:none;border:0;background:none;font:inherit;font-weight:600;color:var(--muted);padding:10px 16px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;border-radius:8px 8px 0 0}
+nav.tabs button:hover{color:var(--ink);background:var(--surface-2)}
+nav.tabs button[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--warm)}
+:root[data-theme="dark"] nav.tabs button[aria-selected="true"]{color:var(--primary)}
+
+main{padding:26px 0 60px}
+section.panel{display:none}
+section.panel.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card>h3:first-child,.card>h2:first-child{margin-top:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.callout.blue{border-color:var(--primary);background:var(--blue-soft)}
+.callout b.t{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;color:var(--muted)}
+.law{font-family:Georgia,serif;font-size:1.15rem;font-style:italic}
+.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary)}
+.objectives{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.objectives li{display:flex;gap:12px;align-items:flex-start}
+.objectives li span{flex:none;width:26px;height:26px;border-radius:50%;background:var(--primary);color:var(--primary-ink);font-weight:700;font-size:.85rem;display:grid;place-items:center;margin-top:2px}
+
+/* math */
+.eq{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.2rem;text-align:center;padding:10px 6px;overflow-x:auto}
+.eq.big{font-size:1.35rem}
+.eq i,.math i{font-style:italic}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.15}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em .08em}
+.frac>span:last-child{padding:.08em .25em 0}
+sub{font-size:.7em;line-height:0}
+.math{font-family:"Cambria Math",Cambria,Georgia,serif;white-space:nowrap}
+
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left}
+th{background:var(--surface-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+
+/* controls */
+button.btn,.btn{appearance:none;font:inherit;font-weight:600;font-size:.92rem;border-radius:8px;padding:8px 16px;cursor:pointer;border:1px solid var(--primary);background:var(--primary);color:var(--primary-ink);transition:filter .15s,transform .05s}
+button.btn:hover{filter:brightness(1.12)} button.btn:active{transform:translateY(1px)}
+button.btn.ghost{background:transparent;color:var(--primary)}
+button.btn.ghost:hover{background:var(--blue-soft);filter:none}
+button.btn[disabled]{opacity:.45;cursor:not-allowed}
+:root[data-theme="dark"] button.btn.ghost{color:var(--primary)}
+input[type=text]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:150px}
+input[type=text]:focus,button:focus-visible,input[type=range]:focus-visible,summary:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:1px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.sliderrow{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:center;margin:8px 0}
+.sliderrow output{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+@media (max-width:560px){.sliderrow{grid-template-columns:1fr 80px}.sliderrow label{grid-column:1/-1}}
+
+details{border:1px solid var(--line);border-radius:8px;padding:2px 14px;margin:10px 0;background:var(--surface-2)}
+summary{cursor:pointer;font-weight:600;padding:8px 0}
+details[open]>summary{margin-bottom:4px}
+
+/* readouts */
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+.readout{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.readout small{display:block;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
+.readout b{font-size:1.4rem;font-family:Georgia,serif;font-variant-numeric:tabular-nums}
+.status{padding:9px 14px;border-radius:8px;font-weight:600;font-size:.92rem;margin-top:8px;background:var(--good-soft);color:var(--good)}
+.status.warn{background:var(--warm-soft);color:var(--warm)}
+.status.bad{background:var(--bad-soft);color:var(--bad)}
+svg.flow{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+svg.flow text{fill:var(--ink);font:600 12px system-ui,sans-serif}
+svg.flow .res-t{fill:#fff}
+.effbar{position:relative;height:16px;background:var(--line);border-radius:99px;margin:26px 0 30px}
+.effbar i.fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--accent);transition:width .15s}
+.effbar span.tick{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);opacity:.55}
+.effbar span.tick em{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-style:normal;font-size:.68rem;color:var(--muted);white-space:nowrap}
+.effbar span.tick.hi em{top:-20px}
+
+canvas{width:100%;max-width:520px;height:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);display:block}
+.meter{height:14px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0}
+.meter i{display:block;height:100%;background:var(--warm);width:0;transition:width .2s}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+
+/* dice */
+.hist{display:flex;align-items:flex-end;gap:4px;height:170px;border-bottom:2px solid var(--line);padding:0 2px;margin-top:12px}
+.hist div{flex:1;position:relative;background:var(--accent);border-radius:4px 4px 0 0;min-height:1px;transition:height .25s}
+.hist div b{position:absolute;top:-19px;left:0;right:0;text-align:center;font-size:.7rem;color:var(--muted);font-weight:600}
+.hist div.ghost{background:transparent;border:1.5px dashed var(--warm);border-bottom:0}
+.histx{display:flex;gap:4px;font-size:.78rem;color:var(--muted);text-align:center;padding:0 2px}
+.histx span{flex:1}
+.dice{font-size:2.2rem;letter-spacing:.2em;min-height:1.4em}
+
+/* stepper */
+.example{margin-bottom:22px}
+.example header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px}
+.problem-box{background:var(--blue-soft);border-radius:10px;padding:14px 16px;margin:10px 0 16px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.step{display:none;border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden;background:var(--surface)}
+.step.show{display:block;animation:fade .3s}
+.step>h4{margin:0;padding:9px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;font-family:system-ui,sans-serif;text-transform:uppercase;letter-spacing:.09em;font-size:.82rem;color:var(--primary)}
+.step>h4 .n{width:24px;height:24px;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-size:.8rem;letter-spacing:0}
+.step .body{padding:12px 16px}
+.step .ask{border-top:1px dashed var(--line);padding:12px 16px;background:var(--warm-soft)}
+.step .ask p{margin:0 0 8px;font-weight:600}
+.opt{display:block;width:100%;text-align:left;font:inherit;padding:9px 12px;margin:6px 0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--good);background:var(--good-soft);color:var(--ink)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin-top:8px;font-size:.93rem}
+.fb.ok{color:var(--good)} .fb.no{color:var(--bad)} .fb.near{color:var(--warm)}
+.fb b{font-weight:700}
+.dots{display:flex;gap:6px;margin:6px 0 14px}
+.dots i{width:28px;height:6px;border-radius:99px;background:var(--line)} .dots i.on{background:var(--accent)}
+.givenlist{display:flex;gap:10px 28px;flex-wrap:wrap;margin:4px 0}
+.givenlist span{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.1rem}
+.unk{color:var(--bad);font-style:italic}
+.boxed{display:inline-block;border:1.5px solid var(--bad);padding:2px 10px;border-radius:4px}
+
+/* practice */
+.setpicker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.setpicker button{appearance:none;font:inherit;font-weight:600;background:var(--surface);border:1px solid var(--line);color:var(--ink);padding:9px 14px;border-radius:99px;cursor:pointer}
+.setpicker button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.setpicker button small{opacity:.75;font-weight:500;margin-left:4px}
+.prob{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 20px;margin-bottom:14px;box-shadow:var(--shadow);position:relative}
+.prob.done{border-color:var(--good)}
+.prob .num{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;display:flex;justify-content:space-between}
+.prob .num .badge{color:var(--good)}
+.partrow{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin:8px 0}
+.partrow label{min-width:210px;font-size:.93rem}
+.partrow .u{color:var(--muted);min-width:34px}
+.partrow .ptag{font-weight:700}
+.prob .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.hintbox,.solbox{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.95rem}
+.hintbox{background:var(--warm-soft)} .solbox{background:var(--blue-soft)}
+.solbox ol{margin:6px 0 0;padding-left:20px}
+.pnote{color:var(--muted);font-size:.86rem}
+.sethead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.sethead p{margin:0;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.linkbtn{background:none;border:0;color:var(--accent);font:inherit;text-decoration:underline;cursor:pointer;padding:0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+<!--LIA-SUPABASE-START (managed by supabase/apply_to_pages.py – do not edit between the markers)-->
+<script>
+/*LIA-CONFIG*/window.LIA_CONFIG={url:'http://127.0.0.1:54400',anonKey:'eyJmock.mock.mock'};/*END-LIA-CONFIG*/
+</script>
+<style>
+.lia-locked body>*:not(#liaGate){visibility:hidden!important}
+#liaGate{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--bg,#f3f0e9);font-family:inherit}
+#liaGate .lia-card{width:100%;max-width:420px;background:var(--surface,#fff);color:var(--ink,#1e2937);border:1px solid var(--line,#ddd);border-radius:14px;padding:28px 26px;box-shadow:0 10px 40px rgba(0,0,0,.18)}
+#liaGate .lia-brand{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:var(--warm,#b4763a);font-weight:700}
+#liaGate h2{margin:.3em 0 .4em;font-size:1.6rem}
+#liaGate p{margin:0 0 1em;color:var(--muted,#5a6575)}
+#liaGate label{display:block;font-weight:600;margin-bottom:6px}
+#liaGate input{width:100%;font:inherit;font-size:1.3rem;letter-spacing:.2em;text-transform:uppercase;text-align:center;padding:12px;border:2px solid var(--line,#ddd);border-radius:10px;background:var(--surface,#fff);color:var(--ink,#1e2937)}
+#liaGate input:focus{outline:3px solid color-mix(in srgb,var(--accent,#2b7a76) 55%,transparent);border-color:var(--accent,#2b7a76)}
+#liaGate .lia-btn{width:100%;margin-top:14px;font:inherit;font-weight:700;font-size:1.05rem;padding:12px;border-radius:10px;border:0;cursor:pointer;background:var(--primary,#1f3a5f);color:var(--primary-ink,#fff)}
+#liaGate .lia-btn[disabled]{opacity:.6;cursor:wait}
+#liaGate .lia-err{min-height:1.4em;margin-top:10px;color:var(--bad,#a94a3f);font-weight:600}
+#liaGate .lia-small{margin:10px 0 0;font-size:.85rem}
+.lia-user{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;font-size:.88rem;color:var(--muted,#5a6575)}
+.lia-user b{color:var(--ink,#1e2937)}
+.lia-user .lia-save{padding:2px 10px;border-radius:99px;background:var(--good-soft,#e1f1e8);color:var(--good,#2c7a57);font-weight:600}
+.lia-user .lia-save.busy{background:var(--blue-soft,#e6edf5);color:var(--primary,#1f3a5f)}
+.lia-user .lia-save.off{background:var(--warm-soft,#f6ebdb);color:var(--warm,#b4763a)}
+.lia-user button{font:inherit;font-size:.85rem;background:none;border:1px solid var(--line,#ddd);color:var(--primary,#1f3a5f);border-radius:8px;padding:3px 10px;cursor:pointer}
+.lia-user button:hover{background:var(--blue-soft,#e6edf5)}
+</style>
+<script>
+/* LiaSync – student sign-in with a code + progress saved to Supabase.
+   If LIA_CONFIG is not filled in, the page works exactly as before (progress in this browser only). */
+(function(){
+'use strict';
+var CFG=window.LIA_CONFIG||{};
+var LIVE=!!(CFG.url&&CFG.anonKey&&!/YOUR_SUPABASE/.test(CFG.url+CFG.anonKey));
+var PAGE=(document.querySelector('meta[name="lia-page"]')||{}).content||location.pathname.split('/').pop().replace(/\.html$/,'').replace(/[^a-z0-9-]/gi,'-').toLowerCase()||'page';
+var K_CODE='lia-student-code', K_NAME='lia-student-name';
+var base=LIVE?String(CFG.url).replace(/\/+$/,'')+'/rest/v1/rpc/':'';
+var student=null, code='', cur={state:{},dirty:false}, timer=null, retry=null, sum={solved:0,total:0}, inflight=false, status=null;
+function ls(k,v){ try{ if(v===undefined) return localStorage.getItem(k); if(v===null) localStorage.removeItem(k); else localStorage.setItem(k,v); }catch(e){} return null; }
+var cacheKey=function(){ return 'lia-cache:'+code+':'+PAGE; };
+
+function headers(){ var h={'Content-Type':'application/json','apikey':CFG.anonKey}; if(/^eyJ/.test(CFG.anonKey)) h.Authorization='Bearer '+CFG.anonKey; return h; }
+function rpc(fn,args,keep){
+  var ctl=window.AbortController?new AbortController():null, to=setTimeout(function(){ if(ctl) ctl.abort(); },15000);
+  return fetch(base+fn,{method:'POST',headers:headers(),body:JSON.stringify(args),keepalive:!!keep,signal:ctl?ctl.signal:undefined})
+    .then(function(r){ clearTimeout(to); if(!r.ok) throw new Error('http '+r.status); return r.json(); },function(e){ clearTimeout(to); throw e; });
+}
+function merge(a,b){
+  var o={},k,x,y; for(k in a) o[k]=a[k];
+  for(k in b){ x=o[k]; y=b[k];
+    if(x===undefined) o[k]=y;
+    else if(x&&y&&typeof x==='object'&&typeof y==='object') o[k]={done:!!(x.done||y.done),tries:Math.max(x.tries||0,y.tries||0)};
+    else if(typeof x==='number'&&typeof y==='number') o[k]=Math.max(x,y);
+  } return o;
+}
+function readCache(){ try{ return JSON.parse(ls(cacheKey())||'null'); }catch(e){ return null; } }
+function writeCache(){ ls(cacheKey(),JSON.stringify({state:cur.state,dirty:cur.dirty})); }
+
+/* ---------- status chip ---------- */
+function chip(){
+  var wrap=document.querySelector('.lessonbar .wrap')||document.body, el=document.getElementById('liaUser');
+  if(!el){ el=document.createElement('div'); el.id='liaUser'; el.className='lia-user'; wrap.appendChild(el);
+    el.innerHTML='<span>👤 <b></b></span><span class="lia-save" role="status" aria-live="polite">Saved ✓</span><button type="button">Sign out</button>';
+    el.querySelector('button').addEventListener('click',signOut);
+  }
+  el.querySelector('b').textContent=(student&&student.name)||'';
+  status=el.querySelector('.lia-save');
+}
+function setStatus(t,cls){ if(!status) return; status.textContent=t; status.className='lia-save'+(cls?' '+cls:''); }
+
+/* ---------- saving ---------- */
+function examplesDone(s){ var n=0,k; for(k in s) if(k.indexOf('ex_')===0) n++; return n; }
+function push(keep){
+  if(!LIVE||!code||!cur.dirty) return Promise.resolve();
+  if(inflight&&!keep) return Promise.resolve();
+  inflight=true; setStatus('Saving…','busy');
+  var snap=JSON.stringify(cur.state);
+  return rpc('lia_save_progress',{p_code:code,p_page:PAGE,p_state:cur.state,p_solved:sum.solved,p_total:sum.total,p_examples:examplesDone(cur.state)},keep)
+    .then(function(r){
+      inflight=false;
+      if(r&&r.ok){ if(JSON.stringify(cur.state)===snap){ cur.dirty=false; writeCache(); setStatus('Saved ✓'); } else { schedule(); } }
+      else if(r&&r.error==='invalid_code'){ setStatus('Code no longer valid','off'); ls(K_CODE,null); }
+      else { setStatus('Could not save – retrying','off'); armRetry(); }
+    },function(){ inflight=false; setStatus('Offline – will save when connected','off'); armRetry(); });
+}
+function schedule(){ clearTimeout(timer); timer=setTimeout(function(){ push(false); },700); }
+function armRetry(){ if(retry) return; retry=setInterval(function(){ if(!cur.dirty){ clearInterval(retry); retry=null; return; } push(false); },15000); }
+window.addEventListener('online',function(){ push(false); });
+document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden'){ clearTimeout(timer); push(true); } });
+window.addEventListener('pagehide',function(){ clearTimeout(timer); push(true); });
+
+/* ---------- sign-in ---------- */
+function signOut(){
+  if(!confirm('Sign out? Your progress is already saved to your account.')) return;
+  clearTimeout(timer); push(true).then(function(){ ls(K_CODE,null); ls(K_NAME,null); location.reload(); });
+  setTimeout(function(){ ls(K_CODE,null); ls(K_NAME,null); location.reload(); },1500);
+}
+function showGate(msg){
+  var g=document.getElementById('liaGate'); if(g) g.remove();
+  g=document.createElement('div'); g.id='liaGate';
+  g.innerHTML='<form class="lia-card" novalidate><div class="lia-brand">Lincoln International Academy</div><h2>Student sign-in</h2>'+
+    '<p>Type the access code your teacher gave you. Your progress is saved to your account, on any device.</p>'+
+    '<label for="liaCode">Access code</label><input id="liaCode" autocomplete="off" autocapitalize="characters" spellcheck="false" maxlength="24" placeholder="XXXX-XXXX">'+
+    '<button class="lia-btn" type="submit">Sign in</button><div class="lia-err" role="alert"></div>'+
+    '<p class="lia-small">No code yet? Ask your teacher.</p></form>';
+  document.body.appendChild(g);
+  var f=g.querySelector('form'), i=g.querySelector('input'), e=g.querySelector('.lia-err'), b=g.querySelector('button');
+  if(msg) e.textContent=msg; setTimeout(function(){ i.focus(); },50);
+  return new Promise(function(res){
+    f.addEventListener('submit',function(ev){
+      ev.preventDefault(); var c=i.value.replace(/[^A-Za-z0-9]/g,'').toUpperCase();
+      if(c.length<4){ e.textContent='Please type your full code.'; return; }
+      b.disabled=true; e.textContent='';
+      rpc('lia_login',{p_code:c}).then(function(r){
+        if(r&&r.ok){ res({code:c,info:r}); }
+        else { b.disabled=false; e.textContent=r&&r.error==='too_many'?'Too many attempts. Please wait a few minutes and try again.':'That code was not recognised. Check it and try again.'; i.select(); }
+      },function(){ b.disabled=false; e.textContent='Cannot reach the server. Check your internet connection and try again.'; });
+    });
+  });
+}
+function finish(info){
+  student={name:info.name,grade:info.grade,class_name:info.class_name}; ls(K_CODE,code); ls(K_NAME,info.name);
+  var g=document.getElementById('liaGate'); if(g) g.remove();
+  document.documentElement.classList.remove('lia-locked'); chip();
+}
+function loadProgress(){
+  var c=readCache();
+  return rpc('lia_get_progress',{p_code:code,p_page:PAGE}).then(function(r){
+    var remote=(r&&r.ok&&r.state&&typeof r.state==='object')?r.state:{};
+    if(c&&c.dirty){ cur.state=merge(remote,c.state); cur.dirty=true; } else { cur.state=remote; cur.dirty=false; }
+    writeCache(); if(cur.dirty) push(false);
+  },function(){ cur.state=(c&&c.state)||{}; cur.dirty=!!(c&&c.dirty); setStatus('Offline – showing saved progress','off'); armRetry(); });
+}
+function begin(fn){
+  var saved=ls(K_CODE);
+  var tryCode=saved?rpc('lia_login',{p_code:saved}).then(function(r){ return r&&r.ok?{code:saved,info:r}:null; },function(){ var n=ls(K_NAME); return n?{code:saved,info:{name:n},offline:true}:null; }):Promise.resolve(null);
+  tryCode.then(function(got){ return got||showGate(saved?'Please sign in again.':''); })
+    .then(function(got){ code=got.code; finish(got.info); return loadProgress(); })
+    .then(function(){ fn(); });
+}
+
+window.LiaSync={
+  live:LIVE, page:PAGE,
+  start:function(fn){ if(!LIVE){ fn(); return; } document.documentElement.classList.add('lia-locked'); begin(fn); },
+  load:function(key){ if(!LIVE){ try{ return JSON.parse(localStorage.getItem(key))||{}; }catch(e){ return {}; } } return cur.state; },
+  save:function(key,state){
+    if(!LIVE){ try{ localStorage.setItem(key,JSON.stringify(state)); }catch(e){} return; }
+    cur.state=state; cur.dirty=true; writeCache(); setStatus('Saving…','busy'); schedule();
+  },
+  summary:function(solved,total){ sum.solved=solved; sum.total=total; }
+};
+if(LIVE) document.documentElement.classList.add('lia-locked');
+})();
+</script>
+<!--LIA-SUPABASE-END-->
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Student Learning Page</div>
+      <div class="school">Lincoln International Academy</div>
+    </div>
+    <div class="meta">
+      <div>Class<b>Physics II</b></div>
+      <div>Teacher<b>Eduardo Vásquez</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="lessonbar">
+  <div class="wrap">
+    <div>
+      <h1>Lesson 10.3 · The Second Law of Thermodynamics</h1>
+      <small>Chapter 10 · Thermodynamics — heat-engine efficiency &amp; entropy · <a href="physics-lesson-2-2.html">Go to Lesson 2.2 · Acceleration →</a></small>
+    </div>
+    <div class="overall" aria-live="polite">
+      <span id="overallText">0 of 0 problems solved</span>
+      <div class="bar"><i id="overallBar"></i></div>
+    </div>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="Lesson sections">
+  <div class="wrap" role="tablist">
+    <button role="tab" id="t-review" data-tab="review" aria-selected="true">1 · Review</button>
+    <button role="tab" id="t-examples" data-tab="examples" aria-selected="false">2 · Worked Examples</button>
+    <button role="tab" id="t-practice" data-tab="practice" aria-selected="false">3 · Practice</button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===================== REVIEW ===================== -->
+<section class="panel active" id="review" aria-labelledby="t-review">
+
+  <div class="card">
+    <h2>What you should be able to do</h2>
+    <ul class="objectives">
+      <li><span>1</span><div>Recognize why the second law of thermodynamics requires <b>two bodies at different temperatures</b> for work to be done.</div></li>
+      <li><span>2</span><div><b>Calculate the efficiency</b> of a heat engine.</div></li>
+      <li><span>3</span><div>Relate the <b>disorder</b> of a system (entropy) to its ability to do work or transfer energy as heat.</div></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <span class="pill">Part A</span>
+    <h2>Efficiency of heat engines</h2>
+    <p>A heat engine absorbs energy as heat from a high-temperature body (<i>Q<sub>h</sub></i>), does work on the environment (<i>W</i>), and gives up the rest to a low-temperature body (<i>Q<sub>c</sub></i>). By the first law of thermodynamics, the work per cycle is the difference between heat in and heat out:</p>
+    <div class="eq big"><i>W</i><sub>net</sub> = <i>Q</i><sub>net</sub> = <i>Q</i><sub>h</sub> − <i>Q</i><sub>c</sub></div>
+
+    <div class="callout warm">
+      <b class="t">Second law of thermodynamics</b>
+      <span class="law">No cyclic process that converts heat entirely into work is possible.</span>
+      <div style="margin-top:6px">So <i>W</i> can never equal <i>Q<sub>h</sub></i> in a cycle: some energy must always be expelled to the surroundings, <i>Q<sub>c</sub></i> &gt; 0.</div>
+    </div>
+
+    <details>
+      <summary>Why doesn't the first law already forbid <i>Q<sub>c</sub></i> = 0?</summary>
+      <p>The first law only says energy is <em>conserved</em>: what goes in must come out as work or heat. An engine with <i>Q<sub>c</sub></i> = 0 would conserve energy perfectly. The requirement to expel energy at a lower temperature is a separate, additional law — the second law.</p>
+    </details>
+
+    <h3>Efficiency (<i>eff</i>)</h3>
+    <p>Efficiency compares the useful energy taken out of a process (work) to the total energy put in (heat from the hot body):</p>
+    <div class="eq big">
+      <i>eff</i> =
+      <span class="frac"><span><i>W</i><sub>net</sub></span><span><i>Q</i><sub>h</sub></span></span> =
+      <span class="frac"><span><i>Q</i><sub>h</sub> − <i>Q</i><sub>c</sub></span><span><i>Q</i><sub>h</sub></span></span> =
+      1 − <span class="frac"><span><i>Q</i><sub>c</sub></span><span><i>Q</i><sub>h</sub></span></span>
+    </div>
+    <ul>
+      <li>Efficiency is <b>unitless</b>; use only the <em>magnitudes</em> of the energies.</li>
+      <li><i>eff</i> = 1 (100 %) would require <i>Q<sub>c</sub></i> = 0 — impossible. <b>Every real engine has <i>eff</i> &lt; 1.</b></li>
+      <li>To raise efficiency, increase <i>Q<sub>h</sub></i> or reduce <i>Q<sub>c</sub></i>, making <i>Q<sub>c</sub></i>/<i>Q<sub>h</sub></i> smaller.</li>
+    </ul>
+
+    <h4>Your equation toolkit (rearranged forms)</h4>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>You know…</th><th>You want…</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr><td><i>Q<sub>h</sub></i>, <i>Q<sub>c</sub></i></td><td><i>eff</i></td><td class="math"><i>eff</i> = 1 − <i>Q<sub>c</sub></i>/<i>Q<sub>h</sub></i></td></tr>
+        <tr><td><i>W</i>, <i>Q<sub>h</sub></i></td><td><i>eff</i></td><td class="math"><i>eff</i> = <i>W</i>/<i>Q<sub>h</sub></i></td></tr>
+        <tr><td><i>eff</i>, <i>Q<sub>h</sub></i></td><td><i>W</i></td><td class="math"><i>W</i> = <i>eff</i> · <i>Q<sub>h</sub></i></td></tr>
+        <tr><td><i>eff</i>, <i>W</i></td><td><i>Q<sub>h</sub></i></td><td class="math"><i>Q<sub>h</sub></i> = <i>W</i>/<i>eff</i></td></tr>
+        <tr><td><i>eff</i>, <i>Q<sub>h</sub></i></td><td><i>Q<sub>c</sub></i></td><td class="math"><i>Q<sub>c</sub></i> = <i>Q<sub>h</sub></i>(1 − <i>eff</i>)</td></tr>
+        <tr><td><i>eff</i>, <i>Q<sub>c</sub></i></td><td><i>Q<sub>h</sub></i></td><td class="math"><i>Q<sub>h</sub></i> = <i>Q<sub>c</sub></i>/(1 − <i>eff</i>)</td></tr>
+        <tr><td>Power <i>P</i>, time <i>t</i></td><td><i>W</i></td><td class="math"><i>W</i> = <i>P</i> · <i>t</i> &nbsp;(<i>t</i> in seconds)</td></tr>
+        <tr><td>Lifting mass <i>m</i> to height <i>h</i></td><td><i>W</i></td><td class="math"><i>W</i> = <i>m g h</i></td></tr>
+      </tbody>
+    </table>
+    </div>
+
+    <h4 style="margin-top:20px">Typical efficiencies of engines</h4>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Engine type</th><th class="num">Calculated maximum</th><th class="num">Measured</th></tr></thead>
+      <tbody>
+        <tr><td>Steam engine</td><td class="num">0.29</td><td class="num">0.17</td></tr>
+        <tr><td>Steam turbine</td><td class="num">0.40</td><td class="num">0.30</td></tr>
+        <tr><td>Gasoline engine</td><td class="num">0.60</td><td class="num">0.25</td></tr>
+        <tr><td>Diesel engine</td><td class="num">0.56</td><td class="num">0.35</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="pnote" style="margin-top:8px">Measured values are lower than calculated maximums because friction, thermal conduction, and the inertia of moving parts hinder real engines.</p>
+  </div>
+
+  <div class="card" id="explorer">
+    <span class="pill">Try it</span>
+    <h3>Heat-engine explorer</h3>
+    <p>Set how much energy the engine absorbs and how much it exhausts. Watch the work and the efficiency respond. Can you make the engine 100 % efficient?</p>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="exQh">Energy in, <i>Q<sub>h</sub></i></label><input id="exQh" type="range" min="100" max="1000" step="10" value="500"><output id="exQhO"></output></div>
+        <div class="sliderrow"><label for="exQc">Energy out, <i>Q<sub>c</sub></i></label><input id="exQc" type="range" min="0" max="500" step="5" value="300"><output id="exQcO"></output></div>
+        <div class="readouts">
+          <div class="readout"><small>Work, W</small><b id="exW">—</b></div>
+          <div class="readout"><small>Efficiency</small><b id="exEff">—</b></div>
+          <div class="readout"><small>Q<sub>c</sub> / Q<sub>h</sub></small><b id="exRatio">—</b></div>
+        </div>
+        <div class="effbar" id="exBar" aria-hidden="true"><i class="fill"></i></div>
+        <div class="status" id="exStatus" aria-live="polite"></div>
+        <p class="pnote" style="margin-top:12px">Tick marks show the <em>measured</em> efficiencies of real engines (steam 0.17, steam turbine 0.30, gasoline 0.25, diesel 0.35).</p>
+      </div>
+      <div id="exSvg"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="pill">Part B</span>
+    <h2>Entropy</h2>
+    <p>Shuffle a deck of cards: it's very unlikely they land sorted by suit and number. There is only a few ways to make the highly ordered arrangement, but more than <b>8 × 10<sup>67</sup></b> ways to arrange 52 cards. Systems left to themselves drift toward the arrangement that can happen in the most ways.</p>
+    <div class="callout blue">
+      <b class="t">Key term</b>
+      <b>Entropy</b> — a measure of the randomness or disorder of a system. The greater the entropy, the greater the disorder. The entropy of a system tends to <em>increase</em>; once at maximum entropy, it tends to stay there.
+    </div>
+
+    <h3>Greater disorder means less energy available to do work</h3>
+    <p>If every gas particle in a cylinder moved toward the piston in an orderly way, all of the internal energy could do work. That is extremely improbable: the particles move in every direction and collide with the walls and each other, so not all of the energy is available for useful work.</p>
+
+    <div class="grid2">
+      <div>
+        <h4>Gas expansion simulator</h4>
+        <canvas id="gasCanvas" width="520" height="260" aria-label="Particles in a box, starting on the left side"></canvas>
+        <div class="row">
+          <button class="btn" id="gasGo">Remove partition</button>
+          <button class="btn ghost" id="gasReset">Reset</button>
+        </div>
+        <div class="pnote">Disorder (entropy) of the arrangement</div>
+        <div class="meter"><i id="gasMeter"></i></div>
+        <div class="pnote" id="gasNote">Particles start packed in the left chamber — a highly ordered, low-entropy state.</div>
+      </div>
+      <div>
+        <h4>What to notice</h4>
+        <ul>
+          <li>Nobody "pushes" the particles to spread out. There are simply far more ways to be spread out than packed in the corner.</li>
+          <li>Wait a while: the particles never spontaneously return to the left chamber. That is the <b>arrow of entropy</b>.</li>
+          <li>Energy is still conserved, but the ordered "all-moving-the-same-way" motion needed for work is gone.</li>
+        </ul>
+        <div class="callout warm">
+          <b class="t">Second law, entropy version</b>
+          <span class="law">The entropy of the universe increases in all natural processes.</span>
+        </div>
+      </div>
+    </div>
+
+    <h3>Entropy can decrease locally — if it increases more elsewhere</h3>
+    <p><b>Refrigerator:</b> water freezing into ice loses entropy (a small decrease), but the refrigerator exhausts heat into the room air, which gains <em>more</em> entropy (a large increase). Net result: total entropy goes up.</p>
+    <div class="callout"><b class="t">Did you know?</b>Living things build complex, orderly structures (cells, tissues) — a local entropy decrease. It works because so much energy comes from the Sun that the total entropy of Earth, the Sun, and space still increases.</div>
+  </div>
+
+  <div class="card" id="dicelab">
+    <span class="pill">Quick Lab (virtual)</span>
+    <h3>Entropy &amp; probability: roll the dice</h3>
+    <p>Each sum can be made in a different number of ways. Sums that can happen in <em>many</em> ways are the "disordered" outcomes — like high-entropy states, they turn up most often.</p>
+    <div class="row">
+      <label><input type="radio" name="nd" value="2" checked> Two dice</label>
+      <label><input type="radio" name="nd" value="3"> Three dice</label>
+      <span style="flex:1"></span>
+      <button class="btn" id="roll1">Roll once</button>
+      <button class="btn" id="roll100">Roll 100×</button>
+      <button class="btn ghost" id="rollReset">Reset</button>
+    </div>
+    <div class="dice" id="diceFace" aria-live="polite">⚀ ⚀</div>
+    <div class="pnote" id="diceInfo">Rolls: 0. Dashed outlines show how many rolls each sum would get if the dice were rolled forever.</div>
+    <div class="hist" id="hist"></div>
+    <div class="histx" id="histx"></div>
+    <details>
+      <summary>Show the number of ways for each sum</summary>
+      <div class="tablewrap"><table id="waysTable"></table></div>
+    </details>
+    <p class="pnote" style="margin-top:10px">Question to answer in your notebook: which sum is most probable with two dice? With three dice? How many ways out of the total?</p>
+  </div>
+
+  <div class="card">
+    <h3>Real-world connection · Deep-sea air conditioning</h3>
+    <p>Systems in Hawaii pump frigid water from half a mile down the ocean to cool buildings, using a heat exchanger instead of energy-hungry compressors. Because heat naturally flows from the building's warm water to the very cold sea water, only pumps are needed — roughly <b>10 %</b> of the electricity of conventional systems. A large temperature difference between two bodies is what makes this transfer happen on its own.</p>
+    <p class="pnote">Ready to apply it? Go to <button class="linkbtn" data-goto="examples">Worked Examples</button>, then <button class="linkbtn" data-goto="practice">Practice</button>.</p>
+  </div>
+
+  <div class="card">
+    <h3>Problem-solving strategy used on this page</h3>
+    <div class="grid2">
+      <ol>
+        <li><b>Analyze</b> — list what is given and what is unknown; sketch the energy flow.</li>
+        <li><b>Plan</b> — choose the efficiency equation that contains your unknown.</li>
+      </ol>
+      <ol start="3">
+        <li><b>Solve</b> — substitute values (convert units first!) and calculate.</li>
+        <li><b>Check</b> — Is <i>eff</i> &lt; 1? Is <i>W</i> &lt; <i>Q<sub>h</sub></i>? Is <i>Q<sub>c</sub></i> &gt; 0?</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXAMPLES ===================== -->
+<section class="panel" id="examples" aria-labelledby="t-examples">
+  <div class="card">
+    <h2>Step-by-step worked examples</h2>
+    <p>Each example follows <b>Analyze → Plan → Solve → Check</b>. Press <em>Next step</em> to reveal the solution one step at a time. At some steps you'll answer a quick question first — that's where the thinking happens.</p>
+  </div>
+  <div id="exampleList"></div>
+</section>
+
+<!-- ===================== PRACTICE ===================== -->
+<section class="panel" id="practice" aria-labelledby="t-practice">
+  <div class="card">
+    <h2>Practice on your own</h2>
+    <p>Type your answer and press <b>Check</b> (or Enter) for immediate feedback. Stuck? Use <b>Hint</b>. After two tries you can open the full <b>Solution</b>. Use <i>g</i> = 9.8 m/s². You may write answers like <span class="math">0.25</span>, <span class="math">25%</span>, <span class="math">9.35e8</span> or <span class="math">9.35 x 10^8</span>; answers within a small rounding tolerance are accepted.</p>
+  </div>
+  <div class="setpicker" id="setPicker" role="group" aria-label="Problem sets"></div>
+  <div id="problemList"></div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Lincoln International Academy · Physics II · Mr. Eduardo Vásquez<br>Problems adapted from <i>Holt McDougal Physics</i>, Chapter 10 §3 and Sample Problem Sets I &amp; II (© Houghton Mifflin Harcourt).</div>
+    <div>Your progress is saved in this browser only. <button class="linkbtn" id="resetAll">Reset my progress</button></div>
+  </div>
+</footer>
+
+<script>
+LiaSync.start(function(){
+'use strict';
+const $  = (s,e=document)=>e.querySelector(s);
+const $$ = (s,e=document)=>[...e.querySelectorAll(s)];
+const KEY='lia-physics2-lesson-10-3';
+let state={};
+state=LiaSync.load(KEY);
+const save=()=>LiaSync.save(KEY,state);
+
+/* ---------- helpers ---------- */
+const F=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const Qh='<i>Q</i><sub>h</sub>', Qc='<i>Q</i><sub>c</sub>', Wn='<i>W</i><sub>net</sub>';
+
+function parseNum(raw){
+  if(raw==null) return NaN;
+  let s=String(raw).trim().toLowerCase().replace(/,/g,'').replace(/\s+/g,'');
+  if(!s) return NaN;
+  let pct=false;
+  if(s.endsWith('%')){ pct=true; s=s.slice(0,-1); }
+  const sup={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-'};
+  s=s.replace(/[⁰¹²³⁴⁵⁶⁷⁸⁹⁻]+/g,m=>'^'+[...m].map(c=>sup[c]).join(''));
+  s=s.replace(/(kj|mj|kw|mw|j|w)$/,'');
+  const m=s.match(/^([+-]?(?:\d+\.?\d*|\.\d+))(?:(?:x|×|\*)10\^?\(?([+-]?\d+)\)?|e([+-]?\d+))?$/);
+  if(!m) return NaN;
+  let v=parseFloat(m[1]);
+  const ex=m[2]!==undefined?m[2]:m[3];
+  if(ex!==undefined) v*=Math.pow(10,parseInt(ex,10));
+  return pct? v/100 : v;
+}
+function judge(v,part){
+  // returns {state:'ok'|'near'|'no', msg}
+  if(!isFinite(v)) return {state:'no',msg:'I couldn\'t read that as a number. Try something like 0.25, 25%, 9.35e8 or 9.35 x 10^8.'};
+  const rel=Math.abs(v-part.ans)/Math.abs(part.ans);
+  if(rel<=(part.tol??0.02)) return {state:'ok',msg:'Correct!'};
+  for(const t of (part.traps||[])){
+    if(Math.abs(v-t.v)/Math.abs(t.v)<=0.02) return {state:'no',msg:t.msg};
+  }
+  if(part.isEff && v>=1) return {state:'no',msg:'An engine\'s efficiency must be less than 1 (100 %). Re-check which quantity goes on the bottom of the fraction.'};
+  if(v<=0) return {state:'no',msg:'The answer should be a positive quantity — check the signs and which energy is which.'};
+  for(const k of [1000,1/1000]){
+    if(Math.abs(v*k-part.ans)/Math.abs(part.ans)<=(part.tol??0.02)) return {state:'near',msg:'Right number, wrong power of ten — check your unit conversion (J vs kJ, MJ).'};
+  }
+  if(rel<=0.12) return {state:'near',msg:'Close! Check your rounding or an intermediate value.'};
+  return {state:'no',msg:'Not quite. Re-read the question, check the equation you chose, and try a hint if you need one.'};
+}
+
+/* ---------- energy-flow diagram ---------- */
+function flowSVG(qh,qc,unit='J',showVals=true){
+  const W=Math.max(qh-qc,0), top=30;
+  const wc=qh>0?Math.max(top*qc/qh,qc>0?1.5:0):0;
+  const ww=qh>0?Math.max(top*W/qh,W>0?1.5:0):0;
+  const cx=190;
+  const fmt=v=>(Math.abs(v)>=1e4||(Math.abs(v)<0.01&&v!==0))?v.toExponential(2).replace('e+','×10^').replace('e','×10^'):String(Math.round(v*100)/100);
+  const vv=n=>showVals?` = ${fmt(n)} ${unit}`:'';
+  return `<svg class="flow" viewBox="0 0 400 250" role="img" aria-label="Energy flow through a heat engine">
+    <rect x="95" y="6" width="190" height="34" rx="6" fill="var(--hot)"/>
+    <text class="res-t" x="190" y="28" text-anchor="middle">Hot reservoir</text>
+    <rect x="${cx-top/2}" y="40" width="${top}" height="44" fill="var(--hot)" opacity=".75"/>
+    <polygon points="${cx-top/2-8},84 ${cx+top/2+8},84 ${cx},96" fill="var(--hot)" opacity=".75"/>
+    <text x="${cx-top/2-14}" y="68" text-anchor="end">Q<tspan dy="3" font-size="9">h</tspan><tspan dy="-3">${vv(qh)}</tspan></text>
+    <rect x="115" y="96" width="150" height="62" rx="10" fill="var(--surface-2)" stroke="var(--primary)" stroke-width="2"/>
+    <text x="190" y="132" text-anchor="middle">Heat engine</text>
+    ${ww>0?`<rect x="265" y="${127-ww/2}" width="50" height="${ww}" fill="var(--work)" opacity=".85"/>
+    <polygon points="315,${127-ww/2-7} 315,${127+ww/2+7} 335,127" fill="var(--work)" opacity=".85"/>
+    <text x="340" y="${127+ww/2+22}" text-anchor="end">W<tspan dy="3" font-size="9">net</tspan><tspan dy="-3">${vv(W)}</tspan></text>`:''}
+    ${wc>0?`<rect x="${cx-wc/2}" y="158" width="${wc}" height="38" fill="var(--cold)" opacity=".8"/>
+    <polygon points="${cx-wc/2-8},196 ${cx+wc/2+8},196 ${cx},208" fill="var(--cold)" opacity=".8"/>`:''}
+    <text x="${wc>0?cx-wc/2-14:cx-14}" y="184" text-anchor="end">Q<tspan dy="3" font-size="9">c</tspan><tspan dy="-3">${vv(qc)}</tspan></text>
+    <rect x="95" y="210" width="190" height="34" rx="6" fill="var(--cold)"/>
+    <text class="res-t" x="190" y="232" text-anchor="middle">Cold reservoir</text>
+  </svg>`;
+}
+
+/* ---------- tabs ---------- */
+function showTab(name){
+  $$('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));
+  $$('section.panel').forEach(p=>p.classList.toggle('active',p.id===name));
+  if(location.hash!=='#'+name) history.replaceState(null,'','#'+name);
+  window.scrollTo({top:0});
+  if(name!=='review') gasPause();
+}
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.addEventListener('click',e=>{ const g=e.target.closest('[data-goto]'); if(g) showTab(g.dataset.goto); });
+
+/* ---------- explorer ---------- */
+(function(){
+  const qh=$('#exQh'), qc=$('#exQc');
+  function upd(){
+    const H=+qh.value; qc.max=H; if(+qc.value>H) qc.value=H;
+    const C=+qc.value, W=H-C, e=W/H;
+    $('#exQhO').textContent=H+' J'; $('#exQcO').textContent=C+' J';
+    $('#exW').textContent=W+' J'; $('#exEff').textContent=e.toFixed(3);
+    $('#exRatio').textContent=(C/H).toFixed(3);
+    $('#exBar .fill').style.width=(e*100)+'%';
+    $('#exSvg').innerHTML=flowSVG(H,C);
+    const st=$('#exStatus');
+    if(C===0){ st.className='status bad'; st.textContent='Impossible! With Qc = 0 the engine would convert heat entirely into work (eff = 1). The second law forbids this.'; }
+    else if(C===H){ st.className='status warn'; st.textContent='No work is done: all the energy went to the cold reservoir (eff = 0).'; }
+    else if(e>0.6){ st.className='status warn'; st.textContent='Allowed by the second law, but higher than the calculated maximum of any engine in the table (0.60).'; }
+    else { st.className='status'; st.textContent='Allowed: Qc > 0 and eff < 1. Lower Qc (or raise Qh) to push efficiency up.'; }
+  }
+  const bar=$('#exBar');
+  [['steam',.17],['turbine',.30],['gasoline',.25],['diesel',.35]].forEach(([n,v],i)=>{
+    const t=document.createElement('span'); t.className='tick'+(i%2?' hi':''); t.style.left=(v*100)+'%';
+    t.innerHTML='<em>'+n+' '+v.toFixed(2)+'</em>'; bar.appendChild(t);
+  });
+  qh.addEventListener('input',upd); qc.addEventListener('input',upd); upd();
+})();
+
+/* ---------- gas simulator ---------- */
+let gasRAF=null, gas=null;
+const gc=$('#gasCanvas'), gx=gc.getContext('2d');
+function gasInit(){
+  const N=70, parts=[];
+  for(let i=0;i<N;i++){
+    const a=Math.random()*Math.PI*2, sp=1.6+Math.random()*1.2;
+    parts.push({x:12+Math.random()*(gc.width*0.22),y:12+Math.random()*(gc.height-24),vx:Math.cos(a)*sp,vy:Math.sin(a)*sp});
+  }
+  gas={parts,open:false,partX:gc.width*0.25};
+  gasDraw(); gasMeter();
+}
+function gasEntropy(){
+  const cols=10, rows=5, cnt=new Array(cols*rows).fill(0);
+  gas.parts.forEach(p=>{
+    const c=Math.min(cols-1,Math.max(0,Math.floor(p.x/gc.width*cols)));
+    const r=Math.min(rows-1,Math.max(0,Math.floor(p.y/gc.height*rows)));
+    cnt[r*cols+c]++;
+  });
+  const n=gas.parts.length; let s=0;
+  cnt.forEach(k=>{ if(k) s-=(k/n)*Math.log(k/n); });
+  return s/Math.log(cols*rows);
+}
+function gasMeter(){
+  const s=gasEntropy(); $('#gasMeter').style.width=(s*100).toFixed(0)+'%';
+  if(gas.open){
+    $('#gasNote').textContent= s>0.9
+      ? 'Near maximum entropy: the particles are spread evenly. They will not spontaneously pack back into the left chamber.'
+      : 'Disorder is rising as particles spread out…';
+  }
+}
+function gasDraw(){
+  const cs=getComputedStyle(document.documentElement);
+  gx.clearRect(0,0,gc.width,gc.height);
+  gx.fillStyle=cs.getPropertyValue('--warm').trim()||'#b4763a';
+  gas.parts.forEach(p=>{ gx.beginPath(); gx.arc(p.x,p.y,5,0,7); gx.fill(); });
+  if(!gas.open){
+    gx.strokeStyle=cs.getPropertyValue('--primary').trim(); gx.lineWidth=3;
+    gx.beginPath(); gx.moveTo(gas.partX,0); gx.lineTo(gas.partX,gc.height); gx.stroke();
+  }
+}
+function gasStep(){
+  gas.parts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    const maxX=gas.open?gc.width-5:gas.partX-5;
+    if(p.x<5){p.x=5;p.vx=Math.abs(p.vx);} if(p.x>maxX){p.x=maxX;p.vx=-Math.abs(p.vx);}
+    if(p.y<5){p.y=5;p.vy=Math.abs(p.vy);} if(p.y>gc.height-5){p.y=gc.height-5;p.vy=-Math.abs(p.vy);}
+  });
+  gasDraw(); gasMeter();
+  gasRAF=requestAnimationFrame(gasStep);
+}
+function gasPlay(){ if(!gasRAF) gasRAF=requestAnimationFrame(gasStep); }
+function gasPause(){ if(gasRAF){ cancelAnimationFrame(gasRAF); gasRAF=null; } }
+$('#gasGo').addEventListener('click',()=>{ gas.open=true; $('#gasNote').textContent='Partition removed — watch the disorder grow.'; gasPlay(); });
+$('#gasReset').addEventListener('click',()=>{ gasPause(); gasInit(); $('#gasNote').textContent='Particles start packed in the left chamber — a highly ordered, low-entropy state.'; gasPlay(); });
+gasInit(); gasPlay();
+document.addEventListener('visibilitychange',()=>{ if(document.hidden) gasPause(); else if($('#review').classList.contains('active')) gasPlay(); });
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>{ if(b.dataset.tab==='review') gasPlay(); }));
+
+/* ---------- dice lab ---------- */
+(function(){
+  let nd=2, counts={}, total=0;
+  const faces=['⚀','⚁','⚂','⚃','⚄','⚅'];
+  function ways(n){ // number of ways for each sum
+    let w={0:1};
+    for(let i=0;i<n;i++){ const nw={}; for(const s in w) for(let d=1;d<=6;d++){ nw[+s+d]=(nw[+s+d]||0)+w[s]; } w=nw; }
+    return w;
+  }
+  function render(){
+    const w=ways(nd), sums=Object.keys(w).map(Number), totalWays=Math.pow(6,nd);
+    const maxFrac=Math.max(...sums.map(s=>w[s]/totalWays));
+    const hist=$('#hist'); hist.innerHTML=''; $('#histx').innerHTML='';
+    sums.forEach(s=>{
+      const exp=w[s]/totalWays, obs=total?(counts[s]||0)/total:0, scale=150/Math.max(maxFrac,obs,1e-9);
+      const g=document.createElement('div'); g.className='ghost';
+      g.style.height=(exp*scale)+'px'; g.style.position='absolute'; g.style.display='none';
+      const bar=document.createElement('div'); bar.style.height=(obs*scale)+'px';
+      bar.innerHTML=`<b>${counts[s]||''}</b>`;
+      bar.title=`Sum ${s}: ${w[s]} of ${totalWays} ways`;
+      const wrap=document.createElement('div'); wrap.style.cssText='flex:1;position:relative;display:flex;align-items:flex-end;height:100%';
+      bar.style.flex='1'; g.style.cssText=`position:absolute;left:0;right:0;bottom:0;height:${exp*scale}px;border:1.5px dashed var(--warm);border-bottom:0;border-radius:4px 4px 0 0;background:transparent;pointer-events:none`;
+      wrap.appendChild(bar); wrap.appendChild(g); hist.appendChild(wrap);
+      const x=document.createElement('span'); x.textContent=s; $('#histx').appendChild(x);
+    });
+    hist.style.height='170px';
+    $$('#hist>div').forEach(d=>{d.style.background='transparent';d.style.minHeight='0'});
+    $$('#hist>div>div:first-child').forEach(b=>{b.style.background='var(--accent)';b.style.borderRadius='4px 4px 0 0';b.style.position='relative'});
+    const t=$('#waysTable');
+    t.innerHTML='<thead><tr><th>Sum</th><th class="num">Ways</th><th class="num">Out of</th><th class="num">Probability</th></tr></thead><tbody>'+
+      sums.map(s=>`<tr><td>${s}</td><td class="num">${w[s]}</td><td class="num">${totalWays}</td><td class="num">${(100*w[s]/totalWays).toFixed(1)} %</td></tr>`).join('')+'</tbody>';
+    $('#diceInfo').textContent=`Rolls: ${total}. Dashed outlines show the long-run expectation for each sum.`;
+  }
+  function roll(){
+    let sum=0, f=[];
+    for(let i=0;i<nd;i++){ const d=1+Math.floor(Math.random()*6); sum+=d; f.push(d); }
+    counts[sum]=(counts[sum]||0)+1; total++; return f;
+  }
+  $('#roll1').addEventListener('click',()=>{ const f=roll(); $('#diceFace').textContent=f.map(d=>faces[d-1]).join(' ')+'  = '+f.reduce((a,b)=>a+b); render(); });
+  $('#roll100').addEventListener('click',()=>{ let f; for(let i=0;i<100;i++) f=roll(); $('#diceFace').textContent=f.map(d=>faces[d-1]).join(' ')+'  (last roll)'; render(); });
+  function reset(){ counts={}; total=0; $('#diceFace').textContent=Array(nd).fill(faces[0]).join(' '); render(); }
+  $('#rollReset').addEventListener('click',reset);
+  $$('input[name=nd]').forEach(r=>r.addEventListener('change',()=>{ nd=+r.value; reset(); }));
+  reset();
+})();
+
+/* ---------- ask widgets (shared by worked examples) ---------- */
+function mkMC(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  ask.opts.forEach((o,i)=>{
+    const b=document.createElement('button'); b.className='opt'; b.type='button'; b.innerHTML=o;
+    b.addEventListener('click',()=>{
+      if(i===ask.correct){
+        b.classList.add('right'); $$('.opt',host).forEach(x=>x.disabled=true);
+        fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); onDone();
+      } else {
+        b.classList.add('wrong'); b.disabled=true;
+        fb.className='fb no'; fb.innerHTML=(ask.wrong&&ask.wrong[i])||'Not quite — try another option.';
+      }
+    });
+    host.appendChild(b);
+  });
+  host.appendChild(fb);
+}
+function mkNum(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const row=document.createElement('div'); row.className='row';
+  const inp=document.createElement('input'); inp.type='text'; inp.setAttribute('aria-label','Your answer'); inp.placeholder='your answer'; inp.autocomplete='off';
+  const u=document.createElement('span'); u.className='math'; u.innerHTML=ask.unit||'';
+  const btn=document.createElement('button'); btn.className='btn'; btn.type='button'; btn.textContent='Check';
+  row.append(inp,u,btn); host.appendChild(row);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite'); host.appendChild(fb);
+  const go=()=>{
+    const j=judge(parseNum(inp.value),{ans:ask.ans,tol:ask.tol||0.02,traps:ask.traps,isEff:ask.isEff});
+    if(j.state==='ok'){ fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); inp.disabled=true; btn.disabled=true; onDone(); }
+    else { fb.className='fb '+j.state; fb.textContent=j.msg; }
+  };
+  btn.addEventListener('click',go); inp.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+}
+
+/* ---------- worked examples ---------- */
+const EX=[
+ { id:'E1', tag:'Sample Problem C', title:'Efficiency from heat in and heat out',
+   problem:'Find the efficiency of a diesel engine that, during one cycle, receives <b>462 J</b> of energy from combustion and loses <b>254 J</b> as heat to the exhaust.',
+   steps:[
+    {name:'Analyze', html:`<div class="givenlist"><span>${Qh} = 462 J</span><span>${Qc} = 254 J</span></div>
+       <div class="givenlist"><span class="unk"><i>eff</i> = ?</span></div>`+flowSVG(462,254,'J'),
+     ask:{type:'mc',q:'Which energy is <b>Q<sub>h</sub></b>, the energy the engine <em>absorbs</em>?',opts:['254 J — the energy lost to the exhaust','462 J — the energy received from combustion'],correct:1,
+          why:'Combustion supplies the engine; the exhaust is where energy leaves, so 254 J is Q<sub>c</sub>.',wrong:{0:'That energy leaves the engine, so it\'s Q<sub>c</sub>.'}}},
+    {name:'Plan', html:`<p>Efficiency is the ratio of the work done by the engine to the energy transferred to it as heat. We are given both heats, so use the form that needs only ${Qh} and ${Qc}:</p>
+       <div class="eq"><i>eff</i> = ${F(Wn,Qh)} = 1 − ${F(Qc,Qh)}</div>`,
+     ask:{type:'mc',q:'Which version of the equation lets us use only Q<sub>h</sub> and Q<sub>c</sub>?',
+          opts:['<i>eff</i> = <i>Q</i><sub>c</sub> / <i>Q</i><sub>h</sub>','<i>eff</i> = 1 − <i>Q</i><sub>c</sub> / <i>Q</i><sub>h</sub>','<i>eff</i> = 1 − <i>Q</i><sub>h</sub> / <i>Q</i><sub>c</sub>'],correct:1,
+          why:'Work = Q<sub>h</sub> − Q<sub>c</sub>, so W/Q<sub>h</sub> = 1 − Q<sub>c</sub>/Q<sub>h</sub>.',
+          wrong:{0:'Q<sub>c</sub>/Q<sub>h</sub> is the fraction of energy <em>wasted</em>, not used.',2:'The ratio is inverted — it would be bigger than 1.'}}},
+    {name:'Solve', html:`<p>Substitute the values:</p><div class="eq"><i>eff</i> = 1 − ${F('254 J','462 J')} = 1 − <span id="ph">0.550</span> = <span class="boxed"><i>eff</i> = 0.450</span></div>`,
+     ask:{type:'num',q:'Before you continue: calculate <b>254 ÷ 462</b>.',ans:0.5498,tol:0.01,why:'So 1 − 0.550 = 0.450.'}},
+    {name:'Check your work', html:`<p>Only <b>45 %</b> of the energy added as heat is used to do work. As expected, the efficiency is less than 1.0.</p>
+       <p>Compare with the table: a diesel engine has a calculated maximum of 0.56 and a measured value of 0.35, so 0.450 is a believable number.</p>`,
+     ask:{type:'mc',q:'Would an answer of <i>eff</i> = 1.8 have passed this check?',opts:['Yes','No — efficiency can never exceed 1'],correct:1,why:'Work can\'t exceed the heat put in, and for a real engine it\'s always less.'}}
+   ]},
+ { id:'E2', tag:'Problem Set I', title:'Finding exhaust heat and work from efficiency',
+   problem:'In 1989, Brendan Keenoy ran up 1760 steps in the CN Tower in Toronto, reaching a height of 342 m in 7 min 52 s. Suppose the work he did were done by a heat engine whose input energy is <b>1.34 MJ</b> and whose efficiency is <b>0.18</b>. How much energy is exhausted from the engine, and how much work does it do?',
+   steps:[
+    {name:'Analyze', html:`<div class="givenlist"><span>${Qh} = 1.34 MJ = 1.34 × 10<sup>6</sup> J</span><span><i>eff</i> = 0.18</span></div>
+       <div class="givenlist"><span class="unk">${Qc} = ?</span><span class="unk">${Wn} = ?</span></div>`,
+     ask:{type:'mc',q:'Which given numbers are <b>not</b> needed to find Q<sub>c</sub> and W<sub>net</sub>?',opts:['Q<sub>h</sub> and efficiency','The height (342 m) and the time (7 min 52 s)','Nothing — all the numbers are needed'],correct:1,
+          why:'The climb only tells us what the work <em>equals</em> (mgh). The engine\'s numbers are Q<sub>h</sub> and eff.',wrong:{0:'Those are exactly what we need.',2:'The height and time are extra information for this question.'}}},
+    {name:'Plan', html:`<p>Rearrange the efficiency equation to isolate ${Qc}, then use the first law to get the work:</p>
+       <div class="eq">${Qc} = ${Qh}(1 − <i>eff</i>) &nbsp;&nbsp;→&nbsp;&nbsp; ${Wn} = ${Qh} − ${Qc}</div>`,
+     ask:{type:'mc',q:'Starting from <i>eff</i> = 1 − Q<sub>c</sub>/Q<sub>h</sub>, what is Q<sub>c</sub>/Q<sub>h</sub>?',opts:['<i>eff</i>','1 − <i>eff</i>','1 / <i>eff</i>'],correct:1,why:'Move eff to one side: Q<sub>c</sub>/Q<sub>h</sub> = 1 − eff.'}},
+    {name:'Solve', html:`<div class="eq">${Qc} = (1.34 × 10<sup>6</sup> J)(1 − 0.18) = (1.34 × 10<sup>6</sup> J)(0.82) = <span class="boxed">1.1 × 10<sup>6</sup> J</span></div>
+       <div class="eq">${Wn} = 1.34 × 10<sup>6</sup> J − 1.1 × 10<sup>6</sup> J = <span class="boxed">2.4 × 10<sup>5</sup> J</span></div>`,
+     ask:{type:'num',q:'Calculate (1 − 0.18) × 1.34 × 10<sup>6</sup> in joules (you can type 1.34e6 style numbers).',ans:1.0988e6,tol:0.01,unit:'J',why:'That is about 1.1 × 10<sup>6</sup> J.'}},
+    {name:'Check your work', html:`<p>Check with the other equation: ${Wn} = <i>eff</i> · ${Qh} = 0.18 × 1.34 × 10<sup>6</sup> J ≈ 2.4 × 10<sup>5</sup> J ✔. And ${Qc} &gt; 0, ${Wn} &lt; ${Qh} ✔.</p>
+       <p>Sanity check with the climb: a 70 kg runner climbing 342 m does <i>mgh</i> ≈ (70)(9.8)(342) ≈ 2.3 × 10<sup>5</sup> J — right on target!</p>`,
+     ask:{type:'mc',q:'Why is it OK that the exhaust heat (1.1 × 10<sup>6</sup> J) is much bigger than the work (2.4 × 10<sup>5</sup> J)?',opts:['It isn\'t — it means we made an error','With only 18 % efficiency, most of the input energy must be exhausted','Because Q<sub>c</sub> always equals Q<sub>h</sub>'],correct:1,why:'82 % of the input leaves as heat: Q<sub>c</sub>/Q<sub>h</sub> = 0.82.'}}
+   ]},
+ { id:'E3', tag:'Problem Set II', title:'Work from efficiency and heat input',
+   problem:'A gasoline engine has an efficiency of <b>33 %</b> and receives <b>660 J</b> of energy as heat from combustion during each cycle. How much work is done by the engine?',
+   steps:[
+    {name:'Analyze', html:`<div class="givenlist"><span><i>eff</i> = 0.33</span><span>${Qh} = 660 J</span></div><div class="givenlist"><span class="unk">${Wn} = ?</span></div>`,
+     ask:{type:'mc',q:'How do we write 33 % in the equation?',opts:['33','0.33','3.3'],correct:1,why:'Percent means "per hundred": 33 % = 0.33.'}},
+    {name:'Plan', html:`<p>Efficiency is ${F(Wn,Qh)}. Multiply both sides by ${Qh}:</p><div class="eq">${Wn} = <i>eff</i> · ${Qh}</div>`,
+     ask:{type:'mc',q:'Which operation isolates W<sub>net</sub> from eff = W<sub>net</sub> / Q<sub>h</sub>?',opts:['Divide both sides by Q<sub>h</sub>','Multiply both sides by Q<sub>h</sub>','Subtract Q<sub>h</sub> from both sides'],correct:1,why:'W<sub>net</sub> is divided by Q<sub>h</sub>, so we undo it by multiplying.'}},
+    {name:'Solve', html:`<div class="eq">${Wn} = (0.33)(660 J) = <span class="boxed">220 J</span></div><p class="pnote">The calculator shows 217.8 J; with two significant figures (from 33 %) we report 220 J.</p>`,
+     ask:{type:'num',q:'Calculate 0.33 × 660.',ans:217.8,tol:0.01,unit:'J'}},
+    {name:'Check your work', html:`<p>${Wn} (220 J) &lt; ${Qh} (660 J) ✔. The exhausted heat would be ${Qc} = 660 − 218 ≈ 442 J, positive ✔. One third of the fuel energy becomes work — right for a 33 % engine.</p>`,
+     ask:{type:'mc',q:'If this engine were 50 % efficient with the same Q<sub>h</sub>, the work would be…',opts:['Smaller than 220 J','Larger than 220 J','The same'],correct:1,why:'W = eff · Q<sub>h</sub>: higher efficiency means more work from the same heat.'}}
+   ]},
+ { id:'E4', tag:'Textbook Practice', title:'Working backward: finding the heat input',
+   problem:'A steam engine has an efficiency of <b>19 %</b> and performs <b>998 J</b> of work each cycle. How much energy is received by the engine as heat, and how much is exhausted?',
+   steps:[
+    {name:'Analyze', html:`<div class="givenlist"><span><i>eff</i> = 0.19</span><span>${Wn} = 998 J</span></div><div class="givenlist"><span class="unk">${Qh} = ?</span><span class="unk">${Qc} = ?</span></div>`,
+     ask:{type:'mc',q:'The engine is only 19 % efficient. Should Q<sub>h</sub> be larger or smaller than 998 J?',opts:['Smaller — work can\'t exceed heat in','Larger — only part of Q<sub>h</sub> becomes work','Equal'],correct:1,why:'Work is just 19 % of Q<sub>h</sub>, so Q<sub>h</sub> must be about five times the work.',wrong:{0:'Think again: W is a fraction (19 %) of Q<sub>h</sub>.'}}},
+    {name:'Plan', html:`<p>From ${Wn} = <i>eff</i> · ${Qh} we get ${Qh} = ${F(Wn,'<i>eff</i>')}. Then ${Qc} = ${Qh} − ${Wn}.</p>`},
+    {name:'Solve', html:`<div class="eq">${Qh} = ${F('998 J','0.19')} = <span class="boxed">5.3 × 10<sup>3</sup> J</span> &nbsp; (5253 J)</div>
+       <div class="eq">${Qc} = 5253 J − 998 J ≈ <span class="boxed">4.3 × 10<sup>3</sup> J</span></div>`,
+     ask:{type:'num',q:'Calculate 998 ÷ 0.19.',ans:5252.6,tol:0.01,unit:'J'}},
+    {name:'Check your work', html:`<p>${Qh} &gt; ${Wn} ✔. Efficiency check: 998 / 5253 = 0.19 ✔.</p>`}
+   ]},
+ { id:'E5', tag:'Problem Set I', title:'Using power and time (units!)',
+   problem:'A steam engine built in 1812 delivers <b>19 kW</b> of net power. If its efficiency is <b>6.0 %</b>, how much energy must be transferred by heat to the engine in <b>1.00 h</b>?',
+   steps:[
+    {name:'Analyze', html:`<div class="givenlist"><span><i>P</i> = 19 kW = 1.9 × 10<sup>4</sup> W</span><span><i>t</i> = 1.00 h</span><span><i>eff</i> = 0.060</span></div><div class="givenlist"><span class="unk">${Qh} = ?</span></div>`,
+     ask:{type:'num',q:'Convert 1.00 h into <b>seconds</b> so the units work with watts (J/s).',ans:3600,tol:0.001,unit:'s',traps:[{v:60,msg:'That\'s minutes in an hour. Multiply by 60 again to reach seconds.'}]}},
+    {name:'Plan', html:`<p>Power is energy per time, so the work in 1 hour is <i>W</i> = <i>P t</i>. Then use ${Qh} = ${F('<i>W</i>','<i>eff</i>')}.</p>`,
+     ask:{type:'mc',q:'Power is a rate of doing work. Which is correct?',opts:['<i>W</i> = <i>P</i> / <i>t</i>','<i>W</i> = <i>P</i> · <i>t</i>','<i>W</i> = <i>t</i> / <i>P</i>'],correct:1,why:'1 W = 1 J/s, so watts × seconds = joules.'}},
+    {name:'Solve', html:`<div class="eq"><i>W</i> = (1.9 × 10<sup>4</sup> W)(3600 s) = 6.84 × 10<sup>7</sup> J</div>
+       <div class="eq">${Qh} = ${F('6.84 × 10<sup>7</sup> J','0.060')} = <span class="boxed">1.1 × 10<sup>9</sup> J</span></div>`,
+     ask:{type:'num',q:'Calculate 6.84 × 10<sup>7</sup> ÷ 0.060.',ans:1.14e9,tol:0.01,unit:'J'}},
+    {name:'Check your work', html:`<p>${Qh} (1.1 × 10<sup>9</sup> J) is much larger than the work (6.8 × 10<sup>7</sup> J), as expected for a 6 % engine ✔ (ratio ≈ 17).</p>`}
+   ]}
+];
+
+(function buildExamples(){
+  const host=$('#exampleList');
+  EX.forEach((ex,idx)=>{
+    const card=document.createElement('div'); card.className='card example'; card.id=ex.id;
+    card.innerHTML=`<header><h3 style="margin:0">Example ${idx+1} · ${ex.title}</h3><span class="pill">${ex.tag}</span></header>
+      <div class="problem-box">${ex.problem}</div>
+      <div class="dots"></div><ol class="steps"></ol><div class="row ctrl"></div>`;
+    const dots=$('.dots',card), list=$('.steps',card), ctrl=$('.ctrl',card);
+    const next=document.createElement('button'); next.className='btn'; next.type='button'; next.textContent='Start: reveal step 1';
+    const restart=document.createElement('button'); restart.className='btn ghost'; restart.type='button'; restart.textContent='Restart example'; restart.hidden=true;
+    ctrl.append(next,restart);
+    ex.steps.forEach((s,i)=>{
+      const d=document.createElement('i'); dots.appendChild(d);
+      const li=document.createElement('li'); li.className='step';
+      li.innerHTML=`<h4><span class="n">${i+1}</span>${s.name}</h4><div class="body">${s.html}</div>`;
+      if(s.ask){ const a=document.createElement('div'); a.className='ask'; li.appendChild(a); }
+      list.appendChild(li);
+    });
+    let cur=-1, needAsk=false;
+    function reveal(){
+      cur++; const li=list.children[cur], s=ex.steps[cur];
+      li.classList.add('show'); dots.children[cur].classList.add('on');
+      if(s.ask){
+        needAsk=true; next.disabled=true;
+        const done=()=>{ needAsk=false; next.disabled=false; refresh(); };
+        (s.ask.type==='num'?mkNum:mkMC)($('.ask',li),s.ask,done);
+      }
+      refresh();
+      li.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    function refresh(){
+      if(cur>=ex.steps.length-1 && !needAsk){
+        next.hidden=true; restart.hidden=false;
+        if(!state['ex_'+ex.id]){ state['ex_'+ex.id]=1; save(); }
+      } else {
+        next.textContent=cur<0?'Start: reveal step 1':`Next step: ${ex.steps[cur+1]?.name||''}`;
+        if(needAsk) next.textContent='Answer the question above to continue';
+      }
+    }
+    next.addEventListener('click',reveal);
+    restart.addEventListener('click',()=>{
+      cur=-1; needAsk=false; next.hidden=false; next.disabled=false; restart.hidden=true;
+      [...list.children].forEach((li,i)=>{ li.classList.remove('show'); const a=$('.ask',li); if(a) a.innerHTML=''; dots.children[i].classList.remove('on'); });
+      refresh(); card.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    host.appendChild(card);
+  });
+})();
+
+/* ---------- practice problems ---------- */
+const eff=(ans,extra={})=>Object.assign({label:'Efficiency, eff',unit:'(no unit)',ans,tol:0.02,isEff:true},extra);
+const P=[
+ /* ===== Textbook practice ===== */
+ {set:'lesson',id:'L1',text:'If a steam engine takes in 2.254 × 10<sup>4</sup> kJ from the boiler and gives up 1.915 × 10<sup>4</sup> kJ in exhaust during one cycle, what is the engine\'s efficiency?',
+  parts:[eff(0.1504,{traps:[{v:0.8496,msg:'That\'s Q<sub>c</sub>/Q<sub>h</sub> — the fraction wasted. Efficiency is 1 minus that.'}]})],
+  hints:['Both energies are heats, so use <i>eff</i> = 1 − Q<sub>c</sub>/Q<sub>h</sub>. The kJ units cancel in the ratio.','Compute 1.915 ÷ 2.254 first, then subtract from 1.'],
+  sol:['Q<sub>h</sub> = 2.254 × 10<sup>4</sup> kJ, Q<sub>c</sub> = 1.915 × 10<sup>4</sup> kJ','eff = 1 − Q<sub>c</sub>/Q<sub>h</sub> = 1 − (1.915 × 10<sup>4</sup>)/(2.254 × 10<sup>4</sup>)','= 1 − 0.8496 = <b>0.150</b>']},
+ {set:'lesson',id:'L2',text:'A test model for an experimental gasoline engine does 45 J of work in one cycle and gives up 31 J as heat. What is the engine\'s efficiency?',
+  parts:[eff(0.592,{tol:0.015,traps:[{v:0.408,msg:'That\'s the wasted fraction Q<sub>c</sub>/Q<sub>h</sub>. Efficiency is W/Q<sub>h</sub>.'},{v:1.45,msg:'Efficiency can\'t exceed 1. You divided by Q<sub>c</sub>; divide by Q<sub>h</sub> instead.'}]})],
+  hints:['You aren\'t given Q<sub>h</sub> directly. Use the first law: Q<sub>h</sub> = W + Q<sub>c</sub>.','Q<sub>h</sub> = 45 + 31 = 76 J. Then eff = W / Q<sub>h</sub>.'],
+  sol:['Q<sub>h</sub> = W<sub>net</sub> + Q<sub>c</sub> = 45 J + 31 J = 76 J','eff = W<sub>net</sub>/Q<sub>h</sub> = 45 J / 76 J = <b>0.59</b>']},
+ {set:'lesson',id:'L3',text:'A fairly efficient steam engine was built in 1840. It required burning only 0.80 kg of coal to perform 2.6 MJ of net work. Calculate the engine\'s efficiency if burning coal releases 32.6 MJ of energy per kilogram of coal.',
+  parts:[eff(0.0997,{tol:0.03,traps:[{v:0.903,msg:'That\'s 1 − eff (the wasted fraction). Efficiency is W/Q<sub>h</sub>.'}]})],
+  hints:['The heat input Q<sub>h</sub> is the energy released by burning all the coal: mass × energy per kilogram.','Q<sub>h</sub> = (0.80 kg)(32.6 MJ/kg) = 26.08 MJ. Then eff = 2.6 MJ / Q<sub>h</sub>.'],
+  sol:['Q<sub>h</sub> = (0.80 kg)(32.6 MJ/kg) = 26.1 MJ','eff = W<sub>net</sub>/Q<sub>h</sub> = 2.6 MJ / 26.1 MJ = <b>0.10</b> (about 10 %)']},
+ {set:'lesson',id:'L4',text:'If a gasoline engine has an efficiency of 21 percent and loses 780 J to the cooling system and exhaust during each cycle, how much work is done by the engine?',
+  parts:[{label:'Work, W<sub>net</sub>',unit:'J',ans:207.4,tol:0.02,traps:[{v:163.8,msg:'You multiplied eff by Q<sub>c</sub> (780 J). Efficiency applies to Q<sub>h</sub>, which you must find first.'},{v:987.3,msg:'That\'s Q<sub>h</sub>. The question asks for the work W = eff · Q<sub>h</sub>.'}]}],
+  hints:['780 J is Q<sub>c</sub>, not Q<sub>h</sub>. Use Q<sub>c</sub> = Q<sub>h</sub>(1 − eff) to find Q<sub>h</sub>.','Q<sub>h</sub> = 780 / (1 − 0.21) ≈ 987 J. Then W = eff · Q<sub>h</sub>.'],
+  sol:['Q<sub>c</sub> = Q<sub>h</sub>(1 − eff) → Q<sub>h</sub> = 780 J / 0.79 = 987 J','W<sub>net</sub> = eff · Q<sub>h</sub> = (0.21)(987 J) = <b>2.1 × 10<sup>2</sup> J</b> (207 J)','Check: Q<sub>h</sub> − Q<sub>c</sub> = 987 − 780 = 207 J ✔']},
+ {set:'lesson',id:'L5',text:'Suppose a steam engine has an efficiency of 19 percent and performs 998 J of work each cycle. How much energy is received by the steam engine as heat?',
+  parts:[{label:'Energy in, Q<sub>h</sub>',unit:'J',ans:5252.6,tol:0.02,traps:[{v:189.6,msg:'You multiplied W by eff. Since W = eff · Q<sub>h</sub>, you need to <em>divide</em> W by eff.'}]}],
+  hints:['W = eff · Q<sub>h</sub>. Solve for Q<sub>h</sub>.','Q<sub>h</sub> = 998 J ÷ 0.19.'],
+  sol:['Q<sub>h</sub> = W<sub>net</sub>/eff = 998 J / 0.19','= <b>5.3 × 10<sup>3</sup> J</b> (5253 J)']},
+ {set:'lesson',id:'L6',text:'The first working steam engine was designed in 1779 by James Watt. Suppose this engine\'s efficiency is 8.0 percent. If 2.5 kJ is transferred by heat into the engine, how much work is done, and how much energy is transferred by heat to the engine\'s surroundings?',
+  parts:[{label:'(a) Work done, W<sub>net</sub>',unit:'J',ans:200,tol:0.02,traps:[{v:0.2,msg:'Right size, but in kJ — enter it in joules (×1000).'}]},
+         {label:'(b) Energy to surroundings, Q<sub>c</sub>',unit:'kJ',ans:2.3,tol:0.02,traps:[{v:0.2,msg:'That\'s the work. Q<sub>c</sub> is what remains: Q<sub>h</sub> − W.'}]}],
+  hints:['W = eff · Q<sub>h</sub> and Q<sub>c</sub> = Q<sub>h</sub> − W. Mind the units: Q<sub>h</sub> is in kJ.','W = 0.080 × 2.5 kJ = 0.20 kJ = 200 J. Q<sub>c</sub> = 2.5 − 0.20 kJ.'],
+  sol:['W<sub>net</sub> = eff · Q<sub>h</sub> = (0.080)(2.5 kJ) = 0.20 kJ = <b>2.0 × 10<sup>2</sup> J</b>','Q<sub>c</sub> = Q<sub>h</sub> − W<sub>net</sub> = 2.5 kJ − 0.20 kJ = <b>2.3 kJ</b>']},
+
+ /* ===== Set I ===== */
+ {set:'s1',id:'A1',text:'If the energy removed from an engine as heat during one cycle is 6.0 × 10<sup>2</sup> J, how much energy must be added to the engine during one cycle in order for it to operate at 31 percent efficiency?',
+  parts:[{label:'Energy added, Q<sub>h</sub>',unit:'J',ans:869.6,tol:0.02,traps:[{v:186,msg:'You multiplied Q<sub>c</sub> by eff. That doesn\'t match any efficiency relationship.'},{v:414,msg:'That\'s Q<sub>c</sub>(1 − eff). Use Q<sub>h</sub> = Q<sub>c</sub> / (1 − eff).'}]}],
+  hints:['Q<sub>c</sub> = Q<sub>h</sub>(1 − eff). Solve for Q<sub>h</sub>.','Q<sub>h</sub> = 600 J ÷ (1 − 0.31).'],
+  sol:['Q<sub>c</sub> = Q<sub>h</sub>(1 − eff) → Q<sub>h</sub> = Q<sub>c</sub>/(1 − eff)','Q<sub>h</sub> = 600 J / 0.69 = <b>8.7 × 10<sup>2</sup> J</b>']},
+ {set:'s1',id:'A2',text:'In 1894, the first turbine-driven ship was designed. Suppose the ship\'s turbines had an efficiency of 16 percent. How much energy would have been exhausted by the turbines if the input energy was 2.0 × 10<sup>9</sup> J and the net power was 1.5 MW?',
+  parts:[{label:'Energy exhausted, Q<sub>c</sub>',unit:'J',ans:1.68e9,tol:0.02,traps:[{v:3.2e8,msg:'That\'s the work done (eff × Q<sub>h</sub>). The exhaust is the rest: Q<sub>h</sub>(1 − eff).'}]}],
+  hints:['The power (1.5 MW) is extra information here — you already know Q<sub>h</sub> and eff.','Q<sub>c</sub> = Q<sub>h</sub>(1 − eff).'],
+  sol:['Q<sub>c</sub> = Q<sub>h</sub>(1 − eff) = (2.0 × 10<sup>9</sup> J)(1 − 0.16)','= (2.0 × 10<sup>9</sup> J)(0.84) = <b>1.7 × 10<sup>9</sup> J</b>','The 1.5 MW power was not needed.']},
+ {set:'s1',id:'A3',text:'A steam engine built in 1812 still works at its original site in England. The engine delivers 19 kW of net power. If the engine\'s efficiency is 6.0 percent, how much energy must be transferred by heat to the engine in 1.00 h?',
+  parts:[{label:'Energy in, Q<sub>h</sub>',unit:'J',ans:1.14e9,tol:0.02,traps:[{v:6.84e7,msg:'That\'s the work done in one hour. You still need to divide by the efficiency to get Q<sub>h</sub>.'},{v:316667,msg:'You used t = 1 h instead of 3600 s. Convert the time to seconds first.'}]}],
+  hints:['Find the work in one hour: W = P·t, with t in <em>seconds</em>. Then Q<sub>h</sub> = W/eff.','W = (1.9 × 10<sup>4</sup> W)(3600 s) = 6.84 × 10<sup>7</sup> J.'],
+  sol:['W<sub>net</sub> = P·t = (1.9 × 10<sup>4</sup> W)(3600 s) = 6.84 × 10<sup>7</sup> J','Q<sub>h</sub> = W<sub>net</sub>/eff = 6.84 × 10<sup>7</sup> J / 0.060 = <b>1.1 × 10<sup>9</sup> J</b>']},
+ {set:'s1',id:'A4',text:'The first motorcycle was built in Germany in 1885, and it could reach a speed of 19 km/h. The output power of the engine was 370 W. If the engine\'s efficiency was 0.19, what was the input energy after 1.00 min?',
+  parts:[{label:'Input energy, Q<sub>h</sub>',unit:'J',ans:116842,tol:0.03,traps:[{v:22200,msg:'That\'s the work done in 60 s. Divide by the efficiency to get the input energy.'},{v:1947,msg:'That\'s a rate (power in, in W). Multiply by the 60 s to get energy.'}]}],
+  hints:['The speed is extra information. Find the work in 60 s: W = P·t.','W = (370 W)(60 s) = 22 200 J. Then Q<sub>h</sub> = W / 0.19.'],
+  sol:['W<sub>net</sub> = P·t = (370 W)(60 s) = 2.22 × 10<sup>4</sup> J','Q<sub>h</sub> = W<sub>net</sub>/eff = 2.22 × 10<sup>4</sup> J / 0.19 = <b>1.2 × 10<sup>5</sup> J</b>']},
+ {set:'s1',id:'A5',text:'A steam engine absorbs 1.98 × 10<sup>5</sup> J and expels 1.49 × 10<sup>5</sup> J in each cycle. Assume that all of the remaining energy is used to do work. (a) What is the engine\'s efficiency? (b) How much work is done in each cycle?',
+  parts:[eff(0.2475,{label:'(a) Efficiency',tol:0.02,traps:[{v:0.7525,msg:'That\'s Q<sub>c</sub>/Q<sub>h</sub>, the wasted fraction. Subtract it from 1.'}]}),
+         {label:'(b) Work per cycle, W<sub>net</sub>',unit:'J',ans:49000,tol:0.02}],
+  hints:['W = Q<sub>h</sub> − Q<sub>c</sub>, and eff = W / Q<sub>h</sub>.','W = 1.98 × 10<sup>5</sup> − 1.49 × 10<sup>5</sup> = 4.9 × 10<sup>4</sup> J.'],
+  sol:['(b) W<sub>net</sub> = Q<sub>h</sub> − Q<sub>c</sub> = 1.98 × 10<sup>5</sup> J − 1.49 × 10<sup>5</sup> J = <b>4.9 × 10<sup>4</sup> J</b>','(a) eff = 1 − Q<sub>c</sub>/Q<sub>h</sub> = 1 − 1.49/1.98 = <b>0.247</b>']},
+ {set:'s1',id:'A6',text:'The world\'s tallest mobile crane can lift 3.00 × 10<sup>4</sup> kg to a height of 1.60 × 10<sup>2</sup> m. What is the efficiency of a heat engine that does the same task while losing 3.60 × 10<sup>8</sup> J of energy by heat to the surroundings? (Use g = 9.8 m/s².)',
+  parts:[eff(0.1156,{tol:0.04,traps:[{v:0.131,msg:'You divided the work by Q<sub>c</sub>. Efficiency divides by Q<sub>h</sub> = W + Q<sub>c</sub>.'},{v:0.884,msg:'That\'s Q<sub>c</sub>/Q<sub>h</sub> — the wasted fraction. Efficiency is 1 minus that.'}]})],
+  hints:['The work the engine does equals the energy needed to lift the load: W = mgh.','W = (3.00 × 10<sup>4</sup>)(9.8)(160) ≈ 4.70 × 10<sup>7</sup> J. Then Q<sub>h</sub> = W + Q<sub>c</sub>.'],
+  sol:['W<sub>net</sub> = mgh = (3.00 × 10<sup>4</sup> kg)(9.8 m/s²)(1.60 × 10<sup>2</sup> m) = 4.70 × 10<sup>7</sup> J','Q<sub>h</sub> = W<sub>net</sub> + Q<sub>c</sub> = 4.70 × 10<sup>7</sup> + 3.60 × 10<sup>8</sup> = 4.07 × 10<sup>8</sup> J','eff = W<sub>net</sub>/Q<sub>h</sub> = 4.70 × 10<sup>7</sup> / 4.07 × 10<sup>8</sup> = <b>0.116</b> (about 12 %)']},
+
+ /* ===== Set II ===== */
+ {set:'s2',id:'B1',text:'A steam engine of a locomotive has an efficiency of 17 percent and receives 5.5 × 10<sup>9</sup> J of energy by heat from its boiler. How much work is done by the engine?',
+  parts:[{label:'Work, W<sub>net</sub>',unit:'J',ans:9.35e8,tol:0.02,traps:[{v:4.565e9,msg:'That\'s the wasted energy Q<sub>h</sub>(1 − eff). The work is eff · Q<sub>h</sub>.'}]}],
+  hints:['W = eff · Q<sub>h</sub>.','W = 0.17 × 5.5 × 10<sup>9</sup> J.'],sol:['W<sub>net</sub> = eff · Q<sub>h</sub> = (0.17)(5.5 × 10<sup>9</sup> J) = <b>9.4 × 10<sup>8</sup> J</b>']},
+ {set:'s2',id:'B2',text:'A coal-burning power plant has an efficiency of 35 percent. If the power plant uses 7.37 × 10<sup>8</sup> J of energy as heat, how much work is done by the power plant?',
+  parts:[{label:'Work, W<sub>net</sub>',unit:'J',ans:2.5795e8,tol:0.02,traps:[{v:4.79e8,msg:'That\'s the wasted energy Q<sub>c</sub>. The work is eff · Q<sub>h</sub>.'}]}],
+  hints:['W = eff · Q<sub>h</sub>.','0.35 × 7.37 × 10<sup>8</sup>.'],sol:['W<sub>net</sub> = (0.35)(7.37 × 10<sup>8</sup> J) = <b>2.6 × 10<sup>8</sup> J</b>']},
+ {set:'s2',id:'B3',text:'A geothermal power plant has an efficiency of 15 percent. If the power plant takes in 9.36 × 10<sup>8</sup> J of energy as heat, how much work is done by the power plant?',
+  parts:[{label:'Work, W<sub>net</sub>',unit:'J',ans:1.404e8,tol:0.02,traps:[{v:7.956e8,msg:'That\'s the wasted energy Q<sub>c</sub>. The work is eff · Q<sub>h</sub>.'}]}],
+  hints:['W = eff · Q<sub>h</sub>.','0.15 × 9.36 × 10<sup>8</sup>.'],sol:['W<sub>net</sub> = (0.15)(9.36 × 10<sup>8</sup> J) = <b>1.4 × 10<sup>8</sup> J</b>']},
+ {set:'s2',id:'B4',text:'If a gasoline engine has an efficiency of 29 percent and receives 693 J of energy by heat during each cycle, how much work is done by the engine?',
+  parts:[{label:'Work, W<sub>net</sub>',unit:'J',ans:200.97,tol:0.02,traps:[{v:492,msg:'That\'s Q<sub>c</sub> (energy wasted). Work = eff · Q<sub>h</sub>.'}]}],
+  hints:['W = eff · Q<sub>h</sub>.','0.29 × 693 J.'],sol:['W<sub>net</sub> = (0.29)(693 J) = <b>2.0 × 10<sup>2</sup> J</b> (201 J)']},
+ {set:'s2',id:'B5',text:'Suppose an engine has an efficiency of 11 percent and performs 1150 J of work each cycle. How much energy is taken in as heat?',
+  parts:[{label:'Energy in, Q<sub>h</sub>',unit:'J',ans:10454.5,tol:0.02,traps:[{v:126.5,msg:'You multiplied W by eff. To find Q<sub>h</sub> you must <em>divide</em> W by eff.'}]}],
+  hints:['W = eff · Q<sub>h</sub>. Solve for Q<sub>h</sub>.','Q<sub>h</sub> = 1150 ÷ 0.11.'],sol:['Q<sub>h</sub> = W<sub>net</sub>/eff = 1150 J / 0.11 = <b>1.0 × 10<sup>4</sup> J</b> (10 450 J)']},
+ {set:'s2',id:'B6',text:'A certain diesel engine performs 372 J of work in each cycle with an efficiency of 33.0 percent. How much energy is transferred from the engine to the exhaust and cooling system as heat?',
+  parts:[{label:'Energy exhausted, Q<sub>c</sub>',unit:'J',ans:755.3,tol:0.02,traps:[{v:372,msg:'That\'s the work. The exhaust heat is Q<sub>h</sub> − W.'},{v:1127.3,msg:'That\'s Q<sub>h</sub>. The question asks for the heat that leaves: Q<sub>c</sub> = Q<sub>h</sub> − W.'}]}],
+  hints:['First find Q<sub>h</sub> = W/eff, then Q<sub>c</sub> = Q<sub>h</sub> − W.','Q<sub>h</sub> = 372 / 0.330 ≈ 1127 J.'],sol:['Q<sub>h</sub> = W<sub>net</sub>/eff = 372 J / 0.330 = 1127 J','Q<sub>c</sub> = Q<sub>h</sub> − W<sub>net</sub> = 1127 J − 372 J = <b>7.55 × 10<sup>2</sup> J</b>']},
+ {set:'s2',id:'B7',text:'A certain propane engine performs 544 J of work in each cycle with an efficiency of 22.25 percent. How much energy is expelled from the engine to the exhaust and cooling system as heat? (The printed problem says "received"; the quantity asked for is the heat leaving the engine, Q<sub>c</sub>.)',
+  parts:[{label:'Energy exhausted, Q<sub>c</sub>',unit:'J',ans:1900.9,tol:0.02,traps:[{v:2444.9,msg:'That\'s Q<sub>h</sub> (energy in). Subtract the work to get Q<sub>c</sub>.'},{v:544,msg:'That\'s the work, not the exhaust heat.'}]}],
+  hints:['Q<sub>h</sub> = W/eff, then Q<sub>c</sub> = Q<sub>h</sub> − W.','Q<sub>h</sub> = 544 / 0.2225 ≈ 2445 J.'],sol:['Q<sub>h</sub> = 544 J / 0.2225 = 2445 J','Q<sub>c</sub> = 2445 J − 544 J = <b>1.90 × 10<sup>3</sup> J</b>']},
+ {set:'s2',id:'B8',text:'Find the efficiency of a gasoline engine that, during one cycle, receives 365 J of energy from combustion and loses 223 J as heat to the exhaust.',
+  parts:[eff(0.389,{traps:[{v:0.611,msg:'That\'s Q<sub>c</sub>/Q<sub>h</sub>, the wasted fraction. Subtract from 1.'}]})],
+  hints:['eff = 1 − Q<sub>c</sub>/Q<sub>h</sub>.','1 − 223/365.'],sol:['eff = 1 − Q<sub>c</sub>/Q<sub>h</sub> = 1 − 223/365 = 1 − 0.611 = <b>0.389</b>']},
+ {set:'s2',id:'B9',text:'Find the efficiency of an engine that, during one cycle, receives 571 J of energy and loses 463 J of energy as heat.',
+  parts:[eff(0.1891,{traps:[{v:0.811,msg:'That\'s Q<sub>c</sub>/Q<sub>h</sub>, the wasted fraction. Subtract from 1.'}]})],
+  hints:['eff = 1 − Q<sub>c</sub>/Q<sub>h</sub>.','1 − 463/571.'],sol:['eff = 1 − 463/571 = 1 − 0.811 = <b>0.189</b>']},
+ {set:'s2',id:'B10',text:'A test model for an experimental engine that uses a new clean-burning fuel does 128 J of work in one cycle and receives 581 J of energy as heat from combustion. What is the engine\'s efficiency?',
+  parts:[eff(0.2203,{traps:[{v:4.54,msg:'The ratio is upside down — divide the work by Q<sub>h</sub> (the bigger number).'},{v:0.78,msg:'That\'s 1 − eff. Efficiency is W/Q<sub>h</sub> directly.'}]})],
+  hints:['eff = W<sub>net</sub> / Q<sub>h</sub>.','128 ÷ 581.'],sol:['eff = W<sub>net</sub>/Q<sub>h</sub> = 128 J / 581 J = <b>0.220</b>']},
+
+ /* ===== Concept check ===== */
+ {set:'concept',id:'C1',type:'mc',text:'Is it possible to construct a heat engine that doesn\'t transfer any energy to its surroundings?',
+  opts:['Yes, if friction is eliminated entirely','Yes, if it operates at a high enough temperature','No — operating in a cycle, it must always expel some energy as heat (Q<sub>c</sub> &gt; 0)','No — it would violate the first law of thermodynamics'],correct:[2],
+  why:'This is the second law. An engine with Q<sub>c</sub> = 0 would conserve energy (so the first law is fine) but would convert heat entirely into work in a cycle, which is impossible.',hints:['Think about which law says "some energy must be given up at a lower temperature".']},
+ {set:'concept',id:'C2',text:'An engineer claims to have built an engine that takes in 7.5 × 10<sup>4</sup> J and expels 3.5 × 10<sup>4</sup> J. (a) How much energy can the engine provide by doing work? (b) What is the efficiency of the engine?',
+  parts:[{label:'(a) Work, W<sub>net</sub>',unit:'J',ans:40000,tol:0.01,traps:[{v:110000,msg:'You added instead of subtracting. W = Q<sub>h</sub> − Q<sub>c</sub>.'}]},
+         eff(0.5333,{label:'(b) Efficiency',tol:0.02,traps:[{v:0.4667,msg:'That\'s Q<sub>c</sub>/Q<sub>h</sub>. Efficiency is W/Q<sub>h</sub>.'}]})],
+  hints:['W = Q<sub>h</sub> − Q<sub>c</sub>; eff = W / Q<sub>h</sub>.','W = 7.5 × 10<sup>4</sup> − 3.5 × 10<sup>4</sup> = 4.0 × 10<sup>4</sup> J.'],
+  sol:['(a) W<sub>net</sub> = Q<sub>h</sub> − Q<sub>c</sub> = 7.5 × 10<sup>4</sup> − 3.5 × 10<sup>4</sup> = <b>4.0 × 10<sup>4</sup> J</b>','(b) eff = 4.0 × 10<sup>4</sup> / 7.5 × 10<sup>4</sup> = <b>0.53</b>']},
+ {set:'concept',id:'C3',type:'mc',text:'Continuing question 2: is an efficiency of 0.53 possible?',
+  opts:['No — the second law forbids any engine from being more than 50 % efficient','Yes — it doesn\'t break the second law (Q<sub>c</sub> &gt; 0, eff &lt; 1), but it is far better than the measured efficiency of real engines of these types (0.17–0.35), so the claim should be tested','No — W is larger than Q<sub>c</sub>, which is never allowed'],correct:[1],
+  why:'The second law only requires eff &lt; 1. But the table shows even the calculated <em>maximum</em> for most engines is below 0.60, and measured values are 0.17–0.35, so 0.53 is extraordinary.',hints:['Check the efficiency table: how does 0.53 compare with real engines?']},
+ {set:'concept',id:'C4',type:'multi',text:'Which of these have <b>high entropy</b>? (select all that apply)',
+  opts:['Papers scattered randomly across a desk','Papers organized in a report','A freshly opened pack of cards','A mixed deck of cards','A room after a party','A room before a party'],correct:[0,3,4],
+  why:'High entropy = high disorder. Scattered papers, a mixed deck, and a messy room are disordered; an organized report, a new sorted pack, and a tidy room are ordered (low entropy).',hints:['A system has high entropy when it can be arranged in many ways that all look "random".']},
+ {set:'concept',id:'C5',type:'mc',text:'Some compounds form spontaneously even though they are more ordered than their components. How is this consistent with the second law?',
+  opts:['It isn\'t — it proves the second law is sometimes violated','The compound\'s entropy decrease is offset by a larger entropy increase elsewhere (e.g., energy released to the surroundings as heat), so total entropy still increases','Ordered substances always have higher entropy','The second law only applies to engines, not chemical reactions'],correct:[1],
+  why:'The second law applies to the entire universe: local decreases are allowed if surroundings gain more entropy.',hints:['Remember the refrigerator: freezing water vs. the room air.']},
+ {set:'concept',id:'C6',type:'mc',text:'Water freezes in a refrigerator, so its entropy decreases. Which statement explains why this doesn\'t violate the second law?',
+  opts:['Cold things have no entropy','The refrigerator exhausts heat to the room, increasing the air\'s entropy by more than the water\'s decreased','Entropy only increases in engines','The ice is actually more disordered than the water'],correct:[1],
+  why:'Total entropy of the refrigerator + room increases. This also applies to other examples, e.g., a living cell building ordered structures using the Sun\'s energy, or a rusting-in-reverse: any local order costs more disorder elsewhere.',hints:['Where does the heat removed from the water end up?']},
+ {set:'concept',id:'C7',type:'mc',text:'A steam-driven turbine is a major component of an electric power plant. Why is it advantageous to raise the steam\'s temperature as much as possible?',
+  opts:['It increases Q<sub>c</sub>, so more energy is wasted','A larger temperature difference between the hot steam and the surroundings lets the engine convert a larger fraction of Q<sub>h</sub> into work (higher efficiency)','It makes the engine 100 % efficient','It lowers the work output'],correct:[1],
+  why:'Efficiency increases when Q<sub>h</sub> is greater (or Q<sub>c</sub> smaller), making Q<sub>c</sub>/Q<sub>h</sub> smaller. A hotter source relative to the cold sink does exactly that.',hints:['Which quantity in eff = 1 − Q<sub>c</sub>/Q<sub>h</sub> do you want to make small?']},
+ {set:'concept',id:'C8',type:'mc',text:'Conceptual challenge: use the second law to explain why an automobile engine requires a cooling system.',
+  opts:['To make the engine 100 % efficient','Because the engine must expel energy (Q<sub>c</sub> &gt; 0) to a lower-temperature body; the cooling system carries that heat away so the engine can keep operating','Because friction doesn\'t exist in cool engines','Because cooling creates work'],correct:[1],
+  why:'No cyclic engine can convert all heat into work. Heat must flow to a cooler body — the coolant and radiator — or the engine would overheat.',hints:['Where must the energy Q<sub>c</sub> go?']},
+ {set:'concept',id:'C9',type:'mc',text:'Conceptual challenge: why are many coal-burning and nuclear power plants located near rivers?',
+  opts:['Rivers supply the coal and uranium','The river is the cold reservoir: its water absorbs the large Q<sub>c</sub> each power plant must expel','Rivers increase the plant\'s Q<sub>h</sub>','Because rivers have high entropy'],correct:[1],
+  why:'With efficiencies of only 30–40 %, most of the energy is exhausted and needs a large, cooler body — like a river or lake — to receive it.',hints:['Think about where the 60–70 % of unused energy goes.']},
+ {set:'concept',id:'C10',type:'mc',text:'A system left to itself tends to go toward a state that…',
+  opts:['has less disorder and lower probability','has greater disorder (entropy) and higher probability','has exactly zero entropy','can do the most work'],correct:[1],
+  why:'Disordered arrangements can occur in many more ways, so they are far more probable. Once at maximum entropy, the system tends to stay there.',hints:['Recall the 8 × 10<sup>67</sup> ways to arrange 52 cards.']}
+];
+const SETS=[
+ {id:'lesson',name:'Textbook Practice',desc:'Lesson 10.3, Problem C Practice (6 problems).'},
+ {id:'s1',name:'Problem Set I',desc:'Additional practice, including problems with power and time.'},
+ {id:'s2',name:'Problem Set II',desc:'Direct use of the efficiency equation (10 problems).'},
+ {id:'concept',name:'Concept Check',desc:'Formative assessment and conceptual challenges.'}
+];
+let curSet='lesson';
+
+function setStats(sid){ const ps=P.filter(p=>p.set===sid); return {done:ps.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length,total:ps.length}; }
+function updateOverall(){
+  const done=P.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length;
+  LiaSync.summary(done,P.length);
+  $('#overallText').textContent=`${done} of ${P.length} practice problems solved`;
+  $('#overallBar').style.width=(100*done/P.length)+'%';
+  $$('#setPicker button').forEach(b=>{ const s=setStats(b.dataset.set); $('small',b).textContent=`${s.done}/${s.total}`; });
+}
+function buildPicker(){
+  const pk=$('#setPicker'); pk.innerHTML='';
+  SETS.forEach(s=>{
+    const b=document.createElement('button'); b.type='button'; b.dataset.set=s.id; b.setAttribute('aria-pressed',String(s.id===curSet));
+    b.innerHTML=`${s.name}<small></small>`; b.addEventListener('click',()=>{ curSet=s.id; buildPicker(); renderSet(); }); pk.appendChild(b);
+  });
+  updateOverall();
+}
+function renderSet(){
+  const host=$('#problemList'); host.innerHTML='';
+  const s=SETS.find(x=>x.id===curSet);
+  const head=document.createElement('div'); head.className='sethead';
+  head.innerHTML=`<p>${s.desc}</p>`; host.appendChild(head);
+  P.filter(p=>p.set===curSet).forEach((p,i)=>host.appendChild(renderProblem(p,i+1)));
+}
+function renderProblem(p,n){
+  const st=state['p_'+p.id]=state['p_'+p.id]||{done:false,tries:0};
+  const el=document.createElement('div'); el.className='prob'+(st.done?' done':'');
+  el.innerHTML=`<div class="num"><span>Problem ${n}</span><span class="badge">${st.done?'✔ Solved':''}</span></div><p style="margin:6px 0 4px">${p.text}</p>`;
+  const body=document.createElement('div'); el.appendChild(body);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  const hintHost=document.createElement('div'), solHost=document.createElement('div');
+  const acts=document.createElement('div'); acts.className='acts';
+  const check=document.createElement('button'); check.className='btn'; check.type='button'; check.textContent='Check';
+  const hint=document.createElement('button'); hint.className='btn ghost'; hint.type='button'; hint.textContent='Hint';
+  const sol=document.createElement('button'); sol.className='btn ghost'; sol.type='button';
+  let hintN=0, inputs=[], checkFn;
+
+  if(p.type==='mc'||p.type==='multi'){
+    const multi=p.type==='multi';
+    p.opts.forEach((o,i)=>{
+      const lab=document.createElement('label'); lab.className='opt'; lab.style.display='block'; lab.style.cursor='pointer';
+      const inp=document.createElement('input'); inp.type=multi?'checkbox':'radio'; inp.name='q_'+p.id; inp.value=i; inp.style.marginRight='10px';
+      lab.append(inp); lab.insertAdjacentHTML('beforeend',o); body.appendChild(lab); inputs.push(inp);
+    });
+    checkFn=()=>{
+      const sel=inputs.filter(i=>i.checked).map(i=>+i.value);
+      if(!sel.length){ fb.className='fb near'; fb.textContent=multi?'Select at least one option.':'Select an answer first.'; return null; }
+      const ok=sel.length===p.correct.length&&p.correct.every(c=>sel.includes(c));
+      inputs.forEach(i=>{ const l=i.parentElement; l.classList.remove('right','wrong'); });
+      if(ok){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+p.why; return true; }
+      sel.forEach(v=>{ if(!p.correct.includes(v)) inputs[v].parentElement.classList.add('wrong'); });
+      if(multi){
+        const missed=p.correct.filter(c=>!sel.includes(c)).length, extra=sel.filter(v=>!p.correct.includes(v)).length;
+        fb.className='fb no'; fb.textContent=`Not yet — ${extra?extra+' selected option(s) should not be there':''}${extra&&missed?' and ':''}${missed?missed+' correct option(s) are missing':''}. Try again.`;
+      } else { fb.className='fb no'; fb.textContent='Not quite. Re-read the question and think about which law or equation applies.'; }
+      return false;
+    };
+  } else {
+    p.parts.forEach((part,i)=>{
+      const row=document.createElement('div'); row.className='partrow';
+      const id=`in_${p.id}_${i}`;
+      row.innerHTML=`<label for="${id}">${part.label}</label>`;
+      const inp=document.createElement('input'); inp.type='text'; inp.id=id; inp.autocomplete='off'; inp.placeholder=part.isEff?'e.g. 0.25 or 25%':'e.g. 1.2e5';
+      const u=document.createElement('span'); u.className='u'; u.textContent=part.unit==='(no unit)'?'':part.unit;
+      const pf=document.createElement('span'); pf.className='fb'; pf.style.margin='0'; pf.setAttribute('aria-live','polite');
+      row.append(inp,u,pf); body.appendChild(row); inputs.push({inp,pf});
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') check.click(); });
+    });
+    checkFn=()=>{
+      let all=true, any=false;
+      inputs.forEach(({inp,pf},i)=>{
+        if(!inp.value.trim()){ pf.className='fb near'; pf.textContent='Enter a value.'; all=false; return; }
+        any=true;
+        const j=judge(parseNum(inp.value),p.parts[i]);
+        pf.className='fb '+j.state; pf.textContent=(j.state==='ok'?'✔ ':'')+j.msg;
+        if(j.state!=='ok') all=false;
+      });
+      fb.textContent=''; fb.className='fb';
+      return any?all:null;
+    };
+  }
+  function showSol(){
+    if(p.sol){ solHost.className='solbox'; solHost.innerHTML='<b>Worked solution</b><ol>'+p.sol.map(s=>`<li>${s}</li>`).join('')+'</ol>'; }
+    else { solHost.className='solbox'; solHost.innerHTML='<b>Answer explained</b><p style="margin:4px 0 0">'+p.why+'</p>'; }
+  }
+  function syncSol(){
+    const open=!!solHost.innerHTML;
+    sol.textContent=open?'Hide solution':'Show solution';
+    sol.disabled=!(st.done||st.tries>=2);
+    sol.title=sol.disabled?'Available after two attempts':'';
+    if(sol.disabled) sol.textContent='Solution (after 2 tries)';
+  }
+  check.addEventListener('click',()=>{
+    const r=checkFn(); if(r===null) return;
+    st.tries++;
+    if(r){
+      if(!st.done){ st.done=true; el.classList.add('done'); $('.badge',el).textContent='✔ Solved'; }
+      if(p.parts) fb.innerHTML='<b>Correct!</b> '+(st.tries===1?'First try — nice work.':'Well done for sticking with it.');
+      fb.className='fb ok'; if(p.parts) fb.className='fb ok';
+    } else if(p.parts && st.tries>=2 && !st.done){ fb.className='fb near'; fb.textContent='Still stuck? Try another hint, or open the worked solution.'; }
+    save(); updateOverall(); syncSol();
+  });
+  hint.addEventListener('click',()=>{
+    const hs=p.hints||[]; if(!hs.length) return;
+    hintN=Math.min(hintN+1,hs.length);
+    hintHost.className='hintbox'; hintHost.innerHTML=`<b>Hint ${hintN}${hs.length>1?' of '+hs.length:''}:</b> `+hs.slice(0,hintN).map((h,i)=>i===hintN-1?h:'<span class="pnote">'+h+'</span>').reverse().join('<br>');
+    hint.textContent=hintN<hs.length?'Another hint':'Hint';
+  });
+  sol.addEventListener('click',()=>{ if(sol.disabled) return; if(solHost.innerHTML){ solHost.innerHTML=''; solHost.className=''; } else showSol(); syncSol(); });
+  acts.append(check,hint,sol); el.append(acts,fb,hintHost,solHost);
+  syncSol();
+  return el;
+}
+
+/* reset + init */
+$('#resetAll').addEventListener('click',()=>{ if(confirm('Clear all saved progress on this device?')){ state={}; save(); buildPicker(); renderSet(); } });
+buildPicker(); renderSet();
+const h=(location.hash||'').slice(1); if(['review','examples','practice'].includes(h)) showTab(h);
+window.LIA={P,EX,parseNum,judge};
+});
+</script>
+</body>
+</html>
