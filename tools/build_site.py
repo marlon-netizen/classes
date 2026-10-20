@@ -1,14 +1,15 @@
 #!/usr/bin/env python3
 """Build / refresh the class website.
 
-Folder layout (each folder = one "area" with its own student list and codes):
-    faith-formation/     lesson pages + lia-config.js + admin.html + index.html
+Folder layout (each student folder = one "area" with its own student list and codes):
+    faith-formation/     lesson pages + lia-config.js + index.html     (student facing)
     ciencias-sociales/   ...
     math-physics/        ...
-    shared/lia-sync.js   the sign-in + progress-saving module every page loads
-    shared/admin.template.html   source of every folder's admin.html (students, codes)
-    shared/scores.template.html  source of every folder's scores.html (teacher dashboard: scores & progress)
-    index.html           the site's front page
+    teacher/             ALL teacher tools in one place - NOT linked from any student page:
+                           index.html (teacher home), admin.html (students & codes), scores.html (scores & progress)
+    shared/lia-sync.js   the sign-in + progress-saving module every student page loads
+    shared/admin.template.html, shared/scores.template.html   sources of the teacher pages
+    index.html           the site's front page (students)
 
 Run it any time you add or move a page (it is safe to run again and again):
 
@@ -34,7 +35,7 @@ AREAS = [
     dict(folder="math-physics", name="Math & Physics",
          blurb="All mathematics and physics classes: Algebra, AP Statistics, Physics I and Physics II."),
 ]
-SKIP = {"index.html", "admin.html", "scores.html"}
+SKIP = {"index.html", "admin.html", "scores.html"}   # (older copies of the teacher pages are removed from the student folders)
 START, END = "<!--LIA-SYNC-START-->", "<!--LIA-SYNC-END-->"
 BLOCK = START + '<script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script>' + END
 BLOCK_RE = re.compile(re.escape(START) + r".*?" + re.escape(END) + r"\n?", re.S)
@@ -132,16 +133,38 @@ def main():
             cards.append((p.name, "", title, desc))
         use = a.url and (not a.area or a.area == area["folder"])
         write_config(folder, area, pages, a.url if use else None, a.key if use else None)
-        (folder / "admin.html").write_text(template, encoding="utf8")
-        (folder / "scores.html").write_text(scores_template, encoding="utf8")
+        for old in ("admin.html", "scores.html"):   # teacher tools live in teacher/ now
+            if (folder / old).exists():
+                (folder / old).unlink()
         (folder / "index.html").write_text(hub(
             area["name"], area["blurb"], cards,
-            '<a href="../index.html">← All subjects</a> · Teachers: <a href="scores.html">Scores &amp; progress</a> · <a href="admin.html">Students &amp; codes</a>'), encoding="utf8")
+            '<a href="../index.html">← All subjects</a>'), encoding="utf8")
         root_cards.append((area["folder"] + "/", "%d lessons" % len(files), area["name"], area["blurb"]))
         print("%-18s %2d pages connected" % (area["folder"], len(files)))
     (ROOT / "index.html").write_text(hub(
         "Student learning site", "Choose your subject, then sign in with the access code your teacher gave you.", root_cards,
-        "Each subject has its own student list and codes · Teachers: open a subject, then “Scores & progress” or “Students & codes”."), encoding="utf8")
+        "Sign in on each lesson page with the access code your teacher gave you."), encoding="utf8")
+    # ---- teacher tools (separate from the student pages)
+    tdir = ROOT / "teacher"
+    tdir.mkdir(exist_ok=True)
+    (tdir / "admin.html").write_text(template, encoding="utf8")
+    (tdir / "scores.html").write_text(scores_template, encoding="utf8")
+    tcards = "\n".join(
+        '<div class="card"><span class="tag">%s</span><h3>%s</h3><p>%s</p><p class="acts"><a class="btn" href="scores.html?area=%s">Scores &amp; progress</a>'
+        '<a class="btn ghost" href="admin.html?area=%s">Students &amp; codes</a><a class="btn ghost" href="../%s/" target="_blank" rel="noopener">Student lessons ↗</a></p></div>'
+        % (html.escape("%d lessons" % len([p for p in (ROOT / a["folder"]).glob("*.html") if p.name not in SKIP])), html.escape(a["name"]), html.escape(a["blurb"]), a["folder"], a["folder"], a["folder"])
+        for a in AREAS)
+    (tdir / "index.html").write_text(
+        '<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta name="robots" content="noindex,nofollow">\n'
+        '<title>Teacher tools | Lincoln International Academy</title>\n' + FONTS + '\n<style>' + HUB_CSS +
+        '.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}.card h3{margin:0 0 .3em;font-size:1.25rem;color:var(--primary)}.card p{margin:.2em 0 .8em;color:var(--muted)}'
+        '.acts{display:flex;flex-wrap:wrap;gap:8px}.btn{display:inline-block;text-decoration:none;font-weight:600;font-size:.9rem;border-radius:8px;padding:7px 14px;border:1px solid var(--primary);background:var(--primary);color:#fff}'
+        '.btn.ghost{background:transparent;color:var(--primary)}.note{background:var(--soft);border-radius:10px;padding:12px 16px;margin:18px 0 0;color:var(--muted);font-size:.95rem}</style>\n</head>\n<body>\n'
+        '<header><div class="wrap"><div class="eyebrow">Teacher tools</div><div class="school">Lincoln International Academy</div><p>Scores, progress, students and access codes for every subject.</p></div></header>\n'
+        '<main><div class="wrap"><div class="grid">\n' + tcards + '\n</div>'
+        '<p class="note"><b>Sign in</b> with your teacher account on the page you open (one login works for all of them). '
+        'This area is not linked from the student pages; students only ever see the lessons. First time? Follow <code>supabase/README.md</code>.</p></div></main>\n'
+        '<footer><div class="wrap"><a href="../index.html">← Student site</a></div></footer>\n</body>\n</html>\n', encoding="utf8")
     print("root index.html written")
 
 

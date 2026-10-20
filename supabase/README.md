@@ -6,12 +6,16 @@ Everything the student does on a page (answers, scores, names, drafts) is **save
 after each change** and **restored automatically the next time they sign in – on any device**.
 
 ```
-index.html                     front page → choose a subject
-faith-formation/               Faith Formation + Growing in Values   (lia-config.js, admin.html, index.html, lessons…)
+index.html                     front page for students → choose a subject
+faith-formation/               Faith Formation + Growing in Values   (lia-config.js, index.html, lessons…)
 ciencias-sociales/             Ciencias Sociales
 math-physics/                  all Math & Physics classes
+teacher/                       ALL teacher tools – not linked from any student page
+  index.html                     teacher home (one button per subject)
+  scores.html                    scores & progress dashboard
+  admin.html                     students & access codes
 shared/lia-sync.js             sign-in + saving module loaded by every lesson page
-shared/admin.template.html     source of each folder's admin.html
+shared/*.template.html         sources of the two teacher pages
 supabase/schema.sql            the database (run once per Supabase project)
 tools/build_site.py            connects pages, rebuilds menus and admin pages
 ```
@@ -43,7 +47,7 @@ Commit and publish the site as usual. Until a folder's `lia-config.js` is filled
 without sign-in (progress stays in the student's browser).
 
 ### 3. Add your students
-Open `<your site>/math-physics/admin.html` (or `faith-formation/…`, `ciencias-sociales/…`) and sign in with the teacher account.
+Open `<your site>/teacher/` (the teacher home – bookmark it; students never see a link to it), choose a subject and **Students & codes**, and sign in with the teacher account. One login works for every teacher page; the subject switcher in the page header changes between Faith Formation, Ciencias Sociales and Math & Physics.
 * **+ Add student** – name, grade, class, e-mail, notes and a code (use *Generate*, or type your own: 4+ letters/numbers).
 * **Bulk add** – paste one student per line: `Name, Grade, Class, E-mail, Notes, Code` (only the name is required; empty code = generated).
 * **Print code slips** – one cut-out slip per active student, ready to hand out.
@@ -54,7 +58,7 @@ Codes are not case-sensitive and ignore dashes/spaces (`k7m2-qx9p` = `K7M2QX9P`)
 different folders – they are different students. A deactivated student can no longer sign in.
 
 ## Seeing scores and progress (teacher dashboard)
-Open `<folder>/scores.html` (link at the bottom of each folder's menu, and in the admin header) and sign in with the same teacher account.
+Open `<your site>/teacher/` → **Scores & progress** for a subject (same teacher account).
 * A grid of **students × lesson pages** with colour-coded **score %** or **progress %** (switch with Score / Progress / Both).
 * **Class average** under every page title; **Overall score / progress** per student; last activity.
 * **Needs attention** flags: no activity for 7+ days, never started, or score under 60 %.
@@ -75,7 +79,7 @@ Open `<folder>/scores.html` (link at the bottom of each folder's menu, and in th
 
 ## Adding new pages
 Drop the `.html` file in the right folder and run `python3 tools/build_site.py`. It adds the sign-in/saving scripts to the page,
-updates that folder's menu and admin labels. Any page that keeps its state in `localStorage` is saved automatically.
+updates that folder's menu and the teacher pages' labels. Any page that keeps its state in `localStorage` is saved automatically.
 Pages that show `N of M … solved` in an element with `id="overallText"` also show completion in the admin table.
 
 ## Security notes

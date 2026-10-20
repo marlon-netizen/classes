@@ -5,7 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Scores &amp; progress | Lincoln International Academy</title>
-<script src="lia-config.js"></script>
+<script>
+/* one admin page for all subjects: ?area=faith-formation | ciencias-sociales | math-physics */
+(function(){var A=['faith-formation','ciencias-sociales','math-physics'],a=new URLSearchParams(location.search).get('area');
+if(A.indexOf(a)<0){try{a=localStorage.getItem('lia-teacher-area');}catch(e){}} if(A.indexOf(a)<0)a=A[2];
+try{localStorage.setItem('lia-teacher-area',a);}catch(e){} window.LIA_TEACHER_AREA=a;
+document.write('<script src="../'+a+'/lia-config.js"><\/script>');})();
+</script>
 <style>
 :root{--bg:#f3f0e9;--surface:#fffdf9;--surface-2:#f8f5ee;--ink:#1e2937;--muted:#5a6575;--line:#ddd6c7;--primary:#1f3a5f;--primary-ink:#fff;--accent:#2b7a76;--warm:#b4763a;--warm-soft:#f6ebdb;--good:#2c7a57;--good-soft:#e1f1e8;--mid:#6c8a2f;--mid-soft:#eef2dc;--low:#b4763a;--low-soft:#f6ebdb;--bad:#a94a3f;--bad-soft:#f6e4e1;--blue-soft:#e6edf5}
 @media (prefers-color-scheme: dark){:root{--bg:#11161d;--surface:#18202a;--surface-2:#1d2631;--ink:#e5e9ef;--muted:#9aa5b5;--line:#2d3947;--primary:#9dbce6;--primary-ink:#0f1722;--accent:#58b5ae;--warm:#d9a165;--warm-soft:#2d2519;--good:#5cc08f;--good-soft:#183024;--mid:#a6c25a;--mid-soft:#262e16;--low:#d9a165;--low-soft:#2d2519;--bad:#e08a7d;--bad-soft:#331e1c;--blue-soft:#1b2838}}
@@ -51,7 +57,7 @@ dialog{border:1px solid var(--line);border-radius:14px;background:var(--surface)
 <body>
 <header class="top"><div class="wrap">
   <div><div class="eyebrow">Scores &amp; progress · <span id="areaName"></span></div><div class="school">Lincoln International Academy</div></div>
-  <div class="who" id="who" hidden><a href="index.html">← Lessons</a><a href="admin.html">Manage students &amp; codes</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
+  <div class="who" id="who" hidden><select id="areaSel" aria-label="Subject" style="padding:4px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.5);background:transparent;color:#f3f0e9"><option value="faith-formation">Faith Formation</option><option value="ciencias-sociales">Ciencias Sociales</option><option value="math-physics">Math &amp; Physics</option></select><a href="index.html">← Teacher tools</a><a id="lnkAdmin" href="admin.html">Manage students &amp; codes</a><a id="lnkLessons" href="#">Student lessons ↗</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
 </div></header>
 <main><div class="wrap">
   <div class="card login" id="loginCard" hidden>
@@ -192,9 +198,11 @@ $('#viewSeg').addEventListener('click',function(e){ var b=e.target.closest('butt
 $('#btnCsv').addEventListener('click',csv); $('#btnPrint').addEventListener('click',function(){ window.print(); });
 $('#dClose').addEventListener('click',function(){ $('#dlg').close(); });
 $('#btnRefresh').addEventListener('click',function(){ load(); }); $('#btnOut').addEventListener('click',function(){ out(''); });
-$('#areaName').textContent=CFG.areaName||''; document.title='Scores & progress · '+(CFG.areaName||'');
+$('#areaName').textContent=CFG.areaName||'';
+(function(){var s=document.getElementById('areaSel'); if(s){ s.value=window.LIA_TEACHER_AREA; s.style.color='#f3f0e9'; s.addEventListener('change',function(){ location.search='?area='+s.value; }); } })();
+$('#lnkAdmin').href='admin.html?area='+window.LIA_TEACHER_AREA; $('#lnkLessons').href='../'+window.LIA_TEACHER_AREA+'/'; $('#lnkLessons').target='_blank'; document.title='Scores & progress · '+(CFG.areaName||'');
 $('#loginForm').addEventListener('submit',function(ev){ ev.preventDefault(); $('#lBtn').disabled=true; msg($('#lErr'),''); auth({email:$('#lEmail').value.trim(),password:$('#lPass').value},'password').then(function(j){ saveSess(j); sess.email=$('#lEmail').value.trim(); return load(); }).catch(function(e){ msg($('#lErr'),e.message,'err'); }).then(function(){ $('#lBtn').disabled=false; }); });
-if(!LIVE) msg($('#setupMsg'),'Supabase is not connected yet. Fill in lia-config.js (see supabase/README.md).','info');
+if(!LIVE) msg($('#setupMsg'),'Supabase is not connected yet. Fill in the subject folder\'s lia-config.js (see supabase/README.md).','info');
 else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=null; } if(sess) load().catch(function(){ out(''); }); else $('#loginCard').hidden=false; }
 })();
 </script>

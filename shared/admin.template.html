@@ -5,7 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher admin | Lincoln International Academy</title>
-<script src="lia-config.js"></script>
+<script>
+/* one admin page for all subjects: ?area=faith-formation | ciencias-sociales | math-physics */
+(function(){var A=['faith-formation','ciencias-sociales','math-physics'],a=new URLSearchParams(location.search).get('area');
+if(A.indexOf(a)<0){try{a=localStorage.getItem('lia-teacher-area');}catch(e){}} if(A.indexOf(a)<0)a=A[2];
+try{localStorage.setItem('lia-teacher-area',a);}catch(e){} window.LIA_TEACHER_AREA=a;
+document.write('<script src="../'+a+'/lia-config.js"><\/script>');})();
+</script>
 <style>
 :root{--bg:#f3f0e9;--surface:#fffdf9;--surface-2:#f8f5ee;--ink:#1e2937;--muted:#5a6575;--line:#ddd6c7;--primary:#1f3a5f;--primary-ink:#fff;--accent:#2b7a76;--accent-soft:#e1efed;--warm:#b4763a;--warm-soft:#f6ebdb;--good:#2c7a57;--good-soft:#e1f1e8;--bad:#a94a3f;--bad-soft:#f6e4e1;--blue-soft:#e6edf5}
 @media (prefers-color-scheme: dark){:root{--bg:#11161d;--surface:#18202a;--surface-2:#1d2631;--ink:#e5e9ef;--muted:#9aa5b5;--line:#2d3947;--primary:#9dbce6;--primary-ink:#0f1722;--accent:#58b5ae;--accent-soft:#1a2f32;--warm:#d9a165;--warm-soft:#2d2519;--good:#5cc08f;--good-soft:#183024;--bad:#e08a7d;--bad-soft:#331e1c;--blue-soft:#1b2838}}
@@ -71,7 +77,7 @@ dialog h2{margin:0 0 6px}
 <header class="top">
   <div class="wrap">
     <div><div class="eyebrow">Teacher admin · <span id="areaName"></span></div><div class="school">Lincoln International Academy</div></div>
-    <div class="who" id="who" hidden><a href="index.html" style="color:#cfd8e6">← Lessons</a><a href="scores.html" style="color:#cfd8e6">Scores &amp; progress</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
+    <div class="who" id="who" hidden><select id="areaSel" aria-label="Subject" style="padding:4px 8px;border-radius:8px;border:1px solid rgba(255,255,255,.5);background:transparent;color:#f3f0e9"><option value="faith-formation">Faith Formation</option><option value="ciencias-sociales">Ciencias Sociales</option><option value="math-physics">Math &amp; Physics</option></select><a href="index.html" style="color:#cfd8e6">← Teacher tools</a><a id="lnkScores" href="scores.html" style="color:#cfd8e6">Scores &amp; progress</a><a id="lnkLessons" href="#" style="color:#cfd8e6">Student lessons ↗</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
   </div>
 </header>
 
@@ -148,6 +154,8 @@ dialog h2{margin:0 0 6px}
 var CFG=window.LIA_CONFIG||{}, $=function(s){return document.querySelector(s);};
 var LIVE=CFG.url&&CFG.anonKey&&!/YOUR_SUPABASE/.test(CFG.url+CFG.anonKey);
 $('#areaName').textContent=CFG.areaName||'';
+(function(){var s=document.getElementById('areaSel'); if(s){ s.value=window.LIA_TEACHER_AREA; s.style.color='#f3f0e9'; s.addEventListener('change',function(){ location.search='?area='+s.value; }); } })();
+$('#lnkScores').href='scores.html?area='+window.LIA_TEACHER_AREA; $('#lnkLessons').href='../'+window.LIA_TEACHER_AREA+'/'; $('#lnkLessons').target='_blank';
 var BASE=String(CFG.url||'').replace(/\/+$/,'');
 var PAGES=CFG.pages||{}, AREA=CFG.area||'default';
 var SK='lia-admin-session:'+(CFG.url||''), sess=null, students=[], progress=[], editId=null, detId=null;
@@ -288,7 +296,7 @@ $('#btnCsv').addEventListener('click',function(){
   var a=document.createElement('a'); a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'})); a.download='students-'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
 });
 $('#btnPrint').addEventListener('click',function(){
-  var where=location.origin+location.pathname.replace(/[^\/]*$/,''); if(location.protocol==='file:') where='(your class website)';
+  var where=location.protocol==='file:'?'(your class website)':new URL('../'+AREA+'/',location.href).href;
   $('#slips').innerHTML=visible().filter(function(s){return s.active;}).map(function(s){ return '<div class="slip"><b>Lincoln International Academy</b><br>'+esc(CFG.areaName||'')+'<br>'+esc(s.full_name)+'<div class="c">'+esc(fmtCode(s.code))+'</div><small>Open any lesson page at<br>'+esc(where)+'<br>and type this code to sign in. Keep it private.</small></div>'; }).join('');
   window.print();
 });
@@ -310,7 +318,7 @@ $('#loginForm').addEventListener('submit',function(ev){
   auth({email:$('#lEmail').value.trim(),password:$('#lPass').value},'password').then(function(j){ saveSess(j); sess.email=$('#lEmail').value.trim(); return load(); })
    .catch(function(e){ msg($('#lErr'),e.message,'err'); }).then(function(){ $('#lBtn').disabled=false; });
 });
-if(!LIVE){ msg($('#setupMsg'),'Supabase is not connected yet. Put your project URL and anon key in lia-config.js (or run: python3 tools/build_site.py --url … --key …). See supabase/README.md.','info'); }
+if(!LIVE){ msg($('#setupMsg'),'Supabase is not connected yet. Put your project URL and anon key in the subject folder\'s lia-config.js (or run: python3 tools/build_site.py --url … --key …). See supabase/README.md.','info'); }
 else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=null; }
   if(sess) load().catch(function(){ signedOut(''); }); else show($('#loginCard'),true); }
 })();
