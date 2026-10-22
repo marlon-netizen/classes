@@ -1,5 +1,14 @@
 -- New random codes for every student in the Math and Physics folders. Saved progress, names, classes and assignments are kept.
 -- A student who is in both folders gets the SAME new code in both. The teacher master code is not changed.
+-- Safety check: stop with a clear message if there are no students in the Math / Physics folders yet
+-- (students are still in the old "math-physics" folder until supabase/migrate-split-math-physics.sql has been run).
+do $$
+begin
+  if not exists (select 1 from public.students where area in ('math', 'physics') and not is_preview) then
+    raise exception 'No students found in the Math or Physics folders. Run supabase/migrate-split-math-physics.sql first (students are still in the old math-physics folder).';
+  end if;
+end $$;
+
 do $$
 declare
   r     record;
