@@ -115,6 +115,3 @@ Links that were already shared with the old file name stop working: send the new
 Math and Physics used to share one folder/area (`math-physics`). They are now two folders (`math/`, `physics/`), each with its own student list and codes.
 To carry over existing students, saved progress and lesson assignments, run `supabase/migrate-split-math-physics.sql` once in the SQL Editor: every student keeps the **same code**
 in each folder they belong to (a student in both Math and Physics gets one row in each). Old links `…/math-physics/<page>.html` stop working; use the new links from the teacher home.
-
-## New codes for a folder (keeps progress)
-`supabase/new-codes-math-physics.sql` gives every student in the Math and Physics folders a new random code without touching names, classes, assignments or saved progress (a student in both folders gets the same new code in both; the teacher master code is unchanged). Run it once in the SQL Editor, then export the result table or use **Print code slips**. To do the same for another folder, change the folder names in its three `area in (...)` lists.
