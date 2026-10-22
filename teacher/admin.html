@@ -6,8 +6,8 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher admin | Lincoln International Academy</title>
 <script>
-/* one admin page for all subjects: ?area=faith-formation | ciencias-sociales | math-physics */
-(function(){var A=['faith-formation','ciencias-sociales','math-physics'],a=new URLSearchParams(location.search).get('area');
+/* one admin page for all subjects: ?area=faith-formation | ciencias-sociales | math | physics */
+(function(){var A=['faith-formation','ciencias-sociales','math','physics'],a=new URLSearchParams(location.search).get('area');
 if(A.indexOf(a)<0){try{a=localStorage.getItem('lia-teacher-area');}catch(e){}} if(A.indexOf(a)<0)a=A[2];
 try{localStorage.setItem('lia-teacher-area',a);}catch(e){} window.LIA_TEACHER_AREA=a;
 document.write('<script src="../'+a+'/lia-config.js"><\/script>');})();
@@ -86,7 +86,7 @@ header .tg{font:inherit;font-weight:600;font-size:.8rem;border-radius:8px;paddin
 <header class="top">
   <div class="wrap">
     <div><div class="eyebrow">Teacher admin · <span id="areaName"></span></div><div class="school">Lincoln International Academy</div></div>
-    <div class="who" id="who" hidden><select id="areaSel" aria-label="Subject" style="border:1px solid rgba(255,255,255,.5);background:transparent;color:#f3f0e9"><option value="faith-formation">Faith Formation</option><option value="ciencias-sociales">Ciencias Sociales</option><option value="math-physics">Math &amp; Physics</option></select><a href="../index.html">← Teacher tools</a><a id="lnkAccess" href="access.html">Assign lessons</a><a id="lnkScores" href="scores.html">Scores &amp; progress</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
+    <div class="who" id="who" hidden><select id="areaSel" aria-label="Subject" style="border:1px solid rgba(255,255,255,.5);background:transparent;color:#f3f0e9"><option value="faith-formation">Faith Formation</option><option value="ciencias-sociales">Ciencias Sociales</option><option value="math">Math</option><option value="physics">Physics</option></select><a href="../index.html">← Teacher tools</a><a id="lnkAccess" href="access.html">Assign lessons</a><a id="lnkScores" href="scores.html">Scores &amp; progress</a><span id="whoMail"></span><button class="ghost small" id="btnRefresh" type="button">Refresh</button><button class="ghost small" id="btnOut" type="button">Sign out</button></div>
   </div>
 </header>
 
