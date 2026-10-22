@@ -4,7 +4,7 @@
 Folder layout (each student folder = one "area" with its own student list and codes):
     faith-formation/     lesson pages + lia-config.js + index.html     (student facing)
     ciencias-sociales/   ...
-    math-physics/        ...
+    math/  physics/      ...
     teacher/             ALL teacher tools in one place - NOT linked from any student page:
                            index.html (teacher home), admin.html (students & codes), scores.html (scores & progress)
     shared/lia-sync.js   the sign-in + progress-saving module every student page loads
@@ -15,7 +15,7 @@ Run it any time you add or move a page (it is safe to run again and again):
 
     python3 tools/build_site.py                      # connect all pages, rebuild hubs and admin pages
     python3 tools/build_site.py --url https://xxxx.supabase.co --key ANON_KEY
-    python3 tools/build_site.py --area math-physics --url https://yyyy.supabase.co --key OTHER_KEY
+    python3 tools/build_site.py --area physics --url https://yyyy.supabase.co --key OTHER_KEY
 
 What it does
   1. adds the sign-in / saving scripts to the <head> of EVERY lesson page in each folder
@@ -35,7 +35,10 @@ THEMES = {
     "ciencias-sociales": dict(font="Merriweather:wght@400;700", family="'Merriweather',Georgia,serif",
         light=dict(bg="#eef2ea", surface="#fbfdf9", ink="#1f2a22", muted="#55655a", line="#d3ddcc", primary="#2f6b4a", warm="#c0762b", soft="#e1eee5", head="#1d3d2c", headink="#eef4ea", eyebrow="#d8c08a"),
         dark=dict(bg="#101712", surface="#18221b", ink="#e3ece5", muted="#97aa9d", line="#2a3a2f", primary="#8fd0a9", warm="#e0a25e", soft="#1c2a21")),
-    "math-physics": dict(font="Oswald:wght@300;400;500;600;700", family="'Oswald','Arial Narrow',system-ui,sans-serif",
+    "math": dict(font="Source+Serif+4:wght@400;600;700", family="'Source Serif 4',Georgia,serif",
+        light=dict(bg="#f1eff7", surface="#fdfcff", ink="#211d33", muted="#605a78", line="#d9d4ea", primary="#4b3f8f", warm="#b0782a", soft="#e7e3f5", head="#2a2250", headink="#f1eefb", eyebrow="#d9bf85"),
+        dark=dict(bg="#13111d", surface="#1c1928", ink="#ebe8f5", muted="#a39eb9", line="#312d46", primary="#b9aef0", warm="#dcae66", soft="#221f33")),
+    "physics": dict(font="Oswald:wght@300;400;500;600;700", family="'Oswald','Arial Narrow',system-ui,sans-serif",
         light=dict(bg="#eef1f5", surface="#fbfcfe", ink="#17212e", muted="#566475", line="#d2d9e3", primary="#1f4e8c", warm="#2b7a76", soft="#e1eaf6", head="#14263f", headink="#eef2f8", eyebrow="#8fd0cb"),
         dark=dict(bg="#0e141c", surface="#161e29", ink="#e5ebf3", muted="#9aa8ba", line="#2a3646", primary="#9dc1f0", warm="#58b5ae", soft="#1a2636")),
 }
@@ -47,8 +50,10 @@ AREAS = [
          blurb="Religion and values lessons: scripture, doctrine and Growing in Values."),
     dict(folder="ciencias-sociales", name="Ciencias Sociales",
          blurb="Social science lessons and practice."),
-    dict(folder="math-physics", name="Math & Physics",
-         blurb="All mathematics and physics classes: Algebra, AP Statistics, Physics I and Physics II."),
+    dict(folder="math", name="Math",
+         blurb="Mathematics classes: Advanced Algebra, AP Statistics and Pre-Calculus."),
+    dict(folder="physics", name="Physics",
+         blurb="Physics I (chapters 1–2) and Physics II (chapters 9–11)."),
 ]
 SKIP = {"index.html", "admin.html", "scores.html"}   # (older copies of the teacher pages are removed from the student folders)
 START, END = "<!--LIA-SYNC-START-->", "<!--LIA-SYNC-END-->"
@@ -240,7 +245,7 @@ else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=n
 })();
 """
     return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta name="robots" content="noindex,nofollow">\n'
-        '<title>Teacher tools | Lincoln International Academy</title>\n' + FONTS + '\n<script src="math-physics/lia-config.js"></script>\n<style>' + darkify(HUB_CSS + css_areas) +
+        '<title>Teacher tools | Lincoln International Academy</title>\n' + FONTS + '\n<script src="physics/lia-config.js"></script>\n<style>' + darkify(HUB_CSS + css_areas) +
         '.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}.card h3{margin:0 0 .3em;font-size:1.25rem;color:var(--p)}.card p{margin:.2em 0 .8em;color:var(--muted)}'
         '.card .tag{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--w);font-weight:600}'
         '.acts{display:flex;flex-wrap:wrap;gap:8px}.btn{display:inline-block;text-decoration:none;font:inherit;font-weight:600;font-size:.9rem;border-radius:8px;padding:7px 14px;border:1px solid var(--p);background:var(--p);color:var(--pi);cursor:pointer}'

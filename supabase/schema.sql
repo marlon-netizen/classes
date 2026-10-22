@@ -4,8 +4,8 @@
 --  It is safe to run again (it uses "if not exists" / "or replace").
 --
 --  How it works
---  * The site has three areas (folders): faith-formation, ciencias-sociales,
---    math-physics. Every student row belongs to one "area"; a student's code
+--  * The site has four areas (folders): faith-formation, ciencias-sociales,
+--    math, physics. Every student row belongs to one "area"; a student's code
 --    works on every page of that area and is unique inside the area.
 --    Use ONE Supabase project for all areas, or one project per area – this
 --    same script works for both (run it once in each project you use).
@@ -19,7 +19,7 @@
 -- ---------- tables ---------------------------------------------------
 create table if not exists public.students (
   id          uuid primary key default gen_random_uuid(),
-  area        text not null default 'default',   -- 'faith-formation' | 'ciencias-sociales' | 'math-physics'
+  area        text not null default 'default',   -- 'faith-formation' | 'ciencias-sociales' | 'math' | 'physics'
   code        text not null,                 -- stored upper-case, letters+digits only
   full_name   text not null,
   grade       text,

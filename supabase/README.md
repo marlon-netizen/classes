@@ -9,7 +9,8 @@ after each change** and **restored automatically the next time they sign in – 
 index.html                     front page for students → choose a subject
 faith-formation/               Faith Formation + Growing in Values   (lia-config.js, index.html, lessons…)
 ciencias-sociales/             Ciencias Sociales
-math-physics/                  all Math & Physics classes
+math/                          Math classes (Algebra, AP Statistics, Pre-Calculus…)
+physics/                       Physics I and Physics II
 teacher/                       ALL teacher tools – not linked from any student page
   index.html                     teacher home (one button per subject)
   scores.html                    scores & progress dashboard
@@ -37,12 +38,12 @@ tools/build_site.py            connects pages, rebuilds menus and admin pages
 In Supabase: **Project Settings → API** → copy the **Project URL** and the **anon / publishable key** (it is meant to be public;
 the database only lets students reach their own saved work through their code).
 
-Either edit the three files `faith-formation/lia-config.js`, `ciencias-sociales/lia-config.js`, `math-physics/lia-config.js`
+Either edit the four files `faith-formation/lia-config.js`, `ciencias-sociales/lia-config.js`, `math/lia-config.js`, `physics/lia-config.js`
 (`url:` and `anonKey:`), or run once:
 ```bash
 python3 tools/build_site.py --url https://YOURPROJECT.supabase.co --key YOUR_ANON_KEY
 # separate project for one folder:
-python3 tools/build_site.py --area math-physics --url https://OTHER.supabase.co --key OTHER_KEY
+python3 tools/build_site.py --area physics --url https://OTHER.supabase.co --key OTHER_KEY
 ```
 Commit and publish the site as usual. Until a folder's `lia-config.js` is filled in, its pages simply keep working
 without sign-in (progress stays in the student's browser).
@@ -80,7 +81,7 @@ Re-run `supabase/schema.sql` once to enable this. Each folder also has its own l
 The setup script creates a **Teacher preview** account with a master code that works in all three folders: it opens every lesson exactly as a
 student sees it (even lessons assigned to a single class). It never appears in the dashboard or on code slips. To change it, edit that row in
 Students & codes (or delete it); to make another one in a folder run
-`insert into public.students (area, code, full_name, notes, is_preview) values ('math-physics', 'NEWCODE1', 'Teacher preview', '', true);`
+`insert into public.students (area, code, full_name, notes, is_preview) values ('physics', 'NEWCODE1', 'Teacher preview', '', true);`
 
 ## How the student experience works
 1. Opening any lesson page shows a **Student sign-in** box (once per folder, per device).
@@ -109,3 +110,8 @@ update public.progress      set page_key = 'physics1-lesson-2-3' where page_key 
 update public.lesson_access set page_key = 'physics1-lesson-2-3' where page_key = 'physics-lesson-2-3';
 ```
 Links that were already shared with the old file name stop working: send the new links (teacher home → Copy link).
+
+## Splitting Math and Physics into two folders
+Math and Physics used to share one folder/area (`math-physics`). They are now two folders (`math/`, `physics/`), each with its own student list and codes.
+To carry over existing students, saved progress and lesson assignments, run `supabase/migrate-split-math-physics.sql` once in the SQL Editor: every student keeps the **same code**
+in each folder they belong to (a student in both Math and Physics gets one row in each). Old links `…/math-physics/<page>.html` stop working; use the new links from the teacher home.
