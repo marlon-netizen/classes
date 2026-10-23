@@ -56,8 +56,28 @@ AREAS = [
          blurb="Physics I (chapters 1–2) and Physics II (chapters 9–11)."),
 ]
 SKIP = {"index.html", "admin.html", "scores.html"}   # (older copies of the teacher pages are removed from the student folders)
+
+# ---- browser-tab icons (favicons): one per folder, same colour as the folder's look; teacher pages have their own
+ICON_GLYPHS = {
+    "faith-formation": '<rect x="28" y="12" width="8" height="40" rx="2" fill="#fff"/><rect x="18" y="22" width="28" height="8" rx="2" fill="#fff"/>',
+    "ciencias-sociales": '<g fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><circle cx="32" cy="32" r="17"/><ellipse cx="32" cy="32" rx="7.5" ry="17"/><path d="M15.5 32h33M18 22.5h28M18 41.5h28"/></g>',
+    "math": '<g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 22h32"/><path d="M25 23v23"/><path d="M39 23v16q0 7 7 7"/></g>',
+    "physics": '<g fill="none" stroke="#fff" stroke-width="3"><ellipse cx="32" cy="32" rx="21" ry="8"/><ellipse cx="32" cy="32" rx="21" ry="8" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="21" ry="8" transform="rotate(120 32 32)"/></g><circle cx="32" cy="32" r="5" fill="#fff"/>',
+    "teacher": '<path d="M23 14v32h21" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>',
+}
+ICON_BG = {"faith-formation": "#7a2e3b", "ciencias-sociales": "#2f6b4a", "math": "#4b3f8f", "physics": "#1f4e8c", "teacher": "#1b2f4b"}
+
+
+def icon_svg(key):
+    return ('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="%s"/>%s'
+            '</svg>\n' % (ICON_BG[key], ICON_GLYPHS[key]))
+
+
+def icon_links(prefix=""):
+    return ('<link rel="icon" type="image/svg+xml" href="%sfavicon.svg"><link rel="alternate icon" type="image/png" href="%sfavicon.png">' % (prefix, prefix))
+
 START, END = "<!--LIA-SYNC-START-->", "<!--LIA-SYNC-END-->"
-BLOCK = START + '<script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script>' + END
+BLOCK = START + icon_links() + '<script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script>' + END
 BLOCK_RE = re.compile(re.escape(START) + r".*?" + re.escape(END) + r"\n?", re.S)
 CFG_RE = re.compile(r"url:\s*'([^']*)'\s*,\s*anonKey:\s*'([^']*)'")
 
@@ -175,6 +195,7 @@ def main():
             pages[p.stem.lower()] = short
         use = a.url and (not a.area or a.area == area["folder"])
         write_config(folder, area, pages, a.url if use else None, a.key if use else None)
+        (folder / "favicon.svg").write_text(icon_svg(area["folder"]), encoding="utf8")
         for old in ("admin.html", "scores.html", "index.html"):   # no student menu: lessons are shared by direct link only
             if (folder / old).exists():
                 (folder / old).unlink()
@@ -182,10 +203,11 @@ def main():
     # ---- teacher tools: the site root is the (signed-in) teacher home; there is no public student index
     tdir = ROOT / "teacher"
     tdir.mkdir(exist_ok=True)
+    (tdir / "favicon.svg").write_text(icon_svg("teacher"), encoding="utf8")
     (tdir / "admin.html").write_text(template, encoding="utf8")
     (tdir / "scores.html").write_text(scores_template, encoding="utf8")
     (tdir / "access.html").write_text((ROOT / "shared" / "access.template.html").read_text(encoding="utf8"), encoding="utf8")
-    (tdir / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=../index.html"><title>Teacher tools</title><a href="../index.html">Teacher tools</a>\n', encoding="utf8")
+    (tdir / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=../index.html"><title>Teacher tools</title>' + icon_links() + '<a href="../index.html">Teacher tools</a>\n', encoding="utf8")
     (ROOT / "index.html").write_text(teacher_home(), encoding="utf8")
     print("root index.html (teacher sign-in) written")
 
@@ -245,7 +267,7 @@ else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=n
 })();
 """
     return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1">\n<meta name="robots" content="noindex,nofollow">\n'
-        '<title>Teacher tools | Lincoln International Academy</title>\n' + FONTS + '\n<script src="physics/lia-config.js"></script>\n<style>' + darkify(HUB_CSS + css_areas) +
+        '<title>Teacher tools | Lincoln International Academy</title>\n' + icon_links('teacher/') + FONTS + '\n<script src="physics/lia-config.js"></script>\n<style>' + darkify(HUB_CSS + css_areas) +
         '.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}.card h3{margin:0 0 .3em;font-size:1.25rem;color:var(--p)}.card p{margin:.2em 0 .8em;color:var(--muted)}'
         '.card .tag{display:inline-block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--w);font-weight:600}'
         '.acts{display:flex;flex-wrap:wrap;gap:8px}.btn{display:inline-block;text-decoration:none;font:inherit;font-weight:600;font-size:.9rem;border-radius:8px;padding:7px 14px;border:1px solid var(--p);background:var(--p);color:var(--pi);cursor:pointer}'

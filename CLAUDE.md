@@ -14,6 +14,7 @@ teacher/                   GENERATED from shared/*.template.html: admin.html (st
 shared/lia-sync.js         the ONE module every lesson page loads (sign-in, saving, restore, access control, theme toggle)
 shared/*.template.html     sources of the teacher pages – edit these, then run the build
 supabase/schema.sql        the whole database; idempotent (safe to re-run); keep it that way
+tools/make_icons.js        renders favicon.png fallbacks from each favicon.svg (after changing icons)
 tools/build_site.py        run after adding/moving/renaming a page or editing a template/theme: python3 tools/build_site.py
 tools/test/                local test harness (Postgres + Supabase mock + Playwright) – see §8
 ```
@@ -34,7 +35,8 @@ links between lessons that a student might not be assigned.
    `:root:not([data-theme="light"])` inside the media query). If the CSS mentions `data-theme`, `lia-sync.js` injects the Light/Dark toggle automatically;
    if the page has its own toggle (`#themeBtn`, `[data-theme-set]`, …) it is left alone. Theme choice key: `localStorage['lia-theme']`.
 6. **Progress** (see §3) – keep all student state in `localStorage`; report completion/score.
-7. Run `python3 tools/build_site.py` (adds the loader block to `<head>`, regenerates `lia-config.js` pages map and the root/teacher pages), run the tests, commit.
+7. **Browser-tab icon:** every page gets its folder's icon automatically (`<folder>/favicon.svg` + `favicon.png`, linked from the loader block). Never add your own `<link rel="icon">`. To change an icon edit `ICON_GLYPHS`/`ICON_BG` in `tools/build_site.py`, run the build, then `node tools/make_icons.js` to refresh the PNG fallbacks. A new folder needs an entry in both tables.
+8. Run `python3 tools/build_site.py` (adds the loader block to `<head>`, regenerates `lia-config.js` pages map and the root/teacher pages), run the tests, commit.
    The block between `<!--LIA-SYNC-START-->` and `<!--LIA-SYNC-END-->` is owned by the build script – leave it.
 
 ## 3. Progress-saving contract (what every page must do)
