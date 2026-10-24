@@ -8,6 +8,7 @@ window.LIA_CONFIG={
   areaName: 'Math',
   pages: {
     'advanced-algebra-addition-rule': 'The Addition Rule – Advanced Algebra',
+    'advanced-algebra-lines-and-sequences': 'Parallel & Perpendicular Lines and Arithmetic Sequences',
     'ap-stats-unit-2': 'AP Statistics – Lessons 2.8–2.12',
     'ap-stats-unit-3-lessons-3-1-3-4': 'AP Statistics – Lessons 3.1–3.4',
     'complex-numbers': 'Complex Numbers – Advanced Algebra'

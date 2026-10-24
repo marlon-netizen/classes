@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Parallel &amp; Perpendicular Lines and Arithmetic Sequences | Lincoln International Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --ink: #2c3a4a;
+    --muted: #66758a;
+    --primary: #4a6fa5;
+    --primary-dark: #35557f;
+    --primary-soft: #e3ebf5;
+    --accent: #8fb3a0;
+    --ok: #3f8f6b;
+    --ok-bg: #e4f3ec;
+    --warn: #b7791f;
+    --warn-bg: #fbf1dc;
+    --bad: #b5524f;
+    --bad-bg: #f8e6e5;
+    --line: #d9e0e8;
+    --sol-bg: #f7f9fb; --field: #ffffff; --disabled: #eef1f5; --disabled-btn: #b8c3d1;
+    --on-primary: #ffffff; --ok-ink: #276348; --bad-ink: #8a3b39; --warn-ink: #835a14;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    letter-spacing: .2px;
+  }
+  header {
+    background: linear-gradient(135deg, #dfe8f3, #eef3f0);
+    border-bottom: 4px solid var(--primary);
+    text-align: center;
+    padding: 2rem 1rem 1.5rem;
+  }
+  header h1 {
+    margin: 0; font-weight: 600;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--primary-dark);
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+  header .class-name { margin: .4rem 0 0; font-size: clamp(1.2rem, 3.5vw, 1.6rem); font-weight: 500; }
+  header .details { margin: .2rem 0 0; color: var(--muted); font-weight: 300; font-size: 1.1rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
+
+  .tabs { display: flex; gap: .5rem; border-bottom: 2px solid var(--line); margin-bottom: 1.2rem; }
+  .tab-btn {
+    font: inherit; font-weight: 500; font-size: 1.05rem;
+    padding: .7rem 1.2rem; border: none; border-radius: 8px 8px 0 0;
+    background: transparent; color: var(--muted); cursor: pointer;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: background .2s, color .2s;
+  }
+  .tab-btn:hover { background: var(--primary-soft); color: var(--primary-dark); }
+  .tab-btn[aria-selected="true"] { background: var(--primary); color: var(--on-primary); }
+  .tab-btn:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #9ab7dd; outline-offset: 2px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 1.2rem 1.4rem; margin-bottom: 1.2rem;
+    box-shadow: 0 1px 3px rgba(40,60,90,.05);
+  }
+  h2 { margin: 0 0 .6rem; font-weight: 500; color: var(--primary-dark); font-size: 1.5rem; }
+  h3 { margin: 0 0 .5rem; font-weight: 500; color: var(--primary-dark); font-size: 1.2rem; }
+  p { margin: .5rem 0; font-weight: 300; font-size: 1.05rem; }
+  ul { font-weight: 300; font-size: 1.05rem; padding-left: 1.3rem; }
+  .formula {
+    background: var(--primary-soft); border-left: 5px solid var(--primary);
+    padding: .8rem 1rem; margin: .8rem 0; border-radius: 6px;
+    font-size: 1.3rem; font-weight: 500; text-align: center;
+  }
+  .formula small { display: block; font-size: .95rem; font-weight: 300; color: var(--muted); margin-top: .2rem; }
+  .note { background: var(--warn-bg); border-left: 5px solid var(--warn); padding: .6rem 1rem; border-radius: 6px; }
+  .frac { display: inline-block; text-align: center; vertical-align: middle; margin: 0 .15rem; }
+  .frac > span { display: block; padding: 0 .25rem; }
+  .frac > span:first-child { border-bottom: 1.5px solid currentColor; }
+  .solution { background: var(--sol-bg); border: 1px dashed var(--line); border-radius: 8px; padding: .6rem 1rem; margin-top: .6rem; }
+  .solution p { margin: .25rem 0; }
+  .example-title { color: var(--primary); font-weight: 500; margin-bottom: .2rem; }
+
+  table.data { border-collapse: collapse; margin: .6rem auto; font-weight: 300; }
+  table.data th, table.data td { border: 1px solid var(--line); padding: .3rem .9rem; text-align: center; }
+  table.data th { background: var(--primary-soft); font-weight: 500; }
+  table.data caption { caption-side: top; font-weight: 500; color: var(--primary-dark); padding-bottom: .3rem; }
+  .table-wrap { overflow-x: auto; }
+
+  .scorebar {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .6rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: .8rem 1.2rem; margin-bottom: 1.2rem;
+  }
+  .scorebar strong { color: var(--primary-dark); font-weight: 500; }
+  .progress { flex: 1 1 160px; height: 10px; background: var(--line); border-radius: 6px; overflow: hidden; }
+  .progress div { height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+  .problem .q-num { color: var(--primary); font-weight: 600; letter-spacing: 1px; }
+  .answer-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: .7rem; }
+  .answer-row input[type="text"] {
+    font: inherit; padding: .5rem .8rem; width: 190px;
+    border: 2px solid var(--line); border-radius: 8px; background: var(--field); color: var(--ink);
+  }
+  .answer-row input:disabled { background: var(--disabled); color: var(--muted); }
+  .unit-label { color: var(--muted); font-weight: 300; margin-left: -.2rem; }
+  .options { display: grid; gap: .4rem; margin-top: .6rem; }
+  .options label {
+    display: flex; gap: .6rem; align-items: center; padding: .45rem .8rem;
+    border: 2px solid var(--line); border-radius: 8px; cursor: pointer; font-weight: 300; font-size: 1.05rem;
+    background: var(--field); color: var(--ink); transition: background .15s, border-color .15s;
+  }
+  .options label:hover { background: var(--primary-soft); }
+  .options label.disabled { cursor: default; background: var(--disabled); }
+  .options label.picked-wrong { border-color: var(--bad); background: var(--bad-bg); }
+  .options label.picked-right { border-color: var(--ok); background: var(--ok-bg); }
+  .options input { accent-color: var(--primary); }
+  button.btn {
+    font: inherit; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    background: var(--primary); color: var(--on-primary); border: none; border-radius: 8px;
+    padding: .55rem 1.2rem; cursor: pointer; transition: background .2s;
+  }
+  button.btn:hover:not(:disabled) { background: var(--primary-dark); }
+  button.btn:disabled { background: var(--disabled-btn); color: var(--muted); cursor: not-allowed; }
+  button.btn.secondary { background: var(--field); color: var(--primary-dark); border: 2px solid var(--primary); }
+  button.btn.secondary:hover { background: var(--primary-soft); }
+  .attempts { margin-left: auto; color: var(--muted); font-weight: 300; }
+  .dots { display: inline-flex; gap: 5px; vertical-align: middle; margin-left: .3rem; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 1px solid #6f9783; }
+  .dot.used { background: var(--line); border-color: var(--line); }
+  .feedback { margin-top: .7rem; padding: .6rem 1rem; border-radius: 8px; display: none; font-weight: 400; }
+  .feedback.show { display: block; }
+  .feedback.ok { background: var(--ok-bg); color: var(--ok-ink); border-left: 5px solid var(--ok); }
+  .feedback.bad { background: var(--bad-bg); color: var(--bad-ink); border-left: 5px solid var(--bad); }
+  .feedback.hint { background: var(--warn-bg); color: var(--warn-ink); border-left: 5px solid var(--warn); }
+  .feedback .sol { font-weight: 300; margin-top: .3rem; }
+  .final { display: none; text-align: center; }
+  .final.show { display: block; }
+  .final h2 { font-size: 1.8rem; }
+  footer { text-align: center; color: var(--muted); font-weight: 300; font-size: .9rem; padding-bottom: 1.5rem; }
+  @media (max-width: 520px) {
+    .tab-btn { padding: .6rem .7rem; font-size: .9rem; flex: 1; }
+    .attempts { margin-left: 0; width: 100%; }
+  }
+  .rad { border-top: 1.5px solid currentColor; padding: 0 3px; margin-left: 1px; display: inline-block; line-height: .95; }
+  .cycle { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin: .6rem 0; }
+  .cycle div { background: var(--primary-soft); border-radius: 8px; padding: .4rem 1rem; text-align: center; font-weight: 500; }
+  .cycle small { display: block; font-weight: 300; color: var(--muted); }
+
+  /* dark mode (same variables, switched by the Light/Dark toggle or the device setting) */
+  :root[data-theme="dark"]{ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; --sol-bg:#202b39; --field:#0f1620; --disabled:#243040; --disabled-btn:#3a4757; --on-primary:#0f1722; --ok-ink:#a6e6c3; --bad-ink:#f5bcb6; --warn-ink:#f3d58f; }
+  :root[data-theme="dark"] header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; --sol-bg:#202b39; --field:#0f1620; --disabled:#243040; --disabled-btn:#3a4757; --on-primary:#0f1722; --ok-ink:#a6e6c3; --bad-ink:#f5bcb6; --warn-ink:#f3d58f; }
+    :root:not([data-theme="light"]) header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  }
+
+  .formula { font-family: "Cambria Math", "STIX Two Math", "Latin Modern Math", "Noto Serif", "DejaVu Serif", Georgia, serif; font-weight: 500; }
+  .formula small { font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif; display: block; font-size: .95rem; font-weight: 300; color: var(--muted); margin-top: .2rem; }
+  code { background: var(--primary-soft); color: var(--ink); padding: 0 .35em; border-radius: 4px; font-family: Consolas, "DejaVu Sans Mono", monospace; font-size: .92em; }
+  .ref { font-size: .95rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: .8rem; padding-top: .5rem; }
+  .steps { counter-reset: st; list-style: none; padding-left: 0; }
+  .steps li { counter-increment: st; margin: .4rem 0; padding-left: 2.2rem; position: relative; }
+  .steps li::before { content: counter(st); position: absolute; left: 0; top: .1rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--primary); color: var(--on-primary); text-align: center; font-size: .9rem; line-height: 1.6rem; font-weight: 500; }
+  .lesson-tag { display: inline-block; background: var(--primary-soft); color: var(--primary-dark); border-radius: 6px; padding: .05rem .6rem; font-weight: 500; letter-spacing: 1px; font-size: .9rem; margin-bottom: .3rem; }
+  .group-title { margin: 1.6rem 0 .8rem; color: var(--primary-dark); font-weight: 500; font-size: 1.3rem; border-bottom: 2px solid var(--line); padding-bottom: .2rem; }
+  .qtext { margin: .5rem 0; font-weight: 300; font-size: 1.05rem; }
+  .figs { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: center; margin: .6rem 0; }
+  .fig { width: 100%; max-width: 260px; height: auto; background: var(--field); border: 1px solid var(--line); border-radius: 8px; }
+  .fig .gr { stroke: var(--line); stroke-width: 1; }
+  .fig .ax { stroke: var(--muted); stroke-width: 1.4; }
+  .fig .l1 { stroke: var(--primary); stroke-width: 3; fill: none; }
+  .fig .l2 { stroke: var(--warn); stroke-width: 3; fill: none; }
+  .fig .ra { stroke: var(--ink); stroke-width: 1.5; fill: none; }
+  .fig .pt { fill: var(--primary); stroke: var(--card); stroke-width: 1.5; }
+  .fig .tk { font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif; font-size: 11px; fill: var(--muted); }
+  .figcap { font-weight: 300; font-size: .95rem; color: var(--muted); text-align: center; }
+  .legend-key { display: inline-block; width: 18px; height: 4px; vertical-align: middle; margin-right: .35rem; border-radius: 2px; }
+
+</style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+
+<header>
+  <h1>Lincoln International Academy</h1>
+  <p class="class-name">Advanced Algebra &middot; 11th Grade</p>
+  <p class="details">Parallel &amp; Perpendicular Lines and Arithmetic Sequences &middot; Teacher: Eduardo Vásquez</p>
+</header>
+
+<main>
+  <div class="tabs" role="tablist" aria-label="Page sections">
+    <button class="tab-btn" role="tab" id="tab-learn" aria-controls="panel-learn" aria-selected="true">Lesson &amp; Examples</button>
+    <button class="tab-btn" role="tab" id="tab-practice" aria-controls="panel-practice" aria-selected="false" tabindex="-1">Practice</button>
+  </div>
+
+  <!-- ============ TAB 1: LESSON ============ -->
+  <section class="panel active" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn">
+    <div class="card">
+      <h2>Parallel and Perpendicular Lines &amp; Arithmetic Sequences</h2>
+      <p>This page has two parts. In <strong>Part 1</strong> you will use slopes to decide whether lines are parallel, perpendicular or neither, and to write equations of lines. In <strong>Part 2</strong> you will work with arithmetic sequences, using recursive and explicit formulas. The two parts are connected: the points of an arithmetic sequence lie on a line whose slope is the common difference.</p>
+      <p><strong>Objectives</strong></p>
+      <ul>
+        <li>Find slopes from points and from equations in different forms.</li>
+        <li>Decide whether two lines are parallel (equal slopes) or perpendicular (negative reciprocal slopes).</li>
+        <li>Write the equation of a line through a point that is parallel or perpendicular to a given line.</li>
+        <li>Recognize arithmetic sequences and find the common difference.</li>
+        <li>Write recursive and explicit formulas, convert between them, and find any term or the term number.</li>
+      </ul>
+    </div>
+
+    <h2 class="group-title">Part 1 &mdash; Parallel and perpendicular lines</h2>
+
+    <div class="card">
+      <span class="lesson-tag">REVIEW</span>
+      <h3>Slope and forms of a line</h3>
+      <div class="formula">
+        <em>m</em> = <span class="frac"><span><em>y</em><sub>2</sub> &minus; <em>y</em><sub>1</sub></span><span><em>x</em><sub>2</sub> &minus; <em>x</em><sub>1</sub></span></span>
+        <small>slope = rise / run (undefined for a vertical line, 0 for a horizontal line)</small>
+      </div>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Forms of a linear equation</caption>
+          <tr><th>Form</th><th>Equation</th><th>What you can read</th></tr>
+          <tr><td>Slope-intercept</td><td><em>y</em> = <em>mx</em> + <em>b</em></td><td>slope <em>m</em>, <em>y</em>-intercept <em>b</em></td></tr>
+          <tr><td>Point-slope</td><td><em>y</em> &minus; <em>y</em><sub>1</sub> = <em>m</em>(<em>x</em> &minus; <em>x</em><sub>1</sub>)</td><td>slope <em>m</em> and a point (<em>x</em><sub>1</sub>, <em>y</em><sub>1</sub>)</td></tr>
+          <tr><td>Standard</td><td><em>Ax</em> + <em>By</em> = <em>C</em></td><td>slope &minus;<em>A</em>/<em>B</em></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">PARALLEL</span>
+      <h3>Parallel lines</h3>
+      <ul>
+        <li>Parallel lines are in the same plane and never meet. Non-vertical parallel lines have the <strong>same slope</strong> and <strong>different <em>y</em>-intercepts</strong>.</li>
+        <li>If the slopes are equal <em>and</em> the intercepts are equal, it is the <em>same line</em> (not parallel).</li>
+        <li>Any two vertical lines (such as <em>x</em> = 2 and <em>x</em> = &minus;5) are parallel; any two horizontal lines are parallel.</li>
+      </ul>
+      <div class="formula"><em>m</em><sub>1</sub> = <em>m</em><sub>2</sub></div>
+      <div class="figs">
+        <div>
+          <svg class="fig" viewBox="0 0 260 260" role="img" aria-label="Graph of two lines"><line class="gr" x1="0.0" y1="0" x2="0.0" y2="260"/><line class="gr" x1="0" y1="260.0" x2="260" y2="260.0"/><line class="gr" x1="21.7" y1="0" x2="21.7" y2="260"/><line class="gr" x1="0" y1="238.3" x2="260" y2="238.3"/><line class="gr" x1="43.3" y1="0" x2="43.3" y2="260"/><line class="gr" x1="0" y1="216.7" x2="260" y2="216.7"/><line class="gr" x1="65.0" y1="0" x2="65.0" y2="260"/><line class="gr" x1="0" y1="195.0" x2="260" y2="195.0"/><line class="gr" x1="86.7" y1="0" x2="86.7" y2="260"/><line class="gr" x1="0" y1="173.3" x2="260" y2="173.3"/><line class="gr" x1="108.3" y1="0" x2="108.3" y2="260"/><line class="gr" x1="0" y1="151.7" x2="260" y2="151.7"/><line class="gr" x1="130.0" y1="0" x2="130.0" y2="260"/><line class="gr" x1="0" y1="130.0" x2="260" y2="130.0"/><line class="gr" x1="151.7" y1="0" x2="151.7" y2="260"/><line class="gr" x1="0" y1="108.3" x2="260" y2="108.3"/><line class="gr" x1="173.3" y1="0" x2="173.3" y2="260"/><line class="gr" x1="0" y1="86.7" x2="260" y2="86.7"/><line class="gr" x1="195.0" y1="0" x2="195.0" y2="260"/><line class="gr" x1="0" y1="65.0" x2="260" y2="65.0"/><line class="gr" x1="216.7" y1="0" x2="216.7" y2="260"/><line class="gr" x1="0" y1="43.3" x2="260" y2="43.3"/><line class="gr" x1="238.3" y1="0" x2="238.3" y2="260"/><line class="gr" x1="0" y1="21.7" x2="260" y2="21.7"/><line class="gr" x1="260.0" y1="0" x2="260.0" y2="260"/><line class="gr" x1="0" y1="0.0" x2="260" y2="0.0"/><line class="ax" x1="0" y1="130.0" x2="260" y2="130.0"/><line class="ax" x1="130.0" y1="0" x2="130.0" y2="260"/><line class="l1" x1="-21.7" y1="411.7" x2="281.7" y2="-195.0"/><line class="l2" x1="-21.7" y1="498.3" x2="281.7" y2="-108.3"/></svg>
+          <div class="figcap"><span class="legend-key" style="background:var(--primary)"></span><em>y</em> = 2<em>x</em> + 1 &nbsp; <span class="legend-key" style="background:var(--warn)"></span><em>y</em> = 2<em>x</em> &minus; 3</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">PERPENDICULAR</span>
+      <h3>Perpendicular lines</h3>
+      <ul>
+        <li>Perpendicular lines meet at a right angle. Their slopes are <strong>negative reciprocals</strong>: the product of the slopes is &minus;1.</li>
+        <li>To get the perpendicular slope: flip the fraction and change the sign (2 becomes &minus;1/2; &minus;3/4 becomes 4/3).</li>
+        <li>A horizontal line and a vertical line are perpendicular.</li>
+      </ul>
+      <div class="formula"><em>m</em><sub>1</sub> &middot; <em>m</em><sub>2</sub> = &minus;1 &nbsp;&nbsp; or &nbsp;&nbsp; <em>m</em><sub>2</sub> = &minus;<span class="frac"><span>1</span><span><em>m</em><sub>1</sub></span></span></div>
+      <div class="figs">
+        <div>
+          <svg class="fig" viewBox="0 0 260 260" role="img" aria-label="Graph of two lines"><line class="gr" x1="0.0" y1="0" x2="0.0" y2="260"/><line class="gr" x1="0" y1="260.0" x2="260" y2="260.0"/><line class="gr" x1="21.7" y1="0" x2="21.7" y2="260"/><line class="gr" x1="0" y1="238.3" x2="260" y2="238.3"/><line class="gr" x1="43.3" y1="0" x2="43.3" y2="260"/><line class="gr" x1="0" y1="216.7" x2="260" y2="216.7"/><line class="gr" x1="65.0" y1="0" x2="65.0" y2="260"/><line class="gr" x1="0" y1="195.0" x2="260" y2="195.0"/><line class="gr" x1="86.7" y1="0" x2="86.7" y2="260"/><line class="gr" x1="0" y1="173.3" x2="260" y2="173.3"/><line class="gr" x1="108.3" y1="0" x2="108.3" y2="260"/><line class="gr" x1="0" y1="151.7" x2="260" y2="151.7"/><line class="gr" x1="130.0" y1="0" x2="130.0" y2="260"/><line class="gr" x1="0" y1="130.0" x2="260" y2="130.0"/><line class="gr" x1="151.7" y1="0" x2="151.7" y2="260"/><line class="gr" x1="0" y1="108.3" x2="260" y2="108.3"/><line class="gr" x1="173.3" y1="0" x2="173.3" y2="260"/><line class="gr" x1="0" y1="86.7" x2="260" y2="86.7"/><line class="gr" x1="195.0" y1="0" x2="195.0" y2="260"/><line class="gr" x1="0" y1="65.0" x2="260" y2="65.0"/><line class="gr" x1="216.7" y1="0" x2="216.7" y2="260"/><line class="gr" x1="0" y1="43.3" x2="260" y2="43.3"/><line class="gr" x1="238.3" y1="0" x2="238.3" y2="260"/><line class="gr" x1="0" y1="21.7" x2="260" y2="21.7"/><line class="gr" x1="260.0" y1="0" x2="260.0" y2="260"/><line class="gr" x1="0" y1="0.0" x2="260" y2="0.0"/><line class="ax" x1="0" y1="130.0" x2="260" y2="130.0"/><line class="ax" x1="130.0" y1="0" x2="130.0" y2="260"/><line class="l1" x1="-21.7" y1="455.0" x2="281.7" y2="-151.7"/><line class="l2" x1="-21.7" y1="21.7" x2="281.7" y2="173.3"/><path class="ra" d="M 157.0 97.6 L 146.3 92.2 L 140.9 103.0 L 140.9 103.0"/></svg>
+          <div class="figcap"><span class="legend-key" style="background:var(--primary)"></span><em>y</em> = 2<em>x</em> &minus; 1 &nbsp; <span class="legend-key" style="background:var(--warn)"></span><em>y</em> = &minus;(1/2)<em>x</em> + 3/2</div>
+        </div>
+      </div>
+      <div class="note"><strong>Remember:</strong> opposite slopes (like 3 and &minus;3) are <em>not</em> perpendicular; you also need the reciprocal.</div>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">METHOD</span>
+      <h3>Writing the equation of a parallel or perpendicular line</h3>
+      <ol class="steps">
+        <li>Find the slope <em>m</em> of the given line (rewrite as <em>y</em> = <em>mx</em> + <em>b</em> if needed).</li>
+        <li>Choose the new slope: the <strong>same</strong> <em>m</em> for a parallel line, the <strong>negative reciprocal</strong> &minus;1/<em>m</em> for a perpendicular line.</li>
+        <li>Use point-slope form with the given point: <em>y</em> &minus; <em>y</em><sub>1</sub> = <em>m</em><sub>new</sub>(<em>x</em> &minus; <em>x</em><sub>1</sub>).</li>
+        <li>Simplify to <em>y</em> = <em>mx</em> + <em>b</em> (or any equivalent form).</li>
+      </ol>
+    </div>
+
+    <h3 class="group-title" style="font-size:1.4rem">Worked examples &mdash; lines</h3>
+
+    <div class="card">
+      <div class="example-title">Example 1 &mdash; Are the lines parallel?</div>
+      <p>Are <code>y = 3x &minus; 2</code> and <code>6x &minus; 2y = 8</code> parallel?</p>
+      <div class="solution">
+        <p>Solve the second for <em>y</em>: &minus;2<em>y</em> = &minus;6<em>x</em> + 8, so <em>y</em> = 3<em>x</em> &minus; 4.</p>
+        <p>Both slopes are 3 and the intercepts (&minus;2 and &minus;4) differ: <strong>parallel</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 2 &mdash; Are the lines perpendicular?</div>
+      <p>Are <code>y = &minus;(2/3)x + 1</code> and <code>3x &minus; 2y = 6</code> perpendicular?</p>
+      <div class="solution">
+        <p>Second line: &minus;2<em>y</em> = &minus;3<em>x</em> + 6, so <em>y</em> = (3/2)<em>x</em> &minus; 3.</p>
+        <p>Slopes: &minus;2/3 and 3/2. Product: (&minus;2/3)(3/2) = &minus;1, so the lines are <strong>perpendicular</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 3 &mdash; A parallel line through a point</div>
+      <p>Write the equation of the line through (4, &minus;1) that is parallel to <em>y</em> = 2<em>x</em> + 5.</p>
+      <div class="solution">
+        <p>Slope: 2 (same as the given line). Point-slope: <em>y</em> &minus; (&minus;1) = 2(<em>x</em> &minus; 4).</p>
+        <p><em>y</em> + 1 = 2<em>x</em> &minus; 8, so <strong><em>y</em> = 2<em>x</em> &minus; 9</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 4 &mdash; A perpendicular line through a point</div>
+      <p>Write the equation of the line through (&minus;3, 2) that is perpendicular to 4<em>x</em> + 2<em>y</em> = 7.</p>
+      <div class="solution">
+        <p>4<em>x</em> + 2<em>y</em> = 7 gives <em>y</em> = &minus;2<em>x</em> + 7/2, so the slope is &minus;2. The perpendicular slope is 1/2.</p>
+        <p><em>y</em> &minus; 2 = (1/2)(<em>x</em> + 3), so <em>y</em> = (1/2)<em>x</em> + 3/2 + 2 = <strong><em>y</em> = (1/2)<em>x</em> + 7/2</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 5 &mdash; Classifying lines from points</div>
+      <p>Line AB passes through A(1, 2) and B(4, 8); line CD passes through C(&minus;2, &minus;5) and D(0, &minus;1). Parallel, perpendicular or neither?</p>
+      <div class="solution">
+        <p>Slope AB = (8 &minus; 2)/(4 &minus; 1) = 2. Slope CD = (&minus;1 + 5)/(0 + 2) = 2.</p>
+        <p>The slopes are equal and C is not on line AB, so the lines are <strong>parallel</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 6 &mdash; Finding an unknown coefficient</div>
+      <p>For what values of <em>k</em> are <em>kx</em> + 3<em>y</em> = 6 and 2<em>x</em> &minus; <em>y</em> = 5 (a) parallel? (b) perpendicular?</p>
+      <div class="solution">
+        <p>Slopes: &minus;<em>k</em>/3 and 2.</p>
+        <p>(a) Parallel: &minus;<em>k</em>/3 = 2, so <strong><em>k</em> = &minus;6</strong>.</p>
+        <p>(b) Perpendicular: (&minus;<em>k</em>/3)(2) = &minus;1, so 2<em>k</em>/3 = 1 and <strong><em>k</em> = 3/2</strong>.</p>
+      </div>
+    </div>
+
+    <h2 class="group-title">Part 2 &mdash; Arithmetic sequences</h2>
+
+    <div class="card">
+      <span class="lesson-tag">DEFINITION</span>
+      <h3>What is an arithmetic sequence?</h3>
+      <p>A sequence is an ordered list of numbers: <em>a</em><sub>1</sub>, <em>a</em><sub>2</sub>, <em>a</em><sub>3</sub>, &hellip; In an <strong>arithmetic sequence</strong> you get each term by adding the same number, the <strong>common difference</strong> <em>d</em>, to the previous term.</p>
+      <div class="formula"><em>d</em> = <em>a</em><sub><em>n</em></sub> &minus; <em>a</em><sub><em>n</em>&minus;1</sub>
+        <small>the same for every pair of consecutive terms (positive: increasing; negative: decreasing; zero: constant)</small></div>
+      <p>Example: 7, 11, 15, 19, &hellip; has <em>d</em> = 4. Example: 20, 14, 8, 2, &hellip; has <em>d</em> = &minus;6. The sequence 3, 6, 12, 24, &hellip; is <em>not</em> arithmetic (it multiplies).</p>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">FORMULAS</span>
+      <h3>Recursive and explicit formulas</h3>
+      <div class="table-wrap">
+        <table class="data" style="text-align:left">
+          <tr><th>Formula</th><th>Rule</th><th>Good for</th></tr>
+          <tr><td><strong>Recursive</strong></td><td><em>a</em><sub>1</sub> = (first term);&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + <em>d</em></td><td>describing how the sequence grows; it needs the previous term</td></tr>
+          <tr><td><strong>Explicit</strong></td><td><em>a</em><sub><em>n</em></sub> = <em>a</em><sub>1</sub> + (<em>n</em> &minus; 1)<em>d</em></td><td>finding <em>any</em> term directly (for example <em>a</em><sub>100</sub>)</td></tr>
+        </table>
+      </div>
+      <ul>
+        <li>A recursive formula always needs the <strong>first term</strong> as well as the rule.</li>
+        <li>The explicit formula can be simplified to <em>a</em><sub><em>n</em></sub> = <em>dn</em> + (<em>a</em><sub>1</sub> &minus; <em>d</em>), a linear expression in <em>n</em>.</li>
+        <li>To find the <strong>term number</strong> of a value, set the explicit formula equal to that value and solve for <em>n</em>; <em>n</em> must be a positive whole number.</li>
+        <li>With two known terms <em>a</em><sub><em>p</em></sub> and <em>a</em><sub><em>q</em></sub>: <em>d</em> = (<em>a</em><sub><em>q</em></sub> &minus; <em>a</em><sub><em>p</em></sub>)/(<em>q</em> &minus; <em>p</em>).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">CONNECTION</span>
+      <h3>Arithmetic sequences and lines</h3>
+      <p>The explicit formula <em>a</em><sub><em>n</em></sub> = <em>dn</em> + (<em>a</em><sub>1</sub> &minus; <em>d</em>) has the same form as <em>y</em> = <em>mx</em> + <em>b</em>. The points (<em>n</em>, <em>a</em><sub><em>n</em></sub>) lie on a line whose <strong>slope is the common difference</strong>. Sequences with the same <em>d</em> give parallel lines.</p>
+      <div class="figs">
+        <div>
+          <svg class="fig" viewBox="0 0 280 240" role="img" aria-label="Points of the sequence a_n = 4n + 3 on a line"><line class="gr" x1="34" y1="214.0" x2="272" y2="214.0"/><text class="tk" x="29" y="218.0" text-anchor="end">0</text><line class="gr" x1="34" y1="173.0" x2="272" y2="173.0"/><text class="tk" x="29" y="177.0" text-anchor="end">5</text><line class="gr" x1="34" y1="132.0" x2="272" y2="132.0"/><text class="tk" x="29" y="136.0" text-anchor="end">10</text><line class="gr" x1="34" y1="91.0" x2="272" y2="91.0"/><text class="tk" x="29" y="95.0" text-anchor="end">15</text><line class="gr" x1="34" y1="50.0" x2="272" y2="50.0"/><text class="tk" x="29" y="54.0" text-anchor="end">20</text><line class="gr" x1="34" y1="9.0" x2="272" y2="9.0"/><text class="tk" x="29" y="13.0" text-anchor="end">25</text><text class="tk" x="34.0" y="232" text-anchor="middle">0</text><text class="tk" x="70.0" y="232" text-anchor="middle">1</text><text class="tk" x="106.0" y="232" text-anchor="middle">2</text><text class="tk" x="142.0" y="232" text-anchor="middle">3</text><text class="tk" x="178.0" y="232" text-anchor="middle">4</text><text class="tk" x="214.0" y="232" text-anchor="middle">5</text><line class="ax" x1="34" y1="214.0" x2="272" y2="214.0"/><line class="ax" x1="34" y1="8" x2="34" y2="214.0"/><line class="l1" x1="34.0" y1="189.4" x2="228.4" y2="12.3"/><circle class="pt" cx="70.0" cy="156.6" r="4.5"/><circle class="pt" cx="106.0" cy="123.8" r="4.5"/><circle class="pt" cx="142.0" cy="91.0" r="4.5"/><circle class="pt" cx="178.0" cy="58.2" r="4.5"/><circle class="pt" cx="214.0" cy="25.4" r="4.5"/><text class="tk" x="266" y="232" text-anchor="middle">n</text><text class="tk" x="42" y="14">a(n)</text></svg>
+          <div class="figcap">Points of <em>a</em><sub><em>n</em></sub> = 4<em>n</em> + 3 (7, 11, 15, 19, 23): slope 4</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="group-title" style="font-size:1.4rem">Worked examples &mdash; sequences</h3>
+
+    <div class="card">
+      <div class="example-title">Example 7 &mdash; Common difference, recursive and explicit formulas</div>
+      <p>Write the recursive and the explicit formula for 7, 11, 15, 19, &hellip; and find <em>a</em><sub>20</sub>.</p>
+      <div class="solution">
+        <p><em>a</em><sub>1</sub> = 7 and <em>d</em> = 11 &minus; 7 = 4.</p>
+        <p>Recursive: <em>a</em><sub>1</sub> = 7;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 4.</p>
+        <p>Explicit: <em>a</em><sub><em>n</em></sub> = 7 + (<em>n</em> &minus; 1)(4) = <strong>4<em>n</em> + 3</strong>.</p>
+        <p><em>a</em><sub>20</sub> = 4(20) + 3 = <strong>83</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 8 &mdash; Which term is it?</div>
+      <p>Which term of 2, 5, 8, 11, &hellip; equals 98? Is 100 a term?</p>
+      <div class="solution">
+        <p><em>d</em> = 3, so <em>a</em><sub><em>n</em></sub> = 2 + 3(<em>n</em> &minus; 1) = 3<em>n</em> &minus; 1.</p>
+        <p>3<em>n</em> &minus; 1 = 98 gives <em>n</em> = 33: 98 is the <strong>33rd term</strong>.</p>
+        <p>3<em>n</em> &minus; 1 = 100 gives <em>n</em> = 101/3 &asymp; 33.67, not a whole number, so 100 is <strong>not</strong> a term.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 9 &mdash; From two terms</div>
+      <p>In an arithmetic sequence <em>a</em><sub>5</sub> = 17 and <em>a</em><sub>9</sub> = 29. Find <em>d</em>, <em>a</em><sub>1</sub> and the explicit formula.</p>
+      <div class="solution">
+        <p>From term 5 to term 9 there are 4 steps: 4<em>d</em> = 29 &minus; 17 = 12, so <em>d</em> = 3.</p>
+        <p><em>a</em><sub>1</sub> = <em>a</em><sub>5</sub> &minus; 4<em>d</em> = 17 &minus; 12 = 5.</p>
+        <p><em>a</em><sub><em>n</em></sub> = 5 + 3(<em>n</em> &minus; 1) = <strong>3<em>n</em> + 2</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 10 &mdash; Converting between formulas</div>
+      <p>(a) Convert <em>a</em><sub>1</sub> = 12, <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> &minus; 4 to an explicit formula. (b) Convert <em>a</em><sub><em>n</em></sub> = 5<em>n</em> &minus; 3 to a recursive formula.</p>
+      <div class="solution">
+        <p>(a) <em>a</em><sub>1</sub> = 12 and <em>d</em> = &minus;4: <em>a</em><sub><em>n</em></sub> = 12 &minus; 4(<em>n</em> &minus; 1) = <strong>16 &minus; 4<em>n</em></strong>.</p>
+        <p>(b) <em>a</em><sub>1</sub> = 5(1) &minus; 3 = 2 and <em>d</em> = 5 (the coefficient of <em>n</em>): <strong><em>a</em><sub>1</sub> = 2;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 5</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 11 &mdash; A word problem</div>
+      <p>The first rung of a ladder is 30 cm above the ground and the rungs are 28 cm apart. (a) Write an explicit formula for the height of rung <em>n</em>. (b) How high is the 10th rung?</p>
+      <div class="solution">
+        <p>(a) <em>a</em><sub>1</sub> = 30, <em>d</em> = 28: <em>a</em><sub><em>n</em></sub> = 30 + 28(<em>n</em> &minus; 1) = <strong>28<em>n</em> + 2</strong>.</p>
+        <p>(b) <em>a</em><sub>10</sub> = 28(10) + 2 = <strong>282 cm</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ TAB 2: PRACTICE ============ -->
+  <section class="panel" id="panel-practice" role="tabpanel" aria-labelledby="tab-practice" hidden>
+    <div class="card">
+      <h2>Practice Problems</h2>
+      <p>You have <strong>3 attempts</strong> for each problem and you get feedback right away. How to answer:</p>
+      <ul>
+        <li><strong>Multiple choice:</strong> select one answer.</li>
+        <li><strong>Numbers:</strong> type a decimal or a fraction (for example <code>-3/4</code> or <code>0.5</code>).</li>
+        <li><strong>Equations of lines:</strong> type the equation, for example <code>y = 2x - 9</code>, <code>y - 2 = 1/2(x + 3)</code> or <code>2x - y = 9</code>. Any correct form is accepted.</li>
+        <li><strong>Sequence formulas:</strong> type the explicit formula, for example <code>a_n = 4n + 3</code> (or just <code>4n + 3</code>).</li>
+      </ul>
+      <p>Problems are grouped by topic: slope and forms, parallel lines, perpendicular lines, mixed line problems, arithmetic sequences, explicit formulas, recursive formulas and mixed sequence problems.</p>
+    </div>
+
+    <div class="scorebar">
+      <div>Solved: <strong id="solvedCount">0</strong> / <span id="totalCount"></span></div>
+      <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+      <div>Points: <strong id="points">0</strong></div>
+    </div>
+
+    <div id="problems"></div>
+
+    <div class="card final" id="finalCard">
+      <h2>Practice complete!</h2>
+      <p id="finalMsg"></p>
+      <button class="btn secondary" id="resetBtn" data-lia-reset type="button">Try again</button>
+    </div>
+  </section>
+</main>
+
+<footer>Lincoln International Academy &middot; Advanced Algebra &middot; Lines and arithmetic sequences</footer>
+
+<script>
+(function () {
+  /* ---------- Tabs ---------- */
+  var tabs = [document.getElementById('tab-learn'), document.getElementById('tab-practice')];
+  function showTab(idx) {
+    tabs.forEach(function (t, i) {
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      var on = i === idx;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      panel.classList.toggle('active', on);
+      panel.hidden = !on;
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showTab(i); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        showTab(n); tabs[n].focus();
+      }
+    });
+  });
+
+  /* ---------- Problems ----------
+     mc:  { g, q, opts, ans, hint, sol }
+     num: { g, q, type:'num', ans, tol, unit, hint, sol }
+     eq:  { g, q, type:'eq',  A, B, C, hint, sol }     line  Ax + By = C
+     seq: { g, q, type:'seq', a1, d,  hint, sol }      a_n = a1 + (n-1)d              */
+  var MAX_ATTEMPTS = 3;
+  var GROUPS = {
+    L1: 'Slope and forms of a line',
+    L2: 'Parallel lines',
+    L3: 'Perpendicular lines',
+    L4: 'Parallel, perpendicular or neither?',
+    S1: 'Arithmetic sequences: common difference and terms',
+    S2: 'Explicit formulas',
+    S3: 'Recursive formulas',
+    S4: 'Mixed sequence problems'
+  };
+  var problems = [
+ {
+  "g": "L1",
+  "q": "Find the slope of the line through (2, 3) and (6, 11).",
+  "type": "num",
+  "ans": 2.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Slope = (change in <em>y</em>)/(change in <em>x</em>).",
+  "sol": "m = (11 &minus; 3)/(6 &minus; 2) = 8/4 = 2."
+ },
+ {
+  "g": "L1",
+  "q": "Find the slope of the line through (&minus;1, 4) and (5, &minus;2).",
+  "type": "num",
+  "ans": -1.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Subtract the <em>y</em>-values and the <em>x</em>-values in the same order.",
+  "sol": "m = (&minus;2 &minus; 4)/(5 &minus; (&minus;1)) = &minus;6/6 = &minus;1."
+ },
+ {
+  "g": "L1",
+  "q": "Find the slope of the line through (&minus;3, &minus;2) and (3, 2). (Enter a fraction or a decimal.)",
+  "type": "num",
+  "ans": 0.6666666666666666,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Rise = 2 &minus; (&minus;2). Run = 3 &minus; (&minus;3).",
+  "sol": "m = (2 &minus; (&minus;2))/(3 &minus; (&minus;3)) = 4/6 = 2/3."
+ },
+ {
+  "g": "L1",
+  "q": "Find the slope of the line <code>3x + 4y = 12</code>. (Enter a fraction or a decimal.)",
+  "type": "num",
+  "ans": -0.75,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Write the equation in the form <em>y</em> = <em>mx</em> + <em>b</em>.",
+  "sol": "Solve for <em>y</em>: 4<em>y</em> = &minus;3<em>x</em> + 12, so <em>y</em> = (&minus;3/4)<em>x</em> + 3. The slope is &minus;3/4."
+ },
+ {
+  "g": "L1",
+  "q": "Write <code>2x - 5y = 10</code> in slope-intercept form. (Type your equation, e.g. <code>y = 2x - 5</code>. Any correct form is accepted.)",
+  "type": "eq",
+  "A": 2.0,
+  "B": -5.0,
+  "C": 10.0,
+  "hint": "Isolate <em>y</em>; divide every term by &minus;5.",
+  "sol": "&minus;5<em>y</em> = &minus;2<em>x</em> + 10, so <em>y</em> = (2/5)<em>x</em> &minus; 2."
+ },
+ {
+  "g": "L1",
+  "q": "Write the equation of the line with slope &minus;3 through the point (2, 1). (Type your equation, e.g. <code>y = 2x - 5</code>. Any correct form is accepted.)",
+  "type": "eq",
+  "A": 3.0,
+  "B": 1.0,
+  "C": 7.0,
+  "hint": "Use <em>y</em> &minus; <em>y</em><sub>1</sub> = <em>m</em>(<em>x</em> &minus; <em>x</em><sub>1</sub>).",
+  "sol": "Point-slope: <em>y</em> &minus; 1 = &minus;3(<em>x</em> &minus; 2), so <em>y</em> = &minus;3<em>x</em> + 7."
+ },
+ {
+  "g": "L1",
+  "q": "Write the equation of the line through (1, 2) and (3, 8). (Type your equation, e.g. <code>y = 2x - 5</code>. Any correct form is accepted.)",
+  "type": "eq",
+  "A": 3.0,
+  "B": -1.0,
+  "C": 1.0,
+  "hint": "Find the slope first, then use point-slope form.",
+  "sol": "Slope = (8 &minus; 2)/(3 &minus; 1) = 3. Then <em>y</em> &minus; 2 = 3(<em>x</em> &minus; 1), so <em>y</em> = 3<em>x</em> &minus; 1."
+ },
+ {
+  "g": "L1",
+  "q": "What is the slope of the vertical line <em>x</em> = &minus;2?",
+  "opts": [
+   "0",
+   "Undefined",
+   "&minus;2",
+   "1"
+  ],
+  "ans": 1,
+  "hint": "Pick two points on the line and compute rise/run.",
+  "sol": "All points on a vertical line have the same <em>x</em>, so the run is 0 and the slope is undefined (division by zero)."
+ },
+ {
+  "g": "L1",
+  "q": "What is the slope of the horizontal line <em>y</em> = 5?",
+  "opts": [
+   "0",
+   "Undefined",
+   "5",
+   "1"
+  ],
+  "ans": 0,
+  "hint": "Pick two points on the line and compute rise/run.",
+  "sol": "All points on a horizontal line have the same <em>y</em>, so the rise is 0 and the slope is 0."
+ },
+ {
+  "g": "L2",
+  "q": "What is the slope of any line <strong>parallel</strong> to <code>y = -(3/4)x + 2</code>? (Fraction or decimal.)",
+  "type": "num",
+  "ans": -0.75,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Parallel lines have the same slope.",
+  "sol": "Parallel lines have equal slopes: &minus;3/4."
+ },
+ {
+  "g": "L2",
+  "q": "What is the slope of any line <strong>parallel</strong> to <code>5x - 2y = 8</code>? (Fraction or decimal.)",
+  "type": "num",
+  "ans": 2.5,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "First find the slope of the given line.",
+  "sol": "&minus;2<em>y</em> = &minus;5<em>x</em> + 8, so <em>y</em> = (5/2)<em>x</em> &minus; 4. Parallel lines share the slope 5/2."
+ },
+ {
+  "g": "L2",
+  "q": "Are the lines <code>y = 3x - 2</code> and <code>6x - 2y = 8</code> parallel?",
+  "opts": [
+   "Yes: both have slope 3 and different <em>y</em>-intercepts",
+   "No: their slopes are 3 and &minus;3",
+   "No: they are perpendicular",
+   "They are the same line"
+  ],
+  "ans": 0,
+  "hint": "Rewrite the second equation as <em>y</em> = <em>mx</em> + <em>b</em>.",
+  "sol": "6<em>x</em> &minus; 2<em>y</em> = 8 gives <em>y</em> = 3<em>x</em> &minus; 4. Same slope (3), different intercepts (&minus;2 and &minus;4): parallel."
+ },
+ {
+  "g": "L2",
+  "q": "Lines <code>2x + 3y = 6</code> and <code>4x + 6y = 18</code> are&hellip;",
+  "opts": [
+   "parallel",
+   "perpendicular",
+   "the same line",
+   "neither parallel nor perpendicular"
+  ],
+  "ans": 0,
+  "hint": "Compare slopes, then compare <em>y</em>-intercepts.",
+  "sol": "Both have slope &minus;2/3. Their <em>y</em>-intercepts are 2 and 3, which are different, so the lines are parallel."
+ },
+ {
+  "g": "L2",
+  "q": "Lines <code>2x + 3y = 6</code> and <code>4x + 6y = 12</code> are&hellip;",
+  "opts": [
+   "parallel (distinct lines)",
+   "perpendicular",
+   "the same line",
+   "neither parallel nor perpendicular"
+  ],
+  "ans": 2,
+  "hint": "Check whether one equation is a multiple of the other.",
+  "sol": "Multiplying the first equation by 2 gives the second, so they are the <em>same</em> line (same slope <em>and</em> same intercept)."
+ },
+ {
+  "g": "L2",
+  "q": "Lines <code>y = 2x + 1</code> and <code>y = -2x + 1</code> are&hellip;",
+  "opts": [
+   "parallel",
+   "perpendicular",
+   "the same line",
+   "neither parallel nor perpendicular"
+  ],
+  "ans": 3,
+  "hint": "Opposite slopes are not negative reciprocals.",
+  "sol": "Slopes 2 and &minus;2 are different (parallel needs equal slopes), and 2 &middot; (&minus;2) = &minus;4 &ne; &minus;1 (perpendicular needs product &minus;1). Neither."
+ },
+ {
+  "g": "L2",
+  "q": "Write the equation of the line through (4, &minus;1) that is <strong>parallel</strong> to <code>y = 2x + 5</code>. (Type your equation, e.g. <code>y = 2x - 5</code>. Any correct form is accepted.)",
+  "type": "eq",
+  "A": 2.0,
+  "B": -1.0,
+  "C": 9.0,
+  "hint": "Use the same slope and point-slope form with the given point.",
+  "sol": "Slope 2: <em>y</em> + 1 = 2(<em>x</em> &minus; 4), so <em>y</em> = 2<em>x</em> &minus; 9."
+ },
+ {
+  "g": "L2",
+  "q": "Write the equation of the line through (&minus;2, 5) that is <strong>parallel</strong> to <code>3x + y = 4</code>. (Type your equation, e.g. <code>y = 2x - 5</code>. Any correct form is accepted.)",
+  "type": "eq",
+  "A": 3.0,
+  "B": 1.0,
+  "C": -1.0,
+  "hint": "Find the slope of 3<em>x</em> + <em>y</em> = 4 first.",
+  "sol": "The given line is <em>y</em> = &minus;3<em>x</em> + 4, so <em>m</em> = &minus;3. Then <em>y</em> &minus; 5 = &minus;3(<em>x</em> + 2), so <em>y</em> = &minus;3<em>x</em> &minus; 1."
+ },
+ {
+  "g": "L2",
+  "q": "Write the equation of the line through (6, 2) that is <strong>parallel</strong> to <code>x - 2y = 4</code>. (Type your equation, e.g. <code>y = 2x - 5</code>. Any correct form is accepted.)",
+  "type": "eq",
+  "A": 1.0,
+  "B": -2.0,
+  "C": 2.0,
+  "hint": "Slope of the given line: solve for <em>y</em>.",
+  "sol": "<em>x</em> &minus; 2<em>y</em> = 4 gives <em>m</em> = 1/2. Then <em>y</em> &minus; 2 = (1/2)(<em>x</em> &minus; 6), so <em>y</em> = (1/2)<em>x</em> &minus; 1."
+ },
+ {
+  "g": "L2",
+  "q": "Write the equation of the line through (3, &minus;4) that is parallel to the <em>x</em>-axis. (Type your equation, e.g. <code>y = 2x - 5</code>. Any correct form is accepted.)",
+  "type": "eq",
+  "A": 0.0,
+  "B": 1.0,
+  "C": -4.0,
+  "hint": "Horizontal lines have the form <em>y</em> = constant.",
+  "sol": "A line parallel to the <em>x</em>-axis is horizontal (slope 0), so <em>y</em> = &minus;4."
+ },
+ {
+  "g": "L2",
+  "q": "For what value of <em>k</em> are the lines <code>kx + 3y = 6</code> and <code>2x - y = 5</code> parallel?",
+  "type": "num",
+  "ans": -6.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Find each slope and set them equal.",
+  "sol": "Slopes: &minus;<em>k</em>/3 and 2. Set &minus;<em>k</em>/3 = 2, so <em>k</em> = &minus;6."
+ },
+ {
+  "g": "L2",
+  "q": "For what value of <em>k</em> is <code>4x + ky = 7</code> parallel to <code>y = 2x - 1</code>?",
+  "type": "num",
+  "ans": -2.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Slope of <em>Ax</em> + <em>By</em> = <em>C</em> is &minus;<em>A</em>/<em>B</em>.",
+  "sol": "The slope of 4<em>x</em> + <em>ky</em> = 7 is &minus;4/<em>k</em>. Set &minus;4/<em>k</em> = 2, so <em>k</em> = &minus;2."
+ },
+ {
+  "g": "L2",
+  "q": "Which line is parallel to the vertical line <code>x = 3</code>?",
+  "opts": [
+   "y = 3",
+   "x = &minus;7",
+   "y = x",
+   "y = &minus;3x"
+  ],
+  "ans": 1,
+  "hint": "Parallel to a vertical line means another vertical line.",
+  "sol": "Vertical lines are parallel to each other, so <em>x</em> = &minus;7 is parallel to <em>x</em> = 3."
+ },
+ {
+  "g": "L3",
+  "q": "What is the slope of any line <strong>perpendicular</strong> to <code>y = (2/3)x - 1</code>? (Fraction or decimal.)",
+  "type": "num",
+  "ans": -1.5,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Flip the fraction and change the sign.",
+  "sol": "Negative reciprocal of 2/3 is &minus;3/2."
+ },
+ {
+  "g": "L3",
+  "q": "What is the slope of any line <strong>perpendicular</strong> to <code>y = -4x + 3</code>? (Fraction or decimal.)",
+  "type": "num",
+  "ans": 0.25,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Negative reciprocal: <em>m</em><sub>2</sub> = &minus;1/<em>m</em><sub>1</sub>.",
+  "sol": "Negative reciprocal of &minus;4 is 1/4."
+ },
+ {
+  "g": "L3",
+  "q": "What is the slope of any line <strong>perpendicular</strong> to <code>3x + 5y = 10</code>? (Fraction or decimal.)",
+  "type": "num",
+  "ans": 1.6666666666666667,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "First find the slope of the given line.",
+  "sol": "The given slope is &minus;3/5, so the perpendicular slope is 5/3."
+ },
+ {
+  "g": "L3",
+  "q": "Are <code>y = (1/2)x + 3</code> and <code>y = -2x - 1</code> perpendicular?",
+  "opts": [
+   "Yes: the slopes are negative reciprocals (product &minus;1)",
+   "No: the slopes are equal",
+   "No: the slopes are opposites, not reciprocals",
+   "They are parallel"
+  ],
+  "ans": 0,
+  "hint": "Multiply the slopes: perpendicular lines give &minus;1.",
+  "sol": "(1/2)(&minus;2) = &minus;1, so the lines are perpendicular."
+ },
+ {
+  "g": "L3",
+  "q": "Are <code>3x - 2y = 6</code> and <code>2x + 3y = 12</code> perpendicular?",
+  "opts": [
+   "Yes",
+   "No: they are parallel",
+   "No: the slopes are 3/2 and 2/3",
+   "No: they are the same line"
+  ],
+  "ans": 0,
+  "hint": "Solve each for <em>y</em> and multiply the slopes.",
+  "sol": "Slopes: 3/2 and &minus;2/3. Product = &minus;1, so they are perpendicular."
+ },
+ {
+  "g": "L3",
+  "q": "Lines <code>y = 3x + 1</code> and <code>y = -3x + 1</code> are&hellip;",
+  "opts": [
+   "perpendicular",
+   "parallel",
+   "the same line",
+   "neither parallel nor perpendicular"
+  ],
+  "ans": 3,
+  "hint": "Perpendicular slopes are negative <em>reciprocals</em>, not just opposites.",
+  "sol": "3 &middot; (&minus;3) = &minus;9, not &minus;1, and the slopes are not equal, so they are neither."
+ },
+ {
+  "g": "L3",
+  "q": "Write the equation of the line through (4, &minus;1) that is <strong>perpendicular</strong> to <code>y = 2x + 5</code>. (Type your equation, e.g. <code>y = 2x - 5</code>. Any correct form is accepted.)",
+  "type": "eq",
+  "A": 0.5,
+  "B": 1.0,
+  "C": 1.0,
+  "hint": "Take the negative reciprocal of 2, then use point-slope form.",
+  "sol": "Perpendicular slope: &minus;1/2. <em>y</em> + 1 = &minus;(1/2)(<em>x</em> &minus; 4), so <em>y</em> = &minus;(1/2)<em>x</em> + 1."
+ },
+ {
+  "g": "L3",
+  "q": "Write the equation of the line through (&minus;3, 2) that is <strong>perpendicular</strong> to <code>4x + 2y = 7</code>. (Type your equation, e.g. <code>y = 2x - 5</code>. Any correct form is accepted.)",
+  "type": "eq",
+  "A": -0.5,
+  "B": 1.0,
+  "C": 3.5,
+  "hint": "Slope of the given line is &minus;4/2.",
+  "sol": "4<em>x</em> + 2<em>y</em> = 7 has slope &minus;2, so the perpendicular slope is 1/2. <em>y</em> &minus; 2 = (1/2)(<em>x</em> + 3), so <em>y</em> = (1/2)<em>x</em> + 7/2."
+ },
+ {
+  "g": "L3",
+  "q": "Write the equation of the line through (0, 5) that is <strong>perpendicular</strong> to <code>y = x - 3</code>. (Type your equation, e.g. <code>y = 2x - 5</code>. Any correct form is accepted.)",
+  "type": "eq",
+  "A": 1.0,
+  "B": 1.0,
+  "C": 5.0,
+  "hint": "The negative reciprocal of 1 is &minus;1.",
+  "sol": "The given slope is 1, so the perpendicular slope is &minus;1. The <em>y</em>-intercept is 5, so <em>y</em> = &minus;<em>x</em> + 5."
+ },
+ {
+  "g": "L3",
+  "q": "Write the equation of the line through (2, &minus;3) that is <strong>perpendicular</strong> to the vertical line <code>x = 5</code>. (Type your equation, e.g. <code>y = 2x - 5</code>. Any correct form is accepted.)",
+  "type": "eq",
+  "A": 0.0,
+  "B": 1.0,
+  "C": -3.0,
+  "hint": "Horizontal and vertical lines are perpendicular.",
+  "sol": "A line perpendicular to a vertical line is horizontal. Through (2, &minus;3): <em>y</em> = &minus;3."
+ },
+ {
+  "g": "L3",
+  "q": "For what value of <em>k</em> are <code>kx + 3y = 6</code> and <code>2x - y = 5</code> perpendicular? (Fraction or decimal.)",
+  "type": "num",
+  "ans": 1.5,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Set the product of the slopes equal to &minus;1.",
+  "sol": "Slopes: &minus;<em>k</em>/3 and 2. Product = &minus;1: (&minus;<em>k</em>/3)(2) = &minus;1, so 2<em>k</em>/3 = 1 and <em>k</em> = 3/2."
+ },
+ {
+  "g": "L3",
+  "q": "For what value of <em>k</em> is <code>y = kx + 1</code> perpendicular to <code>y = (4/5)x - 2</code>? (Fraction or decimal.)",
+  "type": "num",
+  "ans": -1.25,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Negative reciprocal of 4/5.",
+  "sol": "<em>k</em> is the negative reciprocal of 4/5: <em>k</em> = &minus;5/4."
+ },
+ {
+  "g": "L4",
+  "q": "Line AB passes through A(1, 2) and B(4, 8); line CD passes through C(&minus;2, &minus;5) and D(0, &minus;1). The lines are&hellip;",
+  "opts": [
+   "parallel",
+   "perpendicular",
+   "the same line",
+   "neither"
+  ],
+  "ans": 0,
+  "hint": "Compute both slopes.",
+  "sol": "Slope AB = 6/3 = 2. Slope CD = (&minus;1 + 5)/(0 + 2) = 2. Equal slopes and C is not on AB: parallel."
+ },
+ {
+  "g": "L4",
+  "q": "Line PQ passes through P(0, 0) and Q(4, 2); line RS passes through R(1, 3) and S(3, &minus;1). The lines are&hellip;",
+  "opts": [
+   "parallel",
+   "perpendicular",
+   "the same line",
+   "neither"
+  ],
+  "ans": 1,
+  "hint": "Compute both slopes and their product.",
+  "sol": "Slope PQ = 2/4 = 1/2. Slope RS = (&minus;1 &minus; 3)/(3 &minus; 1) = &minus;2. Product = &minus;1: perpendicular."
+ },
+ {
+  "g": "L4",
+  "q": "Line EF passes through E(0, 1) and F(3, 5); line GH passes through G(0, 0) and H(2, 3). The lines are&hellip;",
+  "opts": [
+   "parallel",
+   "perpendicular",
+   "the same line",
+   "neither"
+  ],
+  "ans": 3,
+  "hint": "Compute both slopes.",
+  "sol": "Slope EF = 4/3 and slope GH = 3/2. They are not equal and 4/3 &middot; 3/2 = 2 &ne; &minus;1: neither."
+ },
+ {
+  "g": "L4",
+  "q": "Triangle ABC has vertices A(0, 0), B(4, 0) and C(4, 3). At which vertex is the right angle?",
+  "opts": [
+   "A",
+   "B",
+   "C",
+   "There is no right angle"
+  ],
+  "ans": 1,
+  "hint": "Look for two perpendicular sides.",
+  "sol": "AB is horizontal and BC is vertical, so they are perpendicular and the right angle is at B."
+ },
+ {
+  "g": "L4",
+  "q": "Quadrilateral with vertices (0, 0), (4, 1), (5, 4) and (1, 3), in order. Which description is best?",
+  "opts": [
+   "Parallelogram, not a rectangle",
+   "Rectangle",
+   "Trapezoid with exactly one pair of parallel sides",
+   "No parallel sides"
+  ],
+  "ans": 0,
+  "hint": "Find the slope of each side.",
+  "sol": "Slopes: (0,0)&ndash;(4,1): 1/4; (4,1)&ndash;(5,4): 3; (5,4)&ndash;(1,3): 1/4; (1,3)&ndash;(0,0): 3. Opposite sides are parallel, but adjacent slopes 1/4 and 3 have product 3/4 &ne; &minus;1, so no right angles."
+ },
+ {
+  "g": "L4",
+  "q": "Perpendicular lines (neither vertical nor horizontal) have slopes that are&hellip;",
+  "opts": [
+   "equal",
+   "opposites (like 2 and &minus;2)",
+   "negative reciprocals (product &minus;1)",
+   "reciprocals (like 2 and 1/2)"
+  ],
+  "ans": 2,
+  "hint": "Think of 2 and &minus;1/2.",
+  "sol": "The slopes of perpendicular lines multiply to &minus;1: they are negative reciprocals."
+ },
+ {
+  "g": "L4",
+  "q": "A horizontal line and a vertical line are&hellip;",
+  "opts": [
+   "parallel",
+   "perpendicular",
+   "the same line",
+   "neither"
+  ],
+  "ans": 1,
+  "hint": "Think of the axes.",
+  "sol": "They meet at a right angle, so they are perpendicular (even though the vertical slope is undefined, so the product-of-slopes rule does not apply)."
+ },
+ {
+  "g": "S1",
+  "q": "Which sequence is <strong>arithmetic</strong>?",
+  "opts": [
+   "3, 6, 12, 24, &hellip;",
+   "5, 9, 13, 17, &hellip;",
+   "1, 4, 9, 16, &hellip;",
+   "2, &minus;2, 2, &minus;2, &hellip;"
+  ],
+  "ans": 1,
+  "hint": "An arithmetic sequence has a constant difference between consecutive terms.",
+  "sol": "5, 9, 13, 17 adds 4 each time (common difference 4). The others multiply (geometric), add growing amounts, or alternate."
+ },
+ {
+  "g": "S1",
+  "q": "Find the common difference <em>d</em> of 7, 11, 15, 19, &hellip;",
+  "type": "num",
+  "ans": 4.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Subtract any term from the next term.",
+  "sol": "<em>d</em> = 11 &minus; 7 = 4."
+ },
+ {
+  "g": "S1",
+  "q": "Find the common difference <em>d</em> of 20, 14, 8, 2, &hellip;",
+  "type": "num",
+  "ans": -6.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "The sequence decreases, so <em>d</em> is negative.",
+  "sol": "<em>d</em> = 14 &minus; 20 = &minus;6."
+ },
+ {
+  "g": "S1",
+  "q": "Find the common difference <em>d</em> of 1/2, 1, 3/2, 2, &hellip; (Fraction or decimal.)",
+  "type": "num",
+  "ans": 0.5,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Subtract consecutive terms.",
+  "sol": "<em>d</em> = 1 &minus; 1/2 = 1/2."
+ },
+ {
+  "g": "S1",
+  "q": "Find the common difference <em>d</em> of 2.5, 3.1, 3.7, 4.3, &hellip;",
+  "type": "num",
+  "ans": 0.6,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Subtract consecutive terms.",
+  "sol": "<em>d</em> = 3.1 &minus; 2.5 = 0.6."
+ },
+ {
+  "g": "S1",
+  "q": "What is the next term of 8, 15, 22, 29, &hellip; ?",
+  "type": "num",
+  "ans": 36.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Find <em>d</em>, then add it to the last term.",
+  "sol": "<em>d</em> = 7, so the next term is 29 + 7 = 36."
+ },
+ {
+  "g": "S1",
+  "q": "What is the 5th term of 10, 7, 4, 1, &hellip; ?",
+  "type": "num",
+  "ans": -2.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Find <em>d</em>, then continue the pattern.",
+  "sol": "<em>d</em> = &minus;3, so <em>a</em><sub>5</sub> = 1 + (&minus;3) = &minus;2."
+ },
+ {
+  "g": "S1",
+  "q": "An arithmetic sequence has <em>a</em><sub>1</sub> = 3 and <em>d</em> = 5. Find <em>a</em><sub>4</sub>.",
+  "type": "num",
+  "ans": 18.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Add 5 three times.",
+  "sol": "The terms are 3, 8, 13, 18, so <em>a</em><sub>4</sub> = 18."
+ },
+ {
+  "g": "S1",
+  "q": "Is the sequence &minus;3, &minus;3, &minus;3, &minus;3, &hellip; arithmetic?",
+  "opts": [
+   "Yes, with <em>d</em> = 0",
+   "No, because the terms never change",
+   "No, because <em>d</em> must be positive",
+   "Yes, with <em>d</em> = &minus;3"
+  ],
+  "ans": 0,
+  "hint": "The common difference can be zero or negative.",
+  "sol": "The difference between consecutive terms is always 0, which is a constant, so it is arithmetic with <em>d</em> = 0."
+ },
+ {
+  "g": "S1",
+  "q": "Find the missing term: 5, ___, 17, &hellip; (an arithmetic sequence).",
+  "type": "num",
+  "ans": 11.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Two steps of size <em>d</em> take you from 5 to 17.",
+  "sol": "The missing term is the average of its neighbors: (5 + 17)/2 = 11. (<em>d</em> = 6.)"
+ },
+ {
+  "g": "S1",
+  "q": "In the arithmetic sequence 4, ___, ___, 19, find the <strong>second</strong> missing term.",
+  "type": "num",
+  "ans": 14.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Find <em>d</em> using the total change and the number of steps.",
+  "sol": "Three steps take 4 to 19, so <em>d</em> = 15/3 = 5. The terms are 4, 9, 14, 19; the second missing term is 14."
+ },
+ {
+  "g": "S2",
+  "q": "Write the explicit formula <em>a</em><sub><em>n</em></sub> for the sequence 7, 11, 15, 19, &hellip; (Type your formula, e.g. <code>a_n = 4n + 3</code>.)",
+  "type": "seq",
+  "a1": 7.0,
+  "d": 4.0,
+  "hint": "Use <em>a</em><sub><em>n</em></sub> = <em>a</em><sub>1</sub> + (<em>n</em> &minus; 1)<em>d</em>.",
+  "sol": "<em>a</em><sub>1</sub> = 7 and <em>d</em> = 4. <em>a</em><sub><em>n</em></sub> = 7 + (<em>n</em> &minus; 1)4 = 4<em>n</em> + 3."
+ },
+ {
+  "g": "S2",
+  "q": "Write the explicit formula for the sequence 20, 17, 14, 11, &hellip; (Type your formula, e.g. <code>a_n = 4n + 3</code>.)",
+  "type": "seq",
+  "a1": 20.0,
+  "d": -3.0,
+  "hint": "Find <em>a</em><sub>1</sub> and <em>d</em>.",
+  "sol": "<em>a</em><sub>1</sub> = 20, <em>d</em> = &minus;3: <em>a</em><sub><em>n</em></sub> = 20 &minus; 3(<em>n</em> &minus; 1) = 23 &minus; 3<em>n</em>."
+ },
+ {
+  "g": "S2",
+  "q": "An arithmetic sequence has <em>a</em><sub>1</sub> = 5 and <em>d</em> = 2. Write the explicit formula. (Type your formula, e.g. <code>a_n = 4n + 3</code>.)",
+  "type": "seq",
+  "a1": 5.0,
+  "d": 2.0,
+  "hint": "Substitute into the formula.",
+  "sol": "<em>a</em><sub><em>n</em></sub> = 5 + (<em>n</em> &minus; 1)2 = 2<em>n</em> + 3."
+ },
+ {
+  "g": "S2",
+  "q": "An arithmetic sequence has <em>a</em><sub>1</sub> = &minus;3 and <em>d</em> = 4. Write the explicit formula. (Type your formula, e.g. <code>a_n = 4n + 3</code>.)",
+  "type": "seq",
+  "a1": -3.0,
+  "d": 4.0,
+  "hint": "Distribute the 4 and combine constants.",
+  "sol": "<em>a</em><sub><em>n</em></sub> = &minus;3 + (<em>n</em> &minus; 1)4 = 4<em>n</em> &minus; 7."
+ },
+ {
+  "g": "S2",
+  "q": "Write the explicit formula for the sequence 2, 2.5, 3, 3.5, &hellip; (Type your formula, e.g. <code>a_n = 4n + 3</code>.)",
+  "type": "seq",
+  "a1": 2.0,
+  "d": 0.5,
+  "hint": "Find <em>d</em> = 0.5 first.",
+  "sol": "<em>a</em><sub>1</sub> = 2, <em>d</em> = 0.5: <em>a</em><sub><em>n</em></sub> = 2 + 0.5(<em>n</em> &minus; 1) = 0.5<em>n</em> + 1.5."
+ },
+ {
+  "g": "S2",
+  "q": "Which is the explicit formula for 3, 8, 13, 18, &hellip; ?",
+  "opts": [
+   "<em>a</em><sub><em>n</em></sub> = 3 + 5<em>n</em>",
+   "<em>a</em><sub><em>n</em></sub> = 3 + 5(<em>n</em> &minus; 1)",
+   "<em>a</em><sub><em>n</em></sub> = 5 + 3(<em>n</em> &minus; 1)",
+   "<em>a</em><sub><em>n</em></sub> = 3 + 8(<em>n</em> &minus; 1)"
+  ],
+  "ans": 1,
+  "hint": "Test <em>n</em> = 1 in each formula; it must give 3.",
+  "sol": "<em>a</em><sub>1</sub> = 3 and <em>d</em> = 5, so <em>a</em><sub><em>n</em></sub> = 3 + 5(<em>n</em> &minus; 1). Check <em>n</em> = 1: 3 &#10003;; the first option would give 8 for <em>n</em> = 1."
+ },
+ {
+  "g": "S2",
+  "q": "Using <em>a</em><sub><em>n</em></sub> = 7 + (<em>n</em> &minus; 1)4, find <em>a</em><sub>20</sub>.",
+  "type": "num",
+  "ans": 83.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Substitute <em>n</em> = 20.",
+  "sol": "<em>a</em><sub>20</sub> = 7 + 19(4) = 7 + 76 = 83."
+ },
+ {
+  "g": "S2",
+  "q": "Find the 15th term of 2, 5, 8, 11, &hellip;",
+  "type": "num",
+  "ans": 44.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Use <em>a</em><sub><em>n</em></sub> = <em>a</em><sub>1</sub> + (<em>n</em> &minus; 1)<em>d</em>.",
+  "sol": "<em>d</em> = 3, so <em>a</em><sub>15</sub> = 2 + 14(3) = 44."
+ },
+ {
+  "g": "S2",
+  "q": "Find the 30th term of 100, 95, 90, 85, &hellip;",
+  "type": "num",
+  "ans": -45.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "The common difference is negative.",
+  "sol": "<em>d</em> = &minus;5, so <em>a</em><sub>30</sub> = 100 + 29(&minus;5) = 100 &minus; 145 = &minus;45."
+ },
+ {
+  "g": "S2",
+  "q": "If <em>a</em><sub><em>n</em></sub> = 4<em>n</em> + 3, find <em>a</em><sub>12</sub>.",
+  "type": "num",
+  "ans": 51.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Substitute <em>n</em> = 12.",
+  "sol": "<em>a</em><sub>12</sub> = 4(12) + 3 = 51."
+ },
+ {
+  "g": "S2",
+  "q": "Which term of the sequence 2, 5, 8, 11, &hellip; equals 98? (Enter the value of <em>n</em>.)",
+  "type": "num",
+  "ans": 33.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Write the explicit formula, set it equal to 98 and solve for <em>n</em>.",
+  "sol": "<em>a</em><sub><em>n</em></sub> = 2 + 3(<em>n</em> &minus; 1) = 3<em>n</em> &minus; 1. Set 3<em>n</em> &minus; 1 = 98, so <em>n</em> = 33."
+ },
+ {
+  "g": "S2",
+  "q": "Which term of the sequence 13, 9, 5, 1, &hellip; equals &minus;15? (Enter <em>n</em>.)",
+  "type": "num",
+  "ans": 8.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Here <em>d</em> = &minus;4.",
+  "sol": "<em>a</em><sub><em>n</em></sub> = 13 &minus; 4(<em>n</em> &minus; 1) = 17 &minus; 4<em>n</em>. Set 17 &minus; 4<em>n</em> = &minus;15, so <em>n</em> = 8."
+ },
+ {
+  "g": "S2",
+  "q": "Is 150 a term of the sequence with <em>a</em><sub><em>n</em></sub> = 4<em>n</em> + 3?",
+  "opts": [
+   "Yes, it is the 36th term",
+   "Yes, it is the 37th term",
+   "No, because 4<em>n</em> + 3 = 150 gives <em>n</em> = 36.75, which is not a whole number",
+   "No, because 150 is even"
+  ],
+  "ans": 2,
+  "hint": "Solve 4<em>n</em> + 3 = 150 for <em>n</em>.",
+  "sol": "4<em>n</em> + 3 = 150 gives <em>n</em> = 147/4 = 36.75. A term number must be a positive whole number, so 150 is not a term."
+ },
+ {
+  "g": "S2",
+  "q": "Is 203 a term of the sequence with <em>a</em><sub><em>n</em></sub> = 4<em>n</em> + 3?",
+  "opts": [
+   "Yes, it is the 50th term",
+   "Yes, it is the 51st term",
+   "No",
+   "Yes, it is the 200th term"
+  ],
+  "ans": 0,
+  "hint": "Solve 4<em>n</em> + 3 = 203.",
+  "sol": "4<em>n</em> + 3 = 203 gives 4<em>n</em> = 200, so <em>n</em> = 50. It is the 50th term."
+ },
+ {
+  "g": "S2",
+  "q": "How many terms are in the arithmetic sequence 3, 7, 11, &hellip;, 99?",
+  "type": "num",
+  "ans": 25.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Find which term number equals 99.",
+  "sol": "<em>a</em><sub><em>n</em></sub> = 3 + 4(<em>n</em> &minus; 1) = 4<em>n</em> &minus; 1. Set 4<em>n</em> &minus; 1 = 99, so <em>n</em> = 25."
+ },
+ {
+  "g": "S2",
+  "q": "How many terms are in the arithmetic sequence 5, 8, 11, &hellip;, 62?",
+  "type": "num",
+  "ans": 20.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Find which term number equals 62.",
+  "sol": "<em>a</em><sub><em>n</em></sub> = 5 + 3(<em>n</em> &minus; 1) = 3<em>n</em> + 2. Set 3<em>n</em> + 2 = 62, so <em>n</em> = 20."
+ },
+ {
+  "g": "S3",
+  "q": "Which recursive formula describes 7, 11, 15, 19, &hellip; ?",
+  "opts": [
+   "<em>a</em><sub>1</sub> = 7;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 4",
+   "<em>a</em><sub>1</sub> = 4;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 7",
+   "<em>a</em><sub>1</sub> = 7;&nbsp; <em>a</em><sub><em>n</em></sub> = 4<em>a</em><sub><em>n</em>&minus;1</sub>",
+   "<em>a</em><sub>1</sub> = 7;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> &minus; 4"
+  ],
+  "ans": 0,
+  "hint": "A recursive formula needs the first term and the rule that goes from one term to the next.",
+  "sol": "The first term is 7 and each term is the previous one plus 4."
+ },
+ {
+  "g": "S3",
+  "q": "Which recursive formula describes 20, 17, 14, 11, &hellip; ?",
+  "opts": [
+   "<em>a</em><sub>1</sub> = 20;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 3",
+   "<em>a</em><sub>1</sub> = 20;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> &minus; 3",
+   "<em>a</em><sub>1</sub> = 3;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> &minus; 20",
+   "<em>a</em><sub>1</sub> = 17;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> &minus; 3"
+  ],
+  "ans": 1,
+  "hint": "The sequence decreases by 3 each step.",
+  "sol": "<em>a</em><sub>1</sub> = 20 and <em>d</em> = &minus;3, so <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> &minus; 3."
+ },
+ {
+  "g": "S3",
+  "q": "A sequence has <em>a</em><sub>1</sub> = 5 and <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 8. What are its first four terms?",
+  "opts": [
+   "5, 13, 21, 29",
+   "5, 8, 11, 14",
+   "8, 13, 18, 23",
+   "5, 40, 320, 2560"
+  ],
+  "ans": 0,
+  "hint": "Start at 5 and keep adding 8.",
+  "sol": "5, 5 + 8 = 13, 13 + 8 = 21, 21 + 8 = 29."
+ },
+ {
+  "g": "S3",
+  "q": "A sequence has <em>a</em><sub>1</sub> = 12 and <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> &minus; 4. Find <em>a</em><sub>5</sub>.",
+  "type": "num",
+  "ans": -4.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Subtract 4 repeatedly.",
+  "sol": "12, 8, 4, 0, &minus;4, so <em>a</em><sub>5</sub> = &minus;4."
+ },
+ {
+  "g": "S3",
+  "q": "A sequence has <em>a</em><sub>1</sub> = 2 and <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 0.5. Find <em>a</em><sub>9</sub>.",
+  "type": "num",
+  "ans": 6.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "From the 1st to the 9th term there are 8 steps.",
+  "sol": "Eight steps of 0.5 from 2: 2 + 8(0.5) = 6."
+ },
+ {
+  "g": "S3",
+  "q": "Convert the recursive formula <em>a</em><sub>1</sub> = 12, <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> &minus; 4 to an explicit formula.",
+  "opts": [
+   "<em>a</em><sub><em>n</em></sub> = 12 &minus; 4<em>n</em>",
+   "<em>a</em><sub><em>n</em></sub> = 16 &minus; 4<em>n</em>",
+   "<em>a</em><sub><em>n</em></sub> = 8 + 4<em>n</em>",
+   "<em>a</em><sub><em>n</em></sub> = &minus;4 + 12<em>n</em>"
+  ],
+  "ans": 1,
+  "hint": "Use <em>a</em><sub>1</sub> = 12 and <em>d</em> = &minus;4 in <em>a</em><sub>1</sub> + (<em>n</em> &minus; 1)<em>d</em>.",
+  "sol": "<em>a</em><sub><em>n</em></sub> = 12 + (<em>n</em> &minus; 1)(&minus;4) = 16 &minus; 4<em>n</em>. Check: <em>n</em> = 1 gives 12 &#10003;."
+ },
+ {
+  "g": "S3",
+  "q": "A sequence has <em>a</em><sub>1</sub> = &minus;5 and <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 6. Write the explicit formula. (Type your formula, e.g. <code>a_n = 4n + 3</code>.)",
+  "type": "seq",
+  "a1": -5.0,
+  "d": 6.0,
+  "hint": "Read <em>a</em><sub>1</sub> and <em>d</em> from the recursive formula.",
+  "sol": "<em>a</em><sub><em>n</em></sub> = &minus;5 + 6(<em>n</em> &minus; 1) = 6<em>n</em> &minus; 11."
+ },
+ {
+  "g": "S3",
+  "q": "Convert the explicit formula <em>a</em><sub><em>n</em></sub> = 5<em>n</em> &minus; 3 to a recursive formula.",
+  "opts": [
+   "<em>a</em><sub>1</sub> = 2;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 5",
+   "<em>a</em><sub>1</sub> = 5;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> &minus; 3",
+   "<em>a</em><sub>1</sub> = &minus;3;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 5",
+   "<em>a</em><sub>1</sub> = 2;&nbsp; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 3"
+  ],
+  "ans": 0,
+  "hint": "Find <em>a</em><sub>1</sub> by substituting <em>n</em> = 1; the coefficient of <em>n</em> is <em>d</em>.",
+  "sol": "<em>a</em><sub>1</sub> = 5(1) &minus; 3 = 2 and the coefficient of <em>n</em> is <em>d</em> = 5, so <em>a</em><sub>1</sub> = 2; <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + 5."
+ },
+ {
+  "g": "S3",
+  "q": "What is the main difference between a recursive and an explicit formula?",
+  "opts": [
+   "A recursive formula gives each term from the previous term (and needs the first term); an explicit formula gives any term directly from <em>n</em>",
+   "A recursive formula only works for geometric sequences",
+   "An explicit formula needs the previous term",
+   "They give different sequences"
+  ],
+  "ans": 0,
+  "hint": "Which one lets you find the 100th term without listing 99 terms?",
+  "sol": "Recursive: <em>a</em><sub><em>n</em></sub> in terms of <em>a</em><sub><em>n</em>&minus;1</sub>. Explicit: <em>a</em><sub><em>n</em></sub> directly in terms of <em>n</em>, so you can jump straight to <em>a</em><sub>100</sub>."
+ },
+ {
+  "g": "S3",
+  "q": "Why does a recursive formula for an arithmetic sequence need <em>a</em><sub>1</sub> as well as the rule <em>a</em><sub><em>n</em></sub> = <em>a</em><sub><em>n</em>&minus;1</sub> + <em>d</em>?",
+  "opts": [
+   "Without a starting value, many different sequences share the same rule",
+   "Because <em>d</em> is unknown",
+   "It is not needed",
+   "Because <em>a</em><sub>1</sub> equals <em>d</em>"
+  ],
+  "ans": 0,
+  "hint": "Think of two different sequences with the same common difference.",
+  "sol": "The rule only says how to get the next term. For example, 1, 3, 5, &hellip; and 10, 12, 14, &hellip; both add 2; the first term tells us which sequence we mean."
+ },
+ {
+  "g": "S4",
+  "q": "In an arithmetic sequence, <em>a</em><sub>5</sub> = 17 and <em>a</em><sub>9</sub> = 29. Find the common difference <em>d</em>.",
+  "type": "num",
+  "ans": 3.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "The number of steps from term 5 to term 9 is 4.",
+  "sol": "Four steps take <em>a</em><sub>5</sub> to <em>a</em><sub>9</sub>: 4<em>d</em> = 29 &minus; 17 = 12, so <em>d</em> = 3."
+ },
+ {
+  "g": "S4",
+  "q": "In the same sequence (<em>a</em><sub>5</sub> = 17, <em>a</em><sub>9</sub> = 29), find <em>a</em><sub>1</sub>.",
+  "type": "num",
+  "ans": 5.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Go back 4 steps from <em>a</em><sub>5</sub>.",
+  "sol": "<em>a</em><sub>1</sub> = <em>a</em><sub>5</sub> &minus; 4<em>d</em> = 17 &minus; 12 = 5."
+ },
+ {
+  "g": "S4",
+  "q": "Write the explicit formula for the sequence with <em>a</em><sub>5</sub> = 17 and <em>a</em><sub>9</sub> = 29. (Type your formula, e.g. <code>a_n = 4n + 3</code>.)",
+  "type": "seq",
+  "a1": 5.0,
+  "d": 3.0,
+  "hint": "Find <em>d</em> and <em>a</em><sub>1</sub> first.",
+  "sol": "<em>d</em> = 3, <em>a</em><sub>1</sub> = 5: <em>a</em><sub><em>n</em></sub> = 5 + 3(<em>n</em> &minus; 1) = 3<em>n</em> + 2."
+ },
+ {
+  "g": "S4",
+  "q": "In an arithmetic sequence, <em>a</em><sub>3</sub> = 11 and <em>a</em><sub>8</sub> = &minus;4. Find the common difference <em>d</em>.",
+  "type": "num",
+  "ans": -3.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "There are 5 steps from term 3 to term 8.",
+  "sol": "5<em>d</em> = &minus;4 &minus; 11 = &minus;15, so <em>d</em> = &minus;3."
+ },
+ {
+  "g": "S4",
+  "q": "Write the explicit formula for the sequence with <em>a</em><sub>3</sub> = 11 and <em>a</em><sub>8</sub> = &minus;4. (Type your formula, e.g. <code>a_n = 4n + 3</code>.)",
+  "type": "seq",
+  "a1": 17.0,
+  "d": -3.0,
+  "hint": "Find <em>d</em>, then <em>a</em><sub>1</sub>.",
+  "sol": "<em>d</em> = &minus;3 and <em>a</em><sub>1</sub> = <em>a</em><sub>3</sub> &minus; 2<em>d</em> = 11 + 6 = 17, so <em>a</em><sub><em>n</em></sub> = 17 &minus; 3(<em>n</em> &minus; 1) = 20 &minus; 3<em>n</em>."
+ },
+ {
+  "g": "S4",
+  "q": "An arithmetic sequence has <em>a</em><sub>4</sub> = 22 and <em>d</em> = 6. Find <em>a</em><sub>1</sub>.",
+  "type": "num",
+  "ans": 4.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "From <em>a</em><sub>1</sub> to <em>a</em><sub>4</sub> there are 3 steps.",
+  "sol": "<em>a</em><sub>1</sub> = 22 &minus; 3(6) = 4."
+ },
+ {
+  "g": "S4",
+  "q": "The points (1, <em>a</em><sub>1</sub>), (2, <em>a</em><sub>2</sub>), (3, <em>a</em><sub>3</sub>), &hellip; of the sequence <em>a</em><sub><em>n</em></sub> = 4<em>n</em> + 3 lie on a straight line. What is its slope?",
+  "opts": [
+   "3",
+   "4",
+   "7",
+   "1/4"
+  ],
+  "ans": 1,
+  "hint": "Compare with <em>y</em> = <em>mx</em> + <em>b</em>.",
+  "sol": "The explicit formula <em>a</em><sub><em>n</em></sub> = 4<em>n</em> + 3 is a linear function with slope 4 (the common difference) and intercept 3."
+ },
+ {
+  "g": "S4",
+  "q": "Two arithmetic sequences have the same common difference but different first terms. How are the graphs of their points?",
+  "opts": [
+   "They lie on parallel lines",
+   "They lie on perpendicular lines",
+   "They lie on the same line",
+   "They are not related to lines"
+  ],
+  "ans": 0,
+  "hint": "Slope of the line through the points = common difference.",
+  "sol": "Same <em>d</em> means the same slope, so the points lie on parallel lines."
+ },
+ {
+  "g": "S4",
+  "q": "In a theater, row 1 has 20 seats and each row has 3 more seats than the previous one. How many seats are in row 15?",
+  "type": "num",
+  "ans": 62.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Use <em>a</em><sub><em>n</em></sub> = <em>a</em><sub>1</sub> + (<em>n</em> &minus; 1)<em>d</em>.",
+  "sol": "Arithmetic with <em>a</em><sub>1</sub> = 20, <em>d</em> = 3: <em>a</em><sub>15</sub> = 20 + 14(3) = 62."
+ },
+ {
+  "g": "S4",
+  "q": "In the same theater (row 1 has 20 seats, 3 more in each next row), the last row has 62 seats. How many rows are there?",
+  "type": "num",
+  "ans": 15.0,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Solve <em>a</em><sub><em>n</em></sub> = 62 for <em>n</em>.",
+  "sol": "<em>a</em><sub><em>n</em></sub> = 20 + 3(<em>n</em> &minus; 1) = 3<em>n</em> + 17. Set 3<em>n</em> + 17 = 62, so <em>n</em> = 15."
+ },
+ {
+  "g": "S4",
+  "q": "The first rung of a ladder is 30 cm above the ground and the rungs are 28 cm apart. How high above the ground (in cm) is the 10th rung?",
+  "type": "num",
+  "ans": 282.0,
+  "tol": 0.005,
+  "unit": "cm",
+  "hint": "The 10th rung is 9 spaces above the first.",
+  "sol": "<em>a</em><sub>10</sub> = 30 + 9(28) = 30 + 252 = 282 cm."
+ }
+];
+
+  /* ---------- A small, safe expression evaluator (numbers, x, y, n, + - * / ^ and parentheses) ---------- */
+  function evaluate(str, vars) {
+    var s = str.replace(/\s+/g, '').replace(/[−–—]/g, '-').replace(/[×·]/g, '*').replace(/,/g, '.');
+    var tok = s.match(/\d*\.?\d+|[a-zA-Z]|[-+*\/()^]/g) || [];
+    if (tok.join('') !== s) throw new Error('bad characters');
+    var i = 0;
+    function peek() { return tok[i]; }
+    function isStart(t) { return t !== undefined && (t === '(' || /^[a-zA-Z]$/.test(t) || /^\d*\.?\d+$/.test(t)); }
+    function expr() {
+      var v = term();
+      while (peek() === '+' || peek() === '-') { var op = tok[i++]; var r = term(); v = op === '+' ? v + r : v - r; }
+      return v;
+    }
+    function term() {
+      var v = unary();
+      for (;;) {
+        var t = peek();
+        if (t === '*') { i++; v = v * unary(); }
+        else if (t === '/') { i++; v = v / unary(); }
+        else if (isStart(t)) { v = v * unary(); }      // implicit multiplication, same level as * and /
+        else break;
+      }
+      return v;
+    }
+    function unary() {
+      if (peek() === '-') { i++; return -unary(); }
+      if (peek() === '+') { i++; return unary(); }
+      return power();
+    }
+    function power() {
+      var b = atom();
+      if (peek() === '^') { i++; return Math.pow(b, unary()); }
+      return b;
+    }
+    function atom() {
+      var t = tok[i++];
+      if (t === undefined) throw new Error('unexpected end');
+      if (t === '(') { var v = expr(); if (tok[i++] !== ')') throw new Error('missing )'); return v; }
+      if (/^\d*\.?\d+$/.test(t)) return parseFloat(t);
+      if (/^[a-zA-Z]$/.test(t)) {
+        if (!vars || !(t in vars)) throw new Error('unknown variable');
+        return vars[t];
+      }
+      throw new Error('unexpected ' + t);
+    }
+    var out = expr();
+    if (i !== tok.length) throw new Error('extra input');
+    if (!isFinite(out)) throw new Error('not finite');
+    return out;
+  }
+
+  function close(a, b) { return Math.abs(a - b) <= 1e-6 * Math.max(1, Math.abs(a), Math.abs(b)); }
+
+  // returns true/false, or null if the input cannot be read
+  function checkNum(raw, p) {
+    try { var v = evaluate(raw, {}); return Math.abs(v - p.ans) <= p.tol; } catch (e) { return null; }
+  }
+  function checkEq(raw, p) {
+    var parts = raw.split('=');
+    if (parts.length !== 2 || !parts[0].trim() || !parts[1].trim()) return null;
+    try {
+      var F = function (x, y) { return evaluate(parts[0], { x: x, y: y }) - evaluate(parts[1], { x: x, y: y }); };
+      var c0 = F(0, 0), fx = F(1, 0) - c0, fy = F(0, 1) - c0;
+      // F must be affine in x and y (a line), not curved: test extra points
+      if (!close(F(2, 3), 2 * fx + 3 * fy + c0) || !close(F(-1.5, 0.7), -1.5 * fx + 0.7 * fy + c0)) return false;
+      if (Math.abs(fx) < 1e-9 && Math.abs(fy) < 1e-9) return false;
+      // (fx, fy, c0) must be proportional to (A, B, -C)
+      var A = p.A, B = p.B, C = -p.C;
+      var cr = [fx * B - fy * A, fx * C - c0 * A, fy * C - c0 * B];
+      var scale = Math.max(1, Math.abs(fx) + Math.abs(fy) + Math.abs(c0));
+      return cr.every(function (z) { return Math.abs(z) <= 1e-7 * scale; });
+    } catch (e) { return null; }
+  }
+  function checkSeq(raw, p) {
+    var s = raw.replace(/\s+/g, '');
+    var eqi = s.indexOf('=');
+    if (eqi >= 0) {
+      var left = s.slice(0, eqi);
+      if (!/^(a_?n|a_?\{n\}|a\(n\)|f\(n\)|t_?n|y)$/i.test(left)) return null;
+      s = s.slice(eqi + 1);
+    }
+    if (!s) return null;
+    try {
+      for (var n = 1; n <= 6; n++) {
+        var want = p.a1 + (n - 1) * p.d;
+        if (!close(evaluate(s, { n: n }), want)) return false;
+      }
+      return true;
+    } catch (e) { return null; }
+  }
+
+  /* ---------- State (restored from localStorage; saved student work is synced by lia-sync) ---------- */
+  var KEY = 'alg-lines-sequences';
+  var state = [];
+  var container = document.getElementById('problems');
+  var solvedEl = document.getElementById('solvedCount');
+  var pointsEl = document.getElementById('points');
+  var barEl = document.getElementById('progressBar');
+  var finalCard = document.getElementById('finalCard');
+  document.getElementById('totalCount').textContent = problems.length;
+
+  function freshState() { return problems.map(function () { return { used: 0, done: false, correct: false, points: 0 }; }); }
+  function loadState() {
+    try {
+      var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (Array.isArray(s) && s.length === problems.length) return s.map(function (x) {
+        return { used: x.used | 0, done: !!x.done, correct: !!x.correct, points: x.points | 0 };
+      });
+    } catch (e) {}
+    return freshState();
+  }
+  function saveState() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  function dots(used) {
+    var h = '';
+    for (var i = 0; i < MAX_ATTEMPTS; i++) h += '<span class="dot' + (i < used ? ' used' : '') + '"></span>';
+    return h;
+  }
+  var PLACEHOLDER = { num: 'Your answer', eq: 'e.g. y = 2x - 5', seq: 'e.g. a_n = 4n + 3' };
+  var BADINPUT = {
+    num: 'Please enter a number, e.g. -3/4 or 2.5. (This did not use an attempt.)',
+    eq: 'Please type an equation with an equals sign, e.g. y = 2x - 5. (This did not use an attempt.)',
+    seq: 'Please type a formula in n, e.g. a_n = 4n + 3. (This did not use an attempt.)'
+  };
+
+  function build(restore) {
+    container.innerHTML = '';
+    state = restore ? loadState() : freshState();
+    var lastGroup = '';
+    problems.forEach(function (p, i) {
+      if (p.g !== lastGroup) {
+        lastGroup = p.g;
+        var gt = document.createElement('h3');
+        gt.className = 'group-title';
+        gt.textContent = GROUPS[p.g];
+        container.appendChild(gt);
+      }
+      var isMC = !!p.opts, kind = isMC ? 'mc' : p.type;
+      var div = document.createElement('div');
+      div.className = 'card problem';
+      var optsHTML = '';
+      if (isMC) {
+        optsHTML = '<div class="options" role="radiogroup" aria-label="Choices for problem ' + (i + 1) + '">' +
+          p.opts.map(function (o, k) {
+            return '<label><input type="radio" name="q' + i + '" value="' + k + '"><span>' + o + '</span></label>';
+          }).join('') + '</div>';
+      }
+      div.innerHTML =
+        '<span class="q-num">PROBLEM ' + (i + 1) + '</span>' +
+        '<div class="qtext">' + p.q + '</div>' + optsHTML +
+        '<div class="answer-row">' +
+          (isMC ? '' : '<input type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Answer to problem ' + (i + 1) + '" placeholder="' + PLACEHOLDER[kind] + '"' + (kind === 'num' ? '' : ' style="width:260px;max-width:100%"') + '><span class="unit-label">' + (p.unit || '') + '</span>') +
+          '<button class="btn" type="button">Check</button>' +
+          '<span class="attempts">Attempts left: <span class="dots">' + dots(state[i].used) + '</span></span>' +
+        '</div>' +
+        '<div class="feedback" role="status" aria-live="polite"></div>';
+      container.appendChild(div);
+
+      var input = div.querySelector('input[type="text"]');
+      var radios = div.querySelectorAll('input[type="radio"]');
+      var btn = div.querySelector('button');
+      var fb = div.querySelector('.feedback');
+      var dotsEl = div.querySelector('.dots');
+
+      function show(cls, html) { fb.className = 'feedback show ' + cls; fb.innerHTML = html; }
+      function lock() {
+        btn.disabled = true;
+        if (input) input.disabled = true;
+        Array.prototype.forEach.call(radios, function (r) { r.disabled = true; r.parentNode.classList.add('disabled'); });
+      }
+      function showFinal() {
+        if (isMC) radios[p.ans].parentNode.classList.add('picked-right');
+        if (state[i].correct) show('ok', '&#10003; Correct! Well done.<div class="sol">' + p.sol + '</div>');
+        else show('bad', '&#10007; Not quite. You used all 3 attempts.<div class="sol"><strong>Solution:</strong> ' + p.sol + '</div>');
+        lock();
+      }
+
+      if (state[i].done) showFinal();
+      else if (state[i].used > 0) {
+        var l0 = MAX_ATTEMPTS - state[i].used;
+        show('bad', 'You have ' + l0 + ' attempt' + (l0 > 1 ? 's' : '') + ' left.' +
+          (state[i].used >= 2 ? '<div class="sol"><strong>Hint:</strong> ' + p.hint + '</div>' : ''));
+      }
+
+      function check() {
+        var st = state[i];
+        if (st.done) return;
+        var ok, picked = null;
+        if (isMC) {
+          Array.prototype.forEach.call(radios, function (r) { if (r.checked) picked = r; });
+          if (!picked) { show('hint', 'Please select an answer first. (This did not use an attempt.)'); return; }
+          ok = parseInt(picked.value, 10) === p.ans;
+        } else {
+          ok = kind === 'num' ? checkNum(input.value, p) : kind === 'eq' ? checkEq(input.value, p) : checkSeq(input.value, p);
+          if (ok === null) { show('hint', BADINPUT[kind]); return; }
+        }
+        st.used++;
+        dotsEl.innerHTML = dots(st.used);
+        var left = MAX_ATTEMPTS - st.used;
+        if (ok) {
+          st.done = st.correct = true;
+          st.points = MAX_ATTEMPTS - st.used + 1;
+          if (picked) picked.parentNode.classList.add('picked-right');
+          show('ok', '&#10003; Correct! Well done.' + (st.used === 1 ? ' First try!' : '') + '<div class="sol">' + p.sol + '</div>');
+          lock();
+        } else if (left === 0) {
+          st.done = true;
+          if (picked) picked.parentNode.classList.add('picked-wrong');
+          if (isMC) radios[p.ans].parentNode.classList.add('picked-right');
+          show('bad', '&#10007; Not quite. You have used all 3 attempts.<div class="sol"><strong>Solution:</strong> ' + p.sol + '</div>');
+          lock();
+        } else {
+          var msg = '&#10007; Not correct. You have ' + left + ' attempt' + (left > 1 ? 's' : '') + ' left.';
+          if (st.used >= 2) msg += '<div class="sol"><strong>Hint:</strong> ' + p.hint + '</div>';
+          show('bad', msg);
+          if (input) input.select();
+          if (picked) picked.checked = false;
+        }
+        saveState();
+        update();
+      }
+      btn.addEventListener('click', check);
+      if (input) input.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
+    });
+    update();
+  }
+
+  function update() {
+    var solved = 0, pts = 0, finished = 0;
+    state.forEach(function (s) {
+      if (s.correct) solved++;
+      if (s.done) finished++;
+      pts += s.points;
+    });
+    solvedEl.textContent = solved;
+    pointsEl.textContent = pts + ' / ' + (problems.length * MAX_ATTEMPTS);
+    barEl.style.width = (finished / problems.length * 100) + '%';
+    try { if (window.LiaSync && LiaSync.report) LiaSync.report({ solved: finished, total: problems.length, score: pts, max: problems.length * MAX_ATTEMPTS }); } catch (e) {}
+    if (finished === problems.length) {
+      var pct = Math.round(solved / problems.length * 100);
+      var msg = 'You solved ' + solved + ' of ' + problems.length + ' problems (' + pct + '%) and earned ' + pts + ' points. ';
+      msg += pct === 100 ? 'Excellent work!' : pct >= 70 ? 'Good job! Review the solutions you missed.' : 'Keep practicing — review the lesson and try again.';
+      document.getElementById('finalMsg').textContent = msg;
+      finalCard.classList.add('show');
+    } else {
+      finalCard.classList.remove('show');
+    }
+  }
+
+  var resetBtn = document.getElementById('resetBtn');
+  if (resetBtn) resetBtn.addEventListener('click', function () {
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    build(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  build(true);
+})();
+</script>
+</body>
+</html>
