@@ -232,7 +232,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:0 16px 34px
   <div class="modal">
     <h2 id="sumTitle"><svg class="ic"><use href="#i-star"/></svg> My Scores</h2>
     <table class="sm" id="sumTable"></table>
-    <p class="note">Your best results are sent to your teacher when you are signed in. Write your exit-ticket answers in your notebook or on a sheet of paper.</p>
+    <p class="note">Your best results are sent to your teacher when you are signed in. Your exit-ticket answers are saved automatically.</p>
     <div class="row"><button class="btn" id="closeSum" type="button">Close</button></div>
   </div>
 </div>
@@ -614,6 +614,10 @@ function mkSeq(mount,wid,id,label,seq){
   mount.appendChild(sl); mount.appendChild(el('p','small','Tap the step that belongs in the next empty box.')); mount.appendChild(pe); mount.appendChild(fb);
 }
 
+/* ====================== exit ticket: answers saved in localStorage (mirrored to the student's account by LiaSync) ====================== */
+function exitKey(w){ return 'mass-exit-'+w.id; }
+function loadExit(w){ try{ var v=JSON.parse(localStorage.getItem(exitKey(w))||'{}'); return (v&&typeof v==='object')?v:{}; }catch(e){ return {}; } }
+
 /* ====================== week panels ====================== */
 function buildVocab(w){
   var m=$('#vocab-'+w.id); m.innerHTML=''; clearPrefix(w.id+'-v');
@@ -673,8 +677,23 @@ function buildWeek(w){
   pm.insertBefore(rp,pm.firstChild);
   /* exit */
   var E=$('[data-sp=exit]',p);
-  E.appendChild(el('div','box p','<b>'+ic('cross')+' Get your notebook or a sheet of paper.</b> Your answers are not typed here. <b>Write them by hand</b> in your notebook or on a paper sheet before you leave this page.'));
-  var ex=el('div','card'); ex.innerHTML='<h3>Exit ticket ✏️</h3><ol>'+w.exit.map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ol>'; E.appendChild(ex);
+  E.appendChild(el('div','box p','<b>'+ic('cross')+' Write your answers in the boxes below.</b> They save automatically and come back the next time you open this page. You can also copy them into your notebook.'));
+  var ex=el('div','card'); ex.appendChild(el('h3',null,'Exit ticket ✏️'));
+  var exSaved=loadExit(w), exTa=[], exTimer=null, exSt=el('p','small'); exSt.setAttribute('aria-live','polite');
+  function saveExit(){
+    var o={}; exTa.forEach(function(t,i){ o[i]=t.value; });
+    try{ localStorage.setItem(exitKey(w),JSON.stringify(o)); var d=new Date(); exSt.textContent='✓ Saved at '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); }
+    catch(e){ exSt.textContent='Could not save on this device. Copy your answers into your notebook.'; }
+  }
+  w.exit.forEach(function(q,i){
+    var blk=el('div','qblock'); blk.appendChild(el('div','qtext',(i+1)+'. '+q));
+    var ta=el('textarea'); ta.id='exit-'+w.id+'-'+i; ta.setAttribute('aria-label','Exit ticket answer '+(i+1)+', week '+w.n); ta.placeholder='Write your answer here…'; ta.value=exSaved[i]||'';
+    ta.addEventListener('input',function(){ exSt.textContent='Saving…'; clearTimeout(exTimer); exTimer=setTimeout(saveExit,600); });
+    ta.addEventListener('blur',function(){ clearTimeout(exTimer); saveExit(); });
+    exTa.push(ta); blk.appendChild(ta); ex.appendChild(blk);
+  });
+  exSt.textContent = Object.keys(exSaved).some(function(k){ return exSaved[k]; }) ? '✓ Your earlier answers were loaded.' : '';
+  ex.appendChild(exSt); E.appendChild(ex);
   var me=el('div','card'); me.innerHTML='<h3>Think about it (reflection)</h3><ol>'+w.meta.map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ol>'; E.appendChild(me);
   $('#panels').appendChild(p);
   buildVocab(w); buildPractice(w); updatePill(w.id);
