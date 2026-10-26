@@ -56,6 +56,9 @@ links between lessons that a student might not be assigned.
 * **Free-text answers the teacher should be able to read** (exit tickets, reflections): save each set in `localStorage` under a key that starts with `resp-`
   as JSON `{"title":"Week 3: … – Exit ticket","q":["question",…],"a":["answer",…]}` (answers in the same order as the questions). The mirror saves it automatically and
   `teacher/responses.html` lists it per student and lesson (questions included, CSV export). Autosave on `input`/`blur`; restore on load.
+* **A different set of numbers for every student** (practice sheets): use `LiaSync.seed()` (a stable number from the student's sign-in; `''` while signed out) the first time, save it in the page's own state (`state.seed`) and derive every exercise from a seeded random generator, so the same student always sees the same problems on every device
+  and even after a new code is issued. Keep each exercise's number ranges fixed so every student gets the same level of difficulty. Save *every try* (right or wrong) and the generated question text with the answers using the `resp-` format above.
+  See `physics/physics1-lesson-2-3-practice.html` (25 generated exercises; test: build the set for hundreds of seeds and check every answer is finite, sensible and accepted by the checker).
 * The page must still work if `LiaSync` is absent (no config / offline file preview): everything optional-chained.
 * The signed-in badge (`#liaUser`), the sign-in gate (`#liaGate`) and the "not available for your class" card are drawn by the module – don't restyle or duplicate them.
 
@@ -90,7 +93,7 @@ links between lessons that a student might not be assigned.
 * **Personal data never goes in the repo** (rosters, codes, master code, SQL with names). The repo/site is public. Keep such files outside it and hand them to the user as files.
 
 ## 8. Testing (do this before pushing – there is no CI)
-`tools/test/`: `pg.sh` (local Postgres 16 with `schema.sql`), `mock.js` (Supabase stand-in on :54400 that runs the REAL SQL), Playwright e2e (`e2e_access.js`, `e2e_final.js`).
+`tools/test/`: `pg.sh` (local Postgres 16 with `schema.sql`), `mock.js` (Supabase stand-in on :54400 that runs the REAL SQL), Playwright e2e (`e2e_access.js`, `e2e_final.js`, `e2e_practice.js` = per-student generated practice sheet).
 Playwright redirects the Supabase host to the mock (`context.route`), Chromium is at `/opt/pw-browsers/chromium`. Pattern: `bash tools/test/pg.sh; node tools/test/mock.js & node tools/test/e2e_final.js`.
 Check at least: sign-in gate on a new page, restore from the DB on a second browser context, wrong/blocked lessons, no page errors, dark mode, `node --check` on inline scripts. The sandbox cannot reach the real Supabase – say that
 you could not verify against production.
