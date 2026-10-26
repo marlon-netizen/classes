@@ -42,7 +42,7 @@
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', build); else build();
   })();
 
-  if (!LIVE) { window.LiaSync = { live: false, name: function () { return ''; }, report: function () {} }; return; }
+  if (!LIVE) { window.LiaSync = { live: false, name: function () { return ''; }, report: function () {}, seed: function () { return ''; } }; return; }
   document.documentElement.classList.add('lia-live');
 
   var AREA = CFG.area || 'default';
@@ -318,5 +318,8 @@
       if (changed && code && mirror) { mirror.dirty = true; saveMirror(); schedule(); }
     } catch (e) {}
   }
-  window.LiaSync = { live: true, area: AREA, page: PAGE, signOut: signOut, report: report, name: function () { return code ? (student.name || '') : ''; } };
+  /* seed(): a stable number for this student (a hash of their area + code, never the code itself), '' when nobody is signed in.
+     Pages that give every student their own version of a problem set use it, and save it with the student's work so it never changes. */
+  function seed() { if (!code) return ''; var h = 2166136261, t = AREA + ':' + code; for (var i = 0; i < t.length; i++) { h ^= t.charCodeAt(i); h = Math.imul(h, 16777619) >>> 0; } return h >>> 0; }
+  window.LiaSync = { live: true, area: AREA, page: PAGE, signOut: signOut, report: report, seed: seed, name: function () { return code ? (student.name || '') : ''; } };
 })();
