@@ -10,7 +10,7 @@ index.html                 GENERATED – teacher home (sign-in gate, links to sh
 faith-formation/  ciencias-sociales/  math/  physics/
     <lesson>.html          one self-contained page each (YOU write these)
     lia-config.js          GENERATED per folder: Supabase url + anon key, area, areaName, pages{slug: label}
-teacher/                   GENERATED from shared/*.template.html: admin.html (students & codes), scores.html, access.html (assign lessons); index.html only redirects to /
+teacher/                   GENERATED from shared/*.template.html: admin.html (students & codes), scores.html, access.html (assign lessons), responses.html (students' saved text answers); index.html only redirects to /
 shared/lia-sync.js         the ONE module every lesson page loads (sign-in, saving, restore, access control, theme toggle)
 shared/*.template.html     sources of the teacher pages – edit these, then run the build
 supabase/schema.sql        the whole database; idempotent (safe to re-run); keep it that way
@@ -53,6 +53,9 @@ links between lessons that a student might not be assigned.
   Reading-only pages may report nothing (they show as "saved").
 * Reserved localStorage keys (never written by a page, never saved as student work): `lia-code`, `lia-name`, `lia-mirror`, `lia-reloaded`, `lia-theme`, `lia-admin-session`, `lia-access` (each suffixed with the area/page where relevant).
   Any other key – including page-owned ones such as `lia-physics2-…` – is saved. Don't invent new reserved names without adding them to `trackable()` in `shared/lia-sync.js`.
+* **Free-text answers the teacher should be able to read** (exit tickets, reflections): save each set in `localStorage` under a key that starts with `resp-`
+  as JSON `{"title":"Week 3: … – Exit ticket","q":["question",…],"a":["answer",…]}` (answers in the same order as the questions). The mirror saves it automatically and
+  `teacher/responses.html` lists it per student and lesson (questions included, CSV export). Autosave on `input`/`blur`; restore on load.
 * The page must still work if `LiaSync` is absent (no config / offline file preview): everything optional-chained.
 * The signed-in badge (`#liaUser`), the sign-in gate (`#liaGate`) and the "not available for your class" card are drawn by the module – don't restyle or duplicate them.
 
@@ -76,6 +79,7 @@ links between lessons that a student might not be assigned.
   switcher (`?area=`). Never expose student data or codes without that session. Keep them `noindex`.
 * Edit `shared/*.template.html` / `teacher_home()` in `build_site.py`, then rebuild. All teacher pages: same header (`.who` nav + ☀/☾ toggle), same palette variables, dark mode via `data-theme`.
 * Scores dashboard uses `progress.solved/total/score/max_score/updated_at` per student × page; attention flags = 7+ days idle, never started, score < 60 %.
+* The **Student responses** page (`shared/responses.template.html`) reads `progress.state` keys starting with `resp-`; it excludes `is_preview` students like every report.
 * New teacher feature → add it to all of: teacher home buttons (in `build_site.py`), the header nav in the three templates, and `supabase/README.md`.
 
 ## 7. Database changes

@@ -615,8 +615,16 @@ function mkSeq(mount,wid,id,label,seq){
 }
 
 /* ====================== exit ticket: answers saved in localStorage (mirrored to the student's account by LiaSync) ====================== */
-function exitKey(w){ return 'mass-exit-'+w.id; }
-function loadExit(w){ try{ var v=JSON.parse(localStorage.getItem(exitKey(w))||'{}'); return (v&&typeof v==='object')?v:{}; }catch(e){ return {}; } }
+/* Saved as {title, q:[questions], a:[answers]} under a key that starts with "resp-": the teacher's Student responses page reads exactly this. */
+function exitKey(w){ return 'resp-mass-exit-'+w.id; }
+function loadExit(w){
+  try{
+    var v=JSON.parse(localStorage.getItem(exitKey(w))||'null');
+    if(v&&v.a&&typeof v.a==='object'){ var o={}; for(var i=0;i<w.exit.length;i++) o[i]=v.a[i]||''; return o; }
+    var old=JSON.parse(localStorage.getItem('mass-exit-'+w.id)||'null');          /* first version of the page */
+    return (old&&typeof old==='object')?old:{};
+  }catch(e){ return {}; }
+}
 
 /* ====================== week panels ====================== */
 function buildVocab(w){
@@ -681,7 +689,7 @@ function buildWeek(w){
   var ex=el('div','card'); ex.appendChild(el('h3',null,'Exit ticket ✏️'));
   var exSaved=loadExit(w), exTa=[], exTimer=null, exSt=el('p','small'); exSt.setAttribute('aria-live','polite');
   function saveExit(){
-    var o={}; exTa.forEach(function(t,i){ o[i]=t.value; });
+    var o={title:'Week '+w.n+': '+w.title+' – Exit ticket',q:w.exit.slice(),a:exTa.map(function(t){ return t.value; })};
     try{ localStorage.setItem(exitKey(w),JSON.stringify(o)); var d=new Date(); exSt.textContent='✓ Saved at '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); }
     catch(e){ exSt.textContent='Could not save on this device. Copy your answers into your notebook.'; }
   }

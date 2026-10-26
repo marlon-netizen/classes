@@ -15,6 +15,7 @@ teacher/                       ALL teacher tools – not linked from any student
   index.html                     teacher home (one button per subject)
   scores.html                    scores & progress dashboard
   access.html                    assign lessons to each grade + class
+  responses.html                 students' saved text answers (exit tickets…)
   admin.html                     students & access codes
 shared/lia-sync.js             sign-in + saving module loaded by every lesson page
 shared/*.template.html         sources of the two teacher pages
@@ -58,6 +59,14 @@ Open `<your site>/teacher/` (the teacher home – bookmark it; students never se
 
 Codes are not case-sensitive and ignore dashes/spaces (`k7m2-qx9p` = `K7M2QX9P`). The same code may exist in two
 different folders – they are different students. A deactivated student can no longer sign in.
+
+## Reading students' written answers (Student responses)
+Open `<your site>/teacher/` → **Student responses** for a subject (same teacher account).
+* Pick a **lesson**, then one set of answers (for example *Week 3 – Exit ticket*) or all of them. Each student's questions and answers are listed together, with the time they were saved.
+* Filter by class, search by name, optionally list the students who have not answered yet, **Export CSV** (one row per answer) or **Print**.
+* A lesson page makes its text answers appear here by saving them under a `localStorage` key that starts with `resp-`, as JSON
+  `{"title": "...", "q": ["question 1", ...], "a": ["answer 1", ...]}`. The sign-in module already mirrors every key to the database, so no schema change is needed.
+* Currently saved this way: the **Exit ticket** of *Parts of the Mass* (Faith Formation, one set per week).
 
 ## Seeing scores and progress (teacher dashboard)
 Open `<your site>/teacher/` → **Scores & progress** for a subject (same teacher account).

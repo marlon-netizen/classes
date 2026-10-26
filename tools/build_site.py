@@ -6,9 +6,10 @@ Folder layout (each student folder = one "area" with its own student list and co
     ciencias-sociales/   ...
     math/  physics/      ...
     teacher/             ALL teacher tools in one place - NOT linked from any student page:
-                           index.html (teacher home), admin.html (students & codes), scores.html (scores & progress)
+                           index.html (teacher home), admin.html (students & codes), scores.html (scores & progress),
+                           responses.html (students' saved text answers), access.html (assign lessons)
     shared/lia-sync.js   the sign-in + progress-saving module every student page loads
-    shared/admin.template.html, shared/scores.template.html   sources of the teacher pages
+    shared/*.template.html   sources of the teacher pages (admin, scores, access, responses)
     index.html           the site's front page (students)
 
 Run it any time you add or move a page (it is safe to run again and again):
@@ -207,6 +208,7 @@ def main():
     (tdir / "admin.html").write_text(template, encoding="utf8")
     (tdir / "scores.html").write_text(scores_template, encoding="utf8")
     (tdir / "access.html").write_text((ROOT / "shared" / "access.template.html").read_text(encoding="utf8"), encoding="utf8")
+    (tdir / "responses.html").write_text((ROOT / "shared" / "responses.template.html").read_text(encoding="utf8"), encoding="utf8")
     (tdir / "index.html").write_text('<!doctype html><meta charset="utf-8"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=../index.html"><title>Teacher tools</title>' + icon_links() + '<a href="../index.html">Teacher tools</a>\n', encoding="utf8")
     (ROOT / "index.html").write_text(teacher_home(), encoding="utf8")
     print("root index.html (teacher sign-in) written")
@@ -238,9 +240,9 @@ def teacher_home():
             '<section class="card a%d" data-area="%s"><span class="tag">%d lessons</span><h3>%s</h3><p>%s</p>'
             '<p class="pv"><span>Teacher preview code:</span> <code data-pv>…</code> <button class="btn ghost sm" type="button" data-copycode>Copy</button></p>'
             '<p class="acts"><a class="btn" href="teacher/scores.html?area=%s">Scores &amp; progress</a><a class="btn" href="teacher/admin.html?area=%s">Students &amp; codes</a>'
-            '<a class="btn" href="teacher/access.html?area=%s">Assign lessons</a></p>'
+            '<a class="btn" href="teacher/access.html?area=%s">Assign lessons</a><a class="btn" href="teacher/responses.html?area=%s">Student responses</a></p>'
             '<details open><summary>Links to share with students</summary><ul class="lessons">%s</ul></details></section>'
-            % (n, ar["folder"], len(lessons), html.escape(ar["name"]), html.escape(ar["blurb"]), ar["folder"], ar["folder"], ar["folder"], rows))
+            % (n, ar["folder"], len(lessons), html.escape(ar["name"]), html.escape(ar["blurb"]), ar["folder"], ar["folder"], ar["folder"], ar["folder"], rows))
     js = r"""
 (function(){
 'use strict';
