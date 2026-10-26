@@ -190,8 +190,7 @@ canvas{width:100%;max-width:520px;height:auto;border:1px solid var(--line);borde
 .partrow .u{color:var(--muted);min-width:34px}
 .partrow .ptag{font-weight:700}
 .prob .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-.hintbox,.solbox{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.95rem}
-.hintbox{background:var(--warm-soft)} .solbox{background:var(--blue-soft)}
+.solbox{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.95rem;background:var(--blue-soft)}
 .solbox ol{margin:6px 0 0;padding-left:20px}
 .pnote{color:var(--muted);font-size:.86rem}
 .sethead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
@@ -282,7 +281,7 @@ header.top{position:relative}
     <ul>
       <li>Use <b>up = positive</b> and <i>a</i><sub>g</sub> = −9.81 m/s² (so a falling object has a negative velocity and a negative displacement). When a question asks for a height, distance or time, give a positive number.</li>
       <li>Type your answer and press <b>Check</b> (or Enter). Answers within about 3 % are accepted, and you can write numbers like <span class="math">2.2</span>, <span class="math">−3.5e-3</span> or <span class="math">1.38 x 10^4</span>. You can try again as many times as you like.</li>
-      <li>Stuck? Use <b>Hint</b>. After two tries you can open the worked solution.</li>
+      <li>Stuck? After two tries you can open the worked solution.</li>
       <li><b>All your answers are saved</b> (every try, right or wrong), so your teacher can read them and you can continue on any device.</li>
     </ul>
     <div class="chips" id="chips" aria-label="Exercises"></div>
@@ -354,7 +353,7 @@ function judge(v,part){
     if(Math.abs(av*k-A_)/A_<=tol || Math.abs(av/k-A_)/A_<=tol) return {state:'near',msg};
   }
   if(rel<=0.12) return {state:'near',msg:'Close! Check your rounding or an intermediate value.'};
-  return {state:'no',msg:'Not quite. Re-read the question, check the equation you chose, the signs and the units, and try a hint if you need one.'};
+  return {state:'no',msg:'Not quite. Re-read the question, check the equation you chose, the signs and the units.'};
 }
 
 /* ---------- the 25 exercises (same level for everybody: only the numbers change) ---------- */
@@ -363,151 +362,126 @@ const EXERCISES=[
    return {title:'Dropped from a height: final velocity',
     text:`A wrench slips from the top of ${what} that is <b>${h} m</b> high and falls freely. Ignoring air resistance, what is its velocity just before it hits the ground? (Up is positive.)`,
     parts:[T('Final velocity','m/s',-sqrt(2*g*h))],
-    hint:`${vi} = 0 and ${dy} = −${h} m. No time is given, so use ${EQ.vsq} and take the negative root (moving down).`,
     sol:[`${vf} = −√(0 + 2(−9.81)(−${h})) = −√${sig(2*g*h,4)} = <b>${sig(-sqrt(2*g*h))} m/s</b>`]}; },
  /* 2 */ (R)=>{ const t=R(2,9,.5);
    return {title:'Fall time → height',
     text:`A stone is dropped from rest from a bridge and hits the water <b>${t} s</b> later. How high is the bridge above the water?`,
     parts:[T('Height','m',.5*g*t*t)],
-    hint:`${vi} = 0, so ${EQ.disp} becomes ${dy} = ½${A}(${dt})${sq}. Give the height as a positive number.`,
     sol:[`${dy} = ½(−9.81)(${t})² = ${sig(-.5*g*t*t)} m`,`The bridge is <b>${sig(.5*g*t*t)} m</b> high.`]}; },
  /* 3 */ (R)=>{ const h=R(5,200,5);
    return {title:'Time to fall',
     text:`A flowerpot falls from a windowsill <b>${h} m</b> above the sidewalk. How much time does a passerby below have to move out of the way before it lands?`,
     parts:[T('Time of fall','s',sqrt(2*h/g))],
-    hint:`${vi} = 0, ${dy} = −${h} m, ${A} = −9.81 m/s². Solve ${dy} = ½${A}(${dt})${sq} for ${dt}.`,
     sol:[`${dt} = √(${F('2'+dy,A)}) = √(${F('2(−'+h+')','−9.81')}) = <b>${sig(sqrt(2*h/g))} s</b>`]}; },
  /* 4 */ (R)=>{ const t=R(1,5,.5);
    return {title:'Displacement after a time',
     text:`A gumdrop is released from rest at the top of a tall tower. What is its <b>displacement</b> after <b>${t} s</b>? (Give a signed value: up is positive.)`,
     parts:[T('Displacement','m',-.5*g*t*t)],
-    hint:`${dy} = ½${A}(${dt})${sq} with ${A} = −9.81 m/s². The sign matters!`,
     sol:[`${dy} = ½(−9.81)(${t})² = <b>${sig(-.5*g*t*t)} m</b> (downward)`]}; },
  /* 5 */ (R,P)=>{ const w=P([['Mars',3.7],['the Moon',1.62],['Mercury',3.70],['Venus',8.87],['Jupiter',24.8]]), h=R(20,300,10);
    return {title:'Another world: velocity and time',
     text:`A robot probe drops a camera off the rim of a <b>${h} m</b> high cliff on ${w[0]}, where the free-fall acceleration is <b>−${w[1]} m/s²</b>. (a) Find the velocity with which the camera hits the ground. (b) Find the time it takes to hit the ground.`,
     parts:[T('(a) Final velocity','m/s',-sqrt(2*w[1]*h)),T('(b) Time','s',sqrt(2*h/w[1]))],
-    hint:`${vi} = 0, ${dy} = −${h} m, ${A} = −${w[1]} m/s². (a) ${EQ.vsq}, negative root. (b) ${dt} = (${vf} − ${vi})/${A}.`,
     sol:[`(a) ${vf} = −√(2(${w[1]})(${h})) = <b>${sig(-sqrt(2*w[1]*h))} m/s</b>`,`(b) ${dt} = ${F(vf+' − 0',A)} = ${F(sig(-sqrt(2*w[1]*h)),'−'+w[1])} = <b>${sig(sqrt(2*h/w[1]))} s</b>`]}; },
  /* 6 */ (R)=>{ const v=R(20,80,2.5);
    return {title:'Impact speed → drop height',
     text:`A construction worker knocks a wrench off a ledge. It hits the ground below with a speed of <b>${v} m/s</b>. From what height did it fall? (No air resistance.)`,
     parts:[T('Height of the ledge','m',v*v/(2*g))],
-    hint:`${vi} = 0 and ${vf} = −${v} m/s. Use ${EQ.vsq} and solve for ${dy}.`,
     sol:[`${dy} = ${F(vf+sq+' − '+vi+sq,'2'+A)} = ${F('('+v+')² − 0','2(−9.81)')} = ${sig(-v*v/(2*g))} m`,`The ledge is <b>${sig(v*v/(2*g))} m</b> above the ground.`]}; },
  /* 7 */ (R,P)=>{ const v=R(8,30,1), what=P(['tennis ball','volleyball','soccer ball','softball']);
    return {title:'Thrown up: maximum height',
     text:`A ${what} is thrown straight up with an initial velocity of <b>+${v} m/s</b>. How high above the release point does it rise?`,
     parts:[T('Maximum height','m',v*v/(2*g))],
-    hint:`At the top ${vf} = 0. Use ${EQ.vsq} and solve for ${dy}.`,
     sol:[`${dy} = ${F('0 − ('+v+')²','2(−9.81)')} = <b>${sig(v*v/(2*g))} m</b>`]}; },
  /* 8 */ (R)=>{ const v=R(8,30,1);
    return {title:'Thrown up: total time in the air',
     text:`A ball is thrown straight up at <b>+${v} m/s</b>. How long is it in the air before it returns to the height from which it was thrown?`,
     parts:[T('Time in the air','s',2*v/g)],
-    hint:`It returns with ${vf} = −${v} m/s. Use ${dt} = (${vf} − ${vi})/${A}.`,
     sol:[`${dt} = ${F('−'+v+' − '+v,'−9.81')} = <b>${sig(2*v/g)} s</b>`]}; },
  /* 9 */ (R)=>{ const v=R(5,20,.5);
    return {title:'Returning to the starting point',
     text:`A tennis ball is thrown vertically upward with an initial velocity of <b>+${v} m/s</b>. (a) What will the ball's speed be when it returns to its starting point? (b) How long will the ball take to reach its starting point?`,
     parts:[T('(a) Speed on return','m/s',v,{abs:true}),T('(b) Time','s',2*v/g)],
-    hint:`The displacement is zero, so ${vf}${sq} = ${vi}${sq}. For the time use ${dt} = (${vf} − ${vi})/${A} with ${vf} = −${v} m/s.`,
     sol:[`(a) ${vf}${sq} = ${vi}${sq} + 2${A}(0) → ${vf} = −${v} m/s: the speed is <b>${v} m/s</b>`,`(b) ${dt} = ${F('−'+v+' − '+v,'−9.81')} = <b>${sig(2*v/g)} s</b>`]}; },
  /* 10 */ (R)=>{ const v=R(3,9,.5), h0=R(1,3,.25), vfv=-sqrt(v*v+2*g*h0), t=(vfv-v)/-g;
    return {title:'Hit upward from above the floor',
     text:`A volleyball is hit so that it moves with an initial velocity of <b>+${v} m/s</b> straight upward. If the volleyball starts <b>${h0} m</b> above the floor, how long will it be in the air before it strikes the floor?`,
     parts:[T('Time in the air','s',t)],
-    hint:`Both ${dt} and ${vf} are unknown. First find ${vf} with ${EQ.vsq} (${dy} = −${h0} m, negative root), then use ${dt} = (${vf} − ${vi})/${A}.`,
     sol:[`${vf} = −√(${v}² + 2(9.81)(${h0})) = ${sig(vfv)} m/s`,`${dt} = ${F(sig(vfv)+' − '+v,'−9.81')} = <b>${sig(t)} s</b>`]}; },
  /* 11 */ (R)=>{ let v,t,a; do{ v=R(10,25,.5); t=R(.5,3.5,.5); a=v-g*t; }while(Math.abs(a)<2);
    return {title:'Velocity at a given time',
     text:`A ball is thrown straight up with an initial velocity of <b>+${v} m/s</b>. What is its velocity after <b>${t} s</b>? (A positive value means moving up, a negative value means moving down.)`,
     parts:[T('Velocity','m/s',a)],
-    hint:`${EQ.vel} with ${A} = −9.81 m/s² at every instant.`,
     sol:[`${vf} = ${v} + (−9.81)(${t}) = <b>${sig(a)} m/s</b> (${a>0?'still rising':'falling'})`]}; },
  /* 12 */ (R)=>{ let v,y; do{ v=R(11,22,.5); y=R(3,9,.5); }while(v*v-2*g*y<9);
    return {title:'Velocity at a given height',
     text:`A ball is thrown from ground level with a velocity of <b>${v} m/s</b> straight up. What is its velocity as it <b>first</b> passes the top of a house that is <b>${y} m</b> tall?`,
     parts:[T('Velocity','m/s',sqrt(v*v-2*g*y))],
-    hint:`${dy} = +${y} m. Use ${EQ.vsq}. The ball is still rising the first time it passes, so choose the positive root.`,
     sol:[`${vf} = +√(${v}² + 2(−9.81)(${y})) = +√${sig(v*v-2*g*y,4)} = <b>${sig(sqrt(v*v-2*g*y))} m/s</b> (upward)`]}; },
  /* 13 */ (R)=>{ const T2=R(2,9,.2);
    return {title:'Caught after a time: maximum height',
     text:`A ball thrown vertically upward is caught by the thrower after <b>${T2} s</b>. Find the maximum height the ball reaches above the thrower's hand.`,
     parts:[T('Maximum height','m',.5*g*(T2/2)**2)],
-    hint:`It takes half of the time (${T2/2} s) to reach the top, where ${vf} = 0. Treat the fall from the top: ${dy} = ½${A}(${dt})${sq}.`,
     sol:[`Time to the top = ${T2}/2 = ${T2/2} s`,`Height = ½(9.81)(${T2/2})² = <b>${sig(.5*g*(T2/2)**2)} m</b>`]}; },
  /* 14 */ (R)=>{ const T2=R(2,9,.2);
    return {title:'Caught after a time: initial velocity',
     text:`A baseball is thrown straight up and is caught at the same height after <b>${T2} s</b>. With what initial velocity was it thrown?`,
     parts:[T('Initial velocity','m/s',g*T2/2)],
-    hint:`At the top ${vf} = 0 after ${T2/2} s: ${vi} = −${A}${dt}.`,
     sol:[`${vi} = ${vf} − ${A}${dt} = 0 − (−9.81)(${T2/2}) = <b>+${sig(g*T2/2)} m/s</b>`]}; },
  /* 15 */ (R)=>{ const v=R(2,10,.5), h=R(10,120,5), r=-sqrt(v*v+2*g*h);
    return {title:'Thrown downward: final velocity',
     text:`A ball is thrown <b>downward</b> with an initial speed of <b>${v} m/s</b> from a window <b>${h} m</b> above the ground. What is its velocity when it hits the ground?`,
     parts:[T('Final velocity','m/s',r)],
-    hint:`${vi} = −${v} m/s (downward is negative) and ${dy} = −${h} m. Use ${EQ.vsq}, negative root.`,
     sol:[`${vf} = −√((−${v})² + 2(−9.81)(−${h})) = −√${sig(v*v+2*g*h,4)} = <b>${sig(r)} m/s</b>`]}; },
  /* 16 */ (R)=>{ const t=R(2.5,5,.5), vd=R(3,12,.5), H=Math.round((.5*g*t*t+vd*t)*2)/2, v0=-(H-.5*g*t*t)/t;
    return {title:'Thrown downward: initial velocity from the fall time',
     text:`An object is thrown <b>downward</b> from the top of a tree that is <b>${H} m</b> tall. If it reaches the ground in <b>${t} s</b>, what is its initial velocity?`,
     parts:[T('Initial velocity','m/s',v0)],
-    hint:`${dy} = −${H} m, ${dt} = ${t} s, ${A} = −9.81 m/s². Solve ${EQ.disp} for ${vi}. The answer must be negative (thrown down).`,
     sol:[`${vi} = ${F(dy+' − ½'+A+'('+dt+')'+sq,dt)} = ${F('−'+H+' − ½(−9.81)('+t+')²',t)} = <b>${sig(v0)} m/s</b>`]}; },
  /* 17 */ (R)=>{ const t=R(2,3.5,.5), base=.5*g*t*t, H=Math.round(base+R(8,30,2)), v=(H+base)/t;
    return {title:'Passing a height after a time',
     text:`An archer shoots an arrow straight up. The arrow passes the top of a roller coaster that is <b>${H} m</b> high <b>${t} s</b> after it is shot. What was the arrow's initial speed?`,
     parts:[T('Initial speed','m/s',v)],
-    hint:`${dy} = +${H} m after ${dt} = ${t} s. Solve ${EQ.disp} for ${vi}.`,
     sol:[`${vi} = ${F(dy+' − ½'+A+'('+dt+')'+sq,dt)} = ${F(H+' − ½(−9.81)('+t+')²',t)} = <b>${sig(v)} m/s</b>`]}; },
  /* 18 */ (R)=>{ const v=R(8,16,.5), vc=R(1,4,.5), h0=R(1,2,.25), d=(vc*vc-v*v)/(-2*g);
    return {title:'Height of a catch',
     text:`A newspaper is thrown straight up from a height of <b>${h0} m</b> above the ground with an initial speed of <b>${v} m/s</b>. It is caught on the way up when its velocity is <b>+${vc} m/s</b>. At what height above the ground is it caught?`,
     parts:[T('Height of the catch','m',h0+d)],
-    hint:`Find the displacement from the throw to the catch with ${EQ.vsq}, then add the ${h0} m release height.`,
     sol:[`${dy} = ${F(vf+sq+' − '+vi+sq,'2'+A)} = ${F('('+vc+')² − ('+v+')²','2(−9.81)')} = ${sig(d)} m`,`Height above the ground = ${h0} + ${sig(d)} = <b>${sig(h0+d)} m</b>`]}; },
  /* 19 */ (R)=>{ const Hc=R(15,30,1), yc=R(5,12,1), v=sqrt(2*g*Hc/100), t=(v-sqrt(v*v-2*g*yc/100))/g;
    return {title:'Jump: time to reach a height (two steps)',
     text:`A flea can jump as high as <b>${Hc} cm</b>. Assuming the jump is entirely vertical and air resistance is negligible, how long does it take the flea to reach a height of <b>${yc} cm</b> (on its way up)?`,
     parts:[T('Time','s',t,{tol:.05})],
-    hint:`Work in metres. First find the launch speed from the maximum height (${vf} = 0 at ${Hc/100} m). Then solve ${dy} = ${yc/100} m = ${vi}${dt} − ½(9.81)${dt}² and take the smaller root.`,
     sol:[`${vi} = √(2(9.81)(${Hc/100})) = ${sig(v)} m/s`,`4.905${dt}² − ${sig(v)}${dt} + ${yc/100} = 0 → ${dt} = <b>${sig(t)} s</b> (the larger root is on the way down)`]}; },
  /* 20 */ (R)=>{ let v,t,a; do{ v=R(6,15,.5); t=R(1,3,.5); a=v-g*t; }while(Math.abs(a)<2);
    return {title:'Elevator cable breaks',
     text:`An elevator is moving upward at <b>${v} m/s</b> when its cable breaks, so it moves in free fall. What is its velocity <b>${t} s</b> after the break? (Up is positive.)`,
     parts:[T('Velocity','m/s',a)],
-    hint:`${A} = −9.81 m/s² as soon as the cable breaks. ${EQ.vel}.`,
     sol:[`${vf} = ${v} + (−9.81)(${t}) = <b>${sig(a)} m/s</b> (${a>0?'still moving up':'moving down'})`]}; },
  /* 21 */ (R)=>{ const h=R(20,500,10), v=3.6*sqrt(2*g*h);
    return {title:'Impact speed in km/h',
     text:`A coconut falls from a palm tree <b>${h} m</b> above the ground (imagine no air resistance). What is its speed on impact in <b>kilometres per hour</b>?`,
     parts:[T('Speed','km/h',v)],
-    hint:`Find ${vf} in m/s with ${EQ.vsq}, then multiply by 3.6 to convert to km/h.`,
     sol:[`${vf} = √(2(9.81)(${h})) = ${sig(sqrt(2*g*h))} m/s`,`${sig(sqrt(2*g*h))} m/s × 3.6 = <b>${sig(v)} km/h</b>`]}; },
  /* 22 */ (R)=>{ const H=R(100,450,10), v=R(25,Math.min(60,Math.floor(sqrt(2*g*(H-30))/2.5)*2.5),2.5);   // the net is always at least 30 m above the ground
    return {title:'Safety net',
     text:`A wrench falls from rest from the top of a <b>${H} m</b> tall building. A safety net at one of the floors catches it when it is moving <b>${v} m/s</b> downward. How far above the ground is the net? (No air resistance.)`,
     parts:[T('Height of the net above the ground','m',H-v*v/(2*g))],
-    hint:`How far has the wrench fallen when its speed is ${v} m/s? ${EQ.vsq} with ${vi} = 0. Then subtract from ${H} m.`,
     sol:[`Distance fallen = ${F('('+v+')²','2(9.81)')} = ${sig(v*v/(2*g))} m`,`Height of the net = ${H} − ${sig(v*v/(2*g))} = <b>${sig(H-v*v/(2*g))} m</b>`]}; },
  /* 23 */ (R)=>{ const h=R(.4,1,.05);
    return {title:'Vertical leap and hang time',
     text:`A basketball player has a vertical leap of <b>${h} m</b>. What is her "hang time" (the total time she is in the air)?`,
     parts:[T('Hang time','s',2*sqrt(2*h/g))],
-    hint:`Time up to the top: ${dt} = √(2h/g). The trip down takes the same time.`,
     sol:[`Time to the top = √(2(${h})/9.81) = ${sig(sqrt(2*h/g))} s`,`Hang time = 2 × ${sig(sqrt(2*h/g))} = <b>${sig(2*sqrt(2*h/g))} s</b>`]}; },
  /* 24 */ (R,P)=>{ const w=P([['the Moon',1.62],['Mars',3.71],['Mercury',3.70],['Venus',8.87]]), h=R(2,20,1), r=sqrt(g/w[1]);
    return {title:'Comparing worlds (ratio)',
     text:`A rock is dropped from rest from the same height, <b>${h} m</b>, on Earth (<i>a</i> = −9.81 m/s²) and on ${w[0]} (<i>a</i> = −${w[1]} m/s²). How many times longer does it take to fall on ${w[0]} than on Earth? (Give the ratio <i>t</i><sub>${w[0].replace('the ','')}</sub> ÷ <i>t</i><sub>Earth</sub>.)`,
     parts:[T('Time ratio','',r)],
-    hint:`${dt} = √(2h/g) for each world. The height cancels in the ratio.`,
     sol:[`t<sub>Earth</sub> = √(2(${h})/9.81) = ${sig(sqrt(2*h/g))} s; t<sub>world</sub> = √(2(${h})/${w[1]}) = ${sig(sqrt(2*h/w[1]))} s`,`Ratio = <b>${sig(r)}</b> = √(9.81/${w[1]})`]}; },
  /* 25 */ (R)=>{ const n=R(2,6,1), d=.5*g*(2*n-1);
    return {title:'Distance in one particular second',
     text:`An object is dropped from rest. How far does it fall during the <b>${['','first','second','third','fourth','fifth','sixth'][n]} second</b> of its fall (between <i>t</i> = ${n-1} s and <i>t</i> = ${n} s)?`,
     parts:[T('Distance in that second','m',d)],
-    hint:`Find the distance fallen after ${n} s and after ${n-1} s with ½g<i>t</i>², then subtract.`,
     sol:[`After ${n} s: ½(9.81)(${n})² = ${sig(.5*g*n*n)} m; after ${n-1} s: ½(9.81)(${n-1})² = ${sig(.5*g*(n-1)**2)} m`,`Distance in the ${n}${['','st','nd','rd'][n]||'th'} second = <b>${sig(d)} m</b>`]}; }
 ];
 
@@ -545,15 +519,14 @@ function updateOverall(){
 
 /* ---------- screen ---------- */
 function renderProblem(p){
-  const e=state.ex[p.n]=state.ex[p.n]||{log:[],done:false,hints:0};
+  const e=state.ex[p.n]=state.ex[p.n]||{log:[],done:false};
   const el=document.createElement('div'); el.className='prob'+(e.done?' done':''); el.id='ex'+p.n;
   el.innerHTML=`<div class="num"><span>Exercise ${p.n} · ${p.title}</span><span class="badge">${e.done?'✔ Solved':''}</span></div><p style="margin:6px 0 4px">${p.text}</p>`;
   const body=document.createElement('div'); el.appendChild(body);
   const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
-  const hintHost=document.createElement('div'), solHost=document.createElement('div');
+  const solHost=document.createElement('div');
   const acts=document.createElement('div'); acts.className='acts';
   const check=document.createElement('button'); check.className='btn'; check.type='button'; check.textContent='Check';
-  const hint=document.createElement('button'); hint.className='btn ghost'; hint.type='button'; hint.textContent='Hint';
   const sol=document.createElement('button'); sol.className='btn ghost'; sol.type='button';
   const inputs=[], last=e.log.length?e.log[e.log.length-1][1]:[];
   p.parts.forEach((part,i)=>{
@@ -580,12 +553,11 @@ function renderProblem(p){
     if(all&&!e.done){ e.done=true; el.classList.add('done'); $('.badge',el).textContent='✔ Solved'; }
     fb.className='fb'; fb.textContent='';
     if(all) { fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+(e.log.length===1?'First try — nice work.':'Well done for sticking with it.'); }
-    else if(e.log.length>=2&&!e.done){ fb.className='fb near'; fb.textContent='Still stuck? Try the hint, or open the worked solution.'; }
+    else if(e.log.length>=2&&!e.done){ fb.className='fb near'; fb.textContent='Still stuck? You can now open the worked solution.'; }
     persist(); updateOverall(); syncSol();
   });
-  hint.addEventListener('click',()=>{ e.hints=(e.hints||0)+1; hintHost.className='hintbox'; hintHost.innerHTML='<b>Hint:</b> '+p.hint; hint.textContent='Hint'; save(); });
   sol.addEventListener('click',()=>{ if(sol.disabled) return; if(solHost.innerHTML){ solHost.innerHTML=''; solHost.className=''; } else { solHost.className='solbox'; solHost.innerHTML='<b>Worked solution</b><ol>'+p.sol.map(s=>`<li>${s}</li>`).join('')+'</ol>'; } syncSol(); });
-  acts.append(check,hint,sol); el.append(acts,fb,hintHost,solHost); syncSol();
+  acts.append(check,sol); el.append(acts,fb,solHost); syncSol();
   return el;
 }
 (function build(){

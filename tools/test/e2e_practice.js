@@ -13,7 +13,7 @@ async function login(b,code,w){ const c=await newCtx(b,w), p=await c.newPage(); 
   const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});
   const A=await login(b,'AAAA1111'), B=await login(b,'BBBB2222');
   const qa=await A.p.$$eval('.prob p',e=>e.map(x=>x.textContent)), qb=await B.p.$$eval('.prob p',e=>e.map(x=>x.textContent));
-  ok(qa.length===25,'25 exercises'); const diff=qa.filter((t,i)=>t!==qb[i]).length; ok(diff>=23,'two students: '+diff+' of 25 exercises have different numbers');
+  ok(qa.length===25,'25 exercises'); ok((await A.p.$$('#problemList .acts .btn')).length===50&&!(await A.p.$$eval('#problemList .btn',e=>e.some(x=>/hint/i.test(x.textContent)))),'no Hint button (only Check and Solution)'); const diff=qa.filter((t,i)=>t!==qb[i]).length; ok(diff>=23,'two students: '+diff+' of 25 exercises have different numbers');
   // one wrong try then correct for exercise 1, everything else right
   const sols=await A.p.evaluate(()=>window.LIAPRACTICE.P.map(p=>p.parts.map(x=>String(+x.ans.toPrecision(4)))));
   await A.p.fill('#in_1_0','12'); await A.p.click('#ex1 .acts .btn'); await A.p.waitForTimeout(200);
