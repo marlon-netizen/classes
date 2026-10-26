@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Practice Lesson 2.3 | Lincoln International Academy</title>
-<meta name="description" content="Practice Lesson 2.3 (Physics I): 25 free-fall exercises. Every student gets their own numbers, with immediate feedback.">
+<title>Physics I – Practice Lesson 2.3 | Lincoln International Academy</title>
+<meta name="description" content="Physics I – Practice Lesson 2.3: 25 free-fall exercises. Every student gets their own numbers, with immediate feedback.">
 <script>try{var t=localStorage.getItem('lia-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -264,7 +264,7 @@ header.top{position:relative}
 <div class="lessonbar">
   <div class="wrap">
     <div>
-      <h1>Practice Lesson 2.3</h1>
+      <h1>Physics I – Practice Lesson 2.3</h1>
       <small>Physics I · Chapter 2 · Motion in One Dimension · Section 3 · Falling Objects</small>
     </div>
     <div class="overall" aria-live="polite">
@@ -531,7 +531,7 @@ function saveResponses(){          // the teacher's "Student responses" page rea
     const e=state.ex[p.n]; q.push(p.n+'. '+plain(p.text)+(p.parts.length>1?'':' [unit: '+(p.parts[0].unit||'—')+']'));
     a.push(!e||!e.log.length?'':e.log.map((l,i)=>'Try '+(i+1)+': '+fmtAns(l[1],p)+(l[2]?' ✔':' ✘')).join('  |  ')+'  —  correct answer: '+fmtOk(p)+(e.done?'':'  (not solved yet)'));
   });
-  try{ localStorage.setItem(RKEY,JSON.stringify({title:'Practice Lesson 2.3 – answers (each student has their own numbers)',q,a})); }catch(e){}
+  try{ localStorage.setItem(RKEY,JSON.stringify({title:'Physics I – Practice Lesson 2.3 – answers (each student has their own numbers)',q,a})); }catch(e){}
 }
 function persist(){ save(); saveResponses(); }
 function stats(){ const done=P.filter(p=>state.ex[p.n]&&state.ex[p.n].done).length; return {done,tried:P.filter(p=>state.ex[p.n]&&state.ex[p.n].log.length).length}; }
