@@ -9,10 +9,17 @@ window.LIA_CONFIG={
   pages: {
     'divine-revelation-magisterium': 'Divine Revelation and the Magisterium',
     'faith-formation-exodus-covenant': 'Exodus and Covenant',
-    'faith-formation-parts-of-the-mass': 'Parts of the Mass',
     'growing-in-values-respect': 'Respect On and Off Screen',
     'growing-in-values-road-safety': 'Road Safety in My Community',
     'growing-in-values-rules-on-wheels': 'Rules on Wheels',
+    'parts-of-the-mass-week-03': 'Mass Week 3: Liturgy of the Word',
+    'parts-of-the-mass-week-04': 'Mass Week 4: Liturgy of the Eucharist',
+    'parts-of-the-mass-week-05': 'Mass Week 5: Real Presence & Participation',
+    'parts-of-the-mass-week-06': 'Mass Week 6: Vessels, Vestments & Gestures',
+    'parts-of-the-mass-week-07': 'Mass Week 7: Foreshadowed & Sunday',
+    'parts-of-the-mass-week-08': 'Mass Week 8: Advent & Christmas',
+    'parts-of-the-mass-week-09': 'Mass Week 9: Lent, Easter & Pentecost',
+    'parts-of-the-mass-week-10': 'Mass Week 10: Prayer & Quarter Review',
     'public-ministry-of-jesus': 'Public Ministry of Jesus'
   }
 };

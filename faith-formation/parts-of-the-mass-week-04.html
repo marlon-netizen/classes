@@ -1,0 +1,577 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mass Week 4: Liturgy of the Eucharist | Lincoln International Academy</title>
+<meta name="description" content="Faith Formation, 6th grade: the parts of the Mass, week 4 (Liturgy of the Eucharist). Lesson, review, vocabulary check, practice, Spanish Bible practice and exit ticket.">
+<style>
+:root{
+  --bg:#fbf8f1; --card:#fffefa; --ink:#2b2431; --muted:#6a6172; --line:#e4dac7;
+  --violet:#4a2c6a; --violet-soft:#ece4f4;
+  --gold:#a8812b; --gold-soft:#f6edd6;
+  --green:#2f6b4f; --green-soft:#e1efe6;
+  --red:#9b2335; --red-soft:#f6e1e4;
+  --rose:#b5587a; --rose-soft:#f8e4ea;
+  --good:#2f6b4f; --good-soft:#e1efe6; --bad:#9b2335; --bad-soft:#f6e1e4;
+  --wk:var(--green); --wk-soft:var(--green-soft);
+  --paper:#fcfaf5; --on:#fff;
+  --shadow:0 2px 4px rgba(43,36,49,.06),0 10px 28px rgba(43,36,49,.08);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16111b; --card:#201926; --ink:#ece4f0; --muted:#b3a8bb; --line:#3a3044;
+    --violet:#c5aee6; --violet-soft:#2c2238; --gold:#d8b45c; --gold-soft:#2e2814;
+    --green:#6fc09a; --green-soft:#1a2b22; --red:#e58b99; --red-soft:#361a20; --rose:#e591b0; --rose-soft:#36202a;
+    --good:#6fc09a; --good-soft:#1a2b22; --bad:#e58b99; --bad-soft:#361a20; --paper:#1a1520; --on:#17111c;
+    --shadow:0 1px 3px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16111b; --card:#201926; --ink:#ece4f0; --muted:#b3a8bb; --line:#3a3044;
+  --violet:#c5aee6; --violet-soft:#2c2238; --gold:#d8b45c; --gold-soft:#2e2814;
+  --green:#6fc09a; --green-soft:#1a2b22; --red:#e58b99; --red-soft:#361a20; --rose:#e591b0; --rose-soft:#36202a;
+  --good:#6fc09a; --good-soft:#1a2b22; --bad:#e58b99; --bad-soft:#361a20; --paper:#1a1520; --on:#17111c;
+  --shadow:0 1px 3px rgba(0,0,0,.5);
+}
+.wk-green{--wk:var(--green);--wk-soft:var(--green-soft)}
+.wk-gold{--wk:var(--gold);--wk-soft:var(--gold-soft)}
+.wk-red{--wk:var(--red);--wk-soft:var(--red-soft)}
+.wk-purple{--wk:var(--violet);--wk-soft:var(--violet-soft)}
+.wk-rose{--wk:var(--rose);--wk-soft:var(--rose-soft)}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.25;margin:0 0 .5em;color:var(--violet)}
+h2{font-size:1.5rem} h3{font-size:1.15rem}
+p{margin:0 0 1em}
+button,select,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.ic{width:1.25em;height:1.25em;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.22em;flex:none}
+
+/* header */
+.top{background:linear-gradient(135deg,#3a1f55,#4a2c6a 55%,#5a3680);color:#f6efe0;border-bottom:5px solid var(--gold);position:relative;overflow:hidden}
+.top .in{max-width:1000px;margin:0 auto;padding:20px 16px 18px;position:relative}
+.top .row1{display:flex;flex-wrap:wrap;gap:6px 24px;justify-content:space-between;align-items:flex-end}
+.school{font-family:Georgia,serif;font-size:clamp(1.35rem,3.6vw,1.9rem);font-weight:700;margin:0;letter-spacing:.01em}
+.school .ic{color:#e6c76a;margin-right:6px}
+.meta{font-size:.98rem;color:#e2d8ee}
+.meta b{color:#fff}
+.title{margin:14px 0 0;font-size:clamp(1.1rem,2.8vw,1.35rem);color:#fff;font-family:Georgia,serif}
+.sub{color:#e6c76a;font-size:.92rem}
+.deco{position:absolute;right:10px;top:6px;display:flex;gap:14px;opacity:.16;color:#e6c76a;font-size:2.2rem;pointer-events:none}
+.deco .ic{width:1.6em;height:1.6em}
+.hbtn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:10px;padding:6px 14px;font-size:.9rem}
+.hbtn:hover{background:rgba(255,255,255,.24)}
+
+/* tabs */
+.tabbar{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(43,36,49,.05)}
+.tabs{max-width:1000px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:8px 12px;scrollbar-width:thin}
+.tab{--c:var(--wk);--cs:var(--wk-soft);flex:none;min-width:118px;text-align:left;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:10px;padding:6px 10px;line-height:1.25;transition:background .15s}
+.tab:hover{background:var(--cs)}
+.tab .w{display:flex;align-items:center;gap:5px;font-weight:700;font-size:.9rem;color:var(--c)}
+.tab .d{display:block;font-size:.72rem;color:var(--muted)}
+.tab .t{display:block;font-size:.78rem}
+.tab[aria-selected="true"]{background:var(--c);color:var(--on)}
+.tab[aria-selected="true"] .w,.tab[aria-selected="true"] .d{color:var(--on)}
+.legend{max-width:1000px;margin:10px auto 0;padding:0 16px;font-size:.82rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
+.dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1px solid rgba(0,0,0,.15)}
+
+/* panel */
+.wrap{max-width:1000px;margin:0 auto;padding:16px 16px 48px}
+.panel{display:none}
+.panel.active{display:block;animation:fade .3s ease}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.banner{display:flex;gap:14px;align-items:center;background:var(--wk-soft);border:1px solid var(--line);border-left:8px solid var(--wk);border-radius:14px;padding:14px 18px;margin-bottom:14px}
+.banner .bi{width:54px;height:54px;border-radius:50%;background:var(--wk);color:var(--on);display:grid;place-items:center;flex:none}
+.banner .bi .ic{width:30px;height:30px}
+.banner h2{margin:0;color:var(--wk)}
+.banner .sm{font-size:.88rem;color:var(--muted)}
+.pill{margin-left:auto;background:var(--card);border:1px solid var(--wk);color:var(--wk);border-radius:99px;padding:3px 12px;font-weight:700;font-size:.85rem;white-space:nowrap}
+.sub-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.sn{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:.92rem}
+.sn:hover{border-color:var(--wk)}
+.sn[aria-selected="true"]{background:var(--wk);border-color:var(--wk);color:var(--on);font-weight:600}
+.sp{display:none}
+.sp.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.card h3{color:var(--wk)}
+.day{border-left:5px solid var(--wk);background:var(--wk-soft);border-radius:0 12px 12px 0;padding:10px 16px;margin-bottom:10px}
+.day .dd{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--wk);font-weight:700}
+.std{background:var(--gold-soft);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-size:.92rem;margin-bottom:12px}
+ul.key{margin:.3em 0 0;padding-left:1.2em}
+ul.key li{margin-bottom:.5em}
+.note{font-size:.85rem;color:var(--muted)}
+.box{border-radius:10px;padding:10px 14px;margin:10px 0}
+.box.w{background:var(--gold-soft);border-left:4px solid var(--gold)}
+.box.p{background:var(--violet-soft);border-left:4px solid var(--violet)}
+
+/* reveal cards */
+.cards{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.rv{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;transition:border-color .2s,background .2s}
+.rv:hover{border-color:var(--wk)}
+.rv .q{font-weight:600;display:block}
+.rv .tap{font-size:.78rem;color:var(--muted)}
+.rv .a{display:none;margin-top:6px}
+.rv[aria-expanded="true"]{background:var(--wk-soft);border-color:var(--wk)}
+.rv[aria-expanded="true"] .a{display:block}
+.rv[aria-expanded="true"] .tap{display:none}
+
+/* activities */
+.act{margin-bottom:18px}
+.act h3{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.tag{font-size:.72rem;background:var(--wk-soft);color:var(--wk);padding:1px 9px;border-radius:99px;font-family:system-ui,sans-serif;font-weight:700}
+.qblock{border-top:1px dashed var(--line);padding-top:12px;margin-top:12px}
+.qs>.qblock:first-child{border-top:0;padding-top:0;margin-top:0}
+.qtext{font-weight:600;margin-bottom:8px}
+.opt{display:block;width:100%;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 14px;margin:0 0 7px;transition:border-color .15s,background .15s}
+.opt:hover:not(:disabled){border-color:var(--wk);background:var(--wk-soft)}
+.opt:disabled{cursor:default}
+.opt.good{background:var(--good-soft);border-color:var(--good)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt.dim{opacity:.6}
+.opt.sel{border-color:var(--violet);background:var(--violet-soft)}
+.opt.done{background:var(--good-soft);border-color:var(--good);opacity:.85}
+.tfrow{display:flex;gap:8px}
+.tfrow .opt{flex:1;text-align:center;font-weight:600}
+.fb{border-radius:10px;font-size:.94rem;margin-top:4px}
+.fb.show{padding:8px 12px;animation:fade .25s ease}
+.fb.good{background:var(--good-soft);border-left:4px solid var(--good)}
+.fb.bad{background:var(--bad-soft);border-left:4px solid var(--bad)}
+.fb.info{background:var(--violet-soft);border-left:4px solid var(--violet)}
+.btn{background:var(--violet);color:var(--on);border:0;border-radius:10px;padding:8px 18px;font-weight:600}
+.btn:hover:not(:disabled){filter:brightness(.9)}
+.btn.wk{background:var(--wk)}
+.btn.ghost{background:transparent;color:var(--violet);border:1px solid var(--violet)}
+.btn.ghost:hover:not(:disabled){background:var(--violet-soft)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn:focus-visible,.opt:focus-visible,.tab:focus-visible,.sn:focus-visible,.rv:focus-visible,input:focus-visible,textarea:focus-visible,.hbtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:8px}
+@media(max-width:560px){.match{grid-template-columns:1fr}.pill{margin-left:0}.banner{flex-wrap:wrap}}
+.sortcard{text-align:center;font-size:1.1rem;font-weight:600;background:var(--gold-soft);border-radius:12px;padding:18px 12px;margin:8px 0}
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0}
+.slot{min-height:64px;border:2px dashed var(--line);border-radius:10px;padding:6px 10px;font-size:.88rem;background:var(--paper)}
+.slot small{display:block;color:var(--muted);font-weight:700}
+.slot.filled{border-style:solid;border-color:var(--good);background:var(--good-soft)}
+.slot.next{border-color:var(--violet)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pool .opt{width:auto;margin:0}
+.shake{animation:shake .35s}
+@keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+.small{font-size:.86rem;color:var(--muted)}
+textarea{width:100%;min-height:84px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--card);resize:vertical}
+input[type=text]{padding:9px 12px;border:2px solid var(--line);border-radius:10px;background:var(--card);min-width:220px}
+.model{border-left:4px solid var(--gold);background:var(--gold-soft);padding:8px 12px;border-radius:0 10px 10px 0;margin-top:6px;font-size:.92rem}
+.bcard{border:1px solid var(--line);border-top:5px solid var(--rose);border-radius:12px;padding:14px 16px;margin-bottom:14px;background:var(--card)}
+.bcard .ref{font-family:Georgia,serif;font-size:1.2rem;color:var(--rose);font-weight:700}
+.bibhead{background:var(--rose-soft);border:1px solid var(--line);border-left:8px solid var(--rose);border-radius:14px;padding:14px 18px;margin-bottom:14px}
+.bibhead h2{color:var(--rose);margin-bottom:.3em}
+.result{background:var(--violet-soft);border-radius:12px;padding:14px 18px;margin-top:14px;text-align:center;font-weight:600}
+
+/* overlay */
+.overlay{position:fixed;inset:0;background:rgba(43,36,49,.6);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 16px}
+.overlay[hidden]{display:none}
+.modal{background:var(--card);border-radius:16px;max-width:560px;width:100%;padding:22px;box-shadow:0 10px 40px rgba(0,0,0,.35);border-top:6px solid var(--gold)}
+table.sm{width:100%;border-collapse:collapse;font-size:.93rem;margin:10px 0}
+table.sm td,table.sm th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+table.sm th{color:var(--violet)}
+footer{text-align:center;color:var(--muted);font-size:.82rem;padding:0 16px 34px}
+@media (prefers-reduced-motion:reduce){.panel.active,.fb.show,.shake{animation:none}}
+@media print{.tabbar,.legend,.hbtn,.sub-nav,.lia-theme,.deco,.btn{display:none!important}.sp{display:block!important}.card,.banner,.day,.bcard{break-inside:avoid;box-shadow:none}.top{background:none;color:#000;border-bottom:2px solid #000}.top .school,.top .meta,.top .title,.sub{color:#000}}
+
+html{scroll-behavior:smooth}
+.snav{max-width:1000px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:8px 12px;scrollbar-width:thin}
+.snav a{flex:none;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:99px;padding:5px 14px;font-size:.9rem}
+.snav a:hover{border-color:var(--wk);background:var(--wk-soft)}
+.sec{margin-bottom:30px;scroll-margin-top:64px}
+.sech{display:flex;align-items:center;gap:8px;border-bottom:2px solid var(--wk);padding-bottom:5px;margin-bottom:14px;color:var(--wk)}
+.bibhead{background:var(--wk-soft);border-left-color:var(--wk)}
+.bibhead h2{color:var(--wk)}
+.bcard{border-top-color:var(--wk)}
+.bcard .ref{color:var(--wk)}
+.cloze p{line-height:2.2;margin:0 0 .4em}
+select{font:inherit;padding:4px 8px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+select.good{border-color:var(--good);background:var(--good-soft)}
+select.bad{border-color:var(--bad);background:var(--bad-soft)}
+.wrap{padding-top:18px}
+@media print{.snav{display:none}.sec{break-inside:auto}}
+
+/* Ordinary Time: green theme */
+:root{--violet:#2f6b4f;--violet-soft:#e1efe6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--violet:#7fd0a8;--violet-soft:#1a2b22}}
+:root[data-theme="dark"]{--violet:#7fd0a8;--violet-soft:#1a2b22}
+.top{background:linear-gradient(135deg,#1c4632,#2f6b4f 55%,#3d7f60)}
+
+</style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+<!-- icon sprite (stroke icons) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="i-cross" viewBox="0 0 24 24"><path d="M12 2.5v19M6.5 8h11"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M3 5.5c3-1.6 6-1.6 9 0 3-1.6 6-1.6 9 0v13.5c-3-1.6-6-1.6-9 0-3-1.6-6-1.6-9 0zM12 5.5V19"/></symbol>
+    <symbol id="i-chalice" viewBox="0 0 24 24"><path d="M6 3.5h12c0 4.8-2.5 7.8-6 7.8S6 8.300 6 3.500zM12 11.300V18M8 21h8M9.500 18h5"/></symbol>
+    <symbol id="i-host" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6.500v11M8 10.500h8"/></symbol>
+    <symbol id="i-stole" viewBox="0 0 24 24"><path d="M8 3c.2 5 1 9 .8 18l3.200-2 3.200 2c-.2-9 .6-13 .8-18M12 8.500v5M10 10.500h4"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2.500v3M12 18.500v3M2.500 12h3M18.500 12h3M5.300 5.300l2.100 2.100M16.600 16.600l2.100 2.100M18.700 5.300l-2.100 2.100M7.400 16.600l-2.100 2.100"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.500l2.300 6.600H21l-5.500 4 2.100 6.700L12 15.800l-5.600 4 2.100-6.700L3 9.100h6.700z"/></symbol>
+    <symbol id="i-flame" viewBox="0 0 24 24"><path d="M12 2.500c1 4 5 6 5 10.500a5 5 0 0 1-10 0c0-2 1-3.200 2-4.200 0 2 1 3 2 3 0-3-1-6 1-9.300z"/></symbol>
+    <symbol id="i-candle" viewBox="0 0 24 24"><path d="M12 2c1 2 2 3 2 4.500a2 2 0 0 1-4 0C10 5 11 4 12 2zM9 10h6v11H9z"/></symbol>
+    <symbol id="i-dove" viewBox="0 0 24 24"><path d="M3 14c3 0 5-1 7-3 0-3 2-5 5-5l3-2-.500 3c1 .800 2 1.500 3 1.500-1 1.500-2.500 2-4 2-.500 4-3.500 8-9 8l-2.500-1 2-2c-2 0-3-.500-4-1.500z"/></symbol>
+  </defs>
+</svg>
+
+
+<header class="top">
+  <div class="in">
+    <div class="deco" aria-hidden="true"><svg class="ic"><use href="#i-cross"/></svg><svg class="ic"><use href="#i-chalice"/></svg><svg class="ic"><use href="#i-book"/></svg><svg class="ic"><use href="#i-flame"/></svg></div>
+    <div class="row1">
+      <div>
+        <p class="school"><svg class="ic"><use href="#i-cross"/></svg>Lincoln International Academy</p>
+        <div class="meta">Class: <b>Faith Formation</b> &nbsp;·&nbsp; Teacher: <b>Nathaly López</b></div>
+      </div>
+      <div class="row"><button class="hbtn" id="themeBtn" type="button" aria-label="Switch between light and dark mode">☀ / ☾ Theme</button><button class="hbtn" id="scoresBtn" type="button"><svg class="ic"><use href="#i-star"/></svg> My scores</button></div>
+    </div>
+    <h1 class="title">The Parts of the Mass <span class="sub">· 6th Grade · Quarter 2 · Week 4: Liturgy of the Eucharist</span></h1>
+  </div>
+</header>
+
+<div class="tabbar"><nav class="snav" aria-label="Sections of this page">
+  <a href="#summary">Summary</a><a href="#lesson">Lesson</a><a href="#review">Review</a><a href="#vocab">Vocabulary check</a><a href="#practice">Practice</a><a href="#biblia">Biblia (español)</a><a href="#exit">Exit ticket</a>
+</nav></div>
+
+<main class="wrap wk-green" id="main"></main>
+
+<footer>Lincoln International Academy · Faith Formation · Ms. Nathaly López · 6th Grade, Quarter 2, Week 4.<br>Based on the Q2 Faith Formation lesson plans. Scripture and Catechism references are those listed in the lesson plans.</footer>
+
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="sumTitle" hidden>
+  <div class="modal">
+    <h2 id="sumTitle"><svg class="ic"><use href="#i-star"/></svg> My Scores</h2>
+    <table class="sm" id="sumTable"></table>
+    <p class="note">Your best results are sent to your teacher when you are signed in. Your exit-ticket answers are saved automatically.</p>
+    <div class="row"><button class="btn" id="closeSum" type="button">Close</button></div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var D={"week": {"n": 4, "title": "Liturgy of the Eucharist", "color": "green", "icon": "chalice", "summary": "This week we study the Liturgy of the Eucharist, the second main part of the Mass. You will learn its five parts in order, what happens at the Consecration, why a sacrament is a sign that makes present what it signifies, and how to receive Holy Communion reverently.", "standard": "B.1.6.2 Students will know that Christ's work in the liturgy is sacramental.", "topics": [["The Liturgy of the Eucharist: Gifts, Prayer and Consecration", "Sequence the parts of the Liturgy of the Eucharist and explain that a sacrament is a sign that makes present what it signifies."], ["Holy Communion: Receiving Christ", "Describe the Communion Rite and explain how to receive Communion reverently."]], "key": ["The Liturgy of the Eucharist has five parts, in order: <b>Preparation of the Gifts<\/b>, <b>Preface and Holy, Holy, Holy<\/b>, <b>Consecration<\/b>, <b>Great Amen<\/b>, <b>Communion Rite<\/b>.", "At the Consecration the priest speaks Jesus' words: <i>\"This is my Body… this is the chalice of my Blood.\"<\/i> (the Institution Narrative).", "A <b>sacrament<\/b> is a sign that makes present what it signifies. \"Eucharist\" means <b>thanksgiving<\/b>.", "The Communion Rite includes the Lord's Prayer, the Sign of Peace, the Lamb of God, and \"The Body of Christ\" / \"Amen.\"", "<b>Prepare<\/b> before Communion (pray, examine your conscience, fast one hour). <b>Give thanks<\/b> afterward (thank Jesus, pray silently)."], "real": "A wedding ring is a sign that makes a promise real; the sacraments work in a similar way. Before something important, like a game or a test, we prepare, and afterward we reflect on it.", "review": [["From last week: what are the six parts of the Liturgy of the Word?", "First Reading, Responsorial Psalm, Second Reading, Gospel Acclamation, Gospel, Homily."], ["List the five parts of the Liturgy of the Eucharist.", "Preparation of the Gifts; Preface and Holy, Holy, Holy; Consecration; Great Amen; Communion Rite."], ["What is a sacrament?", "A sign that makes present what it signifies."], ["What does the Church mean by calling the Mass a \"thanksgiving\"?", "\"Eucharist\" means thanksgiving: we thank God for his gifts, above all for Christ."], ["What do we say when we receive Communion?", "\"Amen\": I believe this is the Body of Christ."]], "vocab": [["Liturgy of the Eucharist", "The part of the Mass where bread and wine become the Body and Blood of Christ"], ["Preparation of the Gifts", "Bread and wine are brought forward and prepared at the altar"], ["Consecration", "The priest speaks Jesus' words over the bread and wine"], ["Great Amen", "Our \"Amen\" at the end of the Eucharistic Prayer"], ["Sacrament", "A sign that makes present what it signifies"], ["Communion Rite", "Prayers and actions before receiving: Lord's Prayer, Peace, Lamb of God"]], "practice": [{"type": "seq", "label": "Order of the Liturgy of the Eucharist", "intro": "Put the five parts in order.", "items": [["Preparation of the Gifts", "The gifts are brought forward first.", "We begin by bringing the bread and wine to the altar."], ["Preface and Holy, Holy, Holy", "We sing praise before the Eucharistic Prayer continues.", "We join the angels in singing \"Holy, Holy, Holy.\""], ["Consecration", "The priest speaks the words of Jesus.", "The bread and wine become the Body and Blood of Christ."], ["Great Amen", "We say Amen at the end of the Eucharistic Prayer.", "Our Great Amen says \"yes\" to the whole prayer."], ["Communion Rite", "It leads to receiving Jesus.", "We prepare to receive Communion."]]}, {"type": "quiz", "qs": [["Which words does the priest speak at the Consecration?", "\"This is my Body… this is the chalice of my Blood\"", ["\"Go in peace\"", "\"The Lord be with you\"", "\"Let us pray\""], "These are Jesus' words at the Last Supper (the Institution Narrative)."], ["What is a sacrament?", "A sign that makes present what it signifies", ["A decoration in church", "A song at Mass", "A rule for behavior"], "In a sacrament the sign really makes Christ's work present."], ["What does \"Amen\" mean when we receive Communion?", "\"Yes, I believe this is the Body of Christ\"", ["\"Goodbye\"", "\"I am hungry\"", "\"Thank you, Father\""], "Our \"Amen\" is a statement of faith."], ["Which prayer belongs to the Communion Rite?", "The Lamb of God", ["The Creed", "The First Reading", "The Gospel"], "The Lord's Prayer, Sign of Peace and Lamb of God are in the Communion Rite."], ["How can we prepare to receive Communion?", "Pray, examine our conscience and fast for one hour", ["Arrive late", "Chat during the Mass", "Skip the readings"], "We prepare with prayer, a clean heart and fasting for one hour."], ["True or false: \"Eucharist\" means thanksgiving.", "True", ["False"], "The Mass is the Church's great thanksgiving."]]}], "tf": [["The Consecration comes before the Preparation of the Gifts.", "False", "The gifts are prepared first; the Consecration comes later in the Eucharistic Prayer."], ["With the Great Amen we answer \"yes\" to the Eucharistic Prayer.", "True", "The Great Amen is the assembly's \"yes\" at the end of the prayer."], ["The Lord's Prayer is part of the Communion Rite.", "True", "The Lord's Prayer, Sign of Peace and Lamb of God prepare us to receive Communion."], ["Only the priest receives Communion.", "False", "The faithful who are prepared also receive Holy Communion."], ["Fasting for one hour before Communion is one way to prepare.", "True", "Prayer, an examined conscience and the one-hour fast are ways to prepare."], ["A sacrament is a sign that makes present what it signifies.", "True", "In a sacrament the sign really makes Christ's work present."]], "cloze": [["The priest speaks Jesus' words at the ", ["Consecration", "Homily", "Dismissal"], 0, ".", "The Institution Narrative is spoken at the Consecration."], ["At the end of the Eucharistic Prayer we sing the Great ", ["Amen", "Alleluia", "Psalm"], 0, ".", "The Great Amen is our \"yes\" to the prayer."], ["In the Communion Rite we pray the ", ["Lord's", "Hail Mary", "Penitential"], 0, " Prayer.", "The Lord's Prayer is part of the Communion Rite."], ["When the minister says \"The Body of Christ,\" we answer \"", ["Amen", "Thanks", "Alleluia"], 0, ".\"", "Our \"Amen\" means \"Yes, I believe.\""], ["\"Eucharist\" means ", ["thanksgiving", "silence", "procession"], 0, ".", "The Mass is the Church's great thanksgiving."]], "scen": [["You are about to receive Communion. What is a good way to prepare?", "Pray, examine your conscience and fast for one hour", ["Eat a big meal right before", "Think about your plans", "Talk with friends"], "Preparing helps us receive Jesus well."], ["After Communion the person next to you wants to leave right away. What can you do?", "Stay and pray silently to thank Jesus", ["Leave too", "Chat quietly", "Look around"], "We stay to give thanks and finish the Mass together."], ["The minister says \"The Body of Christ.\" What do you answer and what does it mean?", "\"Amen\": I believe this is the Body of Christ", ["\"Thanks\": it is a gift", "\"Hello\": a greeting", "Nothing"], "Our Amen is a statement of faith."]], "meta": ["Which part of the Eucharistic Prayer can I explain?", "What does \"sacramental\" mean in my own words?", "What question do I still have about Communion?"], "exit": ["Write the five parts of the Liturgy of the Eucharist in order.", "Write two ways to prepare for Communion and two ways to give thanks afterward."]}, "bank": [["Lucas 22:14-20", 2, ["cena|pascua", "pan", "cuerpo", "copa|caliz|sangre", "alianza|memoria"], "En la Última Cena Jesús toma el pan y dice «Esto es mi cuerpo» y la copa «nueva alianza en mi sangre»; pide que lo hagan en su memoria."], ["Mateo 26:26-28", 2, ["pan", "cuerpo", "copa|caliz", "sangre", "perd"], "Jesús bendice el pan y lo da a sus discípulos: «Tomen y coman, esto es mi cuerpo»; luego la copa: «esta es mi sangre... derramada para el perdón de los pecados»."], ["1 Corintios 11:23-26", 2, ["senor|jesus", "pan", "cuerpo", "copa|caliz|sangre", "memoria|anunci"], "Pablo transmite lo que recibió: Jesús, la noche en que fue entregado, tomó pan y la copa y mandó hacer esto en memoria suya; así se anuncia la muerte del Señor hasta que vuelva."], ["Isaías 6:1-3", 2, ["santo", "serafin|angel", "gloria|tierra|llena"], "Isaías ve al Señor en su trono y a los serafines que proclaman: «Santo, Santo, Santo es el Señor del universo; toda la tierra está llena de su gloria»."], ["Apocalipsis 4:8", 2, ["santo", "noche|sin cesar|descanso", "senor|dios|todopoderoso"], "Las cuatro criaturas repiten día y noche: «Santo, Santo, Santo, Señor Dios todopoderoso»."], ["Mateo 6:9-13", 3, ["padre", "reino", "pan", "perdon|perdona", "tentacion|mal"], "Jesús enseña el Padre Nuestro: santificado sea tu nombre, venga tu reino, danos hoy nuestro pan, perdona nuestras ofensas, no nos dejes caer en la tentación y líbranos del mal."], ["Juan 14:27", 3, ["paz", "turb|miedo|corazon|dejo|doy"], "Jesús dice: «La paz les dejo, mi paz les doy; no se turbe su corazón ni tengan miedo»."], ["Juan 1:29", 3, ["cordero", "dios", "pecado|quita"], "Juan el Bautista ve a Jesús y dice: «Este es el Cordero de Dios que quita el pecado del mundo»."], ["Mateo 8:5-13", 3, ["centurion|oficial|capitan", "digno|techo", "palabra|basta|sanar|curar|sirviente|criado|siervo|muchacho"], "Un centurión pide que Jesús sane a su criado y dice que no es digno de que entre en su casa; basta una palabra de Jesús para que sane. Jesús alaba su fe."], ["Juan 20:19-21", 3, ["paz", "discipulos", "jesus|senor", "envi"], "Jesús resucitado se presenta a los discípulos reunidos y les dice «La paz esté con ustedes»; luego los envía como el Padre lo envió a él."]]};
+var W=D.week, BANK=D.bank;
+
+/* ====================== helpers ====================== */
+function $(s,r){ return (r||document).querySelector(s); }
+function $$(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
+function el(tag,cls,html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
+function ic(n){ return '<svg class="ic" aria-hidden="true"><use href="#i-'+n+'"/></svg>'; }
+function shuffle(a,rnd){ a=a.slice(); rnd=rnd||Math.random; for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function setFb(b,k,h){ b.className='fb show '+k; b.innerHTML=h; }
+
+/* ====================== registry & reporting ====================== */
+var items={};   // id -> {grp,label,max,score|null}
+function reg(id,grp,label,max){ items[id]={grp:grp,label:label,max:max,score:null}; }
+function clearPrefix(p){ Object.keys(items).forEach(function(k){ if(k.indexOf(p)===0) delete items[k]; }); }
+function totals(){ var s=0,m=0,d=0,t=0; Object.keys(items).forEach(function(k){ var i=items[k]; if(i.grp==='bib') return; m+=i.max; t++; if(i.score!==null){ s+=i.score; d++; } }); return {s:s,m:m,done:d,total:t}; }
+function bibTotals(){ var s=0,d=0; Object.keys(items).forEach(function(k){ var i=items[k]; if(i.grp==='bib'&&i.score!==null){ s+=i.score; d++; } }); return {s:s,d:d}; }
+function updatePill(){ var p=$('#pill'); if(!p) return; var t=totals(), b=bibTotals(), s=t.s+b.s, m=t.m+12; p.textContent=(t.done+b.d)? ('Score '+s+' / '+m) : (m+' points'); }
+function reportSync(){
+  if(!(window.LiaSync&&window.LiaSync.report)) return;
+  var t=totals(), b=bibTotals();
+  /* the Spanish Bible practice always counts as 12 items / 12 points; the page restarts on every visit, so keep the best result */
+  window.LiaSync.report({solved:t.done+b.d,total:t.total+12,score:t.s+b.s,max:t.m+12},{keepBest:true});
+}
+function finish(id,score){ items[id].score=score; updatePill(); reportSync(); }
+
+/* ====================== activity builders ====================== */
+function mkChoice(mount,grp,id,q,label,num){
+  reg(id,grp,label,1);
+  var block=el('div','qblock'), fb=el('div','fb'); fb.setAttribute('aria-live','polite');
+  block.appendChild(el('div','qtext',(num?num+'. ':'')+q.q));
+  var opts=q.tf? q.o : shuffle(q.o);
+  var btns=opts.map(function(o){
+    var b=el('button','opt'); b.type='button'; b.textContent=o[0];
+    b.addEventListener('click',function(){
+      if(items[id].score!==null) return;
+      btns.forEach(function(x){ x.disabled=true; });
+      if(o[1]){ b.classList.add('good'); setFb(fb,'good','✓ <b>Correct!</b> '+q.e); }
+      else{ b.classList.add('bad','shake'); for(var k=0;k<opts.length;k++) if(opts[k][1]) btns[k].classList.add('good'); setFb(fb,'bad','✗ <b>Not quite.</b> '+q.e); }
+      btns.forEach(function(x){ if(!/good|bad/.test(x.className)) x.classList.add('dim'); });
+      finish(id,o[1]?1:0);
+    });
+    return b;
+  });
+  if(q.tf){ var row=el('div','tfrow'); btns.forEach(function(b){ row.appendChild(b); }); block.appendChild(row); }
+  else btns.forEach(function(b){ block.appendChild(b); });
+  block.appendChild(fb); mount.appendChild(block);
+}
+function quizToQ(a){ // [question, correct, [wrong], explanation]
+  if(a[1]==='True'||a[1]==='False') return {q:a[0],tf:true,e:a[3]||'',o:[['True',a[1]==='True'],['False',a[1]==='False']]};
+  return {q:a[0],e:a[3],o:[[a[1],1]].concat(a[2].map(function(w){ return [w,0]; }))};
+}
+function mkMatch(mount,grp,id,label,pairs){
+  reg(id,grp,label,pairs.length);
+  var sel=null, matched=0, mistakes=0, fb=el('div','fb'); fb.setAttribute('aria-live','polite');
+  var L=pairs.map(function(p,i){ var b=el('button','opt'); b.type='button'; b.textContent=p[0]; b.dataset.i=i; return b; });
+  var R=shuffle(pairs.map(function(p,i){ return {i:i,t:p[1]}; })).map(function(p){ var b=el('button','opt'); b.type='button'; b.textContent=p.t; b.dataset.i=p.i; return b; });
+  L.forEach(function(b){ b.addEventListener('click',function(){ if(b.classList.contains('done')) return; L.forEach(function(x){ x.classList.remove('sel'); }); b.classList.add('sel'); sel=b; setFb(fb,'info','Now tap the matching meaning.'); }); });
+  R.forEach(function(b){ b.addEventListener('click',function(){
+    if(b.classList.contains('done')) return;
+    if(!sel){ setFb(fb,'info','First tap a term on the left.'); return; }
+    if(sel.dataset.i===b.dataset.i){
+      sel.classList.remove('sel'); sel.classList.add('done'); b.classList.add('done'); sel=null; matched++; setFb(fb,'good','✓ <b>Match!</b>');
+      if(matched===pairs.length){ setFb(fb,'good','🎉 <b>All matched</b>'+(mistakes?' with '+mistakes+' miss'+(mistakes>1?'es':''):' with no misses')+'.'); finish(id,Math.max(0,pairs.length-mistakes)); }
+    } else { mistakes++; b.classList.add('bad','shake'); setTimeout(function(){ b.classList.remove('bad','shake'); },600); setFb(fb,'bad','Not that one. Re-read the term and try another meaning.'); }
+  }); });
+  var c1=el('div'), c2=el('div'); L.forEach(function(b){ c1.appendChild(b); }); R.forEach(function(b){ c2.appendChild(b); });
+  var g=el('div','match'); g.appendChild(c1); g.appendChild(c2);
+  mount.appendChild(g); mount.appendChild(fb);
+}
+function mkSort(mount,grp,id,label,cfg){
+  var cards=shuffle(cfg.cards), n=cards.length, i=0, right=0;
+  reg(id,grp,label,n);
+  var count=el('p','small'), card=el('div','sortcard'), row=el('div','row'), fb=el('div','fb'); fb.setAttribute('aria-live','polite');
+  var btns=cfg.choices.map(function(c){ var b=el('button','btn wk'); b.type='button'; b.textContent=c[1]; row.appendChild(b); return b; });
+  function paint(){ if(i>=n){ card.textContent='Finished!'; count.textContent=''; btns.forEach(function(b){ b.disabled=true; }); return; } card.textContent=cards[i][0]; count.textContent='Card '+(i+1)+' of '+n; }
+  btns.forEach(function(b,j){ b.addEventListener('click',function(){
+    if(i>=n) return; var c=cards[i], ok=(c[1]===cfg.choices[j][0]); if(ok) right++;
+    var msg=(ok?'✓ <b>Correct.</b> ':'✗ <b>Not quite.</b> ')+c[2]; i++;
+    if(i>=n){ paint(); setFb(fb,right===n?'good':'info',msg+' — <b>'+right+' of '+n+'</b> correct.'); finish(id,right); }
+    else{ setFb(fb,ok?'good':'bad',msg); paint(); }
+  }); });
+  mount.appendChild(count); mount.appendChild(card); mount.appendChild(row); mount.appendChild(fb); paint();
+}
+function mkSeq(mount,grp,id,label,seq){
+  var n=seq.length, next=0, mistakes=0; reg(id,grp,label,n);
+  var slots=seq.map(function(_,k){ return el('div','slot'+(k===0?' next':''),'<small>Step '+(k+1)+'</small><span>?</span>'); });
+  var fb=el('div','fb'); fb.setAttribute('aria-live','polite');
+  var pool=shuffle(seq.map(function(s,k){ return {t:s[0],i:k}; }));
+  while(n>1 && pool.every(function(p,k){ return p.i===k; })) pool=shuffle(pool);
+  var pe=el('div','pool');
+  pool.forEach(function(p){ var b=el('button','opt'); b.type='button'; b.textContent=p.t;
+    b.addEventListener('click',function(){
+      if(b.disabled||items[id].score!==null) return;
+      if(p.i===next){ b.disabled=true; b.style.display='none'; slots[next].classList.remove('next'); slots[next].classList.add('filled'); slots[next].lastChild.textContent=p.t;
+        setFb(fb,'good','✓ <b>Yes!</b> '+seq[next][2]); next++;
+        if(next<n) slots[next].classList.add('next'); else { setFb(fb,'good','🎉 <b>Complete!</b> '+(mistakes?mistakes+' mistake'+(mistakes>1?'s':'')+' along the way.':'No mistakes.')); finish(id,Math.max(0,n-mistakes)); }
+      } else { mistakes++; b.classList.add('bad','shake'); setTimeout(function(){ b.classList.remove('bad','shake'); },600); setFb(fb,'bad','Not yet. Hint for step '+(next+1)+': '+seq[next][1]); }
+    }); pe.appendChild(b); });
+  var sl=el('div','slots'); slots.forEach(function(s){ sl.appendChild(s); });
+  mount.appendChild(sl); mount.appendChild(el('p','small','Tap the step that belongs in the next empty box.')); mount.appendChild(pe); mount.appendChild(fb);
+}
+/* fill in the blank: choose the word for every sentence; each wrong try costs a point */
+function mkCloze(mount,grp,id,label,S){
+  reg(id,grp,label,S.length);
+  var ok=0, wrong=0, fb=el('div','fb'), box=el('div','cloze'); fb.setAttribute('aria-live','polite');
+  S.forEach(function(s,k){
+    var sel=el('select'); sel.setAttribute('aria-label','Choose the word for sentence '+(k+1)); sel.appendChild(new Option('— choose —',''));
+    s[1].forEach(function(o,j){ sel.appendChild(new Option(o,j)); });
+    sel.addEventListener('change',function(){
+      if(sel.value===''){ sel.className=''; return; }
+      if(+sel.value===s[2]){ sel.className='good'; sel.disabled=true; ok++; setFb(fb,'good','✓ <b>Correct.</b> '+s[4]);
+        if(ok===S.length){ setFb(fb,'good','🎉 <b>All sentences complete!</b>'+(wrong?' '+wrong+' wrong '+(wrong>1?'tries':'try')+' along the way.':'')); finish(id,Math.max(0,S.length-wrong)); }
+      } else { wrong++; sel.className='bad shake'; setTimeout(function(){ sel.classList.remove('shake'); },600); setFb(fb,'bad','Not quite. Try another word.'); }
+    });
+    var p=el('p'); p.appendChild(document.createTextNode(s[0])); p.appendChild(sel); p.appendChild(document.createTextNode(s[3])); box.appendChild(p);
+  });
+  mount.appendChild(box); mount.appendChild(fb);
+}
+
+/* ====================== page sections ====================== */
+function card(title,tag){ var c=el('div','card act'); c.appendChild(el('h3',null,title+(tag?' <span class="tag">'+tag+'</span>':''))); return c; }
+function section(id,title,icon){ var s=el('section','sec'); s.id=id; s.appendChild(el('h2','sech',ic(icon||'cross')+' '+title)); $('#main').appendChild(s); return s; }
+
+function buildVocab(){
+  var m=$('#vocab-body'); m.innerHTML=''; clearPrefix('v');
+  var a=card('Vocabulary check A: match the terms','<span>'+W.vocab.length+' points</span>');
+  a.appendChild(el('p',null,'Tap a term, then tap its meaning.'));
+  mkMatch(a,'Vocabulary','v-match','Match the terms',W.vocab); m.appendChild(a);
+  var b=card('Vocabulary check B: which term is it?',W.vocab.length+' points');
+  var qs=el('div','qs'); b.appendChild(qs);
+  shuffle(W.vocab).forEach(function(v,i){
+    var wrong=shuffle(W.vocab.filter(function(x){ return x[0]!==v[0]; })).slice(0,3).map(function(x){ return x[0]; });
+    mkChoice(qs,'Vocabulary','v-q'+i,quizToQ(['Which term means: “'+v[1]+'”?',v[0],wrong,'“'+v[0]+'”: '+v[1]+'.']),'Term '+(i+1),i+1);
+  });
+  m.appendChild(b);
+}
+function buildPractice(){
+  var m=$('#practice-body'); m.innerHTML=''; clearPrefix('p');
+  var n=0;
+  function head(label,pts){ n++; return card('Practice '+n+': '+label,pts+' point'+(pts>1?'s':'')); }
+  W.practice.forEach(function(p,i){
+    var pid='p'+i, a;
+    if(p.type==='quiz'){ a=head('Multiple-choice questions',p.qs.length); var qs=el('div','qs'); a.appendChild(qs); p.qs.forEach(function(q,k){ mkChoice(qs,'Practice',pid+'q'+k,quizToQ(q),'Question '+(k+1),k+1); }); }
+    else if(p.type==='seq'){ a=head(p.label,p.items.length); a.appendChild(el('p',null,p.intro)); mkSeq(a,'Practice',pid,p.label,p.items); }
+    else if(p.type==='sort'){ a=head(p.label,p.cards.length); a.appendChild(el('p',null,p.intro)); mkSort(a,'Practice',pid,p.label,p); }
+    else if(p.type==='match'){ a=head(p.label,p.pairs.length); a.appendChild(el('p',null,p.intro)); mkMatch(a,'Practice',pid,p.label,p.pairs); }
+    m.appendChild(a);
+  });
+  var x=head('True or false',W.tf.length); x.appendChild(el('p',null,'Decide if each statement is true or false.')); var q1=el('div','qs'); x.appendChild(q1);
+  W.tf.forEach(function(q,k){ mkChoice(q1,'Practice','ptf'+k,quizToQ(q),'True/False '+(k+1),k+1); }); m.appendChild(x);
+  var y=head('Fill in the blanks',W.cloze.length); y.appendChild(el('p',null,'Choose the word that completes each sentence.')); mkCloze(y,'Practice','pcl','Fill in the blanks',W.cloze); m.appendChild(y);
+  var z=head('What would you do?',W.scen.length); z.appendChild(el('p',null,'Choose the best response in each situation.')); var q2=el('div','qs'); z.appendChild(q2);
+  W.scen.forEach(function(q,k){ mkChoice(q2,'Practice','psc'+k,quizToQ(q),'Situation '+(k+1),k+1); }); m.appendChild(z);
+}
+
+/* exit ticket: answers are saved in localStorage; LiaSync mirrors them to the student's account */
+function exitKey(){ return 'resp-mass-exit-w'+W.n; }
+function loadExit(){
+  try{
+    var v=JSON.parse(localStorage.getItem(exitKey())||'null');
+    if(v&&v.a&&typeof v.a==='object'){ var o={}; for(var i=0;i<W.exit.length;i++) o[i]=v.a[i]||''; return o; }
+  }catch(e){}
+  return {};
+}
+function buildExit(s){
+  s.appendChild(el('div','box p','<b>'+ic('cross')+' Write your answers in the boxes below.</b> They save automatically and come back the next time you open this page. You can also copy them into your notebook.'));
+  var ex=el('div','card'); ex.appendChild(el('h3',null,'Exit ticket ✏️'));
+  var saved=loadExit(), tas=[], timer=null, st=el('p','small'); st.setAttribute('aria-live','polite');
+  function save(){
+    var o={title:'Week '+W.n+': '+W.title+' – Exit ticket',q:W.exit.slice(),a:tas.map(function(t){ return t.value; })};
+    try{ localStorage.setItem(exitKey(),JSON.stringify(o)); var d=new Date(); st.textContent='✓ Saved at '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2); }
+    catch(e){ st.textContent='Could not save on this device. Copy your answers into your notebook.'; }
+  }
+  W.exit.forEach(function(q,i){
+    var blk=el('div','qblock'); blk.appendChild(el('div','qtext',(i+1)+'. '+q));
+    var ta=el('textarea'); ta.id='exit-'+i; ta.setAttribute('aria-label','Exit ticket answer '+(i+1)); ta.placeholder='Write your answer here…'; ta.value=saved[i]||'';
+    ta.addEventListener('input',function(){ st.textContent='Saving…'; clearTimeout(timer); timer=setTimeout(save,600); });
+    ta.addEventListener('blur',function(){ clearTimeout(timer); save(); });
+    tas.push(ta); blk.appendChild(ta); ex.appendChild(blk);
+  });
+  st.textContent = Object.keys(saved).some(function(k){ return saved[k]; }) ? '✓ Your earlier answers were loaded.' : '';
+  ex.appendChild(st); s.appendChild(ex);
+  var me=el('div','card'); me.innerHTML='<h3>Think about it (reflection)</h3><ol>'+W.meta.map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ol>'; s.appendChild(me);
+}
+
+/* ====================== Spanish Bible practice (this week's citations) ====================== */
+var PROMPTS=[
+ 'Busca la cita en tu Biblia Católica para Jóvenes y escribe con tus propias palabras lo que lees (2 o 3 frases).',
+ 'Lee la cita en tu Biblia y escribe quiénes aparecen y qué hacen o dicen.',
+ 'Lee la cita y escribe las ideas o palabras más importantes del pasaje y por qué te llamaron la atención.'
+];
+function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+function hash128(str){ var h1=1779033703,h2=3144134277,h3=1013904242,h4=2773480762; for(var i=0,k;i<str.length;i++){ k=str.charCodeAt(i); h1=h2^Math.imul(h1^k,597399067); h2=h3^Math.imul(h2^k,2869860233); h3=h4^Math.imul(h3^k,951274213); h4=h1^Math.imul(h4^k,2716044179); } h1=Math.imul(h3^(h1>>>18),597399067); h2=Math.imul(h4^(h2>>>22),2869860233); h3=Math.imul(h1^(h3>>>17),951274213); h4=Math.imul(h2^(h4>>>19),2716044179); return (h1^h2^h3^h4)>>>0; }
+function rng(seed){ var a=seed>>>0; return function(){ a=(a+0x6D2B79F5)>>>0; var t=a; t=Math.imul(t^(t>>>15),t|1); t^=t+Math.imul(t^(t>>>7),t|61); return ((t^(t>>>14))>>>0)/4294967296; }; }
+function regName(){ try{ return (window.LiaSync&&window.LiaSync.name&&window.LiaSync.name())||''; }catch(e){ return ''; } }
+var bib={round:1};
+function buildBible(s){
+  s.setAttribute('lang','es');
+  s.appendChild(el('div','bibhead','<p>Aquí practicarás con citas de <b>La Biblia Católica para Jóvenes</b> relacionadas con el tema de esta semana. Yo te doy la cita; tú la buscas en tu Biblia, la lees y escribes lo que leíste. <b>Cada estudiante recibe preguntas diferentes</b>, según su nombre.</p>'+
+   '<ol><li>Escribe tu nombre y presiona <b>Generar mis preguntas</b>.</li><li>Busca cada cita en tu Biblia y léela con atención.</li><li>Escribe lo que leíste y presiona <b>Verificar</b>. Luego escoge el resumen que corresponde a la cita.</li></ol>'+
+   '<p class="note">La numeración de los versículos puede variar un poco entre ediciones de la Biblia. Si no encuentras la cita exacta, busca el pasaje cerca de ese lugar o pregunta a tu maestra.</p>'));
+  var c=el('div','card');
+  c.innerHTML='<label for="bname"><b>Tu nombre completo:</b></label><div class="row" style="margin-top:6px"><input type="text" id="bname" autocomplete="off" placeholder="Ejemplo: María Pérez"><button class="btn wk" id="bgo" type="button">Generar mis preguntas</button><button class="btn ghost" id="bnew" type="button" style="display:none">Nueva práctica (otras preguntas)</button></div><p class="note" id="bmsg" style="margin-top:8px"></p>';
+  s.appendChild(c); var q=el('div'); q.id='bq'; s.appendChild(q); var r=el('div'); r.id='bres'; s.appendChild(r);
+  var rn0=regName(); if(rn0){ $('#bname').value=rn0; $('#bname').readOnly=true; $('#bmsg').textContent='Tu nombre viene de tu inicio de sesión.'; }
+  $('#bgo').addEventListener('click',function(){ bib.round=1; genBible(); });
+  $('#bnew').addEventListener('click',function(){ bib.round++; genBible(); });
+  $('#bname').addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); bib.round=1; genBible(); } });
+}
+function genBible(){
+  var rn=regName(); if(rn){ var bn=$('#bname'); bn.value=rn; bn.readOnly=true; }
+  var name=norm($('#bname').value).replace(/\s+/g,' ').trim(), msg=$('#bmsg');
+  if(name.length<2){ msg.textContent='Escribe tu nombre para recibir tus preguntas.'; return; }
+  msg.textContent='Práctica número '+bib.round+' para '+$('#bname').value.trim()+'. Tus preguntas son solo tuyas; otros estudiantes recibirán citas distintas.';
+  $('#bnew').style.display='';
+  clearPrefix('bib');
+  var r=rng(hash128('w'+W.n+'|'+name+'|'+bib.round));
+  var pick=shuffle(BANK,r).slice(0,6);
+  var q=$('#bq'); q.innerHTML=''; $('#bres').innerHTML='';
+  pick.forEach(function(e,i){
+    var id='bib'+i, ref=e[0], kws=e[2], model=e[3];
+    var prompt=PROMPTS[Math.floor(r()*PROMPTS.length)];
+    var others=shuffle(BANK.filter(function(x){ return x[0]!==ref; }),r).slice(0,2).map(function(x){ return [x[3],0]; });
+    var opts=shuffle([[model,1]].concat(others),r);
+    reg(id+'t','bib','Cita '+(i+1)+' (escritura)',1); reg(id+'m','bib','Cita '+(i+1)+' (resumen)',1);
+    var c=el('div','bcard'); c.innerHTML='<div class="small">Cita '+(i+1)+' de 6</div><div class="ref">'+ic('book')+' '+ref+'</div><p>'+prompt+'</p>';
+    var ta=el('textarea'); ta.setAttribute('aria-label','Tu respuesta para '+ref); ta.placeholder='Escribe aquí lo que leíste…';
+    var chk=el('button','btn wk','Verificar mi respuesta'); chk.type='button';
+    var fb=el('div','fb'); fb.setAttribute('aria-live','polite');
+    chk.addEventListener('click',function(){
+      if(items[id+'t'].score!==null) return;
+      var words=ta.value.trim().split(/\s+/).filter(Boolean).length;
+      if(words<5){ setFb(fb,'info','Escribe al menos una frase completa (5 palabras o más) y vuelve a presionar Verificar.'); return; }
+      var t=norm(ta.value), hit=0;
+      kws.forEach(function(g){ if(g.split('|').some(function(a){ return t.indexOf(a)>=0; })) hit++; });
+      var need=kws.length>=3?2:1, ok=hit>=need;
+      ta.disabled=true; chk.disabled=true;
+      if(ok) setFb(fb,'good','✓ <b>¡Muy bien!</b> Incluiste ideas clave del pasaje.<div class="model"><b>Resumen para comparar:</b> '+model+'</div>');
+      else setFb(fb,'bad','Todavía faltan ideas clave del pasaje. Vuelve a leerlo en tu Biblia y compáralo con este resumen:<div class="model"><b>Resumen para comparar:</b> '+model+'</div>');
+      finish(id+'t',ok?1:0); bibProgress();
+    });
+    c.appendChild(ta); var rw=el('div','row'); rw.style.marginTop='8px'; rw.appendChild(chk); c.appendChild(rw); c.appendChild(fb);
+    var qm=el('div','qs'), qb=el('div','qblock'); qb.appendChild(el('div','qtext','¿Cuál de estos resúmenes corresponde a '+ref+'?'));
+    var mfb=el('div','fb'); mfb.setAttribute('aria-live','polite');
+    var bt=opts.map(function(o){ var b=el('button','opt'); b.type='button'; b.textContent=o[0];
+      b.addEventListener('click',function(){ if(items[id+'m'].score!==null) return; bt.forEach(function(x){ x.disabled=true; });
+        if(o[1]){ b.classList.add('good'); setFb(mfb,'good','✓ <b>¡Correcto!</b> Ese es el resumen de '+ref+'.'); }
+        else{ b.classList.add('bad','shake'); bt[opts.findIndex(function(z){ return z[1]; })].classList.add('good'); setFb(mfb,'bad','✗ <b>Casi.</b> El resumen correcto está marcado en verde.'); }
+        finish(id+'m',o[1]?1:0); bibProgress(); });
+      qb.appendChild(b); return b; });
+    qb.appendChild(mfb); qm.appendChild(qb); c.appendChild(qm); q.appendChild(c);
+  });
+  bibProgress(); updatePill(); reportSync();
+}
+function bibProgress(){
+  var b=bibTotals(), res=$('#bres'); res.innerHTML='';
+  if(b.d===12){
+    var pct=Math.round(b.s/12*100);
+    var m= pct===100?'🌟 ¡Perfecto! Leíste con mucha atención.' : pct>=80?'👏 ¡Muy bien! Entiendes bien las lecturas. Repasa las que te faltaron.' : pct>=60?'👍 Buen esfuerzo. Vuelve a leer los pasajes y presiona «Nueva práctica» para seguir practicando.' : '💪 ¡Sigue practicando! Lee con calma cada cita en tu Biblia y vuelve a intentarlo con una nueva práctica.';
+    res.appendChild(el('div','result','Resultado: '+b.s+' de 12 ('+pct+'%)<br><span style="font-weight:400">'+m+'</span><br><span class="small" style="font-weight:400">Escribe en tu cuaderno una frase sobre la lectura que más te gustó.</span>'));
+  }
+}
+
+/* ====================== build the page ====================== */
+(function(){
+  var main=$('#main');
+  main.innerHTML='<div class="banner"><div class="bi">'+ic(W.icon)+'</div><div><h2>Week '+W.n+': '+W.title+'</h2><div class="sm">6th Grade Faith Formation · Quarter 2</div></div><span class="pill" id="pill"></span></div>';
+  // summary
+  var s0=section('summary','Summary of this week\'s topics','star');
+  s0.appendChild(el('div','card','<p>'+W.summary+'</p><ul class="key">'+W.topics.map(function(t){ return '<li><b>'+t[0]+'</b><br><i>Objective:</i> '+t[1]+'</li>'; }).join('')+'</ul>'));
+  s0.appendChild(el('div','std','<b>Standard:</b> '+W.standard));
+  // lesson
+  var s1=section('lesson','Lesson','book');
+  var k=el('div','card'); k.innerHTML='<h3>'+ic('book')+' Key ideas</h3><ul class="key">'+W.key.map(function(x){ return '<li>'+x+'</li>'; }).join('')+'</ul>'; s1.appendChild(k);
+  s1.appendChild(el('div','box w','<b>'+ic('star')+' Real-life connection:</b> '+W.real));
+  // review
+  var s2=section('review','Review','flame');
+  s2.appendChild(el('p',null,'Think of your answer first, then tap the card to check it.'));
+  var cg=el('div','cards'); W.review.forEach(function(r){ var b=el('button','rv'); b.type='button'; b.setAttribute('aria-expanded','false');
+    b.innerHTML='<span class="q">'+r[0]+'</span><span class="tap">Tap to reveal the answer</span><span class="a">'+r[1]+'</span>'; b.addEventListener('click',function(){ b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')==='true'?'false':'true'); }); cg.appendChild(b); });
+  s2.appendChild(cg);
+  // vocab
+  var s3=section('vocab','Vocabulary check','chalice');
+  var rv=el('button','btn ghost','↻ Try the vocabulary check again'); rv.type='button'; rv.style.marginBottom='12px'; rv.addEventListener('click',function(){ buildVocab(); updatePill(); });
+  s3.appendChild(rv); var vb=el('div'); vb.id='vocab-body'; s3.appendChild(vb);
+  // practice
+  var s4=section('practice','Practice','host');
+  var rp=el('button','btn ghost','↻ Restart the practice'); rp.type='button'; rp.style.marginBottom='12px'; rp.addEventListener('click',function(){ buildPractice(); updatePill(); });
+  s4.appendChild(rp); var pb=el('div'); pb.id='practice-body'; s4.appendChild(pb);
+  // biblia (Spanish)
+  var s5=section('biblia','Prácticas bíblicas','book'); buildBible(s5);
+  // exit
+  var s6=section('exit','Exit ticket','cross'); buildExit(s6);
+  buildVocab(); buildPractice(); updatePill();
+})();
+
+/* ====================== theme and scores ====================== */
+$('#themeBtn').addEventListener('click',function(){
+  var r=document.documentElement, cur=r.getAttribute('data-theme');
+  var dark=cur?cur==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  var n=dark?'light':'dark'; r.setAttribute('data-theme',n); try{ localStorage.setItem('lia-theme',n); }catch(e){}
+});
+$('#scoresBtn').addEventListener('click',function(){
+  var t=$('#sumTable'); t.innerHTML='<tr><th>Activity</th><th>Points</th></tr>'; var g={}, order=[];
+  Object.keys(items).forEach(function(k){ var i=items[k]; if(!g[i.grp]){ g[i.grp]={s:0,m:0,d:0}; order.push(i.grp); } g[i.grp].m+=i.max; if(i.score!==null){ g[i.grp].s+=i.score; g[i.grp].d++; } });
+  var tot=0,max=0; order.forEach(function(k){ var x=g[k]; var label=k==='bib'?'Prácticas bíblicas (español)':k; tot+=x.s; max+=(k==='bib'?12:x.m); var r=el('tr'); r.innerHTML='<td>'+label+'</td><td>'+(x.d?x.s+' / '+(k==='bib'?12:x.m):'—')+'</td>'; t.appendChild(r); });
+  var rr=el('tr'); rr.innerHTML='<td><b>Total</b></td><td><b>'+tot+' / '+(max+(g.bib?0:12))+'</b></td>'; t.appendChild(rr);
+  $('#overlay').hidden=false; $('#closeSum').focus();
+});
+$('#closeSum').addEventListener('click',function(){ $('#overlay').hidden=true; });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') $('#overlay').hidden=true; });
+})();
+
+</script>
+</body>
+</html>
