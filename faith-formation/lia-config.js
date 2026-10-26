@@ -9,6 +9,7 @@ window.LIA_CONFIG={
   pages: {
     'divine-revelation-magisterium': 'Divine Revelation and the Magisterium',
     'faith-formation-exodus-covenant': 'Exodus and Covenant',
+    'faith-formation-parts-of-the-mass': 'Parts of the Mass',
     'growing-in-values-respect': 'Respect On and Off Screen',
     'growing-in-values-road-safety': 'Road Safety in My Community',
     'growing-in-values-rules-on-wheels': 'Rules on Wheels',

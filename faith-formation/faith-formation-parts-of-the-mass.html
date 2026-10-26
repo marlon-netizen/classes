@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Parts of the Mass | Faith Formation</title>
+<title>Parts of the Mass | Lincoln International Academy</title>
 <meta name="description" content="6th grade Faith Formation, Quarter 2, weeks 3 to 10: the parts of the Mass with lesson information, review, vocabulary check and practice for each week, plus Spanish Bible practice with questions that differ for each student.">
 <style>
 :root{
@@ -15,8 +15,30 @@
   --rose:#b5587a; --rose-soft:#f8e4ea;
   --good:#2f6b4f; --good-soft:#e1efe6; --bad:#9b2335; --bad-soft:#f6e1e4;
   --wk:var(--green); --wk-soft:var(--green-soft);
+  --paper:#fcfaf5; --on:#fff;
   --shadow:0 2px 4px rgba(43,36,49,.06),0 10px 28px rgba(43,36,49,.08);
 }
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16111b; --card:#201926; --ink:#ece4f0; --muted:#b3a8bb; --line:#3a3044;
+    --violet:#c5aee6; --violet-soft:#2c2238; --gold:#d8b45c; --gold-soft:#2e2814;
+    --green:#6fc09a; --green-soft:#1a2b22; --red:#e58b99; --red-soft:#361a20; --rose:#e591b0; --rose-soft:#36202a;
+    --good:#6fc09a; --good-soft:#1a2b22; --bad:#e58b99; --bad-soft:#361a20; --paper:#1a1520; --on:#17111c;
+    --shadow:0 1px 3px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16111b; --card:#201926; --ink:#ece4f0; --muted:#b3a8bb; --line:#3a3044;
+  --violet:#c5aee6; --violet-soft:#2c2238; --gold:#d8b45c; --gold-soft:#2e2814;
+  --green:#6fc09a; --green-soft:#1a2b22; --red:#e58b99; --red-soft:#361a20; --rose:#e591b0; --rose-soft:#36202a;
+  --good:#6fc09a; --good-soft:#1a2b22; --bad:#e58b99; --bad-soft:#361a20; --paper:#1a1520; --on:#17111c;
+  --shadow:0 1px 3px rgba(0,0,0,.5);
+}
+.wk-green{--wk:var(--green);--wk-soft:var(--green-soft)}
+.wk-gold{--wk:var(--gold);--wk-soft:var(--gold-soft)}
+.wk-red{--wk:var(--red);--wk-soft:var(--red-soft)}
+.wk-purple{--wk:var(--violet);--wk-soft:var(--violet-soft)}
+.wk-rose{--wk:var(--rose);--wk-soft:var(--rose-soft)}
 *{box-sizing:border-box}
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font:16px/1.6 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
@@ -45,13 +67,13 @@ button{cursor:pointer}
 /* tabs */
 .tabbar{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:20;box-shadow:0 2px 8px rgba(43,36,49,.05)}
 .tabs{max-width:1000px;margin:0 auto;display:flex;gap:6px;overflow-x:auto;padding:8px 12px;scrollbar-width:thin}
-.tab{flex:none;min-width:118px;text-align:left;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:10px;padding:6px 10px;line-height:1.25;transition:background .15s}
+.tab{--c:var(--wk);--cs:var(--wk-soft);flex:none;min-width:118px;text-align:left;background:var(--card);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:10px;padding:6px 10px;line-height:1.25;transition:background .15s}
 .tab:hover{background:var(--cs)}
 .tab .w{display:flex;align-items:center;gap:5px;font-weight:700;font-size:.9rem;color:var(--c)}
 .tab .d{display:block;font-size:.72rem;color:var(--muted)}
 .tab .t{display:block;font-size:.78rem}
-.tab[aria-selected="true"]{background:var(--c);color:#fff}
-.tab[aria-selected="true"] .w,.tab[aria-selected="true"] .d{color:#fff}
+.tab[aria-selected="true"]{background:var(--c);color:var(--on)}
+.tab[aria-selected="true"] .w,.tab[aria-selected="true"] .d{color:var(--on)}
 .legend{max-width:1000px;margin:10px auto 0;padding:0 16px;font-size:.82rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 14px;align-items:center}
 .dot{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:5px;vertical-align:-1px;border:1px solid rgba(0,0,0,.15)}
 
@@ -61,22 +83,22 @@ button{cursor:pointer}
 .panel.active{display:block;animation:fade .3s ease}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .banner{display:flex;gap:14px;align-items:center;background:var(--wk-soft);border:1px solid var(--line);border-left:8px solid var(--wk);border-radius:14px;padding:14px 18px;margin-bottom:14px}
-.banner .bi{width:54px;height:54px;border-radius:50%;background:var(--wk);color:#fff;display:grid;place-items:center;flex:none}
+.banner .bi{width:54px;height:54px;border-radius:50%;background:var(--wk);color:var(--on);display:grid;place-items:center;flex:none}
 .banner .bi .ic{width:30px;height:30px}
 .banner h2{margin:0;color:var(--wk)}
 .banner .sm{font-size:.88rem;color:var(--muted)}
-.pill{margin-left:auto;background:#fff;border:1px solid var(--wk);color:var(--wk);border-radius:99px;padding:3px 12px;font-weight:700;font-size:.85rem;white-space:nowrap}
+.pill{margin-left:auto;background:var(--card);border:1px solid var(--wk);color:var(--wk);border-radius:99px;padding:3px 12px;font-weight:700;font-size:.85rem;white-space:nowrap}
 .sub-nav{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
 .sn{background:var(--card);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:.92rem}
 .sn:hover{border-color:var(--wk)}
-.sn[aria-selected="true"]{background:var(--wk);border-color:var(--wk);color:#fff;font-weight:600}
+.sn[aria-selected="true"]{background:var(--wk);border-color:var(--wk);color:var(--on);font-weight:600}
 .sp{display:none}
 .sp.on{display:block}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow)}
 .card h3{color:var(--wk)}
 .day{border-left:5px solid var(--wk);background:var(--wk-soft);border-radius:0 12px 12px 0;padding:10px 16px;margin-bottom:10px}
 .day .dd{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--wk);font-weight:700}
-.std{background:var(--gold-soft);border:1px solid #e8d8a8;border-radius:10px;padding:8px 14px;font-size:.92rem;margin-bottom:12px}
+.std{background:var(--gold-soft);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-size:.92rem;margin-bottom:12px}
 ul.key{margin:.3em 0 0;padding-left:1.2em}
 ul.key li{margin-bottom:.5em}
 .note{font-size:.85rem;color:var(--muted)}
@@ -102,7 +124,7 @@ ul.key li{margin-bottom:.5em}
 .qblock{border-top:1px dashed var(--line);padding-top:12px;margin-top:12px}
 .qs>.qblock:first-child{border-top:0;padding-top:0;margin-top:0}
 .qtext{font-weight:600;margin-bottom:8px}
-.opt{display:block;width:100%;text-align:left;background:#fcfaf5;border:1px solid var(--line);border-radius:10px;padding:9px 14px;margin:0 0 7px;transition:border-color .15s,background .15s}
+.opt{display:block;width:100%;text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:9px 14px;margin:0 0 7px;transition:border-color .15s,background .15s}
 .opt:hover:not(:disabled){border-color:var(--wk);background:var(--wk-soft)}
 .opt:disabled{cursor:default}
 .opt.good{background:var(--good-soft);border-color:var(--good)}
@@ -117,8 +139,8 @@ ul.key li{margin-bottom:.5em}
 .fb.good{background:var(--good-soft);border-left:4px solid var(--good)}
 .fb.bad{background:var(--bad-soft);border-left:4px solid var(--bad)}
 .fb.info{background:var(--violet-soft);border-left:4px solid var(--violet)}
-.btn{background:var(--violet);color:#fff;border:0;border-radius:10px;padding:8px 18px;font-weight:600}
-.btn:hover:not(:disabled){background:#3a1f55}
+.btn{background:var(--violet);color:var(--on);border:0;border-radius:10px;padding:8px 18px;font-weight:600}
+.btn:hover:not(:disabled){filter:brightness(.9)}
 .btn.wk{background:var(--wk)}
 .btn.ghost{background:transparent;color:var(--violet);border:1px solid var(--violet)}
 .btn.ghost:hover:not(:disabled){background:var(--violet-soft)}
@@ -129,7 +151,7 @@ ul.key li{margin-bottom:.5em}
 @media(max-width:560px){.match{grid-template-columns:1fr}.pill{margin-left:0}.banner{flex-wrap:wrap}}
 .sortcard{text-align:center;font-size:1.1rem;font-weight:600;background:var(--gold-soft);border-radius:12px;padding:18px 12px;margin:8px 0}
 .slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0}
-.slot{min-height:64px;border:2px dashed var(--line);border-radius:10px;padding:6px 10px;font-size:.88rem;background:#fcfaf5}
+.slot{min-height:64px;border:2px dashed var(--line);border-radius:10px;padding:6px 10px;font-size:.88rem;background:var(--paper)}
 .slot small{display:block;color:var(--muted);font-weight:700}
 .slot.filled{border-style:solid;border-color:var(--good);background:var(--good-soft)}
 .slot.next{border-color:var(--violet)}
@@ -138,8 +160,8 @@ ul.key li{margin-bottom:.5em}
 .shake{animation:shake .35s}
 @keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
 .small{font-size:.86rem;color:var(--muted)}
-textarea{width:100%;min-height:84px;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;resize:vertical}
-input[type=text]{padding:9px 12px;border:2px solid var(--line);border-radius:10px;background:#fff;min-width:220px}
+textarea{width:100%;min-height:84px;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--card);resize:vertical}
+input[type=text]{padding:9px 12px;border:2px solid var(--line);border-radius:10px;background:var(--card);min-width:220px}
 .model{border-left:4px solid var(--gold);background:var(--gold-soft);padding:8px 12px;border-radius:0 10px 10px 0;margin-top:6px;font-size:.92rem}
 .bcard{border:1px solid var(--line);border-top:5px solid var(--rose);border-radius:12px;padding:14px 16px;margin-bottom:14px;background:var(--card)}
 .bcard .ref{font-family:Georgia,serif;font-size:1.2rem;color:var(--rose);font-weight:700}
@@ -156,7 +178,9 @@ table.sm td,table.sm th{border-bottom:1px solid var(--line);padding:6px 8px;text
 table.sm th{color:var(--violet)}
 footer{text-align:center;color:var(--muted);font-size:.82rem;padding:0 16px 34px}
 @media (prefers-reduced-motion:reduce){.panel.active,.fb.show,.shake{animation:none}}
+@media print{.tabbar,.legend,.hbtn,.sub-nav,.lia-theme,.deco,.btn{display:none!important}.sp{display:block!important}.card,.banner,.day,.bcard{break-inside:avoid;box-shadow:none}.top{background:none;color:#000;border-bottom:2px solid #000}.top .school,.top .meta,.top .title,.sub{color:#000}}
 </style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
 </head>
 <body>
 
@@ -184,7 +208,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:0 16px 34px
         <p class="school"><svg class="ic"><use href="#i-cross"/></svg>Lincoln International Academy</p>
         <div class="meta">Class: <b>Faith Formation</b> &nbsp;·&nbsp; Teacher: <b>Nathaly López</b></div>
       </div>
-      <button class="hbtn" id="scoresBtn" type="button"><svg class="ic"><use href="#i-star"/></svg> My scores</button>
+      <div class="row"><button class="hbtn" id="themeBtn" type="button" aria-label="Switch between light and dark mode">☀ / ☾ Theme</button><button class="hbtn" id="scoresBtn" type="button"><svg class="ic"><use href="#i-star"/></svg> My scores</button></div>
     </div>
     <h1 class="title">The Parts of the Mass <span class="sub">· 6th Grade · Quarter 2 · Weeks 3–10 (October 19 – December 11, 2026)</span></h1>
   </div>
@@ -208,7 +232,7 @@ footer{text-align:center;color:var(--muted);font-size:.82rem;padding:0 16px 34px
   <div class="modal">
     <h2 id="sumTitle"><svg class="ic"><use href="#i-star"/></svg> My Scores</h2>
     <table class="sm" id="sumTable"></table>
-    <p class="note">Scores are saved only while this page is open. Write your exit-ticket answers in your notebook or on a sheet of paper.</p>
+    <p class="note">Your best results are sent to your teacher when you are signed in. Write your exit-ticket answers in your notebook or on a sheet of paper.</p>
     <div class="row"><button class="btn" id="closeSum" type="button">Close</button></div>
   </div>
 </div>
@@ -497,7 +521,16 @@ function reg(id,week,label,max){ items[id]={week:week,label:label,max:max,score:
 function clearPrefix(p){ Object.keys(items).forEach(function(k){ if(k.indexOf(p)===0) delete items[k]; }); }
 function weekTotals(wid){ var s=0,m=0,d=0,t=0; Object.keys(items).forEach(function(k){ var i=items[k]; if(i.week!==wid) return; m+=i.max; t++; if(i.score!==null){ s+=i.score; d++; } }); return {s:s,m:m,done:d,total:t}; }
 function updatePill(wid){ var p=$('#pill-'+wid); if(!p) return; var t=weekTotals(wid); p.textContent = t.done? ('Score '+t.s+' / '+t.m) : (t.m+' points'); }
-function finish(id,score){ items[id].score=score; updatePill(items[id].week); }
+function reportSync(){
+  if(!(window.LiaSync&&window.LiaSync.report)) return;
+  var solved=0,total=0,score=0,max=0,bs=0,bd=0;
+  Object.keys(items).forEach(function(k){ var i=items[k];
+    if(i.week==='bib'){ if(i.score!==null){ bd++; bs+=i.score; } return; }
+    total++; max+=i.max; if(i.score!==null){ solved++; score+=i.score; } });
+  /* the Spanish practice always counts as 12 items / 12 points; the page restarts on every visit, so keep the best result */
+  window.LiaSync.report({solved:solved+bd,total:total+12,score:score+bs,max:max+12},{keepBest:true});
+}
+function finish(id,score){ items[id].score=score; updatePill(items[id].week); reportSync(); }
 
 /* ====================== activity builders ====================== */
 function mkChoice(mount,wid,id,q,label,num){
@@ -612,7 +645,7 @@ function buildPractice(w){
 function buildWeek(w){
   var c=COLORS[w.color];
   var p=el('section','panel'); p.id='panel-'+w.id; p.setAttribute('role','tabpanel'); p.setAttribute('aria-labelledby','tab-'+w.id);
-  p.style.setProperty('--wk',c[0]); p.style.setProperty('--wk-soft',c[1]);
+  p.classList.add('wk-'+w.color);
   p.innerHTML='<div class="banner"><div class="bi">'+ic(w.icon)+'</div><div><h2>Week '+w.n+': '+w.title+'</h2><div class="sm">'+w.dates+', 2026 · 6th Grade Faith Formation</div></div><span class="pill" id="pill-'+w.id+'"></span></div>'+
    '<div class="sub-nav" role="tablist" aria-label="Sections for week '+w.n+'"></div>'+
    '<div class="sp on" data-sp="lesson"></div><div class="sp" data-sp="review"></div><div class="sp" data-sp="vocab"><div id="vocab-'+w.id+'"></div></div><div class="sp" data-sp="prac"><div id="prac-'+w.id+'"></div></div><div class="sp" data-sp="exit"></div>';
@@ -718,7 +751,7 @@ function rng(seed){ var a=seed>>>0; return function(){ a=(a+0x6D2B79F5)>>>0; var
 var bib={round:1,score:0,max:0,done:0};
 function buildBible(){
   var p=el('section','panel'); p.id='panel-bib'; p.setAttribute('role','tabpanel'); p.setAttribute('aria-labelledby','tab-bib');
-  p.style.setProperty('--wk',COLORS.rose[0]); p.style.setProperty('--wk-soft',COLORS.rose[1]);
+  p.classList.add('wk-rose');
   p.setAttribute('lang','es');
   p.innerHTML='<div class="bibhead"><h2>'+ic('book')+' Prácticas bíblicas</h2><p>Aquí practicarás con citas de <b>La Biblia Católica para Jóvenes</b>. Yo te doy la cita; tú la buscas en tu Biblia, la lees y escribes lo que leíste. <b>Cada estudiante recibe preguntas diferentes</b>, según su nombre.</p>'+
    '<ol><li>Escribe tu nombre y presiona <b>Generar mis preguntas</b>.</li><li>Busca cada cita en tu Biblia y léela con atención.</li><li>Escribe lo que leíste y presiona <b>Verificar</b>. Luego contesta la pregunta de opción múltiple.</li></ol>'+
@@ -726,11 +759,14 @@ function buildBible(){
    '<div class="card"><label for="bname"><b>Tu nombre completo:</b></label><div class="row" style="margin-top:6px"><input type="text" id="bname" autocomplete="off" placeholder="Ejemplo: María Pérez"><button class="btn wk" id="bgo" type="button">Generar mis preguntas</button><button class="btn ghost" id="bnew" type="button" style="display:none">Nueva práctica (otras preguntas)</button></div><p class="note" id="bmsg" style="margin-top:8px"></p></div>'+
    '<div id="bq"></div><div id="bres"></div>';
   $('#panels').appendChild(p);
+  var rn0=regName(); if(rn0){ $('#bname').value=rn0; $('#bname').readOnly=true; $('#bmsg').textContent='Tu nombre viene de tu inicio de sesión.'; }
   $('#bgo').addEventListener('click',function(){ bib.round=1; genBible(); });
   $('#bnew').addEventListener('click',function(){ bib.round++; genBible(); });
   $('#bname').addEventListener('keydown',function(e){ if(e.key==='Enter'){ e.preventDefault(); bib.round=1; genBible(); } });
 }
+function regName(){ try{ return (window.LiaSync&&window.LiaSync.name&&window.LiaSync.name())||''; }catch(e){ return ''; } }
 function genBible(){
+  var rn=regName(); if(rn){ var bn=$('#bname'); bn.value=rn; bn.readOnly=true; }
   var name=norm($('#bname').value).replace(/\s+/g,' ').trim();
   var msg=$('#bmsg');
   if(name.length<2){ msg.textContent='Escribe tu nombre para recibir tus preguntas.'; return; }
@@ -797,8 +833,8 @@ function showTab(id){
   window.scrollTo({top:0,behavior:'smooth'});
 }
 function addTab(id,html,colorKey){
-  var c=COLORS[colorKey]; var b=el('button','tab',html); b.type='button'; b.id='tab-'+id; b.setAttribute('role','tab'); b.setAttribute('aria-selected','false');
-  b.style.setProperty('--c',c[0]); b.style.setProperty('--cs',c[1]); b.addEventListener('click',function(){ showTab(id); }); tabs.appendChild(b);
+  var b=el('button','tab wk-'+colorKey,html); b.type='button'; b.id='tab-'+id; b.setAttribute('role','tab'); b.setAttribute('aria-selected','false');
+  b.addEventListener('click',function(){ showTab(id); }); tabs.appendChild(b);
 }
 WEEKS.forEach(function(w){
   addTab(w.id,'<span class="w">'+ic(w.icon)+'Week '+w.n+'</span><span class="d">'+w.dates+'</span><span class="t">'+w.title+'</span>',w.color);
@@ -808,6 +844,12 @@ addTab('bib','<span class="w">'+ic('book')+'Prácticas bíblicas</span><span cla
 buildBible();
 showTab('w3');
 
+/* ====================== theme (shares the choice with every page) ====================== */
+$('#themeBtn').addEventListener('click',function(){
+  var r=document.documentElement, cur=r.getAttribute('data-theme');
+  var dark=cur?cur==='dark':(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  var n=dark?'light':'dark'; r.setAttribute('data-theme',n); try{ localStorage.setItem('lia-theme',n); }catch(e){}
+});
 /* ====================== scores overlay ====================== */
 $('#scoresBtn').addEventListener('click',function(){
   var t=$('#sumTable'); t.innerHTML='<tr><th>Tab</th><th>Points</th></tr>'; var gs=0,gm=0;
