@@ -308,6 +308,20 @@ let state={};
 try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
 const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
 
+/* ---------- light / dark switch (header buttons) ---------- */
+(function(){
+  const root=document.documentElement, mq=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+  const eff=()=>root.getAttribute('data-theme')||((mq&&mq.matches)?'dark':'light');
+  function sync(){ const t=eff(); $$('[data-theme-set]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeSet===t))); }
+  $$('[data-theme-set]').forEach(b=>b.addEventListener('click',()=>{
+    root.setAttribute('data-theme',b.dataset.themeSet);
+    try{ localStorage.setItem('lia-theme',b.dataset.themeSet); }catch(e){}
+    sync();
+  }));
+  if(mq&&mq.addEventListener) mq.addEventListener('change',sync);
+  sync();
+})();
+
 /* ---------- every student gets their own numbers ----------
    The seed comes from the student's sign-in (LiaSync.seed) the first time, and is then saved with their work, so the same
    student always sees the same 25 exercises on every device. Every exercise has a fixed level of difficulty: only the numbers change. */
