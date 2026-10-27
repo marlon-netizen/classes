@@ -237,12 +237,12 @@ def teacher_home():
         rows = "".join('<li><div><b>%s</b><a class="lk" data-rel="%s/%s" href="%s/%s" target="_blank" rel="noopener"></a></div><button class="btn ghost sm" type="button" data-copy>Copy link</button></li>'
                        % (html.escape(page_info(p)[1]), ar["folder"], p.name, ar["folder"], p.name) for p in lessons)
         cards.append(
-            '<section class="card a%d" data-area="%s"><span class="tag">%d lessons</span><h3>%s</h3><p>%s</p>'
+            '<section class="card a%d" data-area="%s"><span class="tag">%d %s</span><h3>%s</h3><p>%s</p>'
             '<p class="pv"><span>Teacher preview code:</span> <code data-pv>…</code> <button class="btn ghost sm" type="button" data-copycode>Copy</button></p>'
             '<p class="acts"><a class="btn" href="teacher/scores.html?area=%s">Scores &amp; progress</a><a class="btn" href="teacher/admin.html?area=%s">Students &amp; codes</a>'
             '<a class="btn" href="teacher/access.html?area=%s">Assign lessons</a><a class="btn" href="teacher/responses.html?area=%s">Student responses</a></p>'
             '<details open><summary>Links to share with students</summary><ul class="lessons">%s</ul></details></section>'
-            % (n, ar["folder"], len(lessons), html.escape(ar["name"]), html.escape(ar["blurb"]), ar["folder"], ar["folder"], ar["folder"], ar["folder"], rows))
+            % (n, ar["folder"], len(lessons), "lesson" if len(lessons) == 1 else "lessons", html.escape(ar["name"]), html.escape(ar["blurb"]), ar["folder"], ar["folder"], ar["folder"], ar["folder"], rows))
     js = r"""
 (function(){
 'use strict';
@@ -282,6 +282,9 @@ else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=n
         '.err{margin-top:10px;color:#c0504a;font-weight:600}.who{margin-left:auto;font-size:.85rem;display:flex;gap:10px;align-items:center;color:#cfd8e6}.who button{font:inherit;background:none;color:inherit;border:1px solid rgba(255,255,255,.5);border-radius:8px;padding:2px 10px;cursor:pointer}'
         'header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px}header .wrap>.hr{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}'
         'header .tg{font:inherit;font-weight:600;font-size:.8rem;border-radius:8px;padding:4px 11px;cursor:pointer;background:transparent;color:#f3f0e9;border:1px solid rgba(255,255,255,.5)}'
+        '.wrap{max-width:1560px}.grid{grid-template-columns:repeat(4,minmax(0,1fr));align-items:start}'
+        '@media (max-width:1180px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:640px){.grid{grid-template-columns:1fr}}'
+        '.card .btn{font-size:.85rem;padding:6px 12px}'
         '.pv{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;background:var(--soft);border-radius:8px;padding:8px 12px;margin:0 0 .8em!important;color:var(--ink)!important;font-size:.9rem}.pv code{font:700 1.05rem ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;color:var(--p)}</style>\n</head>\n<body>\n'
         '<header><div class="wrap"><div><div class="eyebrow">Teacher tools</div><div class="school">Lincoln International Academy</div></div>'
         '<div class="who" id="who" hidden><span id="whoMail"></span><button type="button" id="btnOut">Sign out</button></div></div></header>\n'
