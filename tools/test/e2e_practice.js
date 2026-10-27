@@ -12,6 +12,7 @@ async function login(b,code,w){ const c=await newCtx(b,w), p=await c.newPage(); 
   sql("insert into public.students(area,code,full_name,grade,class_name) values ('physics','AAAA1111','Ana Pérez','10','Physics I'),('physics','BBBB2222','Ben Ruiz','10','Physics I')");
   const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium'});
   const A=await login(b,'AAAA1111'), B=await login(b,'BBBB2222');
+  await A.p.click('[data-theme-set=light]'); ok(await A.p.evaluate(()=>document.documentElement.getAttribute('data-theme')==='light'),'Light button works'); await A.p.click('[data-theme-set=dark]'); ok(await A.p.evaluate(()=>document.documentElement.getAttribute('data-theme')==='dark'),'Dark button works');
   const qa=await A.p.$$eval('.prob p',e=>e.map(x=>x.textContent)), qb=await B.p.$$eval('.prob p',e=>e.map(x=>x.textContent));
   ok(qa.length===25,'25 exercises'); ok((await A.p.$$('#problemList .acts .btn')).length===50&&!(await A.p.$$eval('#problemList .btn',e=>e.some(x=>/hint/i.test(x.textContent)))),'no Hint button (only Check and Solution)'); const diff=qa.filter((t,i)=>t!==qb[i]).length; ok(diff>=23,'two students: '+diff+' of 25 exercises have different numbers');
   // one wrong try then correct for exercise 1, everything else right

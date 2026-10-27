@@ -33,7 +33,7 @@ links between lessons that a student might not be assigned.
 4. Content pattern: review → step-by-step worked examples → practice with immediate feedback. Responsive; print-friendly; accessible (labels, focus, contrast).
 5. **Dark mode:** colours as CSS variables on `:root`, dark variant in `@media (prefers-color-scheme: dark)` **and** `:root[data-theme="dark"]` (use
    `:root:not([data-theme="light"])` inside the media query). If the CSS mentions `data-theme`, `lia-sync.js` injects the Light/Dark toggle automatically;
-   if the page has its own toggle (`#themeBtn`, `[data-theme-set]`, …) it is left alone. Theme choice key: `localStorage['lia-theme']`.
+   if the page has its own toggle (`#themeBtn`, `[data-theme-set]`, …) it is left alone — **then the page must wire the buttons itself** (set `data-theme` on `<html>`, save `lia-theme`); a header with buttons but no handler means Light/Dark do nothing. Theme choice key: `localStorage['lia-theme']`.
 6. **Progress** (see §3) – keep all student state in `localStorage`; report completion/score.
 7. **Browser-tab icon:** every page gets its folder's icon automatically (`<folder>/favicon.svg` + `favicon.png`, linked from the loader block). Never add your own `<link rel="icon">`. To change an icon edit `ICON_GLYPHS`/`ICON_BG` in `tools/build_site.py`, run the build, then `node tools/make_icons.js` to refresh the PNG fallbacks. A new folder needs an entry in both tables.
 8. Run `python3 tools/build_site.py` (adds the loader block to `<head>`, regenerates `lia-config.js` pages map and the root/teacher pages), run the tests, commit.
