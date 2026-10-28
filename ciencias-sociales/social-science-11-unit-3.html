@@ -250,26 +250,6 @@ nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(-
 .copyline{background:var(--sky);border-radius:8px;padding:8px 12px;font-size:.88rem;word-break:break-word}
 
 
-.submitRow{margin:6px 0 18px;text-align:center}
-.modal{position:fixed;inset:0;z-index:100;background:rgba(10,20,40,.55);display:flex;align-items:center;justify-content:center;padding:16px}
-.modal[hidden]{display:none}
-.mbox{position:relative;background:var(--surface);color:var(--ink);border-radius:16px;box-shadow:0 12px 40px rgba(0,0,0,.35);padding:22px 24px;width:100%;max-width:440px;max-height:calc(100vh - 32px);overflow:auto;border-top:6px solid var(--gold)}
-.mbox h3{margin-bottom:.4em}
-.mclose{position:absolute;top:8px;right:12px;border:0;background:transparent;font-size:1.6rem;line-height:1;color:var(--muted)}
-.bigscore{font-size:2.2rem;font-weight:900;color:var(--blue);margin:6px 0}
-.mtbl{width:100%;border-collapse:collapse;font-size:.85rem;margin:4px 0}.mtbl td{padding:5px 8px;border-bottom:1px solid var(--line)}.mtbl td:last-child{text-align:right;font-weight:700}.mtbl tr.now td{background:var(--gold-soft)}
-.linkbtn{border:0;background:none;color:var(--muted);text-decoration:underline;font-size:.78rem;padding:6px}
-.bigscore small{font-size:1rem;color:var(--terra);margin-left:10px}
-.mbtns{display:flex;flex-wrap:wrap;gap:8px;margin:0}
-body.modal-open{overflow:hidden}
-@media print{
- body.pm header.top,body.pm nav.sticky,body.pm .layout,body.pm footer{display:none!important}
- body.pm .modal{position:static;background:none;display:block;padding:0}
- body.pm .mbox{box-shadow:none;max-width:none}
- body.pm .mclose,body.pm .mbtns,body.pm .nameRow,body.pm .mbox .legend{display:none}
- body:not(.pm) .modal{display:none}
-}
-.mtbl .muted{font-weight:400}
 
 </style>
 <!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
@@ -573,7 +553,6 @@ body.modal-open{overflow:hidden}
 
 <footer><div class="zig" aria-hidden="true"></div><div class="wrap">Lincoln International Academy · Social Science 11th · Based on the 2026–2027 yearly plan, Unit III · Prepared with Ms. Kathya López's curriculum map</div></footer>
 
-<div class="modal" id="scoreModal" hidden></div>
 
 <script>
 (function(){
@@ -978,6 +957,23 @@ function commit(l,t,c,a){
   const k=l+':'+t,p=state.scores[k];
   if(!p||c>=p.c){state.scores[k]={c,a};save();reportUnit();}
 }
+/* ---------- every answer is saved for the teacher ----------
+   Each activity keeps its questions and the student's answers under a key that starts with "resp-"
+   ({title, q:[...], a:[...]}); the teacher's "Student responses" page reads exactly this. */
+function respKey(l,mode){const ai=ACT.findIndex(a=>a[0]===mode);return {key:'resp-u3-l'+l+'-'+String(ai+1).padStart(2,'0')+'-'+mode,label:ai>=0?ACT[ai][1]:mode};}
+function readResp(key){try{const o=JSON.parse(localStorage.getItem(key)||'null');if(o&&Array.isArray(o.q)&&Array.isArray(o.a))return o;}catch(e){}return null;}
+function logResp(l,mode,q,a,raw){
+  try{
+    const {key,label}=respKey(l,mode);
+    const o=readResp(key)||{title:'Unit III · Lesson '+l+' ('+LN[l]+') – '+label,q:[],a:[]};
+    const i=o.q.indexOf(q); if(i<0){o.q.push(q);o.a.push(a);}else o.a[i]=a;
+    if(raw!==undefined){o.raw=o.raw||{};o.raw[q]=raw;}
+    localStorage.setItem(key,JSON.stringify(o));
+  }catch(e){}
+}
+function savedRaw(l,mode,q){const o=readResp(respKey(l,mode).key);return o&&o.raw&&typeof o.raw[q]==='string'?o.raw[q]:'';}
+const mark=(ok,right)=>ok?'✔':'✘ (correct: '+right+')';
+
 function lessonScore(l){
   const rows=ACT.filter(x=>hasAct(l,x[0])).map(([k,lab])=>{const t=maxPts(l,k),p=state.scores[l+':'+k];return {k,lab,t,c:p?p.c:0,done:!!p&&p.a>0};});
   const C=sum(rows.map(r=>r.c)),T=sum(rows.map(r=>r.t));
@@ -988,89 +984,21 @@ function lessonScore(l){
 function reportUnit(){try{let n=0,m=0,C=0,T=0;[1,2,3,4].forEach(l=>{const S=lessonScore(l);n+=S.n;m+=S.m;C+=S.C;T+=S.T;});if(window.LiaSync)LiaSync.report({solved:n,total:m,score:C,max:T});}catch(e){}}
 setTimeout(reportUnit,0);
 
-/* ---------- score pop-up ---------- */
-const modal=$('#scoreModal');
-let cur=null;
-const lineText=()=>{const S=lessonScore(cur.l);return `${state.name.trim()||'(name)'} · Unit III, Lesson ${cur.l} (${LN[cur.l]}) · Overall score ${S.C}/${S.T} (${pctOf(S.C,S.T)}%)`;};
-function copyText(txt,btn){
-  const done=()=>{const o=btn.textContent;btn.textContent='Copied!';setTimeout(()=>btn.textContent=o,1500);};
-  const fallback=()=>{const t=document.createElement('textarea');t.value=txt;t.style.position='fixed';t.style.opacity='0';document.body.appendChild(t);t.select();try{document.execCommand('copy');done();}catch(e){}t.remove();};
-  try{navigator.clipboard.writeText(txt).then(done,fallback);}catch(e){fallback();}
-}
-function loadScript(src){return new Promise((res,rej)=>{if(document.querySelector('script[data-lib="'+src+'"]'))return res();const s=document.createElement('script');s.src=src;s.dataset.lib=src;s.onload=res;s.onerror=()=>rej(new Error('load'));document.head.appendChild(s);});}
-const LIBS=['https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js','https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js'];
-const preloadLibs=()=>{LIBS.forEach(u=>loadScript(u).catch(()=>{}));};
-async function savePdf(btn){
-  const old=btn.textContent;btn.disabled=true;btn.textContent='Preparing PDF…';
-  const S=lessonScore(cur.l);
-  try{
-    await Promise.all(LIBS.map(loadScript));
-    const box=$('.mbox',modal);
-    const canvas=await window.html2canvas(box,{scale:2,backgroundColor:getComputedStyle(box).backgroundColor,useCORS:true,
-      onclone:(doc)=>{const b=doc.querySelector('#scoreModal .mbox');b.style.maxHeight='none';b.style.overflow='visible';b.style.width='440px';
-        ['.mclose','.mbtns','.nameRow','.legend'].forEach(q=>b.querySelectorAll(q).forEach(e=>e.remove()));
-        const who=doc.createElement('p');who.style.cssText='font-weight:700;margin:6px 0 10px';who.textContent='Student: '+(state.name.trim()||'(no name)');
-        b.querySelector('h3').after(who);}});
-    const {jsPDF}=window.jspdf;
-    const pdf=new jsPDF({unit:'mm',format:'a4'});
-    const W=210,mx=22,iw=W-mx*2,ih=canvas.height*iw/canvas.width;
-    pdf.setFontSize(11);pdf.setTextColor(11,61,122);pdf.text('Lincoln International Academy · Social Science 11th',mx,16);
-    pdf.setTextColor(90,98,112);pdf.setFontSize(9);pdf.text('Unit III: Philosophy of Emancipation and the Heroic Legacy',mx,21);
-    pdf.addImage(canvas.toDataURL('image/jpeg',0.92),'JPEG',mx,28,iw,Math.min(ih,250));
-    const d=new Date().toLocaleDateString();
-    pdf.setFontSize(8);pdf.text(`Saved on ${d} · ${state.name.trim()||'(no name)'} · Lesson ${cur.l} overall ${S.C}/${S.T} (${pctOf(S.C,S.T)}%)`,mx,290);
-    const nm=(state.name.trim()||'student').replace(/[^\w\-]+/g,'_');
-    pdf.save(`Unit3_Lesson${cur.l}_${nm}.pdf`);
-  }catch(e){
-    document.body.classList.add('pm');window.print();setTimeout(()=>document.body.classList.remove('pm'),500);
-  }
-  btn.disabled=false;btn.textContent=old;
-}
-function openScore(info){
-  cur=info;preloadLibs();
-  const l=info.l,S=lessonScore(l),pct=pctOf(S.C,S.T);
-  const rows=S.rows.map(r=>`<tr class="${r.k===info.current?'now':''}"><td>${esc(r.lab)}</td><td>${r.done?`${r.c} / ${r.t}`:'<span class="muted">Not done</span>'}</td></tr>`).join('');
-  modal.innerHTML=`<div class="mbox" role="dialog" aria-modal="true" aria-labelledby="mTitle">
-    <button type="button" class="mclose" aria-label="Close">×</button>
-    <p class="kicker2">Lesson ${l} · ${esc(LN[l])}</p>
-    <h3 id="mTitle">Overall score</h3>
-    <div class="bigscore">${S.C} / ${S.T}<small>${pct}%</small></div>
-    <table class="mtbl"><tbody>${rows}</tbody></table>
-    <p class="legend" style="margin:6px 0">${S.n} of ${S.m} activities done. Activities not done count as 0. Your best score in each activity is kept.</p>
-    <label class="namel nameRow">${signedName()?'Student (from your sign-in)':'Student name'} <input class="nameIn" type="text" autocomplete="name" placeholder="Type your full name" value="${esc(state.name)}"${signedName()?' readonly':''}></label>
-    <p class="copyline"></p>
-    <p class="legend" style="margin:6px 0 10px">Only your name and scores are included; your answers are not.</p>
-    <p class="mbtns"><button type="button" class="btn pdfBtn">Save as PDF</button> <button type="button" class="btn alt copyBtn">Copy my score</button> <button type="button" class="btn alt closeBtn">Close</button></p>
-  </div>`;
-  const ni=$('.nameIn',modal),cl=$('.copyline',modal),cb=$('.copyBtn',modal),pb=$('.pdfBtn',modal);
-  const refresh=()=>{cl.textContent=lineText();const e=!state.name.trim();cb.disabled=e;pb.disabled=e;cb.title=pb.title=e?'Type your name first':'';};
-  ni.oninput=()=>{state.name=ni.value;save();refresh();};
-  cb.onclick=()=>copyText(lineText(),cb);
-  pb.onclick=()=>savePdf(pb);
-  $('.closeBtn',modal).onclick=closeScore;$('.mclose',modal).onclick=closeScore;
-  refresh();modal.hidden=false;document.body.classList.add('modal-open');
-  setTimeout(()=>ni.focus(),30);
-}
-function closeScore(){modal.hidden=true;document.body.classList.remove('modal-open');}
-modal.addEventListener('click',e=>{if(e.target===modal)closeScore();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!modal.hidden)closeScore();});
-
 /* ---------- practice factory ---------- */
 function makePractice(l,rootEl){
   const acts=ACT.filter(a=>hasAct(l,a[0]));
   rootEl.innerHTML=`<div class="ptabs" role="tablist" aria-label="Activity type">${acts.map((a,i)=>`<button class="ptab" role="tab" aria-selected="${i===0}" data-p="${a[0]}">${a[1]}</button>`).join('')}</div>
-  <div class="scorebar"><b class="scoreTxt">Score: 0 / 0</b><div class="prog" aria-hidden="true"><i class="progBar"></i></div><span class="progTxt"></span><button class="btn alt resetBtn" type="button">Restart this set</button><button class="btn submitBtn" type="button">Submit</button></div>
-  <div class="quiz"></div><p class="submitRow"><button class="btn submitBtn" type="button">Submit my score</button></p>`;
+  <div class="scorebar"><b class="scoreTxt">Score: 0 / 0</b><div class="prog" aria-hidden="true"><i class="progBar"></i></div><span class="progTxt"></span><button class="btn alt resetBtn" type="button">Restart this set</button></div>
+  <div class="quiz"></div>`;
   const quiz=$('.quiz',rootEl);
   let mode='mcq',ans=0,cor=0,tot=0,shown=false;
-  const submit=()=>{commit(l,mode,cor,ans);openScore({l,current:mode});};
   const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
   function rec(c,m){ans+=m;cor+=c;commit(l,mode,cor,ans);update();}
   function update(){
     $('.scoreTxt',rootEl).textContent=`Score: ${cor} / ${ans}`;
     $('.progTxt',rootEl).textContent=`${ans} of ${tot} answered`;
     $('.progBar',rootEl).style.width=(tot?ans/tot*100:0)+'%';
-    if(tot&&ans===tot&&!shown){shown=true;setTimeout(submit,400);}
+    if(tot&&ans===tot&&!shown){shown=true;$('.progTxt',rootEl).textContent=`${ans} of ${tot} answered · saved automatically`;}
   }
   const box=(label,i,body)=>{const c=document.createElement('div');c.className='q';c.innerHTML=`<div class="num">${label} ${i+1}</div>${body}`;return c;};
   function mcCard(item,idx,label,fixed){
@@ -1082,6 +1010,7 @@ function makePractice(l,rootEl){
       const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=op.t;
       b.onclick=()=>{
         const ok=op.i===item.a;
+        logResp(l,mode,(item.src?item.src+' — ':'')+item.q,op.t+' '+mark(ok,item.o[item.a]));
         $$('.opt',bx).forEach((x,k)=>{x.disabled=true;if(order[k].i===item.a)x.classList.add('right');});
         if(!ok)b.classList.add('wrong');
         fb.className='fb show '+(ok?'ok':'no');
@@ -1107,6 +1036,7 @@ function makePractice(l,rootEl){
       if(sels.some(x=>!x.value)){fb.className='fb show no';fb.innerHTML='<b class="h">Almost there</b>Choose an answer for every row first.';return;}
       let n=0;const wrong=[];
       sels.forEach((se,i)=>{const ok=se.value===set.p[i][1];if(ok)n++;else wrong.push(`<li><b>${esc(set.p[i][0])}</b> → ${esc(set.p[i][1])}</li>`);se.disabled=true;se.classList.add(ok?'right':'wrong');se.nextElementSibling.textContent=ok?'✔':'✘';});
+      logResp(l,mode,set.t+' ['+set.p.map(p=>p[0]).join(', ')+']',sels.map((se,i)=>set.p[i][0]+' → '+se.value+' '+mark(se.value===set.p[i][1],set.p[i][1])).join(' | '));
       btn.disabled=true;const all=n===set.p.length;
       fb.className='fb show '+(all?'ok':'no');
       fb.innerHTML=`<b class="h">${n} of ${set.p.length} correct</b>${all?'Great matching!':'Correct matches for the ones you missed:<ul class="check">'+wrong.join('')+'</ul>'}`;
@@ -1122,6 +1052,7 @@ function makePractice(l,rootEl){
       r.innerHTML=`<p>${esc(txt)}</p><div class="cats">${set.c.map((n,k)=>`<button type="button" class="cat" data-k="${k}">${esc(n)}</button>`).join('')}</div><div class="note"></div>`;
       $$('.cat',r).forEach(b=>b.onclick=()=>{
         const k=+b.dataset.k,ok=k===c;
+        logResp(l,mode,set.t+' — '+txt,set.c[k]+' '+mark(ok,set.c[c]));
         $$('.cat',r).forEach(x=>{x.disabled=true;if(+x.dataset.k===c)x.classList.add('right');});
         if(!ok)b.classList.add('wrong');
         $('.note',r).innerHTML=ok?'<b style="color:var(--good)">✔ Correct</b>':`<b style="color:var(--bad)">✘ It belongs under “${esc(set.c[c])}”.</b>`;
@@ -1152,6 +1083,7 @@ function makePractice(l,rootEl){
     draw();
     btn.onclick=()=>{
       locked=true;btn.disabled=true;const n=arr.filter((x,k)=>x.i===k).length;draw();
+      logResp(l,mode,set.t,'Student\'s order: '+arr.map(x=>x.y+' '+x.t).join(' → ')+' · '+n+' of '+arr.length+' in the right place');
       const ok=n===arr.length;fb.className='fb show '+(ok?'ok':'no');
       fb.innerHTML=`<b class="h">${n} of ${arr.length} in the right place</b>${ok?'Perfect timeline!':'Correct order: '+set.e.map(e=>esc(e[0])).join(' → ')}`;
       rec(n,arr.length);
@@ -1169,6 +1101,7 @@ function makePractice(l,rootEl){
       const go=()=>{
         if(sv.classList.contains('done'))return;
         sv.classList.add('done');const ok=dep.n===item.a;
+        logResp(l,mode,item.q,dep.n+' '+mark(ok,item.a));
         p.classList.add(ok?'right':'wrong');
         if(!ok)ps.forEach(q=>{if(q.dep===item.a)q.el.classList.add('right');});
         fb.className='fb show '+(ok?'ok':'no');
@@ -1185,12 +1118,18 @@ function makePractice(l,rootEl){
     card.innerHTML=`<div class="num">Written ${idx+1}</div><div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div><p class="stem">${esc(item.q)}</p><textarea aria-label="Your answer" placeholder="Write your answer here..."></textarea><p style="margin:8px 0 0"><button type="button" class="btn">Check my answer</button> <span class="legend wc"></span></p><div class="fb" role="status"></div>`;
     const ta=$('textarea',card),btn=$('.btn',card),fb=$('.fb',card),wc=$('.wc',card);
     let done=false;
-    ta.oninput=()=>{wc.textContent=(ta.value.trim().split(/\s+/).filter(Boolean).length)+' words';};
+    const prev=savedRaw(l,mode,item.q); if(prev){ta.value=prev;}
+    const count=()=>{wc.textContent=(ta.value.trim().split(/\s+/).filter(Boolean).length)+' words';};
+    let tmr=0; const keep=(note)=>{const t=ta.value.trim();if(t)logResp(l,mode,item.q,t+(note?'  ['+note+']':'  [not checked yet]'),ta.value);};
+    ta.oninput=()=>{count();clearTimeout(tmr);tmr=setTimeout(()=>keep(),500);};   // saved while the student types
+    ta.onblur=()=>{clearTimeout(tmr);keep();};
+    count();
     btn.onclick=()=>{
       const txt=ta.value.toLowerCase();
       if(txt.trim().split(/\s+/).filter(Boolean).length<15){fb.className='fb show no';fb.innerHTML='<b class="h">Add more detail</b>Write at least 15 words so we can check your key ideas.';return;}
       const hits=item.keys.map(([lab,ws])=>[lab,ws.some(w=>txt.includes(w))]);
       const n=hits.filter(h=>h[1]).length,ok=n===item.keys.length;
+      clearTimeout(tmr);keep('Key ideas found: '+n+' of '+item.keys.length+' — '+hits.map(([lb,h])=>(h?'✔ ':'✘ ')+lb).join('; '));
       fb.className='fb show '+(ok?'ok':'no');
       fb.innerHTML=`<b class="h">${n} of ${item.keys.length} key ideas found</b><ul class="check">${hits.map(([lb,h])=>`<li>${h?'✔':'✘'} ${esc(lb)}</li>`).join('')}</ul><b>Model answer:</b> ${esc(item.model)}<br><small>This keyword check is a guide. Compare meaning with the model and ask your teacher if unsure.</small>`;
       if(!done){done=true;rec(n>=2?1:0,1);}
@@ -1214,7 +1153,6 @@ function makePractice(l,rootEl){
     tot=cards.reduce((a,c)=>a+c[1],0);cards.forEach(c=>quiz.appendChild(c[0]));update();
   }
   $$('.ptab',rootEl).forEach(b=>b.onclick=()=>{$$('.ptab',rootEl).forEach(x=>x.setAttribute('aria-selected',x===b));build(b.dataset.p);});
-  $$('.submitBtn',rootEl).forEach(b=>b.onclick=submit);
   $('.resetBtn',rootEl).onclick=()=>{build(mode);quiz.scrollIntoView({behavior:'smooth',block:'start'});};
   build('mcq');
 }
