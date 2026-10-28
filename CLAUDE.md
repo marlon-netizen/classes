@@ -93,7 +93,7 @@ links between lessons that a student might not be assigned.
 * **Personal data never goes in the repo** (rosters, codes, master code, SQL with names). The repo/site is public. Keep such files outside it and hand them to the user as files.
 
 ## 8. Testing (do this before pushing – there is no CI)
-`tools/test/`: `pg.sh` (local Postgres 16 with `schema.sql`), `mock.js` (Supabase stand-in on :54400 that runs the REAL SQL), Playwright e2e (`e2e_access.js`, `e2e_final.js`, `e2e_practice.js` = per-student generated practice sheet).
+`tools/test/`: `pg.sh` (local Postgres 16 with `schema.sql`), `mock.js` (Supabase stand-in on :54400 that runs the REAL SQL), Playwright e2e (`e2e_access.js`, `e2e_final.js`, `e2e_practice.js` = per-student generated practice sheet, `e2e_unit3.js` = every answer of the Unit III page saved to Student responses).
 Playwright redirects the Supabase host to the mock (`context.route`), Chromium is at `/opt/pw-browsers/chromium`. Pattern: `bash tools/test/pg.sh; node tools/test/mock.js & node tools/test/e2e_final.js`.
 Check at least: sign-in gate on a new page, restore from the DB on a second browser context, wrong/blocked lessons, no page errors, dark mode, `node --check` on inline scripts. The sandbox cannot reach the real Supabase – say that
 you could not verify against production.
