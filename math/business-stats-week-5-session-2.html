@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Business Statistics – Week 5 Session 2: Confidence Intervals | Lincoln International Academy</title>
+<meta name="description" content="Study guide: confidence intervals for means and proportions, confidence levels, margins of error, sample size and correct interpretation, with a simulator.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f1eff7;--card:#fdfcff;--ink:#211d33;--muted:#5d5774;--line:#d9d4ea;--primary:#4b3f8f;--on-primary:#fff;
+  --warm:#b0782a;--soft:#e7e3f5;--head:#2a2250;--head2:#3a2f70;--headink:#f1eefb;--eyebrow:#d9bf85;
+  --ok:#1f7a4d;--okbg:#e3f4ea;--bad:#a23b3b;--badbg:#f9e5e5;--warn:#7d5210;--warnbg:#fbf1dc;--field:#fff;--code:#efeaf8;
+  --chart1:#4b3f8f;--chart2:#b0782a;--chart3:#2a8f86;--shade:rgba(75,63,143,.28);--shade2:rgba(176,120,42,.35);
+}
+:root[data-theme="dark"]{
+  --bg:#13111d;--card:#1c1928;--ink:#ebe8f5;--muted:#a9a4bf;--line:#363150;--primary:#b9aef0;--on-primary:#13111d;
+  --warm:#dcae66;--soft:#262239;--head:#1a1632;--head2:#241e45;--headink:#f1eefb;--eyebrow:#dcae66;
+  --ok:#6fd0a0;--okbg:#17301f;--bad:#f09a9a;--badbg:#3a1f23;--warn:#e0b25c;--warnbg:#33291a;--field:#12101b;--code:#262239;
+  --chart1:#b9aef0;--chart2:#dcae66;--chart3:#5fcdc2;--shade:rgba(185,174,240,.30);--shade2:rgba(220,174,102,.38);
+}
+@media (prefers-color-scheme: dark){
+:root:not([data-theme="light"]){
+  --bg:#13111d;--card:#1c1928;--ink:#ebe8f5;--muted:#a9a4bf;--line:#363150;--primary:#b9aef0;--on-primary:#13111d;
+  --warm:#dcae66;--soft:#262239;--head:#1a1632;--head2:#241e45;--headink:#f1eefb;--eyebrow:#dcae66;
+  --ok:#6fd0a0;--okbg:#17301f;--bad:#f09a9a;--badbg:#3a1f23;--warn:#e0b25c;--warnbg:#33291a;--field:#12101b;--code:#262239;
+  --chart1:#b9aef0;--chart2:#dcae66;--chart3:#5fcdc2;--shade:rgba(185,174,240,.30);--shade2:rgba(220,174,102,.38);
+}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:56px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Source Serif 4',Georgia,'Times New Roman',serif;font-size:1.05rem;line-height:1.65}
+header{position:relative;background:linear-gradient(135deg,var(--head),var(--head2));color:var(--headink);text-align:center;padding:2.6rem 1rem 1.7rem;border-bottom:4px solid var(--warm)}
+header .eyebrow{margin:0;color:var(--eyebrow);letter-spacing:.14em;text-transform:uppercase;font-size:.82rem;font-weight:600}
+header h1{margin:.2rem 0 .1rem;font-size:clamp(1.5rem,4.5vw,2.2rem);font-weight:700}
+header .class-name{margin:.2rem 0 0;font-size:clamp(1.05rem,3vw,1.35rem);font-weight:600}
+header .details{margin:.15rem 0 0;opacity:.88;font-size:.98rem}
+nav.toc{position:sticky;top:0;z-index:20;background:var(--card);border-bottom:1px solid var(--line);display:flex;gap:.2rem;overflow-x:auto;padding:.35rem .6rem;white-space:nowrap;box-shadow:0 1px 4px rgba(20,10,60,.06)}
+nav.toc a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:600;padding:.3rem .65rem;border-radius:999px}
+nav.toc a:hover,nav.toc a:focus-visible{background:var(--soft);color:var(--primary)}
+main{max-width:920px;margin:0 auto;padding:1.2rem 1rem 3rem}
+section.card,.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:1.2rem 1.4rem;margin:0 0 1.2rem;box-shadow:0 1px 3px rgba(40,30,90,.05)}
+h2{margin:0 0 .6rem;font-size:1.5rem;color:var(--primary);line-height:1.25}
+h3{margin:1.2rem 0 .35rem;font-size:1.18rem;color:var(--primary);line-height:1.3}
+h4{margin:1rem 0 .3rem;font-size:1.02rem}
+p{margin:.5rem 0}ul,ol{padding-left:1.35rem;margin:.4rem 0}li{margin:.2rem 0}
+a{color:var(--primary)}
+:focus-visible{outline:3px solid var(--warm);outline-offset:2px}
+.syl{background:var(--soft);border-left:5px solid var(--primary);padding:.7rem 1rem;border-radius:8px;font-size:.98rem}
+.syl b{color:var(--primary)}
+.obj{list-style:none;padding:0}.obj li{display:flex;gap:.6rem;align-items:flex-start;padding:.25rem 0}
+.obj input{margin-top:.45rem;accent-color:var(--primary);width:1.05rem;height:1.05rem;flex:none}
+.meta{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 0}
+.chip{background:var(--soft);color:var(--primary);border-radius:999px;padding:.15rem .7rem;font-size:.85rem;font-weight:600}
+.formula{background:var(--soft);border-left:5px solid var(--primary);border-radius:8px;padding:.7rem 1rem;margin:.8rem 0;text-align:center;font-size:1.2rem;overflow-x:auto}
+.formula small{display:block;font-size:.88rem;color:var(--muted);margin-top:.2rem}
+.frac{display:inline-block;text-align:center;vertical-align:middle;margin:0 .2rem}
+.frac>span{display:block;padding:0 .25rem;line-height:1.25}.frac>span:first-child{border-bottom:1.5px solid currentColor}
+.ov{text-decoration:overline}
+.hat{position:relative;display:inline-block}.hat::before{content:"^";position:absolute;left:50%;top:-.4em;transform:translateX(-50%);font-size:.9em}
+.sq{white-space:nowrap}
+.callout{border-radius:8px;padding:.6rem 1rem;margin:.9rem 0;border-left:5px solid var(--warm);background:var(--warnbg)}
+.callout>b:first-child{display:block;margin-bottom:.15rem}
+.callout.tip{background:var(--okbg);border-color:var(--ok)}.callout.tip>b:first-child{color:var(--ok)}
+.callout.trap{background:var(--badbg);border-color:var(--bad)}.callout.trap>b:first-child{color:var(--bad)}
+.callout.xl{background:var(--soft);border-color:var(--chart3)}.callout.xl>b:first-child{color:var(--chart3)}
+.callout.warn>b:first-child{color:var(--warn)}
+.callout.idea{background:var(--soft);border-color:var(--primary)}.callout.idea>b:first-child{color:var(--primary)}
+.callout p{margin:.3rem 0}.callout ul{margin:.3rem 0}
+.ex{border:1px solid var(--line);border-radius:10px;padding:.8rem 1.1rem;margin:1rem 0;background:var(--card)}
+.ex>.exh{margin:0 0 .3rem;color:var(--warm);font-weight:700;letter-spacing:.04em;text-transform:uppercase;font-size:.85rem}
+.ex ol.steps{counter-reset:s;list-style:none;padding:0;margin:.5rem 0}
+.ex ol.steps>li{counter-increment:s;position:relative;padding:.25rem 0 .25rem 2.1rem}
+.ex ol.steps>li::before{content:counter(s);position:absolute;left:0;top:.35rem;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--primary);color:var(--on-primary);font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center}
+.ex .ans{background:var(--okbg);border-radius:8px;padding:.45rem .9rem;margin-top:.5rem}
+.table-wrap{overflow-x:auto;margin:.7rem 0}
+table.data{border-collapse:collapse;margin:0 auto;font-size:.98rem}
+table.data caption{caption-side:top;font-weight:700;color:var(--primary);padding-bottom:.3rem}
+table.data th,table.data td{border:1px solid var(--line);padding:.3rem .8rem;text-align:center}
+table.data th{background:var(--soft)}table.data td.l,table.data th.l{text-align:left}
+table.data tr.tot td{font-weight:700;background:var(--soft)}
+dl.gloss{margin:.4rem 0}dl.gloss dt{font-weight:700;color:var(--primary);margin-top:.6rem}dl.gloss dd{margin:.05rem 0 0 0}
+details.sol{margin:.6rem 0}details.sol summary{cursor:pointer;color:var(--primary);font-weight:600}
+/* practice */
+.sbar{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;background:var(--soft);border-radius:10px;padding:.6rem 1rem;margin-bottom:1rem}
+.sbar .bar{flex:1 1 160px;height:10px;border-radius:6px;background:var(--line);overflow:hidden}.sbar .bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.q{border:1px solid var(--line);border-radius:10px;padding:.8rem 1rem;margin:.9rem 0;background:var(--card)}
+.q.done{border-color:var(--ok)}.q.shown{border-color:var(--warm)}
+.qh{display:flex;gap:.6rem;align-items:center;margin-bottom:.3rem}
+.qn{background:var(--primary);color:var(--on-primary);border-radius:6px;padding:0 .55rem;font-weight:700;font-size:.9rem}
+.qt{color:var(--muted);font-size:.82rem;text-transform:uppercase;letter-spacing:.06em}
+.qs{margin-left:auto;font-size:.85rem;font-weight:700}
+.q.done .qs{color:var(--ok)}.q.shown .qs{color:var(--warm)}
+.qb p{margin:.3rem 0}
+.opts{display:grid;gap:.4rem;margin:.6rem 0}
+.opts label{display:flex;gap:.6rem;align-items:flex-start;border:2px solid var(--line);border-radius:8px;padding:.4rem .8rem;cursor:pointer;background:var(--field)}
+.opts label:hover{background:var(--soft)}.opts input{margin-top:.4rem;accent-color:var(--primary)}
+.opts label.right{border-color:var(--ok);background:var(--okbg)}.opts label.wrong{border-color:var(--bad);background:var(--badbg)}
+.opts label.dis{cursor:default}
+.nrow{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin:.6rem 0}
+input[type=text],input[type=number],select,textarea{font:inherit;color:var(--ink);background:var(--field);border:2px solid var(--line);border-radius:8px;padding:.4rem .7rem}
+input[type=text]{width:12rem}textarea{width:100%;min-height:5.5rem;resize:vertical}
+.nrow .u{color:var(--muted)}
+.btn{font:inherit;font-weight:700;background:var(--primary);color:var(--on-primary);border:none;border-radius:8px;padding:.45rem 1.1rem;cursor:pointer}
+.btn:hover:not(:disabled){filter:brightness(1.1)}.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--primary);border:2px solid var(--primary)}
+.fb{display:none;margin-top:.5rem;border-radius:8px;padding:.5rem .9rem}
+.fb.show{display:block}.fb.ok{background:var(--okbg);border-left:5px solid var(--ok)}.fb.no{background:var(--badbg);border-left:5px solid var(--bad)}.fb.info{background:var(--warnbg);border-left:5px solid var(--warm)}
+.fb p{margin:.25rem 0}
+/* viz */
+.viz{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:.8rem 1rem;margin:1rem 0}
+.viz>.vh{margin:0 0 .4rem;font-weight:700;color:var(--warm);font-size:.85rem;letter-spacing:.06em;text-transform:uppercase}
+.viz canvas{width:100%;display:block;border-radius:8px;background:var(--field);border:1px solid var(--line)}
+.vc{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;margin:.5rem 0}
+.ctl{display:flex;flex-direction:column;font-size:.9rem;min-width:9rem;flex:1 1 9rem}
+.ctl label{font-weight:600;color:var(--muted)}.ctl output{color:var(--primary);font-weight:700;margin-left:.3rem}
+.ctl input[type=range]{accent-color:var(--primary);width:100%}
+.ctl input[type=number],.ctl select{width:100%;padding:.25rem .5rem}
+.vr{display:grid;grid-template-columns:repeat(auto-fit,minmax(9rem,1fr));gap:.4rem;margin-top:.5rem}
+.vr div{background:var(--soft);border-radius:8px;padding:.3rem .6rem;font-size:.9rem}.vr b{display:block;color:var(--primary);font-size:1.05rem}
+.vn{color:var(--muted);font-size:.9rem;margin:.4rem 0 0}
+.grid100{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;margin:.5rem 0;max-width:460px}
+.grid100 span{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:.72rem;border-radius:4px;border:2px solid transparent;color:#fff;font-weight:700}
+.grid100 span.sel{border-color:var(--ink);box-shadow:0 0 0 2px var(--card) inset;outline:2px solid var(--ink)}
+.grid100 span.dim{opacity:.35}
+.sum{border:2px dashed var(--primary)}
+footer{text-align:center;color:var(--muted);font-size:.9rem;padding:0 1rem 2rem}
+@media (max-width:560px){section.card,.card{padding:1rem}input[type=text]{width:100%}}
+@media print{nav.toc,.btn,.vc,.viz,.nrow,.lia-theme,#liaUser,.sbar{display:none!important}body{background:#fff;color:#000}.card{box-shadow:none;break-inside:avoid-page}header{background:#fff!important;color:#000;border-bottom:2px solid #000}header .eyebrow,header .details{color:#000}}
+</style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+<header>
+  <p class="eyebrow">Week 5 &middot; Session 2</p>
+  <h1>Lincoln International Academy</h1>
+  <p class="class-name">Business Statistics &middot; Confidence Intervals</p>
+  <p class="details">Teacher: Eduardo Vásquez &middot; Study guide with worked examples and practice</p>
+</header>
+<nav class="toc" aria-label="On this page"><a href="#overview">Overview</a><a href="#idea">Estimates and intervals</a><a href="#mean">Confidence interval for a mean</a><a href="#prop">Confidence interval for a proportion</a><a href="#width">What controls the width?</a><a href="#mistakes">Common mistakes</a><a href="#practice">Practice</a><a href="#exit">Exit ticket</a><a href="#summary">Cheat sheet</a></nav>
+<main>
+<section class="card" id="overview">
+  <h2>Overview</h2>
+  <div class="syl"><b>Syllabus:</b> Confidence interval estimation for means and proportions. Confidence levels, margins of error and interpretation in context.</div>
+  <h3>By the end of this session you can…</h3>
+  <ul class="obj"><li><label><input type="checkbox"> <span>Explain point estimates, interval estimates, confidence level and margin of error.</span></label></li><li><label><input type="checkbox"> <span>Construct and interpret confidence intervals for a mean (z when σ is known, t when it is unknown) and for a proportion.</span></label></li><li><label><input type="checkbox"> <span>Interpret a confidence interval correctly in context and avoid the common wrong interpretations.</span></label></li><li><label><input type="checkbox"> <span>Explain how sample size, variability and confidence level affect the width.</span></label></li><li><label><input type="checkbox"> <span>Determine the sample size needed for a target margin of error.</span></label></li></ul>
+  <div class="meta"><span class="chip">About 90 minutes</span><span class="chip">14 practice questions</span><span class="chip">Your progress is saved</span></div>
+  
+</section>
+<section class="card" id="idea"><h2>Estimates and intervals</h2>
+ <p>A <b>point estimate</b> (x̄, <span class="hat">p</span>) is one number and almost surely not exactly right. A <b>confidence interval</b> adds a margin of error to show how precise it is:</p>
+ <div class="formula">estimate ± margin of error = estimate ± (critical value) × (standard error)</div>
+ <p>The <b>confidence level</b> (90 %, 95 %, 99 %) is the long-run proportion of such intervals that contain the true parameter. It is a property of the <b>method</b>, not of any single interval.</p>
+ <div class="viz" data-viz="ci"></div>
+ <div class="callout trap"><b>The interpretation trap</b><p>Once computed, an interval either contains μ or it does not. Correct: “We are 95 % confident that the true mean lies in (73.5, 83.3).” Wrong: “There is a 95 % probability μ is in this interval” or “95 % of customers are in this interval”.</p></div></section><section class="card" id="mean"><h2>Confidence interval for a mean</h2>
+ <div class="table-wrap"><table class="data"><caption>Two cases</caption><thead><tr><th class=l></th><th>σ known (rare)</th><th>σ unknown (usual)</th></tr></thead><tbody><tr><td class=l>Interval</td><td>x̄ ± z*·σ/√n</td><td>x̄ ± t*·s/√n</td></tr><tr><td class=l>Distribution</td><td>standard normal</td><td>t with df = n − 1</td></tr><tr><td class=l>Excel margin of error</td><td><code>=CONFIDENCE.NORM(α, σ, n)</code></td><td><code>=CONFIDENCE.T(α, s, n)</code>; critical value <code>=T.INV.2T(α, df)</code></td></tr></tbody></table></div>
+ <div class="table-wrap"><table class="data"><caption>Critical values t* for common confidence levels</caption><thead><tr><th>df = n − 1</th><th>90 %</th><th>95 %</th><th>99 %</th></tr></thead><tbody><tr><td>9</td><td>1.833</td><td>2.262</td><td>3.250</td></tr><tr><td>14</td><td>1.761</td><td>2.145</td><td>2.977</td></tr><tr><td>19</td><td>1.729</td><td>2.093</td><td>2.861</td></tr><tr><td>24</td><td>1.711</td><td>2.064</td><td>2.797</td></tr><tr><td>29</td><td>1.699</td><td>2.045</td><td>2.756</td></tr><tr><td>59</td><td>1.671</td><td>2.001</td><td>2.662</td></tr><tr><td>∞ (z)</td><td>1.645</td><td>1.960</td><td>2.576</td></tr></tbody></table></div>
+ <p><b>Conditions:</b> a random sample; independent observations (n less than 10 % of the population); the population roughly normal <i>or</i> n large (about 30 or more). With small n, check for strong skew and outliers.</p>
+ <div class="ex"><p class="exh">Worked example · mean order value</p><p>A random sample of n = 25 orders has x̄ = $78.40 and s = $12.00. Find a 95 % confidence interval for the mean order value.</p><ol class="steps"><li>σ unknown → t interval, df = 24, t* = 2.064.</li><li>SE = s/√n = 12/√25 = 2.40.</li><li>ME = 2.064 × 2.40 = 4.95.</li><li>Interval = 78.40 ± 4.95 = (73.45, 83.35).</li></ol><div class="ans"><b>Answer:</b> We are 95 % confident that the true mean order value is between $73.45 and $83.35.</div></div></section><section class="card" id="prop"><h2>Confidence interval for a proportion</h2>
+ <div class="formula"><span class="hat">p</span> ± z* √[<span class="frac"><span><span class="hat">p</span>(1 − <span class="hat">p</span>)</span><span>n</span></span>]<small>Conditions: random sample, n·p̂ ≥ 10 and n(1 − p̂) ≥ 10</small></div>
+ <div class="ex"><p class="exh">Worked example · design preference</p><p>In a random sample of 400 customers, 132 prefer the new design. Find a 95 % interval for the share of all customers who prefer it.</p><ol class="steps"><li>p̂ = 132/400 = 0.33. Check: 132 and 268 are both ≥ 10.</li><li>SE = √(0.33 × 0.67/400) = 0.0235.</li><li>ME = 1.96 × 0.0235 = 0.0461.</li><li>Interval = 0.33 ± 0.046 = (0.284, 0.376).</li></ol><div class="ans"><b>Answer:</b> We are 95 % confident that between 28.4 % and 37.6 % of all customers prefer the new design.</div></div>
+ <div class="callout xl"><b>Excel</b><p>No built-in proportion interval: compute <code>=SQRT(p*(1-p)/n)</code> and <code>=NORM.S.INV(0.975)*SE</code>, then subtract and add the margin of error.</p></div></section><section class="card" id="width"><h2>What controls the width?</h2>
+ <div class="table-wrap"><table class="data"><caption>Margin of error = critical value × SE</caption><thead><tr><th class=l>To get a narrower interval…</th><th>Cost</th></tr></thead><tbody><tr><td class=l>increase n</td><td>more time and money; √n law: 4× n halves the margin</td></tr><tr><td class=l>lower the confidence level</td><td>less confidence</td></tr><tr><td class=l>reduce variability (σ), e.g. stratify or measure better</td><td>may not be possible</td></tr></tbody></table></div>
+ <h3>Choosing the sample size</h3>
+ <div class="formula">n = <span class="frac"><span>(z*σ)²</span><span>E²</span></span>  (mean)          n = <span class="frac"><span>p(1 − p)(z*)²</span><span>E²</span></span>  (proportion)<small>E = desired margin of error. Always round <b>up</b>. If p is unknown use p = 0.5 (worst case)</small></div>
+ <div class="ex"><p class="exh">Worked example · planning a survey</p><p>How many customers must be surveyed to estimate the mean spend within ±$3 with 95 % confidence if σ ≈ $15? And to estimate a proportion within ±3 percentage points with no prior idea of p?</p><ol class="steps"><li>Mean: n = (1.96 × 15/3)² = 96.04 → 97.</li><li>Proportion: n = 0.25 × (1.96/0.03)² = 1067.1 → 1068.</li></ol><div class="ans"><b>Answer:</b> 97 customers for the mean; 1068 for the proportion.</div></div></section><section class="card" id="mistakes"><h2>Common mistakes</h2><ul><li>“95 % probability that μ is in this interval.”</li><li>Using z when σ is unknown (use t unless n is very large).</li><li>Using σ instead of the SE = σ/√n in the margin of error.</li><li>Forgetting to round the required n <b>up</b>.</li><li>Applying the proportion interval when np̂ or n(1 − p̂) is below 10.</li><li>Treating the interval as the range of individual values.</li></ul></section>
+<section class="card" id="practice">
+  <h2>Practice with immediate feedback</h2>
+  <p>Answer each question and press <b>Check</b>. You may try again after a miss; the points shrink with each try (2 → 1 → ½). “Show solution” reveals the answer and the full working (no points). Numeric answers: type a plain number; for probabilities use a decimal such as 0.25 (a % sign is also accepted).</p>
+  <div class="sbar" id="sbar"><b class="n">0 of 14 finished</b><span class="p">0 / 28 points</span><div class="bar" aria-hidden="true"><i></i></div></div>
+  <div id="practiceList"></div>
+</section>
+<section class="card" id="exit">
+  <h2>Exit ticket</h2>
+  <p>Two short written answers. They save automatically and your teacher can read them.</p>
+</section>
+<section class="card sum" id="summary">
+  <h2>One-page cheat sheet</h2>
+  <div class="table-wrap"><table class="data"><thead><tr><th class=l>Topic</th><th>Formula</th></tr></thead><tbody><tr><td class=l>General</td><td>estimate ± critical value × SE</td></tr><tr><td class=l>Mean, σ known</td><td>x̄ ± z* σ/√n</td></tr><tr><td class=l>Mean, σ unknown</td><td>x̄ ± t* s/√n, df = n − 1</td></tr><tr><td class=l>Proportion</td><td>p̂ ± z* √(p̂(1 − p̂)/n)</td></tr><tr><td class=l>Common z*</td><td>1.645 (90 %) · 1.960 (95 %) · 2.576 (99 %)</td></tr><tr><td class=l>n for mean</td><td>(z*σ/E)², round up</td></tr><tr><td class=l>n for proportion</td><td>p(1 − p)(z*/E)², p = 0.5 if unknown</td></tr><tr><td class=l>Interpretation</td><td>“95 % confident the parameter lies in…”: long-run success of the method</td></tr><tr><td class=l>Excel</td><td>CONFIDENCE.NORM · CONFIDENCE.T · T.INV.2T · NORM.S.INV</td></tr></tbody></table></div>
+  <p class="vn">Print this page (Ctrl/Cmd + P) to keep a copy. Always check the notation and method used in your lecturer’s slides; small differences (for example in how quartiles are calculated) can change the last digit of an answer.</p>
+</section>
+</main>
+<footer>Lincoln International Academy &middot; Business Statistics &middot; Week 5, Session 2</footer>
+<script>window.BS_PAGE={"slug": "business-stats-week-5-session-2", "title": "Business Statistics – Week 5 Session 2", "ex": [{"id": "business-stats-week-5-session-2-q1", "type": "num", "q": "<p>σ = 10 is known, n = 100 and the confidence level is 95 %. What is the <b>margin of error<\/b> z*·σ/√n?<\/p>", "ans": 1.96, "tol": 0.01, "unit": "", "why": "ME = 1.96 × 10/√100 = 1.96 × 1 = 1.96.", "hint": null, "tag": "Margin of error"}, {"id": "business-stats-week-5-session-2-q2", "type": "num", "q": "<p>A random sample has x̄ = 50, σ = 8 (known), n = 64. Find the <b>lower limit<\/b> of the 95 % confidence interval for μ.<\/p>", "ans": 48.04, "tol": 0.02, "unit": "", "why": "SE = 8/√64 = 1; ME = 1.96 × 1 = 1.96. Lower limit = 50 − 1.96 = 48.04.", "hint": null, "tag": "CI for a mean (σ known)"}, {"id": "business-stats-week-5-session-2-q3", "type": "num", "q": "<p>σ is unknown; n = 25. What is the t critical value for a <b>95 %<\/b> interval? (df = 24; 3 decimals)<\/p>", "ans": 2.064, "tol": 0.003, "unit": "", "why": "Use the t distribution with df = n − 1 = 24 (area 0.025 in each tail): t* = 2.064 (Excel: =T.INV.2T(0.05,24)). It is slightly larger than z* = 1.96 because s is itself uncertain.", "hint": null, "tag": "t critical value"}, {"id": "business-stats-week-5-session-2-q4", "type": "num", "q": "<p>A sample of n = 25 has x̄ = 78.4 and s = 12. Find the <b>upper limit<\/b> of the 95 % confidence interval for μ (use t*).<\/p>", "ans": 83.35, "tol": 0.05, "unit": "", "why": "SE = 12/√25 = 2.4; ME = 2.064 × 2.4 = 4.953. Upper limit = 78.4 + 4.95 = 83.35.", "hint": null, "tag": "CI for a mean (σ unknown)"}, {"id": "business-stats-week-5-session-2-q5", "type": "num", "q": "<p>In a random sample of 400 customers, 132 prefer the new design. What is the <b>margin of error<\/b> of the 95 % confidence interval for p? (3 decimals)<\/p>", "ans": 0.046, "tol": 0.001, "unit": "", "why": "p̂ = 132/400 = 0.33. SE = √(0.33 × 0.67/400) = 0.0235. ME = 1.96 × 0.0235 = 0.0461.", "hint": null, "tag": "CI for a proportion"}, {"id": "business-stats-week-5-session-2-q6", "type": "num", "q": "<p>Using the same sample (132 of 400), find the <b>lower limit<\/b> of the 95 % interval for p. (3 decimals)<\/p>", "ans": 0.284, "tol": 0.001, "unit": "", "why": "p̂ − ME = 0.33 − 0.0461 = 0.2839, i.e. about 28.4 %.", "hint": null, "tag": "CI for a proportion"}, {"id": "business-stats-week-5-session-2-q7", "type": "mc", "q": "<p>A 95 % confidence interval for the mean order value is ($73.45, $83.35). Which interpretation is correct?<\/p>", "opts": ["We are 95 % confident that the true mean order value lies between $73.45 and $83.35, because the method captures the true mean in 95 % of repeated samples", "There is a 95 % probability that a randomly chosen order is between $73.45 and $83.35", "95 % of the orders in the sample lie in this interval", "The sample mean has a 95 % chance of being in the interval"], "why": "The interval estimates the <b>population mean<\/b>, not individual values. The 95 % describes the long-run success rate of the method (see the simulator).", "hint": null, "tag": "Interpretation"}, {"id": "business-stats-week-5-session-2-q8", "type": "mc", "q": "<p>Which change makes a confidence interval <b>narrower<\/b>, other things equal?<\/p>", "opts": ["a larger sample size", "a higher confidence level", "a more variable population", "a smaller sample size"], "why": "ME = critical value × SE. Larger n shrinks SE. A higher confidence level or a larger σ widens the interval.", "hint": null, "tag": "Width"}, {"id": "business-stats-week-5-session-2-q9", "type": "mc", "q": "<p>The confidence level is raised from 95 % to 99 % with the same data. The interval becomes…<\/p>", "opts": ["wider, because we need a larger critical value to be more confident", "narrower, because we are more precise", "unchanged", "shifted to the right"], "why": "There is a trade-off: more confidence costs precision. 99 % uses 2.576 instead of 1.96.", "hint": null, "tag": "Width"}, {"id": "business-stats-week-5-session-2-q10", "type": "num", "q": "<p>You want to estimate a mean with 95 % confidence, margin of error E = 3, and σ ≈ 15. What minimum sample size n = (z*σ/E)² do you need? (round <b>up<\/b>)<\/p>", "ans": 97, "tol": 0.001, "unit": "", "why": "n = (1.96 × 15/3)² = 9.8² = 96.04 → <b>97<\/b>. Always round up.", "hint": null, "tag": "Sample size"}, {"id": "business-stats-week-5-session-2-q11", "type": "num", "q": "<p>You want to estimate a proportion with 95 % confidence and margin of error 0.03, with no prior estimate of p. Using the worst case p = 0.5, what n = p(1 − p)(z*/E)² is needed? (round <b>up<\/b>)<\/p>", "ans": 1068, "tol": 0.001, "unit": "", "why": "n = 0.25 × (1.96/0.03)² = 0.25 × 4268.4 = 1067.1 → <b>1068<\/b>.", "hint": null, "tag": "Sample size"}, {"id": "business-stats-week-5-session-2-q12", "type": "mc", "q": "<p>When do we use the <b>t distribution<\/b> instead of the normal for a confidence interval for a mean?<\/p>", "opts": ["When σ is unknown and estimated by the sample standard deviation s", "When n is exactly 30", "When the data are categorical", "Whenever the confidence level is 95 %"], "why": "t* accounts for the extra uncertainty from estimating σ by s. For large n, t* is almost equal to z*.", "hint": null, "tag": "t vs z"}, {"id": "business-stats-week-5-session-2-q13", "type": "num", "q": "<p>A confidence interval for a mean is (40, 50). What is its <b>margin of error<\/b>?<\/p>", "ans": 5, "tol": 0.01, "unit": "", "why": "The interval is x̄ ± ME, so ME = (50 − 40)/2 = 5 (and x̄ = 45).", "hint": null, "tag": "Reading intervals"}, {"id": "business-stats-week-5-session-2-q14", "type": "num", "q": "<p>With the same confidence level and standard deviation, the sample size is multiplied by 4. The margin of error is multiplied by…<\/p>", "ans": 0.5, "tol": 0.001, "unit": "", "why": "ME ∝ 1/√n, so quadrupling n halves the margin of error (× 0.5).", "hint": null, "tag": "Width"}], "exit": ["A news report says “a poll found 52 % support, ± 3 % at 95 % confidence.” Explain what the ± 3 % and the 95 % mean, and what the poll can and cannot say about the true level of support.", "What is the muddiest point from this session?"]};</script>
+<script>
+(function(){'use strict';
+var $=function(s,r){return (r||document).querySelector(s);},$$=function(s,r){return [].slice.call((r||document).querySelectorAll(s));};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+function lsGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
+function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){}}
+var PAGE=window.BS_PAGE||{slug:'x',ex:[],exit:[]};
+/* ---------- theme-aware redraw ---------- */
+var redraws=[];function onRedraw(f){redraws.push(f);f();}
+function redrawAll(){redraws.forEach(function(f){try{f();}catch(e){}});}
+window.addEventListener('resize',redrawAll);
+try{new MutationObserver(redrawAll).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});}catch(e){}
+try{var mq=matchMedia('(prefers-color-scheme: dark)');(mq.addEventListener?mq.addEventListener('change',redrawAll):mq.addListener(redrawAll));}catch(e){}
+function cv(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+/* ---------- maths ---------- */
+function erf(x){var s=x<0?-1:1;x=Math.abs(x);var t=1/(1+0.3275911*x);var y=1-(((((1.061405429*t-1.453152027)*t)+1.421413741)*t-0.284496736)*t+0.254829592)*t*Math.exp(-x*x);return s*y;}
+function ncdf(z){return 0.5*(1+erf(z/Math.SQRT2));}
+function npdf(z){return Math.exp(-z*z/2)/Math.sqrt(2*Math.PI);}
+function ninv(p){var lo=-10,hi=10;for(var i=0;i<80;i++){var m=(lo+hi)/2;if(ncdf(m)<p)lo=m;else hi=m;}return (lo+hi)/2;}
+function lgam(x){var c=[76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,0.1208650973866179e-2,-0.5395239384953e-5];var y=x,t=x+5.5;t-=(x+0.5)*Math.log(t);var s=1.000000000190015;for(var j=0;j<6;j++){y+=1;s+=c[j]/y;}return -t+Math.log(2.5066282746310005*s/x);}
+function betacf(a,b,x){var m,m2,aa,c=1,d=1-(a+b)*x/(a+1),h;if(Math.abs(d)<1e-30)d=1e-30;d=1/d;h=d;for(m=1;m<=200;m++){m2=2*m;aa=m*(b-m)*x/((a+m2-1)*(a+m2));d=1+aa*d;if(Math.abs(d)<1e-30)d=1e-30;c=1+aa/c;if(Math.abs(c)<1e-30)c=1e-30;d=1/d;h*=d*c;aa=-(a+m)*(a+b+m)*x/((a+m2)*(a+m2+1));d=1+aa*d;if(Math.abs(d)<1e-30)d=1e-30;c=1+aa/c;if(Math.abs(c)<1e-30)c=1e-30;d=1/d;var del=d*c;h*=del;if(Math.abs(del-1)<3e-12)break;}return h;}
+function ibeta(x,a,b){if(x<=0)return 0;if(x>=1)return 1;var bt=Math.exp(lgam(a+b)-lgam(a)-lgam(b)+a*Math.log(x)+b*Math.log(1-x));return x<(a+1)/(a+b+2)?bt*betacf(a,b,x)/a:1-bt*betacf(b,a,1-x)/b;}
+function tcdf(t,df){var x=df/(df+t*t),p=0.5*ibeta(x,df/2,0.5);return t>0?1-p:p;}
+function tinv(p,df){var lo=-60,hi=60;for(var i=0;i<90;i++){var m=(lo+hi)/2;if(tcdf(m,df)<p)lo=m;else hi=m;}return (lo+hi)/2;}
+function binpmf(n,p,k){if(k<0||k>n)return 0;return Math.exp(lgam(n+1)-lgam(k+1)-lgam(n-k+1)+k*Math.log(p)+(n-k)*Math.log(1-p));}
+function mean(a){var s=0;a.forEach(function(v){s+=v;});return s/a.length;}
+function sd(a){var m=mean(a),s=0;a.forEach(function(v){s+=(v-m)*(v-m);});return Math.sqrt(s/(a.length-1));}
+function qpos(a,p){var s=a.slice().sort(function(x,y){return x-y;}),n=s.length,L=p*(n+1);if(L<=1)return s[0];if(L>=n)return s[n-1];var i=Math.floor(L),f=L-i;return s[i-1]+f*(s[i]-s[i-1]);}
+function fx(x,d){if(!isFinite(x))return '–';return (Math.abs(x)<1e-12?0:x).toFixed(d==null?2:d);}
+/* ---------- plot helper ---------- */
+function frame(c,h,x0,x1,y1,pad){pad=pad||{};var dpr=window.devicePixelRatio||1,w=c.clientWidth||600;c.width=Math.round(w*dpr);c.height=Math.round(h*dpr);c.style.height=h+'px';var g=c.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);
+ var L=pad.l==null?42:pad.l,R=pad.r==null?14:pad.r,T=pad.t==null?12:pad.t,B=pad.b==null?34:pad.b;
+ var F={g:g,w:w,h:h,L:L,R:R,T:T,B:B,X:function(x){return L+(x-x0)/(x1-x0)*(w-L-R);},Y:function(y){return h-B-y/y1*(h-T-B);}};
+ g.font='12px system-ui,sans-serif';g.lineWidth=1;return F;}
+function axisX(F,ticks,labels,title){var g=F.g;g.strokeStyle=cv('--muted');g.fillStyle=cv('--muted');g.beginPath();g.moveTo(F.L,F.h-F.B);g.lineTo(F.w-F.R,F.h-F.B);g.stroke();g.textAlign='center';g.textBaseline='top';
+ ticks.forEach(function(t,i){var x=F.X(t);g.beginPath();g.moveTo(x,F.h-F.B);g.lineTo(x,F.h-F.B+4);g.stroke();g.fillText(labels?labels[i]:String(t),x,F.h-F.B+6);});
+ if(title){g.fillText(title,(F.L+F.w-F.R)/2,F.h-14);}}
+function axisY(F,ymax,n,fmt){var g=F.g;g.strokeStyle=cv('--line');g.fillStyle=cv('--muted');g.textAlign='right';g.textBaseline='middle';for(var i=0;i<=n;i++){var v=ymax*i/n,y=F.Y(v);g.beginPath();g.moveTo(F.L,y);g.lineTo(F.w-F.R,y);g.stroke();g.fillText(fmt?fmt(v):String(+v.toFixed(2)),F.L-5,y);}}
+function curve(F,f,x0,x1,color,lw,fill,a,b){var g=F.g,N=240,i,x;if(fill){g.beginPath();g.moveTo(F.X(a),F.Y(0));for(i=0;i<=N;i++){x=a+(b-a)*i/N;g.lineTo(F.X(x),F.Y(f(x)));}g.lineTo(F.X(b),F.Y(0));g.closePath();g.fillStyle=fill;g.fill();}
+ if(color){g.beginPath();for(i=0;i<=N;i++){x=x0+(x1-x0)*i/N;var px=F.X(x),py=F.Y(f(x));if(i)g.lineTo(px,py);else g.moveTo(px,py);}g.strokeStyle=color;g.lineWidth=lw||2;g.stroke();g.lineWidth=1;}}
+function vline(F,x,color,label,dash){var g=F.g;g.save();g.strokeStyle=color;g.fillStyle=color;g.lineWidth=2;if(dash)g.setLineDash([5,4]);g.beginPath();g.moveTo(F.X(x),F.T);g.lineTo(F.X(x),F.h-F.B);g.stroke();if(label){g.textAlign='center';g.textBaseline='bottom';g.fillText(label,F.X(x),F.T+10);}g.restore();}
+var uid=0;
+function ctl(root,label,o){var id='v'+(++uid),d=document.createElement('div');d.className='ctl';var h='<label for="'+id+'">'+label+' <output></output></label>';
+ if(o.type==='select'){h+='<select id="'+id+'">'+o.opts.map(function(p){return '<option value="'+p[0]+'">'+p[1]+'</option>';}).join('')+'</select>';}
+ else h+='<input id="'+id+'" type="'+(o.type||'range')+'" min="'+o.min+'" max="'+o.max+'" step="'+o.step+'">';
+ d.innerHTML=h;var inp=$('input,select',d),out=$('output',d);inp.value=o.val;
+ var api={el:inp,d:d,get:function(){return o.type==='select'?inp.value:parseFloat(inp.value);},set:function(v){inp.value=v;sh();},max:function(m){inp.max=m;},min:function(m){inp.min=m;}};
+ function sh(){out.textContent=o.type==='select'?'':(o.fmt?o.fmt(api.get()):inp.value);}sh();
+ inp.addEventListener('input',function(){sh();if(o.on)o.on();});root.cc.appendChild(d);return api;}
+function shell(root,title,h,note){root.innerHTML='<div class="vh">'+esc(title)+'</div><div class="vc"></div><canvas role="img" aria-label="'+esc(title)+'"></canvas><div class="vr" aria-live="polite"></div>'+(note?'<p class="vn">'+note+'</p>':'');root.cc=$('.vc',root);root.cv=$('canvas',root);root.vr=$('.vr',root);root.H=h;}
+function readout(root,items){root.vr.innerHTML=items.map(function(i){return '<div>'+i[0]+'<b>'+i[1]+'</b></div>';}).join('');}
+var VIZ={};
+/* ---- sampler (sampling methods) ---- */
+VIZ.sampler=function(root){shell(root,'Sampling methods: draw a sample of 20 from 100 customers',0,'Colours = four regions (A 40 · B 30 · C 20 · D 10 customers). Each row of ten is a branch (a natural cluster). Draw several samples and watch how the region mix changes.');
+ root.removeChild(root.cv);var reg=function(i){return i<40?0:i<70?1:i<90?2:3;},cols=['#4b3f8f','#b0782a','#2a8f86','#a23b3b'],nm=['A','B','C','D'];
+ var m=ctl(root,'Method',{type:'select',val:'srs',opts:[['srs','Simple random'],['sys','Systematic (every 5th)'],['str','Stratified (proportional)'],['clu','Cluster (2 whole branches)'],['con','Convenience (first 20)']],on:function(){}});
+ var b=document.createElement('button');b.className='btn';b.type='button';b.textContent='Draw a sample';root.cc.appendChild(b);
+ var g=document.createElement('div');g.className='grid100';root.insertBefore(g,root.vr);
+ for(var i=0;i<100;i++){var s=document.createElement('span');s.textContent=i+1;s.style.background=cols[reg(i)];g.appendChild(s);}
+ function pick(k,n){var a=[];for(var i=0;i<n;i++)a.push(i);for(i=n-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t;}return a.slice(0,k);}
+ function draw(){var meth=m.get(),sel=[],i;
+  if(meth==='srs')sel=pick(20,100);
+  else if(meth==='sys'){var st=Math.floor(Math.random()*5);for(i=st;i<100;i+=5)sel.push(i);}
+  else if(meth==='str'){var sz=[40,30,20,10],al=[8,6,4,2],off=0;sz.forEach(function(n,r){pick(al[r],n).forEach(function(x){sel.push(off+x);});off+=n;});}
+  else if(meth==='clu'){pick(2,10).forEach(function(r){for(var c=0;c<10;c++)sel.push(r*10+c);});}
+  else{for(i=0;i<20;i++)sel.push(i);}
+  var set={};sel.forEach(function(x){set[x]=1;});$$('span',g).forEach(function(s,i){s.className=set[i]?'sel':(sel.length?'dim':'');});
+  var cnt=[0,0,0,0];sel.forEach(function(x){cnt[reg(x)]++;});
+  readout(root,[['Sample size',sel.length]].concat(nm.map(function(n,r){return ['Region '+n+' in sample',cnt[r]+' of 20 ('+[40,30,20,10][r]+'% of population)'];})));}
+ b.addEventListener('click',draw);m.el.addEventListener('change',draw);readout(root,[['Press','“Draw a sample”']]);};
+/* ---- histogram bins ---- */
+VIZ.hist=function(root){var data=root.dataset.values.split(',').map(Number),unit=root.dataset.unit||'',mn=Math.min.apply(null,data),mx=Math.max.apply(null,data);
+ shell(root,root.dataset.title||'Histogram: how many classes?',250,'Too few classes hide the shape; too many make the picture jagged. Sturges’ rule is only a starting point: k ≈ 1 + 3.322·log₁₀(n).');
+ var k=ctl(root,'Number of classes',{min:2,max:20,step:1,val:7,on:draw});
+ function draw(){var K=k.get(),w=(mx-mn)/K,cnt=[],i;for(i=0;i<K;i++)cnt.push(0);data.forEach(function(v){var j=Math.min(K-1,Math.floor((v-mn)/w));cnt[j]++;});
+  var ym=Math.max.apply(null,cnt),yt=ym+(ym%2?1:0)||2,F=frame(root.cv,250,mn,mx,yt,{b:44});axisY(F,yt,Math.min(yt,6),function(v){return Math.round(v);});
+  var g=F.g;cnt.forEach(function(c,i){var x0=mn+i*w,x1=x0+w;g.fillStyle=cv('--chart1');g.globalAlpha=.85;g.fillRect(F.X(x0)+1,F.Y(c),F.X(x1)-F.X(x0)-2,F.Y(0)-F.Y(c));g.globalAlpha=1;});
+  var ticks=[],labs=[],step=K>12?2:1;for(i=0;i<=K;i+=step){ticks.push(mn+i*w);labs.push(fx(mn+i*w,w<2?1:0));}axisX(F,ticks,labs,unit);
+  var ti=cnt.indexOf(ym);root.cv.setAttribute('aria-label','Histogram with '+K+' classes; tallest class '+fx(mn+ti*w,1)+' to '+fx(mn+(ti+1)*w,1)+' has '+ym+' values');
+  readout(root,[['Observations',data.length],['Class width',fx(w,2)+' '+unit],['Tallest class',ym+' values'],['Sturges’ k',Math.ceil(1+3.322*Math.log10(data.length))]]);}
+ onRedraw(draw);};
+/* ---- outliers / robust stats ---- */
+VIZ.outlier=function(root){var base=root.dataset.values.split(',').map(Number),lo=+root.dataset.min,hi=+root.dataset.max,unit=root.dataset.unit||'';
+ shell(root,'Extreme values: what moves, what stays?',200,'Quartiles use the position rule L = p(n+1) (Excel QUARTILE.EXC). Fences = Q1 − 1.5·IQR and Q3 + 1.5·IQR. Whiskers stop at the most extreme values inside the fences.');
+ var on=document.createElement('div');on.className='ctl';on.innerHTML='<label><input type="checkbox" checked> Include the extra value</label>';root.cc.appendChild(on);var chk=$('input',on);chk.addEventListener('change',draw);
+ var x=ctl(root,'Extra value',{min:lo,max:hi,step:1,val:+root.dataset.start||Math.round(mean(base)),on:draw,fmt:function(v){return v+' '+unit;}});
+ function st(a){var q1=qpos(a,.25),q3=qpos(a,.75),i=q3-q1;return {n:a.length,m:mean(a),md:qpos(a,.5),s:sd(a),r:Math.max.apply(null,a)-Math.min.apply(null,a),q1:q1,q3:q3,iqr:i,lf:q1-1.5*i,uf:q3+1.5*i};}
+ var S0=st(base);
+ function draw(){var a=base.slice();if(chk.checked)a.push(x.get());var S=st(a),mn=Math.min(lo,Math.min.apply(null,base))-2,mx=Math.max(hi,Math.max.apply(null,base))+2,F=frame(root.cv,200,mn,mx,1,{l:14,t:10,b:44}),g=F.g;
+  var inside=a.filter(function(v){return v>=S.lf&&v<=S.uf;}),wl=Math.min.apply(null,inside),wh=Math.max.apply(null,inside),out=a.filter(function(v){return v<S.lf||v>S.uf;}),yb=F.h-F.B-70;
+  g.strokeStyle=cv('--ink');g.fillStyle=cv('--soft');g.lineWidth=2;g.beginPath();g.moveTo(F.X(wl),yb);g.lineTo(F.X(S.q1),yb);g.moveTo(F.X(S.q3),yb);g.lineTo(F.X(wh),yb);g.moveTo(F.X(wl),yb-14);g.lineTo(F.X(wl),yb+14);g.moveTo(F.X(wh),yb-14);g.lineTo(F.X(wh),yb+14);g.stroke();
+  g.fillRect(F.X(S.q1),yb-24,F.X(S.q3)-F.X(S.q1),48);g.strokeRect(F.X(S.q1),yb-24,F.X(S.q3)-F.X(S.q1),48);g.beginPath();g.moveTo(F.X(S.md),yb-24);g.lineTo(F.X(S.md),yb+24);g.strokeStyle=cv('--chart1');g.stroke();
+  g.fillStyle=cv('--bad');out.forEach(function(v){g.beginPath();g.arc(F.X(v),yb,5,0,6.3);g.fill();});
+  g.fillStyle=cv('--chart2');g.beginPath();var mx2=F.X(S.m);g.moveTo(mx2,yb-34);g.lineTo(mx2+6,yb-42);g.lineTo(mx2-6,yb-42);g.closePath();g.fill();g.lineWidth=1;
+  var t=[],l=[],step=Math.ceil((mx-mn)/8/5)*5;for(var v=Math.ceil(mn/step)*step;v<=mx;v+=step){t.push(v);l.push(v);}axisX(F,t,l,unit);g.fillStyle=cv('--muted');g.textAlign='left';g.fillText('▼ mean (orange)   | median (purple line)   ● outlier (red)',F.L+6,F.T+4);
+  function d(k,dec){var diff=S[k]-S0[k];return fx(S[k],dec||1)+(chk.checked?' ('+(diff>=0?'+':'')+fx(diff,dec||1)+')':'');}
+  readout(root,[['Mean',d('m')],['Median',d('md')],['Std dev (s)',d('s')],['Range',d('r')],['Q1 / Q3',fx(S.q1,1)+' / '+fx(S.q3,1)],['IQR',d('iqr')],['Fences',fx(S.lf,1)+' to '+fx(S.uf,1)],['Outliers',out.length?out.join(', '):'none']]);
+  root.cv.setAttribute('aria-label','Boxplot. Median '+fx(S.md,1)+', mean '+fx(S.m,1)+', '+out.length+' outliers');}
+ onRedraw(draw);};
+/* ---- contingency table ---- */
+VIZ.ctable=function(root){var rn=root.dataset.rows.split('|'),cn=root.dataset.cols.split('|'),v=root.dataset.counts.split(',').map(Number);
+ root.innerHTML='<div class="vh">Contingency-table calculator</div><div class="table-wrap"><table class="data"><caption>Edit the four counts</caption><thead><tr><th></th><th>'+esc(cn[0])+'</th><th>'+esc(cn[1])+'</th><th>Total</th></tr></thead><tbody></tbody></table></div><div class="vr" aria-live="polite"></div><p class="vn">Joint = cell ÷ grand total. Marginal = row or column total ÷ grand total. Conditional = cell ÷ the total of the condition. If P(B | A) = P(B), the events are independent.</p>';
+ var tb=$('tbody',root);root.vr=$('.vr',root);var inp=[];
+ [0,1].forEach(function(r){var tr=document.createElement('tr');tr.innerHTML='<th class="l">'+esc(rn[r])+'</th>';[0,1].forEach(function(c){var td=document.createElement('td'),i=document.createElement('input');i.type='number';i.min=0;i.value=v[r*2+c];i.style.width='5.5rem';i.setAttribute('aria-label',rn[r]+' and '+cn[c]);i.addEventListener('input',calc);inp.push(i);td.appendChild(i);tr.appendChild(td);});var t=document.createElement('td');t.className='rt';tr.appendChild(t);tb.appendChild(tr);});
+ var tr=document.createElement('tr');tr.className='tot';tr.innerHTML='<td class="l">Total</td><td class="c0"></td><td class="c1"></td><td class="gt"></td>';tb.appendChild(tr);
+ function calc(){var a=inp.map(function(i){return Math.max(0,+i.value||0);}),r0=a[0]+a[1],r1=a[2]+a[3],c0=a[0]+a[2],c1=a[1]+a[3],N=r0+r1;$$('.rt',tb)[0].textContent=r0;$$('.rt',tb)[1].textContent=r1;$('.c0',tb).textContent=c0;$('.c1',tb).textContent=c1;$('.gt',tb).textContent=N;
+  if(!N||!r0||!c0){readout(root,[['Enter counts','–']]);return;}
+  var pA=r0/N,pB=c0/N,pAB=a[0]/N,pBgA=a[0]/r0,pAgB=a[0]/c0,indep=Math.abs(pBgA-pB)<0.0005;
+  readout(root,[['P('+rn[0]+')',fx(pA,4)],['P('+cn[0]+')',fx(pB,4)],['P('+rn[0]+' and '+cn[0]+')',fx(pAB,4)],['P('+rn[0]+' or '+cn[0]+')',fx(pA+pB-pAB,4)],['P('+cn[0]+' | '+rn[0]+')',fx(pBgA,4)],['P('+rn[0]+' | '+cn[0]+')',fx(pAgB,4)],['Independent?',indep?'Yes (P(B|A) = P(B))':'No — they are related']]);}
+ calc();};
+/* ---- binomial ---- */
+VIZ.binom=function(root){shell(root,'Binomial distribution explorer',230,'X = number of successes in n independent trials, each with success probability p. Mean = np, standard deviation = √(np(1−p)).');
+ var n=ctl(root,'Trials n',{min:1,max:40,step:1,val:10,on:draw}),p=ctl(root,'Success probability p',{min:.05,max:.95,step:.05,val:.3,on:draw,fmt:function(v){return v.toFixed(2);}}),k=ctl(root,'Highlight k',{min:0,max:10,step:1,val:3,on:draw});
+ function draw(){var N=n.get(),P=p.get();k.max(N);var K=Math.min(k.get(),N),ym=0,i,pm=[];for(i=0;i<=N;i++){pm.push(binpmf(N,P,i));ym=Math.max(ym,pm[i]);}ym=Math.ceil(ym*20)/20+.0001;
+  var F=frame(root.cv,230,-.5,N+.5,ym,{b:40}),g=F.g;axisY(F,ym,4,function(v){return v.toFixed(2);});pm.forEach(function(q,i){g.fillStyle=i<=K?cv('--chart1'):cv('--chart2');g.globalAlpha=i===K?1:.7;g.fillRect(F.X(i-.4),F.Y(q),F.X(i+.4)-F.X(i-.4),F.Y(0)-F.Y(q));});g.globalAlpha=1;
+  var t=[],l=[],st=N>20?5:N>10?2:1;for(i=0;i<=N;i+=st){t.push(i);l.push(i);}axisX(F,t,l,'number of successes x');
+  var cum=0;for(i=0;i<=K;i++)cum+=pm[i];readout(root,[['Mean np',fx(N*P,2)],['Std dev',fx(Math.sqrt(N*P*(1-P)),3)],['P(X = '+K+')',fx(pm[K],4)],['P(X ≤ '+K+')',fx(cum,4)],['P(X ≥ '+K+')',fx(1-cum+pm[K],4)]]);}
+ onRedraw(draw);};
+/* ---- uniform ---- */
+VIZ.uniform=function(root){shell(root,'Continuous uniform distribution U(a, b)',210,'The rectangle has area 1. P(c < X < d) is the area of the shaded part. Because the area under a single point is zero, P(X = c) = 0 and ≤ vs < makes no difference.');
+ var a=ctl(root,'a (minimum)',{min:0,max:80,step:1,val:20,on:draw}),b=ctl(root,'b (maximum)',{min:1,max:90,step:1,val:50,on:draw}),c=ctl(root,'c (lower bound)',{min:0,max:90,step:1,val:30,on:draw}),d=ctl(root,'d (upper bound)',{min:0,max:90,step:1,val:45,on:draw});
+ function draw(){var A=a.get(),B=Math.max(b.get(),A+1),C=c.get(),D=d.get();if(D<C){var t=C;C=D;D=t;}var h=1/(B-A),F=frame(root.cv,210,0,90,Math.max(h*1.6,0.06),{b:36});axisY(F,Math.max(h*1.6,0.06),4,function(v){return v.toFixed(3);});var g=F.g;
+  var lo=Math.max(A,C),hi=Math.min(B,D),pr=hi>lo?(hi-lo)/(B-A):0;if(hi>lo){g.fillStyle=cv('--shade2');g.fillRect(F.X(lo),F.Y(h),F.X(hi)-F.X(lo),F.Y(0)-F.Y(h));}
+  g.strokeStyle=cv('--chart1');g.lineWidth=2.5;g.beginPath();g.moveTo(F.X(0),F.Y(0));g.lineTo(F.X(A),F.Y(0));g.lineTo(F.X(A),F.Y(h));g.lineTo(F.X(B),F.Y(h));g.lineTo(F.X(B),F.Y(0));g.lineTo(F.X(90),F.Y(0));g.stroke();g.lineWidth=1;
+  var tk=[];for(var i=0;i<=90;i+=10)tk.push(i);axisX(F,tk,null,'x');vline(F,C,cv('--warm'),'c',true);vline(F,D,cv('--warm'),'d',true);
+  readout(root,[['Height f(x) = 1/(b−a)',fx(h,4)],['Mean (a+b)/2',fx((A+B)/2,2)],['Std dev (b−a)/√12',fx((B-A)/Math.sqrt(12),3)],['P('+C+' < X < '+D+')',fx(pr,4)]]);}
+ onRedraw(draw);};
+/* ---- normal ---- */
+VIZ.normal=function(root){shell(root,'Normal distribution explorer',250,'Area under the curve = probability. z = (x − μ)/σ tells you how many standard deviations x is from the mean. “Find x” reads the table backwards: given the area to the left, find the cut-off.');
+ var mu=ctl(root,'Mean μ',{type:'number',min:-1000,max:1000,step:'any',val:root.dataset.mu||100}),s=ctl(root,'Std dev σ',{type:'number',min:.01,max:1000,step:'any',val:root.dataset.sd||15}),
+  m=ctl(root,'What do you want?',{type:'select',val:'below',opts:[['below','P(X < x1)'],['above','P(X > x1)'],['between','P(x1 < X < x2)'],['inv','Find x with area p to the left']]}),
+  x1=ctl(root,'x1 (or p for “find x”)',{type:'number',min:-1000,max:1000,step:'any',val:root.dataset.x1||115}),x2=ctl(root,'x2',{type:'number',min:-1000,max:1000,step:'any',val:root.dataset.x2||130});
+ [mu,s,m,x1,x2].forEach(function(c){c.el.addEventListener('input',draw);c.el.addEventListener('change',draw);});
+ function draw(){var M=mu.get(),S=Math.max(s.get(),.0001),mode=m.get(),A=x1.get(),B=x2.get(),zs=function(x){return (x-M)/S;},F=frame(root.cv,250,-4,4,.45,{b:50}),g=F.g;if(isNaN(M)||isNaN(S)||isNaN(A))return;
+  var f=function(z){return npdf(z);},pr,za=zs(A),zb=zs(B),info;
+  if(mode==='inv'){var p=Math.min(.9999,Math.max(.0001,A)),zz=ninv(p);curve(F,f,-4,4,null,0,cv('--shade2'),-4,Math.max(-4,Math.min(4,zz)));curve(F,f,-4,4,cv('--chart1'),2.5);vline(F,Math.max(-4,Math.min(4,zz)),cv('--warm'),'x',true);pr=p;info=[['Area to the left p',fx(p,4)],['z for that area',fx(zz,3)],['x = μ + zσ',fx(M+zz*S,3)]];}
+  else{var lo=-4,hi=4;if(mode==='below')hi=za;else if(mode==='above')lo=za;else{lo=Math.min(za,zb);hi=Math.max(za,zb);}lo=Math.max(-4,lo);hi=Math.min(4,hi);if(hi>lo)curve(F,f,-4,4,null,0,cv('--shade2'),lo,hi);curve(F,f,-4,4,cv('--chart1'),2.5);
+   pr=mode==='below'?ncdf(za):mode==='above'?1-ncdf(za):Math.abs(ncdf(zb)-ncdf(za));vline(F,Math.max(-4,Math.min(4,za)),cv('--warm'),'x1',true);if(mode==='between')vline(F,Math.max(-4,Math.min(4,zb)),cv('--warm'),'x2',true);
+   info=[['z1',fx(za,3)]].concat(mode==='between'?[['z2',fx(zb,3)]]:[]).concat([['Probability',fx(pr,4)]]);}
+  var t=[-3,-2,-1,0,1,2,3];axisX(F,t,t.map(function(z){return fx(M+z*S,S<1?2:1)+'\n';}).map(function(x){return x.trim();}),'x value (z = −3 … 3 below)');
+  g.fillStyle=cv('--muted');g.textAlign='center';g.textBaseline='top';t.forEach(function(z){g.fillText('z='+z,F.X(z),F.h-F.B+20);});
+  readout(root,info);root.cv.setAttribute('aria-label','Normal curve; '+info.map(function(i){return i[0]+' '+i[1];}).join(', '));}
+ onRedraw(draw);};
+/* ---- central limit theorem ---- */
+VIZ.clt=function(root){shell(root,'Central Limit Theorem simulator',270,'Each press draws 1,000 random samples of size n from the population on the left and plots their means. The orange curve is the normal curve the CLT predicts: mean μ and standard error σ/√n.');
+ var pop=ctl(root,'Population shape',{type:'select',val:'exp',opts:[['exp','Right-skewed (exponential)'],['uni','Uniform'],['bim','Bimodal'],['nor','Normal']]}),
+  nn=ctl(root,'Sample size n',{min:0,max:5,step:1,val:2,fmt:function(i){return [1,2,5,10,30,100][i];},on:function(){}});
+ var b=document.createElement('button');b.className='btn';b.type='button';b.textContent='Draw 1,000 samples';root.cc.appendChild(b);
+ var P={exp:{mu:5,sd:5,gen:function(){return -5*Math.log(1-Math.random());},pdf:function(x){return x<0?0:Math.exp(-x/5)/5;}},
+  uni:{mu:5,sd:10/Math.sqrt(12),gen:function(){return Math.random()*10;},pdf:function(x){return x>=0&&x<=10?.1:0;}},
+  bim:{mu:5,sd:Math.sqrt(.64+9),gen:function(){var u=Math.random()<.5?2:8,a=Math.sqrt(-2*Math.log(1-Math.random()))*Math.cos(6.2832*Math.random());return u+.8*a;},pdf:function(x){return .5*(npdf((x-2)/.8)+npdf((x-8)/.8))/.8;}},
+  nor:{mu:5,sd:2,gen:function(){return 5+2*Math.sqrt(-2*Math.log(1-Math.random()))*Math.cos(6.2832*Math.random());},pdf:function(x){return npdf((x-5)/2)/2;}}};
+ var means=null,lastN=1,lastPop='exp';
+ function draw(){var pp=P[pop.get()],n=[1,2,5,10,30,100][nn.get()],h=270,F=frame(root.cv,h,0,14,1,{b:40,l:10});var g=F.g,i;
+  var W=root.cv.clientWidth,pw=Math.min(210,W*.3);
+  function drawPop(){var g=root.cv.getContext('2d');
+  /* population (small, left) */
+  var px=function(x){return 10+x/14*pw;},ymax=0;for(i=0;i<=140;i++)ymax=Math.max(ymax,pp.pdf(i/10));
+  g.fillStyle=cv('--shade');g.strokeStyle=cv('--chart1');g.lineWidth=2;g.beginPath();g.moveTo(px(0),h-40);for(i=0;i<=140;i++){g.lineTo(px(i/10),h-40-pp.pdf(i/10)/ymax*70);}g.lineTo(px(14),h-40);g.closePath();g.fill();g.stroke();g.lineWidth=1;
+  g.fillStyle=cv('--muted');g.textAlign='left';g.textBaseline='top';g.fillText('Population (μ = '+pp.mu+', σ = '+fx(pp.sd,2)+')',10,h-30);
+  }
+  if(means&&lastN===n&&lastPop===pop.get()){var bw=.2,K=70,c=[],i2;for(i2=0;i2<K;i2++)c.push(0);means.forEach(function(v){var j=Math.min(K-1,Math.max(0,Math.floor(v/bw)));c[j]++;});var se=pp.sd/Math.sqrt(n),yM=Math.max(Math.max.apply(null,c)/means.length/bw,npdf(0)/se)*1.12;
+   var G=frame(root.cv,h,0,14,yM,{l:W*.34,r:12,b:40,t:12});g=G.g;
+   g.fillStyle=cv('--chart1');g.globalAlpha=.8;c.forEach(function(k,j){var d=k/means.length/bw;g.fillRect(G.X(j*bw),G.Y(d),Math.max(1,G.X(bw)-G.X(0)-.5),G.Y(0)-G.Y(d));});g.globalAlpha=1;
+   curve(G,function(x){return npdf((x-pp.mu)/se)/se;},0,14,cv('--chart2'),2.5);axisX(G,[0,2,4,6,8,10,12,14],null,'sample mean x̄');
+   readout(root,[['Samples drawn',means.length],['Mean of the means',fx(mean(means),3)+'  (μ = '+pp.mu+')'],['Std dev of the means',fx(sd(means),3)],['σ/√n (theory)',fx(se,3)]]);}
+  else{g.fillStyle=cv('--muted');g.textAlign='center';g.fillText('Choose a population and n, then press “Draw 1,000 samples”.',W*.64,h/2);readout(root,[['n',n],['σ/√n (theory)',fx(pp.sd/Math.sqrt(n),3)]]);}drawPop();}
+ b.addEventListener('click',function(){var pp=P[pop.get()],n=[1,2,5,10,30,100][nn.get()];means=[];for(var i=0;i<1000;i++){var s=0;for(var j=0;j<n;j++)s+=pp.gen();means.push(s/n);}lastN=n;lastPop=pop.get();draw();});
+ pop.el.addEventListener('change',draw);nn.el.addEventListener('input',draw);onRedraw(draw);};
+/* ---- confidence intervals ---- */
+VIZ.ci=function(root){shell(root,'Confidence-interval simulator (true mean μ = 100, σ = 15)',330,'Each horizontal line is one 95 %-style interval x̄ ± t·s/√n built from a fresh random sample. Red intervals missed μ. The confidence level describes the long-run hit rate of the method, not any single interval.');
+ var n=ctl(root,'Sample size n',{min:5,max:100,step:1,val:25}),lv=ctl(root,'Confidence level',{type:'select',val:'0.95',opts:[['0.80','80 %'],['0.90','90 %'],['0.95','95 %'],['0.99','99 %']]});
+ var b=document.createElement('button');b.className='btn';b.type='button';b.textContent='Draw 50 intervals';root.cc.appendChild(b);var res=null;
+ function rn(){return Math.sqrt(-2*Math.log(1-Math.random()))*Math.cos(6.2832*Math.random());}
+ function draw(){var F=frame(root.cv,330,80,120,1,{l:12,b:34,t:8}),g=F.g;g.textAlign='center';if(!res){g.fillStyle=cv('--muted');g.fillText('Press “Draw 50 intervals”.',F.w/2,F.h/2);readout(root,[['Tip','Try n = 5 and 99 %, then n = 100 and 80 %']]);axisX(F,[80,90,100,110,120],null,'');return;}
+  var hit=0;res.forEach(function(r,i){var y=10+i*(F.h-F.B-14)/50,ok=r.lo<=100&&r.hi>=100;if(ok)hit++;g.strokeStyle=ok?cv('--chart1'):cv('--bad');g.lineWidth=2;g.beginPath();g.moveTo(F.X(Math.max(80,r.lo)),y);g.lineTo(F.X(Math.min(120,r.hi)),y);g.stroke();g.beginPath();g.arc(F.X(r.m),y,2.5,0,6.3);g.fillStyle=g.strokeStyle;g.fill();});g.lineWidth=1;
+  axisX(F,[80,90,100,110,120],null,'');vline(F,100,cv('--warm'),'μ = 100',true);var w=res.length?(res[0].hi-res[0].lo):0;
+  readout(root,[['Captured μ',hit+' of 50  ('+Math.round(hit*2)+' %)'],['Missed',(50-hit)],['Typical width',fx(w,1)],['t critical (df = '+(res.n-1)+')',fx(res.tc,3)]]);}
+ b.addEventListener('click',function(){var N=n.get(),C=parseFloat(lv.get()),tc=tinv(1-(1-C)/2,N-1);res=[];res.n=N;res.tc=tc;for(var i=0;i<50;i++){var a=[];for(var j=0;j<N;j++)a.push(100+15*rn());var m=mean(a),e=tc*sd(a)/Math.sqrt(N);res.push({m:m,lo:m-e,hi:m+e});}draw();});
+ onRedraw(draw);};
+/* ---- p-value ---- */
+VIZ.pval=function(root){shell(root,'p-value as a tail area',240,'The p-value is the area in the tail(s) beyond your test statistic, computed as if H₀ were true. If p ≤ α, the result is “statistically significant” and H₀ is rejected.');
+ var z=ctl(root,'Test statistic z',{min:-4,max:4,step:.01,val:1.75,on:draw,fmt:function(v){return v.toFixed(2);}}),tl=ctl(root,'Alternative hypothesis',{type:'select',val:'two',opts:[['two','Hₐ: μ ≠ μ₀ (two-sided)'],['right','Hₐ: μ > μ₀ (right-tail)'],['left','Hₐ: μ < μ₀ (left-tail)']]}),al=ctl(root,'Significance level α',{type:'select',val:'0.05',opts:[['0.10','0.10'],['0.05','0.05'],['0.01','0.01']]});
+ tl.el.addEventListener('change',draw);al.el.addEventListener('change',draw);
+ function draw(){var Z=z.get(),T=tl.get(),A=parseFloat(al.get()),F=frame(root.cv,240,-4,4,.45,{b:44}),g=F.g,f=npdf,p,cr;
+  if(T==='two'){p=2*(1-ncdf(Math.abs(Z)));cr=ninv(1-A/2);}else{p=T==='right'?1-ncdf(Z):ncdf(Z);cr=ninv(1-A);}
+  if(T==='two'){var a=Math.abs(Z);curve(F,f,-4,4,null,0,cv('--shade2'),a,4);curve(F,f,-4,4,null,0,cv('--shade2'),-4,-a);}else if(T==='right')curve(F,f,-4,4,null,0,cv('--shade2'),Z,4);else curve(F,f,-4,4,null,0,cv('--shade2'),-4,Z);
+  curve(F,f,-4,4,cv('--chart1'),2.5);axisX(F,[-4,-3,-2,-1,0,1,2,3,4],null,'z');
+  if(T==='two'){vline(F,cr,cv('--bad'),'',true);vline(F,-cr,cv('--bad'),'',true);}else vline(F,T==='right'?cr:-cr,cv('--bad'),'',true);vline(F,Z,cv('--warm'),'z');
+  var rej=p<=A;readout(root,[['p-value',fx(p,4)],['α',A.toFixed(2)],['Critical value'+(T==='two'?'s':''),(T==='two'?'±':T==='left'?'−':'')+fx(cr,3)],['Decision',rej?'Reject H₀ (p ≤ α)':'Fail to reject H₀ (p > α)']]);}
+ onRedraw(draw);};
+/* ---- Type I / II error and power ---- */
+VIZ.power=function(root){shell(root,'Type I error, Type II error and power (right-tailed z-test)',270,'Purple curve: sampling distribution of the test statistic when H₀ is true. Orange curve: when the true mean is larger by d standard deviations. Red area = α (Type I), blue area = β (Type II), the rest of the orange curve is power.');
+ var al=ctl(root,'Significance level α',{type:'select',val:'0.05',opts:[['0.10','0.10'],['0.05','0.05'],['0.01','0.01']]}),d=ctl(root,'True effect d (in σ units)',{min:.1,max:1,step:.05,val:.5,on:draw,fmt:function(v){return v.toFixed(2);}}),n=ctl(root,'Sample size n',{min:4,max:200,step:1,val:25,on:draw});
+ al.el.addEventListener('change',draw);
+ function draw(){var A=parseFloat(al.get()),D=d.get(),N=n.get(),del=D*Math.sqrt(N),c=ninv(1-A),F=frame(root.cv,270,-4,9,.45,{b:44}),g=F.g;
+  var f0=function(x){return npdf(x);},f1=function(x){return npdf(x-del);};
+  curve(F,f1,-4,9,null,0,cv('--shade'),-4,c);curve(F,f1,-4,9,null,0,'rgba(60,160,120,.28)',c,9);curve(F,f0,-4,9,null,0,'rgba(200,60,60,.45)',c,9);
+  curve(F,f0,-4,9,cv('--chart1'),2.5);curve(F,f1,-4,9,cv('--chart2'),2.5);vline(F,c,cv('--ink'),'critical z',true);axisX(F,[-4,-2,0,2,4,6,8],null,'test statistic z');
+  var beta=ncdf(c-del);readout(root,[['Critical value',fx(c,3)],['Shift δ = d·√n',fx(del,2)],['α = P(Type I)',fx(A,3)],['β = P(Type II)',fx(beta,3)],['Power = 1 − β',fx(1-beta,3)]]);}
+ onRedraw(draw);};
+$$('.viz[data-viz]').forEach(function(r){var f=VIZ[r.dataset.viz];if(f){try{f(r);}catch(e){r.textContent='(This interactive could not start: '+e.message+')';}}});
+/* ---------- objectives checklist ---------- */
+(function(){var K='bs-'+PAGE.slug+'-check',st={};try{st=JSON.parse(lsGet(K)||'{}')||{};}catch(e){}
+ $$('.obj input').forEach(function(c,i){c.checked=!!st[i];c.addEventListener('change',function(){st[i]=c.checked;lsSet(K,JSON.stringify(st));});});})();
+/* ---------- practice engine ---------- */
+var EX=PAGE.ex||[],KEY='bs-'+PAGE.slug+'-practice',S={};try{S=JSON.parse(lsGet(KEY)||'{}')||{};}catch(e){S={};}
+function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
+function perm(n,seed){var a=[],i;for(i=0;i<n;i++)a.push(i);var r=seed||1;for(i=n-1;i>0;i--){r=(Math.imul(r,1664525)+1013904223)>>>0;var j=r%(i+1),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function parseNum(s,keepPct){s=String(s).trim().replace(/[−–]/g,'-').replace(/[$€£,\s]/g,'');var pct=/%$/.test(s);s=s.replace(/%$/,'');var m=s.match(/^(-?\d*\.?\d+)\/(\d*\.?\d+)$/),v;
+ if(m)v=parseFloat(m[1])/parseFloat(m[2]);else if(/^-?(\d+\.?\d*|\.\d+)$/.test(s))v=parseFloat(s);else return NaN;if(pct&&!keepPct)v/=100;return v;}
+var host=$('#practiceList');
+function qEl(e,i){var id=e.id,a=document.createElement('article');a.className='q';a.id='q-'+id;
+ var h='<div class="qh"><span class="qn">Q'+(i+1)+'</span><span class="qt">'+esc(e.tag||'')+'</span><span class="qs" aria-live="polite"></span></div><div class="qb">'+e.q+'</div>';
+ if(e.type==='mc'){e.order=perm(e.opts.length,hash(id));h+='<div class="opts" role="radiogroup">'+e.order.map(function(oi,k){return '<label><input type="radio" name="r-'+id+'" value="'+oi+'"><span>'+e.opts[oi]+'</span></label>';}).join('')+'</div>';}
+ else h+='<div class="nrow"><label class="sr" for="n-'+id+'" style="position:absolute;left:-9999px">Your answer</label><input type="text" id="n-'+id+'" inputmode="decimal" autocomplete="off" placeholder="Your answer"><span class="u">'+(e.unit||'')+'</span></div>';
+ h+='<div class="nrow"><button type="button" class="btn" data-c>Check</button><button type="button" class="btn ghost" data-s hidden>Show solution</button></div><div class="fb" role="status"></div>';a.innerHTML=h;
+ $('[data-c]',a).addEventListener('click',function(){check(e,a);});$('[data-s]',a).addEventListener('click',function(){reveal(e,a);});
+ var ni=$('input[type=text]',a);if(ni)ni.addEventListener('keydown',function(ev){if(ev.key==='Enter'){ev.preventDefault();check(e,a);}});return a;}
+function ansText(e){return e.type==='mc'?e.opts[0]:(e.show!=null?e.show:String(e.ans))+(e.unit?' '+e.unit:'');}
+function fb(a,cls,html){var f=$('.fb',a);f.className='fb show '+cls;f.innerHTML=html;}
+function lock(a){$$('input,button[data-c]',a).forEach(function(x){x.disabled=true;});$$('.opts label',a).forEach(function(l){l.classList.add('dis');});$('[data-s]',a).hidden=true;}
+function paint(e,a){var s=S[e.id];if(!s)return;
+ if(s.st==='ok'){a.classList.add('done');$('.qs',a).textContent='✔ '+s.pts+' pts';lock(a);fb(a,'ok','<p><b>Correct.</b> '+e.why+'</p>');}
+ else if(s.st==='shown'){a.classList.add('shown');$('.qs',a).textContent='Solution viewed';lock(a);fb(a,'info','<p><b>Answer: '+ansText(e)+'</b></p><p>'+e.why+'</p>');}
+ else if(s.t>0){$('[data-s]',a).hidden=false;$('.qs',a).textContent='Tries: '+s.t;}
+ if(e.type==='mc'&&s.v!=null){var r=$$('input',a);r.forEach(function(x){if(+x.value===+s.v){x.checked=true;if(s.st==='ok')x.parentNode.classList.add('right');}if(s.st==='shown'&&+x.value===0)x.parentNode.classList.add('right');});}
+ if(e.type==='num'&&s.v!=null){$('input[type=text]',a).value=s.v;}}
+function check(e,a){var s=S[e.id]||(S[e.id]={t:0}),ok,val;if(s.st==='ok'||s.st==='shown')return;
+ if(e.type==='mc'){var c=$('input:checked',a);if(!c){fb(a,'info','<p>Choose an answer first.</p>');return;}val=c.value;ok=(+val===0);}
+ else{var txt=$('input[type=text]',a).value;val=txt;var v=parseNum(txt,e.pct);if(isNaN(v)){fb(a,'info','<p>Type a number (for example 0.25, 12.5 or 3/4).</p>');return;}ok=Math.abs(v-e.ans)<=e.tol;}
+ s.t++;s.v=val;
+ if(ok){s.st='ok';s.pts=s.t===1?2:s.t===2?1:0.5;}
+ else{if(e.type==='mc'){var lab=$('input:checked',a).parentNode;lab.classList.add('wrong');}fb(a,'no','<p><b>Not quite.</b> '+(s.t===1?(e.hint||'Re-read the question and check each step.'):'Try again, or use “Show solution”.')+'</p>');$('[data-s]',a).hidden=false;$('.qs',a).textContent='Tries: '+s.t;}
+ save();if(ok){paint(e,a);}summary();}
+function reveal(e,a){var s=S[e.id]||(S[e.id]={t:0});if(s.st==='ok')return;s.st='shown';s.pts=0;save();paint(e,a);summary();}
+function save(){lsSet(KEY,JSON.stringify(S));}
+function stats(){var done=0,pts=0,right=0;EX.forEach(function(e){var s=S[e.id];if(s&&(s.st==='ok'||s.st==='shown')){done++;pts+=s.pts||0;if(s.st==='ok')right++;}});return {done:done,pts:pts,right:right,n:EX.length};}
+function summary(){var t=stats(),sb=$('#sbar');if(sb){$('.n',sb).textContent=t.done+' of '+t.n+' finished';$('.p',sb).textContent=t.pts+' / '+(2*t.n)+' points';$('.bar i',sb).style.width=(t.n?100*t.done/t.n:0)+'%';}
+ try{if(window.LiaSync&&LiaSync.report&&t.n)LiaSync.report({solved:t.done,total:t.n,score:t.pts,max:2*t.n});}catch(e){}}
+if(host){EX.forEach(function(e,i){var a=qEl(e,i);host.appendChild(a);paint(e,a);});summary();}
+/* ---------- exit ticket (saved as a readable response) ---------- */
+(function(){var h=$('#exit');if(!h||!PAGE.exit||!PAGE.exit.length)return;var K='resp-bs-'+PAGE.slug+'-exit',old=null;try{old=JSON.parse(lsGet(K)||'null');}catch(e){}
+ var tas=PAGE.exit.map(function(q,i){var w=document.createElement('div');w.innerHTML='<p><b>'+(i+1)+'. '+q+'</b></p><label class="sr" for="x'+i+'" style="position:absolute;left:-9999px">Your answer</label><textarea id="x'+i+'" placeholder="Write your answer here. It saves automatically."></textarea>';h.appendChild(w);var t=$('textarea',w);if(old&&old.a&&old.a[i])t.value=old.a[i];return t;});
+ function sv(){lsSet(K,JSON.stringify({title:PAGE.title+' – Exit ticket',q:PAGE.exit.map(function(q){return q.replace(/<[^>]+>/g,'');}),a:tas.map(function(t){return t.value;})}));}
+ tas.forEach(function(t){t.addEventListener('input',sv);t.addEventListener('blur',sv);});})();
+})();
+</script>
+</body>
+</html>
