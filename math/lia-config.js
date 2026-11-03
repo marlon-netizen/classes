@@ -11,6 +11,7 @@ window.LIA_CONFIG={
     'advanced-algebra-lines-and-sequences': 'Parallel & Perpendicular Lines and Arithmetic Sequences',
     'ap-stats-unit-2': 'AP Statistics – Lessons 2.8–2.12',
     'ap-stats-unit-3-lessons-3-1-3-4': 'AP Statistics – Lessons 3.1–3.4',
+    'ap-stats-unit-3-lessons-3-5-3-8': 'AP Statistics – Lessons 3.5–3.8',
     'business-stats-midterm-review': 'Business Statistics – Midterm Review (Weeks 1–6): Formula Sheet and Mixed Practice',
     'business-stats-week-1-session-1': 'Business Statistics – Week 1 Session 1: Introduction to Statistics in Business',
     'business-stats-week-1-session-2': 'Business Statistics – Week 1 Session 2: Sampling, Errors and Data Quality',

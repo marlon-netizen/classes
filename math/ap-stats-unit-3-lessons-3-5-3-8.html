@@ -1,0 +1,2268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AP Statistics – Lessons 3.5–3.8 | Lincoln International Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --ink: #2c3a4a;
+    --muted: #66758a;
+    --primary: #4a6fa5;
+    --primary-dark: #35557f;
+    --primary-soft: #e3ebf5;
+    --accent: #8fb3a0;
+    --ok: #3f8f6b;
+    --ok-bg: #e4f3ec;
+    --warn: #b7791f;
+    --warn-bg: #fbf1dc;
+    --bad: #b5524f;
+    --bad-bg: #f8e6e5;
+    --line: #d9e0e8;
+    --sol-bg: #f7f9fb; --field: #ffffff; --disabled: #eef1f5; --disabled-btn: #b8c3d1;
+    --on-primary: #ffffff; --ok-ink: #276348; --bad-ink: #8a3b39; --warn-ink: #835a14;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    letter-spacing: .2px;
+  }
+  header {
+    background: linear-gradient(135deg, #dfe8f3, #eef3f0);
+    border-bottom: 4px solid var(--primary);
+    text-align: center;
+    padding: 2rem 1rem 1.5rem;
+  }
+  header h1 {
+    margin: 0; font-weight: 600;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--primary-dark);
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+  header .class-name { margin: .4rem 0 0; font-size: clamp(1.2rem, 3.5vw, 1.6rem); font-weight: 500; }
+  header .details { margin: .2rem 0 0; color: var(--muted); font-weight: 300; font-size: 1.1rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
+
+  .tabs { display: flex; gap: .5rem; border-bottom: 2px solid var(--line); margin-bottom: 1.2rem; overflow-x: auto; }
+  .tab-btn { white-space: nowrap; }
+  .tab-btn {
+    font: inherit; font-weight: 500; font-size: 1.05rem;
+    padding: .7rem 1.2rem; border: none; border-radius: 8px 8px 0 0;
+    background: transparent; color: var(--muted); cursor: pointer;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: background .2s, color .2s;
+  }
+  .tab-btn:hover { background: var(--primary-soft); color: var(--primary-dark); }
+  .tab-btn[aria-selected="true"] { background: var(--primary); color: var(--on-primary); }
+  .tab-btn:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #9ab7dd; outline-offset: 2px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 1.2rem 1.4rem; margin-bottom: 1.2rem;
+    box-shadow: 0 1px 3px rgba(40,60,90,.05);
+  }
+  h2 { margin: 0 0 .6rem; font-weight: 500; color: var(--primary-dark); font-size: 1.5rem; }
+  h3 { margin: 0 0 .5rem; font-weight: 500; color: var(--primary-dark); font-size: 1.2rem; }
+  p { margin: .5rem 0; font-weight: 300; font-size: 1.05rem; }
+  ul { font-weight: 300; font-size: 1.05rem; padding-left: 1.3rem; }
+  .formula {
+    background: var(--primary-soft); border-left: 5px solid var(--primary);
+    padding: .8rem 1rem; margin: .8rem 0; border-radius: 6px;
+    font-size: 1.3rem; font-weight: 500; text-align: center;
+  }
+  .formula { font-family: "Cambria Math", "STIX Two Math", "Latin Modern Math", "Noto Serif", "DejaVu Serif", Georgia, serif; font-weight: 500; }
+  .formula small { font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif; display: block; font-size: .95rem; font-weight: 300; color: var(--muted); margin-top: .2rem; }
+  .note { background: var(--warn-bg); border-left: 5px solid var(--warn); padding: .6rem 1rem; border-radius: 6px; }
+  .frac { display: inline-block; text-align: center; vertical-align: middle; margin: 0 .15rem; }
+  .frac > span { display: block; padding: 0 .25rem; }
+  .frac > span:first-child { border-bottom: 1.5px solid currentColor; }
+  .solution { background: var(--sol-bg); border: 1px dashed var(--line); border-radius: 8px; padding: .6rem 1rem; margin-top: .6rem; }
+  .solution p { margin: .25rem 0; }
+  .example-title { color: var(--primary); font-weight: 500; margin-bottom: .2rem; }
+
+  table.data { border-collapse: collapse; margin: .6rem auto; font-weight: 300; }
+  table.data th, table.data td { border: 1px solid var(--line); padding: .3rem .9rem; text-align: center; }
+  table.data th { background: var(--primary-soft); font-weight: 500; }
+  table.data caption { caption-side: top; font-weight: 500; color: var(--primary-dark); padding-bottom: .3rem; }
+  .table-wrap { overflow-x: auto; }
+
+  .scorebar {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .6rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: .8rem 1.2rem; margin-bottom: 1.2rem;
+  }
+  .scorebar strong { color: var(--primary-dark); font-weight: 500; }
+  .progress { flex: 1 1 160px; height: 10px; background: var(--line); border-radius: 6px; overflow: hidden; }
+  .progress div { height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+  .qtext { margin: .5rem 0; font-weight: 300; font-size: 1.05rem; }
+  .problem .q-num { color: var(--primary); font-weight: 600; letter-spacing: 1px; }
+  .answer-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: .7rem; }
+  .answer-row input[type="text"] {
+    font: inherit; padding: .5rem .8rem; width: 190px;
+    border: 2px solid var(--line); border-radius: 8px; background: var(--field); color: var(--ink);
+  }
+  .answer-row input:disabled { background: var(--disabled); color: var(--muted); }
+  .unit-label { color: var(--muted); font-weight: 300; margin-left: -.2rem; }
+  .options { display: grid; gap: .4rem; margin-top: .6rem; }
+  .options label {
+    display: flex; gap: .6rem; align-items: center; padding: .45rem .8rem;
+    border: 2px solid var(--line); border-radius: 8px; cursor: pointer; font-weight: 300; font-size: 1.05rem;
+    background: var(--field); color: var(--ink); transition: background .15s, border-color .15s;
+  }
+  .options label:hover { background: var(--primary-soft); }
+  .options label.disabled { cursor: default; background: var(--disabled); }
+  .options label.picked-wrong { border-color: var(--bad); background: var(--bad-bg); }
+  .options label.picked-right { border-color: var(--ok); background: var(--ok-bg); }
+  .options input { accent-color: var(--primary); }
+  button.btn {
+    font: inherit; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    background: var(--primary); color: var(--on-primary); border: none; border-radius: 8px;
+    padding: .55rem 1.2rem; cursor: pointer; transition: background .2s;
+  }
+  button.btn:hover:not(:disabled) { background: var(--primary-dark); }
+  button.btn:disabled { background: var(--disabled-btn); color: var(--muted); cursor: not-allowed; }
+  button.btn.secondary { background: var(--field); color: var(--primary-dark); border: 2px solid var(--primary); }
+  button.btn.secondary:hover { background: var(--primary-soft); }
+  .attempts { margin-left: auto; color: var(--muted); font-weight: 300; }
+  .dots { display: inline-flex; gap: 5px; vertical-align: middle; margin-left: .3rem; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 1px solid #6f9783; }
+  .dot.used { background: var(--line); border-color: var(--line); }
+  .feedback { margin-top: .7rem; padding: .6rem 1rem; border-radius: 8px; display: none; font-weight: 400; }
+  .feedback.show { display: block; }
+  .feedback.ok { background: var(--ok-bg); color: var(--ok-ink); border-left: 5px solid var(--ok); }
+  .feedback.bad { background: var(--bad-bg); color: var(--bad-ink); border-left: 5px solid var(--bad); }
+  .feedback.hint { background: var(--warn-bg); color: var(--warn-ink); border-left: 5px solid var(--warn); }
+  .feedback .sol { font-weight: 300; margin-top: .3rem; }
+  .final { display: none; text-align: center; }
+  .final.show { display: block; }
+  .final h2 { font-size: 1.8rem; }
+  footer { text-align: center; color: var(--muted); font-weight: 300; font-size: .9rem; padding-bottom: 1.5rem; }
+  @media (max-width: 520px) {
+    .tab-btn { padding: .6rem .7rem; font-size: .9rem; flex: 1; }
+    .attempts { margin-left: 0; width: 100%; }
+  }
+  .rad { border-top: 1.5px solid currentColor; padding: 0 3px; margin-left: 1px; display: inline-block; line-height: .95; }
+  .rad:has(.hat) { padding-top: .35em; line-height: 1.1; }
+  .cycle { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin: .6rem 0; }
+  .cycle div { background: var(--primary-soft); border-radius: 8px; padding: .4rem 1rem; text-align: center; font-weight: 500; }
+  .cycle small { display: block; font-weight: 300; color: var(--muted); }
+
+  /* dark mode (same variables, switched by the Light/Dark toggle or the device setting) */
+  :root[data-theme="dark"]{ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; --sol-bg:#202b39; --field:#0f1620; --disabled:#243040; --disabled-btn:#3a4757; --on-primary:#0f1722; --ok-ink:#a6e6c3; --bad-ink:#f5bcb6; --warn-ink:#f3d58f; }
+  :root[data-theme="dark"] header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; --sol-bg:#202b39; --field:#0f1620; --disabled:#243040; --disabled-btn:#3a4757; --on-primary:#0f1722; --ok-ink:#a6e6c3; --bad-ink:#f5bcb6; --warn-ink:#f3d58f; }
+    :root:not([data-theme="light"]) header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  }
+  .hat { position: relative; display: inline-block; font-style: italic; padding: 0 .03em; }
+  .hat::before { content: '^'; position: absolute; left: 50%; top: -.38em; transform: translateX(-50%); font-style: normal; font-size: .9em; }
+  .sym { font-style: italic; }
+  code { background: var(--primary-soft); color: var(--ink); padding: 0 .35em; border-radius: 4px; font-family: Consolas, "DejaVu Sans Mono", monospace; font-size: .92em; }
+  .ref { font-size: .95rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: .8rem; padding-top: .5rem; }
+  .steps { counter-reset: st; list-style: none; padding-left: 0; }
+  .steps li { counter-increment: st; margin: .4rem 0; padding-left: 2.2rem; position: relative; }
+  .steps li::before { content: counter(st); position: absolute; left: 0; top: .1rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--primary); color: var(--on-primary); text-align: center; font-size: .9rem; line-height: 1.6rem; font-weight: 500; }
+  .lesson-tag { display: inline-block; background: var(--primary-soft); color: var(--primary-dark); border-radius: 6px; padding: .05rem .6rem; font-weight: 500; letter-spacing: 1px; font-size: .9rem; margin-bottom: .3rem; }
+
+  /* simulation */
+  .sim-ctl select { font: inherit; width: 100%; padding: .4rem .6rem; border: 2px solid var(--line); border-radius: 8px; background: var(--field); color: var(--ink); margin-top: .3rem; }
+  .sim-svg .ci-hit { stroke: var(--ok); stroke-width: 2.2; }
+  .sim-svg .ci-miss { stroke: var(--bad); stroke-width: 2.8; }
+  .sim-svg .dot-hit { fill: var(--ok); }
+  .sim-svg .dot-miss { fill: var(--bad); }
+
+  .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.6rem; }
+  .sim-ctl label { display: flex; justify-content: space-between; font-weight: 500; color: var(--primary-dark); }
+  .sim-ctl output { font-weight: 600; color: var(--ink); }
+  .sim-ctl input[type="range"] { width: 100%; accent-color: var(--primary); margin: .3rem 0 0; }
+  .sim-btns { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+  .sim-btns .btn.sm, .sim-presets .btn.sm { padding: .4rem .9rem; font-size: .9rem; text-transform: none; letter-spacing: .3px; }
+  .sim-presets { margin-top: .8rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; color: var(--muted); font-weight: 300; }
+  .sim-svg { width: 100%; height: auto; display: block; }
+  .sim-svg text { font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif; font-size: 12px; fill: var(--muted); }
+  .sim-svg .axis { stroke: var(--muted); stroke-width: 1; }
+  .sim-svg .grid { stroke: var(--line); stroke-width: 1; }
+  .sim-svg .bar { fill: var(--primary); opacity: .75; stroke: var(--card); stroke-width: .5; }
+  .sim-svg .curve { fill: none; stroke: var(--warn); stroke-width: 2.5; }
+  .sim-svg .truep { stroke: var(--ok); stroke-width: 2; stroke-dasharray: 5 4; }
+  .sim-svg .lab { fill: var(--ink); font-size: 13px; }
+  .legend { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; justify-content: center; font-weight: 300; font-size: .95rem; margin-top: .3rem; }
+  .legend i { display: inline-block; width: 18px; height: 10px; margin-right: .4rem; border-radius: 2px; vertical-align: middle; }
+  .sim-last { background: var(--primary-soft); border-left: 5px solid var(--primary); border-radius: 6px; padding: .5rem 1rem; margin: .8rem 0; font-weight: 400; }
+  .sim-status { padding: .5rem 1rem; border-radius: 6px; margin-top: .8rem; font-weight: 400; }
+  .sim-status.good { background: var(--ok-bg); color: var(--ok-ink); border-left: 5px solid var(--ok); }
+  .sim-status.warn { background: var(--warn-bg); color: var(--warn-ink); border-left: 5px solid var(--warn); }
+  details.explore { border: 1px solid var(--line); border-radius: 8px; padding: .4rem 1rem; margin: .6rem 0; background: var(--card); }
+  details.explore summary { cursor: pointer; font-weight: 500; color: var(--primary-dark); }
+  details.explore[open] summary { margin-bottom: .3rem; }
+  @media (max-width: 640px) { .sim-grid { grid-template-columns: 1fr; } }
+  .group-title { margin: 1.6rem 0 .8rem; color: var(--primary-dark); font-weight: 500; font-size: 1.3rem; border-bottom: 2px solid var(--line); padding-bottom: .2rem; }
+
+  .sim-svg .a-alpha { fill: var(--bad); opacity: .55; }
+  .sim-svg .a-beta { fill: var(--warn); opacity: .45; }
+  .sim-svg .a-power { fill: var(--ok); opacity: .5; }
+  .sim-svg .c-null { fill: none; stroke: var(--primary); stroke-width: 2.5; }
+  .sim-svg .c-true { fill: none; stroke: var(--warn); stroke-width: 2.5; }
+  .sim-svg .crit { stroke: var(--ink); stroke-width: 1.6; stroke-dasharray: 5 4; }
+
+</style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+
+<header>
+  <h1>Lincoln International Academy</h1>
+  <p class="class-name">AP Statistics &middot; Unit 3: Lessons 3.5&ndash;3.8</p>
+  <p class="details">Hypothesis Tests for a Population Proportion &middot; Teacher: Eduardo Vásquez</p>
+</header>
+
+<main>
+  <div class="tabs" role="tablist" aria-label="Page sections">
+    <button class="tab-btn" role="tab" id="tab-learn" aria-controls="panel-learn" aria-selected="true">Lesson &amp; Examples</button>
+    <button class="tab-btn" role="tab" id="tab-sim" aria-controls="panel-sim" aria-selected="false" tabindex="-1">Power Sim</button>
+    <button class="tab-btn" role="tab" id="tab-practice" aria-controls="panel-practice" aria-selected="false" tabindex="-1">Practice</button>
+  </div>
+
+  <!-- ============ TAB 1: LESSON ============ -->
+  <section class="panel active" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn">
+    <div class="card">
+      <h2>Hypothesis Tests for a Population Proportion</h2>
+      <p>A confidence interval <em>estimates</em> a population proportion. A <strong>significance test</strong> <em>evaluates a claim</em> about it: is the sample result far enough from the claimed value that random chance is not a plausible explanation? Lessons 3.5&ndash;3.8 take you from setting up the hypotheses, to interpreting the P-value, to concluding, to understanding the errors that can occur and the <strong>power</strong> of a test.</p>
+      <p><strong>Objectives</strong></p>
+      <ul>
+        <li>Perform a significance test to evaluate a claim about a population proportion.</li>
+        <li>Interpret Type I and Type II errors and their possible consequences in context.</li>
+        <li>Understand the relationship among the significance level, the probability of a Type II error, and power.</li>
+      </ul>
+      <div class="formula">
+        <em>z</em> = <span class="frac"><span><span class="hat">p</span> &minus; <em>p</em><sub>0</sub></span><span>&radic;<span class="rad"><em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>) / <em>n</em></span></span></span>
+        <small>The test statistic for H<sub>0</sub>: <em>p</em> = <em>p</em><sub>0</sub>. Everything in the denominator uses the claimed value <em>p</em><sub>0</sub>.</small>
+      </div>
+      <p class="ref"><strong>References:</strong> class presentation <em>Hypothesis Tests for a Population Proportion</em> (Lessons 3.5&ndash;3.8) and Barron&rsquo;s <em>AP Statistics</em> &mdash; the chapters on tests of significance and on Type I/Type II errors and power. Barron&rsquo;s is organized differently from our course sequence, so use the topics, not the chapter order, to find the matching sections.</p>
+    </div>
+
+    <!-- ===== 3.5 ===== -->
+    <h2 class="group-title">Lesson 3.5 &mdash; Setting up a significance test</h2>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.5</span>
+      <h3>The logic of a significance test</h3>
+      <p>Closely related to estimating a population proportion is <em>testing a claim</em> about it. A travel agency might compute an interval estimate for the proportion of sunny days in the Virgin Islands or, instead, test a tourist bureau&rsquo;s claim about the proportion of sunny days.</p>
+      <p>The general procedure: choose a specific hypothesis to be tested, the <strong>null hypothesis</strong> H<sub>0</sub>; pick an appropriate random sample; and use the sample to judge how likely H<sub>0</sub> is. If the sample statistic is <strong>far enough away from the claimed population parameter</strong>, there is sufficient evidence to reject H<sub>0</sub>. We attempt to show that the null hypothesis is unacceptable by showing that it is <em>improbable</em>.</p>
+      <ul>
+        <li>The sample statistic almost never equals the claimed parameter. Either it differs by <strong>random chance</strong> or the claimed parameter is <strong>wrong</strong>.</li>
+        <li>If we can eliminate random chance as a plausible explanation, we have convincing evidence that the claimed parameter is wrong.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.5</span>
+      <h3>Null and alternative hypotheses</h3>
+      <ul>
+        <li>The <strong>null hypothesis</strong> H<sub>0</sub> is an <em>equality</em> about the population proportion, for example H<sub>0</sub>: <em>p</em> = 0.37.</li>
+        <li>The <strong>alternative hypothesis</strong> H<sub>a</sub> is a <em>strict inequality</em>: H<sub>a</sub>: <em>p</em> &lt; 0.37, or H<sub>a</sub>: <em>p</em> &gt; 0.37, or H<sub>a</sub>: <em>p</em> &ne; 0.37.</li>
+        <li>Hypotheses are about the <strong>parameter</strong> <em>p</em>, never about the statistic <span class="hat">p</span>. Define <em>p</em> in context: &ldquo;<em>p</em> = the proportion of all [population] who [success]&rdquo;.</li>
+        <li><strong>Direction:</strong> the direction of H<sub>a</sub> comes from the research question (&ldquo;more than&rdquo;, &ldquo;less than&rdquo;), decided <em>before</em> seeing the data. <strong>If the question does not suggest a direction, use a two-sided test</strong> (&ne;).</li>
+      </ul>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Choosing H<sub>a</sub></caption>
+          <tr><th>Wording of the claim or question</th><th>H<sub>a</sub></th><th>Type of test</th></tr>
+          <tr><td>&ldquo;more than&rdquo;, &ldquo;greater&rdquo;, &ldquo;higher&rdquo;, &ldquo;exceeds&rdquo;</td><td><em>p</em> &gt; <em>p</em><sub>0</sub></td><td>one-sided (right tail)</td></tr>
+          <tr><td>&ldquo;less than&rdquo;, &ldquo;lower&rdquo;, &ldquo;decreased&rdquo;</td><td><em>p</em> &lt; <em>p</em><sub>0</sub></td><td>one-sided (left tail)</td></tr>
+          <tr><td>&ldquo;different from&rdquo;, &ldquo;changed&rdquo;, &ldquo;not fair&rdquo;</td><td><em>p</em> &ne; <em>p</em><sub>0</sub></td><td>two-sided (both tails)</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.5</span>
+      <h3>Significance level and conditions</h3>
+      <p>Small P-values indicate that the observed result would be unusual if H<sub>0</sub> were true. How small is &ldquo;small&rdquo;? The <strong>significance level &alpha;</strong> is a predetermined boundary used to decide whether a P-value is small or not. Common choices are <strong>&alpha; = 0.05, 0.01 and 0.10</strong>. A smaller &alpha; demands stronger evidence before rejecting H<sub>0</sub>.</p>
+      <p>The procedure is the <strong>one-sample <em>z</em>-test for a population proportion</strong> (calculator: <code>1-PropZTest</code>). Because the P-value is a <em>conditional probability</em> calculated assuming H<sub>0</sub>: <em>p</em> = <em>p</em><sub>0</sub> is true, we use the claimed proportion <em>p</em><sub>0</sub> <strong>both in checking Normality and in the standard deviation</strong>:</p>
+      <div class="formula">
+        &sigma;<sub><span class="hat">p</span></sub> = &radic;<span class="rad"><em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>) / <em>n</em></span>
+      </div>
+      <ul>
+        <li><strong>Independence:</strong> random sample (or randomized experiment) and the 10% rule, <em>n</em> &le; 0.10<em>N</em>.</li>
+        <li><strong>Normality (large counts):</strong> <em>np</em><sub>0</sub> &ge; 10 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) &ge; 10.</li>
+      </ul>
+      <div class="note"><strong>Test vs interval:</strong> a test uses <em>p</em><sub>0</sub> (we assume H<sub>0</sub> is true). A confidence interval uses <span class="hat">p</span> in the standard error.</div>
+    </div>
+
+    <!-- ===== 3.6 ===== -->
+    <h2 class="group-title">Lesson 3.6 &mdash; Interpreting the P-value</h2>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.6</span>
+      <h3>What the P-value measures</h3>
+      <p>The strength of the sample statistic is gauged through its associated <strong>P-value</strong>: the probability of obtaining a sample statistic <em>as extreme as (or more extreme than)</em> the one obtained, <strong>assuming the null hypothesis is true</strong>. The smaller the P-value, the more significant the difference between the null hypothesis and the sample results.</p>
+      <div class="formula">P-value = P(a result at least this extreme | H<sub>0</sub> is true)</div>
+      <ul>
+        <li>The P-value is a <strong>conditional probability</strong>: it assumes H<sub>0</sub> is true. Under that assumption it measures how likely it is to get evidence for H<sub>a</sub> as strong as or stronger than the observed evidence <em>by chance alone</em>.</li>
+        <li>It is <strong>not</strong> the probability that H<sub>0</sub> is true, and 1 &minus; P-value is not the probability that H<sub>a</sub> is true.</li>
+        <li>Smaller P-value &rarr; stronger, more convincing statistical evidence for H<sub>a</sub>.</li>
+      </ul>
+      <p><strong>Template for interpreting a P-value:</strong> &ldquo;Assuming that <em>p</em> = <em>p</em><sub>0</sub> [in context], the probability of getting a sample proportion as extreme as (or more extreme than) [the observed value] by chance alone is [P-value].&rdquo;</p>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.6</span>
+      <h3>How the P-value is found</h3>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>P-value from the test statistic <em>z</em></caption>
+          <tr><th>H<sub>a</sub></th><th>P-value</th><th>Picture</th></tr>
+          <tr><td><em>p</em> &gt; <em>p</em><sub>0</sub></td><td>P(<em>Z</em> &gt; <em>z</em>)</td><td>area in the right tail</td></tr>
+          <tr><td><em>p</em> &lt; <em>p</em><sub>0</sub></td><td>P(<em>Z</em> &lt; <em>z</em>)</td><td>area in the left tail</td></tr>
+          <tr><td><em>p</em> &ne; <em>p</em><sub>0</sub></td><td>2 &middot; P(<em>Z</em> &gt; |<em>z</em>|)</td><td>both tails: double the tail area</td></tr>
+        </table>
+      </div>
+      <p>The farther <span class="hat">p</span> is from <em>p</em><sub>0</sub> (in the direction of H<sub>a</sub>), and the larger the sample size, the larger |<em>z</em>| and the smaller the P-value.</p>
+    </div>
+
+    <!-- ===== 3.7 ===== -->
+    <h2 class="group-title">Lesson 3.7 &mdash; Carrying out the test and concluding</h2>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.7</span>
+      <h3>Decision rule and conclusion</h3>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Decision rule</caption>
+          <tr><th>If&hellip;</th><th>Decision</th><th>Meaning</th></tr>
+          <tr><td>P-value &le; &alpha;</td><td><strong>Reject</strong> H<sub>0</sub></td><td>convincing statistical evidence for H<sub>a</sub></td></tr>
+          <tr><td>P-value &gt; &alpha;</td><td><strong>Fail to reject</strong> H<sub>0</sub></td><td>not convincing statistical evidence for H<sub>a</sub></td></tr>
+        </table>
+      </div>
+      <div class="note"><strong>Be careful!</strong> When we do not reject the null hypothesis we <strong>never &ldquo;accept&rdquo; it</strong>. We only say that we do not have sufficient evidence to reject it.</div>
+      <p><strong>Conclusion in context, linked to the P-value:</strong> &ldquo;Since the P-value (___) is [less than / greater than] &alpha; = ___, we [reject / fail to reject] H<sub>0</sub>. There [is / is not] convincing evidence that [H<sub>a</sub> in context].&rdquo;</p>
+      <ol class="steps">
+        <li><strong>Parameter:</strong> define <em>p</em> in context.</li>
+        <li><strong>Hypotheses:</strong> H<sub>0</sub>: <em>p</em> = <em>p</em><sub>0</sub> and H<sub>a</sub> (&lt;, &gt; or &ne;), and the significance level &alpha;.</li>
+        <li><strong>Procedure and checks:</strong> one-sample <em>z</em>-test for a proportion; independence (random, 10%); Normality (<em>np</em><sub>0</sub> &ge; 10 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) &ge; 10).</li>
+        <li><strong>Mechanics:</strong> compute <span class="hat">p</span>, <em>z</em> and the P-value (or use <code>1-PropZTest</code>).</li>
+        <li><strong>Conclusion in context</strong> with linkage to the P-value and &alpha;.</li>
+      </ol>
+      <p><strong>Connection to intervals:</strong> a value <em>p</em><sub>0</sub> that lies inside a (1 &minus; &alpha;) confidence interval is plausible, so a two-sided test at level &alpha; will generally fail to reject it; a value outside the interval will generally be rejected.</p>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 1 &mdash; Which expression gives the P-value?</div>
+      <p>A research dermatologist believes that cancers of the head and neck occur most often on the left side (the side next to a window when driving). In a review of 565 cases, 305 occurred on the left side. What is the resulting P-value?</p>
+      <div class="solution">
+        <p>H<sub>0</sub>: <em>p</em> = 0.5 and H<sub>a</sub>: <em>p</em> &gt; 0.5 (one-sided: the belief is about the <em>left</em> side more often). <span class="hat">p</span> = 305/565 &asymp; 0.54.</p>
+        <p>&sigma;<sub><span class="hat">p</span></sub> = &radic;((0.5)(1 &minus; 0.5)/565) = &radic;((0.5)(0.5)/565) &asymp; 0.0210 (note: the claimed 0.5 is used).</p>
+        <p><em>z</em> = (<span class="hat">p</span> &minus; <em>p</em><sub>0</sub>)/&sigma; = (0.54 &minus; 0.5)/&radic;((0.5)(0.5)/565) &asymp; 1.89 (using 305/565 exactly).</p>
+        <p>P-value = P(<em>z</em> &gt; <span class="frac"><span>0.54 &minus; 0.50</span><span>&radic;<span class="rad">(0.5)(0.5)/565</span></span></span>) &asymp; <strong>0.0292</strong>.</p>
+        <p>The right choice is the one-sided expression that uses <em>p</em><sub>0</sub> = 0.5 in the standard deviation: P(<em>z</em> &gt; (0.54 &minus; 0.50)/&radic;((0.5)(0.5)/565)). Doubling the tail would be wrong (not two-sided), and using (0.54)(0.46) would be wrong (that is a standard error for an interval, not a test).</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 2 &mdash; A complete test, concluded at two significance levels</div>
+      <p>A union spokesperson claims that 75% of union members will support a strike if their basic demands are not met. A company negotiator believes the true percentage is lower and runs a hypothesis test. What is the conclusion if 87 out of a simple random sample of 125 union members say they will strike? (Give conclusions at the 0.05 and the 0.10 significance levels.) What error might have been committed?</p>
+      <div class="solution">
+        <p><strong>Parameter:</strong> <em>p</em> = the proportion of all union members who will support a strike if their basic demands are not met.</p>
+        <p><strong>Hypotheses:</strong> H<sub>0</sub>: <em>p</em> = 0.75 and H<sub>a</sub>: <em>p</em> &lt; 0.75.</p>
+        <p><strong>Procedure:</strong> one-sample <em>z</em>-test for a population proportion.</p>
+        <p><strong>Checks:</strong> independence: it is an SRS, and we assume 125 is less than 10% of all union members. Normality: <em>np</em><sub>0</sub> = 125(0.75) = 93.75 &ge; 10 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 125(0.25) = 31.25 &ge; 10.</p>
+        <p><strong>Mechanics:</strong> <span class="hat">p</span> = 87/125 = 0.696; <code>1-PropZTest</code> gives <em>z</em> = &minus;1.394 and <strong>P = 0.0816</strong>.</p>
+        <p><strong>Conclusion:</strong></p>
+        <ul>
+          <li>At &alpha; = 0.05: since 0.0816 &gt; 0.05 we <strong>fail to reject</strong> H<sub>0</sub>. There is not convincing evidence at the 5% significance level that the true percentage of union members who support a strike is less than 75%.</li>
+          <li>At &alpha; = 0.10: since 0.0816 &lt; 0.10 we <strong>reject</strong> H<sub>0</sub>. There is convincing evidence at the 10% significance level that the true percentage who support a strike is less than 75%.</li>
+        </ul>
+        <p><strong>Possible errors:</strong> if H<sub>0</sub> is not rejected (&alpha; = 0.05) a false H<sub>0</sub> may have been missed: a <strong>Type II error</strong>; the union might call a strike thinking it has greater support than it actually has. If H<sub>0</sub> is rejected (&alpha; = 0.10), a true H<sub>0</sub> may have been rejected: a <strong>Type I error</strong>; the union might decide not to call a strike thinking it lacks support when it actually has it.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 3 &mdash; A two-sided test</div>
+      <p>A company claims that 20% of its snack bags contain a prize. A consumer group opens a random sample of 400 bags (far fewer than 10% of all bags) and finds 64 prizes. Is there convincing evidence that the true proportion is different from 0.20? Use &alpha; = 0.05.</p>
+      <div class="solution">
+        <p><strong>Parameter:</strong> <em>p</em> = the proportion of all bags that contain a prize. <strong>Hypotheses:</strong> H<sub>0</sub>: <em>p</em> = 0.20, H<sub>a</sub>: <em>p</em> &ne; 0.20 (no direction suggested, so two-sided).</p>
+        <p><strong>Checks:</strong> random sample, 400 &lt; 10% of all bags; <em>np</em><sub>0</sub> = 80 &ge; 10 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 320 &ge; 10.</p>
+        <p><strong>Mechanics:</strong> <span class="hat">p</span> = 64/400 = 0.16; &sigma; = &radic;(0.2 &middot; 0.8/400) = 0.02; <em>z</em> = (0.16 &minus; 0.20)/0.02 = &minus;2.00; P-value = 2 &middot; P(<em>Z</em> &lt; &minus;2.00) = 2(0.0228) = <strong>0.0455</strong>.</p>
+        <p><strong>Conclusion:</strong> since 0.0455 &lt; 0.05 we reject H<sub>0</sub>. There is convincing evidence at the 5% level that the true proportion of bags with a prize is different from 0.20. (At &alpha; = 0.01 we would fail to reject.)</p>
+      </div>
+    </div>
+
+    <!-- ===== 3.8 ===== -->
+    <h2 class="group-title">Lesson 3.8 &mdash; Errors, significance level and power</h2>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.8</span>
+      <h3>Type I and Type II errors</h3>
+      <p>There are two ways a test can go wrong: mistakenly rejecting a true null hypothesis, or mistakenly failing to reject a false one.</p>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Decision vs population truth</caption>
+          <tr><th></th><th>H<sub>0</sub> is true</th><th>H<sub>0</sub> is false</th></tr>
+          <tr><th>Reject H<sub>0</sub></th><td><strong>Type I error</strong><br>(probability &alpha;)</td><td>Correct decision<br>(probability 1 &minus; &beta; = <strong>power</strong>)</td></tr>
+          <tr><th>Fail to reject H<sub>0</sub></th><td>Correct decision<br>(probability 1 &minus; &alpha;)</td><td><strong>Type II error</strong><br>(probability &beta;)</td></tr>
+        </table>
+      </div>
+      <ul>
+        <li>The <strong>&alpha;-risk</strong>, also called the <em>significance level</em>, is the probability of a <strong>Type I error</strong> (rejecting a true H<sub>0</sub>).</li>
+        <li>A <strong>Type II error</strong> (failing to reject a false H<sub>0</sub>) has probability <strong>&beta;</strong>. &beta; depends on <em>which</em> alternative value of <em>p</em> is true.</li>
+        <li><strong>In context:</strong> always describe each error in words and give a consequence. A Type I error is a &ldquo;false positive&rdquo; (concluding an effect exists when it does not); a Type II error is a &ldquo;false negative&rdquo; (missing a real effect).</li>
+      </ul>
+      <p><strong>Courtroom illustration:</strong> H<sub>0</sub>: the person is innocent. A Type I error is finding an innocent person guilty; a Type II error is failing to convict a guilty person. Criminal trials try to minimize Type I errors by demanding unanimous guilty verdicts; many civil suits accept simple majority verdicts, minimizing Type II errors.</p>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.8</span>
+      <h3>Power</h3>
+      <p>The <strong>power</strong> of a test against a specific alternative value of <em>p</em> is the probability that the test <em>correctly rejects</em> H<sub>0</sub> when that alternative is true:</p>
+      <div class="formula">power = 1 &minus; &beta; = P(reject H<sub>0</sub> | the specific alternative <em>p</em> is true)
+        <small>High power means the test is good at detecting a real difference. When <em>p</em> = <em>p</em><sub>0</sub>, the &ldquo;power&rdquo; is just &alpha;.</small></div>
+      <p><strong>What affects power</strong> (changing one factor at a time):</p>
+      <div class="table-wrap">
+        <table class="data" style="text-align:left">
+          <tr><th>Change</th><th>Effect on power</th><th>Effect on &alpha; and &beta;</th></tr>
+          <tr><td>Increase the sample size <em>n</em></td><td>power increases</td><td>&alpha; unchanged; &beta; decreases</td></tr>
+          <tr><td>Increase the significance level &alpha;</td><td>power increases</td><td>risk of Type I error increases; &beta; decreases</td></tr>
+          <tr><td>Decrease &alpha;</td><td>power decreases</td><td>Type I risk decreases; &beta; increases</td></tr>
+          <tr><td>True <em>p</em> farther from <em>p</em><sub>0</sub> (bigger effect)</td><td>power increases</td><td>&beta; decreases</td></tr>
+          <tr><td>One-sided instead of two-sided test (true <em>p</em> in the direction of H<sub>a</sub>)</td><td>power increases</td><td>same &alpha;</td></tr>
+          <tr><td>Less variability in the data</td><td>power increases</td><td>&beta; decreases</td></tr>
+        </table>
+      </div>
+      <div class="note"><strong>Trade-off:</strong> with a fixed sample size, lowering &alpha; raises &beta; (and lowers power). The only way to lower both at once is to increase <em>n</em>. Which error is worse depends on the context, so the significance level should be chosen with the consequences in mind.</div>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.8</span>
+      <h3>How to calculate &beta; and power for a proportion</h3>
+      <ol class="steps">
+        <li>Find the <strong>rejection boundary</strong> in terms of <span class="hat">p</span> using H<sub>0</sub>: critical value = <em>p</em><sub>0</sub> &plusmn; <em>z</em>*&sigma;<sub>0</sub>, with &sigma;<sub>0</sub> = &radic;(<em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>)/<em>n</em>). (Right-tailed: <em>p</em><sub>0</sub> + <em>z</em>*&sigma;<sub>0</sub>; left-tailed: <em>p</em><sub>0</sub> &minus; <em>z</em>*&sigma;<sub>0</sub>; two-sided: both, using <em>z</em>* for &alpha;/2 in each tail.)</li>
+        <li>Assume a specific true value <em>p</em>. The sampling distribution of <span class="hat">p</span> is now centered at that <em>p</em> with standard deviation &sigma; = &radic;(<em>p</em>(1 &minus; <em>p</em>)/<em>n</em>).</li>
+        <li><strong>Power</strong> = the area of that distribution inside the rejection region. &beta; = 1 &minus; power = the area outside it.</li>
+      </ol>
+      <p>The <strong>Power Sim</strong> tab shows these two distributions and shades &alpha;, &beta; and power so you can see each effect.</p>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 4 &mdash; Computing power</div>
+      <p>H<sub>0</sub>: <em>p</em> = 0.50 vs H<sub>a</sub>: <em>p</em> &gt; 0.50, a random sample of <em>n</em> = 100 and &alpha; = 0.05. Find the power against the alternative <em>p</em> = 0.60, and &beta;.</p>
+      <div class="solution">
+        <p>&sigma;<sub>0</sub> = &radic;(0.5 &middot; 0.5/100) = 0.05, so the test rejects H<sub>0</sub> when <span class="hat">p</span> &gt; 0.50 + 1.645(0.05) = <strong>0.5822</strong>.</p>
+        <p>If <em>p</em> = 0.60, then &sigma; = &radic;(0.6 &middot; 0.4/100) = 0.0490.</p>
+        <p>Power = P(<span class="hat">p</span> &gt; 0.5822) = P(<em>Z</em> &gt; (0.5822 &minus; 0.60)/0.0490) = P(<em>Z</em> &gt; -0.362) = <strong>0.641</strong>.</p>
+        <p>&beta; = 1 &minus; 0.641 = <strong>0.359</strong>.</p>
+        <p>Interpretation: if the true proportion is 0.60, this test would reject the false null hypothesis about 64% of the time, and it would commit a Type II error about 36% of the time.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 5 &mdash; What changes the power?</div>
+      <p>Using Example 4 as a base (true <em>p</em> = 0.60), how does the power change if (a) the sample size is 400, (b) &alpha; = 0.01?</p>
+      <div class="solution">
+        <p>(a) <em>n</em> = 400: &sigma;<sub>0</sub> = 0.025, critical value = 0.50 + 1.645(0.025) = 0.5411, &sigma; = 0.0245; power = P(<em>Z</em> &gt; (0.5411 &minus; 0.60)/0.0245) = <strong>0.992</strong>. A much larger power, with the same &alpha;.</p>
+        <p>(b) &alpha; = 0.01 (<em>z</em>* = 2.326), <em>n</em> = 100: critical value = 0.50 + 2.326(0.05) = 0.6163; power = P(<em>Z</em> &gt; (0.6163 &minus; 0.60)/0.0490) = <strong>0.370</strong>. A smaller &alpha; lowers the power (and the Type I error risk).</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 6 &mdash; Errors in context</div>
+      <p>A manufacturer tests H<sub>0</sub>: <em>p</em> = 0.02 vs H<sub>a</sub>: <em>p</em> &gt; 0.02 for the proportion of defective parts. Describe a Type I error, a Type II error, and a consequence of each.</p>
+      <div class="solution">
+        <p><strong>Type I error:</strong> concluding the defect rate is higher than 2% when it is actually 2%. Consequence: the production line may be stopped and repaired unnecessarily, costing time and money.</p>
+        <p><strong>Type II error:</strong> failing to find evidence that the defect rate is higher than 2% when it really is higher. Consequence: defective parts continue to be produced and shipped to customers.</p>
+        <p>If shipping defective parts is the more serious problem, the manufacturer may choose a larger &alpha; (for example 0.10) to reduce &beta; and increase power.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ TAB 2: POWER SIMULATION ============ -->
+  <section class="panel" id="panel-sim" role="tabpanel" aria-labelledby="tab-sim" hidden>
+    <div class="card">
+      <h2>Simulation: errors and power</h2>
+      <p>The <strong>blue curve</strong> is the sampling distribution of <span class="hat">p</span> if H<sub>0</sub> is true (centered at <em>p</em><sub>0</sub>). The <strong>orange curve</strong> is the sampling distribution if the <em>true</em> proportion is a different value <em>p</em>. The test rejects H<sub>0</sub> when <span class="hat">p</span> falls in the rejection region, beyond the dashed line(s).</p>
+      <p>The <span style="color:var(--bad-ink);font-weight:500">red</span> area under the blue curve is &alpha; (Type I error), the <span style="color:var(--warn-ink);font-weight:500">orange</span> area under the orange curve inside the non-rejection region is &beta; (Type II error), and the <span style="color:var(--ok-ink);font-weight:500">green</span> area is the <strong>power</strong>. Move the sliders and watch them change.</p>
+    </div>
+
+    <div class="card">
+      <div class="sim-grid">
+        <div class="sim-ctl">
+          <label for="pwP0"><span>Claimed value <em>p</em><sub>0</sub> (H<sub>0</sub>)</span> <output id="pwP0Out" for="pwP0">0.50</output></label>
+          <input type="range" id="pwP0" min="0.10" max="0.90" step="0.01" value="0.50">
+        </div>
+        <div class="sim-ctl">
+          <label for="pwP"><span>True proportion <em>p</em></span> <output id="pwPOut" for="pwP">0.60</output></label>
+          <input type="range" id="pwP" min="0.05" max="0.95" step="0.01" value="0.60">
+        </div>
+        <div class="sim-ctl">
+          <label for="pwN"><span>Sample size <em>n</em></span> <output id="pwNOut" for="pwN">100</output></label>
+          <input type="range" id="pwN" min="10" max="800" step="1" value="100">
+        </div>
+        <div class="sim-ctl">
+          <label for="pwA"><span>Significance level &alpha;</span></label>
+          <select id="pwA">
+            <option value="0.10">0.10</option>
+            <option value="0.05" selected>0.05</option>
+            <option value="0.01">0.01</option>
+          </select>
+        </div>
+        <div class="sim-ctl">
+          <label for="pwAlt"><span>Alternative hypothesis</span></label>
+          <select id="pwAlt">
+            <option value="gt" selected>H<sub>a</sub>: p &gt; p0 (right-tailed)</option>
+            <option value="lt">H<sub>a</sub>: p &lt; p0 (left-tailed)</option>
+            <option value="ne">H<sub>a</sub>: p &ne; p0 (two-sided)</option>
+          </select>
+        </div>
+      </div>
+      <div class="sim-presets">Try:
+        <button class="btn secondary sm" type="button" data-pw="0.5,0.6,100,0.05,gt">Base case</button>
+        <button class="btn secondary sm" type="button" data-pw="0.5,0.6,400,0.05,gt">Larger sample</button>
+        <button class="btn secondary sm" type="button" data-pw="0.5,0.6,100,0.01,gt">Smaller &alpha;</button>
+        <button class="btn secondary sm" type="button" data-pw="0.5,0.55,100,0.05,gt">Smaller effect</button>
+        <button class="btn secondary sm" type="button" data-pw="0.5,0.6,100,0.05,ne">Two-sided</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <svg class="sim-svg" id="pwSvg" viewBox="0 0 640 320" role="img" aria-label="Two Normal curves for the sample proportion under the null and the true value, with the rejection region, alpha, beta and power shaded"></svg>
+      <div class="legend">
+        <span><i style="background:var(--primary)"></i>If H<sub>0</sub> is true</span>
+        <span><i style="background:var(--warn)"></i>If the true <em>p</em> is as set</span>
+        <span><i style="background:var(--bad);opacity:.55"></i>&alpha;</span>
+        <span><i style="background:var(--warn);opacity:.55"></i>&beta;</span>
+        <span><i style="background:var(--ok);opacity:.55"></i>Power</span>
+      </div>
+      <div class="table-wrap" style="margin-top:.8rem">
+        <table class="data">
+          <caption>Results (Normal model)</caption>
+          <tr><th>Rejection region for <span class="hat">p</span></th><td id="pwRej">&mdash;</td></tr>
+          <tr><th>&alpha; = P(Type I error)</th><td id="pwAlpha">&mdash;</td></tr>
+          <tr><th>&beta; = P(Type II error)</th><td id="pwBeta">&mdash;</td></tr>
+          <tr><th>Power = 1 &minus; &beta;</th><td id="pwPower">&mdash;</td></tr>
+        </table>
+      </div>
+      <div class="sim-status" id="pwStatus" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="card">
+      <h3>Run the tests</h3>
+      <p>Simulate 1000 random samples of size <em>n</em> from a population with the true proportion above. For each sample the <em>z</em>-test of H<sub>0</sub>: <em>p</em> = <em>p</em><sub>0</sub> is carried out at the chosen &alpha;. The percentage of samples that reject H<sub>0</sub> estimates the power.</p>
+      <div class="sim-btns">
+        <button class="btn" type="button" id="pwRunTrue">Simulate 1000 tests (true <em>p</em> as set)</button>
+        <button class="btn secondary" type="button" id="pwRunNull">Simulate 1000 tests when H<sub>0</sub> is true (<em>p</em> = <em>p</em><sub>0</sub>)</button>
+      </div>
+      <div class="sim-last" id="pwRun" aria-live="polite" style="margin-top:.8rem">Press a button to run 1000 tests.</div>
+    </div>
+
+    <div class="card">
+      <h3>Explore (click to check your idea)</h3>
+      <details class="explore"><summary>1. Use the base case (<em>p</em><sub>0</sub> = 0.50, true <em>p</em> = 0.60, <em>n</em> = 100, &alpha; = 0.05). What are &beta; and the power? Then run 1000 tests.</summary>
+        <p>Power &asymp; 0.64 and &beta; &asymp; 0.36. About 64% of the 1000 simulated tests reject the false H<sub>0</sub>; about 36% make a Type II error.</p></details>
+      <details class="explore"><summary>2. Increase <em>n</em> from 100 to 400. What happens to &alpha;, &beta; and power?</summary>
+        <p>&alpha; stays at 0.05. The two curves become narrower and separate, so &beta; drops and the power rises to about 0.99.</p></details>
+      <details class="explore"><summary>3. Change &alpha; from 0.05 to 0.01. What happens?</summary>
+        <p>The rejection region shrinks. &alpha; falls to 0.01, but &beta; rises and the power falls to about 0.37: the trade-off between Type I and Type II errors.</p></details>
+      <details class="explore"><summary>4. Set the true <em>p</em> equal to <em>p</em><sub>0</sub> and run 1000 tests. What fraction rejects?</summary>
+        <p>About &alpha; (around 5% for &alpha; = 0.05): if H<sub>0</sub> is true, every rejection is a Type I error, and the &ldquo;power&rdquo; equals &alpha;.</p></details>
+      <details class="explore"><summary>5. Compare the right-tailed test with the two-sided test (true <em>p</em> = 0.60). Which has more power, and why?</summary>
+        <p>The right-tailed test, because it puts all of &alpha; in the tail where the true value lies. The two-sided test spends &alpha;/2 on the other tail, so its critical value is farther from <em>p</em><sub>0</sub>.</p></details>
+    </div>
+  </section>
+
+
+  <!-- ============ TAB 3: PRACTICE ============ -->
+  <section class="panel" id="panel-practice" role="tabpanel" aria-labelledby="tab-practice" hidden>
+    <div class="card">
+      <h2>Practice Problems</h2>
+      <p>You have <strong>3 attempts</strong> for each problem and you get feedback right away. For multiple-choice problems, select one answer. For numeric problems, type a number (decimals, or a fraction like 3/8). Percent answers should be entered as decimals (0.25, not 25%). P-values and probabilities should be rounded to at least 3 or 4 decimals; a small rounding tolerance is allowed. Problems are grouped by lesson (3.5&ndash;3.8) and follow the style of the AP exam: hypotheses, conditions, test statistics, P-values, conclusions in context, Type I/II errors and power.</p>
+    </div>
+
+    <div class="scorebar">
+      <div>Solved: <strong id="solvedCount">0</strong> / <span id="totalCount"></span></div>
+      <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+      <div>Points: <strong id="points">0</strong></div>
+    </div>
+
+    <div id="problems"></div>
+
+    <div class="card final" id="finalCard">
+      <h2>Practice complete!</h2>
+      <p id="finalMsg"></p>
+      <button class="btn secondary" id="resetBtn" data-lia-reset type="button">Try again</button>
+    </div>
+  </section>
+</main>
+
+<footer>Lincoln International Academy &middot; AP Statistics &middot; Lessons 3.5&ndash;3.8</footer>
+
+<script>
+/* ---------- Power simulation ---------- */
+(function () {
+  var svg = document.getElementById('pwSvg');
+  if (!svg) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  var Z = { gt: { 0.10: 1.2816, 0.05: 1.6449, 0.01: 2.3263 }, ne: { 0.10: 1.6449, 0.05: 1.96, 0.01: 2.5758 } };
+  var W = 640, Hh = 320, ML = 20, MR = 20, MT = 14, MB = 58;
+  var $ = function (id) { return document.getElementById(id); };
+  function Phi(z) {              // standard Normal CDF (Abramowitz-Stegun 7.1.26)
+    var t = 1 / (1 + 0.2316419 * Math.abs(z)), d = 0.3989423 * Math.exp(-z * z / 2);
+    var p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))));
+    return z > 0 ? 1 - p : p;
+  }
+  function el(name, attrs, text) {
+    var e = document.createElementNS(NS, name);
+    for (var k in attrs) e.setAttribute(k, attrs[k]);
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+  function niceStep(maxV, ticks) {
+    var raw = maxV / ticks, mag = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10));
+    var f = raw / mag, nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10;
+    return nf * mag;
+  }
+  function params() {
+    return { p0: parseFloat($('pwP0').value), p: parseFloat($('pwP').value), n: parseInt($('pwN').value, 10),
+             a: parseFloat($('pwA').value), alt: $('pwAlt').value };
+  }
+  function model(q) {
+    var s0 = Math.sqrt(q.p0 * (1 - q.p0) / q.n), s1 = Math.sqrt(q.p * (1 - q.p) / q.n), m = { s0: s0, s1: s1 };
+    if (q.alt === 'gt') { m.hi = q.p0 + Z.gt[q.a] * s0; m.lo = null; m.power = 1 - Phi((m.hi - q.p) / s1); }
+    else if (q.alt === 'lt') { m.lo = q.p0 - Z.gt[q.a] * s0; m.hi = null; m.power = Phi((m.lo - q.p) / s1); }
+    else { m.lo = q.p0 - Z.ne[q.a] * s0; m.hi = q.p0 + Z.ne[q.a] * s0; m.power = Phi((m.lo - q.p) / s1) + 1 - Phi((m.hi - q.p) / s1); }
+    m.beta = 1 - m.power;
+    return m;
+  }
+  function render() {
+    var q = params(), m = model(q);
+    $('pwP0Out').textContent = q.p0.toFixed(2); $('pwPOut').textContent = q.p.toFixed(2); $('pwNOut').textContent = q.n;
+    var sMax = Math.max(m.s0, m.s1);
+    var lo = Math.max(0, Math.min(q.p0, q.p) - 4.2 * sMax), hi = Math.min(1, Math.max(q.p0, q.p) + 4.2 * sMax);
+    function X(v) { return ML + (v - lo) / (hi - lo) * (W - ML - MR); }
+    var ymaxPdf = Math.max(1 / (m.s0 * 2.5066), 1 / (m.s1 * 2.5066));
+    function Y(v) { return Hh - MB - v / (ymaxPdf * 1.1) * (Hh - MB - MT); }
+    function pdf(x, mu, s) { return Math.exp(-0.5 * Math.pow((x - mu) / s, 2)) / (s * 2.50662827); }
+    while (svg.firstChild) svg.removeChild(svg.firstChild);
+    // shaded areas: path under a curve between a and b
+    function area(mu, s, a, b, cls) {
+      a = Math.max(lo, a); b = Math.min(hi, b); if (b <= a) return;
+      var d = 'M' + X(a).toFixed(1) + ',' + Y(0).toFixed(1), K = 80;
+      for (var i = 0; i <= K; i++) { var x = a + (b - a) * i / K; d += 'L' + X(x).toFixed(1) + ',' + Y(pdf(x, mu, s)).toFixed(1); }
+      d += 'L' + X(b).toFixed(1) + ',' + Y(0).toFixed(1) + 'Z';
+      svg.appendChild(el('path', { d: d, 'class': cls }));
+    }
+    // beta (non rejection region under true curve) and power (rejection region under true curve)
+    var nlo = m.lo === null ? lo : m.lo, nhi = m.hi === null ? hi : m.hi;
+    area(q.p, m.s1, nlo, nhi, 'a-beta');
+    if (m.lo !== null) area(q.p, m.s1, lo, m.lo, 'a-power');
+    if (m.hi !== null) area(q.p, m.s1, m.hi, hi, 'a-power');
+    // alpha under H0
+    if (m.lo !== null) area(q.p0, m.s0, lo, m.lo, 'a-alpha');
+    if (m.hi !== null) area(q.p0, m.s0, m.hi, hi, 'a-alpha');
+    // curves
+    function curve(mu, s, cls) {
+      var d = '';
+      for (var i = 0; i <= 200; i++) { var x = lo + (hi - lo) * i / 200; d += (i ? 'L' : 'M') + X(x).toFixed(1) + ',' + Y(pdf(x, mu, s)).toFixed(1); }
+      svg.appendChild(el('path', { d: d, 'class': cls }));
+    }
+    curve(q.p0, m.s0, 'c-null'); curve(q.p, m.s1, 'c-true');
+    // axis
+    svg.appendChild(el('line', { x1: ML, x2: W - MR, y1: Y(0), y2: Y(0), 'class': 'axis' }));
+    var xs = niceStep(hi - lo, 7), first = Math.ceil(lo / xs - 1e-9) * xs;
+    for (var xv = first; xv <= hi + 1e-9; xv += xs) {
+      svg.appendChild(el('line', { x1: X(xv), x2: X(xv), y1: Y(0), y2: Y(0) + 5, 'class': 'axis' }));
+      svg.appendChild(el('text', { x: X(xv), y: Y(0) + 18, 'text-anchor': 'middle' }, xv.toFixed(xs < 0.01 ? 3 : 2)));
+    }
+    svg.appendChild(el('text', { x: (ML + W - MR) / 2, y: Hh - 6, 'text-anchor': 'middle', 'class': 'lab' }, 'Sample proportion p̂'));
+    // critical lines and p markers
+    [m.lo, m.hi].forEach(function (c) {
+      if (c === null) return;
+      svg.appendChild(el('line', { x1: X(c), x2: X(c), y1: MT, y2: Y(0), 'class': 'crit' }));
+      svg.appendChild(el('text', { x: X(c), y: Y(0) + 34, 'text-anchor': 'middle', 'class': 'lab' }, 'critical ' + c.toFixed(3)));
+    });
+    svg.appendChild(el('text', { x: X(q.p0), y: Y(pdf(q.p0, q.p0, m.s0)) - 6, 'text-anchor': 'middle', 'class': 'lab' }, 'p0 = ' + q.p0.toFixed(2)));
+    if (Math.abs(q.p - q.p0) > 1.2 * sMax) svg.appendChild(el('text', { x: X(q.p), y: Y(pdf(q.p, q.p, m.s1)) - 6, 'text-anchor': 'middle', 'class': 'lab' }, 'p = ' + q.p.toFixed(2)));
+
+    // table
+    var rej = q.alt === 'gt' ? 'p̂ > ' + m.hi.toFixed(4) : q.alt === 'lt' ? 'p̂ < ' + m.lo.toFixed(4) : 'p̂ < ' + m.lo.toFixed(4) + ' or p̂ > ' + m.hi.toFixed(4);
+    $('pwRej').textContent = rej;
+    $('pwAlpha').textContent = q.a.toFixed(2);
+    $('pwBeta').textContent = m.beta.toFixed(3);
+    $('pwPower').textContent = m.power.toFixed(3);
+    var okc = q.n * q.p0 >= 10 && q.n * (1 - q.p0) >= 10;
+    var st = $('pwStatus');
+    st.className = 'sim-status ' + (okc ? 'good' : 'warn');
+    st.innerHTML = 'Large counts under H<sub>0</sub>: <em>np</em><sub>0</sub> = ' + (q.n * q.p0).toFixed(1) + ', <em>n</em>(1 − <em>p</em><sub>0</sub>) = ' + (q.n * (1 - q.p0)).toFixed(1) + ' → ' +
+      (okc ? '<strong>both ≥ 10</strong>: the Normal model is appropriate.' : '<strong>not both ≥ 10</strong>: the Normal model is not appropriate, so these values are only rough.') +
+      (Math.abs(q.p - q.p0) < 1e-9 ? ' Since the true <em>p</em> equals <em>p</em><sub>0</sub>, H<sub>0</sub> is true and the “power” equals α.' : '');
+    $('pwRun').innerHTML = 'Press a button to run 1000 tests.';
+  }
+  function run(useNull) {
+    var q = params(), m = model(q), trueP = useNull ? q.p0 : q.p, T = 1000, rej = 0;
+    for (var t = 0; t < T; t++) {
+      var c = 0; for (var i = 0; i < q.n; i++) if (Math.random() < trueP) c++;
+      var z = (c / q.n - q.p0) / m.s0, zc = q.alt === 'ne' ? Z.ne[q.a] : Z.gt[q.a];
+      if ((q.alt === 'gt' && z > zc) || (q.alt === 'lt' && z < -zc) || (q.alt === 'ne' && Math.abs(z) > zc)) rej++;
+    }
+    var pct = (rej / T * 100).toFixed(1);
+    $('pwRun').innerHTML = useNull
+      ? 'H<sub>0</sub> is true (<em>p</em> = ' + q.p0.toFixed(2) + '): <strong>' + rej + '</strong> of ' + T + ' tests rejected H<sub>0</sub> (' + pct + '%). Every one of these is a <strong>Type I error</strong>; the rate is close to α = ' + q.a.toFixed(2) + '.'
+      : 'True <em>p</em> = ' + q.p.toFixed(2) + ': <strong>' + rej + '</strong> of ' + T + ' tests rejected H<sub>0</sub> (' + pct + '%). This estimates the power (theory: ' + (model(q).power * 100).toFixed(1) + '%). The other ' + (T - rej) + ' are <strong>Type II errors</strong>.';
+  }
+  ['pwP0', 'pwP', 'pwN'].forEach(function (id) { $(id).addEventListener('input', render); });
+  ['pwA', 'pwAlt'].forEach(function (id) { $(id).addEventListener('change', render); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-pw]'), function (b) {
+    b.addEventListener('click', function () {
+      var a = b.getAttribute('data-pw').split(',');
+      $('pwP0').value = a[0]; $('pwP').value = a[1]; $('pwN').value = a[2]; $('pwA').value = a[3]; $('pwAlt').value = a[4]; render();
+    });
+  });
+  $('pwRunTrue').addEventListener('click', function () { run(false); });
+  $('pwRunNull').addEventListener('click', function () { run(true); });
+  render();
+})();
+</script>
+
+<script>
+(function () {
+  /* ---------- Tabs ---------- */
+  var tabs = [document.getElementById('tab-learn'), document.getElementById('tab-sim'), document.getElementById('tab-practice')];
+  function showTab(idx) {
+    tabs.forEach(function (t, i) {
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      var on = i === idx;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      panel.classList.toggle('active', on);
+      panel.hidden = !on;
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showTab(i); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        showTab(n); tabs[n].focus();
+      }
+    });
+  });
+
+  var MAX_ATTEMPTS = 3;
+  var GROUPS = {
+    '3.5': 'Lesson 3.5 — Setting up a significance test',
+    '3.6': 'Lesson 3.6 — Interpreting the P-value',
+    '3.7': 'Lesson 3.7 — Carrying out the test and concluding',
+    '3.8': 'Lesson 3.8 — Errors, significance level and power'
+  };
+  var problems = [
+ {
+  "g": "3.5",
+  "q": "A cafe owner believes that <strong>more than 40%</strong> of her customers prefer the new recipe. Which pair of hypotheses should be tested?",
+  "opts": [
+   "H<sub>0</sub>: <em>p</em> = 0.40 and H<sub>a</sub>: <em>p</em> &gt; 0.40",
+   "H<sub>0</sub>: <em>p</em> &gt; 0.40 and H<sub>a</sub>: <em>p</em> = 0.40",
+   "H<sub>0</sub>: <em>p</em> = 0.40 and H<sub>a</sub>: <em>p</em> &lt; 0.40",
+   "H<sub>0</sub>: <em>p</em> = 0.40 and H<sub>a</sub>: <em>p</em> &ne; 0.40"
+  ],
+  "ans": 0,
+  "hint": "The belief &ldquo;more than 40%&rdquo; is the alternative; the null states the benchmark with an equals sign.",
+  "sol": "The correct pair is H<sub>0</sub>: <em>p</em> = 0.40 and H<sub>a</sub>: <em>p</em> &gt; 0.40. The null hypothesis is an equality about the population proportion; the alternative is a strict inequality that reflects the claim being tested."
+ },
+ {
+  "g": "3.5",
+  "q": "A union spokesperson claims that 75% of members will support a strike. A negotiator believes the true percentage is <strong>lower</strong>. Which pair of hypotheses should be tested?",
+  "opts": [
+   "H<sub>0</sub>: <em>p</em> = 0.75 and H<sub>a</sub>: <em>p</em> &gt; 0.75",
+   "H<sub>0</sub>: <em>p</em> = 0.75 and H<sub>a</sub>: <em>p</em> &lt; 0.75",
+   "H<sub>0</sub>: <em>p</em> &lt; 0.75 and H<sub>a</sub>: <em>p</em> = 0.75",
+   "H<sub>0</sub>: <em>p</em> = 0.75 and H<sub>a</sub>: <em>p</em> &ne; 0.75"
+  ],
+  "ans": 1,
+  "hint": "The negotiator&rsquo;s belief (&ldquo;lower&rdquo;) gives the direction of H<sub>a</sub>.",
+  "sol": "The correct pair is H<sub>0</sub>: <em>p</em> = 0.75 and H<sub>a</sub>: <em>p</em> &lt; 0.75. The null hypothesis is an equality about the population proportion; the alternative is a strict inequality that reflects the claim being tested."
+ },
+ {
+  "g": "3.5",
+  "q": "A coin is suspected of <strong>not being fair</strong>. Let <em>p</em> be the true proportion of heads. Which pair of hypotheses should be tested?",
+  "opts": [
+   "H<sub>0</sub>: <em>p</em> = 0.5 and H<sub>a</sub>: <em>p</em> &gt; 0.5",
+   "H<sub>0</sub>: <em>p</em> = 0.5 and H<sub>a</sub>: <em>p</em> &lt; 0.5",
+   "H<sub>0</sub>: <em>p</em> = 0.5 and H<sub>a</sub>: <em>p</em> &ne; 0.5",
+   "H<sub>0</sub>: <em>p</em> &ne; 0.5 and H<sub>a</sub>: <em>p</em> = 0.5"
+  ],
+  "ans": 2,
+  "hint": "&ldquo;Not fair&rdquo; has no direction, so the alternative is two-sided.",
+  "sol": "The correct pair is H<sub>0</sub>: <em>p</em> = 0.5 and H<sub>a</sub>: <em>p</em> &ne; 0.5. The null hypothesis is an equality about the population proportion; the alternative is a strict inequality that reflects the claim being tested."
+ },
+ {
+  "g": "3.5",
+  "q": "A manufacturer states that 2% of its parts are defective. An inspector suspects the defect rate is <strong>higher</strong> than stated. Which pair of hypotheses should be tested?",
+  "opts": [
+   "H<sub>0</sub>: <em>p</em> = 0.02 and H<sub>a</sub>: <em>p</em> &lt; 0.02",
+   "H<sub>0</sub>: <em>p</em> &gt; 0.02 and H<sub>a</sub>: <em>p</em> = 0.02",
+   "H<sub>0</sub>: <em>p</em> = 0.02 and H<sub>a</sub>: <em>p</em> &ne; 0.02",
+   "H<sub>0</sub>: <em>p</em> = 0.02 and H<sub>a</sub>: <em>p</em> &gt; 0.02"
+  ],
+  "ans": 3,
+  "hint": "The inspector suspects a higher rate, so H<sub>a</sub> is &ldquo;&gt;&rdquo;.",
+  "sol": "The correct pair is H<sub>0</sub>: <em>p</em> = 0.02 and H<sub>a</sub>: <em>p</em> &gt; 0.02. The null hypothesis is an equality about the population proportion; the alternative is a strict inequality that reflects the claim being tested."
+ },
+ {
+  "g": "3.5",
+  "q": "A hospital&rsquo;s historical readmission rate is 18%. After a new discharge program, administrators want to know if the rate has <strong>changed</strong>. Which pair of hypotheses should be tested?",
+  "opts": [
+   "H<sub>0</sub>: <em>p</em> = 0.18 and H<sub>a</sub>: <em>p</em> &lt; 0.18",
+   "H<sub>0</sub>: <em>p</em> = 0.18 and H<sub>a</sub>: <em>p</em> &ne; 0.18",
+   "H<sub>0</sub>: <em>p</em> = 0.18 and H<sub>a</sub>: <em>p</em> &gt; 0.18",
+   "H<sub>0</sub>: <em>p</em> &lt; 0.18 and H<sub>a</sub>: <em>p</em> &ge; 0.18"
+  ],
+  "ans": 1,
+  "hint": "&ldquo;Changed&rdquo; (up or down) means a two-sided alternative. (If the question does not suggest a direction, use two-sided.)",
+  "sol": "The correct pair is H<sub>0</sub>: <em>p</em> = 0.18 and H<sub>a</sub>: <em>p</em> &ne; 0.18. The null hypothesis is an equality about the population proportion; the alternative is a strict inequality that reflects the claim being tested."
+ },
+ {
+  "g": "3.5",
+  "q": "A drug company claims its new treatment cures more than the standard 60% of patients. Let <em>p</em> be the true cure rate of the new treatment. Which pair of hypotheses should be tested?",
+  "opts": [
+   "H<sub>0</sub>: <em>p</em> = 0.60 and H<sub>a</sub>: <em>p</em> &lt; 0.60",
+   "H<sub>0</sub>: <em>p</em> &gt; 0.60 and H<sub>a</sub>: <em>p</em> = 0.60",
+   "H<sub>0</sub>: <em>p</em> = 0.60 and H<sub>a</sub>: <em>p</em> &gt; 0.60",
+   "H<sub>0</sub>: <em>p</em> = 0.60 and H<sub>a</sub>: <em>p</em> &ne; 0.60"
+  ],
+  "ans": 2,
+  "hint": "The company&rsquo;s claim of &ldquo;more than 60%&rdquo; is the alternative H<sub>a</sub>.",
+  "sol": "The correct pair is H<sub>0</sub>: <em>p</em> = 0.60 and H<sub>a</sub>: <em>p</em> &gt; 0.60. The null hypothesis is an equality about the population proportion; the alternative is a strict inequality that reflects the claim being tested."
+ },
+ {
+  "g": "3.5",
+  "q": "Which of the following is a correctly written pair of hypotheses for a test about a population proportion?",
+  "opts": [
+   "H<sub>0</sub>: <span class=\"hat\">p</span> = 0.30 and H<sub>a</sub>: <span class=\"hat\">p</span> &gt; 0.30",
+   "H<sub>0</sub>: <em>p</em> = 0.30 and H<sub>a</sub>: <em>p</em> &gt; 0.30",
+   "H<sub>0</sub>: <em>p</em> &ge; 0.30 and H<sub>a</sub>: <em>p</em> &lt; 0.30",
+   "H<sub>0</sub>: <em>p</em> &ne; 0.30 and H<sub>a</sub>: <em>p</em> = 0.30"
+  ],
+  "ans": 1,
+  "hint": "Hypotheses use the parameter <em>p</em>, not <span class=\"hat\">p</span>.",
+  "sol": "Hypotheses are statements about the <strong>population parameter</strong> <em>p</em>, never about the sample statistic <span class=\"hat\">p</span>. H<sub>0</sub> contains the equality and H<sub>a</sub> is a strict inequality."
+ },
+ {
+  "g": "3.5",
+  "q": "In a significance test about a proportion, the null hypothesis&hellip;",
+  "opts": [
+   "is always a statement of equality, H<sub>0</sub>: <em>p</em> = <em>p</em><sub>0</sub>",
+   "is the statement the researcher hopes to prove",
+   "is a statement about the sample proportion",
+   "always has a &ldquo;&ne;&rdquo; sign"
+  ],
+  "ans": 0,
+  "hint": "Recall: we attempt to show H<sub>0</sub> is improbable.",
+  "sol": "H<sub>0</sub> is the equality benchmark <em>p</em> = <em>p</em><sub>0</sub>. We try to show that it is unacceptable by showing that it is improbable."
+ },
+ {
+  "g": "3.5",
+  "q": "A student defines the parameter as &ldquo;<em>p</em> = 0.62, the proportion of 400 sampled voters who favor the bond.&rdquo; What is wrong?",
+  "opts": [
+   "Nothing is wrong",
+   "The parameter is the proportion of <em>all</em> voters in the population, not the sample, and its value is unknown",
+   "It should use &mu;",
+   "It should use <span class=\"hat\">p</span> as the parameter"
+  ],
+  "ans": 1,
+  "hint": "Parameter = population; statistic = sample.",
+  "sol": "The parameter describes the whole population (&ldquo;<em>p</em> = the proportion of all voters in the city who favor the bond&rdquo;). The 0.62 is a statistic."
+ },
+ {
+  "g": "3.5",
+  "q": "Which is the best definition of the parameter for this test? &ldquo;A school claims 80% of its graduates enroll in college. A counselor believes the rate is lower.&rdquo;",
+  "opts": [
+   "<em>p</em> = the proportion of <em>all</em> graduates of the school who enroll in college",
+   "<em>p</em> = the proportion of the sampled graduates who enroll in college",
+   "<em>p</em> = 0.80",
+   "&mu; = the mean number of graduates who enroll"
+  ],
+  "ans": 0,
+  "hint": "Name the population and the &ldquo;success&rdquo;.",
+  "sol": "Define the parameter in context as a population proportion."
+ },
+ {
+  "g": "3.5",
+  "q": "The statement &ldquo;If the question does not suggest a direction for the alternative, use a two-sided test&rdquo; means that for &ldquo;Is the coin different from fair?&rdquo; we use&hellip;",
+  "opts": [
+   "H<sub>a</sub>: <em>p</em> &lt; 0.5",
+   "H<sub>a</sub>: <em>p</em> &gt; 0.5",
+   "H<sub>a</sub>: <em>p</em> &ne; 0.5",
+   "H<sub>a</sub>: <em>p</em> = 0.5"
+  ],
+  "ans": 2,
+  "hint": "Does the claim say &ldquo;more&rdquo; or &ldquo;less&rdquo;?",
+  "sol": "No direction was suggested, so the alternative is two-sided: <em>p</em> &ne; 0.5."
+ },
+ {
+  "g": "3.5",
+  "q": "A researcher looks at the data first, sees that the sample proportion is above 0.50, and then chooses H<sub>a</sub>: <em>p</em> &gt; 0.50. Why is this a poor practice?",
+  "opts": [
+   "The direction of H<sub>a</sub> should come from the question being asked before seeing the data",
+   "The sample proportion cannot be above 0.50",
+   "It makes the test two-sided",
+   "There is nothing wrong"
+  ],
+  "ans": 0,
+  "hint": "When must the hypotheses be written?",
+  "sol": "Hypotheses are set up from the research question, before looking at the data. Choosing the direction from the sample inflates the chance of a false positive."
+ },
+ {
+  "g": "3.5",
+  "q": "Which inference procedure is appropriate to test a claim about a single population proportion using one random sample?",
+  "opts": [
+   "One-sample <em>t</em>-test for a mean",
+   "One-sample <em>z</em>-test for a population proportion",
+   "Two-sample <em>z</em>-test",
+   "Chi-square test"
+  ],
+  "ans": 1,
+  "hint": "One categorical variable, one sample.",
+  "sol": "One categorical variable, one sample, one proportion: a one-sample <em>z</em>-test for a population proportion (<code>1-PropZTest</code>)."
+ },
+ {
+  "g": "3.5",
+  "q": "To check the large counts (Normality) condition for a <strong>significance test</strong> of H<sub>0</sub>: <em>p</em> = <em>p</em><sub>0</sub>, we use&hellip;",
+  "opts": [
+   "<em>np</em><sub>0</sub> &ge; 10 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) &ge; 10",
+   "<em>n</em><span class=\"hat\">p</span> &ge; 10 and <em>n</em>(1 &minus; <span class=\"hat\">p</span>) &ge; 10",
+   "<em>n</em> &ge; 30 only",
+   "Nothing: tests need no conditions"
+  ],
+  "ans": 0,
+  "hint": "In a test we assume H<sub>0</sub> is true.",
+  "sol": "The P-value is a conditional probability computed assuming H<sub>0</sub> is true, so the claimed proportion <em>p</em><sub>0</sub> (not <span class=\"hat\">p</span>) is used to check Normality and to compute the standard deviation. (For a confidence interval, use <span class=\"hat\">p</span>.)"
+ },
+ {
+  "g": "3.5",
+  "q": "The <strong>independence</strong> condition for a one-sample <em>z</em>-test for a proportion is checked by&hellip;",
+  "opts": [
+   "a random sample (or randomized experiment) and the 10% rule: <em>n</em> &le; 0.10<em>N</em>",
+   "the large counts condition",
+   "<em>n</em> &ge; 30",
+   "checking a dotplot for outliers"
+  ],
+  "ans": 0,
+  "hint": "Randomness and the 10% rule.",
+  "sol": "Independence: the data come from a random sample, and when sampling without replacement <em>n</em> is less than 10% of the population."
+ },
+ {
+  "g": "3.5",
+  "q": "A random sample of 150 items is taken to test H<sub>0</sub>: <em>p</em> = 0.04. Is the large counts (Normality) condition satisfied?",
+  "opts": [
+   "Yes: both <em>np</em><sub>0</sub> and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) are at least 10",
+   "No: <em>np</em><sub>0</sub> = 6 is less than 10",
+   "No: <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 144 is less than 10",
+   "Yes, because the sample is random"
+  ],
+  "ans": 1,
+  "hint": "Compute <em>np</em><sub>0</sub> and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) and compare each with 10.",
+  "sol": "<em>np</em><sub>0</sub> = 6 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 144. One is below 10: <strong>not</strong> satisfied."
+ },
+ {
+  "g": "3.5",
+  "q": "A random sample of 60 people is taken to test H<sub>0</sub>: <em>p</em> = 0.30. Is the large counts (Normality) condition satisfied?",
+  "opts": [
+   "Yes: both <em>np</em><sub>0</sub> and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) are at least 10",
+   "No: <em>np</em><sub>0</sub> = 18 is less than 10",
+   "No: <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 42 is less than 10",
+   "Yes, because the sample is random"
+  ],
+  "ans": 0,
+  "hint": "Compute <em>np</em><sub>0</sub> and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) and compare each with 10.",
+  "sol": "<em>np</em><sub>0</sub> = 18 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 42. Both are &ge; 10: satisfied."
+ },
+ {
+  "g": "3.5",
+  "q": "A random sample of 200 people is taken to test H<sub>0</sub>: <em>p</em> = 0.50. Is the large counts (Normality) condition satisfied?",
+  "opts": [
+   "Yes: both <em>np</em><sub>0</sub> and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) are at least 10",
+   "No: <em>np</em><sub>0</sub> = 100 is less than 10",
+   "No: <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 100 is less than 10",
+   "Yes, because the sample is random"
+  ],
+  "ans": 0,
+  "hint": "Compute <em>np</em><sub>0</sub> and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) and compare each with 10.",
+  "sol": "<em>np</em><sub>0</sub> = 100 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 100. Both are &ge; 10: satisfied."
+ },
+ {
+  "g": "3.5",
+  "q": "Under H<sub>0</sub>: <em>p</em> = 0.75 with a random sample of <em>n</em> = 125, find the standard deviation &sigma;<sub><span class=\"hat\">p</span></sub> of the sampling distribution of <span class=\"hat\">p</span>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.03873,
+  "tol": 0.0003,
+  "unit": "",
+  "hint": "Use <em>p</em><sub>0</sub>, not <span class=\"hat\">p</span>: &radic;(<em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>)/<em>n</em>).",
+  "sol": "&sigma;<sub><span class=\"hat\">p</span></sub> = &radic;(0.75 &middot; 0.25/125) = 0.0387."
+ },
+ {
+  "g": "3.5",
+  "q": "Under H<sub>0</sub>: <em>p</em> = 0.37 with a random sample of <em>n</em> = 300, find the standard deviation &sigma;<sub><span class=\"hat\">p</span></sub> of the sampling distribution of <span class=\"hat\">p</span>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.027875,
+  "tol": 0.0003,
+  "unit": "",
+  "hint": "Use <em>p</em><sub>0</sub>, not <span class=\"hat\">p</span>: &radic;(<em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>)/<em>n</em>).",
+  "sol": "&sigma;<sub><span class=\"hat\">p</span></sub> = &radic;(0.37 &middot; 0.63/300) = 0.0279."
+ },
+ {
+  "g": "3.5",
+  "q": "Under H<sub>0</sub>: <em>p</em> = 0.2 with a random sample of <em>n</em> = 400, find the standard deviation &sigma;<sub><span class=\"hat\">p</span></sub> of the sampling distribution of <span class=\"hat\">p</span>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.02,
+  "tol": 0.0003,
+  "unit": "",
+  "hint": "Use <em>p</em><sub>0</sub>, not <span class=\"hat\">p</span>: &radic;(<em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>)/<em>n</em>).",
+  "sol": "&sigma;<sub><span class=\"hat\">p</span></sub> = &radic;(0.2 &middot; 0.8/400) = 0.0200."
+ },
+ {
+  "g": "3.5",
+  "q": "The <strong>significance level</strong> &alpha; is&hellip;",
+  "opts": [
+   "the probability that H<sub>0</sub> is true",
+   "a predetermined boundary used to decide whether a P-value is small enough to reject H<sub>0</sub>; it is also the probability of a Type I error",
+   "the P-value",
+   "the probability of a Type II error"
+  ],
+  "ans": 1,
+  "hint": "Common values: 0.05, 0.01, 0.10.",
+  "sol": "&alpha; (such as 0.05, 0.01 or 0.10) is chosen in advance. If the P-value &le; &alpha;, we reject H<sub>0</sub>. It equals the probability of a Type I error."
+ },
+ {
+  "g": "3.5",
+  "q": "Which significance level makes it <strong>harder</strong> to reject H<sub>0</sub>?",
+  "opts": [
+   "&alpha; = 0.10",
+   "&alpha; = 0.05",
+   "&alpha; = 0.01",
+   "They are all equally hard"
+  ],
+  "ans": 2,
+  "hint": "Compare how small the P-value must be.",
+  "sol": "A smaller &alpha; requires a smaller P-value, so rejection is harder."
+ },
+ {
+  "g": "3.6",
+  "q": "The <strong>P-value</strong> of a significance test is&hellip;",
+  "opts": [
+   "the probability that H<sub>0</sub> is true",
+   "the probability of getting a sample statistic as extreme as, or more extreme than, the one observed, assuming H<sub>0</sub> is true",
+   "the probability that H<sub>a</sub> is true",
+   "the probability of a Type II error"
+  ],
+  "ans": 1,
+  "hint": "It is computed assuming H<sub>0</sub> is true.",
+  "sol": "The P-value is a conditional probability: it assumes H<sub>0</sub> is true and measures how likely evidence for H<sub>a</sub> as strong or stronger than the observed evidence is by chance alone."
+ },
+ {
+  "g": "3.6",
+  "q": "A significance test gives a P-value of 0.03. Which is the correct interpretation?",
+  "opts": [
+   "There is a 3% chance that H<sub>0</sub> is true",
+   "Assuming H<sub>0</sub> is true, there is a 3% chance of getting a sample proportion as extreme as the one observed (or more) by random chance alone",
+   "There is a 97% chance that H<sub>a</sub> is true",
+   "The sample proportion is 3% away from <em>p</em><sub>0</sub>"
+  ],
+  "ans": 1,
+  "hint": "Start the interpretation with &ldquo;Assuming H<sub>0</sub> is true&hellip;&rdquo;.",
+  "sol": "The P-value is P(data this extreme or more | H<sub>0</sub> true) = 0.03. It is <em>not</em> the probability that H<sub>0</sub> is true."
+ },
+ {
+  "g": "3.6",
+  "q": "A test of H<sub>0</sub>: <em>p</em> = 0.50 vs H<sub>a</sub>: <em>p</em> &gt; 0.50 gives a P-value of 0.012. Which statement best interprets the P-value in context (voters favoring a proposal)?",
+  "opts": [
+   "If exactly half of all voters favored the proposal, the probability of a random sample giving a proportion this high or higher would be 0.012",
+   "The probability that half of all voters favor the proposal is 0.012",
+   "1.2% of the voters favor the proposal",
+   "The probability that the alternative is false is 0.012"
+  ],
+  "ans": 0,
+  "hint": "Use the form &ldquo;if <em>p</em> = <em>p</em><sub>0</sub>, the probability of &hellip; is &hellip;&rdquo;.",
+  "sol": "The interpretation must assume H<sub>0</sub> (<em>p</em> = 0.50) and describe the chance of a sample result this extreme or more."
+ },
+ {
+  "g": "3.6",
+  "q": "Which of the following is a <strong>common misinterpretation</strong> of a P-value of 0.04?",
+  "opts": [
+   "If H<sub>0</sub> is true, a result this extreme would occur about 4% of the time",
+   "There is a 4% probability that the null hypothesis is true",
+   "A small P-value is evidence against H<sub>0</sub>",
+   "The smaller the P-value, the stronger the evidence for H<sub>a</sub>"
+  ],
+  "ans": 1,
+  "hint": "Which statement treats H<sub>0</sub> as random?",
+  "sol": "The P-value does not give the probability that H<sub>0</sub> is true; H<sub>0</sub> is either true or not, and the P-value is calculated by assuming it is true."
+ },
+ {
+  "g": "3.6",
+  "q": "Which P-value provides the <strong>strongest</strong> evidence against H<sub>0</sub>?",
+  "opts": [
+   "0.20",
+   "0.049",
+   "0.008",
+   "0.51"
+  ],
+  "ans": 2,
+  "hint": "Small P-values are convincing evidence.",
+  "sol": "The smaller the P-value, the more unusual the sample result would be if H<sub>0</sub> were true, so the stronger the evidence for H<sub>a</sub>."
+ },
+ {
+  "g": "3.6",
+  "q": "The sample proportion almost never equals the claimed population proportion exactly. The logic of a significance test is to&hellip;",
+  "opts": [
+   "show the sample proportion differs from <em>p</em><sub>0</sub> at all",
+   "decide whether the difference between <span class=\"hat\">p</span> and <em>p</em><sub>0</sub> could plausibly be explained by random chance alone",
+   "prove that H<sub>0</sub> is true",
+   "estimate <em>p</em> with a margin of error"
+  ],
+  "ans": 1,
+  "hint": "Think: chance or a real difference?",
+  "sol": "Either the sample statistic differs by random chance, or the claimed parameter is wrong. If chance is not plausible (small P-value), we have convincing evidence that the claim is wrong."
+ },
+ {
+  "g": "3.6",
+  "q": "A student says: &ldquo;The P-value is 0.20, so there is a 20% probability that the null hypothesis is true.&rdquo; Which is the best response?",
+  "opts": [
+   "Correct",
+   "Incorrect: the P-value is computed assuming H<sub>0</sub> is true, so it cannot be the probability that H<sub>0</sub> is true. It is the probability of a result this extreme or more if H<sub>0</sub> is true",
+   "Incorrect: the probability is 80%",
+   "Incorrect: the P-value is the probability that H<sub>a</sub> is true"
+  ],
+  "ans": 1,
+  "hint": "What is assumed when computing a P-value?",
+  "sol": "The P-value is a conditional probability that assumes H<sub>0</sub>."
+ },
+ {
+  "g": "3.6",
+  "q": "In a one-sided test, getting a smaller P-value would result from&hellip;",
+  "opts": [
+   "a sample proportion closer to <em>p</em><sub>0</sub>",
+   "a sample proportion farther from <em>p</em><sub>0</sub> in the direction of H<sub>a</sub> (with the same <em>n</em>)",
+   "a smaller sample size with the same <span class=\"hat\">p</span>",
+   "a larger <em>p</em><sub>0</sub> always"
+  ],
+  "ans": 1,
+  "hint": "Farther from H<sub>0</sub> means rarer under H<sub>0</sub>.",
+  "sol": "More extreme sample results (farther from <em>p</em><sub>0</sub> in the direction of H<sub>a</sub>) are less likely under H<sub>0</sub>, giving smaller P-values."
+ },
+ {
+  "g": "3.6",
+  "q": "With the same sample proportion and <em>p</em><sub>0</sub>, how does a <strong>larger</strong> sample size affect the P-value (when <span class=\"hat\">p</span> &ne; <em>p</em><sub>0</sub>)?",
+  "opts": [
+   "It tends to make the P-value smaller (a larger |z|)",
+   "It tends to make the P-value larger",
+   "It has no effect",
+   "It makes the P-value equal to &alpha;"
+  ],
+  "ans": 0,
+  "hint": "z = (<span class=\"hat\">p</span> &minus; <em>p</em><sub>0</sub>)/&sigma;; what happens to &sigma; as <em>n</em> grows?",
+  "sol": "The standard deviation &radic;(<em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>)/<em>n</em>) shrinks as <em>n</em> grows, so the same difference gives a larger |<em>z</em>| and a smaller P-value."
+ },
+ {
+  "g": "3.6",
+  "q": "Which statement correctly links the P-value and the significance level?",
+  "opts": [
+   "If the P-value &le; &alpha;, we reject H<sub>0</sub>",
+   "If the P-value &le; &alpha;, we fail to reject H<sub>0</sub>",
+   "If the P-value &gt; &alpha;, we accept H<sub>0</sub>",
+   "&alpha; is computed from the P-value"
+  ],
+  "ans": 0,
+  "hint": "Small P-value, reject.",
+  "sol": "P-value &le; &alpha; &rarr; reject H<sub>0</sub> (convincing evidence for H<sub>a</sub>). P-value &gt; &alpha; &rarr; fail to reject H<sub>0</sub> (not convincing evidence for H<sub>a</sub>)."
+ },
+ {
+  "g": "3.6",
+  "q": "A two-sided test gives a P-value of 0.08. A researcher says: &ldquo;The sample proportion was higher than <em>p</em><sub>0</sub>, so the one-sided P-value is 0.04 and we can reject at &alpha; = 0.05.&rdquo; Why is this not acceptable?",
+  "opts": [
+   "The direction of H<sub>a</sub> must be decided before collecting and looking at the data, not after",
+   "One-sided tests are never valid",
+   "The P-value cannot be halved",
+   "A P-value of 0.04 is too big"
+  ],
+  "ans": 0,
+  "hint": "When is the direction chosen?",
+  "sol": "Choosing a one-sided alternative after seeing the data (to halve the P-value) is improper. If the question does not suggest a direction, use a two-sided test."
+ },
+ {
+  "g": "3.6",
+  "q": "Why can a significance test never prove that H<sub>0</sub> is true?",
+  "opts": [
+   "Because P-values are always small",
+   "Because a sample statistic that is consistent with H<sub>0</sub> is also consistent with many other values of <em>p</em>",
+   "Because H<sub>0</sub> is always false",
+   "Because the Normal model fails"
+  ],
+  "ans": 1,
+  "hint": "Think of confidence interval plausible values.",
+  "sol": "A sample result close to <em>p</em><sub>0</sub> is also plausible for nearby values of <em>p</em>. That is why we only &ldquo;fail to reject&rdquo; and never &ldquo;accept&rdquo; H<sub>0</sub>."
+ },
+ {
+  "g": "3.7",
+  "q": "A cafe owner believes that more than half of her customers prefer the new recipe. In a random sample of 200 customers, 118 prefer the new recipe. Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &gt; 0.5. Find the test statistic <em>z</em>. (Round to 2 decimals.)",
+  "type": "num",
+  "ans": 2.545584,
+  "tol": 0.02,
+  "unit": "",
+  "hint": "z = (<span class=\"hat\">p</span> &minus; <em>p</em><sub>0</sub>)/&radic;(<em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>)/<em>n</em>). Use <em>p</em><sub>0</sub> in the denominator.",
+  "sol": "Checks: random sample; <em>np</em><sub>0</sub> = 100 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 100, both &ge; 10. <span class=\"hat\">p</span> = 118/200 = 0.5900; &sigma; = &radic;(0.5 &middot; 0.5/200) = 0.0354; <em>z</em> = (0.5900 &minus; 0.5)/0.0354 = <strong>2.546</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A cafe owner believes that more than half of her customers prefer the new recipe. In a random sample of 200 customers, 118 prefer the new recipe. Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &gt; 0.5. Find the P-value. (Round to 4 decimals; the calculator command is <code>1-PropZTest(0.5, 118, 200, &gt;p0)</code>.)",
+  "type": "num",
+  "ans": 0.005455,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use the tail that matches H<sub>a</sub>: &gt; right tail, &lt; left tail, &ne; double the tail.",
+  "sol": "With <em>z</em> = 2.546: P-value = P(<em>Z</em> &gt; 2.55) = <strong>0.0055</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A cafe owner believes that more than half of her customers prefer the new recipe. In a random sample of 200 customers, 118 prefer the new recipe. Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &gt; 0.5. The P-value is about 0.0055. What is the decision at the &alpha; = 0.01 significance level?",
+  "opts": [
+   "Reject H<sub>0</sub>",
+   "Fail to reject H<sub>0</sub>",
+   "Accept H<sub>0</sub>",
+   "Accept H<sub>a</sub> with certainty"
+  ],
+  "ans": 0,
+  "hint": "Compare the P-value with &alpha;: reject if P-value &le; &alpha;.",
+  "sol": "P-value = 0.0055 &le; &alpha; = 0.01, so we reject H<sub>0</sub>."
+ },
+ {
+  "g": "3.7",
+  "q": "A cafe owner believes that more than half of her customers prefer the new recipe. In a random sample of 200 customers, 118 prefer the new recipe. Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &gt; 0.5. With P-value &asymp; 0.0055 and &alpha; = 0.01, which conclusion in context is correct?",
+  "opts": [
+   "Since the P-value is small, we have proven that the null hypothesis is false.",
+   "Since the P-value 0.0055 is less than &alpha; = 0.01, there is convincing evidence that the true proportion of all customers who prefer the new recipe is greater than 0.50.",
+   "The probability that the null hypothesis is true is 0.0055.",
+   "Since the P-value is less than &alpha;, we accept the null hypothesis."
+  ],
+  "ans": 1,
+  "hint": "Reject &rarr; convincing evidence for H<sub>a</sub>; fail to reject &rarr; not convincing evidence for H<sub>a</sub> (never &ldquo;accept&rdquo; H<sub>0</sub>).",
+  "sol": "Link the conclusion to the P-value and &alpha;, and state it in context: &ldquo;Since the P-value 0.0055 is less than &alpha; = 0.01, there is convincing evidence that the true proportion of all customers who prefer the new recipe is greater than 0.50.&rdquo; We never &ldquo;accept&rdquo; H<sub>0</sub>, and the P-value is not the probability that H<sub>0</sub> is true."
+ },
+ {
+  "g": "3.7",
+  "q": "A school claims that 80% of its graduates enroll in college. A counselor believes the rate is lower. In a random sample of 350 graduates, 266 enrolled in college. Test H<sub>0</sub>: <em>p</em> = 0.8, H<sub>a</sub>: <em>p</em> &lt; 0.8. Find the test statistic <em>z</em>. (Round to 2 decimals.)",
+  "type": "num",
+  "ans": -1.870829,
+  "tol": 0.02,
+  "unit": "",
+  "hint": "z = (<span class=\"hat\">p</span> &minus; <em>p</em><sub>0</sub>)/&radic;(<em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>)/<em>n</em>). Use <em>p</em><sub>0</sub> in the denominator.",
+  "sol": "Checks: random sample; <em>np</em><sub>0</sub> = 280 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 70, both &ge; 10. <span class=\"hat\">p</span> = 266/350 = 0.7600; &sigma; = &radic;(0.8 &middot; 0.2/350) = 0.0214; <em>z</em> = (0.7600 &minus; 0.8)/0.0214 = <strong>&minus;1.871</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A school claims that 80% of its graduates enroll in college. A counselor believes the rate is lower. In a random sample of 350 graduates, 266 enrolled in college. Test H<sub>0</sub>: <em>p</em> = 0.8, H<sub>a</sub>: <em>p</em> &lt; 0.8. Find the P-value. (Round to 4 decimals; the calculator command is <code>1-PropZTest(0.8, 266, 350, &lt;p0)</code>.)",
+  "type": "num",
+  "ans": 0.030684,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use the tail that matches H<sub>a</sub>: &gt; right tail, &lt; left tail, &ne; double the tail.",
+  "sol": "With <em>z</em> = &minus;1.871: P-value = P(<em>Z</em> &lt; &minus;1.87) = <strong>0.0307</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A school claims that 80% of its graduates enroll in college. A counselor believes the rate is lower. In a random sample of 350 graduates, 266 enrolled in college. Test H<sub>0</sub>: <em>p</em> = 0.8, H<sub>a</sub>: <em>p</em> &lt; 0.8. The P-value is about 0.0307. What is the decision at the &alpha; = 0.01 significance level?",
+  "opts": [
+   "Reject H<sub>0</sub>",
+   "Fail to reject H<sub>0</sub>",
+   "Accept H<sub>0</sub>",
+   "Accept H<sub>a</sub> with certainty"
+  ],
+  "ans": 1,
+  "hint": "Compare the P-value with &alpha;: reject if P-value &le; &alpha;.",
+  "sol": "P-value = 0.0307 &gt; &alpha; = 0.01, so we fail to reject H<sub>0</sub>."
+ },
+ {
+  "g": "3.7",
+  "q": "A school claims that 80% of its graduates enroll in college. A counselor believes the rate is lower. In a random sample of 350 graduates, 266 enrolled in college. Test H<sub>0</sub>: <em>p</em> = 0.8, H<sub>a</sub>: <em>p</em> &lt; 0.8. With P-value &asymp; 0.0307 and &alpha; = 0.01, which conclusion in context is correct?",
+  "opts": [
+   "We accept the null hypothesis: there is convincing evidence that the claim is true.",
+   "The probability that the null hypothesis is true is 0.0307.",
+   "Since the P-value is greater than &alpha;, there is convincing evidence that the true proportion of all graduates who enroll in college is less than 0.80.",
+   "Since the P-value 0.0307 is greater than &alpha; = 0.01, there is not convincing evidence that the true proportion of all graduates who enroll in college is less than 0.80."
+  ],
+  "ans": 3,
+  "hint": "Reject &rarr; convincing evidence for H<sub>a</sub>; fail to reject &rarr; not convincing evidence for H<sub>a</sub> (never &ldquo;accept&rdquo; H<sub>0</sub>).",
+  "sol": "Link the conclusion to the P-value and &alpha;, and state it in context: &ldquo;Since the P-value 0.0307 is greater than &alpha; = 0.01, there is not convincing evidence that the true proportion of all graduates who enroll in college is less than 0.80.&rdquo; We never &ldquo;accept&rdquo; H<sub>0</sub>, and the P-value is not the probability that H<sub>0</sub> is true."
+ },
+ {
+  "g": "3.7",
+  "q": "A coin is suspected of being unfair. In 250 independent flips, 140 land heads. Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &ne; 0.5. Find the test statistic <em>z</em>. (Round to 2 decimals.)",
+  "type": "num",
+  "ans": 1.897367,
+  "tol": 0.02,
+  "unit": "",
+  "hint": "z = (<span class=\"hat\">p</span> &minus; <em>p</em><sub>0</sub>)/&radic;(<em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>)/<em>n</em>). Use <em>p</em><sub>0</sub> in the denominator.",
+  "sol": "Checks: random sample; <em>np</em><sub>0</sub> = 125 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 125, both &ge; 10. <span class=\"hat\">p</span> = 140/250 = 0.5600; &sigma; = &radic;(0.5 &middot; 0.5/250) = 0.0316; <em>z</em> = (0.5600 &minus; 0.5)/0.0316 = <strong>1.897</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A coin is suspected of being unfair. In 250 independent flips, 140 land heads. Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &ne; 0.5. Find the P-value. (Round to 4 decimals; the calculator command is <code>1-PropZTest(0.5, 140, 250, &ne;p0)</code>.)",
+  "type": "num",
+  "ans": 0.05778,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use the tail that matches H<sub>a</sub>: &gt; right tail, &lt; left tail, &ne; double the tail.",
+  "sol": "With <em>z</em> = 1.897: P-value = 2 &middot; P(<em>Z</em> &gt; |1.90|) = <strong>0.0578</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A coin is suspected of being unfair. In 250 independent flips, 140 land heads. Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &ne; 0.5. The P-value is about 0.0578. What is the decision at the &alpha; = 0.05 significance level?",
+  "opts": [
+   "Reject H<sub>0</sub>",
+   "Fail to reject H<sub>0</sub>",
+   "Accept H<sub>0</sub>",
+   "Accept H<sub>a</sub> with certainty"
+  ],
+  "ans": 1,
+  "hint": "Compare the P-value with &alpha;: reject if P-value &le; &alpha;.",
+  "sol": "P-value = 0.0578 &gt; &alpha; = 0.05, so we fail to reject H<sub>0</sub>."
+ },
+ {
+  "g": "3.7",
+  "q": "A coin is suspected of being unfair. In 250 independent flips, 140 land heads. Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &ne; 0.5. With P-value &asymp; 0.0578 and &alpha; = 0.05, which conclusion in context is correct?",
+  "opts": [
+   "We accept the null hypothesis: there is convincing evidence that the claim is true.",
+   "Since the P-value 0.0578 is greater than &alpha; = 0.05, there is not convincing evidence that the true proportion of heads for this coin is different from 0.50.",
+   "The probability that the null hypothesis is true is 0.0578.",
+   "Since the P-value is greater than &alpha;, there is convincing evidence that the true proportion of heads for this coin is different from 0.50."
+  ],
+  "ans": 1,
+  "hint": "Reject &rarr; convincing evidence for H<sub>a</sub>; fail to reject &rarr; not convincing evidence for H<sub>a</sub> (never &ldquo;accept&rdquo; H<sub>0</sub>).",
+  "sol": "Link the conclusion to the P-value and &alpha;, and state it in context: &ldquo;Since the P-value 0.0578 is greater than &alpha; = 0.05, there is not convincing evidence that the true proportion of heads for this coin is different from 0.50.&rdquo; We never &ldquo;accept&rdquo; H<sub>0</sub>, and the P-value is not the probability that H<sub>0</sub> is true."
+ },
+ {
+  "g": "3.7",
+  "q": "A manufacturer claims that 12% of its parts are defective. An inspector takes a random sample of 500 parts and finds 75 defective. Test H<sub>0</sub>: <em>p</em> = 0.12, H<sub>a</sub>: <em>p</em> &ne; 0.12. Find the test statistic <em>z</em>. (Round to 2 decimals.)",
+  "type": "num",
+  "ans": 2.064307,
+  "tol": 0.02,
+  "unit": "",
+  "hint": "z = (<span class=\"hat\">p</span> &minus; <em>p</em><sub>0</sub>)/&radic;(<em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>)/<em>n</em>). Use <em>p</em><sub>0</sub> in the denominator.",
+  "sol": "Checks: random sample; <em>np</em><sub>0</sub> = 60 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 440, both &ge; 10. <span class=\"hat\">p</span> = 75/500 = 0.1500; &sigma; = &radic;(0.12 &middot; 0.88/500) = 0.0145; <em>z</em> = (0.1500 &minus; 0.12)/0.0145 = <strong>2.064</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A manufacturer claims that 12% of its parts are defective. An inspector takes a random sample of 500 parts and finds 75 defective. Test H<sub>0</sub>: <em>p</em> = 0.12, H<sub>a</sub>: <em>p</em> &ne; 0.12. Find the P-value. (Round to 4 decimals; the calculator command is <code>1-PropZTest(0.12, 75, 500, &ne;p0)</code>.)",
+  "type": "num",
+  "ans": 0.038989,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use the tail that matches H<sub>a</sub>: &gt; right tail, &lt; left tail, &ne; double the tail.",
+  "sol": "With <em>z</em> = 2.064: P-value = 2 &middot; P(<em>Z</em> &gt; |2.06|) = <strong>0.0390</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A manufacturer claims that 12% of its parts are defective. An inspector takes a random sample of 500 parts and finds 75 defective. Test H<sub>0</sub>: <em>p</em> = 0.12, H<sub>a</sub>: <em>p</em> &ne; 0.12. The P-value is about 0.0390. What is the decision at the &alpha; = 0.05 significance level?",
+  "opts": [
+   "Reject H<sub>0</sub>",
+   "Fail to reject H<sub>0</sub>",
+   "Accept H<sub>0</sub>",
+   "Accept H<sub>a</sub> with certainty"
+  ],
+  "ans": 0,
+  "hint": "Compare the P-value with &alpha;: reject if P-value &le; &alpha;.",
+  "sol": "P-value = 0.0390 &le; &alpha; = 0.05, so we reject H<sub>0</sub>."
+ },
+ {
+  "g": "3.7",
+  "q": "A manufacturer claims that 12% of its parts are defective. An inspector takes a random sample of 500 parts and finds 75 defective. Test H<sub>0</sub>: <em>p</em> = 0.12, H<sub>a</sub>: <em>p</em> &ne; 0.12. With P-value &asymp; 0.0390 and &alpha; = 0.05, which conclusion in context is correct?",
+  "opts": [
+   "Since the P-value is small, we have proven that the null hypothesis is false.",
+   "The probability that the null hypothesis is true is 0.0390.",
+   "Since the P-value is less than &alpha;, we accept the null hypothesis.",
+   "Since the P-value 0.0390 is less than &alpha; = 0.05, there is convincing evidence that the true proportion of all parts that are defective is different from 0.12."
+  ],
+  "ans": 3,
+  "hint": "Reject &rarr; convincing evidence for H<sub>a</sub>; fail to reject &rarr; not convincing evidence for H<sub>a</sub> (never &ldquo;accept&rdquo; H<sub>0</sub>).",
+  "sol": "Link the conclusion to the P-value and &alpha;, and state it in context: &ldquo;Since the P-value 0.0390 is less than &alpha; = 0.05, there is convincing evidence that the true proportion of all parts that are defective is different from 0.12.&rdquo; We never &ldquo;accept&rdquo; H<sub>0</sub>, and the P-value is not the probability that H<sub>0</sub> is true."
+ },
+ {
+  "g": "3.7",
+  "q": "A hospital&rsquo;s historical readmission rate is 18%. After a new program, a random sample of 160 patients shows 20 readmitted. Is there evidence that the rate has decreased? Test H<sub>0</sub>: <em>p</em> = 0.18, H<sub>a</sub>: <em>p</em> &lt; 0.18. Find the test statistic <em>z</em>. (Round to 2 decimals.)",
+  "type": "num",
+  "ans": -1.810838,
+  "tol": 0.02,
+  "unit": "",
+  "hint": "z = (<span class=\"hat\">p</span> &minus; <em>p</em><sub>0</sub>)/&radic;(<em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>)/<em>n</em>). Use <em>p</em><sub>0</sub> in the denominator.",
+  "sol": "Checks: random sample; <em>np</em><sub>0</sub> = 28.8 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 131.2, both &ge; 10. <span class=\"hat\">p</span> = 20/160 = 0.1250; &sigma; = &radic;(0.18 &middot; 0.82/160) = 0.0304; <em>z</em> = (0.1250 &minus; 0.18)/0.0304 = <strong>&minus;1.811</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A hospital&rsquo;s historical readmission rate is 18%. After a new program, a random sample of 160 patients shows 20 readmitted. Is there evidence that the rate has decreased? Test H<sub>0</sub>: <em>p</em> = 0.18, H<sub>a</sub>: <em>p</em> &lt; 0.18. Find the P-value. (Round to 4 decimals; the calculator command is <code>1-PropZTest(0.18, 20, 160, &lt;p0)</code>.)",
+  "type": "num",
+  "ans": 0.035083,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use the tail that matches H<sub>a</sub>: &gt; right tail, &lt; left tail, &ne; double the tail.",
+  "sol": "With <em>z</em> = &minus;1.811: P-value = P(<em>Z</em> &lt; &minus;1.81) = <strong>0.0351</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A hospital&rsquo;s historical readmission rate is 18%. After a new program, a random sample of 160 patients shows 20 readmitted. Is there evidence that the rate has decreased? Test H<sub>0</sub>: <em>p</em> = 0.18, H<sub>a</sub>: <em>p</em> &lt; 0.18. The P-value is about 0.0351. What is the decision at the &alpha; = 0.05 significance level?",
+  "opts": [
+   "Reject H<sub>0</sub>",
+   "Fail to reject H<sub>0</sub>",
+   "Accept H<sub>0</sub>",
+   "Accept H<sub>a</sub> with certainty"
+  ],
+  "ans": 0,
+  "hint": "Compare the P-value with &alpha;: reject if P-value &le; &alpha;.",
+  "sol": "P-value = 0.0351 &le; &alpha; = 0.05, so we reject H<sub>0</sub>."
+ },
+ {
+  "g": "3.7",
+  "q": "A hospital&rsquo;s historical readmission rate is 18%. After a new program, a random sample of 160 patients shows 20 readmitted. Is there evidence that the rate has decreased? Test H<sub>0</sub>: <em>p</em> = 0.18, H<sub>a</sub>: <em>p</em> &lt; 0.18. With P-value &asymp; 0.0351 and &alpha; = 0.05, which conclusion in context is correct?",
+  "opts": [
+   "Since the P-value is small, we have proven that the null hypothesis is false.",
+   "Since the P-value 0.0351 is less than &alpha; = 0.05, there is convincing evidence that the true readmission proportion after the new program is less than 0.18.",
+   "The probability that the null hypothesis is true is 0.0351.",
+   "Since the P-value is less than &alpha;, we accept the null hypothesis."
+  ],
+  "ans": 1,
+  "hint": "Reject &rarr; convincing evidence for H<sub>a</sub>; fail to reject &rarr; not convincing evidence for H<sub>a</sub> (never &ldquo;accept&rdquo; H<sub>0</sub>).",
+  "sol": "Link the conclusion to the P-value and &alpha;, and state it in context: &ldquo;Since the P-value 0.0351 is less than &alpha; = 0.05, there is convincing evidence that the true readmission proportion after the new program is less than 0.18.&rdquo; We never &ldquo;accept&rdquo; H<sub>0</sub>, and the P-value is not the probability that H<sub>0</sub> is true."
+ },
+ {
+  "g": "3.7",
+  "q": "A poll of a random sample of 400 voters finds that 216 support a proposal. Is there evidence that more than half of all voters support it? Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &gt; 0.5. Find the test statistic <em>z</em>. (Round to 2 decimals.)",
+  "type": "num",
+  "ans": 1.6,
+  "tol": 0.02,
+  "unit": "",
+  "hint": "z = (<span class=\"hat\">p</span> &minus; <em>p</em><sub>0</sub>)/&radic;(<em>p</em><sub>0</sub>(1 &minus; <em>p</em><sub>0</sub>)/<em>n</em>). Use <em>p</em><sub>0</sub> in the denominator.",
+  "sol": "Checks: random sample; <em>np</em><sub>0</sub> = 200 and <em>n</em>(1 &minus; <em>p</em><sub>0</sub>) = 200, both &ge; 10. <span class=\"hat\">p</span> = 216/400 = 0.5400; &sigma; = &radic;(0.5 &middot; 0.5/400) = 0.0250; <em>z</em> = (0.5400 &minus; 0.5)/0.0250 = <strong>1.600</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A poll of a random sample of 400 voters finds that 216 support a proposal. Is there evidence that more than half of all voters support it? Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &gt; 0.5. Find the P-value. (Round to 4 decimals; the calculator command is <code>1-PropZTest(0.5, 216, 400, &gt;p0)</code>.)",
+  "type": "num",
+  "ans": 0.054799,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use the tail that matches H<sub>a</sub>: &gt; right tail, &lt; left tail, &ne; double the tail.",
+  "sol": "With <em>z</em> = 1.600: P-value = P(<em>Z</em> &gt; 1.60) = <strong>0.0548</strong>."
+ },
+ {
+  "g": "3.7",
+  "q": "A poll of a random sample of 400 voters finds that 216 support a proposal. Is there evidence that more than half of all voters support it? Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &gt; 0.5. The P-value is about 0.0548. What is the decision at the &alpha; = 0.05 significance level?",
+  "opts": [
+   "Reject H<sub>0</sub>",
+   "Fail to reject H<sub>0</sub>",
+   "Accept H<sub>0</sub>",
+   "Accept H<sub>a</sub> with certainty"
+  ],
+  "ans": 1,
+  "hint": "Compare the P-value with &alpha;: reject if P-value &le; &alpha;.",
+  "sol": "P-value = 0.0548 &gt; &alpha; = 0.05, so we fail to reject H<sub>0</sub>."
+ },
+ {
+  "g": "3.7",
+  "q": "A poll of a random sample of 400 voters finds that 216 support a proposal. Is there evidence that more than half of all voters support it? Test H<sub>0</sub>: <em>p</em> = 0.5, H<sub>a</sub>: <em>p</em> &gt; 0.5. With P-value &asymp; 0.0548 and &alpha; = 0.05, which conclusion in context is correct?",
+  "opts": [
+   "We accept the null hypothesis: there is convincing evidence that the claim is true.",
+   "The probability that the null hypothesis is true is 0.0548.",
+   "Since the P-value is greater than &alpha;, there is convincing evidence that the true proportion of all voters who support the proposal is greater than 0.50.",
+   "Since the P-value 0.0548 is greater than &alpha; = 0.05, there is not convincing evidence that the true proportion of all voters who support the proposal is greater than 0.50."
+  ],
+  "ans": 3,
+  "hint": "Reject &rarr; convincing evidence for H<sub>a</sub>; fail to reject &rarr; not convincing evidence for H<sub>a</sub> (never &ldquo;accept&rdquo; H<sub>0</sub>).",
+  "sol": "Link the conclusion to the P-value and &alpha;, and state it in context: &ldquo;Since the P-value 0.0548 is greater than &alpha; = 0.05, there is not convincing evidence that the true proportion of all voters who support the proposal is greater than 0.50.&rdquo; We never &ldquo;accept&rdquo; H<sub>0</sub>, and the P-value is not the probability that H<sub>0</sub> is true."
+ },
+ {
+  "g": "3.7",
+  "q": "A research dermatologist believes that cancers of the head and neck occur most often on the left side. In a review of 565 cases, 305 occurred on the left side. Test H<sub>0</sub>: <em>p</em> = 0.50 vs H<sub>a</sub>: <em>p</em> &gt; 0.50 (use <span class=\"hat\">p</span> &asymp; 0.54). Which expression gives the P-value?",
+  "opts": [
+   "P(<em>z</em> &gt; <span class=\"frac\"><span>0.54 &minus; 0.50</span><span>&radic;<span class=\"rad\">(0.50)(0.50)/565</span></span></span>)",
+   "2P(<em>z</em> &gt; <span class=\"frac\"><span>0.54 &minus; 0.50</span><span>&radic;<span class=\"rad\">(0.50)(0.50)/565</span></span></span>)",
+   "P(<em>z</em> &gt; <span class=\"frac\"><span>0.54 &minus; 0.50</span><span>&radic;<span class=\"rad\">(0.54)(0.46)/565</span></span></span>)",
+   "P(<em>z</em> &lt; <span class=\"frac\"><span>0.54 &minus; 0.50</span><span>&radic;<span class=\"rad\">(0.50)(0.50)/565</span></span></span>)"
+  ],
+  "ans": 0,
+  "hint": "Ask: one-sided or two-sided? And which proportion goes in the standard deviation?",
+  "sol": "H<sub>a</sub>: <em>p</em> &gt; 0.50 is one-sided (right tail), and the standard deviation must use <em>p</em><sub>0</sub> = 0.50."
+ },
+ {
+  "g": "3.7",
+  "q": "A school claims 60% of its students ride the bus. A survey of 150 random students finds that 78 ride the bus. Test H<sub>0</sub>: <em>p</em> = 0.60 vs H<sub>a</sub>: <em>p</em> &lt; 0.60 (use <span class=\"hat\">p</span> = 0.52). Which expression gives the P-value?",
+  "opts": [
+   "2P(<em>z</em> &lt; <span class=\"frac\"><span>0.52 &minus; 0.60</span><span>&radic;<span class=\"rad\">(0.60)(0.40)/150</span></span></span>)",
+   "P(<em>z</em> &lt; <span class=\"frac\"><span>0.52 &minus; 0.60</span><span>&radic;<span class=\"rad\">(0.52)(0.48)/150</span></span></span>)",
+   "P(<em>z</em> &lt; <span class=\"frac\"><span>0.52 &minus; 0.60</span><span>&radic;<span class=\"rad\">(0.60)(0.40)/150</span></span></span>)",
+   "P(<em>z</em> &gt; <span class=\"frac\"><span>0.52 &minus; 0.60</span><span>&radic;<span class=\"rad\">(0.60)(0.40)/150</span></span></span>)"
+  ],
+  "ans": 2,
+  "hint": "Ask: one-sided or two-sided? And which proportion goes in the standard deviation?",
+  "sol": "H<sub>a</sub>: <em>p</em> &lt; 0.60 is one-sided (left tail), and the standard deviation must use <em>p</em><sub>0</sub> = 0.60."
+ },
+ {
+  "g": "3.7",
+  "q": "A company claims 30% of its customers renew. A random sample of 220 customers has 79 renewals (<span class=\"hat\">p</span> &asymp; 0.36). Test whether the renewal rate is different from 0.30: H<sub>a</sub>: <em>p</em> &ne; 0.30. Which expression gives the P-value?",
+  "opts": [
+   "P(<em>z</em> &gt; <span class=\"frac\"><span>0.36 &minus; 0.30</span><span>&radic;<span class=\"rad\">(0.30)(0.70)/220</span></span></span>)",
+   "2P(<em>z</em> &gt; <span class=\"frac\"><span>0.36 &minus; 0.30</span><span>&radic;<span class=\"rad\">(0.30)(0.70)/220</span></span></span>)",
+   "2P(<em>z</em> &gt; <span class=\"frac\"><span>0.36 &minus; 0.30</span><span>&radic;<span class=\"rad\">(0.36)(0.64)/220</span></span></span>)",
+   "P(<em>z</em> &lt; <span class=\"frac\"><span>0.36 &minus; 0.30</span><span>&radic;<span class=\"rad\">(0.30)(0.70)/220</span></span></span>)"
+  ],
+  "ans": 1,
+  "hint": "Ask: one-sided or two-sided? And which proportion goes in the standard deviation?",
+  "sol": "H<sub>a</sub>: <em>p</em> &ne; 0.30 is two-sided (double the tail), and the standard deviation must use <em>p</em><sub>0</sub> = 0.30."
+ },
+ {
+  "g": "3.7",
+  "q": "A test of H<sub>0</sub>: <em>p</em> = 0.30 gives P-value = 0.18. A student concludes: &ldquo;We accept H<sub>0</sub>: the true proportion is 0.30.&rdquo; What is the problem?",
+  "opts": [
+   "Nothing, this is a correct conclusion",
+   "We never &ldquo;accept&rdquo; H<sub>0</sub>; we can only say there is not convincing evidence for H<sub>a</sub> (fail to reject H<sub>0</sub>)",
+   "The P-value should be 0.05",
+   "The student should have said &ldquo;the P-value proves H<sub>a</sub>&rdquo;"
+  ],
+  "ans": 1,
+  "hint": "What do we say when we do not reject H<sub>0</sub>?",
+  "sol": "A large P-value means the data are consistent with H<sub>0</sub>, but also with many nearby values, so we do not accept H<sub>0</sub>."
+ },
+ {
+  "g": "3.7",
+  "q": "A test for a population proportion has H<sub>0</sub>: <em>p</em> = 0.40. The student computes the standard deviation using <span class=\"hat\">p</span> = 0.46 instead of 0.40. Which statement is true?",
+  "opts": [
+   "This is correct for a significance test",
+   "For a significance test, the standard deviation uses <em>p</em><sub>0</sub> = 0.40 because the P-value assumes H<sub>0</sub> is true",
+   "The standard deviation should use 0.5 always",
+   "It does not matter at all"
+  ],
+  "ans": 1,
+  "hint": "Which proportion is assumed in a P-value calculation?",
+  "sol": "Tests use <em>p</em><sub>0</sub>; confidence intervals use <span class=\"hat\">p</span> (standard error)."
+ },
+ {
+  "g": "3.7",
+  "q": "Which is the correct list of steps for a significance test for a proportion?",
+  "opts": [
+   "Parameter; hypotheses; procedure and checks (independence, Normality using <em>p</em><sub>0</sub>); mechanics (<em>z</em>, P-value); conclusion in context linked to the P-value",
+   "Compute the interval; state H<sub>a</sub>; accept H<sub>0</sub>",
+   "Choose &alpha; after seeing the P-value; reject if the data look different",
+   "Check <em>n</em> &ge; 30 only; report the sample proportion"
+  ],
+  "ans": 0,
+  "hint": "The five-part write-up.",
+  "sol": "Parameter, Hypotheses, Procedure, Checks, Mechanics, Conclusion in context linked to the P-value."
+ },
+ {
+  "g": "3.7",
+  "q": "A random sample of 125 union members gives <span class=\"hat\">p</span> = 0.696 for H<sub>0</sub>: <em>p</em> = 0.75, H<sub>a</sub>: <em>p</em> &lt; 0.75, with <em>z</em> = &minus;1.39 and P = 0.0816. At &alpha; = 0.10, the conclusion is&hellip;",
+  "opts": [
+   "reject H<sub>0</sub>: convincing evidence that the true proportion supporting a strike is less than 0.75",
+   "fail to reject H<sub>0</sub>: no evidence at all",
+   "accept H<sub>0</sub>",
+   "the probability that H<sub>0</sub> is true is 0.0816"
+  ],
+  "ans": 0,
+  "hint": "Compare 0.0816 with 0.10.",
+  "sol": "0.0816 &lt; 0.10, so we reject H<sub>0</sub> at the 10% level (but not at the 5% level, since 0.0816 &gt; 0.05)."
+ },
+ {
+  "g": "3.7",
+  "q": "The same test (P = 0.0816) is run at &alpha; = 0.05. What is the correct conclusion?",
+  "opts": [
+   "Reject H<sub>0</sub>",
+   "Fail to reject H<sub>0</sub>: there is not convincing evidence at the 5% level that the true proportion is less than 0.75",
+   "Accept H<sub>0</sub> because 0.0816 &gt; 0.05",
+   "The test is invalid"
+  ],
+  "ans": 1,
+  "hint": "Compare 0.0816 with 0.05.",
+  "sol": "0.0816 &gt; 0.05, so we fail to reject H<sub>0</sub>. The decision depends on the significance level chosen in advance."
+ },
+ {
+  "g": "3.7",
+  "q": "A 95% confidence interval for a proportion is (0.46, 0.54). A two-sided test of H<sub>0</sub>: <em>p</em> = 0.50 at &alpha; = 0.05 would most likely&hellip;",
+  "opts": [
+   "fail to reject H<sub>0</sub>, because 0.50 is a plausible value in the interval",
+   "reject H<sub>0</sub>",
+   "accept H<sub>0</sub> with certainty",
+   "give a P-value of exactly 0.05"
+  ],
+  "ans": 0,
+  "hint": "Is 0.50 inside the interval?",
+  "sol": "A value inside the (1 &minus; &alpha;) confidence interval is plausible, so a two-sided test at the matching &alpha; generally fails to reject it. (The two methods can differ slightly because the test uses <em>p</em><sub>0</sub> in the standard deviation and the interval uses <span class=\"hat\">p</span>.)"
+ },
+ {
+  "g": "3.7",
+  "q": "A 95% confidence interval for a proportion is (0.55, 0.65). A two-sided test of H<sub>0</sub>: <em>p</em> = 0.50 at &alpha; = 0.05 would most likely&hellip;",
+  "opts": [
+   "reject H<sub>0</sub>, because 0.50 is not in the interval",
+   "fail to reject H<sub>0</sub>",
+   "have a P-value above 0.50",
+   "be invalid because the interval is wide"
+  ],
+  "ans": 0,
+  "hint": "Is 0.50 inside the interval?",
+  "sol": "0.50 is outside the interval, so it is not a plausible value; the two-sided test at &alpha; = 0.05 rejects H<sub>0</sub>."
+ },
+ {
+  "g": "3.8",
+  "q": "A <strong>Type I error</strong> occurs when we&hellip;",
+  "opts": [
+   "fail to reject a false null hypothesis",
+   "reject a true null hypothesis",
+   "accept a true null hypothesis",
+   "reject a false null hypothesis"
+  ],
+  "ans": 1,
+  "hint": "Type I &rarr; reject a true H<sub>0</sub>.",
+  "sol": "Type I error: rejecting H<sub>0</sub> when it is true (a false positive). Its probability is &alpha;."
+ },
+ {
+  "g": "3.8",
+  "q": "A <strong>Type II error</strong> occurs when we&hellip;",
+  "opts": [
+   "reject a true null hypothesis",
+   "fail to reject a false null hypothesis",
+   "reject a false null hypothesis",
+   "fail to reject a true null hypothesis"
+  ],
+  "ans": 1,
+  "hint": "Type II &rarr; fail to reject a false H<sub>0</sub>.",
+  "sol": "Type II error: failing to reject H<sub>0</sub> when it is false (a false negative). Its probability is &beta;."
+ },
+ {
+  "g": "3.8",
+  "q": "A drug company tests H<sub>0</sub>: <em>p</em> = 0.60 (the new treatment cures 60% of patients, the same as the standard) against H<sub>a</sub>: <em>p</em> &gt; 0.60. Which describes a <strong>Type I error</strong> in this context?",
+  "opts": [
+   "conclude the new treatment cures more than 60% of patients when it actually does not",
+   "fail to find evidence that the new treatment is better when it actually cures more than 60% of patients",
+   "fail to reject H<sub>0</sub> when H<sub>0</sub> is true (a correct decision)",
+   "reject H<sub>0</sub> when H<sub>a</sub> is true (a correct decision)"
+  ],
+  "ans": 0,
+  "hint": "Reject a true null hypothesis.",
+  "sol": "A Type I error is rejecting a true H<sub>0</sub>. Here that means to conclude the new treatment cures more than 60% of patients when it actually does not."
+ },
+ {
+  "g": "3.8",
+  "q": "A drug company tests H<sub>0</sub>: <em>p</em> = 0.60 (the new treatment cures 60% of patients, the same as the standard) against H<sub>a</sub>: <em>p</em> &gt; 0.60. Which describes a <strong>Type II error</strong> in this context?",
+  "opts": [
+   "conclude the new treatment cures more than 60% of patients when it actually does not",
+   "reject H<sub>0</sub> when H<sub>a</sub> is true (a correct decision)",
+   "fail to find evidence that the new treatment is better when it actually cures more than 60% of patients",
+   "fail to reject H<sub>0</sub> when H<sub>0</sub> is true (a correct decision)"
+  ],
+  "ans": 2,
+  "hint": "Fail to reject a false null hypothesis.",
+  "sol": "A Type II error is failing to reject a false H<sub>0</sub>. Here that means to fail to find evidence that the new treatment is better when it actually cures more than 60% of patients."
+ },
+ {
+  "g": "3.8",
+  "q": "A drug company tests H<sub>0</sub>: <em>p</em> = 0.60 (the new treatment cures 60% of patients, the same as the standard) against H<sub>a</sub>: <em>p</em> &gt; 0.60. Which is a possible <strong>consequence of a Type II error</strong>?",
+  "opts": [
+   "Patients and doctors may switch to a more expensive treatment that is no better.",
+   "A truly better treatment is not adopted, so patients miss out on its benefits.",
+   "There are no consequences when a test is done correctly",
+   "The sample size automatically increases"
+  ],
+  "ans": 1,
+  "hint": "First describe what the Type II error is in this context.",
+  "sol": "Type II error consequence: A truly better treatment is not adopted, so patients miss out on its benefits. (A Type I error would mean: Patients and doctors may switch to a more expensive treatment that is no better.)"
+ },
+ {
+  "g": "3.8",
+  "q": "A manufacturer tests H<sub>0</sub>: <em>p</em> = 0.02 (the defect rate is 2%) against H<sub>a</sub>: <em>p</em> &gt; 0.02. Which describes a <strong>Type I error</strong> in this context?",
+  "opts": [
+   "fail to detect that the defect rate is higher than 2% when it really is higher",
+   "conclude the defect rate is higher than 2% when it is actually 2%",
+   "fail to reject H<sub>0</sub> when H<sub>0</sub> is true (a correct decision)",
+   "reject H<sub>0</sub> when H<sub>a</sub> is true (a correct decision)"
+  ],
+  "ans": 1,
+  "hint": "Reject a true null hypothesis.",
+  "sol": "A Type I error is rejecting a true H<sub>0</sub>. Here that means to conclude the defect rate is higher than 2% when it is actually 2%."
+ },
+ {
+  "g": "3.8",
+  "q": "A manufacturer tests H<sub>0</sub>: <em>p</em> = 0.02 (the defect rate is 2%) against H<sub>a</sub>: <em>p</em> &gt; 0.02. Which describes a <strong>Type II error</strong> in this context?",
+  "opts": [
+   "conclude the defect rate is higher than 2% when it is actually 2%",
+   "reject H<sub>0</sub> when H<sub>a</sub> is true (a correct decision)",
+   "fail to reject H<sub>0</sub> when H<sub>0</sub> is true (a correct decision)",
+   "fail to detect that the defect rate is higher than 2% when it really is higher"
+  ],
+  "ans": 3,
+  "hint": "Fail to reject a false null hypothesis.",
+  "sol": "A Type II error is failing to reject a false H<sub>0</sub>. Here that means to fail to detect that the defect rate is higher than 2% when it really is higher."
+ },
+ {
+  "g": "3.8",
+  "q": "A manufacturer tests H<sub>0</sub>: <em>p</em> = 0.02 (the defect rate is 2%) against H<sub>a</sub>: <em>p</em> &gt; 0.02. Which is a possible <strong>consequence of a Type II error</strong>?",
+  "opts": [
+   "The production line may be stopped and repaired unnecessarily, costing time and money.",
+   "There are no consequences when a test is done correctly",
+   "Defective parts continue to be produced and shipped to customers.",
+   "The sample size automatically increases"
+  ],
+  "ans": 2,
+  "hint": "First describe what the Type II error is in this context.",
+  "sol": "Type II error consequence: Defective parts continue to be produced and shipped to customers. (A Type I error would mean: The production line may be stopped and repaired unnecessarily, costing time and money.)"
+ },
+ {
+  "g": "3.8",
+  "q": "A union tests H<sub>0</sub>: <em>p</em> = 0.75 (75% of members support a strike) against H<sub>a</sub>: <em>p</em> &lt; 0.75. Which describes a <strong>Type I error</strong> in this context?",
+  "opts": [
+   "fail to conclude that support is below 75% when it actually is below 75%",
+   "fail to reject H<sub>0</sub> when H<sub>0</sub> is true (a correct decision)",
+   "conclude that support for a strike is below 75% when it is actually 75% (or more)",
+   "reject H<sub>0</sub> when H<sub>a</sub> is true (a correct decision)"
+  ],
+  "ans": 2,
+  "hint": "Reject a true null hypothesis.",
+  "sol": "A Type I error is rejecting a true H<sub>0</sub>. Here that means to conclude that support for a strike is below 75% when it is actually 75% (or more)."
+ },
+ {
+  "g": "3.8",
+  "q": "A union tests H<sub>0</sub>: <em>p</em> = 0.75 (75% of members support a strike) against H<sub>a</sub>: <em>p</em> &lt; 0.75. Which describes a <strong>Type II error</strong> in this context?",
+  "opts": [
+   "fail to conclude that support is below 75% when it actually is below 75%",
+   "conclude that support for a strike is below 75% when it is actually 75% (or more)",
+   "reject H<sub>0</sub> when H<sub>a</sub> is true (a correct decision)",
+   "fail to reject H<sub>0</sub> when H<sub>0</sub> is true (a correct decision)"
+  ],
+  "ans": 0,
+  "hint": "Fail to reject a false null hypothesis.",
+  "sol": "A Type II error is failing to reject a false H<sub>0</sub>. Here that means to fail to conclude that support is below 75% when it actually is below 75%."
+ },
+ {
+  "g": "3.8",
+  "q": "A union tests H<sub>0</sub>: <em>p</em> = 0.75 (75% of members support a strike) against H<sub>a</sub>: <em>p</em> &lt; 0.75. Which is a possible <strong>consequence of a Type II error</strong>?",
+  "opts": [
+   "The union may decide not to call a strike thinking support is too low, when members actually do support it.",
+   "There are no consequences when a test is done correctly",
+   "The sample size automatically increases",
+   "The union may call a strike thinking it has greater support than it actually has."
+  ],
+  "ans": 3,
+  "hint": "First describe what the Type II error is in this context.",
+  "sol": "Type II error consequence: The union may call a strike thinking it has greater support than it actually has. (A Type I error would mean: The union may decide not to call a strike thinking support is too low, when members actually do support it.)"
+ },
+ {
+  "g": "3.8",
+  "q": "A court tests H<sub>0</sub>: the defendant is innocent against H<sub>a</sub>: the defendant is guilty. Which describes a <strong>Type I error</strong> in this context?",
+  "opts": [
+   "fail to convict a guilty person",
+   "fail to reject H<sub>0</sub> when H<sub>0</sub> is true (a correct decision)",
+   "reject H<sub>0</sub> when H<sub>a</sub> is true (a correct decision)",
+   "convict an innocent person"
+  ],
+  "ans": 3,
+  "hint": "Reject a true null hypothesis.",
+  "sol": "A Type I error is rejecting a true H<sub>0</sub>. Here that means to convict an innocent person."
+ },
+ {
+  "g": "3.8",
+  "q": "A court tests H<sub>0</sub>: the defendant is innocent against H<sub>a</sub>: the defendant is guilty. Which describes a <strong>Type II error</strong> in this context?",
+  "opts": [
+   "convict an innocent person",
+   "fail to convict a guilty person",
+   "reject H<sub>0</sub> when H<sub>a</sub> is true (a correct decision)",
+   "fail to reject H<sub>0</sub> when H<sub>0</sub> is true (a correct decision)"
+  ],
+  "ans": 1,
+  "hint": "Fail to reject a false null hypothesis.",
+  "sol": "A Type II error is failing to reject a false H<sub>0</sub>. Here that means to fail to convict a guilty person."
+ },
+ {
+  "g": "3.8",
+  "q": "A court tests H<sub>0</sub>: the defendant is innocent against H<sub>a</sub>: the defendant is guilty. Which is a possible <strong>consequence of a Type II error</strong>?",
+  "opts": [
+   "A guilty person goes free.",
+   "An innocent person is punished.",
+   "There are no consequences when a test is done correctly",
+   "The sample size automatically increases"
+  ],
+  "ans": 0,
+  "hint": "First describe what the Type II error is in this context.",
+  "sol": "Type II error consequence: A guilty person goes free. (A Type I error would mean: An innocent person is punished.)"
+ },
+ {
+  "g": "3.8",
+  "q": "If the significance level is &alpha; = 0.05, the probability of a Type I error is&hellip;",
+  "opts": [
+   "0.95",
+   "0.05",
+   "the P-value",
+   "&beta;"
+  ],
+  "ans": 1,
+  "hint": "The significance level equals P(Type I error).",
+  "sol": "&alpha; is the probability of rejecting a true H<sub>0</sub>, i.e. the probability of a Type I error: 0.05."
+ },
+ {
+  "g": "3.8",
+  "q": "A test has a Type II error probability of &beta; = 0.35 for a particular true value of <em>p</em>. What is the <strong>power</strong> of the test against that value?",
+  "type": "num",
+  "ans": 0.65,
+  "tol": 0.005,
+  "unit": "",
+  "hint": "Power = 1 &minus; &beta;.",
+  "sol": "Power = 1 &minus; &beta; = 1 &minus; 0.35 = 0.65."
+ },
+ {
+  "g": "3.8",
+  "q": "The <strong>power</strong> of a significance test against a specific alternative value of <em>p</em> is&hellip;",
+  "opts": [
+   "the probability of a Type I error",
+   "the probability of correctly rejecting H<sub>0</sub> when that alternative value is the true value (1 &minus; &beta;)",
+   "the probability that H<sub>0</sub> is true",
+   "the P-value"
+  ],
+  "ans": 1,
+  "hint": "Power is the probability of avoiding a Type II error.",
+  "sol": "Power = P(reject H<sub>0</sub> | the specific alternative is true) = 1 &minus; &beta;."
+ },
+ {
+  "g": "3.8",
+  "q": "Which of the following <strong>increases</strong> the power of a test (other things equal)?",
+  "opts": [
+   "Decreasing the sample size",
+   "Increasing the sample size",
+   "Decreasing &alpha;",
+   "Moving the true value of <em>p</em> closer to <em>p</em><sub>0</sub>"
+  ],
+  "ans": 1,
+  "hint": "Which choice reduces variability?",
+  "sol": "A larger sample reduces the standard deviation of <span class=\"hat\">p</span>, which separates the two sampling distributions and lowers &beta; without changing &alpha;."
+ },
+ {
+  "g": "3.8",
+  "q": "If the significance level is increased from &alpha; = 0.01 to &alpha; = 0.05 (same <em>n</em> and same true <em>p</em>), then&hellip;",
+  "opts": [
+   "power increases, &beta; decreases, but the probability of a Type I error increases",
+   "power decreases and &beta; increases",
+   "both &alpha; and &beta; decrease",
+   "power and &beta; are unchanged"
+  ],
+  "ans": 0,
+  "hint": "Easier to reject H<sub>0</sub> means fewer Type II errors.",
+  "sol": "There is a trade-off: a larger &alpha; makes it easier to reject, so &beta; decreases and power increases, but the Type I error risk &alpha; grows."
+ },
+ {
+  "g": "3.8",
+  "q": "How can we reduce <strong>both</strong> &alpha; and &beta; at the same time?",
+  "opts": [
+   "Increase the sample size",
+   "Decrease &alpha; only",
+   "Increase &alpha; only",
+   "Use a one-sided test"
+  ],
+  "ans": 0,
+  "hint": "Which change affects the variability?",
+  "sol": "With a fixed sample size, lowering &alpha; raises &beta; (and vice versa). Increasing <em>n</em> lowers variability and can reduce both."
+ },
+ {
+  "g": "3.8",
+  "q": "For the same &alpha; and <em>n</em>, the power of a test is <strong>greater</strong> when the true value of <em>p</em> is&hellip;",
+  "opts": [
+   "closer to <em>p</em><sub>0</sub>",
+   "farther from <em>p</em><sub>0</sub> (in the direction of H<sub>a</sub>)",
+   "exactly <em>p</em><sub>0</sub>",
+   "power does not depend on the true <em>p</em>"
+  ],
+  "ans": 1,
+  "hint": "Large effects are easy to detect.",
+  "sol": "A bigger difference between <em>p</em> and <em>p</em><sub>0</sub> is easier to detect, so the power increases. If <em>p</em> = <em>p</em><sub>0</sub>, the &ldquo;power&rdquo; is just &alpha;."
+ },
+ {
+  "g": "3.8",
+  "q": "Four tests of H<sub>0</sub>: <em>p</em> = 0.50 vs H<sub>a</sub>: <em>p</em> &gt; 0.50 are planned. Which has the <strong>greatest power</strong>?",
+  "opts": [
+   "<em>n</em> = 100, &alpha; = 0.01, true <em>p</em> = 0.55",
+   "<em>n</em> = 400, &alpha; = 0.05, true <em>p</em> = 0.60",
+   "<em>n</em> = 100, &alpha; = 0.05, true <em>p</em> = 0.55",
+   "<em>n</em> = 400, &alpha; = 0.01, true <em>p</em> = 0.52"
+  ],
+  "ans": 1,
+  "hint": "Compare n, &alpha; and the distance from 0.50.",
+  "sol": "Largest <em>n</em>, larger &alpha; and the biggest distance from 0.50 all favor power: <em>n</em> = 400, &alpha; = 0.05, true <em>p</em> = 0.60."
+ },
+ {
+  "g": "3.8",
+  "q": "A one-sided test and a two-sided test use the same &alpha; and <em>n</em>. If the true <em>p</em> is in the direction of the one-sided alternative, which test has more power?",
+  "opts": [
+   "The one-sided test, because all of &alpha; is placed in the useful tail",
+   "The two-sided test",
+   "They always have equal power",
+   "Neither has any power"
+  ],
+  "ans": 0,
+  "hint": "Where does the rejection region sit?",
+  "sol": "A one-sided test puts the whole rejection region in the direction of the true value, so its critical value is closer to <em>p</em><sub>0</sub> and its power is larger (in that direction)."
+ },
+ {
+  "g": "3.8",
+  "q": "In the courtroom analogy with H<sub>0</sub>: the defendant is innocent, requiring a unanimous jury (instead of a simple majority) is an attempt to&hellip;",
+  "opts": [
+   "minimize Type I errors (convicting an innocent person)",
+   "minimize Type II errors",
+   "increase the power",
+   "increase the sample size"
+  ],
+  "ans": 0,
+  "hint": "Which error is more serious in a criminal trial?",
+  "sol": "Demanding stronger evidence to reject H<sub>0</sub> lowers &alpha; (fewer innocent people convicted) but raises &beta; (more guilty people go free)."
+ },
+ {
+  "g": "3.8",
+  "q": "A test fails to reject H<sub>0</sub> even though H<sub>0</sub> is actually false. This is&hellip;",
+  "opts": [
+   "a Type I error",
+   "a Type II error",
+   "a correct decision",
+   "an error in the P-value only"
+  ],
+  "ans": 1,
+  "hint": "False H<sub>0</sub> not rejected.",
+  "sol": "Failing to reject a false null hypothesis is a Type II error."
+ },
+ {
+  "g": "3.8",
+  "q": "A test rejects H<sub>0</sub> and H<sub>0</sub> is actually true. This is&hellip;",
+  "opts": [
+   "a Type I error",
+   "a Type II error",
+   "a correct decision",
+   "caused by a small &alpha;"
+  ],
+  "ans": 0,
+  "hint": "True H<sub>0</sub> rejected.",
+  "sol": "Rejecting a true null hypothesis is a Type I error."
+ },
+ {
+  "g": "3.8",
+  "q": "Which statement about &beta; is correct?",
+  "opts": [
+   "&beta; is a single fixed number for any test",
+   "&beta; depends on the particular alternative value of <em>p</em> that is assumed to be true",
+   "&beta; always equals 1 &minus; &alpha;",
+   "&beta; is the P-value"
+  ],
+  "ans": 1,
+  "hint": "Power curve: different true values, different power.",
+  "sol": "A different true value of <em>p</em> gives a different &beta; (and power). We compute them for specific alternative values."
+ },
+ {
+  "g": "3.8",
+  "q": "Consider H<sub>0</sub>: <em>p</em> = 0.50 vs H<sub>a</sub>: <em>p</em> &gt; 0.50 with a random sample of <em>n</em> = 100 and &alpha; = 0.05 (<em>z</em>* = 1.645). H<sub>0</sub> is rejected when <span class=\"hat\">p</span> exceeds a critical value. Find it. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.582245,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Critical <span class=\"hat\">p</span> = <em>p</em><sub>0</sub> + <em>z</em>*&sigma;<sub>0</sub>, using <em>p</em><sub>0</sub> in &sigma;<sub>0</sub>.",
+  "sol": "&sigma;<sub>0</sub> = &radic;(0.5 &middot; 0.5/100) = 0.05, so the critical value is 0.50 + 1.645(0.05) = 0.5822. Reject H<sub>0</sub> if <span class=\"hat\">p</span> &gt; 0.5822."
+ },
+ {
+  "g": "3.8",
+  "q": "Consider H<sub>0</sub>: <em>p</em> = 0.50 vs H<sub>a</sub>: <em>p</em> &gt; 0.50 with a random sample of <em>n</em> = 100 and &alpha; = 0.05 (<em>z</em>* = 1.645). Suppose the true proportion is actually <em>p</em> = 0.60. Find the <strong>power</strong> of the test. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.641482,
+  "tol": 0.01,
+  "unit": "",
+  "hint": "Use the sampling distribution centered at the true <em>p</em> = 0.60 (with its own &sigma;) and find the area beyond the critical value.",
+  "sol": "When <em>p</em> = 0.60, &sigma; = &radic;(0.6 &middot; 0.4/100) = 0.0490. Power = P(<span class=\"hat\">p</span> &gt; 0.5822) = P(<em>Z</em> &gt; (0.5822 &minus; 0.60)/0.0490) = P(<em>Z</em> &gt; &minus;0.362) = <strong>0.641</strong>."
+ },
+ {
+  "g": "3.8",
+  "q": "Consider H<sub>0</sub>: <em>p</em> = 0.50 vs H<sub>a</sub>: <em>p</em> &gt; 0.50 with a random sample of <em>n</em> = 100 and &alpha; = 0.05 (<em>z</em>* = 1.645). For the true value <em>p</em> = 0.60, find &beta;, the probability of a Type II error. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.358518,
+  "tol": 0.01,
+  "unit": "",
+  "hint": "&beta; = P(<span class=\"hat\">p</span> &le; critical value | <em>p</em> = 0.60).",
+  "sol": "&beta; = 1 &minus; power = 1 &minus; 0.641 = <strong>0.359</strong>."
+ },
+ {
+  "g": "3.8",
+  "q": "Consider H<sub>0</sub>: <em>p</em> = 0.50 vs H<sub>a</sub>: <em>p</em> &gt; 0.50 with a random sample of <em>n</em> = 400 and &alpha; = 0.05 (<em>z</em>* = 1.645). Suppose the true proportion is <em>p</em> = 0.60. Find the power. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.991884,
+  "tol": 0.01,
+  "unit": "",
+  "hint": "Quadrupling <em>n</em> halves both standard deviations.",
+  "sol": "&sigma;<sub>0</sub> = 0.025, critical value = 0.50 + 1.645(0.025) = 0.5411; &sigma; = 0.0245 under <em>p</em> = 0.60. Power = P(<em>Z</em> &gt; &minus;2.40) = <strong>0.992</strong>. A larger sample greatly increases the power."
+ },
+ {
+  "g": "3.8",
+  "q": "Consider H<sub>0</sub>: <em>p</em> = 0.50 vs H<sub>a</sub>: <em>p</em> &gt; 0.50 with a random sample of <em>n</em> = 100 and &alpha; = 0.01 (<em>z</em>* = 2.326). Suppose the true proportion is <em>p</em> = 0.60. Find the power. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.369556,
+  "tol": 0.01,
+  "unit": "",
+  "hint": "A smaller &alpha; moves the critical value farther away.",
+  "sol": "Critical value = 0.50 + 2.326(0.05) = 0.6163; power = P(<em>Z</em> &gt; (0.6163 &minus; 0.60)/0.0490) = P(<em>Z</em> &gt; 0.33) = <strong>0.370</strong>, lower than with &alpha; = 0.05 (0.641)."
+ },
+ {
+  "g": "3.8",
+  "q": "Consider H<sub>0</sub>: <em>p</em> = 0.20 vs H<sub>a</sub>: <em>p</em> &lt; 0.20 with a random sample of <em>n</em> = 200 and &alpha; = 0.05 (<em>z</em>* = 1.645). Find the critical value: H<sub>0</sub> is rejected if <span class=\"hat\">p</span> is below it. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.153475,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Critical <span class=\"hat\">p</span> = <em>p</em><sub>0</sub> &minus; <em>z</em>*&sigma;<sub>0</sub>.",
+  "sol": "&sigma;<sub>0</sub> = &radic;(0.2 &middot; 0.8/200) = 0.0283; critical value = 0.20 &minus; 1.645(0.0283) = 0.1535."
+ },
+ {
+  "g": "3.8",
+  "q": "Consider H<sub>0</sub>: <em>p</em> = 0.20 vs H<sub>a</sub>: <em>p</em> &lt; 0.20 with a random sample of <em>n</em> = 200 and &alpha; = 0.05 (<em>z</em>* = 1.645). If the true proportion is <em>p</em> = 0.12, find the power. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.927417,
+  "tol": 0.01,
+  "unit": "",
+  "hint": "Find the area to the left of the critical value on the sampling distribution centered at 0.12.",
+  "sol": "&sigma; = &radic;(0.12 &middot; 0.88/200) = 0.0230; power = P(<span class=\"hat\">p</span> &lt; 0.1535) = P(<em>Z</em> &lt; 1.46) = <strong>0.927</strong>."
+ },
+ {
+  "g": "3.8",
+  "q": "Consider H<sub>0</sub>: <em>p</em> = 0.50 vs H<sub>a</sub>: <em>p</em> &ne; 0.50 with a random sample of <em>n</em> = 100 and &alpha; = 0.05 (<em>z</em>* = 1.96). Find the <strong>upper</strong> critical value of <span class=\"hat\">p</span>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.598,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Two-sided: split &alpha; into two tails, <em>z</em>* = 1.96.",
+  "sol": "Critical values: 0.50 &plusmn; 1.96(0.05) = 0.402 and 0.598. Reject H<sub>0</sub> if <span class=\"hat\">p</span> &lt; 0.402 or <span class=\"hat\">p</span> &gt; 0.598."
+ },
+ {
+  "g": "3.8",
+  "q": "Consider H<sub>0</sub>: <em>p</em> = 0.50 vs H<sub>a</sub>: <em>p</em> &ne; 0.50 with a random sample of <em>n</em> = 100 and &alpha; = 0.05 (<em>z</em>* = 1.96). If the true proportion is <em>p</em> = 0.65, find the power. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.862191,
+  "tol": 0.01,
+  "unit": "",
+  "hint": "Add the probabilities of landing in either rejection region (the lower region is almost negligible).",
+  "sol": "&sigma; = &radic;(0.65 &middot; 0.35/100) = 0.0477. Power = P(<span class=\"hat\">p</span> &lt; 0.402) + P(<span class=\"hat\">p</span> &gt; 0.598) &asymp; 0.0000 + 0.862 = <strong>0.862</strong>."
+ },
+ {
+  "g": "3.8",
+  "q": "A test has &alpha; = 0.05. If the true value of <em>p</em> is exactly equal to <em>p</em><sub>0</sub> (so H<sub>0</sub> is true), what is the probability that the test rejects H<sub>0</sub>?",
+  "type": "num",
+  "ans": 0.05,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "This is the Type I error probability.",
+  "sol": "If H<sub>0</sub> is true, the rejection probability is &alpha; = 0.05 (a Type I error)."
+ },
+ {
+  "g": "3.8",
+  "q": "A researcher plans a test and finds the power against the alternative <em>p</em> = 0.58 is only 0.40. Which change would <strong>most reasonably</strong> increase the power?",
+  "opts": [
+   "Collect a larger random sample",
+   "Use a smaller sample to save money",
+   "Use a smaller &alpha; such as 0.001",
+   "Change H<sub>a</sub> after seeing the data"
+  ],
+  "ans": 0,
+  "hint": "Which option lowers variability?",
+  "sol": "Increasing <em>n</em> reduces the variability of <span class=\"hat\">p</span> and increases power without raising the Type I error probability. (Raising &alpha; also increases power but increases the risk of a Type I error.)"
+ },
+ {
+  "g": "3.8",
+  "q": "The power of a test against H<sub>a</sub>: <em>p</em> = 0.58 is 0.40. The probability of a Type II error for that alternative is&hellip;",
+  "opts": [
+   "0.40",
+   "0.60",
+   "0.05",
+   "0.96"
+  ],
+  "ans": 1,
+  "hint": "Power = 1 &minus; &beta;.",
+  "sol": "&beta; = 1 &minus; power = 1 &minus; 0.40 = 0.60."
+ }
+];
+
+  var KEY = 'apstats-u3-3-5-to-3-8';
+  var state = [];
+  var container = document.getElementById('problems');
+  var solvedEl = document.getElementById('solvedCount');
+  var pointsEl = document.getElementById('points');
+  var barEl = document.getElementById('progressBar');
+  var finalCard = document.getElementById('finalCard');
+  document.getElementById('totalCount').textContent = problems.length;
+
+  function freshState() { return problems.map(function () { return { used: 0, done: false, correct: false, points: 0 }; }); }
+  function loadState() {
+    try {
+      var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (Array.isArray(s) && s.length === problems.length) return s.map(function (x) {
+        return { used: x.used | 0, done: !!x.done, correct: !!x.correct, points: x.points | 0 };
+      });
+    } catch (e) {}
+    return freshState();
+  }
+  function saveState() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  function parseNumber(raw) {
+    var s = raw.trim().replace(/\s+/g, '').replace(',', '.').replace('−', '-');
+    var m = s.match(/^(-?\d*\.?\d+)\/(-?\d*\.?\d+)$/);
+    if (m) { var d = parseFloat(m[2]); return d === 0 ? NaN : parseFloat(m[1]) / d; }
+    if (/^-?\d*\.?\d+$/.test(s)) return parseFloat(s);
+    return NaN;
+  }
+  function dots(used) {
+    var h = '';
+    for (var i = 0; i < MAX_ATTEMPTS; i++) h += '<span class="dot' + (i < used ? ' used' : '') + '"></span>';
+    return h;
+  }
+
+  function build(restore) {
+    container.innerHTML = '';
+    state = restore ? loadState() : freshState();
+    var lastGroup = '';
+    problems.forEach(function (p, i) {
+      if (p.g !== lastGroup) {
+        lastGroup = p.g;
+        var gt = document.createElement('h3');
+        gt.className = 'group-title';
+        gt.textContent = GROUPS[p.g];
+        container.appendChild(gt);
+      }
+      var isMC = !!p.opts;
+      var div = document.createElement('div');
+      div.className = 'card problem';
+      var optsHTML = '';
+      if (isMC) {
+        optsHTML = '<div class="options" role="radiogroup" aria-label="Choices for problem ' + (i + 1) + '">' +
+          p.opts.map(function (o, k) {
+            return '<label><input type="radio" name="q' + i + '" value="' + k + '"><span>' + o + '</span></label>';
+          }).join('') + '</div>';
+      }
+      div.innerHTML =
+        '<span class="q-num">PROBLEM ' + (i + 1) + '</span>' +
+        '<div class="qtext">' + p.q + '</div>' + optsHTML +
+        '<div class="answer-row">' +
+          (isMC ? '' : '<input type="text" inputmode="decimal" autocomplete="off" aria-label="Answer to problem ' + (i + 1) + '" placeholder="Your answer"><span class="unit-label">' + (p.unit || '') + '</span>') +
+          '<button class="btn" type="button">Check</button>' +
+          '<span class="attempts">Attempts left: <span class="dots">' + dots(state[i].used) + '</span></span>' +
+        '</div>' +
+        '<div class="feedback" role="status" aria-live="polite"></div>';
+      container.appendChild(div);
+
+      var input = div.querySelector('input[type="text"]');
+      var radios = div.querySelectorAll('input[type="radio"]');
+      var btn = div.querySelector('button');
+      var fb = div.querySelector('.feedback');
+      var dotsEl = div.querySelector('.dots');
+
+      function show(cls, html) { fb.className = 'feedback show ' + cls; fb.innerHTML = html; }
+      function lock() {
+        btn.disabled = true;
+        if (input) input.disabled = true;
+        Array.prototype.forEach.call(radios, function (r) { r.disabled = true; r.parentNode.classList.add('disabled'); });
+      }
+      function showFinal() {
+        if (isMC) radios[p.ans].parentNode.classList.add('picked-right');
+        if (state[i].correct) show('ok', '&#10003; Correct! Well done.<div class="sol">' + p.sol + '</div>');
+        else show('bad', '&#10007; Not quite. You used all 3 attempts.<div class="sol"><strong>Solution:</strong> ' + p.sol + '</div>');
+        lock();
+      }
+      if (state[i].done) showFinal();
+      else if (state[i].used > 0) {
+        var l0 = MAX_ATTEMPTS - state[i].used;
+        show('bad', 'You have ' + l0 + ' attempt' + (l0 > 1 ? 's' : '') + ' left.' +
+          (state[i].used >= 2 ? '<div class="sol"><strong>Hint:</strong> ' + p.hint + '</div>' : ''));
+      }
+
+      function check() {
+        var st = state[i];
+        if (st.done) return;
+        var ok, picked = null;
+        if (isMC) {
+          Array.prototype.forEach.call(radios, function (r) { if (r.checked) picked = r; });
+          if (!picked) { show('hint', 'Please select an answer first. (This did not use an attempt.)'); return; }
+          ok = parseInt(picked.value, 10) === p.ans;
+        } else {
+          var v = parseNumber(input.value);
+          if (isNaN(v)) { show('hint', 'Please enter a number, e.g. 0.0816 or 3/8. (This did not use an attempt.)'); return; }
+          ok = Math.abs(v - p.ans) <= p.tol;
+        }
+        st.used++;
+        dotsEl.innerHTML = dots(st.used);
+        var left = MAX_ATTEMPTS - st.used;
+        if (ok) {
+          st.done = st.correct = true;
+          st.points = MAX_ATTEMPTS - st.used + 1;
+          if (picked) picked.parentNode.classList.add('picked-right');
+          show('ok', '&#10003; Correct! Well done.' + (st.used === 1 ? ' First try!' : '') + '<div class="sol">' + p.sol + '</div>');
+          lock();
+        } else if (left === 0) {
+          st.done = true;
+          if (picked) picked.parentNode.classList.add('picked-wrong');
+          if (isMC) radios[p.ans].parentNode.classList.add('picked-right');
+          show('bad', '&#10007; Not quite. You have used all 3 attempts.<div class="sol"><strong>Solution:</strong> ' + p.sol + '</div>');
+          lock();
+        } else {
+          var msg = '&#10007; Not correct. You have ' + left + ' attempt' + (left > 1 ? 's' : '') + ' left.';
+          if (st.used >= 2) msg += '<div class="sol"><strong>Hint:</strong> ' + p.hint + '</div>';
+          show('bad', msg);
+          if (input) input.select();
+          if (picked) picked.checked = false;
+        }
+        saveState();
+        update();
+      }
+      btn.addEventListener('click', check);
+      if (input) input.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
+    });
+    update();
+  }
+
+  function update() {
+    var solved = 0, pts = 0, finished = 0;
+    state.forEach(function (s) {
+      if (s.correct) solved++;
+      if (s.done) finished++;
+      pts += s.points;
+    });
+    solvedEl.textContent = solved;
+    pointsEl.textContent = pts + ' / ' + (problems.length * MAX_ATTEMPTS);
+    barEl.style.width = (finished / problems.length * 100) + '%';
+    try { if (window.LiaSync && LiaSync.report) LiaSync.report({ solved: finished, total: problems.length, score: pts, max: problems.length * MAX_ATTEMPTS }); } catch (e) {}
+    if (finished === problems.length) {
+      var pct = Math.round(solved / problems.length * 100);
+      var msg = 'You solved ' + solved + ' of ' + problems.length + ' problems (' + pct + '%) and earned ' + pts + ' points. ';
+      msg += pct === 100 ? 'Excellent work!' : pct >= 70 ? 'Good job! Review the solutions you missed.' : 'Keep practicing — review the lesson and try again.';
+      document.getElementById('finalMsg').textContent = msg;
+      finalCard.classList.add('show');
+    } else {
+      finalCard.classList.remove('show');
+    }
+  }
+
+  var resetBtn = document.getElementById('resetBtn');
+  if (resetBtn) resetBtn.addEventListener('click', function () {
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    build(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  build(true);
+})();
+</script>
+</body>
+</html>
