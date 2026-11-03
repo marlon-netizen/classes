@@ -14,6 +14,7 @@ window.LIA_CONFIG={
     'physics1-lesson-2-3': 'Physics I – Lesson 2.3 Falling Objects',
     'physics1-lesson-2-3-practice': 'Physics I – Practice Lesson 2.3',
     'physics2-lesson-10-3': 'Physics II – Lesson 10.3 Second Law of Thermodynamics',
-    'physics2-lesson-11-2': 'Physics II – Lesson 11.2 Measuring Simple Harmonic Motion'
+    'physics2-lesson-11-2': 'Physics II – Lesson 11.2 Measuring Simple Harmonic Motion',
+    'physics2-lesson-11-3': 'Physics II – Lesson 11.3 Properties of Waves'
   }
 };
