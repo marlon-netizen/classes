@@ -7,10 +7,11 @@ after each change** and **restored automatically the next time they sign in – 
 
 ```
 index.html                     front page for students → choose a subject
-faith-formation/               Faith Formation + Growing in Values   (lia-config.js, index.html, lessons…)
+faith-formation/               Faith Formation   (lia-config.js, lessons…)
 ciencias-sociales/             Ciencias Sociales
 math/                          Math classes (Algebra, AP Statistics, Pre-Calculus…)
 physics/                       Physics I and Physics II
+growing-in-values/             Growing in Values plans (8th grade, Q02 weekly lessons) – its own student list and codes
 teacher/                       ALL teacher tools – not linked from any student page
   index.html                     teacher home (one button per subject)
   scores.html                    scores & progress dashboard
@@ -39,7 +40,7 @@ tools/build_site.py            connects pages, rebuilds menus and admin pages
 In Supabase: **Project Settings → API** → copy the **Project URL** and the **anon / publishable key** (it is meant to be public;
 the database only lets students reach their own saved work through their code).
 
-Either edit the four files `faith-formation/lia-config.js`, `ciencias-sociales/lia-config.js`, `math/lia-config.js`, `physics/lia-config.js`
+Either edit the five files `faith-formation/lia-config.js`, `ciencias-sociales/lia-config.js`, `math/lia-config.js`, `physics/lia-config.js`, `growing-in-values/lia-config.js`
 (`url:` and `anonKey:`), or run once:
 ```bash
 python3 tools/build_site.py --url https://YOURPROJECT.supabase.co --key YOUR_ANON_KEY
@@ -127,3 +128,10 @@ in each folder they belong to (a student in both Math and Physics gets one row i
 
 ## New codes for a folder (keeps progress)
 `supabase/new-codes-math-physics.sql` gives every student in the Math and Physics folders a new random code without touching names, classes, assignments or saved progress (a student in both folders gets the same new code in both; the teacher master code is unchanged). Run it once in the SQL Editor, then export the result table or use **Print code slips**. To do the same for another folder, change the folder names in its three `area in (...)` lists.
+
+
+## Growing in Values (8th grade) – weekly pages
+`growing-in-values/` is its own area: its own **student list and codes** (create them in *Students & codes* with the subject switcher set to *Growing in Values*, and create the teacher preview code there too).
+It has a separate column on the teacher home page with the same four tools (Scores & progress, Students & codes, Assign lessons, Student responses). The seven Q02 pages
+(Semester 1, Unit 2) are generated from `tools/gv/` (see `tools/gv/make.py`). Written answers (reflections, case analyses, decalogue, budget, exit tickets) are saved as `resp-…` sets and appear in *Student responses*.
+No SQL change is needed (the `area` column accepts any text).

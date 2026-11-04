@@ -4,7 +4,7 @@
 Folder layout (each student folder = one "area" with its own student list and codes):
     faith-formation/     lesson pages + lia-config.js + index.html     (student facing)
     ciencias-sociales/   ...
-    math/  physics/      ...
+    math/  physics/  growing-in-values/      ...
     teacher/             ALL teacher tools in one place - NOT linked from any student page:
                            index.html (teacher home), admin.html (students & codes), scores.html (scores & progress),
                            responses.html (students' saved text answers), access.html (assign lessons)
@@ -42,6 +42,9 @@ THEMES = {
     "physics": dict(font="Oswald:wght@300;400;500;600;700", family="'Oswald','Arial Narrow',system-ui,sans-serif",
         light=dict(bg="#eef1f5", surface="#fbfcfe", ink="#17212e", muted="#566475", line="#d2d9e3", primary="#1f4e8c", warm="#2b7a76", soft="#e1eaf6", head="#14263f", headink="#eef2f8", eyebrow="#8fd0cb"),
         dark=dict(bg="#0e141c", surface="#161e29", ink="#e5ebf3", muted="#9aa8ba", line="#2a3646", primary="#9dc1f0", warm="#58b5ae", soft="#1a2636")),
+    "growing-in-values": dict(font="Nunito+Sans:wght@400;600;700;800", family="'Nunito Sans',system-ui,sans-serif",
+        light=dict(bg="#eef5f4", surface="#fbfefd", ink="#14292b", muted="#4f6769", line="#cfe0de", primary="#0e6f73", warm="#d08a2e", soft="#dcefed", head="#0b3d4a", headink="#ecf6f5", eyebrow="#f0c987"),
+        dark=dict(bg="#0d1819", surface="#142324", ink="#e2f0ef", muted="#93b0b1", line="#25403f", primary="#6fd0d0", warm="#e6b266", soft="#183031")),
 }
 DEFAULT_THEME = dict(font="Oswald:wght@300;400;500;600;700", family="'Oswald','Arial Narrow',system-ui,sans-serif",
     light=dict(bg="#f3f0e9", surface="#fffdf9", ink="#1e2937", muted="#5a6575", line="#ddd6c7", primary="#1f3a5f", warm="#b4763a", soft="#e6edf5", head="#1b2f4b", headink="#f3f0e9", eyebrow="#d3b48a"),
@@ -55,6 +58,8 @@ AREAS = [
          blurb="Mathematics classes: Advanced Algebra, AP Statistics and Pre-Calculus."),
     dict(folder="physics", name="Physics",
          blurb="Physics I (chapters 1–2) and Physics II (chapters 9–11)."),
+    dict(folder="growing-in-values", name="Growing in Values",
+         blurb="Growing in Values plans (8th grade): weekly lessons for Q02 (Semester 1, Unit 2)."),
 ]
 SKIP = {"index.html", "admin.html", "scores.html"}   # (older copies of the teacher pages are removed from the student folders)
 
@@ -64,9 +69,10 @@ ICON_GLYPHS = {
     "ciencias-sociales": '<g fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><circle cx="32" cy="32" r="17"/><ellipse cx="32" cy="32" rx="7.5" ry="17"/><path d="M15.5 32h33M18 22.5h28M18 41.5h28"/></g>',
     "math": '<g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 22h32"/><path d="M25 23v23"/><path d="M39 23v16q0 7 7 7"/></g>',
     "physics": '<g fill="none" stroke="#fff" stroke-width="3"><ellipse cx="32" cy="32" rx="21" ry="8"/><ellipse cx="32" cy="32" rx="21" ry="8" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="21" ry="8" transform="rotate(120 32 32)"/></g><circle cx="32" cy="32" r="5" fill="#fff"/>',
+    "growing-in-values": '<path d="M32 51C14 38 12 24 21 18c5-3 9-1 11 3 2-4 6-6 11-3 9 6 7 20-11 33z" fill="#fff"/><path d="M32 44V30M32 36c-4-1-6-4-6-7M32 33c3-1 5-3 5-6" fill="none" stroke="#0e6f73" stroke-width="3" stroke-linecap="round"/>',
     "teacher": '<path d="M23 14v32h21" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>',
 }
-ICON_BG = {"faith-formation": "#7a2e3b", "ciencias-sociales": "#2f6b4a", "math": "#4b3f8f", "physics": "#1f4e8c", "teacher": "#1b2f4b"}
+ICON_BG = {"faith-formation": "#7a2e3b", "ciencias-sociales": "#2f6b4a", "math": "#4b3f8f", "physics": "#1f4e8c", "growing-in-values": "#0e6f73", "teacher": "#1b2f4b"}
 
 
 def icon_svg(key):
@@ -106,10 +112,12 @@ def connect(path):
 def write_config(folder, area, pages, url, key):
     cfg = folder / "lia-config.js"
     old_url, old_key = "YOUR_SUPABASE_URL", "YOUR_SUPABASE_ANON_KEY"
-    if cfg.exists():
-        m = CFG_RE.search(cfg.read_text(encoding="utf8"))
-        if m:
+    # a brand-new folder inherits the URL/key of the first folder that already has real ones
+    for c in [cfg] + [ROOT / x["folder"] / "lia-config.js" for x in AREAS]:
+        m = c.exists() and CFG_RE.search(c.read_text(encoding="utf8"))
+        if m and "YOUR_SUPABASE" not in m.group(1) + m.group(2):
             old_url, old_key = m.group(1), m.group(2)
+            break
     url, key = url or old_url, key or old_key
     pm = ",\n".join("    %s: %s" % (js(k), js(v)) for k, v in sorted(pages.items()))
     cfg.write_text(
@@ -282,8 +290,8 @@ else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=n
         '.err{margin-top:10px;color:#c0504a;font-weight:600}.who{margin-left:auto;font-size:.85rem;display:flex;gap:10px;align-items:center;color:#cfd8e6}.who button{font:inherit;background:none;color:inherit;border:1px solid rgba(255,255,255,.5);border-radius:8px;padding:2px 10px;cursor:pointer}'
         'header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px}header .wrap>.hr{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}'
         'header .tg{font:inherit;font-weight:600;font-size:.8rem;border-radius:8px;padding:4px 11px;cursor:pointer;background:transparent;color:#f3f0e9;border:1px solid rgba(255,255,255,.5)}'
-        '.wrap{max-width:1560px}.grid{grid-template-columns:repeat(4,minmax(0,1fr));align-items:start}'
-        '@media (max-width:1180px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:640px){.grid{grid-template-columns:1fr}}'
+        '.wrap{max-width:1560px}.grid{grid-template-columns:repeat(5,minmax(0,1fr));align-items:start}'
+        '@media (max-width:1480px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:640px){.grid{grid-template-columns:1fr}}'
         '.card .btn{font-size:.85rem;padding:6px 12px}'
         '.pv{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;background:var(--soft);border-radius:8px;padding:8px 12px;margin:0 0 .8em!important;color:var(--ink)!important;font-size:.9rem}.pv code{font:700 1.05rem ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;color:var(--p)}</style>\n</head>\n<body>\n'
         '<header><div class="wrap"><div><div class="eyebrow">Teacher tools</div><div class="school">Lincoln International Academy</div></div>'

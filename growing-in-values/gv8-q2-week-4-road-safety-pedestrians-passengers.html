@@ -1,0 +1,780 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Road Safety: Pedestrians and Passengers | Lincoln International Academy</title>
+<meta name="description" content="Interactive study page for Growing in Values (8th grade, Q02 Week 4): road safety for pedestrians, passengers and drivers, crossing safely and designing a safe route, with practice.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef5f4; --surface:#fbfefd; --surface-2:#f1f8f7; --ink:#14292b; --muted:#4f6769;
+  --line:#cfe0de; --primary:#0e6f73; --primary-ink:#ffffff; --accent:#2f8f6f; --accent-soft:#dcf0e8;
+  --blue-soft:#dcefed; --warm:#c47f20; --warm-soft:#fbefd6; --good:#23764f; --good-soft:#dff2e7;
+  --bad:#a8463c; --bad-soft:#f8e3df; --head:#0b3d4a; --shadow:0 1px 2px rgba(10,40,45,.07),0 4px 14px rgba(10,40,45,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1819; --surface:#142324; --surface-2:#192c2d; --ink:#e2f0ef; --muted:#93b0b1;
+    --line:#25403f; --primary:#6fd0d0; --primary-ink:#082326; --accent:#6fcfa4; --accent-soft:#16302a;
+    --blue-soft:#183031; --warm:#e6b266; --warm-soft:#33280f; --good:#5cc08f; --good-soft:#163025;
+    --bad:#e59086; --bad-soft:#341d1b; --head:#0a2c35; --shadow:0 1px 2px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1819; --surface:#142324; --surface-2:#192c2d; --ink:#e2f0ef; --muted:#93b0b1;
+    --line:#25403f; --primary:#6fd0d0; --primary-ink:#082326; --accent:#6fcfa4; --accent-soft:#16302a;
+    --blue-soft:#183031; --warm:#e6b266; --warm-soft:#33280f; --good:#5cc08f; --good-soft:#163025;
+    --bad:#e59086; --bad-soft:#341d1b; --head:#0a2c35; --shadow:0 1px 2px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Nunito Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,h4{font-family:"Nunito Sans",system-ui,sans-serif;font-weight:800;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:var(--head);color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:"Nunito Sans",system-ui,sans-serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em;margin:0}
+.crumbs{margin:.25rem 0 0;font-size:1.05rem;color:#d9d3c4}
+.crumbs strong{color:#fff}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font-size:.8rem;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#f3f0e9;border:1px solid rgba(255,255,255,.2)}
+.theme{background:transparent;border:1px solid rgba(255,255,255,.35);color:#f3f0e9;border-radius:8px;padding:4px 10px;font-size:.85rem}
+
+/* nav */
+nav.sticky{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+nav.sticky .wrap{display:flex;gap:4px;align-items:center;overflow-x:auto;padding-top:6px;padding-bottom:6px}
+nav.sticky a{white-space:nowrap;text-decoration:none;color:var(--ink);padding:6px 12px;border-radius:8px;font-size:.92rem}
+nav.sticky a:hover{background:var(--blue-soft)}
+.progress-box{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);white-space:nowrap}
+.bar{width:110px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+section.sec{padding:34px 0 6px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--warm);font-weight:700;margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow);margin:0 0 18px}
+.card.soft{background:var(--blue-soft)}
+.card.warm{background:var(--warm-soft)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 10px 10px 0;margin:0 0 1em}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.ref{font-size:.82rem;color:var(--muted);font-style:italic}
+.tag{display:inline-block;font-size:.75rem;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary);font-weight:600;margin-right:6px}
+
+/* stage explorer */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:600}
+.tab[aria-selected="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.tabpanel ul{margin:.3em 0 1em;padding-left:1.2em}
+.tabpanel li{margin-bottom:.35em}
+
+/* flip cards */
+.flip{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-height:150px;text-align:left;box-shadow:var(--shadow);width:100%}
+.flip .front{font-family:"Nunito Sans",system-ui,sans-serif;font-size:1.3rem;font-weight:700}
+.flip .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+.flip .back{display:none}
+.flip.on{background:var(--accent-soft);border-color:var(--accent)}
+.flip.on .front{font-size:1.05rem;color:var(--accent)}
+.flip.on .back{display:block;margin-top:8px}
+.flip.on .hint{display:none}
+
+/* accordion */
+details.acc{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:8px}
+details.acc summary{padding:11px 14px;cursor:pointer;font-weight:600}
+details.acc .body{padding:0 14px 12px}
+
+/* activity shell */
+.act{position:relative}
+.act h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.act .done-mark{display:none;font-size:.78rem;background:var(--good-soft);color:var(--good);padding:2px 10px;border-radius:99px;font-weight:700}
+.act.done .done-mark{display:inline-block}
+.btn{background:var(--primary);color:var(--primary-ink);border:0;border-radius:9px;padding:8px 16px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--primary);border:1px solid var(--primary)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.opt:focus-visible,.tab:focus-visible,.flip:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+.opt{display:block;width:100%;text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 8px}
+.opt:hover:not(:disabled){border-color:var(--primary)}
+.opt.good{background:var(--good-soft);border-color:var(--good);color:var(--ink)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt.sel{border-color:var(--primary);background:var(--blue-soft)}
+.opt:disabled{cursor:default}
+.fb{min-height:1.4em;margin:8px 0 0;padding:0;border-radius:8px;font-size:.95rem}
+.fb.show{padding:9px 13px}
+.fb.good{background:var(--good-soft);color:var(--ink);border-left:4px solid var(--good)}
+.fb.bad{background:var(--bad-soft);color:var(--ink);border-left:4px solid var(--bad)}
+.fb.info{background:var(--blue-soft);border-left:4px solid var(--primary)}
+.shake{animation:shake .35s}
+@keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}html{scroll-behavior:auto}.bar i{transition:none}}
+.score{font-weight:700;color:var(--primary)}
+.qhead{font-weight:700;margin-bottom:8px}
+.qblock{border-top:1px dashed var(--line);padding-top:14px;margin-top:14px}
+.qblock:first-of-type{border-top:0;padding-top:0;margin-top:0}
+
+/* worked example */
+.steps{list-style:none;margin:12px 0 0;padding:0}
+.step{display:none;border:1px solid var(--line);border-left:5px solid var(--primary);background:var(--surface-2);border-radius:10px;padding:11px 14px;margin-bottom:9px}
+.step.show{display:block;animation:fade .3s}
+.step b.t{display:block;color:var(--primary);margin-bottom:2px}
+.step.final{border-left-color:var(--good);background:var(--good-soft)}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.problem{background:var(--warm-soft);border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+
+/* sequence */
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}
+.slot{min-height:78px;border:2px dashed var(--line);border-radius:10px;padding:8px 10px;font-size:.92rem;background:var(--surface-2)}
+.slot small{display:block;color:var(--muted);font-weight:700;margin-bottom:2px}
+.slot.filled{border-style:solid;border-color:var(--good);background:var(--good-soft)}
+.slot.next{border-color:var(--primary)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pool .opt{width:auto;margin:0}
+
+/* matching / sort */
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
+@media(max-width:560px){.match{grid-template-columns:1fr}}
+.match .opt.done{background:var(--good-soft);border-color:var(--good);opacity:.85}
+.sortcard{font-family:"Nunito Sans",system-ui,sans-serif;font-size:1.15rem;text-align:center;background:var(--warm-soft);border-radius:12px;padding:20px 12px;margin:10px 0}
+
+/* cloze */
+.cloze p{line-height:2.2}
+select{font:inherit;padding:4px 8px;border-radius:8px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+select.good{border-color:var(--good);background:var(--good-soft)}
+select.bad{border-color:var(--bad);background:var(--bad-soft)}
+textarea{width:100%;min-height:96px;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);resize:vertical}
+.checks{list-style:none;padding:0;margin:8px 0}
+.checks li{padding:4px 0}
+.checks .y{color:var(--good);font-weight:700}
+.checks .n{color:var(--warm);font-weight:700}
+.model{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 10px 10px 0;margin-top:8px}
+
+table.cmp{width:100%;border-collapse:collapse;font-size:.95rem}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.cmp th{background:var(--blue-soft)}
+
+.overlay{position:fixed;inset:0;background:rgba(17,22,29,.6);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 16px}
+.overlay[hidden]{display:none}
+.modal{background:var(--surface);border-radius:16px;max-width:620px;width:100%;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.35);border-top:5px solid var(--warm)}
+.bigscore{font-family:"Nunito Sans",system-ui,sans-serif;font-size:2.6rem;font-weight:700;color:var(--primary);line-height:1.1;margin:4px 0 8px}
+.bigscore small{font-size:1rem;color:var(--muted);font-weight:400}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden;min-width:70px}
+.meter i{display:block;height:100%;background:var(--accent)}
+footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.88rem}
+.sr{position:absolute;left:-9999px}
+@media print{header.top .theme,nav.sticky,.btn{display:none}.step{display:block}}
+.fig{display:flex;justify-content:center;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px;margin:6px 0 10px}
+.fig svg{max-width:100%;height:auto;max-height:150px}
+label.opt{display:flex;gap:10px;align-items:flex-start;cursor:pointer}label.opt input{margin-top:5px}
+label.opt.good{background:var(--good-soft);border-color:var(--good)}label.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+input.num,input.amt{font:inherit;padding:8px 10px;border-radius:8px;border:2px solid var(--line);background:var(--surface);color:var(--ink);width:9em;max-width:100%}
+input.num.good{border-color:var(--good);background:var(--good-soft)}input.num.bad{border-color:var(--bad);background:var(--bad-soft)}
+.who{font-size:.9rem;color:var(--muted);margin:0 0 8px}.who b{color:var(--ink)}
+.qa{margin:0 0 14px}.qa label{display:block;font-weight:700;margin-bottom:4px}
+.alloc{display:grid;grid-template-columns:1fr 9.5em;gap:8px 12px;align-items:center}
+.pct{font-weight:800;font-size:1.1rem}.pct.ok{color:var(--good)}.pct.no{color:var(--bad)}
+.saved{font-size:.8rem;color:var(--muted)}
+.wk{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.fact{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.fact>div{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.fact b.h{display:block;color:var(--primary);margin-bottom:3px}
+
+</style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <p class="school">Lincoln International Academy</p>
+      <p class="crumbs">Class: <strong>Growing in Values</strong> &nbsp;·&nbsp; Teacher: <strong>Nathaly López</strong> &nbsp;·&nbsp; Lesson: <strong>Road Safety: Pedestrians and Passengers</strong></p>
+    </div>
+    <div class="meta">
+      <span class="pill">8th Grade · Q02 Week 4 of 7</span>
+      <span class="pill">Unit 2: We live in community with respect and responsibility</span>
+      <button class="theme" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Light / Dark</button>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky" aria-label="Page sections">
+  <div class="wrap">
+    <a href="#learn">Learn</a>
+    <a href="#vocab">Vocabulary</a>
+    <a href="#examples">Worked examples</a>
+    <a href="#practice">Practice</a>
+    <a href="#reflect">Write &amp; reflect</a>
+    <div class="progress-box" aria-live="polite"><span id="progText">0 of 14 activities</span><div class="bar"><i id="progBar"></i></div></div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section class="sec" id="learn">
+  <div class="eyebrow">Road education · Pedestrians and passengers</div>
+  <h2>I Take Care of My Life: Pedestrians and Passengers</h2>
+  <div class="card soft">
+    <h3>Guiding question</h3>
+    <p><strong>“How do my choices as a pedestrian and as a passenger protect me and the people around me?”</strong></p>
+    <div class="callout"><strong>Learning target:</strong> I can explain the safe behaviors of pedestrians, passengers and drivers, cross a street using the three-look rule, and design a safe route with actions for each risk point.</div>
+    <p class="ref" style="margin:0">Unit indicator: Shows respect for the road education rules as a pedestrian, cyclist and passenger in the places where they travel. &nbsp;·&nbsp; Textbook: <em>Creciendo en Valores</em> 8, pp. 117–123</p>
+  </div>
+  
+  <div class="card warm">
+    <h3>I take care of my life and the lives of others</h3>
+    <p>Safe traffic depends on <strong>what each of us does</strong>. Every day we travel in three roles: as a <b>pedestrian</b> (on foot), as a <b>passenger</b> and, one day, as a <b>driver</b>. Each role has rules that protect lives.</p>
+    <p style="margin:0"><em>“Be careful, preserve your life and that of others. Before crossing the street, make sure to look both ways.”</em> (textbook, p. 117)</p>
+  </div>
+  <div class="card">
+    <h3>Three roles, three sets of responsibilities</h3>
+    <div class="fact">
+      <div><b class="h">Pedestrian</b>Everyone who travels on foot is a pedestrian, including people who push a bicycle or a motorcycle with the engine off and people who move in a wheelchair. Pedestrians must take precautions and respect the rules for crossing.</div>
+      <div><b class="h">Passenger</b>Wait for transport in safe places (the sidewalk, not the roadway), do not get on or off a moving bus, wear the seat belt, and do not distract the driver.</div>
+      <div><b class="h">Driver</b>Drives at moderate speed, takes no risks, never drives after drinking, respects signals and the rights of others, and avoids distractions such as the phone.</div>
+    </div>
+    <div class="fig" style="margin-top:12px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 100" width="80" role="img" aria-label="Traffic light showing red"><rect x="22" y="6" width="36" height="88" rx="10" fill="#222"/><circle cx="40" cy="26" r="11" fill="#d63a2f" opacity="1"/><circle cx="40" cy="50" r="11" fill="#e9b824" opacity="0.22"/><circle cx="40" cy="74" r="11" fill="#2e9e5b" opacity="0.22"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 100" width="80" role="img" aria-label="Traffic light showing yellow"><rect x="22" y="6" width="36" height="88" rx="10" fill="#222"/><circle cx="40" cy="26" r="11" fill="#d63a2f" opacity="0.22"/><circle cx="40" cy="50" r="11" fill="#e9b824" opacity="1"/><circle cx="40" cy="74" r="11" fill="#2e9e5b" opacity="0.22"/></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 100" width="80" role="img" aria-label="Traffic light showing green"><rect x="22" y="6" width="36" height="88" rx="10" fill="#222"/><circle cx="40" cy="26" r="11" fill="#d63a2f" opacity="0.22"/><circle cx="40" cy="50" r="11" fill="#e9b824" opacity="0.22"/><circle cx="40" cy="74" r="11" fill="#2e9e5b" opacity="1"/></svg></div>
+    <p class="ref" style="margin:6px 0 0">The traffic light: red = stop, yellow = caution, green = go (when it is clear).</p>
+  </div>
+
+  <h3>Key ideas</h3>
+  <p>Select each tab to read it. Say it in your own words before you move on.</p>
+  <div class="card">
+    <div class="tabs" role="tablist" aria-label="Key ideas" id="stageTabs"></div>
+    <div id="stagePanel" class="tabpanel" role="tabpanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="sec" id="vocab">
+  <div class="eyebrow">Key vocabulary</div>
+  <h2>Words to Know</h2>
+  <p>Tap a card to flip it. Say the meaning in your own words before you flip!</p>
+  <div class="grid g3" id="flips"></div>
+</section>
+
+<section class="sec" id="examples">
+  <div class="eyebrow">Step by step</div>
+  <h2>Worked Examples</h2>
+  <p>Each example shows how to think it through. Press <strong>Show next step</strong> and try to predict the next step before you reveal it. The steps you opened are remembered.</p>
+  <div class="card soft"><b>The four case questions:</b> (1) Who is involved: pedestrian, passenger or driver? (2) Which rule applies? (3) What could happen? (4) What is the safe alternative?</div>
+  <div id="exampleList"></div>
+</section>
+
+<section class="sec" id="practice">
+  <div class="eyebrow">Your turn</div>
+  <h2>Practice with Instant Feedback</h2>
+  <p>You get feedback right after every answer. Mistakes are part of learning, so use the explanations and try again. Everything you answer is saved to your account, so you can sign in from any device and continue.</p>
+  <div class="card act" id="act-quiz"><h3>1. Mastery Quiz (10 questions) <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-lights"><h3>2. Read the Traffic Light <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-roles"><h3>3. Pedestrian, Passenger or Driver? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-risk"><h3>4. Safe or Risky? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-match"><h3>5. Match the Rule <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-seq"><h3>6. Crossing the Street Safely <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-multi"><h3>7. Select All That Apply <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-cloze"><h3>8. Complete the Sentences <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-scen"><h3>9. What Would You Do? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-route"><h3>10. My Safe Route and Pledge <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-mural"><h3>11. Mural Newspaper: Preventing Accidents <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-book"><h3>12. Book Review Questions <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card soft" id="summaryCta" style="display:none">
+    <h3>All activities complete!</h3>
+    <p>Great work. See how you did on each activity.</p>
+    <button class="btn" type="button" id="openSummary">View my score summary</button>
+  </div>
+</section>
+
+<section class="sec" id="reflect">
+  <div class="eyebrow">In your own words</div>
+  <h2>Write and Reflect</h2>
+  <div class="callout warm"><strong>Your written answers are saved automatically</strong> and your teacher can read them. Write full sentences and use what you learned this week.</div>
+  <div class="card act" id="act-reflect"><h3>13. Five-Line Reflection <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-exit"><h3>14. Exit Ticket <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card">
+    <h3>Self-check</h3>
+    <ul><li>I can explain the three looks before crossing.</li><li>I can name three rules for passengers.</li><li>I can describe what a good driver does.</li><li>I completed my safe route and my exit ticket.</li></ul>
+  </div>
+  <p style="text-align:center;font-size:1.3rem;font-weight:800;margin:22px 0"><em>Safe roads begin with my choices.</em></p>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Lincoln International Academy · Growing in Values · Ms. Nathaly López · 8th Grade, Q02 Week 4 (Semester 1, Unit 2).
+    <br>Based on the lesson plan "Road safety: pedestrians and passengers (S1_U2_C04)" and the textbook <em>Creciendo en Valores</em> 8 (pp. 117–123).
+  </div>
+</footer>
+
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="sumTitle" hidden>
+  <div class="modal">
+    <div class="eyebrow">Growing in Values · Week 4</div>
+    <h2 id="sumTitle">Your Score Summary</h2>
+    <div class="bigscore" id="sumBig"></div>
+    <p id="sumMsg"></p>
+    <table class="cmp" id="sumTable"></table>
+    <p class="ref">Scores count your latest try of each scored activity. Written activities show "Completed" when every answer is filled in.</p>
+    <div class="row"><button class="btn" type="button" id="closeSummary">Close</button><button class="btn ghost" type="button" id="reviewBtn">Practice again</button></div>
+  </div>
+</div>
+
+<script>
+window.GV = {"slug": "gv8-q2-week-4-road-safety-pedestrians-passengers", "label": "Q02 Week 4: Road Safety: Pedestrians and Passengers", "ideas": [{"tab": "1. Pedestrian", "title": "The pedestrian: who is it?", "ref": "Textbook, p. 117", "pts": ["Every person who travels <b>on foot<\/b> on traffic routes is a pedestrian. This includes people who <b>push a bicycle or a motorcycle with the engine off<\/b> and people who move in a <b>wheelchair<\/b>.", "Pedestrians must <b>take precautions<\/b> and respect the specific rules.", "Before crossing, <b>look both ways<\/b> along the road."], "key": "Pedestrians are protected best when they are careful and visible."}, {"tab": "2. Crossing safely", "title": "Crossing the street with caution", "ref": "Textbook, p. 121", "pts": ["Memorize the three steps: <b>1.<\/b> Look first to the <b>left<\/b>. <b>2.<\/b> Then to the <b>right<\/b>. <b>3.<\/b> Before you start to cross, look again to the <b>left<\/b>.", "Always use the <b>pedestrian crossings<\/b>.", "If the crossing has a traffic light, <b>do not cross on red or flashing light<\/b>: wait on the sidewalk until it is green, and still check that no vehicle is coming.", "Be careful near garages and workshops: vehicles may come out."], "key": "Look left, look right, look left again, and cross at the crossing."}, {"tab": "3. A good pedestrian", "title": "What a good pedestrian does", "ref": "Textbook, pp. 121–122", "pts": ["Always walk on the <b>sidewalks<\/b>; if you play, do not bother or block others.", "Always use the pedestrian crossings.", "Respect traffic lights: wait for green.", "Be careful when you pass beside a garage or workshop.", "<b>Give way to older people<\/b> when the sidewalks are narrow."], "key": "A good pedestrian is careful and considerate."}, {"tab": "4. Passenger", "title": "The passenger's rules", "ref": "Textbook, pp. 117–118", "pts": ["Wait for transport in safe areas, <b>on the sidewalk, not on the roadway<\/b>.", "<b>Do not get on or off<\/b> while the vehicle is moving.", "<b>Always wear the seat belt<\/b>, including in the back seat.", "<b>Do not distract the driver;<\/b> it can cause accidents.", "Warn the driver if you see unsafe conditions, give directions in time and, on a long trip, help the driver stay alert by talking to them.", "Call the driver's attention if they are driving dangerously."], "key": "A passenger is part of the safety of the trip."}, {"tab": "5. Driver", "title": "A good driver", "ref": "Textbook, pp. 118–121", "pts": ["A good driver <b>drives at moderate speed, makes no risky maneuvers, does not drink alcohol when driving<\/b>, drives responsibly and respects traffic rules and the rights of others.", "Respect <b>traffic lights and signs<\/b>: running a red light or ignoring a STOP is very dangerous.", "Do not park on avenues or roundabouts and do not block intersections.", "Use <b>turn signals<\/b>; keep the car in good condition; travel on the right; avoid distractions such as the phone; use warning triangles after a breakdown."], "key": "Responsible driving protects every person on the road."}, {"tab": "6. Why rules matter", "title": "Why do we follow the rules?", "ref": "Values", "pts": ["Rules protect <b>life<\/b>, mine and other people's.", "Following them is a sign of <b>respect and responsibility<\/b>.", "Even when nobody is watching, we choose the safe behavior.", "We can also <b>teach others<\/b>: reminding a friend to buckle up is an act of care."], "key": "Road safety is a value: care for life."}], "vocab": [["Precaution", "Care taken to avoid a danger."], ["Roadway", "The part of the road where vehicles travel (calzada)."], ["Frustration", "The feeling of anger or sadness when things do not go as we want."], ["Visibility", "How well something can be seen."], ["Traffic flow", "The smooth movement of vehicles (fluidez)."], ["Flashing light", "A light that blinks on and off (intermitente)."], ["Pedestrian", "A person who travels on foot."], ["Passenger", "A person who travels in a vehicle but does not drive it."], ["Seat belt", "A strap that holds a person in the seat if the vehicle stops suddenly."]], "examples": [{"title": "Example 1: Crossing at a corner", "problem": "You want to cross a street at a corner that has a pedestrian crossing and a traffic light. What do you do?", "steps": [["Stand on the sidewalk.", "Wait at the curb, where drivers can see you."], ["Read the light.", "Do not cross on red or flashing light. Wait for green."], ["Look left, right, and left again.", "Check that no vehicle is coming, even when the light is green for you."], ["Cross at the crossing.", "Walk steadily and keep your attention on the road."], ["Answer.", "Wait for green, look left, right and left again, then cross at the crossing.", true]]}, {"title": "Example 2: Getting on the bus", "problem": "<i>A bus is leaving the stop. A student runs, steps off the sidewalk and tries to jump on while it moves.<\/i>", "steps": [["Which rule applies?", "Passengers wait on the sidewalk and <b>do not get on or off a moving vehicle<\/b>."], ["What could happen?", "A fall under the wheels or a collision with other vehicles."], ["What is the safe choice?", "Wait for the next bus on the sidewalk."], ["Answer.", "Let the bus go. Wait safely on the sidewalk for the next one.", true]]}, {"title": "Example 3: Passenger and driver", "problem": "<i>You are in the front seat. The driver keeps looking at the phone and drives fast.<\/i>", "steps": [["Name the risk.", "Distraction and speed."], ["Recall the passenger's duties.", "Warn the driver of unsafe conditions and call attention if the driving is dangerous."], ["Choose the words.", "Calm and clear: “Please put the phone away and slow down. I want us all to arrive safely.”"], ["Protect yourself too.", "Wear your seat belt and, if the driver does not change, ask to get out safely and tell an adult."], ["Answer.", "Speak up calmly, keep your belt fastened and ask for safer driving. Do not distract the driver with arguments.", true]]}, {"title": "Example 4: Design a safe route", "problem": "Plan the safest route from your house to your school as a pedestrian.", "steps": [["Draw the route.", "Mark start (home) and end (school)."], ["Mark the crossings.", "Choose streets that have <b>pedestrian crossings<\/b> and traffic lights."], ["List risk points.", "Garages, narrow sidewalks, busy corners."], ["Write the safe action for each.", "Look left-right-left, give way on narrow sidewalks, wait for green."], ["Final route.", "<table class='cmp'><tr><th>Place<\/th><th>Safe action<\/th><\/tr><tr><td>Main avenue crossing<\/td><td>Wait for green; look left, right, left<\/td><\/tr><tr><td>Garage entrance<\/td><td>Slow down and watch for vehicles<\/td><\/tr><tr><td>Narrow sidewalk<\/td><td>Give way to older people<\/td><\/tr><\/table>", true]]}], "acts": [{"id": "act-quiz", "type": "quiz", "title": "Mastery Quiz (10 questions)", "intro": "Ten questions on pedestrian, passenger and driver responsibilities. Aim for 80% or higher.", "qs": [{"q": "Who is a pedestrian?", "o": ["Anyone who travels on foot, including a person pushing a bicycle with the engine off or using a wheelchair", "Only people walking fast", "Only adults", "Drivers of small cars"], "a": 0, "e": "The textbook includes people who push a bicycle or a motorcycle with the engine off and people with disabilities in wheelchairs."}, {"q": "What is the first thing to do before crossing a street?", "o": ["Look both ways along the road", "Run", "Close your eyes", "Call a friend"], "a": 0, "e": "Looking both ways is the first precaution."}, {"q": "The three steps for crossing are…", "o": ["Look left, look right, look left again", "Look right only", "Run and look later", "Look at the phone, then cross"], "a": 0, "e": "Left, right, and left again just before you start."}, {"q": "A pedestrian crossing has a red or flashing light. What do you do?", "o": ["Wait on the sidewalk until it is green", "Cross quickly", "Cross if the street looks empty", "Run across"], "a": 0, "e": "Do not cross on red or flashing."}, {"q": "Where should passengers wait for transport?", "o": ["On the sidewalk, in a safe area", "On the roadway", "Between parked cars", "In the middle of the street"], "a": 0, "e": "Safe areas are sidewalks and designated stops."}, {"q": "A passenger should…", "o": ["Always wear the seat belt, including in the back seat", "Wear the belt only in front", "Not wear it on short trips", "Take it off when the driver is not watching"], "a": 0, "e": "Everyone buckles up, every time."}, {"q": "Why should a passenger not distract the driver?", "o": ["It can cause accidents", "It makes the trip shorter", "Drivers like noise", "It is rude only"], "a": 0, "e": "A distracted driver can crash."}, {"q": "Which describes a good driver?", "o": ["Moderate speed, no risky maneuvers, no alcohol, respects traffic rules", "The fastest driver", "One who ignores signs at night", "One who talks on the phone"], "a": 0, "e": "A good driver is careful and responsible."}, {"q": "Why is it dangerous to ignore a STOP sign or a red light?", "o": ["Because it can cause serious collisions, especially at night", "It is only impolite", "It saves time and is safe", "It is dangerous only for pedestrians"], "a": 0, "e": "Ignoring signals puts everyone at risk."}, {"q": "On narrow sidewalks, a good pedestrian…", "o": ["Gives way to older people", "Walks in the middle", "Runs ahead", "Blocks the way"], "a": 0, "e": "A good pedestrian is considerate."}]}, {"id": "act-lights", "type": "quiz", "title": "Read the Traffic Light", "intro": "Look at each traffic light (simplified drawings).", "qs": [{"q": "What does a pedestrian do when the light for the crossing shows this?", "o": ["Wait on the sidewalk and do not cross", "Cross quickly", "Cross if there are no cars", "Run across"], "a": 0, "e": "Red means stop and wait.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 100\" width=\"80\" role=\"img\" aria-label=\"Traffic light showing red\"><rect x=\"22\" y=\"6\" width=\"36\" height=\"88\" rx=\"10\" fill=\"#222\"/><circle cx=\"40\" cy=\"26\" r=\"11\" fill=\"#d63a2f\" opacity=\"1\"/><circle cx=\"40\" cy=\"50\" r=\"11\" fill=\"#e9b824\" opacity=\"0.22\"/><circle cx=\"40\" cy=\"74\" r=\"11\" fill=\"#2e9e5b\" opacity=\"0.22\"/><\/svg>"}, {"q": "The light turns yellow as you are about to step off the curb. What do you do?", "o": ["Wait for the next green; yellow is a warning that the light is changing", "Hurry across", "Walk slowly across", "Ignore it"], "a": 0, "e": "Yellow is a caution: do not start to cross.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 100\" width=\"80\" role=\"img\" aria-label=\"Traffic light showing yellow\"><rect x=\"22\" y=\"6\" width=\"36\" height=\"88\" rx=\"10\" fill=\"#222\"/><circle cx=\"40\" cy=\"26\" r=\"11\" fill=\"#d63a2f\" opacity=\"0.22\"/><circle cx=\"40\" cy=\"50\" r=\"11\" fill=\"#e9b824\" opacity=\"1\"/><circle cx=\"40\" cy=\"74\" r=\"11\" fill=\"#2e9e5b\" opacity=\"0.22\"/><\/svg>"}, {"q": "The light is green for pedestrians. What do you still do before stepping out?", "o": ["Look left, right and left again to check that no vehicle is coming", "Nothing, green is always safe", "Close your eyes", "Run"], "a": 0, "e": "Green means you may go if it is clear: always check.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 100\" width=\"80\" role=\"img\" aria-label=\"Traffic light showing green\"><rect x=\"22\" y=\"6\" width=\"36\" height=\"88\" rx=\"10\" fill=\"#222\"/><circle cx=\"40\" cy=\"26\" r=\"11\" fill=\"#d63a2f\" opacity=\"0.22\"/><circle cx=\"40\" cy=\"50\" r=\"11\" fill=\"#e9b824\" opacity=\"0.22\"/><circle cx=\"40\" cy=\"74\" r=\"11\" fill=\"#2e9e5b\" opacity=\"1\"/><\/svg>"}, {"q": "A driver sees this light. What should the driver do?", "o": ["Stop", "Speed up", "Honk and go", "Slow down only"], "a": 0, "e": "Red means stop for drivers too.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 80 100\" width=\"80\" role=\"img\" aria-label=\"Traffic light showing red\"><rect x=\"22\" y=\"6\" width=\"36\" height=\"88\" rx=\"10\" fill=\"#222\"/><circle cx=\"40\" cy=\"26\" r=\"11\" fill=\"#d63a2f\" opacity=\"1\"/><circle cx=\"40\" cy=\"50\" r=\"11\" fill=\"#e9b824\" opacity=\"0.22\"/><circle cx=\"40\" cy=\"74\" r=\"11\" fill=\"#2e9e5b\" opacity=\"0.22\"/><\/svg>"}]}, {"id": "act-roles", "type": "sort", "title": "Pedestrian, Passenger or Driver?", "intro": "Who does each safe behavior belong to most?", "choices": [{"k": "P", "label": "🚶 Pedestrian"}, {"k": "S", "label": "🚌 Passenger"}, {"k": "D", "label": "🚗 Driver"}], "cards": [["Look left, right and left again before crossing.", "P", "Pedestrians look in all directions before they cross."], ["Wait for the green light on the sidewalk.", "P", "Pedestrians obey the light."], ["Do not get on or off while the bus is moving.", "S", "Passengers wait until the vehicle stops."], ["Wear the seat belt, even in the back seat.", "S", "Passengers always use the belt."], ["Warn the driver about unsafe conditions.", "S", "A passenger helps the driver stay alert."], ["Use turn signals before changing lanes.", "D", "Signals help others react in time."], ["Never drive after drinking alcohol.", "D", "A good driver does not drink alcohol when driving."], ["Keep the vehicle in good mechanical condition.", "D", "A defective car is dangerous."], ["Give way to older people on narrow sidewalks.", "P", "A good pedestrian is considerate."]]}, {"id": "act-risk", "type": "sort", "title": "Safe or Risky?", "intro": "Is each situation <b>safe<\/b> or <b>risky<\/b>?", "choices": [{"k": "S", "label": "🟢 Safe"}, {"k": "R", "label": "🔴 Risky"}], "cards": [["Crossing at the crossing after the light turns green and looking left, right, left.", "S", "That is the correct way to cross."], ["Crossing the street while looking at a phone.", "R", "You cannot see danger when you are distracted."], ["Standing on the roadway to wait for the bus.", "R", "Wait on the sidewalk."], ["Wearing the seat belt in the back seat.", "S", "Seat belts are for everyone."], ["Running to jump on a moving bus.", "R", "Never get on or off a moving vehicle."], ["Asking the driver kindly to slow down.", "S", "A passenger can help the driver be safe."], ["Crossing on a flashing light because the street looks empty.", "R", "Do not cross on red or flashing lights."], ["Walking past a garage and checking for vehicles coming out.", "S", "Vehicles may come out of garages."]]}, {"id": "act-match", "type": "match", "title": "Match the Rule", "intro": "Tap the situation on the left, then the right behavior.", "pairs": [["Crossing a street", "Look left, right and left again"], ["Waiting for a bus", "Stay on the sidewalk"], ["Inside a vehicle", "Wear the seat belt, front and back"], ["Traffic light is red or flashing", "Wait; do not cross"], ["Narrow sidewalk", "Give way to older people"], ["Long trip with a tired driver", "Talk to the driver to keep them alert"], ["Driver breaks down", "Place warning triangles"]]}, {"id": "act-seq", "type": "seq", "title": "Crossing the Street Safely", "intro": "Put the steps in order.", "items": [{"t": "Stop at the curb and find the pedestrian crossing", "hint": "Find the safest place first.", "why": "Use the pedestrian crossing."}, {"t": "Wait for the green light on the sidewalk", "hint": "Be patient before stepping out.", "why": "Do not cross on red or flashing."}, {"t": "Look to the left", "hint": "The first of the three looks.", "why": "First look: left."}, {"t": "Look to the right", "hint": "The second look.", "why": "Second look: right."}, {"t": "Look again to the left before you start to cross", "hint": "The third and final look.", "why": "Third look: left again."}, {"t": "Cross at a steady walk, eyes up and phone away", "hint": "Now you can move.", "why": "Walk steadily, without distractions."}]}, {"id": "act-multi", "type": "multi", "title": "Select All That Apply", "intro": "Some questions have more than one right answer.", "qs": [{"q": "Which are good passenger behaviors?", "o": ["Wear the seat belt in the back seat", "Wait on the sidewalk", "Warn the driver of danger", "Get off while the bus is moving"], "a": [0, 1, 2], "e": "Never get off a moving vehicle."}, {"q": "Which are good pedestrian behaviors?", "o": ["Use the pedestrian crossing", "Wait for the green light", "Walk on the sidewalk", "Cross on a flashing light"], "a": [0, 1, 2], "e": "Do not cross on red or flashing lights."}, {"q": "Which describe a good driver?", "o": ["Moderate speed", "Respects traffic rules", "Does not drink alcohol when driving", "Takes risky maneuvers"], "a": [0, 1, 2], "e": "Risky maneuvers cause accidents."}, {"q": "Which can distract a driver?", "o": ["A cell phone", "Changing a radio station", "Loud arguments", "Keeping both hands on the wheel"], "a": [0, 1, 2], "e": "Keeping both hands on the wheel helps."}]}, {"id": "act-cloze", "type": "cloze", "title": "Complete the Sentences", "intro": "Choose the word that completes each sentence.", "items": [["Before crossing, look left, right and ", ["left", "up", "behind"], 0, " again.", "Three looks: left, right, left."], ["Passengers wait on the ", ["sidewalk", "roadway", "bridge"], 0, ".", "Safe areas, not the roadway."], ["Always wear the seat ", ["belt", "cap", "lock"], 0, ", also in the back seat.", "Everyone buckles up."], ["Do not cross on a red or ", ["flashing", "green", "blue"], 0, " light.", "Wait for green."], ["A good driver does not drink ", ["alcohol", "water", "tea"], 0, " when driving.", "Alcohol and driving never go together."], ["Road safety is the responsibility of ", ["everyone", "no one", "police only"], 0, ".", "Safe traffic depends on what each of us does."]]}, {"id": "act-scen", "type": "scenario", "title": "What Would You Do?", "intro": "Choose the best response in each situation.", "steps": [{"s": "Your friends decide to cross in the middle of the block, away from the crossing, to save time. What do you do?", "o": [{"t": "Walk to the crossing and invite them to come, explaining it is safer.", "p": 2, "f": "You choose the safe option and offer leadership."}, {"t": "Follow them quietly.", "p": 0, "f": "Following puts you at risk."}, {"t": "Cross after them once the street is clear.", "p": 0, "f": "A clear street can change in a second."}]}, {"s": "The bus is crowded and a student hangs from the door as it moves. What is the best action for you as a passenger?", "o": [{"t": "Wait for the next bus rather than hang from the door, and tell the driver or an adult about the dangerous behavior.", "p": 2, "f": "You protect yourself and others."}, {"t": "Hang from the door too, only for a short ride.", "p": 0, "f": "Short rides are not safer."}, {"t": "Say nothing but stay inside.", "p": 1, "f": "Staying inside is safe, but you could also warn the driver."}]}, {"s": "Your older cousin is driving and starts texting. What do you do?", "o": [{"t": "Ask calmly that they put the phone away or stop in a safe place to answer, and keep your seat belt on.", "p": 2, "f": "You speak up kindly and stay safe."}, {"t": "Offer to read the message aloud.", "p": 1, "f": "Offering to help is kind, but the driver is still distracted."}, {"t": "Pretend not to notice.", "p": 0, "f": "Passengers should warn the driver of danger."}]}, {"s": "On a narrow sidewalk an older adult with a cane is walking toward you. What is a good pedestrian to do?", "o": [{"t": "Step aside and give way.", "p": 2, "f": "Giving way to older people shows respect."}, {"t": "Keep walking at the same speed.", "p": 0, "f": "That blocks the way."}, {"t": "Wait until the person passes but keep playing on your phone.", "p": 1, "f": "Waiting is good; paying attention is better."}]}]}, {"id": "act-route", "type": "open", "title": "My Safe Route and Pledge", "rtitle": "Safe route and pledge", "min": 15, "intro": "Design the safest route you use as a pedestrian or passenger (for example home to school). See Worked Example 4.", "prompts": [{"q": "1. My route (from … to …) and the crossings I use:", "rows": 3}, {"q": "2. Two risk points on my route and the safe action for each:", "rows": 4}, {"q": "3. My road-safety pledge for this week (concrete and realistic):", "rows": 3}]}, {"id": "act-mural", "type": "open", "title": "Mural Newspaper: Preventing Accidents", "rtitle": "Mural newspaper: how to prevent traffic accidents", "min": 15, "intro": "From your textbook: with your team you write a mural newspaper about what can be done to prevent traffic accidents. Write your part here.", "prompts": [{"q": "1. A headline for your mural:", "rows": 2}, {"q": "2. Three tips for pedestrians, passengers or drivers:", "rows": 4}, {"q": "3. Your conclusion about what a good pedestrian and a good passenger do:", "rows": 4}]}, {"id": "act-book", "type": "open", "title": "Book Review Questions", "rtitle": "Review questions (Creciendo en Valores, p. 123)", "min": 20, "intro": "From your textbook.", "prompts": [{"q": "1. How do you define a driver?", "rows": 3}, {"q": "2. Why is it necessary to respect traffic lights and traffic signs?", "rows": 3}, {"q": "3. Why must we travel on the right?", "rows": 3}, {"q": "4. What does it mean to travel with caution?", "rows": 3}]}, {"id": "act-reflect", "type": "open", "reflect": true, "title": "Five-Line Reflection", "rtitle": "Reflection", "min": 25, "who": true, "intro": "Apply what you learned at home, at school or in your community.", "prompts": [{"q": "Write about five lines. Describe one safe or unsafe behavior you saw this week on your way to school and what you would change.", "rows": 6}]}, {"id": "act-exit", "type": "open", "reflect": true, "title": "Exit Ticket", "rtitle": "Exit ticket", "min": 20, "who": true, "intro": "Answer in your own words before you leave this page.", "prompts": [{"q": "1. Explain the three steps for crossing a street and one rule for passengers.", "rows": 4}, {"q": "2. Which safe habit will you practice this week, and how will you remember it?", "rows": 4}]}]};
+
+</script>
+<script>
+(function(){
+"use strict";
+const G = window.GV;
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+function h(tag, attrs, ...kids){
+  const el = document.createElement(tag);
+  for(const k in (attrs||{})){
+    if(k==='class') el.className = attrs[k];
+    else if(k==='html') el.innerHTML = attrs[k];
+    else if(k.startsWith('on')) el.addEventListener(k.slice(2), attrs[k]);
+    else el.setAttribute(k, attrs[k]);
+  }
+  kids.flat(Infinity).forEach(c => { if(c!=null) el.append(c.nodeType ? c : document.createTextNode(c)); });
+  return el;
+}
+const SLUG = G.slug;
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const plain = s => String(s).replace(/<[^>]*>/g,'').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();
+const studentName = () => (window.LiaSync && LiaSync.name && LiaSync.name()) || '';
+
+/* ---------- saved answers + stable (seeded) answer order ----------
+   Every tap/choice is recorded and replayed on the next visit (localStorage, mirrored to the database by LiaSync).
+   Shuffles are seeded, so the order is the same on every visit; the correct option is spread over all positions.
+   "Try again" starts a new round (new order, that activity's saved answers cleared). */
+const AKEY = 'gv-ans-' + SLUG;
+let AD = store.get(AKEY, {}) || {};
+const asave = () => store.set(AKEY, AD);
+let curAct = null, shufN = 0, CNT = {}, replaying = false; const STARTED = {};
+function rng(seed){ let a = seed>>>0; return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a>>>15), 1 | a); t = (t + Math.imul(t ^ (t>>>7), 61 | t)) ^ t; return ((t ^ (t>>>14))>>>0) / 4294967296; }; }
+function strSeed(s){ let x = 2166136261; for(let i=0;i<s.length;i++){ x ^= s.charCodeAt(i); x = Math.imul(x, 16777619); } return x>>>0; }
+function actRnd(){ shufN++; return rng(strSeed(curAct + '|' + ((AD[curAct] && AD[curAct].round) || 0) + '|' + shufN)); }
+function beginAct(id){ if(STARTED[id]){ AD[id] = {round: ((AD[id] && AD[id].round) || 0) + 1, a: []}; asave(); } STARTED[id] = 1; curAct = id; shufN = 0; CNT = {}; }
+function armAct(id, mount){
+  curAct = null;
+  const d = AD[id] = AD[id] || {round: 0, a: []};
+  const cs = $$('button.opt, button.btn:not(.ghost), select, input[type=checkbox]', mount);
+  cs.forEach((c, i) => c.addEventListener(c.tagName === 'SELECT' ? 'change' : 'click', () => {
+    if(replaying) return;
+    if(d.a.length < 600){ d.a.push(c.tagName === 'SELECT' ? {i, v: c.value} : {i}); asave(); }
+  }));
+  if(d.a.length){
+    replaying = true;
+    d.a.forEach(x => { const c = cs[x.i]; if(!c) return; if(c.tagName === 'SELECT'){ c.value = x.v; c.dispatchEvent(new Event('change')); } else c.click(); });
+    replaying = false;
+  }
+}
+function placeOk(arr){
+  const ok = arr.find(x => x.ok); if(!ok) return shuffle(arr);
+  const n = arr.length, wr = shuffle(arr.filter(x => x !== ok)), k = (CNT[n] = (CNT[n] || 0) + 1) - 1, target = ((k % n) * (n === 4 ? 3 : 2) + Math.floor(k / n)) % n;
+  wr.splice(target, 0, ok); return wr;
+}
+function shuffle(a){ a=a.slice(); const rnd=curAct?actRnd():Math.random; for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function feedback(el, kind, text){ el.className = 'fb show ' + kind; el.textContent = text; }
+
+/* ---------- theme (own toggle: wired here) ---------- */
+(function(){
+  const root = document.documentElement;
+  try{ const t = localStorage.getItem('lia-theme'); if(t==='light'||t==='dark') root.dataset.theme = t; }catch(e){}
+  $('#themeBtn').addEventListener('click', () => {
+    const dark = root.dataset.theme==='dark' || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try{ localStorage.setItem('lia-theme', root.dataset.theme); }catch(e){}
+  });
+})();
+
+/* ---------- progress & scores ---------- */
+const ACTS = G.acts.map(a => [a.id, a.title]);
+const TOTAL = ACTS.length;
+const SKEY = 'gv-scores-' + SLUG;
+const scores = store.get(SKEY, {}) || {};
+function reportProgress(){   // tells the teacher dashboard how far this student is
+  try{ let c=0,t=0,n=0; ACTS.forEach(a=>{ const s=scores[a[0]]; if(s){ n++; c+=s[0]; t+=s[1]; } });
+    if(window.LiaSync && LiaSync.report) LiaSync.report({solved:n,total:TOTAL,score:c,max:t}); }catch(e){}
+}
+function paintProgress(){
+  reportProgress();
+  const n = ACTS.filter(a => scores[a[0]]).length;
+  $('#progText').textContent = n + ' of ' + TOTAL + ' activities';
+  $('#progBar').style.width = (n/TOTAL*100) + '%';
+  $$('.act').forEach(a => a.classList.toggle('done', !!scores[a.id]));
+  $('#summaryCta').style.display = n===TOTAL ? '' : 'none';
+}
+function record(id, correct, total){
+  const was = ACTS.filter(a => scores[a[0]]).length;
+  scores[id] = [correct, total];
+  store.set(SKEY, scores);
+  paintProgress();
+  if(was===TOTAL-1 && ACTS.every(a => scores[a[0]])) setTimeout(openSummary, 900);
+}
+function unrecord(id){ if(scores[id]){ delete scores[id]; store.set(SKEY, scores); paintProgress(); } }
+function openSummary(){
+  let c=0,t=0;
+  const rows = ACTS.map(([id,name]) => { const [a,b]=scores[id]||[0,0]; c+=a; t+=b;
+    return h('tr',{}, h('td',{},name), h('td',{}, b ? a+' / '+b : (scores[id] ? 'Completed ✓' : '—')), h('td',{}, h('div',{class:'meter'}, h('i',{style:'width:'+(b?a/b*100:(scores[id]?100:0))+'%'})))); });
+  const pct = t ? Math.round(c/t*100) : 0;
+  $('#sumBig').innerHTML = pct + '% <small>(' + c + ' of ' + t + ' points on the scored activities)</small>';
+  $('#sumMsg').textContent = pct>=90 ? 'Outstanding! You can explain this week\'s topic and put it into practice.'
+    : pct>=80 ? 'Secure! You have a solid understanding. Review the activities with lower scores to make it even stronger.'
+    : pct>=60 ? 'Good progress. Go back to the Worked Examples, then retry the activities with lower scores.'
+    : 'Keep going! Re-read the key ideas and the Worked Examples, then try the activities again.';
+  const tbl = $('#sumTable'); tbl.innerHTML='';
+  tbl.append(h('tr',{},h('th',{},'Activity'),h('th',{},'Result'),h('th',{},'')), ...rows);
+  $('#overlay').hidden = false; $('#closeSummary').focus();
+}
+function closeSummary(){ $('#overlay').hidden = true; }
+$('#openSummary').addEventListener('click', openSummary);
+$('#closeSummary').addEventListener('click', closeSummary);
+$('#reviewBtn').addEventListener('click', () => { closeSummary(); $('#practice').scrollIntoView(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeSummary(); });
+
+/* ---------- key ideas (tabs) ---------- */
+(function(){
+  const tabs = $('#stageTabs'), panel = $('#stagePanel'); if(!tabs) return;
+  function show(i){
+    $$('.tab', tabs).forEach((b,j) => b.setAttribute('aria-selected', j===i));
+    const s = G.ideas[i];
+    panel.innerHTML = '';
+    panel.append(h('h3', {}, s.title), s.ref ? h('p', {class:'ref'}, s.ref) : null, h('ul', {}, s.pts.map(p => h('li', {html:p}))), h('div', {class:'callout'}, h('strong', {}, 'Key idea: '), s.key));
+  }
+  G.ideas.forEach((s,i) => tabs.append(h('button', {class:'tab', role:'tab', type:'button', 'aria-selected':'false', onclick:()=>show(i)}, s.tab)));
+  show(0);
+})();
+
+/* ---------- vocabulary cards ---------- */
+G.vocab.forEach(([t,d]) => {
+  const b = h('button', {class:'flip', type:'button', 'aria-pressed':'false'}, h('div', {class:'front'}, t), h('div', {class:'hint'}, 'Tap to see the meaning'), h('div', {class:'back'}, d));
+  b.addEventListener('click', () => { const on = b.classList.toggle('on'); b.setAttribute('aria-pressed', on); });
+  $('#flips').append(b);
+});
+
+/* ---------- worked examples (steps shown are saved) ---------- */
+const EKEY = 'gv-ex-' + SLUG, EX = store.get(EKEY, {}) || {};
+G.examples.forEach((ex, ei) => {
+  const list = h('ol', {class:'steps'});
+  const items = ex.steps.map(([t,b,fin]) => { const li = h('li', {class:'step' + (fin?' final':'')}, h('b',{class:'t'}, t), h('span',{html:b})); list.append(li); return li; });
+  let n = Math.min(+EX[ei]||0, items.length);
+  const next = h('button', {class:'btn', type:'button'}, 'Show next step');
+  const all = h('button', {class:'btn ghost', type:'button'}, 'Show all');
+  const reset = h('button', {class:'btn ghost', type:'button'}, 'Hide steps');
+  const status = h('span', {class:'ref', 'aria-live':'polite'}, '');
+  function paint(){ items.forEach((li,i) => li.classList.toggle('show', i<n)); next.disabled = n>=items.length; status.textContent = n + ' of ' + items.length + ' steps shown'; EX[ei] = n; store.set(EKEY, EX); }
+  next.addEventListener('click', () => { if(n<items.length) n++; paint(); items[n-1].scrollIntoView({block:'nearest', behavior:'smooth'}); });
+  all.addEventListener('click', () => { n=items.length; paint(); });
+  reset.addEventListener('click', () => { n=0; paint(); });
+  paint();
+  $('#exampleList').append(h('div', {class:'card'}, h('h3', {}, ex.title), h('div', {class:'problem', html:'<b>Situation:</b> ' + ex.problem}), h('div', {class:'row', style:'margin-top:12px'}, next, all, reset, status), list));
+});
+
+/* ---------- activity engines ---------- */
+const mountOf = id => $('#'+id+' .mount');
+function withRound(id, render0){ const mount = mountOf(id); function render(){ beginAct(id); render0(mount, render); armAct(id, mount); } render(); }
+function againBtn(render){ const b = h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again'); b.addEventListener('click', render); return b; }
+
+/* 1. multiple choice (optional picture per question) */
+function mountQuiz(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    let answered = 0, correct = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = againBtn(render);
+    function paintSummary(){
+      if(answered<a.qs.length){ summary.textContent = 'Answered ' + answered + ' of ' + a.qs.length; return; }
+      summary.textContent = 'Score: ' + correct + ' / ' + a.qs.length + (correct===a.qs.length ? ' – perfect!' : correct/a.qs.length>=.8 ? ' – secure (80% or higher).' : ' – review the explanations and try again.');
+      again.style.display = ''; record(a.id, correct, a.qs.length);
+    }
+    if(a.intro) mount.append(h('p', {html:a.intro}));
+    a.qs.forEach((q,qi) => {
+      const order = placeOk(q.o.map((t,i) => ({t, ok:i===q.a})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const btns = order.map(o => {
+        const b = h('button', {class:'opt', type:'button'}, o.t);
+        b.addEventListener('click', () => {
+          if(b.disabled) return;
+          answered++; btns.forEach(x => x.disabled = true);
+          if(o.ok){ correct++; b.classList.add('good'); feedback(fb,'good','✓ Correct. ' + q.e); }
+          else { b.classList.add('bad','shake'); btns[order.findIndex(x=>x.ok)].classList.add('good'); feedback(fb,'bad','✗ Not quite. ' + q.e); }
+          paintSummary();
+        });
+        return b;
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, (qi+1) + '. ' + q.q), q.svg ? h('div',{class:'fig',html:q.svg}) : null, btns, fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  });
+}
+
+/* 2. select ALL that apply */
+function mountMulti(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    let answered = 0, correct = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = againBtn(render);
+    function paintSummary(){
+      if(answered<a.qs.length){ summary.textContent = 'Answered ' + answered + ' of ' + a.qs.length; return; }
+      summary.textContent = 'Score: ' + correct + ' / ' + a.qs.length + ' (a question counts only when you pick every right choice and no wrong one).';
+      again.style.display = ''; record(a.id, correct, a.qs.length);
+    }
+    if(a.intro) mount.append(h('p', {html:a.intro}));
+    a.qs.forEach((q,qi) => {
+      const order = shuffle(q.o.map((t,i) => ({t, ok:q.a.includes(i)})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const boxes = order.map(o => { const cb = h('input', {type:'checkbox'}); return {cb, o, l:h('label', {class:'opt'}, cb, h('span', {}, o.t))}; });
+      const check = h('button', {class:'btn', type:'button'}, 'Check my answer');
+      check.addEventListener('click', () => {
+        if(check.disabled) return;
+        check.disabled = true; answered++;
+        const ok = boxes.every(b => b.cb.checked === b.o.ok);
+        boxes.forEach(b => { b.cb.disabled = true; if(b.o.ok) b.l.classList.add('good'); else if(b.cb.checked) b.l.classList.add('bad'); });
+        if(ok){ correct++; feedback(fb,'good','✓ Yes, that is every right choice. ' + q.e); } else feedback(fb,'bad','✗ Not quite. The right choices are highlighted. ' + q.e);
+        paintSummary();
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, (qi+1) + '. ' + q.q + '  (select all that apply)'), boxes.map(b => b.l), h('div',{class:'row'}, check), fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  });
+}
+
+/* 3. scenarios: choose the best response (2 = best, 1 = partly, 0 = not helpful) */
+function mountScenario(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    let answered = 0, pts = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = againBtn(render);
+    function paintSummary(){
+      if(answered<a.steps.length){ summary.textContent = 'Answered ' + answered + ' of ' + a.steps.length; return; }
+      summary.textContent = 'Points: ' + pts + ' / ' + (2*a.steps.length) + ' (best response = 2, partly helpful = 1, not helpful = 0).';
+      again.style.display = ''; record(a.id, pts, 2*a.steps.length);
+    }
+    if(a.intro) mount.append(h('p', {html:a.intro}));
+    a.steps.forEach((st,si) => {
+      const order = placeOk(st.o.map(o => ({...o, ok:o.p===2})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const btns = order.map(o => {
+        const b = h('button', {class:'opt', type:'button'}, o.t);
+        b.addEventListener('click', () => {
+          if(b.disabled) return;
+          answered++; pts += o.p; btns.forEach(x => x.disabled = true);
+          b.classList.add(o.p===2 ? 'good' : o.p===1 ? 'sel' : 'bad');
+          if(o.p<2) btns[order.findIndex(x=>x.ok)].classList.add('good');
+          feedback(fb, o.p===2?'good':o.p===1?'info':'bad', (o.p===2?'✓ Best response. ':o.p===1?'◑ Partly helpful. ':'✗ Not helpful. ') + o.f + (o.p<2 ? ' Better: ' + order.find(x=>x.ok).t : ''));
+          paintSummary();
+        });
+        return b;
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, 'Situation ' + (si+1)), h('p',{html:st.s}), btns, fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  });
+}
+
+/* 4. put the steps in order */
+function mountSeq(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const items = a.items; let next = 0, mistakes = 0;
+    const slots = items.map((_,i) => h('div', {class:'slot' + (i===0?' next':'')}, h('small', {}, 'Step ' + (i+1)), h('span', {}, '?')));
+    const fb = h('div', {class:'fb', 'aria-live':'polite'});
+    let pool = shuffle(items.map((it,i) => ({...it, i})));
+    while(items.length>1 && pool.every((p,k) => p.i===k)) pool = shuffle(pool);
+    const poolEl = h('div', {class:'pool'});
+    const again = againBtn(render);
+    pool.forEach(p => {
+      const b = h('button', {class:'opt', type:'button'}, p.t);
+      b.addEventListener('click', () => {
+        if(b.disabled) return;
+        if(p.i===next){
+          b.disabled = true; b.style.display='none';
+          slots[next].classList.remove('next'); slots[next].classList.add('filled'); slots[next].lastChild.textContent = p.t;
+          feedback(fb,'good','✓ Yes! ' + p.why); next++;
+          if(next<items.length) slots[next].classList.add('next');
+          else { feedback(fb,'good','🎉 Complete! ' + (mistakes===0 ? 'No mistakes.' : mistakes + ' mistake' + (mistakes>1?'s':'') + ' along the way.') + ' ' + p.why); again.style.display=''; record(a.id, Math.max(0, items.length-mistakes), items.length); }
+        } else { mistakes++; b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'), 600); feedback(fb,'bad','Not yet. Hint for step ' + (next+1) + ': ' + items[next].hint); }
+      });
+      poolEl.append(b);
+    });
+    mount.append(h('p', {html:a.intro}), h('div', {class:'slots'}, slots), h('p', {class:'ref'}, 'Tap the step that belongs in the next empty box.'), poolEl, fb, h('div', {class:'row', style:'margin-top:10px'}, again));
+  });
+}
+
+/* 5. match pairs */
+function mountMatch(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const pairs = a.pairs; let sel=null, matched=0, mistakes=0;
+    const fb = h('div',{class:'fb','aria-live':'polite'}); const again = againBtn(render);
+    const L = pairs.map((p,i) => h('button',{class:'opt',type:'button','data-i':i},p[0]));
+    const R = shuffle(pairs.map((p,i) => ({i,t:p[1]}))).map(p => h('button',{class:'opt',type:'button','data-i':p.i},p.t));
+    L.forEach(b => b.addEventListener('click',()=>{ if(b.classList.contains('done')) return; L.forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); sel=b; feedback(fb,'info','Now choose the matching item on the right.'); }));
+    R.forEach(b => b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      if(!sel){ feedback(fb,'info','First tap an item on the left.'); return; }
+      if(sel.dataset.i===b.dataset.i){
+        sel.classList.remove('sel'); sel.classList.add('done'); b.classList.add('done'); sel=null; matched++; feedback(fb,'good','✓ Match!');
+        if(matched===pairs.length){ feedback(fb,'good','🎉 All matched' + (mistakes? ' with ' + mistakes + ' miss' + (mistakes>1?'es':'') : ' with no misses') + '.'); again.style.display=''; record(a.id, Math.max(0, pairs.length-mistakes), pairs.length); }
+      } else { mistakes++; b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'),600); feedback(fb,'bad','Not that one. Re-read and try another.'); }
+    }));
+    mount.append(h('p',{html:a.intro}),h('div',{class:'match'},h('div',{},L),h('div',{},R)),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  });
+}
+
+/* 6. sort cards into categories (optional picture per card) */
+function mountSort(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const deck = shuffle(a.cards); let i=0, right=0;
+    const fb = h('div',{class:'fb','aria-live':'polite'}); const card = h('div',{class:'sortcard'});
+    const btns = a.choices.map(c => h('button',{class:'btn',type:'button'},c.label));
+    const count = h('p',{class:'ref'}); const again = againBtn(render);
+    function paint(){
+      if(i>=deck.length){ card.textContent='Finished!'; btns.forEach(b=>b.disabled=true); count.textContent=''; return; }
+      card.innerHTML=''; if(deck[i][3]) card.append(h('div',{class:'fig',html:deck[i][3]})); card.append(h('span',{},deck[i][0])); count.textContent='Card ' + (i+1) + ' of ' + deck.length;
+    }
+    function pick(k){
+      if(i>=deck.length) return;
+      const c=deck[i], ok=c[1]===k; if(ok) right++;
+      const msg=(ok?'✓ Correct. ':'✗ Not quite. ') + c[2]; i++;
+      if(i>=deck.length){ paint(); feedback(fb, right===deck.length?'good':'info', msg + ' — Score: ' + right + ' / ' + deck.length + '.'); again.style.display=''; record(a.id, right, deck.length); }
+      else { feedback(fb, ok?'good':'bad', msg); paint(); }
+    }
+    btns.forEach((b,j) => b.addEventListener('click',()=>pick(a.choices[j].k)));
+    mount.append(h('p',{html:a.intro}),count,card,h('div',{class:'row'},btns),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+    paint();
+  });
+}
+
+/* 7. fill in the blanks (drop-down) */
+function mountCloze(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const S = a.items, ok=new Set(); let wrong=0;
+    const fb = h('div',{class:'fb','aria-live':'polite'}); const again = againBtn(render); const box = h('div',{class:'cloze'});
+    S.forEach((s,k) => {
+      const sel = h('select',{'aria-label':'Choose the word for sentence ' + (k+1)}, h('option',{value:''},'— choose —'), s[1].map((o,j)=>h('option',{value:j},o)));
+      sel.addEventListener('change',()=>{
+        if(sel.value===''){ sel.className=''; return; }
+        if(+sel.value===s[2]){ sel.className='good'; sel.disabled=true; ok.add(k); feedback(fb,'good','✓ ' + s[4]);
+          if(ok.size===S.length){ feedback(fb,'good','🎉 All sentences complete!'); again.style.display=''; record(a.id, Math.max(0, S.length-wrong), S.length); } }
+        else { wrong++; sel.className='bad shake'; setTimeout(()=>sel.classList.remove('shake'),600); feedback(fb,'bad','Not quite – try another word. Think about what you learned this week.'); }
+      });
+      box.append(h('p',{}, s[0], sel, s[3]));
+    });
+    mount.append(h('p',{html:a.intro}),box,fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  });
+}
+
+/* 8. written answers: saved word for word and listed on the teacher's "Student responses" page (resp- key) */
+function mountOpen(a){
+  const mount = mountOf(a.id), key = 'resp-' + SLUG + '-' + a.id, n = a.prompts.length, min = a.min || 12;
+  const qs = a.prompts.map(p => plain(p.q));
+  let R = store.get(key, null);
+  if(!R || !Array.isArray(R.a)) R = {a:[]};
+  R = {title: G.label + ' – ' + (a.rtitle || a.title), q: qs, a: qs.map((_,i) => String(R.a[i] || ''))};
+  const status = h('span', {class:'saved'}, '');
+  function check(){
+    const done = R.a.every(t => t.trim().length >= min);
+    status.textContent = done ? '✓ Saved. Your teacher can read your answers.' : 'Saved automatically as you type. Write at least a full sentence for each answer to complete this activity.';
+    if(done) record(a.id, 0, 0); else unrecord(a.id);
+  }
+  if(a.intro) mount.append(h('p', {html:a.intro}));
+  if(a.who){ const nm = studentName(); mount.append(h('p', {class:'who'}, 'Name: ', h('b', {}, nm || '(sign in to show your name)'), '  ·  Week: ' + G.label)); }
+  a.prompts.forEach((p,i) => {
+    const ta = h('textarea', {id:a.id+'-q'+i, rows:p.rows||4, 'aria-label':plain(p.q)});
+    ta.value = R.a[i];
+    ta.addEventListener('input', () => { R.a[i] = ta.value; store.set(key, R); check(); });
+    ta.addEventListener('blur', () => { R.a[i] = ta.value; store.set(key, R); });
+    mount.append(h('div', {class:'qa'}, h('label', {for:a.id+'-q'+i, html:p.q}), p.hint ? h('div',{class:'ref',style:'margin:0 0 4px'},p.hint) : null, ta));
+  });
+  if(a.model) mount.append(h('details', {class:'acc'}, h('summary', {}, 'See a model answer'), h('div', {class:'body', html:a.model})));
+  mount.append(status);
+  check();
+}
+
+/* 9. share a budget (percent) and explain the choice – saved as written answers */
+function mountAlloc(a){
+  const mount = mountOf(a.id), key = 'resp-' + SLUG + '-' + a.id, names = a.items.map(x => x.n);
+  const qs = names.map(n => 'Share of the budget for: ' + n).concat([plain(a.reason)]);
+  let R = store.get(key, null); if(!R || !Array.isArray(R.a)) R = {a:[]};
+  R = {title: G.label + ' – ' + (a.rtitle || a.title), q: qs, a: qs.map((_,i) => String(R.a[i] == null ? '' : R.a[i]))};
+  const total = a.total || 100, tot = h('span', {class:'pct'}), status = h('span', {class:'saved'}, '');
+  const inputs = a.items.map((it,i) => { const inp = h('input', {class:'amt', type:'number', min:0, max:total, step:1, id:a.id+'-i'+i, 'aria-label':'Percent for ' + it.n});
+    inp.value = R.a[i]; inp.addEventListener('input', () => { R.a[i] = inp.value; store.set(key, R); paint(); }); return inp; });
+  const why = h('textarea', {id:a.id+'-why', rows:4, 'aria-label':plain(a.reason)}); why.value = R.a[names.length];
+  why.addEventListener('input', () => { R.a[names.length] = why.value; store.set(key, R); paint(); });
+  function paint(){
+    const s = inputs.reduce((t,i) => t + (+i.value||0), 0);
+    tot.textContent = 'Total: ' + s + '% of ' + total + '%'; tot.className = 'pct ' + (s===total ? 'ok' : 'no');
+    const done = s===total && why.value.trim().length >= 15;
+    status.textContent = done ? '✓ Saved. Your teacher can read your budget and your reasons.' : (s===total ? 'Now explain your biggest choice (at least a full sentence).' : (s>total ? 'You gave away more than ' + total + '%: lower some numbers.' : 'Share all ' + total + '% of the budget: ' + (total-s) + '% still to assign.'));
+    if(done) record(a.id, 0, 0); else unrecord(a.id);
+  }
+  mount.append(h('p', {html:a.intro}), h('div', {class:'alloc'}, a.items.map((it,i) => [h('label', {for:a.id+'-i'+i, html:'<b>' + it.n + '</b><br><span class="ref">' + (it.hint||'') + '</span>'}), inputs[i]])), h('p', {}, tot),
+    h('div', {class:'qa'}, h('label', {for:a.id+'-why', html:a.reason}), why), status);
+  paint();
+}
+
+/* 10. numbers practice: every student gets their own set of numbers (seeded by the sign-in) */
+function mountCalc(a){
+  const mount = mountOf(a.id), skey = 'gv-calc-' + SLUG + '-' + a.id, rkey = 'resp-' + SLUG + '-' + a.id, gen = (window.GV_GENS||{})[a.gen];
+  let S = store.get(skey, null); if(!S || !Array.isArray(S.t)) S = {seed:'', t:[], d:[]};
+  const sd = (window.LiaSync && LiaSync.seed && LiaSync.seed()) || ''; if(!S.seed && sd) S.seed = sd;
+  const n = a.n || 5, Q = [];
+  for(let k=0;k<n;k++){ Q.push(gen(rng(strSeed((S.seed||'demo') + '|' + a.id + '|' + k)), k)); S.t[k] = S.t[k] || []; S.d[k] = S.d[k] || 0; }
+  store.set(skey, S);
+  function saveResp(){ store.set(rkey, {title: G.label + ' – ' + (a.rtitle||a.title), q: Q.map((q,k) => (k+1) + '. ' + plain(q.q)), a: Q.map((q,k) => S.t[k].length ? 'Tries: ' + S.t[k].join(' → ') + (S.d[k] ? ' (solved)' : '') : '') }); }
+  let first = 0;
+  const summary = h('p', {class:'score', 'aria-live':'polite'});
+  function paint(){
+    const solved = S.d.filter(Boolean).length; first = Q.filter((q,k) => S.d[k] && S.t[k].length===1).length;
+    summary.textContent = solved < n ? 'Solved ' + solved + ' of ' + n : 'Done! Solved on the first try: ' + first + ' of ' + n + '.';
+    if(solved === n) record(a.id, first, n);
+  }
+  mount.append(h('p', {html:a.intro}), h('p', {class:'ref'}, 'Your numbers are your own: classmates get different ones. Type a number, then press Check. Use a calculator if you like.'));
+  Q.forEach((q,k) => {
+    const fb = h('div', {class:'fb', 'aria-live':'polite'}), inp = h('input', {class:'num', type:'text', inputmode:'decimal', 'aria-label':'Answer to question ' + (k+1)}), btn = h('button', {class:'btn', type:'button'}, 'Check');
+    function lock(good){ inp.disabled = true; btn.disabled = true; inp.classList.add(good ? 'good' : 'bad'); }
+    function show(){ if(S.d[k]){ const last = S.t[k][S.t[k].length-1], v = parseFloat(String(last).replace(',', '.')), good = isFinite(v) && Math.abs(v - q.ans) <= (q.tol == null ? 0.01 : q.tol); inp.value = last; lock(good);
+      if(good) feedback(fb,'good','✓ ' + q.e + ' Answer: ' + q.ans + (q.unit ? ' ' + q.unit : '') + '.'); else feedback(fb,'bad','The answer is ' + q.ans + (q.unit ? ' ' + q.unit : '') + '. ' + q.e); } }
+    btn.addEventListener('click', () => {
+      const raw = inp.value.trim(); if(!raw) return;
+      const v = parseFloat(raw.replace(',', '.')); S.t[k].push(raw);
+      if(isFinite(v) && Math.abs(v - q.ans) <= (q.tol == null ? 0.01 : q.tol)){ S.d[k] = 1; lock(true); feedback(fb,'good','✓ ' + q.e + ' Answer: ' + q.ans + (q.unit ? ' ' + q.unit : '') + '.'); }
+      else if(S.t[k].length >= 3){ S.d[k] = 1; lock(false); feedback(fb,'bad','The answer is ' + q.ans + (q.unit ? ' ' + q.unit : '') + '. ' + q.e); }
+      else { inp.classList.add('bad','shake'); setTimeout(()=>inp.classList.remove('bad','shake'),600); feedback(fb,'bad','Not yet. Hint: ' + q.hint); }
+      store.set(skey, S); saveResp(); paint();
+    });
+    mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead', html:(k+1) + '. ' + q.q}), h('div', {class:'row'}, inp, q.unit ? h('span',{class:'ref'},q.unit) : null, btn), fb));
+    show();
+  });
+  mount.append(summary); saveResp(); paint();
+}
+
+const MOUNT = {quiz:mountQuiz, multi:mountMulti, scenario:mountScenario, seq:mountSeq, match:mountMatch, sort:mountSort, cloze:mountCloze, open:mountOpen, alloc:mountAlloc, calc:mountCalc};
+G.acts.forEach(a => MOUNT[a.type](a));
+paintProgress();
+})();
+
+</script>
+</body>
+</html>
