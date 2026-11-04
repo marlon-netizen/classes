@@ -291,7 +291,7 @@ else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=n
         'header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px}header .wrap>.hr{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}'
         'header .tg{font:inherit;font-weight:600;font-size:.8rem;border-radius:8px;padding:4px 11px;cursor:pointer;background:transparent;color:#f3f0e9;border:1px solid rgba(255,255,255,.5)}'
         '.wrap{max-width:1560px}.grid{grid-template-columns:repeat(5,minmax(0,1fr));align-items:start}'
-        '@media (max-width:1480px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:640px){.grid{grid-template-columns:1fr}}'
+        '@media (max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:640px){.grid{grid-template-columns:1fr}}'
         '.card .btn{font-size:.85rem;padding:6px 12px}'
         '.pv{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;background:var(--soft);border-radius:8px;padding:8px 12px;margin:0 0 .8em!important;color:var(--ink)!important;font-size:.9rem}.pv code{font:700 1.05rem ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;color:var(--p)}</style>\n</head>\n<body>\n'
         '<header><div class="wrap"><div><div class="eyebrow">Teacher tools</div><div class="school">Lincoln International Academy</div></div>'
