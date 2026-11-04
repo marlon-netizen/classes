@@ -17,9 +17,9 @@ learn = '''
       <div><b class="h">Patriotic symbols (Símbolos Patrios)</b>The <b>Flag</b>, the <b>Coat of Arms</b> and the <b>National Anthem</b>.<div class="fig" style="margin-top:8px">%s</div></div>
       <div><b class="h">National symbols (Símbolos Nacionales)</b>The <b>Sacuanjoche</b> (flower), the <b>Madroño</b> (tree) and the <b>Guardabarranco</b> (bird).<div class="fig" style="margin-top:8px">%s%s%s</div></div>
     </div>
-    <p class="ref" style="margin:10px 0 0">The drawings on this page are simplified. Look at the real symbols in your textbook (pp. 88–95).</p>
+    <p class="ref" style="margin:10px 0 0">The drawings on this page are simplified versions of the real symbols. Compare them with the pictures in your textbook (pp. 88–95).</p>
   </div>
-''' % (flag(), flower(), tree(), bird())
+''' % (flag() + coat(), flower(), tree(), bird())
 
 ideas = [
  {"tab": "1. The flag", "title": "The National Flag", "ref": "Patriotic symbol",
@@ -104,6 +104,7 @@ pics = [
  Q("Which symbol does this picture show?", ["The national tree (Madroño)", "The national flower (Sacuanjoche)", "The Coat of Arms", "The National Anthem"], "A tree with a creamy-white crown in flower (November to February): the Madroño.", tree()),
  Q("Which symbol does this picture show?", ["The national bird (Guardabarranco)", "The national tree (Madroño)", "The Flag", "The national flower (Sacuanjoche)"], "A small bird with a long tail ending in two blue rackets: the Guardabarranco.", bird()),
  Q("What does this picture show?", ["The National Flag: blue, white, blue stripes with the coat of arms in the center", "The Coat of Arms alone", "The flag of another country", "A national symbol from nature"], "Horizontal blue-white-blue stripes with the coat of arms in the middle: the National Flag.", flag()),
+ Q("Which symbol does this picture show?", ["The Coat of Arms", "The Flag", "The national tree (Madroño)", "The National Anthem"], "A ring with REPÚBLICA DE NICARAGUA – AMÉRICA CENTRAL around a triangle with volcanoes, a rainbow and a Phrygian cap: the Coat of Arms.", coat()),
  Q("This flag is flown at a school ceremony. Which family of symbols does it belong to?", ["Patriotic symbols", "National symbols", "Neither", "Only a decoration"], "The Flag is a patriotic symbol, together with the Coat of Arms and the Anthem.", flag()),
 ]
 
@@ -117,7 +118,7 @@ acts = [
             ["The Madroño", "N", "The tree is a national symbol.", tree()],
             ["The Guardabarranco", "N", "The bird is a national symbol.", bird()],
             ["“Salve a Ti Nicaragua”", "P", "The National Anthem is a patriotic symbol.", None],
-            ["The triangle with the rainbow and the volcanoes", "P", "That is the Coat of Arms, a patriotic symbol.", None],
+            ["The Coat of Arms", "P", "The triangle with the rainbow and the volcanoes, inside a ring with the country name, is the Coat of Arms, a patriotic symbol.", coat()],
             ["Plumeria rubra", "N", "That is the scientific name of the Sacuanjoche, the national flower.", None],
             ["Eumomota superciliosa", "N", "That is the scientific name of the Guardabarranco, the national bird.", None]]},
  {"id": "act-match", "type": "match", "title": "Match the Fact", "intro": "Tap an item on the left, then tap the fact that belongs to it.",
