@@ -1,0 +1,1065 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physics I – Lesson 3.1 Introduction to Vectors | Lincoln International Academy</title>
+<meta name="description" content="Interactive study page for Physics I, Lesson 3.1: Introduction to Vectors – scalars and vectors, graphical addition and subtraction, multiplying by scalars, worked examples and practice.">
+<script>try{var t=localStorage.getItem('lia-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f0e9; --surface:#fffdf9; --surface-2:#f8f5ee; --ink:#1e2937; --muted:#5a6575;
+  --line:#ddd6c7; --primary:#1f3a5f; --primary-ink:#ffffff; --accent:#2b7a76; --accent-soft:#e1efed;
+  --blue-soft:#e6edf6; --warm:#b4763a; --warm-soft:#f6ebdb; --good:#2c7a57; --good-soft:#e1f1e8;
+  --bad:#a94a3f; --bad-soft:#f6e4e1; --hot:#c58a4d; --cold:#4f86a8; --work:#2b7a76;
+  --shadow:0 1px 2px rgba(30,41,55,.06),0 4px 14px rgba(30,41,55,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+    --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+    --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+    --bad:#e08a7d; --bad-soft:#331e1c; --hot:#c58a4d; --cold:#6aa3c7; --work:#58b5ae;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+  --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+  --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+  --bad:#e08a7d; --bad-soft:#331e1c; --hot:#c58a4d; --cold:#6aa3c7; --work:#58b5ae;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 'Oswald','Arial Narrow',sans-serif}
+h1,h2,h3,h4{font-family:'Oswald',sans-serif;font-weight:600;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:'Oswald',sans-serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:#d3b48a;margin-bottom:2px}
+.meta{display:flex;gap:26px;flex-wrap:wrap}
+.meta div{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#aab7ca}
+.meta b{display:block;font-size:1.05rem;text-transform:none;letter-spacing:0;color:#f3f0e9;font-weight:600}
+.lessonbar{background:var(--surface);border-bottom:1px solid var(--line)}
+.lessonbar .wrap{padding-top:14px;padding-bottom:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center}
+.lessonbar h1{font-size:clamp(1.15rem,2.6vw,1.45rem);margin:0}
+.lessonbar small{color:var(--muted)}
+.overall{display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--muted)}
+.bar{width:150px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+
+/* nav */
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:8px}
+nav.tabs button{appearance:none;border:0;background:none;font:inherit;font-weight:600;color:var(--muted);padding:10px 16px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;border-radius:8px 8px 0 0}
+nav.tabs button:hover{color:var(--ink);background:var(--surface-2)}
+nav.tabs button[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--warm)}
+:root[data-theme="dark"] nav.tabs button[aria-selected="true"]{color:var(--primary)}
+
+main{padding:26px 0 60px}
+section.panel{display:none}
+section.panel.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card>h3:first-child,.card>h2:first-child{margin-top:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.callout.blue{border-color:var(--primary);background:var(--blue-soft)}
+.callout b.t{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;color:var(--muted)}
+.law{font-family:'Oswald',sans-serif;font-size:1.15rem;font-style:italic}
+.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary)}
+.objectives{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.objectives li{display:flex;gap:12px;align-items:flex-start}
+.objectives li span{flex:none;width:26px;height:26px;border-radius:50%;background:var(--primary);color:var(--primary-ink);font-weight:700;font-size:.85rem;display:grid;place-items:center;margin-top:2px}
+
+/* math */
+.eq{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.2rem;text-align:center;padding:10px 6px;overflow-x:auto}
+.eq.big{font-size:1.35rem}
+.eq i,.math i{font-style:italic}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.15}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em .08em}
+.frac>span:last-child{padding:.08em .25em 0}
+sub{font-size:.7em;line-height:0}
+.math{font-family:"Cambria Math",Cambria,Georgia,serif;white-space:nowrap}
+
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left}
+th{background:var(--surface-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+
+/* controls */
+button.btn,.btn{appearance:none;font:inherit;font-weight:600;font-size:.92rem;border-radius:8px;padding:8px 16px;cursor:pointer;border:1px solid var(--primary);background:var(--primary);color:var(--primary-ink);transition:filter .15s,transform .05s}
+button.btn:hover{filter:brightness(1.12)} button.btn:active{transform:translateY(1px)}
+button.btn.ghost{background:transparent;color:var(--primary)}
+button.btn.ghost:hover{background:var(--blue-soft);filter:none}
+button.btn[disabled]{opacity:.45;cursor:not-allowed}
+:root[data-theme="dark"] button.btn.ghost{color:var(--primary)}
+input[type=text]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:150px}
+input[type=text]:focus,button:focus-visible,input[type=range]:focus-visible,summary:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:1px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.sliderrow{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:center;margin:8px 0}
+.sliderrow output{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+@media (max-width:560px){.sliderrow{grid-template-columns:1fr 80px}.sliderrow label{grid-column:1/-1}}
+
+details{border:1px solid var(--line);border-radius:8px;padding:2px 14px;margin:10px 0;background:var(--surface-2)}
+summary{cursor:pointer;font-weight:600;padding:8px 0}
+details[open]>summary{margin-bottom:4px}
+
+/* readouts */
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+.readout{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.readout small{display:block;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
+.readout b{font-size:1.4rem;font-family:'Oswald',sans-serif;font-variant-numeric:tabular-nums}
+.status{padding:9px 14px;border-radius:8px;font-weight:600;font-size:.92rem;margin-top:8px;background:var(--good-soft);color:var(--good)}
+.status.warn{background:var(--warm-soft);color:var(--warm)}
+.status.bad{background:var(--bad-soft);color:var(--bad)}
+svg.flow{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+svg.flow text{fill:var(--ink);font:600 12px 'Oswald','Arial Narrow',sans-serif}
+svg.flow .res-t{fill:#fff}
+.effbar{position:relative;height:16px;background:var(--line);border-radius:99px;margin:26px 0 30px}
+.effbar i.fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--accent);transition:width .15s}
+.effbar span.tick{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);opacity:.55}
+.effbar span.tick em{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-style:normal;font-size:.68rem;color:var(--muted);white-space:nowrap}
+.effbar span.tick.hi em{top:-20px}
+
+canvas{width:100%;max-width:520px;height:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);display:block}
+.meter{height:14px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0}
+.meter i{display:block;height:100%;background:var(--warm);width:0;transition:width .2s}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+
+/* dice */
+.hist{display:flex;align-items:flex-end;gap:4px;height:170px;border-bottom:2px solid var(--line);padding:0 2px;margin-top:12px}
+.hist div{flex:1;position:relative;background:var(--accent);border-radius:4px 4px 0 0;min-height:1px;transition:height .25s}
+.hist div b{position:absolute;top:-19px;left:0;right:0;text-align:center;font-size:.7rem;color:var(--muted);font-weight:600}
+.hist div.ghost{background:transparent;border:1.5px dashed var(--warm);border-bottom:0}
+.histx{display:flex;gap:4px;font-size:.78rem;color:var(--muted);text-align:center;padding:0 2px}
+.histx span{flex:1}
+.dice{font-size:2.2rem;letter-spacing:.2em;min-height:1.4em}
+
+/* stepper */
+.example{margin-bottom:22px}
+.example header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px}
+.problem-box{background:var(--blue-soft);border-radius:10px;padding:14px 16px;margin:10px 0 16px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.step{display:none;border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden;background:var(--surface)}
+.step.show{display:block;animation:fade .3s}
+.step>h4{margin:0;padding:9px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;font-family:'Oswald','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:.09em;font-size:.82rem;color:var(--primary)}
+.step>h4 .n{width:24px;height:24px;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-size:.8rem;letter-spacing:0}
+.step .body{padding:12px 16px}
+.step .ask{border-top:1px dashed var(--line);padding:12px 16px;background:var(--warm-soft)}
+.step .ask p{margin:0 0 8px;font-weight:600}
+.opt{display:block;width:100%;text-align:left;font:inherit;padding:9px 12px;margin:6px 0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--good);background:var(--good-soft);color:var(--ink)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin-top:8px;font-size:.93rem}
+.fb.ok{color:var(--good)} .fb.no{color:var(--bad)} .fb.near{color:var(--warm)}
+.fb b{font-weight:700}
+.dots{display:flex;gap:6px;margin:6px 0 14px}
+.dots i{width:28px;height:6px;border-radius:99px;background:var(--line)} .dots i.on{background:var(--accent)}
+.givenlist{display:flex;gap:10px 28px;flex-wrap:wrap;margin:4px 0}
+.givenlist span{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.1rem}
+.unk{color:var(--bad);font-style:italic}
+.boxed{display:inline-block;border:1.5px solid var(--bad);padding:2px 10px;border-radius:4px}
+
+/* practice */
+.setpicker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.setpicker button{appearance:none;font:inherit;font-weight:600;background:var(--surface);border:1px solid var(--line);color:var(--ink);padding:9px 14px;border-radius:99px;cursor:pointer}
+.setpicker button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.setpicker button small{opacity:.75;font-weight:500;margin-left:4px}
+.prob{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 20px;margin-bottom:14px;box-shadow:var(--shadow);position:relative}
+.prob.done{border-color:var(--good)}
+.prob .num{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;display:flex;justify-content:space-between}
+.prob .num .badge{color:var(--good)}
+.partrow{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin:8px 0}
+.partrow label{min-width:210px;font-size:.93rem}
+.partrow .u{color:var(--muted);min-width:34px}
+.partrow .ptag{font-weight:700}
+.prob .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.hintbox,.solbox{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.95rem}
+.hintbox{background:var(--warm-soft)} .solbox{background:var(--blue-soft)}
+.solbox ol{margin:6px 0 0;padding-left:20px}
+.pnote{color:var(--muted);font-size:.86rem}
+.sethead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.sethead p{margin:0;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.linkbtn{background:none;border:0;color:var(--accent);font:inherit;text-decoration:underline;cursor:pointer;padding:0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{appearance:none;border:0;background:none;font:inherit;font-weight:700;padding:8px 18px;cursor:pointer;color:var(--ink);min-width:54px;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink)}
+.ctlrow{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:8px 0}
+.ctlrow label.l{font-weight:600;min-width:100px}
+svg.vt{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+svg.vt text{fill:var(--muted);font:600 11px 'Oswald','Arial Narrow',sans-serif}
+svg.vt .lbl{fill:var(--ink)}
+svg.vt .axis{stroke:var(--muted);stroke-width:1.4}
+svg.vt .grid{stroke:var(--line);stroke-width:1}
+select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.vartable{width:100%;max-width:520px}
+.vartable td{padding:6px 10px}
+.vartable td:first-child{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.1rem}
+.eqcard{background:var(--blue-soft);border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin-top:10px}
+tr.hl td{background:var(--accent-soft);font-weight:700}
+.subhead{margin:26px 0 10px;font-size:1rem;font-family:'Oswald','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--primary);border-bottom:2px solid var(--line);padding-bottom:4px}
+.fig{margin:10px 0 6px}
+.figcap{font-size:.82rem;color:var(--muted);text-align:center}
+.opt input{margin-right:10px}
+
+body{letter-spacing:.015em}
+h1,h2,h3,h4{letter-spacing:.01em}
+.school{font-weight:700;letter-spacing:.02em}
+header.top{position:relative}
+.theme{position:absolute;top:12px;right:max(16px,calc((100vw - 1020px)/2 + 16px));display:inline-flex;border:1px solid rgba(255,255,255,.35);border-radius:99px;overflow:hidden;background:rgba(255,255,255,.08);z-index:5}
+.theme button{display:inline-flex;gap:6px;align-items:center;appearance:none;border:0;background:none;color:#e9e3f0;font:inherit;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;cursor:pointer}
+.theme button:hover{background:rgba(255,255,255,.14)}
+.theme button[aria-pressed="true"]{background:#f3f0e9;color:#1b2f4b}
+.theme button:focus-visible{outline:3px solid #e0b79c;outline-offset:-3px}
+@media (max-width:620px){header.top .wrap{padding-top:56px}}
+.lbl{fill:var(--ink)}
+</style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+
+<header class="top">
+  <div class="theme" role="group" aria-label="Color theme">
+    <button type="button" data-theme-set="light" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3L17 7M7 17l-1.7 1.7"/></g></svg><span>Light</span></button>
+    <button type="button" data-theme-set="dark" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><span>Dark</span></button>
+  </div>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Student Learning Page</div>
+      <div class="school">Lincoln International Academy</div>
+    </div>
+    <div class="meta">
+      <div>Class<b>Physics I</b></div>
+      <div>Teacher<b>Eduardo Vásquez</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="lessonbar">
+  <div class="wrap">
+    <div>
+      <h1>Lesson 3.1 · Introduction to Vectors</h1>
+      <small>Chapter 3 · Two-Dimensional Motion and Vectors · Section 1</small>
+    </div>
+    <div class="overall" aria-live="polite">
+      <span id="overallText">0 of 0 practice problems solved</span>
+      <div class="bar"><i id="overallBar"></i></div>
+    </div>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="Lesson sections">
+  <div class="wrap" role="tablist">
+    <button role="tab" id="t-review" data-tab="review" aria-selected="true">1 · Review</button>
+    <button role="tab" id="t-examples" data-tab="examples" aria-selected="false">2 · Worked Examples</button>
+    <button role="tab" id="t-practice" data-tab="practice" aria-selected="false">3 · Practice</button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===================== REVIEW ===================== -->
+
+<section class="panel active" id="review" aria-labelledby="t-review">
+
+  <div class="card">
+    <h2>What you should be able to do</h2>
+    <ul class="objectives">
+      <li><span>1</span><div><b>Distinguish between a scalar and a vector.</b></div></li>
+      <li><span>2</span><div><b>Add and subtract vectors</b> by using the graphical method.</div></li>
+      <li><span>3</span><div><b>Multiply and divide vectors by scalars.</b></div></li>
+    </ul>
+    <p class="pnote" style="margin-top:12px">In this lesson: <a href="#part-a">Scalars and vectors</a> · <a href="#part-b">Drawing vectors</a> · <a href="#part-c">Adding vectors graphically</a> · <a href="#part-d">Properties of vectors</a> · <a href="#lab">Vector lab</a></p>
+    <p class="pnote"><b>Key terms:</b> scalar · vector · resultant</p>
+  </div>
+
+  <div class="card" id="part-a">
+    <span class="pill">Part A</span>
+    <h2>Scalars and vectors</h2>
+    <p>In "Motion in One Dimension" we described direction with a plus or minus sign. That only works for motion along a straight line. To describe motion that does <b>not</b> follow a straight line we need a way to record a direction in a plane.</p>
+    <div class="grid2">
+      <div class="callout blue"><b class="t">Scalar</b>A physical quantity that has <b>magnitude but no direction</b>.<br>Examples: speed, volume, the number of pages in a book, time.</div>
+      <div class="callout warm"><b class="t">Vector</b>A physical quantity that has <b>both magnitude and direction</b>.<br>Examples: displacement, velocity, acceleration.</div>
+    </div>
+    <p>A pilot planning a trip must know exactly <i>how far</i> and <i>which way</i> to fly: that is a displacement, so it is a vector. To describe the velocity of a bird we must give the speed (say 3.5 m/s) <b>and</b> the direction (say northeast).</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Quantity</th><th>Scalar or vector?</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>distance, speed, time, mass, volume</td><td>scalar</td><td>3.5 m/s</td></tr>
+        <tr><td>displacement, velocity, acceleration, force</td><td>vector</td><td>3.5 m/s to the northeast</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card" id="part-b">
+    <span class="pill">Part B</span>
+    <h2>Drawing and writing vectors</h2>
+    <p>Quantities are written with symbols, such as <i>t</i> for time. To keep vectors and scalars apart, this course uses <b>boldface</b> type for vectors and <i>italics</i> for scalars:</p>
+    <div class="eq big"><i>v</i> = 3.5 m/s &nbsp;(speed, scalar) &nbsp;&nbsp;&nbsp; <b>v</b> = 3.5 m/s to the northeast &nbsp;(velocity, vector)</div>
+    <p>When you write by hand you cannot use boldface, so draw a small arrow over the symbol: <span class="math" style="font-size:1.2rem">v⃗</span> = 3.5 m/s to the northeast.</p>
+    <p>In a diagram a vector is an <b>arrow</b>:</p>
+    <ul>
+      <li>the arrow <b>points</b> in the direction of the vector;</li>
+      <li>the <b>length</b> of the arrow is proportional to the magnitude (a vector twice as long is twice as large);</li>
+      <li>the end with the arrowhead is the <b>head</b> (tip) and the other end is the <b>tail</b>.</li>
+    </ul>
+    <div class="fig" id="figIntro"></div>
+    <p class="figcap">Three vectors: <b>A</b> = 3 m up, <b>B</b> = 2 m to the right, <b>C</b> = 3 m to the right. A and C have the same magnitude but different directions; B and C have the same direction but different magnitudes.</p>
+    <div class="callout"><b class="t">Same vector?</b>Two arrows represent the <b>same vector</b> only if they have the <b>same magnitude AND the same direction</b>. Where the arrow is drawn on the page does not matter.</div>
+  </div>
+
+  <div class="card" id="part-c">
+    <span class="pill">Part C</span>
+    <h2>Adding vectors graphically: the resultant</h2>
+    <p>A <b>resultant</b> is a vector that represents the <b>sum</b> of two or more vectors. Only vectors that describe the <b>same kind of quantity</b> and have the <b>same units</b> can be added: you cannot add a velocity to a displacement, or meters to feet.</p>
+    <p>Think of a student who walks 1600 m to a friend's house and then 1600 m to school. The direct path from his house to the school is the <i>vector sum</i> of the two displacements. To find it by drawing:</p>
+    <ol>
+      <li>Choose a reasonable <b>scale</b> (for example 50 m = 1 cm on paper).</li>
+      <li>Draw the first vector with the right direction and scaled length.</li>
+      <li>Draw the second vector with its <b>tail at the head of the first</b>, again with the right direction and scaled length.</li>
+      <li>Draw the resultant from the <b>tail of the first</b> to the <b>head of the last</b>.</li>
+      <li>Measure its length with a ruler and multiply by the scale to get the magnitude. Measure the angle with a protractor to get the direction.</li>
+    </ol>
+    <div class="fig" id="figWalk"></div>
+    <p class="figcap">Tip-to-tail (triangle) method: (a) and (b) are the two displacements, the dashed arrow (c) is their resultant.</p>
+    <div class="callout warm"><b class="t">Tips</b>Always label every arrow, write the scale, and state the direction of the resultant relative to a reference line (for example "10° above the horizontal" or "15° east of north").</div>
+  </div>
+
+  <div class="card" id="part-d">
+    <span class="pill">Part D</span>
+    <h2>Properties of vectors</h2>
+    <h3>1 · Vectors can be moved parallel to themselves in a diagram</h3>
+    <p>Imagine a toy car crossing a moving walkway. Its velocity is the combination of two independent motions: <b>0.80 m/s</b> across the walkway and <b>1.5 m/s</b> along it. Because a vector only has a magnitude and a direction, you may slide it anywhere on the diagram as long as its <b>length and direction do not change</b>. That lets you draw one vector's tail at the tip of the other (the <i>triangle</i> or <i>polygon method</i>).</p>
+    <div class="fig" id="figCar"></div>
+    <p class="figcap">The resultant velocity of the car, found with a ruler and a protractor.</p>
+    <h3>2 · Vectors can be added in any order</h3>
+    <p>The sum of two or more vectors does not depend on the order of the addition: <b>A + B = B + A</b>. A marathon runner who makes the same four displacements in a different order ends up with the same total displacement.</p>
+    <h3>3 · To subtract a vector, add its opposite</h3>
+    <p>The <b>negative</b> of a vector has the <b>same magnitude</b> but the <b>opposite direction</b>. For example, the negative of 30 m/s to the west is −30 m/s to the west, which is +30 m/s to the east. Adding a vector to its negative gives zero.</p>
+    <div class="eq big"><b>A</b> − <b>B</b> = <b>A</b> + (−<b>B</b>)</div>
+    <p>To subtract in two dimensions, first draw the negative of the vector to be subtracted, then add it with the triangle method.</p>
+    <h3>4 · Multiplying or dividing a vector by a scalar gives a vector</h3>
+    <p>A cab driver is told to go twice as fast. His velocity <b>v</b><sub>cab</sub> is multiplied by the scalar 2: the result, 2<b>v</b><sub>cab</sub>, is a vector with <b>twice the magnitude</b> and the <b>same direction</b>. If the driver is told to go twice as fast in the opposite direction, the vector is multiplied by −2: the result, −2<b>v</b><sub>cab</sub>, has twice the magnitude and points the <b>opposite way</b>.</p>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Scalar</th><th>Effect on a vector <b>v</b></th></tr></thead>
+      <tbody>
+        <tr><td>2</td><td>twice as long, same direction</td></tr>
+        <tr><td>½ (or ÷ 2)</td><td>half as long, same direction</td></tr>
+        <tr><td>−1</td><td>same length, opposite direction (the negative of <b>v</b>)</td></tr>
+        <tr><td>−2</td><td>twice as long, opposite direction</td></tr>
+      </tbody>
+    </table></div>
+    <div class="callout blue"><b class="t">Did you know?</b>The word <i>vector</i> is also used by airline pilots and navigators: it is the particular path followed (or to be followed), given as a compass heading.</div>
+  </div>
+
+  <div class="card" id="lab">
+    <span class="pill">Lab</span>
+    <h2>Vector lab: add, subtract and scale</h2>
+    <p>Set the size and direction of vectors <b>A</b> and <b>B</b>, pick a scalar for each, and choose which one you draw first. The solid arrows follow the tip-to-tail method and the dashed arrow is the resultant. Try to predict the result before you look at it.</p>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="la_m">Magnitude of <b>A</b></label><input type="range" id="la_m" min="1" max="8" step="0.5" value="4"><output id="la_mo">4 units</output></div>
+        <div class="sliderrow"><label for="la_a">Direction of <b>A</b></label><input type="range" id="la_a" min="0" max="355" step="5" value="0"><output id="la_ao">0°</output></div>
+        <div class="ctlrow"><label class="l" for="la_k">Multiply <b>A</b> by</label>
+          <select id="la_k"><option value="-2">−2</option><option value="-1">−1</option><option value="-0.5">−½</option><option value="0.5">½</option><option value="1" selected>1</option><option value="2">2</option></select></div>
+      </div>
+      <div>
+        <div class="sliderrow"><label for="lb_m">Magnitude of <b>B</b></label><input type="range" id="lb_m" min="1" max="8" step="0.5" value="3"><output id="lb_mo">3 units</output></div>
+        <div class="sliderrow"><label for="lb_a">Direction of <b>B</b></label><input type="range" id="lb_a" min="0" max="355" step="5" value="90"><output id="lb_ao">90°</output></div>
+        <div class="ctlrow"><label class="l" for="lb_k">Multiply <b>B</b> by</label>
+          <select id="lb_k"><option value="-2">−2</option><option value="-1">−1</option><option value="-0.5">−½</option><option value="0.5">½</option><option value="1" selected>1</option><option value="2">2</option></select></div>
+      </div>
+    </div>
+    <div class="ctlrow"><span class="l" style="font-weight:600">Draw first</span>
+      <div class="seg" role="group" aria-label="Order of drawing"><button type="button" id="lo_ab" aria-pressed="true">A then B</button><button type="button" id="lo_ba" aria-pressed="false">B then A</button></div>
+      <label><input type="checkbox" id="lo_ghost" checked> show the other order (faint)</label></div>
+    <div class="fig" id="labFig"></div>
+    <div class="readouts" id="labReads"></div>
+    <div class="status" id="labStatus" aria-live="polite"></div>
+    <p class="pnote">Direction angles are measured counter-clockwise from the right (+x) direction. Try: (1) A = 4 at 0°, B = 3 at 90°, then swap the order; (2) set the multiplier of B to −1 to see A − B; (3) set both scalars to 2 and compare the resultant with the original.</p>
+  </div>
+
+  <div class="card">
+    <h3>Remember when solving problems</h3>
+    <ol>
+      <li><b>Analyze</b> — is the quantity a vector? List magnitudes and directions; choose a scale.</li>
+      <li><b>Plan</b> — add vectors tail-to-head; to subtract, add the negative; apply scalars before adding.</li>
+      <li><b>Solve</b> — measure the resultant's length (× scale) and its angle from a stated reference line.</li>
+      <li><b>Check</b> — the resultant can never be longer than the sum of the lengths, and it must make sense in direction.</li>
+    </ol>
+    <p class="pnote">Ready? Go to <button class="linkbtn" data-goto="examples">Worked Examples</button>, then <button class="linkbtn" data-goto="practice">Practice</button>.</p>
+  </div>
+</section>
+
+
+<!-- ===================== EXAMPLES ===================== -->
+<section class="panel" id="examples" aria-labelledby="t-examples">
+  <div class="card">
+    <h2>Step-by-step worked examples</h2>
+    <p>Each example follows <b>Analyze → Plan → Solve → Check</b>. Press <em>Next step</em> to reveal one step at a time. At most steps you'll answer a quick question first — that's where the thinking happens.</p>
+  </div>
+  <div id="exampleList"></div>
+</section>
+
+<!-- ===================== PRACTICE ===================== -->
+<section class="panel" id="practice" aria-labelledby="t-practice">
+  <div class="card">
+    <h2>Practice on your own</h2>
+    <p>Choose an answer or type a number and press <b>Check</b> (or Enter) for immediate feedback. Stuck? Use <b>Hint</b>. After two tries you can open the full <b>Solution</b>.</p>
+    <ul>
+      <li>For problems with a scale drawing, a drawing is accurate to about a few percent, so answers within <b>3–10 %</b> are accepted. Angles are measured from the reference line named in the question.</li>
+      <li>For signed answers, use the direction the problem says is positive (for example "east is +"). Magnitudes (lengths, speeds) are positive.</li>
+      <li>You may enter answers like <span class="math">126</span>, <span class="math">10.3</span> or <span class="math">−50</span>.</li>
+    </ul>
+  </div>
+  <div class="setpicker" id="setPicker" role="group" aria-label="Problem sets"></div>
+  <div id="problemList"></div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Lincoln International Academy · Physics I · Mr. Eduardo Vásquez<br>Content adapted from <i>Holt McDougal Physics</i>, Chapter 3 §1 (Introduction to Vectors) and the Diagram Skills study guide (© Houghton Mifflin Harcourt). Additional problems written for this page.</div>
+    <div>Your progress is saved automatically. <button class="linkbtn" id="resetAll" data-lia-reset>Reset my progress</button></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+const $  = (s,e=document)=>e.querySelector(s);
+const $$ = (s,e=document)=>[...e.querySelectorAll(s)];
+const KEY='lia-physics1-lesson-3-1';
+let state={};
+try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+
+
+/* ---------- notation helpers ---------- */
+const B=x=>`<b>${x}</b>`;
+const F=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const deg=Math.PI/180, rad2=x=>x/deg;
+const vec=(m,a)=>({x:m*Math.cos(a*deg),y:m*Math.sin(a*deg)});
+const mag=v=>Math.hypot(v.x,v.y);
+const ang=v=>{ let a=rad2(Math.atan2(v.y,v.x)); return a<0?a+360:a; };
+const r1=x=>String(+x.toFixed(1)), r3=x=>String(+x.toPrecision(3));
+
+/* ---------- number parsing / judging ---------- */
+function parseNum(raw){
+  if(raw==null) return NaN;
+  let s=String(raw).trim().toLowerCase().replace(/,/g,'').replace(/\s+/g,'').replace(/[−–]/g,'-');
+  if(!s) return NaN;
+  s=s.replace(/(°|degrees|degree|deg|km\/h|kph|m\/s|km|cm|ms|s|m)$/,'');
+  const m=s.match(/^([+-]?(?:\d+\.?\d*|\.\d+))(?:(?:x|×|\*)10\^?\(?([+-]?\d+)\)?|e([+-]?\d+))?$/);
+  if(!m) return NaN;
+  let v=parseFloat(m[1]);
+  const ex=m[2]!==undefined?m[2]:m[3];
+  if(ex!==undefined) v*=Math.pow(10,parseInt(ex,10));
+  return v;
+}
+function judge(v,part){
+  if(!isFinite(v)) return {state:'no',msg:'I couldn\'t read that as a number. Try something like 126 or 10.3.'};
+  const ans=part.ans, tol=part.tol??0.03;
+  if(ans===0){ return Math.abs(v)<=(part.atol??0.05)?{state:'ok',msg:'Correct!'}:{state:'no',msg:'Not quite. Think about what happens when the vectors cancel.'}; }
+  const A_=Math.abs(ans), cmp=part.abs?Math.abs(v):v, tgt=part.abs?A_:ans;
+  const rel=Math.abs(cmp-tgt)/A_;
+  if(rel<=tol) return {state:'ok',msg:'Correct!'};
+  for(const t of (part.traps||[])){ if(Math.abs(v-t.v)/Math.abs(t.v)<=0.02) return {state:'no',msg:t.msg}; }
+  if(!part.abs && Math.abs(v+ans)/A_<=tol) return {state:'near',msg:'Right size, wrong sign. Check which direction you chose as positive (or which way the vector points).'};
+  if(part.ang){
+    if(Math.abs(v-(90-ans))<=Math.max(1,ans*tol)) return {state:'near',msg:'That is the complementary angle (90° − θ). Check which line the angle is measured from.'};
+    if(Math.abs(v-(180-ans))<=Math.max(1,ans*tol)) return {state:'near',msg:'That is 180° − θ: you measured from the opposite end of the reference line.'};
+    if(rel<=0.12) return {state:'near',msg:'Close! Check your rounding or measure the angle again.'};
+    return {state:'no',msg:'Not quite. Re-read which reference line the angle is measured from (use tan θ = opposite ÷ adjacent).'};
+  }
+  const av=Math.abs(v);
+  if(Math.abs(av*2-A_)/A_<=tol||Math.abs(av/2-A_)/A_<=tol) return {state:'near',msg:'Off by a factor of 2 — did you double or halve the right vector?'};
+  if(Math.abs(av*10-A_)/A_<=tol||Math.abs(av/10-A_)/A_<=tol) return {state:'near',msg:'Right digits, wrong power of ten — check your scale (e.g. 10 m = 1 cm).'};
+  if(rel<=0.12) return {state:'near',msg:'Close! Check your rounding or an intermediate value.'};
+  return {state:'no',msg:'Not quite. Re-read the question, draw the vectors tip-to-tail, and try a hint if you need one.'};
+}
+
+/* ---------- vector drawing ---------- */
+function arrow(x1,y1,x2,y2,o={}){
+  const c=o.c||'var(--accent)', w=o.w||2.6, dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy)||1, a=Math.atan2(dy,dx), h=Math.min(10,L*.5);
+  const p1=[x2-h*Math.cos(a-.4),y2-h*Math.sin(a-.4)], p2=[x2-h*Math.cos(a+.4),y2-h*Math.sin(a+.4)];
+  const bx=x2-h*.7*Math.cos(a), by=y2-h*.7*Math.sin(a);
+  let s=`<line x1="${x1}" y1="${y1}" x2="${bx}" y2="${by}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"${o.dash?` stroke-dasharray="${o.dash}"`:''}${o.op?` opacity="${o.op}"`:''}/>`;
+  s+=`<polygon points="${x2},${y2} ${p1[0]},${p1[1]} ${p2[0]},${p2[1]}" fill="${c}"${o.op?` opacity="${o.op}"`:''}/>`;
+  if(o.label){
+    const mx=(x1+x2)/2, my=(y1+y2)/2, nx=-dy/L, ny=dx/L, off=o.loff??13;
+    const side=nx*off, an=Math.abs(nx)>0.55?(side>0?'start':'end'):'middle';
+    s+=`<text class="lbl" x="${mx+nx*off*(an==='middle'?1:.5)}" y="${my+ny*off+4}" text-anchor="${an}" style="fill:${o.lc||c};font-weight:700">${o.label}</text>`;
+  }
+  return s;
+}
+/* tip-to-tail figure: path = [{x,y,label,c}], auto-fit; o.result draws resultant; o.ghost = alternative path */
+function figTT(path,o={}){
+  const W=o.W||460,H=o.H||250,pad=o.pad??34;
+  const pts=[{x:0,y:0}]; path.forEach(v=>pts.push({x:pts[pts.length-1].x+v.x,y:pts[pts.length-1].y+v.y}));
+  let gh=null; if(o.ghost){ gh=[{x:0,y:0}]; o.ghost.forEach(v=>gh.push({x:gh[gh.length-1].x+v.x,y:gh[gh.length-1].y+v.y})); }
+  const all=pts.concat(gh||[]);
+  const minx=Math.min(...all.map(p=>p.x)),maxx=Math.max(...all.map(p=>p.x)),miny=Math.min(...all.map(p=>p.y)),maxy=Math.max(...all.map(p=>p.y));
+  const sx=Math.max(maxx-minx,1e-6), sy=Math.max(maxy-miny,1e-6);
+  const sc=Math.min((W-2*pad)/sx,(H-2*pad)/sy,o.maxScale||40);
+  const ox=(W-sc*sx)/2-minx*sc, oy=(H-sc*sy)/2+maxy*sc;
+  const X=x=>ox+x*sc, Y=y=>oy-y*sc;
+  let s=`<svg class="vt" viewBox="0 0 ${W} ${H}" role="img" aria-label="${o.aria||'Vector diagram'}">`;
+  if(o.grid){ const g=o.grid; for(let gx=Math.ceil(minx/g)*g;gx<=maxx+1e-9;gx+=g) s+=`<line class="grid" x1="${X(gx)}" y1="${pad/2}" x2="${X(gx)}" y2="${H-pad/2}"/>`; for(let gy=Math.ceil(miny/g)*g;gy<=maxy+1e-9;gy+=g) s+=`<line class="grid" x1="${pad/2}" y1="${Y(gy)}" x2="${W-pad/2}" y2="${Y(gy)}"/>`; }
+  if(gh){ gh.slice(1).forEach((p,i)=>{ const q=gh[i]; s+=arrow(X(q.x),Y(q.y),X(p.x),Y(p.y),{c:'var(--muted)',w:2,dash:'5 5',op:.55}); }); }
+  path.forEach((v,i)=>{ const q=pts[i],p=pts[i+1]; s+=arrow(X(q.x),Y(q.y),X(p.x),Y(p.y),{c:v.c||['var(--accent)','var(--warm)','var(--primary)','var(--cold)'][i%4],label:v.label,loff:v.loff}); });
+  const last=pts[pts.length-1];
+  if(o.result!==false && path.length>1 && (Math.abs(last.x)+Math.abs(last.y))>1e-9){
+    s+=arrow(X(0),Y(0),X(last.x),Y(last.y),{c:'var(--bad)',w:3,dash:'7 5',label:o.rlabel||'R',loff:o.rloff??-14});
+  }
+  s+=`<circle cx="${X(0)}" cy="${Y(0)}" r="3.5" fill="var(--ink)"/>`;
+  if(o.note) s+=`<text x="${W-8}" y="${H-8}" text-anchor="end">${o.note}</text>`;
+  return s+'</svg>';
+}
+const SIX=['var(--accent)','var(--warm)','var(--primary)','var(--cold)','var(--bad)','var(--good)'];
+
+/* the worksheet grid: vectors A–J (1 square = 1 m) */
+const WS={ // [name, x1,y1, x2,y2] in grid squares
+  A:[1,0.5,1,3.5], B:[2,3.5,4,3.5], C:[2,1,5,1], D:[6,0.5,6,4.5], E:[8,4.5,8,1.5], F:[11,3.5,9,3.5],
+  G:[8.5,1,12.5,1], H:[14,0.5,14,3.5], I:[16,3,16+3*Math.cos(30*deg),3+3*Math.sin(30*deg)], J:[16,1,16+2*Math.cos(30*deg),1+2*Math.sin(30*deg)]
+};
+function figWorksheet(){
+  const c=26,W=19.5*c,H=5.4*c;
+  let s=`<svg class="vt" viewBox="0 0 ${W} ${H}" role="img" aria-label="Ten vectors A to J on a square grid. A = 3 m up, B = 2 m right, C = 3 m right, D = 4 m up, E = 3 m down, F = 2 m left, G = 4 m right, H = 3 m up, I = 3 m at 30 degrees, J = 2 m at 30 degrees.">`;
+  for(let i=0;i<=19;i++) s+=`<line class="grid" x1="${i*c}" y1="0" x2="${i*c}" y2="${H}"/>`;
+  for(let j=0;j<=5;j++) s+=`<line class="grid" x1="0" y1="${H-j*c-4}" x2="${W}" y2="${H-j*c-4}"/>`;
+  Object.keys(WS).forEach((k,i)=>{
+    const [a,b,x,y]=WS[k];
+    s+=arrow(a*c,H-4-b*c,x*c,H-4-y*c,{c:'var(--ink)',w:2.6});
+    const lx=(a+x)/2*c, ly=H-4-(b+y)/2*c;
+    const dxs={A:-12,B:0,C:0,D:12,E:12,F:0,G:0,H:12,I:-6,J:-6}[k], dys={A:0,B:-9,C:-9,D:0,E:0,F:-9,G:-9,H:0,I:-16,J:14}[k];
+    s+=`<text class="lbl" x="${lx+dxs}" y="${ly+dys+4}" text-anchor="middle" style="font-weight:700;font-size:13px">${k}</text>`;
+  });
+  s+=`<text x="${16*c+34}" y="${H-4-3*c-26}" style="font-size:10px">30°</text><text x="${16*c+34}" y="${H-4-1*c+16}" style="font-size:10px">30°</text>`;
+  return s+'</svg><p class="figcap">One grid square = 1 m. A = 3 m · B = 2 m · C = 3 m · D = 4 m · E = 3 m · F = 2 m · G = 4 m · H = 3 m · I = 3 m · J = 2 m</p>';
+}
+function figIntro(){
+  const c=30,W=300,H=120;
+  let s=`<svg class="vt" style="max-width:340px" viewBox="0 0 ${W} ${H}" role="img" aria-label="Vector A 3 m up, B 2 m right, C 3 m right">`;
+  for(let i=0;i<=10;i++) s+=`<line class="grid" x1="${i*c}" y1="0" x2="${i*c}" y2="${H}"/>`;
+  for(let j=0;j<=4;j++) s+=`<line class="grid" x1="0" y1="${H-j*c}" x2="${W}" y2="${H-j*c}"/>`;
+  s+=arrow(1*c,H-0,1*c,H-3*c,{c:'var(--accent)',label:'A',loff:-12})+arrow(3*c,H-3*c,5*c,H-3*c,{c:'var(--warm)',label:'B',loff:-12})+arrow(3*c,H-1*c,6*c,H-1*c,{c:'var(--primary)',label:'C',loff:-12});
+  return s+'</svg>';
+}
+
+/* ---------- vector lab ---------- */
+(function(){
+  if(!$('#labFig')) return;
+  let first='ab';
+  const sy=n=>String(+n.toFixed(2)).replace('-','−');
+  function upd(){
+    const ma=+$('#la_m').value, aa=+$('#la_a').value, ka=+$('#la_k').value, mb=+$('#lb_m').value, ab=+$('#lb_a').value, kb=+$('#lb_k').value;
+    $('#la_mo').textContent=ma+' units'; $('#la_ao').textContent=aa+'°'; $('#lb_mo').textContent=mb+' units'; $('#lb_ao').textContent=ab+'°';
+    const A=vec(ma*ka,aa), Bv=vec(mb*kb,ab);
+    const kl=k=>k===1?'':(k===-1?'−':(k===0.5?'½':(k===-0.5?'−½':sy(k))));
+    const a={x:A.x,y:A.y,label:kl(ka)+'A',c:'var(--accent)'}, b={x:Bv.x,y:Bv.y,label:kl(kb)+'B',c:'var(--warm)'};
+    const path=first==='ab'?[a,b]:[b,a];
+    const ghost=$('#lo_ghost').checked?(first==='ab'?[b,a]:[a,b]):null;
+    $('#labFig').innerHTML=figTT(path,{ghost,aria:'Vector addition diagram',H:270,maxScale:36});
+    const R={x:A.x+Bv.x,y:A.y+Bv.y}, m=mag(R);
+    $('#labReads').innerHTML=`<div class="readout"><small>|R| magnitude</small><b>${m<1e-9?'0':r3(m)}</b></div><div class="readout"><small>direction θ</small><b>${m<1e-9?'—':r1(ang(R))+'°'}</b></div><div class="readout"><small>R<sub>x</sub></small><b>${sy(R.x)}</b></div><div class="readout"><small>R<sub>y</sub></small><b>${sy(R.y)}</b></div>`;
+    const st=$('#labStatus');
+    if(m<1e-9){ st.className='status warn'; st.textContent='The vectors cancel: the resultant is zero (a vector added to its negative gives zero).'; }
+    else { st.className='status'; st.textContent=`Order ${first==='ab'?'A then B':'B then A'}: resultant = ${r3(m)} units at ${r1(ang(R))}°. The other order gives exactly the same resultant (A + B = B + A).`; }
+  }
+  ['la_m','la_a','la_k','lb_m','lb_a','lb_k','lo_ghost'].forEach(id=>$('#'+id).addEventListener('input',upd));
+  $('#lo_ghost').addEventListener('change',upd);
+  [['lo_ab','ab'],['lo_ba','ba']].forEach(([id,v])=>$('#'+id).addEventListener('click',()=>{ first=v; $('#lo_ab').setAttribute('aria-pressed',String(v==='ab')); $('#lo_ba').setAttribute('aria-pressed',String(v==='ba')); upd(); }));
+  upd();
+})();
+
+/* static review figures */
+(function(){
+  const set=(id,h)=>{ const e=$('#'+id); if(e) e.innerHTML=h; };
+  set('figIntro',figIntro());
+  set('figWalk',figTT([{x:1600/50,y:0,label:'(a) 1600 m east',loff:14},{x:0,y:1600/50,label:'(b) 1600 m north',loff:16}],{rlabel:'(c) resultant',H:260,aria:'Student walks east then north; resultant is the diagonal',note:'scale: 50 m = 1 cm'}));
+  set('figCar',figTT([{x:0.8,y:0,label:'(b) 0.80 m/s across',loff:14},{x:0,y:1.5,label:'(a) 1.5 m/s along',loff:16}],{rlabel:'(c) v resultant',H:260,aria:'Toy car velocity on a moving walkway'}));
+})();
+
+/* ---------- tabs ---------- */
+function showTab(name){
+  $$('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));
+  $$('section.panel').forEach(p=>p.classList.toggle('active',p.id===name));
+  if(location.hash!=='#'+name) history.replaceState(null,'','#'+name);
+  window.scrollTo({top:0});
+}
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.addEventListener('click',e=>{ const g=e.target.closest('[data-goto]'); if(g) showTab(g.dataset.goto); });
+
+/* ---------- theme toggle ---------- */
+(function(){
+  const root=document.documentElement, mq=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+  const eff=()=>root.getAttribute('data-theme')||((mq&&mq.matches)?'dark':'light');
+  function sync(){ const t=eff(); $$('[data-theme-set]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeSet===t))); }
+  $$('[data-theme-set]').forEach(b=>b.addEventListener('click',()=>{
+    root.setAttribute('data-theme',b.dataset.themeSet);
+    try{ localStorage.setItem('lia-theme',b.dataset.themeSet); }catch(e){}
+    sync();
+  }));
+  if(mq&&mq.addEventListener) mq.addEventListener('change',sync);
+  sync();
+})();
+/* ---------- ask widgets (worked examples) ---------- */
+function mkMC(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  ask.opts.forEach((o,i)=>{
+    const b=document.createElement('button'); b.className='opt'; b.type='button'; b.innerHTML=o;
+    b.addEventListener('click',()=>{
+      if(i===ask.correct){ b.classList.add('right'); $$('.opt',host).forEach(x=>x.disabled=true); fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); onDone(); }
+      else { b.classList.add('wrong'); b.disabled=true; fb.className='fb no'; fb.innerHTML=(ask.wrong&&ask.wrong[i])||'Not quite — try another option.'; }
+    });
+    host.appendChild(b);
+  });
+  host.appendChild(fb);
+}
+function mkNum(host,ask,onDone){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const row=document.createElement('div'); row.className='row';
+  const inp=document.createElement('input'); inp.type='text'; inp.setAttribute('aria-label','Your answer'); inp.placeholder='your answer'; inp.autocomplete='off';
+  const u=document.createElement('span'); u.className='math'; u.innerHTML=ask.unit||'';
+  const btn=document.createElement('button'); btn.className='btn'; btn.type='button'; btn.textContent='Check';
+  row.append(inp,u,btn); host.appendChild(row);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite'); host.appendChild(fb);
+  const go=()=>{
+    const j=judge(parseNum(inp.value),{ans:ask.ans,tol:ask.tol||0.02,traps:ask.traps,abs:ask.abs});
+    if(j.state==='ok'){ fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); inp.disabled=true; btn.disabled=true; onDone(); }
+    else { fb.className='fb '+j.state; fb.textContent=j.msg; }
+  };
+  btn.addEventListener('click',go); inp.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+}
+/* ---------- worked examples ---------- */
+const G=(...items)=>`<div class="givenlist">${items.map(i=>`<span>${i}</span>`).join('')}</div>`;
+const U=(x)=>`<span class="unk">${x}</span>`;
+const WIND=vec(75,-45), WALK=[{x:85,y:0},vec(45,30)];
+const EX=[
+ { id:'E1', tag:'Objective 1', title:'Scalar or vector?',
+   problem:'An airplane takes off for a flight. Decide which of these quantities are <b>scalars</b> and which are <b>vectors</b>: (a) the acceleration of the plane as it takes off, (b) the number of passengers, (c) the duration of the flight, (d) the displacement of the flight, (e) the fuel required.',
+   steps:[
+    {name:'Analyze', html:`<p>A quantity is a <b>vector</b> only if it needs a <b>direction</b> to be described completely. Otherwise it is a <b>scalar</b> (magnitude only).</p>`,
+     ask:{type:'mc',q:'Does "the number of passengers" need a direction?',opts:['No — it is just a count (scalar)','Yes — passengers sit in a direction','Yes — passengers travel in a direction'],correct:0,why:'A count has magnitude only, so it is a scalar.'}},
+    {name:'Test each quantity', html:`<div class="tablewrap"><table><thead><tr><th>Quantity</th><th>Needs a direction?</th></tr></thead><tbody>
+      <tr><td>(a) acceleration while taking off</td><td>yes (forward and up)</td></tr><tr><td>(c) duration of the flight</td><td>no</td></tr><tr><td>(d) displacement of the flight</td><td>yes (how far <i>and</i> which way)</td></tr><tr><td>(e) fuel required</td><td>no</td></tr></tbody></table></div>`,
+     ask:{type:'mc',q:'Which of the five quantities is a <b>vector</b>?',opts:['The duration of the flight','The displacement of the flight','The fuel required'],correct:1,why:'Displacement states both the distance and the direction from start to finish.',wrong:{0:'Time has no direction.',2:'An amount of fuel (litres or kilograms) has no direction.'}}},
+    {name:'Check your work', html:`<p><b>Scalars:</b> (b) number of passengers, (c) duration, (e) fuel. <b>Vectors:</b> (a) acceleration, (d) displacement.</p>`,
+     ask:{type:'mc',q:'A speedometer reads 90 km/h. Is that a scalar or a vector?',opts:['A scalar: speed has no direction','A vector: it has units','A vector: cars move forward'],correct:0,why:'Speed is the magnitude of velocity. A velocity such as "90 km/h north" would be a vector.'}}
+   ]},
+ { id:'E2', tag:'Worksheet · Questions 1–3', title:'Reading vectors on a grid',
+   problem:'Look at the arrows below (1 square = 1 m). <b>A</b> is 3 m up, <b>C</b> is 3 m to the right, <b>H</b> is 3 m up, <b>G</b> is 4 m to the right, <b>D</b> is 4 m up. Which have the same magnitude? The same direction? Which represent the same vector?',
+   steps:[
+    {name:'Analyze', html:`<div class="fig">${figWorksheet()}</div><p>The <b>length</b> of an arrow shows the magnitude. The way it <b>points</b> shows the direction.</p>`,
+     ask:{type:'mc',q:'Do <b>A</b> (3 m up) and <b>C</b> (3 m right) have the same magnitude?',opts:['Yes — both are 3 m long','No — one points up and one points right','No — C is longer'],correct:0,why:'Magnitude only compares the size; direction does not matter.'}},
+    {name:'Compare directions', html:`<p>Same direction means the arrows point the same way, whatever their length. <b>A, D, H</b> all point up; <b>B, C, G</b> all point right; <b>I</b> and <b>J</b> both point 30° above the horizontal.</p>`,
+     ask:{type:'mc',q:'Do <b>A</b> (3 m up) and <b>D</b> (4 m up) have the same direction?',opts:['Yes — both point up','No — they have different lengths','No — they start in different places'],correct:0,why:'Direction is independent of length and of where the arrow is drawn.'}},
+    {name:'Same vector?', html:`<p>Same vector = same magnitude <b>and</b> same direction. <b>A</b> and <b>D</b> point the same way but have different lengths; <b>A</b> and <b>C</b> have the same length but point different ways.</p>`,
+     ask:{type:'mc',q:'Which pair of arrows represents the <b>same vector</b>?',opts:['A and D','A and H','A and C','A and E'],correct:1,why:'A and H are both 3 m up. (A and E have the same magnitude but opposite directions.)',wrong:{0:'Same direction but different magnitudes.',2:'Same magnitude but different directions.',3:'Same magnitude but opposite directions: E is the <i>negative</i> of A.'}}},
+    {name:'Check your work', html:`<p>Same magnitude (3 m): <b>A, C, E, H, I</b>. Same magnitude (2 m): <b>B, F, J</b>. Same magnitude (4 m): <b>D, G</b>. The only identical pair of vectors is <b>A = H</b>.</p>`}
+   ]},
+ { id:'E3', tag:'Figure 1.2 · Resultant', title:'A student walks to school',
+   problem:'A student walks <b>1600 m east</b> to a friend\'s house and then <b>1600 m north</b> to school. Use a scale drawing (50 m = 1 cm) to find his total displacement.',
+   steps:[
+    {name:'Analyze', html:G('<b>a</b> = 1600 m east','<b>b</b> = 1600 m north','scale: 50 m = 1 cm')+G(U('<b>R</b> = ?')),
+     ask:{type:'num',q:'How long do you draw each arrow? Calculate 1600 ÷ 50.',ans:32,tol:0.01,unit:'cm',why:'Each leg is drawn 32 cm long.'}},
+    {name:'Plan', html:`<p>Draw <b>a</b> first. Then draw <b>b</b> with its <b>tail at the head of a</b>. The resultant goes from the tail of <b>a</b> to the head of <b>b</b>.</p>`,
+     ask:{type:'mc',q:'Where does the resultant arrow start and end?',opts:['From the tail of the first vector to the head of the last','From the head of the first vector to the tail of the last','From the head of the first vector to the head of the last'],correct:0,why:'The resultant connects the very beginning of the path to the very end.'}},
+    {name:'Solve', html:`<div class="fig">${figTT([{x:32,y:0,label:'a = 32 cm',loff:14},{x:0,y:32,label:'b = 32 cm',loff:16}],{rlabel:'R',aria:'Scale drawing of the walk',note:'scale: 50 m = 1 cm'})}</div><p>Measure the resultant with a ruler: about <b>45.3 cm</b>. Measure the angle with a protractor: <b>45°</b> north of east.</p>`,
+     ask:{type:'num',q:'Convert the measured length to meters: 45.3 cm × 50 m/cm.',ans:45.3*50,tol:0.02,unit:'m',why:'R ≈ 2.3 × 10³ m (about 2265 m), 45° north of east.'}},
+    {name:'Check your work', html:`<p>The walk is 3200 m long, but the displacement is only about 2260 m: the straight line is shorter than the path (the triangle inequality). It must also be longer than either leg (1600 m) ✔.</p>`,
+     ask:{type:'mc',q:'Which statement about the magnitude of the resultant is always true?',opts:['It is less than or equal to the sum of the magnitudes of the vectors added','It is the sum of the magnitudes','It is the difference of the magnitudes'],correct:0,why:'Equal only when both vectors point in the same direction.'}}
+   ]},
+ { id:'E4', tag:'Section 1 Assessment · Q2', title:'The roller coaster',
+   problem:'A roller coaster moves <b>85 m horizontally</b> and then travels <b>45 m at an angle of 30.0° above the horizontal</b>. Use graphical techniques to predict its displacement from its starting point.',
+   steps:[
+    {name:'Analyze', html:G('<b>a</b> = 85 m, horizontal','<b>b</b> = 45 m, 30.0° above horizontal','scale: 10 m = 1 cm')+G(U('<b>R</b> = ?')),
+     ask:{type:'mc',q:'With the scale 10 m = 1 cm, how long do you draw vector <b>b</b>?',opts:['4.5 cm','8.5 cm','45 cm'],correct:0,why:'45 m ÷ 10 m/cm = 4.5 cm (and a = 8.5 cm).'}},
+    {name:'Draw', html:`<div class="fig">${figTT([{x:85,y:0,label:'a = 85 m',loff:14},{x:WALK[1].x,y:WALK[1].y,label:'b = 45 m',loff:-14}],{rlabel:'R',aria:'Roller coaster displacement diagram'})}</div><p>Draw <b>a</b> horizontally, then at its head use the protractor to draw <b>b</b> at 30° above the horizontal. Close the triangle from the start to the final head.</p>`,
+     ask:{type:'mc',q:'Between which two points do you measure the resultant?',opts:['The tail of a and the head of b','The head of a and the head of b','The tail of a and the head of a'],correct:0,why:'Start of the whole path to end of the whole path.'}},
+    {name:'Measure', html:`<p>Measured: <b>R ≈ 12.6 cm</b>, angle ≈ <b>10°</b> above the horizontal.</p>`,
+     ask:{type:'num',q:'Convert 12.6 cm to meters using the scale 10 m = 1 cm.',ans:126,tol:0.02,unit:'m',why:'R ≈ 1.26 × 10² m, about 10° above the horizontal.'}},
+    {name:'Check your work', html:`<p>The result must be between 85 m (the longest side) and 130 m (85 + 45). 126 m ✔. It points only slightly above the horizontal because the 45 m leg is short and tilted just 30° ✔.</p>`,
+     ask:{type:'mc',q:'If the coaster went up the 45 m section first and then moved 85 m horizontally, the displacement would be…',opts:['The same — vectors can be added in any order','Different — the order matters','Zero'],correct:0,why:'A + B = B + A. The path is different (the other triangle) but the resultant is identical.'}}
+   ]},
+ { id:'E5', tag:'Worksheet · Questions 4–5', title:'Subtracting and scaling vectors',
+   problem:'Using the worksheet vectors, <b>A</b> = 3 m up and <b>B</b> = 2 m to the right: (a) build <b>A − B/2</b> and (b) build <b>B/2 − A</b>. How do the two results compare?',
+   steps:[
+    {name:'Analyze', html:G('<b>A</b> = 3 m, up','<b>B</b> = 2 m, right')+G(U('A − B/2 = ?'),U('B/2 − A = ?')),
+     ask:{type:'mc',q:'What is <b>B</b>/2?',opts:['1 m to the right (half as long, same direction)','1 m to the left','2 m up'],correct:0,why:'Dividing by the scalar 2 halves the length and keeps the direction.'}},
+    {name:'Plan', html:`<p>Subtracting means adding the negative: <b>A − B/2 = A + (−B/2)</b>. First draw A, then at its head draw −B/2 (1 m to the <b>left</b>).</p>`,
+     ask:{type:'mc',q:'Which way does −<b>B</b>/2 point?',opts:['To the left','To the right','Down'],correct:0,why:'The negative of a vector points the opposite way: B points right, so −B/2 points left.'}},
+    {name:'Draw', html:`<div class="grid2"><div>${figTT([{x:0,y:3,label:'A',loff:12},{x:-1,y:0,label:'−B/2',loff:14}],{rlabel:'A − B/2',rloff:-16,grid:1,aria:'A minus B over two',H:240})}</div><div>${figTT([{x:1,y:0,label:'B/2',loff:-10},{x:0,y:-3,label:'−A',loff:-12}],{rlabel:'B/2 − A',rloff:16,grid:1,aria:'B over two minus A',H:240})}</div></div><p>Resultants: <b>A − B/2</b> = 3.2 m at 72° above the west direction; <b>B/2 − A</b> = 3.2 m at 72° below the east direction.</p>`,
+     ask:{type:'num',q:'The resultant is the hypotenuse of a 1 m by 3 m right triangle. Calculate √(1² + 3²).',ans:Math.sqrt(10),tol:0.01,unit:'m',why:'3.16 m ≈ 3.2 m (a ruler gives about 3.2 cm on a 1 cm = 1 m drawing).'}},
+    {name:'Check your work', html:`<p>The two results have the <b>same magnitude</b> but point in <b>opposite directions</b>: <b>B/2 − A = −(A − B/2)</b>. So the order matters for <i>subtraction</i> (unlike addition).</p>`,
+     ask:{type:'mc',q:'Is A − B/2 the same vector as B/2 − A?',opts:['No — same size but opposite directions','Yes — same size and direction','No — different sizes'],correct:0,why:'Subtraction is not commutative: reversing it reverses the vector.'}}
+   ]},
+ { id:'E6', tag:'Section 1 Assessment · Q3–Q4', title:'The plane and the wind',
+   problem:'A pilot sets the plane to fly at <b>2.50 × 10² km/h to the north</b>. A wind blows at <b>75 km/h toward the southeast</b>. (a) What is the plane\'s resultant velocity (graphical technique)? (b) If the pilot slows to <b>half</b> the speed and the wind is unchanged, what is the new resultant velocity?',
+   steps:[
+    {name:'Analyze', html:G('<b>v</b><sub>plane</sub> = 250 km/h north','<b>v</b><sub>wind</sub> = 75 km/h toward the SE','scale: 25 km/h = 1 cm')+G(U('<b>v</b><sub>resultant</sub> = ?')),
+     ask:{type:'mc',q:'How long is the plane\'s arrow with the scale 25 km/h = 1 cm?',opts:['10 cm','25 cm','3 cm'],correct:0,why:'250 ÷ 25 = 10 cm (and the wind is 75 ÷ 25 = 3 cm).'}},
+    {name:'Draw (a)', html:`<div class="fig">${figTT([{x:0,y:250,label:'plane',loff:-12},{x:WIND.x,y:WIND.y,label:'wind',loff:-12}],{rlabel:'resultant',rloff:14,aria:'Plane plus wind',H:270})}</div><p>Draw the plane's arrow north, then the 3 cm wind arrow from its head toward the southeast (45° below the east line). The resultant measures about 8.2 cm → <b>≈ 204 km/h</b>, about <b>15° east of north</b>.</p>`,
+     ask:{type:'num',q:'Convert the measured 8.16 cm to km/h (× 25 km/h per cm).',ans:8.16*25,tol:0.03,unit:'km/h',why:'v ≈ 2.04 × 10² km/h, 15° east of north.'}},
+    {name:'Slow down (b)', html:`<p>Slowing to <b>half</b> the speed multiplies the plane's vector by the scalar ½, giving 125 km/h north. The wind vector does <b>not</b> change.</p><div class="fig">${figTT([{x:0,y:125,label:'plane',loff:-12},{x:WIND.x,y:WIND.y,label:'wind',loff:-12}],{rlabel:'resultant',rloff:14,aria:'Slower plane plus wind',H:230})}</div>`,
+     ask:{type:'mc',q:'What happens to the direction of the resultant when the plane flies slower?',opts:['It turns farther toward the east (the wind has a larger effect)','It turns toward the west','It does not change'],correct:0,why:'The wind is the same, but the plane\'s northward part is smaller, so the resultant leans more to the east: about 36° east of north, 89 km/h.'}},
+    {name:'Check your work', html:`<p>(a) 204 km/h at 15° E of N; (b) 89 km/h at 36° E of N. In both cases the speed is less than 250 + 75 = 325 km/h and the heading is east of north because the wind pushes eastward ✔.</p>`}
+   ]},
+ { id:'E7', tag:'Objective 3', title:'The cab driver: multiplying by a scalar',
+   problem:'A cab\'s velocity is <b>v</b><sub>cab</sub> = <b>12 m/s east</b>. Find (a) 2<b>v</b><sub>cab</sub>, (b) −2<b>v</b><sub>cab</sub> and (c) <b>v</b><sub>cab</sub>/3.',
+   steps:[
+    {name:'Analyze', html:G('<b>v</b><sub>cab</sub> = 12 m/s east')+G(U('2v = ?'),U('−2v = ?'),U('v/3 = ?')),
+     ask:{type:'mc',q:'Multiplying a vector by a <b>positive</b> scalar changes its…',opts:['magnitude only (direction stays the same)','direction only','both magnitude and direction'],correct:0,why:'A positive scalar stretches or shrinks the vector but never turns it around.'}},
+    {name:'Solve (a) and (b)', html:`<p>2<b>v</b> = 2(12) = <b>24 m/s east</b>. −2<b>v</b> has the same magnitude, 24 m/s, but points the opposite way: <b>24 m/s west</b>.</p>`,
+     ask:{type:'mc',q:'What does the negative sign in −2<b>v</b> do?',opts:['It reverses the direction (west instead of east)','It makes the magnitude negative','It makes the cab stop'],correct:0,why:'Magnitudes are never negative; the minus sign flips the direction.'}},
+    {name:'Solve (c)', html:`<p>Dividing by 3 shrinks the magnitude: 12 ÷ 3 = 4 m/s, direction unchanged.</p>`,
+     ask:{type:'num',q:'Calculate 12 ÷ 3.',ans:4,tol:0.01,unit:'m/s',why:'<b>v</b>/3 = 4 m/s east.'}},
+    {name:'Check your work', html:`<p>(a) 24 m/s east, (b) 24 m/s west, (c) 4 m/s east. Check: <b>v</b> + (−<b>v</b>) = 0, so −2<b>v</b> + 2<b>v</b> must also be zero ✔.</p>`}
+   ]}
+];
+
+(function buildExamples(){
+  const host=$('#exampleList');
+  EX.forEach((ex,idx)=>{
+    const card=document.createElement('div'); card.className='card example'; card.id=ex.id;
+    card.innerHTML=`<header><h3 style="margin:0">Example ${idx+1} · ${ex.title}</h3><span class="pill">${ex.tag}</span></header>
+      <div class="problem-box">${ex.problem}</div>
+      <div class="dots"></div><ol class="steps"></ol><div class="row ctrl"></div>`;
+    const dots=$('.dots',card), list=$('.steps',card), ctrl=$('.ctrl',card);
+    const next=document.createElement('button'); next.className='btn'; next.type='button'; next.textContent='Start: reveal step 1';
+    const restart=document.createElement('button'); restart.className='btn ghost'; restart.type='button'; restart.textContent='Restart example'; restart.hidden=true;
+    ctrl.append(next,restart);
+    ex.steps.forEach((s,i)=>{
+      const d=document.createElement('i'); dots.appendChild(d);
+      const li=document.createElement('li'); li.className='step';
+      li.innerHTML=`<h4><span class="n">${i+1}</span>${s.name}</h4><div class="body">${s.html}</div>`;
+      if(s.ask){ const a=document.createElement('div'); a.className='ask'; li.appendChild(a); }
+      list.appendChild(li);
+    });
+    let cur=-1, needAsk=false;
+    function reveal(){
+      cur++; const li=list.children[cur], s=ex.steps[cur];
+      li.classList.add('show'); dots.children[cur].classList.add('on');
+      if(s.ask){
+        needAsk=true; next.disabled=true;
+        (s.ask.type==='num'?mkNum:mkMC)($('.ask',li),s.ask,()=>{ needAsk=false; next.disabled=false; refresh(); });
+      }
+      refresh(); li.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    function refresh(){
+      if(cur>=ex.steps.length-1 && !needAsk){ next.hidden=true; restart.hidden=false; if(!state['ex_'+ex.id]){ state['ex_'+ex.id]=1; save(); } }
+      else { next.textContent=needAsk?'Answer the question above to continue':(cur<0?'Start: reveal step 1':`Next step: ${ex.steps[cur+1]?.name||''}`); }
+    }
+    next.addEventListener('click',reveal);
+    restart.addEventListener('click',()=>{
+      cur=-1; needAsk=false; next.hidden=false; next.disabled=false; restart.hidden=true;
+      [...list.children].forEach((li,i)=>{ li.classList.remove('show'); const a=$('.ask',li); if(a) a.innerHTML=''; dots.children[i].classList.remove('on'); });
+      refresh(); card.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    host.appendChild(card);
+  });
+})();
+/* ---------- practice problems ---------- */
+const T=(label,unit,ans,extra={})=>Object.assign({label,unit,ans},extra);
+const P=[]; const add=(set,sub,text,parts,h,sol,extra={})=>P.push(Object.assign({set,sub,text,parts,h,sol},extra));
+const MC=(set,text,opts,correct,why,hint,extra={})=>P.push(Object.assign({set,type:Array.isArray(correct)&&correct.length>1?'multi':'mc',text,opts,correct:[].concat(correct),why,h:[hint]},extra));
+const N=n=>n.toFixed(1);
+
+/* ===== Set 1: the worksheet ===== */
+const w1='Worksheet · Introduction to Vectors';
+MC('ws','<b>Worksheet 1.</b> Use the vectors above (1 square = 1 m). Which vectors have the <b>same magnitude</b>? Select all true statements.',
+ ['A, C, E, H and I all have magnitude 3 m','B, F and J all have magnitude 2 m','D and G both have magnitude 4 m','A and B have the same magnitude','C and G have the same magnitude'],[0,1,2],
+ 'Magnitude is the length of the arrow, in the units given: A, C, E, H, I = 3 m; B, F, J = 2 m; D, G = 4 m.','Read the magnitudes under the diagram; direction does not matter.',{sub:w1,figure:figWorksheet});
+MC('ws','<b>Worksheet 2.</b> Which vectors have the <b>same direction</b>? Select all true statements.',
+ ['A, D and H point the same way (up)','B, C and G point the same way (right)','I and J point the same way (30° above the horizontal)','A and E point the same way','C and F point the same way'],[0,1,2],
+ 'Same direction = same way, whatever the length. E points down (opposite to A) and F points left (opposite to C).','Compare the arrowheads only.',{sub:w1,figure:figWorksheet});
+MC('ws','<b>Worksheet 3.</b> Which arrows, if any, represent the <b>same vector</b>?',
+ ['A and H','B and C','C and G','A and D','I and J','B and F'],[0],
+ 'Same vector = same magnitude AND same direction. A and H are both 3 m up. B/C and C/G share a direction but not a magnitude; B/F have the same magnitude but opposite directions.','Both conditions must hold.',{sub:w1,figure:figWorksheet});
+add('ws',w1,'<b>Worksheet 4.</b> Take <b>A</b> = 3 m up and <b>B</b> = 2 m to the right. Construct the vector sum <b>2A + B</b>. What is the <b>magnitude</b> of 2<b>A</b> + <b>B</b>, and what <b>angle</b> does it make <b>above the direction of B</b> (to the right)? (Hint: 2A = 6 m up.)',
+ [T('Magnitude of 2A + B','m',Math.sqrt(40),{tol:0.03}),T('Angle above the direction of B','°',Math.atan2(6,2)/deg,{tol:0.04,ang:true})],
+ ['2A is 6 m up. Draw 2A, then B (2 m right) from its head. The resultant is the hypotenuse of a 2 m by 6 m right triangle.','Magnitude = √(2² + 6²); angle: tan θ = 6/2.'],
+ ['2A = 6 m up; B = 2 m right.','R = √(2² + 6²) = √40 = 6.3 m.','tan θ = 6 m ÷ 2 m = 3 → θ = tan⁻¹(3) = 71.6° above the direction of B.']);
+MC('ws','<b>Worksheet 4 (continued).</b> You now draw <b>B + 2A</b> (B first, then 2A from its head). Compared with 2A + B, the resultant is…',
+ ['The same vector (same magnitude and direction)','The same magnitude but opposite direction','A different magnitude, same direction','A different vector in both'],[0],
+ 'Vectors can be added in any order: A + B = B + A. The two diagrams are different triangles, but the resultant is identical.','Does order matter when adding vectors?',{sub:w1});
+add('ws',w1,'<b>Worksheet 5.</b> Construct <b>A − (B/2)</b> with A = 3 m up and B = 2 m to the right. Hint: B/2 = 1 m right, so −B/2 = 1 m left. Find the magnitude of the result and its angle <b>above the west direction</b> (to the left).',
+ [T('Magnitude of A − B/2','m',Math.sqrt(10),{tol:0.03}),T('Angle above the west direction','°',Math.atan2(3,1)/deg,{tol:0.04,ang:true})],
+ ['A − B/2 = A + (−B/2): draw A (3 m up), then 1 m to the left.','The resultant is the hypotenuse of a 1 m by 3 m right triangle.'],
+ ['−B/2 = 1 m to the left.','R = √(1² + 3²) = √10 = 3.2 m.','tan θ = 3/1 → θ = 71.6° above the west direction (pointing up and to the left).']);
+add('ws',w1,'<b>Worksheet 5 (second diagram).</b> Now construct <b>(B/2) − A</b>. Find its magnitude and its angle <b>below the east direction</b> (to the right).',
+ [T('Magnitude of B/2 − A','m',Math.sqrt(10),{tol:0.03}),T('Angle below the east direction','°',Math.atan2(3,1)/deg,{tol:0.04,ang:true})],
+ ['B/2 − A = B/2 + (−A): draw 1 m right, then 3 m down.','It is the negative of the previous result.'],
+ ['B/2 = 1 m right; −A = 3 m down.','R = √(1² + 3²) = 3.2 m.','tan θ = 3/1 → θ = 71.6° below the east direction.','Compare with Worksheet 5: same magnitude, opposite direction: B/2 − A = −(A − B/2).']);
+MC('ws','<b>Worksheet 5 (conclusion).</b> How is (B/2) − A related to A − (B/2)?',
+ ['Same magnitude, opposite direction','Same magnitude, same direction','Different magnitude, same direction','They are perpendicular'],[0],
+ 'Reversing a subtraction gives the negative of the result.','Compare your two diagrams.',{sub:w1});
+add('ws',w1,'<b>Worksheet extension.</b> Use the same grid, taking right = +x and up = +y. (a) The <b>x-component</b> (right is +) of C − G (3 m right minus 4 m right). (b) The <b>y-component</b> (up is +) of D + E (4 m up plus 3 m down).',
+ [T('C − G (right is +)','m',-1,{tol:0.02}),T('D + E (up is +)','m',1,{tol:0.02})],
+ ['C − G = 3 − 4 along the same line.','D is +4 and E is −3.'],
+ ['C − G = (+3) − (+4) = −1 m: 1 m to the <b>left</b>.','D + E = (+4) + (−3) = +1 m: 1 m <b>up</b>.']);
+
+/* ===== Set 2: textbook formative assessment ===== */
+const t1='Section 1 Formative Assessment';
+MC('tb','<b>1.</b> Which of the following quantities are <b>scalars</b>? Select all. (a) the acceleration of a plane as it takes off, (b) the number of passengers on the plane, (c) the duration of the flight, (d) the displacement of the flight, (e) the amount of fuel required for the flight.',
+ ['(a) the acceleration of the plane','(b) the number of passengers','(c) the duration of the flight','(d) the displacement of the flight','(e) the amount of fuel required'],[1,2,4],
+ 'Scalars have magnitude only: (b), (c), (e). (a) acceleration and (d) displacement are vectors.','Which quantities need a direction?',{sub:t1});
+MC('tb','<b>1 (continued).</b> Which of these are <b>vectors</b>? Select all.',
+ ['(a) the acceleration of the plane','(b) the number of passengers','(c) the duration of the flight','(d) the displacement of the flight','(e) the amount of fuel required'],[0,3],
+ 'Acceleration and displacement need a direction, so they are vectors.','The complement of the previous question.',{sub:t1});
+add('tb',t1,'<b>2.</b> A roller coaster moves <b>85 m horizontally</b> and then travels <b>45 m at an angle of 30.0° above the horizontal</b>. Use graphical techniques (scale 10 m = 1 cm) to predict its displacement from its starting point. (A scale drawing is accurate to about ±5 %.)',
+ [T('Magnitude of the displacement','m',mag({x:85+45*Math.cos(30*deg),y:45*Math.sin(30*deg)}),{tol:0.05}),T('Angle above the horizontal','°',ang({x:85+45*Math.cos(30*deg),y:45*Math.sin(30*deg)}),{tol:0.1,ang:true})],
+ ['Draw 8.5 cm horizontally, then 4.5 cm at 30° above the horizontal from its head.','Measure the length of the closing side and multiply by 10 m/cm; measure the angle with the protractor.'],
+ ['Scale: 10 m = 1 cm → legs of 8.5 cm and 4.5 cm.','Measured: R ≈ 12.6 cm → 126 m; angle ≈ 10°.','(Check: x = 85 + 45 cos 30° = 124 m, y = 45 sin 30° = 22.5 m → R = 126 m, θ = 10.3°.)']);
+add('tb',t1,'<b>3.</b> A novice pilot sets the plane\'s controls, thinking it will fly at <b>2.50 × 10² km/h to the north</b>. The wind blows at <b>75 km/h toward the southeast</b>. What is the plane\'s resultant velocity? Use graphical techniques (scale 25 km/h = 1 cm).',
+ [T('Resultant speed','km/h',mag({x:WIND.x,y:250+WIND.y}),{tol:0.05}),T('Direction: angle east of north','°',rad2(Math.atan2(WIND.x,250+WIND.y)),{tol:0.12,ang:true})],
+ ['Draw 10 cm north, then 3 cm toward the southeast from its head (45° below the east line).','Measure the resultant: length × 25 km/h; angle from north with the protractor.'],
+ ['Plane: 10 cm north. Wind: 3 cm at 45° south of east.','Measured R ≈ 8.2 cm → 204 km/h.','Angle ≈ 15° east of north.','(Check: R<sub>x</sub> = 75 cos 45° = 53 km/h, R<sub>y</sub> = 250 − 53 = 197 km/h → 204 km/h, 15.1°.)']);
+add('tb',t1,'<b>4.</b> While flying over the Grand Canyon, the pilot slows the plane to <b>one-half</b> the velocity in problem 3. If the wind is still 75 km/h toward the southeast, predict the plane\'s new resultant velocity (scale 25 km/h = 1 cm).',
+ [T('Resultant speed','km/h',mag({x:WIND.x,y:125+WIND.y}),{tol:0.05}),T('Direction: angle east of north','°',rad2(Math.atan2(WIND.x,125+WIND.y)),{tol:0.1,ang:true})],
+ ['Half of 250 km/h north is 125 km/h north: 5 cm.','Draw 5 cm north, then the same 3 cm wind arrow.'],
+ ['The plane\'s vector is multiplied by ½: 125 km/h north (5 cm).','The wind is unchanged (3 cm, 45° south of east).','Measured R ≈ 3.6 cm → 89 km/h, about 36° east of north.','(Check: R<sub>x</sub> = 53, R<sub>y</sub> = 125 − 53 = 72 → R = 89.4 km/h, θ = 36.4°.)']);
+MC('tb','<b>5.</b> A single water particle in a sprinkler system travels <b>85 m</b> and then returns to the same point. What is its displacement during one cycle?',
+ ['0 m','85 m','170 m','It cannot be determined'],[0],
+ 'Displacement depends only on the start and end points. They are the same point, so the displacement is zero (the distance traveled is 170 m).','Compare the start and end positions.',{sub:t1});
+
+/* ===== Set 3: scalars, vectors and notation ===== */
+const n1='Scalars, vectors and notation';
+MC('sv','Which of the following is a <b>vector</b> quantity?',['Speed','Displacement','Time','Volume'],[1],'Displacement has magnitude and direction. The others are scalars.','Which quantity needs a direction?',{sub:n1});
+MC('sv','Select all the <b>scalar</b> quantities.',['The number of pages in this book','A speed of 3.5 m/s','A velocity of 3.5 m/s northeast','A volume of 2 liters','An acceleration of 9.81 m/s² downward'],[0,1,3],
+ 'Scalars: page count, speed, volume. Velocity and acceleration with a direction are vectors.','Direction stated = vector.',{sub:n1});
+MC('sv','In this course a vector is written with <b>boldface</b>. What is the difference between <i>v</i> = 3.5 m/s and <b>v</b> = 3.5 m/s to the northeast?',
+ ['<i>v</i> is a speed (scalar); <b>v</b> is a velocity (vector)','<i>v</i> is a velocity; <b>v</b> is a speed','There is no difference','<b>v</b> is always larger than <i>v</i>'],[0],
+ 'Italic = scalar (magnitude only). Bold (or an arrow written above the symbol) = vector (magnitude and direction).','Which one gives a direction?',{sub:n1});
+MC('sv','The <b>length</b> of a vector arrow in a diagram represents…',['Its magnitude (to scale)','Its direction','Its units','The time it acts'],[0],
+ 'Longer arrow = larger magnitude, using the chosen scale. The arrowhead shows direction.','What does a ruler measure on the arrow?',{sub:n1});
+MC('sv','Why is it meaningless to add a <b>velocity</b> vector to a <b>displacement</b> vector?',
+ ['They describe different physical quantities (different units)','Vectors can never be added','Velocity is a scalar','Displacement has no direction'],[0],
+ 'Only vectors of the same kind and in the same units can be added: you cannot add m/s to m, or meters to feet.','Think about the units.',{sub:n1});
+MC('sv','What does a <b>resultant</b> represent?',['The sum of two or more vectors','The difference between two scalars','The longest vector in the diagram','The angle between vectors'],[0],
+ 'The resultant is the single vector that has the same effect as the vectors added.','Look at the definition.',{sub:n1});
+MC('sv','Two vectors have magnitudes 3 m and 4 m. Which value is <b>impossible</b> for the magnitude of their resultant?',['1 m','5 m','7 m','8 m'],[3],
+ 'The resultant ranges from |4 − 3| = 1 m (opposite directions) to 3 + 4 = 7 m (same direction). 8 m is impossible.','Try the extreme cases: same direction and opposite direction.',{sub:n1});
+
+/* ===== Set 4: adding and subtracting ===== */
+const a1='Adding and subtracting vectors';
+add('as',a1,'A gecko runs up a tree from the 20 cm mark to the 80 cm mark, then reverses and runs down to the 50 cm mark. Take up as positive. (a) What is the gecko\'s total <b>displacement</b>? (b) What <b>distance</b> did it run?',
+ [T('Displacement (up is +)','cm',30,{tol:0.02}),T('Distance traveled','cm',90,{tol:0.02})],
+ ['Add the two displacements: +60 cm and −30 cm.','Distance = sum of the lengths of the parts.'],
+ ['First leg: 80 − 20 = +60 cm. Second leg: 50 − 80 = −30 cm.','Displacement = +60 + (−30) = +30 cm (30 cm up).','Distance = 60 + 30 = 90 cm.']);
+add('as',a1,'A student walks <b>1600 m east</b> and then <b>1600 m north</b> (Figure 1.2). What is the magnitude of the total displacement, and in what direction (angle north of east)?',
+ [T('Magnitude','m',Math.hypot(1600,1600),{tol:0.04}),T('Angle north of east','°',45,{tol:0.06,ang:true})],
+ ['The two legs are perpendicular and equal, so the resultant is the diagonal of a square.','Scale drawing: 32 cm legs (50 m = 1 cm).'],
+ ['Draw 32 cm east, then 32 cm north.','Measured R ≈ 45.3 cm → 2.26 × 10³ m, at 45° north of east.','(Check: 1600√2 = 2263 m.)']);
+add('as',a1,'A toy car crosses a moving walkway (Figure 1.3). The car moves <b>0.80 m/s</b> across the walkway and the walkway moves <b>1.5 m/s</b> along its length, perpendicular to the car. Find the resultant velocity as seen from above: its magnitude and the angle from the walkway\'s direction.',
+ [T('Resultant speed','m/s',Math.hypot(0.8,1.5),{tol:0.04}),T('Angle from the walkway direction','°',Math.atan2(0.8,1.5)/deg,{tol:0.08,ang:true})],
+ ['Draw 1.5 cm for the walkway and 0.80 cm for the car (scale: 1 cm = 1 m/s), tail to head.','Measure the closing side and the angle with the walkway arrow.'],
+ ['Scale 1 cm = 1 m/s: walkway 1.5 cm, car 0.80 cm.','Measured R ≈ 1.7 cm → 1.7 m/s.','Angle from the walkway direction ≈ 28°.','(Check: √(1.5² + 0.8²) = 1.70 m/s; tan⁻¹(0.8/1.5) = 28.1°.)']);
+add('as',a1,'A truck driver travels <b>6 km east</b>, then <b>2 km west</b>, then <b>9 km east</b>. East is positive. (a) What distance did the driver travel? (b) What is the driver\'s total displacement?',
+ [T('Distance','km',17,{tol:0.02}),T('Displacement (east is +)','km',13,{tol:0.02})],
+ ['Distance adds all the lengths. Displacement adds signed values: +6, −2, +9.'],
+ ['Distance = 6 + 2 + 9 = 17 km.','Displacement = +6 + (−2) + (+9) = +13 km (13 km east).']);
+add('as',a1,'On a city grid a marathon runner makes the displacements <b>3 blocks east</b> and <b>4 blocks north</b>, in either order (Figure 1.4). What is the magnitude of the total displacement (in blocks) and its angle north of east?',
+ [T('Magnitude','blocks',5,{tol:0.04}),T('Angle north of east','°',Math.atan2(4,3)/deg,{tol:0.06,ang:true})],
+ ['The order does not matter for the sum: draw 3 east, then 4 north.','The resultant is the hypotenuse of a 3–4–5 triangle.'],
+ ['R = √(3² + 4²) = 5 blocks.','tan θ = 4/3 → θ = 53.1° north of east.','Going north first then east gives the same resultant: A + B = B + A.']);
+add('as',a1,'<b>A</b> = 4 m east and <b>B</b> = 3 m north. Find the magnitude of <b>A − B</b>, and the angle of the result <b>below the east direction</b>.',
+ [T('Magnitude of A − B','m',5,{tol:0.04}),T('Angle below east','°',Math.atan2(3,4)/deg,{tol:0.06,ang:true})],
+ ['A − B = A + (−B). −B is 3 m south.','Draw 4 m east, then 3 m south.'],
+ ['−B = 3 m south.','R = √(4² + 3²) = 5 m.','tan θ = 3/4 → θ = 36.9° below east (toward the southeast).']);
+add('as',a1,'A car\'s velocity changes from <b>30 m/s east</b> to <b>20 m/s west</b>. Using <b>Δv = v<sub>final</sub> − v<sub>initial</sub></b> with east as positive, find Δv.',
+ [T('Δv (east is +)','m/s',-50,{tol:0.02})],
+ ['Write the final velocity as −20 m/s and the initial velocity as +30 m/s.','Subtract by adding the opposite.'],
+ ['v<sub>f</sub> = −20 m/s, v<sub>i</sub> = +30 m/s.','Δv = v<sub>f</sub> + (−v<sub>i</sub>) = −20 + (−30) = −50 m/s: 50 m/s toward the west.']);
+MC('as','The negative of the velocity of a car traveling <b>30 m/s west</b> is…',['30 m/s east','30 m/s west','−30 m/s east','0'],[0],
+ 'The negative has the same magnitude and the opposite direction: 30 m/s east (= +30 m/s if east is positive).','Same size, opposite way.',{sub:a1});
+MC('as','Which procedure subtracts <b>B</b> from <b>A</b> in two dimensions?',
+ ['Draw −B (same length, opposite direction) and add it to A tip-to-tail','Subtract the lengths of the arrows','Draw B and A both from the same head','Add B to A and reverse the result\'s length'],[0],
+ 'A − B = A + (−B): draw the negative of B, then add with the triangle method.','Subtracting = adding the opposite.',{sub:a1});
+MC('as','A vector is added to its own negative. The resultant is…',['Zero','Twice the vector','The vector itself','Perpendicular to the vector'],[0],'A + (−A) = 0.','Think of 30 m/s east plus 30 m/s west.',{sub:a1});
+
+/* ===== Set 5: multiplying and dividing by scalars ===== */
+const m1='Multiplying and dividing by scalars';
+add('mu',m1,'A cab\'s velocity is <b>v</b><sub>cab</sub> = 12 m/s east. Taking east as positive, find (a) 2<b>v</b><sub>cab</sub> and (b) −2<b>v</b><sub>cab</sub>.',
+ [T('2v (east is +)','m/s',24,{tol:0.02}),T('−2v (east is +)','m/s',-24,{tol:0.02})],
+ ['Multiply the magnitude by 2; a negative scalar also reverses the direction.'],
+ ['2v = 2(12) = +24 m/s: 24 m/s east.','−2v = −2(12) = −24 m/s: 24 m/s west (twice the speed, opposite direction).']);
+add('mu',m1,'A boat moves with velocity <b>v</b> = 8.0 m/s north. What is (a) <b>v</b>/2 and (b) −<b>v</b>/4? Give the signed values with north as positive.',
+ [T('v/2 (north is +)','m/s',4,{tol:0.02}),T('−v/4 (north is +)','m/s',-2,{tol:0.02})],
+ ['Dividing by a scalar divides the magnitude only.'],
+ ['v/2 = 4.0 m/s north.','−v/4 = −2.0 m/s: 2.0 m/s south.']);
+MC('mu','Multiplying a vector by the scalar <b>2</b> gives a vector that is…',['Twice as long and pointing in the same direction','Twice as long and pointing the opposite way','The same length but pointing the opposite way','Half as long and pointing the same way'],[0],
+ 'Positive scalars change only the magnitude.','A positive scalar does not turn the vector around.',{sub:m1});
+MC('mu','Multiplying a vector by <b>−2</b> gives a vector that is…',['Twice as long and pointing the opposite way','Twice as long and pointing the same way','Half as long and pointing the opposite way','Of negative length'],[0],
+ 'The size doubles (×2) and the minus sign reverses the direction.','What does the minus sign do?',{sub:m1});
+MC('mu','The result of multiplying a vector by a scalar is a…',['Vector','Scalar','Number without units','Resultant of two scalars'],[0],'Scalar × vector = vector (with the original units).','A vector stretched or shrunk is still a vector.',{sub:m1});
+add('mu',m1,'A plane\'s velocity is <b>v</b> = 250 km/h north. The pilot slows to 0.40<b>v</b>. What is the new speed? And what is the speed after the pilot reverses to −0.40<b>v</b>?',
+ [T('Speed with 0.40v','km/h',100,{tol:0.02}),T('Speed with −0.40v','km/h',100,{tol:0.02}),T('Signed velocity −0.40v (north is +)','km/h',-100,{tol:0.02})],
+ ['Speed = magnitude (always positive). Velocity keeps its sign.'],
+ ['0.40(250) = 100 km/h north.','−0.40v has the same magnitude: 100 km/h, but pointing south.','Signed with north +: −100 km/h.']);
+add('mu',m1,'<b>A</b> = 3 m east. Find the magnitude of <b>A</b> + 2<b>A</b> + (−<b>A</b>/3), all in the same line. Give the signed result with east as positive.',
+ [T('Sum (east is +)','m',3+6-1,{tol:0.02})],
+ ['2A = +6 m, −A/3 = −1 m.'],
+ ['A = +3, 2A = +6, −A/3 = −1.','Sum = 3 + 6 − 1 = +8 m: 8 m east.']);
+MC('mu','<b>A</b> and <b>B</b> point in the same direction, with magnitudes 5 m and 2 m. How large is <b>A</b> − <b>B</b>?',['3 m in the direction of A','7 m in the direction of A','3 m opposite to A','10 m'],[0],
+ 'Subtracting B = adding −B (2 m opposite to A): 5 − 2 = 3 m in the direction of A.','Add the opposite of B.',{sub:m1});
+MC('mu','The vectors <b>A</b>, 2<b>A</b> and −<b>A</b>/2 are drawn from the same point. Which statement is correct?',
+ ['2A and A are parallel; −A/2 is antiparallel (opposite) to both','All three point the same way','2A and −A/2 are perpendicular','A and 2A point in opposite directions'],[0],
+ 'Positive multiples stay parallel; a negative multiple reverses the direction.','Check the sign of each scalar.',{sub:m1});
+
+const SETS=[
+ {id:'ws',name:'Worksheet',desc:'Based on the "Introduction to Vectors" diagram skills worksheet: compare arrows, then build 2A + B, A − B/2 and B/2 − A.'},
+ {id:'tb',name:'Section 1 Assessment',desc:'The Section 1 Formative Assessment: scalars and vectors, graphical addition, scalar multiplication and displacement.'},
+ {id:'sv',name:'Scalars & Vectors',desc:'Notation, magnitude, direction and what can be added.'},
+ {id:'as',name:'Add & Subtract',desc:'Tip-to-tail addition, any order, and subtraction by adding the negative.'},
+ {id:'mu',name:'Scalar Multiples',desc:'Multiplying and dividing vectors by scalars (positive and negative).'}
+];
+
+P.forEach((p,i)=>{ p.id=p.set+(i+1); });
+let curSet='ws';
+
+function setStats(sid){ const ps=P.filter(p=>p.set===sid); return {done:ps.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length,total:ps.length}; }
+function updateOverall(){
+  const done=P.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length;
+  $('#overallText').textContent=`${done} of ${P.length} practice problems solved`;
+  $('#overallBar').style.width=(100*done/P.length)+'%';
+  $$('#setPicker button').forEach(b=>{ const s=setStats(b.dataset.set); $('small',b).textContent=`${s.done}/${s.total}`; });
+}
+function buildPicker(){
+  const pk=$('#setPicker'); pk.innerHTML='';
+  SETS.forEach(s=>{
+    const b=document.createElement('button'); b.type='button'; b.dataset.set=s.id; b.setAttribute('aria-pressed',String(s.id===curSet));
+    b.innerHTML=`${s.name}<small></small>`; b.addEventListener('click',()=>{ curSet=s.id; buildPicker(); renderSet(); }); pk.appendChild(b);
+  });
+  updateOverall();
+}
+function renderSet(){
+  const host=$('#problemList'); host.innerHTML='';
+  const s=SETS.find(x=>x.id===curSet);
+  const head=document.createElement('div'); head.className='sethead'; head.innerHTML=`<p>${s.desc.replace(/_(\w+)/g,'<sub>$1</sub>')}</p>`; host.appendChild(head);
+  let last=null;
+  P.filter(p=>p.set===curSet).forEach((p,i)=>{
+    if(p.sub&&p.sub!==last){ const h=document.createElement('h3'); h.className='subhead'; h.textContent=p.sub; host.appendChild(h); last=p.sub; }
+    host.appendChild(renderProblem(p,i+1));
+  });
+}
+function renderProblem(p,n){
+  const st=state['p_'+p.id]=state['p_'+p.id]||{done:false,tries:0};
+  const el=document.createElement('div'); el.className='prob'+(st.done?' done':'');
+  el.innerHTML=`<div class="num"><span>Problem ${n}</span><span class="badge">${st.done?'✔ Solved':''}</span></div><p style="margin:6px 0 4px">${p.text}</p>`;
+  if(p.figure) el.insertAdjacentHTML('beforeend',p.figure());
+  const body=document.createElement('div'); el.appendChild(body);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  const hintHost=document.createElement('div'), solHost=document.createElement('div');
+  const acts=document.createElement('div'); acts.className='acts';
+  const check=document.createElement('button'); check.className='btn'; check.type='button'; check.textContent='Check';
+  const hint=document.createElement('button'); hint.className='btn ghost'; hint.type='button'; hint.textContent='Hint';
+  const sol=document.createElement('button'); sol.className='btn ghost'; sol.type='button';
+  let hintN=0, inputs=[], checkFn;
+
+  if(p.opts){
+    const multi=p.type==='multi';
+    p.opts.forEach((o,i)=>{
+      const lab=document.createElement('label'); lab.className='opt'; lab.style.display='block'; lab.style.cursor='pointer';
+      const inp=document.createElement('input'); inp.type=multi?'checkbox':'radio'; inp.name='q_'+p.id; inp.value=i;
+      lab.append(inp); lab.insertAdjacentHTML('beforeend',o); body.appendChild(lab); inputs.push(inp);
+    });
+    checkFn=()=>{
+      const sel=inputs.filter(i=>i.checked).map(i=>+i.value);
+      if(!sel.length){ fb.className='fb near'; fb.textContent='Select an answer first.'; return null; }
+      const ok=sel.length===p.correct.length&&p.correct.every(c=>sel.includes(c));
+      inputs.forEach(i=>i.parentElement.classList.remove('right','wrong'));
+      if(ok){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+p.why; return true; }
+      sel.forEach(v=>{ if(!p.correct.includes(v)) inputs[v].parentElement.classList.add('wrong'); });
+      fb.className='fb no'; fb.textContent='Not quite. Re-read the question and think about the magnitude and the direction of each arrow.';
+      return false;
+    };
+  } else {
+    p.parts.forEach((part,i)=>{
+      const row=document.createElement('div'); row.className='partrow';
+      const id=`in_${p.id}_${i}`;
+      row.innerHTML=`<label for="${id}">${part.label}</label>`;
+      const inp=document.createElement('input'); inp.type='text'; inp.id=id; inp.autocomplete='off'; inp.placeholder='your answer';
+      const u=document.createElement('span'); u.className='u'; u.textContent=part.unit;
+      const pf=document.createElement('span'); pf.className='fb'; pf.style.margin='0'; pf.setAttribute('aria-live','polite');
+      row.append(inp,u,pf); body.appendChild(row); inputs.push({inp,pf});
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') check.click(); });
+    });
+    checkFn=()=>{
+      let all=true, any=false;
+      inputs.forEach(({inp,pf},i)=>{
+        if(!inp.value.trim()){ pf.className='fb near'; pf.textContent='Enter a value.'; all=false; return; }
+        any=true;
+        const j=judge(parseNum(inp.value),p.parts[i]);
+        pf.className='fb '+j.state; pf.textContent=(j.state==='ok'?'✔ ':'')+j.msg;
+        if(j.state!=='ok') all=false;
+      });
+      fb.textContent=''; fb.className='fb';
+      return any?all:null;
+    };
+  }
+  function showSol(){
+    solHost.className='solbox';
+    solHost.innerHTML=p.sol?'<b>Worked solution</b><ol>'+p.sol.map(s=>`<li>${s}</li>`).join('')+'</ol>':'<b>Answer explained</b><p style="margin:4px 0 0">'+p.why+'</p>';
+  }
+  function syncSol(){
+    const open=!!solHost.innerHTML;
+    sol.disabled=!(st.done||st.tries>=2);
+    sol.textContent=sol.disabled?'Solution (after 2 tries)':(open?'Hide solution':'Show solution');
+  }
+  check.addEventListener('click',()=>{
+    const r=checkFn(); if(r===null) return;
+    st.tries++;
+    if(r){
+      if(!st.done){ st.done=true; el.classList.add('done'); $('.badge',el).textContent='✔ Solved'; }
+      if(p.parts){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+(st.tries===1?'First try — nice work.':'Well done for sticking with it.'); }
+    } else if(p.parts && st.tries>=2 && !st.done){ fb.className='fb near'; fb.textContent='Still stuck? Try another hint, or open the worked solution.'; }
+    save(); updateOverall(); syncSol();
+  });
+  hint.addEventListener('click',()=>{
+    const hs=p.h||[]; if(!hs.length) return;
+    hintN=Math.min(hintN+1,hs.length);
+    hintHost.className='hintbox'; hintHost.innerHTML=`<b>Hint ${hintN}${hs.length>1?' of '+hs.length:''}:</b> `+hs.slice(0,hintN).map((h,i)=>i===hintN-1?h:'<span class="pnote">'+h+'</span>').reverse().join('<br>');
+    hint.textContent=hintN<hs.length?'Another hint':'Hint';
+  });
+  sol.addEventListener('click',()=>{ if(sol.disabled) return; if(solHost.innerHTML){ solHost.innerHTML=''; solHost.className=''; } else showSol(); syncSol(); });
+  acts.append(check,hint,sol); el.append(acts,fb,hintHost,solHost);
+  syncSol();
+  return el;
+}
+
+
+$('#resetAll').addEventListener('click',()=>{ if(confirm('Clear all saved progress on this device?')){ state={}; save(); buildPicker(); renderSet(); } });
+buildPicker(); renderSet();
+const h=(location.hash||'').slice(1); if(['review','examples','practice'].includes(h)) showTab(h);
+window.LIA31={P,EX,parseNum,judge,figTT};
+})();
+</script>
+</body>
+</html>
