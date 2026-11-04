@@ -695,20 +695,21 @@ document.addEventListener('click',e=>{ const g=e.target.closest('[data-goto]'); 
 })();
 
 /* ---------- ask widgets (worked examples) ---------- */
-function mkMC(host,ask,onDone){
+function mkMC(host,ask,onDone,saved,onSave){
   host.innerHTML=`<p>${ask.q}</p>`;
   const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
   ask.opts.forEach((o,i)=>{
     const b=document.createElement('button'); b.className='opt'; b.type='button'; b.innerHTML=o;
     b.addEventListener('click',()=>{
-      if(i===ask.correct){ b.classList.add('right'); $$('.opt',host).forEach(x=>x.disabled=true); fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); onDone(); }
+      if(i===ask.correct){ b.classList.add('right'); $$('.opt',host).forEach(x=>x.disabled=true); fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); if(onSave) onSave(i); onDone(); }
       else { b.classList.add('wrong'); b.disabled=true; fb.className='fb no'; fb.innerHTML=(ask.wrong&&ask.wrong[i])||'Not quite — try another option.'; }
     });
     host.appendChild(b);
   });
   host.appendChild(fb);
+  if(saved!=null){ const b=$$('.opt',host)[saved]; if(b) b.click(); }
 }
-function mkNum(host,ask,onDone){
+function mkNum(host,ask,onDone,saved,onSave){
   host.innerHTML=`<p>${ask.q}</p>`;
   const row=document.createElement('div'); row.className='row';
   const inp=document.createElement('input'); inp.type='text'; inp.setAttribute('aria-label','Your answer'); inp.placeholder='your answer'; inp.autocomplete='off';
@@ -718,10 +719,11 @@ function mkNum(host,ask,onDone){
   const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite'); host.appendChild(fb);
   const go=()=>{
     const j=judge(parseNum(inp.value),{ans:ask.ans,tol:ask.tol||0.02,traps:ask.traps,abs:ask.abs});
-    if(j.state==='ok'){ fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); inp.disabled=true; btn.disabled=true; onDone(); }
+    if(j.state==='ok'){ fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); inp.disabled=true; btn.disabled=true; if(onSave) onSave(inp.value); onDone(); }
     else { fb.className='fb '+j.state; fb.textContent=j.msg; }
   };
   btn.addEventListener('click',go); inp.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+  if(typeof saved==='string' && saved){ inp.value=saved; go(); }
 }
 
 /* ---------- worked examples ---------- */
@@ -798,6 +800,29 @@ const EX=[
    ]}
 ];
 
+/* ---------- answer-position randomizer (deterministic: same order for every student and every visit) ---------- */
+const CNT={};
+function rng(seed){ let a=seed>>>0; return ()=>{ a=(a+0x6D2B79F5)|0; let t=Math.imul(a^(a>>>15),1|a); t=(t+Math.imul(t^(t>>>7),61|t))^t; return((t^(t>>>14))>>>0)/4294967296; }; }
+function arrangeOpts(opts,correct,seed){ /* returns {order} so that new[j]=old[order[j]] */
+  const n=opts.length, r=rng(seed);
+  if(opts.every(o=>/^\([a-e]\)/i.test(o))) return {order:opts.map((_,i)=>i)};
+  const idx=opts.map((_,i)=>i);
+  if(correct.length===1){
+    const c=correct[0], rest=idx.filter(i=>i!==c);
+    for(let i=rest.length-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [rest[i],rest[j]]=[rest[j],rest[i]]; }
+    const k=(CNT[n]=(CNT[n]||0)+1)-1, target=((k%n)*(n===4?3:2)+Math.floor(k/n))%n; rest.splice(target,0,c);
+    return {order:rest};
+  }
+  for(let i=n-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [idx[i],idx[j]]=[idx[j],idx[i]]; }
+  return {order:idx};
+}
+function strSeed(s){ let h=2166136261; for(const ch of s){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; }
+EX.forEach(ex=>ex.steps.forEach((s,si)=>{
+  const a=s.ask; if(!a||a.type!=='mc') return;
+  const {order}=arrangeOpts(a.opts,[a.correct],strSeed(ex.id+si));
+  a.opts=order.map(i=>a.opts[i]); a.correct=order.indexOf(a.correct);
+  if(a.wrong){ const w={}; Object.keys(a.wrong).forEach(k=>{ w[order.indexOf(+k)]=a.wrong[k]; }); a.wrong=w; }
+}));
 (function buildExamples(){
   const host=$('#exampleList');
   EX.forEach((ex,idx)=>{
@@ -816,15 +841,19 @@ const EX=[
       if(s.ask){ const a=document.createElement('div'); a.className='ask'; li.appendChild(a); }
       list.appendChild(li);
     });
-    let cur=-1, needAsk=false;
+    let cur=-1, needAsk=false, replaying=false;
+    const savedAns=((state.exa||{})[ex.id])||[];
+    const keepAns=i=>v=>{ if(replaying) return; state.exa=state.exa||{}; (state.exa[ex.id]=state.exa[ex.id]||[])[i]=v; save(); };
     function reveal(){
       cur++; const li=list.children[cur], s=ex.steps[cur];
       li.classList.add('show'); dots.children[cur].classList.add('on');
       if(s.ask){
         needAsk=true; next.disabled=true;
-        (s.ask.type==='num'?mkNum:mkMC)($('.ask',li),s.ask,()=>{ needAsk=false; next.disabled=false; refresh(); });
+        const si=cur;
+        (s.ask.type==='num'?mkNum:mkMC)($('.ask',li),s.ask,()=>{ needAsk=false; next.disabled=false; refresh(); },savedAns[si],keepAns(si));
       }
-      refresh(); li.scrollIntoView({behavior:'smooth',block:'nearest'});
+      if(!replaying){ state.exn=state.exn||{}; state.exn[ex.id]=cur+1; save(); }
+      refresh(); if(!replaying) li.scrollIntoView({behavior:'smooth',block:'nearest'});
     }
     function refresh(){
       if(cur>=ex.steps.length-1 && !needAsk){ next.hidden=true; restart.hidden=false; if(!state['ex_'+ex.id]){ state['ex_'+ex.id]=1; save(); } }
@@ -834,9 +863,12 @@ const EX=[
     restart.addEventListener('click',()=>{
       cur=-1; needAsk=false; next.hidden=false; next.disabled=false; restart.hidden=true;
       [...list.children].forEach((li,i)=>{ li.classList.remove('show'); const a=$('.ask',li); if(a) a.innerHTML=''; dots.children[i].classList.remove('on'); });
+      if(state.exn) state.exn[ex.id]=0; if(state.exa) state.exa[ex.id]=[]; savedAns.length=0; save();
       refresh(); card.scrollIntoView({behavior:'smooth',block:'start'});
     });
     host.appendChild(card);
+    const nDone=((state.exn||{})[ex.id])||0;
+    if(nDone){ replaying=true; for(let k=0;k<nDone&&k<ex.steps.length;k++){ if(k>0&&needAsk) break; reveal(); } replaying=false; refresh(); }
   });
 })();
 
@@ -1187,6 +1219,7 @@ const SETS=[
 P.forEach((p,i)=>{ p.id=p.set+(i+1); });
 let curSet='tb';
 
+P.forEach(p=>{ if(!p.opts) return; const {order}=arrangeOpts(p.opts,p.correct,strSeed(String(p.id))); p.opts=order.map(i=>p.opts[i]); p.correct=p.correct.map(c=>order.indexOf(c)); });
 function setStats(sid){ const ps=P.filter(p=>p.set===sid); return {done:ps.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length,total:ps.length}; }
 function updateOverall(){
   const done=P.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length;
@@ -1232,6 +1265,7 @@ function renderProblem(p,n){
       const lab=document.createElement('label'); lab.className='opt'; lab.style.display='block'; lab.style.cursor='pointer';
       const inp=document.createElement('input'); inp.type=multi?'checkbox':'radio'; inp.name='q_'+p.id; inp.value=i;
       lab.append(inp); lab.insertAdjacentHTML('beforeend',o); body.appendChild(lab); inputs.push(inp);
+      inp.addEventListener('change',()=>{ st.ans=inputs.filter(x=>x.checked).map(x=>+x.value); save(); });
     });
     checkFn=()=>{
       const sel=inputs.filter(i=>i.checked).map(i=>+i.value);
@@ -1253,6 +1287,7 @@ function renderProblem(p,n){
       const pf=document.createElement('span'); pf.className='fb'; pf.style.margin='0'; pf.setAttribute('aria-live','polite');
       row.append(inp,u,pf); body.appendChild(row); inputs.push({inp,pf});
       inp.addEventListener('keydown',e=>{ if(e.key==='Enter') check.click(); });
+      inp.addEventListener('input',()=>{ st.ans=inputs.map(x=>x.inp.value); save(); });
     });
     checkFn=()=>{
       let all=true, any=false;
@@ -1293,6 +1328,11 @@ function renderProblem(p,n){
   });
   sol.addEventListener('click',()=>{ if(sol.disabled) return; if(solHost.innerHTML){ solHost.innerHTML=''; solHost.className=''; } else showSol(); syncSol(); });
   acts.append(check,hint,sol); el.append(acts,fb,hintHost,solHost);
+  if(st.ans){ /* restore the student's saved answer */
+    if(p.opts){ inputs.forEach(i=>{ i.checked=st.ans.includes(+i.value); }); }
+    else inputs.forEach(({inp},i)=>{ if(st.ans[i]!=null) inp.value=st.ans[i]; });
+    if(st.tries>0||st.done){ const tr=st.tries; checkFn(); st.tries=tr; }
+  }
   syncSol();
   return el;
 }

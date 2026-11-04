@@ -267,7 +267,7 @@
     <div class="card final" id="finalCard">
       <h2>Practice complete!</h2>
       <p id="finalMsg"></p>
-      <button class="btn secondary" id="resetBtn" type="button">Try again</button>
+      <button class="btn secondary" id="resetBtn" data-lia-reset type="button">Try again</button>
     </div>
   </section>
 </main>
@@ -419,9 +419,45 @@
     return h;
   }
 
-  function build() {
+  /* ---------- State (saved in localStorage; lia-sync mirrors it to the student's account) ---------- */
+  /* ---------- answer-position randomizer (same order for every student and every visit) ---------- */
+  var CNT = {};
+  function rng(seed) { var a = seed >>> 0; return function () { a = (a + 0x6D2B79F5) | 0; var t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+  function strSeed(s) { var h = 2166136261; for (var i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+  function arrangeOpts(opts, correct, seed) {
+    var n = opts.length, r = rng(seed), idx = opts.map(function (_, i) { return i; });
+    if (correct.length === 1) {
+      var c = correct[0], rest = idx.filter(function (i) { return i !== c; });
+      for (var i = rest.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), t = rest[i]; rest[i] = rest[j]; rest[j] = t; }
+      var k = (CNT[n] = (CNT[n] || 0) + 1) - 1, target = ((k % n) * (n === 4 ? 3 : 2) + Math.floor(k / n)) % n;
+      rest.splice(target, 0, c);
+      return rest;
+    }
+    return idx;
+  }
+  problems.forEach(function (p, i) {
+    if (!p.opts) return;
+    var order = arrangeOpts(p.opts, [p.ans], strSeed('q' + i));
+    p.opts = order.map(function (k) { return p.opts[k]; });
+    p.ans = order.indexOf(p.ans);
+  });
+
+  var KEY = 'lia-advanced-algebra-addition-rule';
+  function freshState() { return problems.map(function () { return { used: 0, done: false, correct: false, points: 0 }; }); }
+  function loadState() {
+    try {
+      var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (Array.isArray(s) && s.length === problems.length) return s.map(function (x) {
+        return { used: x.used | 0, done: !!x.done, correct: !!x.correct, points: x.points | 0, v: x.v == null ? null : x.v };
+      });
+    } catch (e) {}
+    return freshState();
+  }
+  function saveState() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  function build(restore) {
     container.innerHTML = '';
-    state = problems.map(function () { return { used: 0, done: false, correct: false }; });
+    state = restore ? loadState() : freshState();
     problems.forEach(function (p, i) {
       var div = document.createElement('div');
       div.className = 'card problem';
@@ -431,7 +467,7 @@
         '<div class="answer-row">' +
           '<input type="text" inputmode="decimal" autocomplete="off" aria-label="Answer to problem ' + (i + 1) + '" placeholder="e.g. 4/13 or 0.31">' +
           '<button class="btn" type="button">Check</button>' +
-          '<span class="attempts">Attempts left: <span class="dots">' + dots(0) + '</span></span>' +
+          '<span class="attempts">Attempts left: <span class="dots">' + dots(state[i].used) + '</span></span>' +
         '</div>' +
         '<div class="feedback" role="status" aria-live="polite"></div>';
       container.appendChild(div);
@@ -440,6 +476,25 @@
       var btn = div.querySelector('button');
       var fb = div.querySelector('.feedback');
       var dotsEl = div.querySelector('.dots');
+      var isMC = false, radios = [];
+      function showFinal() {
+        if (state[i].correct) show('ok', '&#10003; Correct! Well done.<div class="sol">' + p.sol + '</div>');
+        else show('bad', '&#10007; Not quite. You used all 3 attempts.<div class="sol"><strong>Solution:</strong> ' + p.sol + '</div>');
+        lock();
+      }
+      // remember what the student selected / typed
+      Array.prototype.forEach.call(radios, function (r, k) { r.addEventListener('change', function () { state[i].v = k; saveState(); }); });
+      if (input) input.addEventListener('input', function () { state[i].v = input.value; saveState(); });
+      if (state[i].v != null) {
+        if (isMC) { if (radios[state[i].v]) radios[state[i].v].checked = true; }
+        else if (input) input.value = state[i].v;
+      }
+      if (state[i].done) showFinal();
+      else if (state[i].used > 0) {
+        var l0 = MAX_ATTEMPTS - state[i].used;
+        show('bad', 'You have ' + l0 + ' attempt' + (l0 > 1 ? 's' : '') + ' left.' +
+          (state[i].used >= 2 ? '<div class="sol"><strong>Hint:</strong> ' + p.hint + '</div>' : ''));
+      }
 
       function check() {
         var st = state[i];
@@ -470,6 +525,7 @@
           show('bad', msg);
           input.select();
         }
+        saveState();
         update();
       }
       function show(cls, html) {
@@ -507,10 +563,11 @@
 
   document.getElementById('resetBtn').addEventListener('click', function () {
     build();
+    saveState();
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  build();
+  build(true);
 })();
 </script>
 </body>

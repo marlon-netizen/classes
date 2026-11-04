@@ -403,12 +403,14 @@ $$('.viz[data-viz]').forEach(function(r){var f=VIZ[r.dataset.viz];if(f){try{f(r)
 var EX=PAGE.ex||[],KEY='bs-'+PAGE.slug+'-practice',S={};try{S=JSON.parse(lsGet(KEY)||'{}')||{};}catch(e){S={};}
 function hash(s){var h=2166136261;for(var i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;}
 function perm(n,seed){var a=[],i;for(i=0;i<n;i++)a.push(i);var r=seed||1;for(i=n-1;i>0;i--){r=(Math.imul(r,1664525)+1013904223)>>>0;var j=r%(i+1),t=a[i];a[i]=a[j];a[j]=t;}return a;}
+function placeOrder(e,id){var n=e.opts.length,o=perm(n,hash(id)).filter(function(x){return x!==0;}),k=MCK++,target=((k%n)*(n===4?3:2)+Math.floor(k/n))%n;o.splice(target,0,0);return o;}
+var MCK=hash(String(PAGE.slug||''))%7;
 function parseNum(s,keepPct){s=String(s).trim().replace(/[−–]/g,'-').replace(/[$€£,\s]/g,'');var pct=/%$/.test(s);s=s.replace(/%$/,'');var m=s.match(/^(-?\d*\.?\d+)\/(\d*\.?\d+)$/),v;
  if(m)v=parseFloat(m[1])/parseFloat(m[2]);else if(/^-?(\d+\.?\d*|\.\d+)$/.test(s))v=parseFloat(s);else return NaN;if(pct&&!keepPct)v/=100;return v;}
 var host=$('#practiceList');
 function qEl(e,i){var id=e.id,a=document.createElement('article');a.className='q';a.id='q-'+id;
  var h='<div class="qh"><span class="qn">Q'+(i+1)+'</span><span class="qt">'+esc(e.tag||'')+'</span><span class="qs" aria-live="polite"></span></div><div class="qb">'+e.q+'</div>';
- if(e.type==='mc'){e.order=perm(e.opts.length,hash(id));h+='<div class="opts" role="radiogroup">'+e.order.map(function(oi,k){return '<label><input type="radio" name="r-'+id+'" value="'+oi+'"><span>'+e.opts[oi]+'</span></label>';}).join('')+'</div>';}
+ if(e.type==='mc'){e.order=placeOrder(e,id);h+='<div class="opts" role="radiogroup">'+e.order.map(function(oi,k){return '<label><input type="radio" name="r-'+id+'" value="'+oi+'"><span>'+e.opts[oi]+'</span></label>';}).join('')+'</div>';}
  else h+='<div class="nrow"><label class="sr" for="n-'+id+'" style="position:absolute;left:-9999px">Your answer</label><input type="text" id="n-'+id+'" inputmode="decimal" autocomplete="off" placeholder="Your answer"><span class="u">'+(e.unit||'')+'</span></div>';
  h+='<div class="nrow"><button type="button" class="btn" data-c>Check</button><button type="button" class="btn ghost" data-s hidden>Show solution</button></div><div class="fb" role="status"></div>';a.innerHTML=h;
  $('[data-c]',a).addEventListener('click',function(){check(e,a);});$('[data-s]',a).addEventListener('click',function(){reveal(e,a);});
