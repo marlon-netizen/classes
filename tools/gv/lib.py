@@ -8,11 +8,33 @@ def svg(inner, vb="0 0 100 100", label="", w=120):
     return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="%s" width="%d" role="img" aria-label="%s">%s</svg>' % (vb, w, html.escape(label, quote=True), inner)
 
 # ---- pictures (simplified drawings) ----
+def _emblem_inner():
+    """Coat of arms of Nicaragua, simplified but faithful: ring with the country name, triangle with five volcanoes,
+    sea, rainbow, sunrays and the Phrygian cap on a pole. Drawn in a 200x200 box."""
+    rays = ''.join('<line x1="100" y1="72" x2="%.1f" y2="%.1f" stroke="#f2c230" stroke-width="2.4"/>' % (100 + 52 * __import__('math').cos(__import__('math').radians(a)), 72 - 52 * __import__('math').sin(__import__('math').radians(a))) for a in range(20, 161, 14))
+    bows = ''.join('<path d="M%d 100a%d %d 0 0 1 %d 0" fill="none" stroke="%s" stroke-width="3.2"/>' % (100 - r, r, r, 2 * r, c) for r, c in ((34, "#d8322b"), (31, "#f28c28"), (28, "#f2d12b"), (25, "#3f9b4a"), (22, "#2f7fd0"), (19, "#7d4ca8")))
+    return (
+        '<defs><clipPath id="gvTri"><polygon points="100,40 44,136 156,136"/></clipPath>'
+        '<path id="gvTop" d="M22 100a78 78 0 0 1 156 0"/><path id="gvBot" d="M30 100a70 70 0 0 0 140 0"/></defs>'
+        '<circle cx="100" cy="100" r="97" fill="#fbf3d0" stroke="#b8901e" stroke-width="3"/><circle cx="100" cy="100" r="62" fill="#fffaf0" stroke="#b8901e" stroke-width="2"/>'
+        '<text font-family="Arial,sans-serif" font-size="13.5" font-weight="700" fill="#5b4208" letter-spacing="1.6"><textPath href="#gvTop" startOffset="50%" text-anchor="middle">REPÚBLICA DE NICARAGUA</textPath></text>'
+        '<text font-family="Arial,sans-serif" font-size="13.5" font-weight="700" fill="#5b4208" letter-spacing="1.6"><textPath href="#gvBot" startOffset="50%" text-anchor="middle" dominant-baseline="hanging">AMÉRICA CENTRAL</textPath></text>'
+        '<g clip-path="url(#gvTri)"><rect x="40" y="36" width="120" height="104" fill="#bfe4f5"/>' + rays +
+        '<rect x="40" y="119" width="120" height="20" fill="#1e72b8"/><path d="M44 126q8-4 16 0t16 0 16 0 16 0 16 0 16 0" fill="none" stroke="#7cc0ea" stroke-width="1.6"/>'
+        '<g fill="#3d6a3b" stroke="#27492a" stroke-width="1"><polygon points="52,121 68,99 84,121"/><polygon points="78,121 93,92 108,121"/><polygon points="102,121 117,94 132,121"/><polygon points="124,121 138,101 152,121"/><polygon points="90,121 104,104 118,121"/></g>'
+        '<g fill="none" stroke="#e8e8e8" stroke-width="1.4" opacity=".85"><path d="M93 92q3-6 0-10M117 94q3-6 0-10"/></g>' + bows +
+        '<line x1="100" y1="100" x2="100" y2="64" stroke="#7a5a2a" stroke-width="2.2"/>'
+        '<path d="M87 76c1-14 13-20 24-15-5 1-6 5-4 9 3 6-1 9-9 9-5 0-10-1-11-3z" fill="#d8322b" stroke="#8c1a16" stroke-width="1"/><path d="M87 76c2 3 11 4 20 1" fill="none" stroke="#fff" stroke-width="2"/></g>'
+        '<polygon points="100,40 44,136 156,136" fill="none" stroke="#1d6b3a" stroke-width="3.2" stroke-linejoin="round"/>')
+
+def coat():
+    return svg(_emblem_inner(), "0 0 200 200", "Coat of arms of Nicaragua, simplified: a ring with the name of the country, and a triangle with five volcanoes, a rainbow, the sun's rays and a Phrygian cap", 170)
+
 def flag():
-    return svg('<rect x="1" y="1" width="148" height="88" fill="#fff" stroke="#8a8a8a"/><rect x="1" y="1" width="148" height="29" fill="#1f5fae"/><rect x="1" y="60" width="148" height="29" fill="#1f5fae"/>'
-               '<polygon points="75,33 62,57 88,57" fill="#f6f1e0" stroke="#2d7a3e" stroke-width="2"/><polygon points="68,53 72,45 76,53" fill="#6b7f3a"/><polygon points="75,53 79,46 83,53" fill="#6b7f3a"/>'
-               '<path d="M66 44a9 9 0 0 1 18 0" fill="none" stroke="#d9a21b" stroke-width="1.5"/><path d="M68 44a7 7 0 0 1 14 0" fill="none" stroke="#c0392b" stroke-width="1.5"/>',
-               "0 0 150 90", "Flag of Nicaragua, simplified: blue, white, blue stripes with the coat of arms in the center", 190)
+    return svg('<rect x="1" y="1" width="148" height="88" fill="#fff" stroke="#9a9a9a"/><rect x="1" y="1" width="148" height="29" fill="#0f5fb8"/><rect x="1" y="60" width="148" height="29" fill="#0f5fb8"/>'
+               '<svg x="58.5" y="30.5" width="33" height="33" viewBox="0 0 200 200">' + _emblem_inner() + '</svg>',
+               "0 0 150 90", "Flag of Nicaragua, simplified: blue, white, blue horizontal stripes with the coat of arms in the center", 200)
+
 def stop():
     return svg('<polygon points="30,6 70,6 94,30 94,70 70,94 30,94 6,70 6,30" fill="#c0262d" stroke="#fff" stroke-width="3"/><text x="50" y="58" font-size="26" font-weight="800" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif">STOP</text>', label="Stop sign")
 def yield_():
@@ -51,13 +73,42 @@ def traffic_light(on):
     return svg('<rect x="22" y="6" width="36" height="88" rx="10" fill="#222"/>' + c, "0 0 80 100", "Traffic light showing %s" % {"r": "red", "y": "yellow", "g": "green"}[on], 80)
 def helmet():
     return svg('<path d="M14 62a36 36 0 0 1 72 0z" fill="#1f7a8c" stroke="#0b3d4a" stroke-width="3"/><path d="M14 62h72v8H14z" fill="#0b3d4a"/><path d="M30 28v34M50 24v38M70 28v34" stroke="#fff" stroke-width="3" opacity=".7"/>', label="Bicycle helmet")
-def bird():
-    return svg('<ellipse cx="50" cy="52" rx="22" ry="14" fill="#2f9e8f"/><circle cx="68" cy="42" r="11" fill="#2f9e8f"/><path d="M76 40l12 3-12 3z" fill="#222"/><rect x="62" y="40" width="12" height="3" fill="#222"/><path d="M30 56L8 78M30 56l-24 14" stroke="#1760b8" stroke-width="3"/><ellipse cx="6" cy="79" rx="5" ry="3" fill="#1760b8"/><ellipse cx="3" cy="70" rx="5" ry="3" fill="#1760b8"/><circle cx="49" cy="52" r="12" fill="#e08a2c" opacity=".85"/><path d="M42 66v10M56 66v10" stroke="#555" stroke-width="3"/>', label="Guardabarranco (turquoise-browed motmot), simplified drawing")
 def flower():
-    petals = ''.join('<ellipse cx="50" cy="26" rx="11" ry="22" fill="#fbf6e8" stroke="#d9c9a0" transform="rotate(%d 50 50)"/>' % a for a in range(0, 360, 72))
-    return svg(petals + '<circle cx="50" cy="50" r="9" fill="#f2c230"/>', label="Sacuanjoche flower: cream-white petals with a yellow center, simplified drawing")
+    petal = '<path d="M50 52C34 44 30 18 46 6C58 -1 70 16 62 36C58 46 54 50 50 52Z" fill="url(#gvPet)" stroke="#e3d3a6" stroke-width="1"/>'
+    petals = ''.join('<g transform="rotate(%d 50 52)">%s</g>' % (a, petal) for a in range(0, 360, 72))
+    return svg('<defs><radialGradient id="gvPet" cx="50%" cy="100%" r="100%"><stop offset="0" stop-color="#f6c93a"/><stop offset=".35" stop-color="#fbeec0"/><stop offset="1" stop-color="#fffdf6"/></radialGradient></defs>'
+               '<g fill="#3f7f3a" stroke="#2c5c2a" stroke-width="1"><path d="M50 60C18 66 4 86 6 98 28 96 46 82 50 60Z"/><path d="M50 60C82 66 96 86 94 98 72 96 54 82 50 60Z"/></g>'
+               + petals + '<circle cx="50" cy="52" r="6" fill="#f2b81f"/><circle cx="50" cy="52" r="2.6" fill="#e48a14"/>',
+               label="Sacuanjoche flower (Plumeria rubra): five twisted cream-white petals with a yellow center, with green leaves, simplified drawing", w=120)
+
 def tree():
-    return svg('<rect x="46" y="55" width="8" height="38" fill="#7a5a3a"/><circle cx="50" cy="38" r="26" fill="#f5efe0" stroke="#cdbd96"/><circle cx="36" cy="46" r="14" fill="#f8f3e6"/><circle cx="64" cy="46" r="14" fill="#f8f3e6"/><circle cx="50" cy="24" r="12" fill="#faf6ea"/>', label="Madroño tree in flower: a creamy-white crown, simplified drawing")
+    import math
+    blobs = [(50, 30, 20), (30, 38, 16), (70, 38, 16), (40, 22, 14), (62, 22, 14), (22, 50, 11), (78, 50, 11), (50, 44, 15)]
+    green = ''.join('<circle cx="%d" cy="%d" r="%d" fill="#5d8f45"/>' % b for b in blobs)
+    flo = ''.join('<circle cx="%.1f" cy="%.1f" r="%.1f" fill="#fbf5e1" stroke="#e6dcb8" stroke-width=".6"/>' % (b[0] + b[2] * .75 * math.cos(k * 1.7 + b[0]), b[1] + b[2] * .75 * math.sin(k * 1.9 + b[1]), 3 + (k % 3)) for b in blobs for k in range(6))
+    return svg('<path d="M10 96H90" stroke="#8a6d3b" stroke-width="3"/><path d="M47 96C47 78 44 68 38 58M53 96C53 80 54 66 60 56M50 78C50 66 50 58 50 50M44 70C34 64 28 58 26 52M56 68C68 62 72 56 74 52" fill="none" stroke="#9c8f7a" stroke-width="4.5" stroke-linecap="round"/>'
+               + green + flo, label="Madroño tree in flower: a pale smooth trunk and a crown covered with cream-white flowers among green leaves, simplified drawing", w=120)
+
+def bird():
+    return svg('<path d="M4 62C30 56 60 58 96 52" stroke="#7a5a35" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M92 52l8-6" stroke="#7a5a35" stroke-width="3" stroke-linecap="round"/>'
+               # tail: long dark-green feathers with bare shaft ending in blue rackets
+               '<path d="M44 66C30 80 22 92 14 104" stroke="#2c6e5a" stroke-width="3.2" fill="none" stroke-linecap="round"/><path d="M50 68C42 84 38 96 36 106" stroke="#2c6e5a" stroke-width="3.2" fill="none" stroke-linecap="round"/>'
+               '<ellipse cx="13" cy="106" rx="6" ry="3.4" transform="rotate(-55 13 106)" fill="#1e5fbf" stroke="#0b2f7a" stroke-width=".8"/><ellipse cx="36" cy="109" rx="6" ry="3.4" transform="rotate(-82 36 109)" fill="#1e5fbf" stroke="#0b2f7a" stroke-width=".8"/>'
+               '<path d="M13 106l-3-2M36 109l1-3" stroke="#0b2f7a" stroke-width="1.4"/>'
+               # body
+               '<path d="M42 62C46 40 66 30 82 36C92 40 94 54 84 64C74 74 52 76 42 62Z" fill="#c9772f" stroke="#8a4d18" stroke-width="1"/>'
+               '<path d="M60 60C58 46 70 38 84 42C80 56 72 66 60 60Z" fill="#5a9a6b" stroke="#2f6b46" stroke-width="1"/>'
+               '<path d="M58 66C70 74 82 70 86 60C80 66 68 70 58 66Z" fill="#e2b265"/>'
+               # head
+               '<circle cx="88" cy="38" r="12.5" fill="#d98a38" stroke="#8a4d18" stroke-width="1"/><path d="M78 30C84 22 96 24 99 32C92 29 84 29 78 30Z" fill="#c9772f"/>'
+               '<path d="M79 33C86 28 94 29 99 34" fill="none" stroke="#35c3d4" stroke-width="3.2" stroke-linecap="round"/>'
+               '<path d="M80 38C86 35 94 36 99 40L96 45C90 42 84 43 80 42Z" fill="#171717"/><circle cx="92" cy="39" r="2" fill="#fff"/><circle cx="92.4" cy="39.2" r="1" fill="#171717"/>'
+               '<path d="M98 38l14 5-14 5z" fill="#1c1c1c"/>'
+               # black throat spot with turquoise edge
+               '<ellipse cx="86" cy="58" rx="4.2" ry="3" fill="#171717" stroke="#35c3d4" stroke-width="1.2"/>'
+               '<path d="M66 72l-3 8M74 72l-1 8" stroke="#5a4a36" stroke-width="2.2" stroke-linecap="round"/>',
+               "0 0 120 120", "Guardabarranco (turquoise-browed motmot): cinnamon and green body, turquoise eyebrow, black eye mask and throat spot, and a long tail ending in two blue rackets, perched on a branch; simplified drawing", 150)
+
 def hand_chest():
     return svg('<circle cx="50" cy="20" r="10" fill="#c98f5a"/><rect x="34" y="32" width="32" height="46" rx="8" fill="#2f6b8f"/><path d="M60 46l-10 10" stroke="#c98f5a" stroke-width="8" stroke-linecap="round"/><rect x="38" y="78" width="9" height="16" fill="#333"/><rect x="53" y="78" width="9" height="16" fill="#333"/>', label="A person standing straight with the right hand over the heart")
 
