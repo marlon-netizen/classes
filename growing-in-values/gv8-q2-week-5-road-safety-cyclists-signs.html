@@ -1,0 +1,778 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Road Safety: Cyclists and Signs | Lincoln International Academy</title>
+<meta name="description" content="Interactive study page for Growing in Values (8th grade, Q02 Week 5): traffic signs (preventive, regulatory, informative), cyclist safety rules, the helmet and the BRET, with practice.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef5f4; --surface:#fbfefd; --surface-2:#f1f8f7; --ink:#14292b; --muted:#4f6769;
+  --line:#cfe0de; --primary:#0e6f73; --primary-ink:#ffffff; --accent:#2f8f6f; --accent-soft:#dcf0e8;
+  --blue-soft:#dcefed; --warm:#c47f20; --warm-soft:#fbefd6; --good:#23764f; --good-soft:#dff2e7;
+  --bad:#a8463c; --bad-soft:#f8e3df; --head:#0b3d4a; --shadow:0 1px 2px rgba(10,40,45,.07),0 4px 14px rgba(10,40,45,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1819; --surface:#142324; --surface-2:#192c2d; --ink:#e2f0ef; --muted:#93b0b1;
+    --line:#25403f; --primary:#6fd0d0; --primary-ink:#082326; --accent:#6fcfa4; --accent-soft:#16302a;
+    --blue-soft:#183031; --warm:#e6b266; --warm-soft:#33280f; --good:#5cc08f; --good-soft:#163025;
+    --bad:#e59086; --bad-soft:#341d1b; --head:#0a2c35; --shadow:0 1px 2px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1819; --surface:#142324; --surface-2:#192c2d; --ink:#e2f0ef; --muted:#93b0b1;
+    --line:#25403f; --primary:#6fd0d0; --primary-ink:#082326; --accent:#6fcfa4; --accent-soft:#16302a;
+    --blue-soft:#183031; --warm:#e6b266; --warm-soft:#33280f; --good:#5cc08f; --good-soft:#163025;
+    --bad:#e59086; --bad-soft:#341d1b; --head:#0a2c35; --shadow:0 1px 2px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Nunito Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,h4{font-family:"Nunito Sans",system-ui,sans-serif;font-weight:800;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:var(--head);color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:"Nunito Sans",system-ui,sans-serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em;margin:0}
+.crumbs{margin:.25rem 0 0;font-size:1.05rem;color:#d9d3c4}
+.crumbs strong{color:#fff}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font-size:.8rem;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#f3f0e9;border:1px solid rgba(255,255,255,.2)}
+.theme{background:transparent;border:1px solid rgba(255,255,255,.35);color:#f3f0e9;border-radius:8px;padding:4px 10px;font-size:.85rem}
+
+/* nav */
+nav.sticky{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+nav.sticky .wrap{display:flex;gap:4px;align-items:center;overflow-x:auto;padding-top:6px;padding-bottom:6px}
+nav.sticky a{white-space:nowrap;text-decoration:none;color:var(--ink);padding:6px 12px;border-radius:8px;font-size:.92rem}
+nav.sticky a:hover{background:var(--blue-soft)}
+.progress-box{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);white-space:nowrap}
+.bar{width:110px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+section.sec{padding:34px 0 6px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--warm);font-weight:700;margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow);margin:0 0 18px}
+.card.soft{background:var(--blue-soft)}
+.card.warm{background:var(--warm-soft)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 10px 10px 0;margin:0 0 1em}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.ref{font-size:.82rem;color:var(--muted);font-style:italic}
+.tag{display:inline-block;font-size:.75rem;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary);font-weight:600;margin-right:6px}
+
+/* stage explorer */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:600}
+.tab[aria-selected="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.tabpanel ul{margin:.3em 0 1em;padding-left:1.2em}
+.tabpanel li{margin-bottom:.35em}
+
+/* flip cards */
+.flip{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-height:150px;text-align:left;box-shadow:var(--shadow);width:100%}
+.flip .front{font-family:"Nunito Sans",system-ui,sans-serif;font-size:1.3rem;font-weight:700}
+.flip .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+.flip .back{display:none}
+.flip.on{background:var(--accent-soft);border-color:var(--accent)}
+.flip.on .front{font-size:1.05rem;color:var(--accent)}
+.flip.on .back{display:block;margin-top:8px}
+.flip.on .hint{display:none}
+
+/* accordion */
+details.acc{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:8px}
+details.acc summary{padding:11px 14px;cursor:pointer;font-weight:600}
+details.acc .body{padding:0 14px 12px}
+
+/* activity shell */
+.act{position:relative}
+.act h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.act .done-mark{display:none;font-size:.78rem;background:var(--good-soft);color:var(--good);padding:2px 10px;border-radius:99px;font-weight:700}
+.act.done .done-mark{display:inline-block}
+.btn{background:var(--primary);color:var(--primary-ink);border:0;border-radius:9px;padding:8px 16px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--primary);border:1px solid var(--primary)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.opt:focus-visible,.tab:focus-visible,.flip:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+.opt{display:block;width:100%;text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 8px}
+.opt:hover:not(:disabled){border-color:var(--primary)}
+.opt.good{background:var(--good-soft);border-color:var(--good);color:var(--ink)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt.sel{border-color:var(--primary);background:var(--blue-soft)}
+.opt:disabled{cursor:default}
+.fb{min-height:1.4em;margin:8px 0 0;padding:0;border-radius:8px;font-size:.95rem}
+.fb.show{padding:9px 13px}
+.fb.good{background:var(--good-soft);color:var(--ink);border-left:4px solid var(--good)}
+.fb.bad{background:var(--bad-soft);color:var(--ink);border-left:4px solid var(--bad)}
+.fb.info{background:var(--blue-soft);border-left:4px solid var(--primary)}
+.shake{animation:shake .35s}
+@keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}html{scroll-behavior:auto}.bar i{transition:none}}
+.score{font-weight:700;color:var(--primary)}
+.qhead{font-weight:700;margin-bottom:8px}
+.qblock{border-top:1px dashed var(--line);padding-top:14px;margin-top:14px}
+.qblock:first-of-type{border-top:0;padding-top:0;margin-top:0}
+
+/* worked example */
+.steps{list-style:none;margin:12px 0 0;padding:0}
+.step{display:none;border:1px solid var(--line);border-left:5px solid var(--primary);background:var(--surface-2);border-radius:10px;padding:11px 14px;margin-bottom:9px}
+.step.show{display:block;animation:fade .3s}
+.step b.t{display:block;color:var(--primary);margin-bottom:2px}
+.step.final{border-left-color:var(--good);background:var(--good-soft)}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.problem{background:var(--warm-soft);border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+
+/* sequence */
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}
+.slot{min-height:78px;border:2px dashed var(--line);border-radius:10px;padding:8px 10px;font-size:.92rem;background:var(--surface-2)}
+.slot small{display:block;color:var(--muted);font-weight:700;margin-bottom:2px}
+.slot.filled{border-style:solid;border-color:var(--good);background:var(--good-soft)}
+.slot.next{border-color:var(--primary)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pool .opt{width:auto;margin:0}
+
+/* matching / sort */
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
+@media(max-width:560px){.match{grid-template-columns:1fr}}
+.match .opt.done{background:var(--good-soft);border-color:var(--good);opacity:.85}
+.sortcard{font-family:"Nunito Sans",system-ui,sans-serif;font-size:1.15rem;text-align:center;background:var(--warm-soft);border-radius:12px;padding:20px 12px;margin:10px 0}
+
+/* cloze */
+.cloze p{line-height:2.2}
+select{font:inherit;padding:4px 8px;border-radius:8px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+select.good{border-color:var(--good);background:var(--good-soft)}
+select.bad{border-color:var(--bad);background:var(--bad-soft)}
+textarea{width:100%;min-height:96px;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);resize:vertical}
+.checks{list-style:none;padding:0;margin:8px 0}
+.checks li{padding:4px 0}
+.checks .y{color:var(--good);font-weight:700}
+.checks .n{color:var(--warm);font-weight:700}
+.model{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 10px 10px 0;margin-top:8px}
+
+table.cmp{width:100%;border-collapse:collapse;font-size:.95rem}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.cmp th{background:var(--blue-soft)}
+
+.overlay{position:fixed;inset:0;background:rgba(17,22,29,.6);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 16px}
+.overlay[hidden]{display:none}
+.modal{background:var(--surface);border-radius:16px;max-width:620px;width:100%;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.35);border-top:5px solid var(--warm)}
+.bigscore{font-family:"Nunito Sans",system-ui,sans-serif;font-size:2.6rem;font-weight:700;color:var(--primary);line-height:1.1;margin:4px 0 8px}
+.bigscore small{font-size:1rem;color:var(--muted);font-weight:400}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden;min-width:70px}
+.meter i{display:block;height:100%;background:var(--accent)}
+footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.88rem}
+.sr{position:absolute;left:-9999px}
+@media print{header.top .theme,nav.sticky,.btn{display:none}.step{display:block}}
+.fig{display:flex;justify-content:center;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px;margin:6px 0 10px}
+.fig svg{max-width:100%;height:auto;max-height:150px}
+label.opt{display:flex;gap:10px;align-items:flex-start;cursor:pointer}label.opt input{margin-top:5px}
+label.opt.good{background:var(--good-soft);border-color:var(--good)}label.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+input.num,input.amt{font:inherit;padding:8px 10px;border-radius:8px;border:2px solid var(--line);background:var(--surface);color:var(--ink);width:9em;max-width:100%}
+input.num.good{border-color:var(--good);background:var(--good-soft)}input.num.bad{border-color:var(--bad);background:var(--bad-soft)}
+.who{font-size:.9rem;color:var(--muted);margin:0 0 8px}.who b{color:var(--ink)}
+.qa{margin:0 0 14px}.qa label{display:block;font-weight:700;margin-bottom:4px}
+.alloc{display:grid;grid-template-columns:1fr 9.5em;gap:8px 12px;align-items:center}
+.pct{font-weight:800;font-size:1.1rem}.pct.ok{color:var(--good)}.pct.no{color:var(--bad)}
+.saved{font-size:.8rem;color:var(--muted)}
+.wk{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.fact{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.fact>div{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.fact b.h{display:block;color:var(--primary);margin-bottom:3px}
+
+</style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <p class="school">Lincoln International Academy</p>
+      <p class="crumbs">Class: <strong>Growing in Values</strong> &nbsp;·&nbsp; Teacher: <strong>Nathaly López</strong> &nbsp;·&nbsp; Lesson: <strong>Road Safety: Cyclists and Signs</strong></p>
+    </div>
+    <div class="meta">
+      <span class="pill">8th Grade · Q02 Week 5 of 7</span>
+      <span class="pill">Unit 2: We live in community with respect and responsibility</span>
+      <button class="theme" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Light / Dark</button>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky" aria-label="Page sections">
+  <div class="wrap">
+    <a href="#learn">Learn</a>
+    <a href="#vocab">Vocabulary</a>
+    <a href="#examples">Worked examples</a>
+    <a href="#practice">Practice</a>
+    <a href="#reflect">Write &amp; reflect</a>
+    <div class="progress-box" aria-live="polite"><span id="progText">0 of 13 activities</span><div class="bar"><i id="progBar"></i></div></div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section class="sec" id="learn">
+  <div class="eyebrow">Road education · Cyclists and signs</div>
+  <h2>Cyclists and Traffic Signs</h2>
+  <div class="card soft">
+    <h3>Guiding question</h3>
+    <p><strong>“What do traffic signs tell us, and how can a cyclist stay safe and visible?”</strong></p>
+    <div class="callout"><strong>Learning target:</strong> I can classify vertical traffic signs by shape and color, explain the rules for riding a bicycle, and design a sign that teaches a safe behavior.</div>
+    <p class="ref" style="margin:0">Unit indicator: Shows respect for the road education rules as a pedestrian, cyclist and passenger in the places where they travel. &nbsp;·&nbsp; Textbook: <em>Creciendo en Valores</em> 8, pp. 124–127</p>
+  </div>
+  
+  <div class="card warm">
+    <h3>Signs speak a language everyone can read</h3>
+    <p><strong>Traffic signs</strong> communicate messages that tell pedestrians and drivers the correct and safe way to travel on public roads. Their <b>shape and color</b> tell us what kind of message it is, even before we read the symbol.</p>
+    <p style="margin:0">Cyclists must also follow the rules. <em>“Take care of your life, protect yourself, use the helmet.”</em> (textbook, p. 125)</p>
+  </div>
+  <div class="card">
+    <h3>The three kinds of vertical signs</h3>
+    <div class="fact">
+      <div><b class="h">Preventive (warning)</b>Diamond shape, black symbol on a yellow background. They warn drivers that there is <b>danger</b> on the road.<div class="fig" style="margin-top:8px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="120" role="img" aria-label="Yellow diamond warning sign: children crossing (school zone)"><polygon points="50,4 96,50 50,96 4,50" fill="#f7c81e" stroke="#111" stroke-width="3"/><g fill="#111"><circle cx="40" cy="32" r="5"/><path stroke="#111" stroke-width="3" fill="none" d="M40 38v18M33 44l7 4 7-4M40 56l-6 14M40 56l6 14"/><circle cx="60" cy="38" r="4"/><path stroke="#111" stroke-width="3" fill="none" d="M60 43v14M54 49l6 3 6-3M60 57l-5 12M60 57l5 12"/></g></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="120" role="img" aria-label="Yellow diamond warning sign: winding road ahead"><polygon points="50,4 96,50 50,96 4,50" fill="#f7c81e" stroke="#111" stroke-width="3"/><path d="M40 76c0-14 20-14 20-28s-20-14-20-28" fill="none" stroke="#111" stroke-width="7" stroke-linecap="round"/></svg></div></div>
+      <div><b class="h">Regulatory</b>Circular, black symbol, white background and a red border. They state <b>limits and prohibitions</b>. Not obeying them is an infraction.<div class="fig" style="margin-top:8px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="120" role="img" aria-label="Regulatory sign: speed limit 30"><circle cx="50" cy="50" r="44" fill="#fff" stroke="#c0262d" stroke-width="9"/><text x="50" y="62" font-size="38" font-weight="800" text-anchor="middle" fill="#111" font-family="Arial,sans-serif">30</text></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="120" role="img" aria-label="Regulatory sign: no parking"><circle cx="50" cy="50" r="44" fill="#fff" stroke="#c0262d" stroke-width="9"/><text x="50" y="66" font-size="46" font-weight="800" text-anchor="middle" fill="#111" font-family="Arial,sans-serif">P</text><line x1="22" y1="78" x2="78" y2="22" stroke="#c0262d" stroke-width="8"/></svg></div></div>
+      <div><b class="h">Informative</b>Rectangular, blue or green background with a white frame. They <b>identify roads and guide</b> the driver and give useful data for the trip.<div class="fig" style="margin-top:8px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="120" role="img" aria-label="Informative sign: hospital"><rect x="6" y="14" width="88" height="72" rx="8" fill="#1760b8" stroke="#fff" stroke-width="3"/><text x="50" y="68" font-size="52" font-weight="800" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif">H</text></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="120" role="img" aria-label="Informative sign: airport"><rect x="4" y="22" width="92" height="56" rx="6" fill="#1760b8" stroke="#fff" stroke-width="3"/><text x="50" y="58" font-size="15" font-weight="800" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif">AIRPORT</text></svg></div></div>
+    </div>
+    <p class="ref" style="margin:10px 0 0">Simplified drawings. Look for the real signs on your way to school.</p>
+  </div>
+
+  <h3>Key ideas</h3>
+  <p>Select each tab to read it. Say it in your own words before you move on.</p>
+  <div class="card">
+    <div class="tabs" role="tablist" aria-label="Key ideas" id="stageTabs"></div>
+    <div id="stagePanel" class="tabpanel" role="tabpanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="sec" id="vocab">
+  <div class="eyebrow">Key vocabulary</div>
+  <h2>Words to Know</h2>
+  <p>Tap a card to flip it. Say the meaning in your own words before you flip!</p>
+  <div class="grid g3" id="flips"></div>
+</section>
+
+<section class="sec" id="examples">
+  <div class="eyebrow">Step by step</div>
+  <h2>Worked Examples</h2>
+  <p>Each example shows how to think it through. Press <strong>Show next step</strong> and try to predict the next step before you reveal it. The steps you opened are remembered.</p>
+  <div class="card soft"><b>Reading any sign:</b> (1) What is its shape? (2) What are its colors? (3) Which type is it: preventive, regulatory or informative? (4) What should I do?</div>
+  <div id="exampleList"></div>
+</section>
+
+<section class="sec" id="practice">
+  <div class="eyebrow">Your turn</div>
+  <h2>Practice with Instant Feedback</h2>
+  <p>You get feedback right after every answer. Mistakes are part of learning, so use the explanations and try again. Everything you answer is saved to your account, so you can sign in from any device and continue.</p>
+  <div class="card act" id="act-quiz"><h3>1. Mastery Quiz (10 questions) <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-signs"><h3>2. Sign Categories <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-read"><h3>3. What Does It Mean? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-match"><h3>4. Match the Sign Type <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-cyc"><h3>5. Cyclist: Safe or Risky? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-multi"><h3>6. Select All That Apply <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-seq"><h3>7. Getting Ready for a Safe Ride <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-cloze"><h3>8. Complete the Sentences <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-scen"><h3>9. What Would You Do? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-design"><h3>10. Design a Sign <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-checklist"><h3>11. Cyclist Safety Checklist <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card soft" id="summaryCta" style="display:none">
+    <h3>All activities complete!</h3>
+    <p>Great work. See how you did on each activity.</p>
+    <button class="btn" type="button" id="openSummary">View my score summary</button>
+  </div>
+</section>
+
+<section class="sec" id="reflect">
+  <div class="eyebrow">In your own words</div>
+  <h2>Write and Reflect</h2>
+  <div class="callout warm"><strong>Your written answers are saved automatically</strong> and your teacher can read them. Write full sentences and use what you learned this week.</div>
+  <div class="card act" id="act-reflect"><h3>12. Five-Line Reflection <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-exit"><h3>13. Exit Ticket <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card">
+    <h3>Self-check</h3>
+    <ul><li>I can tell preventive, regulatory and informative signs apart.</li><li>I can list four rules for cyclists.</li><li>I can explain what the BRET do.</li><li>I completed my sign design and my exit ticket.</li></ul>
+  </div>
+  <p style="text-align:center;font-size:1.3rem;font-weight:800;margin:22px 0"><em>Signs and helmets save lives.</em></p>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Lincoln International Academy · Growing in Values · Ms. Nathaly López · 8th Grade, Q02 Week 5 (Semester 1, Unit 2).
+    <br>Based on the lesson plan "Road safety: cyclists and signs (S1_U2_C05)" and the textbook <em>Creciendo en Valores</em> 8 (pp. 124–127).
+  </div>
+</footer>
+
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="sumTitle" hidden>
+  <div class="modal">
+    <div class="eyebrow">Growing in Values · Week 5</div>
+    <h2 id="sumTitle">Your Score Summary</h2>
+    <div class="bigscore" id="sumBig"></div>
+    <p id="sumMsg"></p>
+    <table class="cmp" id="sumTable"></table>
+    <p class="ref">Scores count your latest try of each scored activity. Written activities show "Completed" when every answer is filled in.</p>
+    <div class="row"><button class="btn" type="button" id="closeSummary">Close</button><button class="btn ghost" type="button" id="reviewBtn">Practice again</button></div>
+  </div>
+</div>
+
+<script>
+window.GV = {"slug": "gv8-q2-week-5-road-safety-cyclists-signs", "label": "Q02 Week 5: Road Safety: Cyclists and Signs", "ideas": [{"tab": "1. Preventive signs", "title": "Preventive (warning) signs", "ref": "Textbook, p. 124", "pts": ["<b>Shape:<\/b> diamond. <b>Colors:<\/b> yellow background, black symbol.", "They tell drivers there is a <b>danger<\/b> ahead (for example children crossing, a curve in the road).", "When you see one, <b>slow down and be alert<\/b>."], "key": "A yellow diamond says: be careful, danger ahead."}, {"tab": "2. Regulatory signs", "title": "Regulatory signs", "ref": "Textbook, p. 124", "pts": ["<b>Shape:<\/b> circle. <b>Colors:<\/b> white background, red border, black symbol.", "They indicate <b>limitations and prohibitions<\/b> (for example a speed limit or no parking).", "If we do not respect them we commit an <b>infraction<\/b>."], "key": "A white circle with a red border says: this is a rule."}, {"tab": "3. Informative signs", "title": "Informative signs", "ref": "Textbook, p. 124", "pts": ["<b>Shape:<\/b> rectangle. <b>Colors:<\/b> blue or green background with a white frame.", "They <b>identify roads and guide<\/b> the driver and give useful information for the journey (for example a hospital, an airport, a wheelchair-accessible place).", "They do not warn of danger or give an order; they <b>inform<\/b>."], "key": "A blue or green rectangle says: here is some useful information."}, {"tab": "4. Helmet", "title": "The cyclist's helmet", "ref": "Textbook, pp. 124–125", "pts": ["Riding a bike is not just pedaling: there are rules and precautions.", "The most basic safety measure is the <b>helmet<\/b>.", "A badly given blow to the skull can cause serious injuries that affect our <b>thinking and movement<\/b>. That is why the helmet is important.", "<i>“Take care of your life, protect yourself, use the helmet.”<\/i>"], "key": "Protecting the head is a basic safety measure for every cyclist."}, {"tab": "5. Cyclist rules", "title": "Rules for riding a bicycle", "ref": "Textbook, pp. 125–126", "pts": ["Travel on the roadway <b>in the direction of traffic<\/b>, never against it. Use the <b>cycle path<\/b> if there is one.", "Ride on the right and <b>signal<\/b> before turning left, turning right or braking.", "Be <b>visible<\/b>: light clothes and reflective materials; <b>white light in front and red light at the back<\/b>.", "Always use the helmet. Do not drink alcohol before riding. Avoid carrying passengers or heavy loads, zigzagging or doing stunts.", "Do not hold on to another vehicle. Do not use headphones.", "Look at the pavement for holes and slippery spots; brake carefully when wet; keep a safe distance; keep brakes in good condition.", "Respect all signs: stop at red and give priority to pedestrians."], "key": "A responsible cyclist is visible, predictable and protected."}, {"tab": "6. BRET", "title": "Student Traffic Regulating Brigades (BRET)", "ref": "Textbook, pp. 126–127", "pts": ["The BRET exist to <b>protect the school community<\/b> from the risks of traffic around the school.", "Members share with other students what they learned about <b>safety, prevention and self-care<\/b>.", "They help protect students when they <b>enter and leave school<\/b> and cooperate in traffic control and pedestrian crossing near the school.", "They are important for <b>road education<\/b> in the school."], "key": "Students can lead road safety in their own school."}], "vocab": [["Preventive", "Warning: it tells you to prevent a danger."], ["Regulatory", "Sets a rule: a limit or a prohibition."], ["Informative", "Gives useful information, like a place or a direction."], ["Travel (transitar)", "To move along streets and roads."], ["Injury", "Harm to the body, such as a wound or a fracture."], ["Protection", "Something that keeps you safe from harm."], ["Infraction", "Breaking a rule or law."], ["Cycle path", "A lane or route made for bicycles."], ["Reflective", "Material that bounces light back so you can be seen at night."]], "examples": [{"title": "Example 1: Name the category of a sign", "problem": "You see a <b>yellow diamond<\/b> sign with two children. What kind of sign is it and what should you do?", "steps": [["Read the shape and color.", "Diamond, yellow background, black symbol."], ["Recall the categories.", "Diamond + yellow = <b>preventive<\/b> (warning)."], ["Read the symbol.", "Children crossing: there may be a school nearby."], ["Answer.", "It is a <b>preventive sign<\/b>. Slow down and be ready to stop.", true]]}, {"title": "Example 2: A cyclist's checklist", "problem": "<i>You will ride your bicycle to a friend's house at dusk.<\/i> What do you check before leaving?", "steps": [["Protect your head.", "Put on a helmet that fits."], ["Be seen.", "Light or reflective clothes, reflectors, <b>white light in front and red at the back<\/b>."], ["Check the bike.", "Brakes work; tires are in good condition."], ["Choose the route.", "Use the cycle path if there is one; otherwise ride on the right, in the direction of traffic."], ["Plan your signals.", "Signal before turning left, turning right and braking."], ["Answer.", "Helmet ✓ Visible ✓ Brakes ✓ Right route ✓ Signals ✓ No headphones ✓", true]]}, {"title": "Example 3: A rule or a warning?", "problem": "Is a round sign with a white background, a red border and the number 30 a warning, a rule or information?", "steps": [["Shape and color.", "Circle, white background, red border."], ["Which category?", "<b>Regulatory<\/b>."], ["What does it do?", "It sets a limit: the speed limit."], ["What if we ignore it?", "It is an <b>infraction<\/b> and it is dangerous."], ["Answer.", "A <b>rule<\/b> (regulatory sign): do not go faster than the limit.", true]]}, {"title": "Example 4: Design an informative sign", "problem": "Design an informative sign for your school and explain the safe behavior it teaches.", "steps": [["Choose the message.", "“Pedestrian crossing: look left, right and left.”"], ["Pick the category.", "It informs and guides: <b>informative<\/b>."], ["Choose shape and color.", "Rectangle, blue background, white frame."], ["Add the symbol.", "A simple figure of a person walking, with an arrow."], ["Explain the behavior.", "Cross only at the crossing and look three times."], ["Final design.", "<i>Blue rectangle with a white frame and a walking figure. Safe behavior: use the crossing and look left, right and left again.<\/i>", true]]}], "acts": [{"id": "act-quiz", "type": "quiz", "title": "Mastery Quiz (10 questions)", "intro": "Ten questions about signs and cyclist safety. Aim for 80% or higher.", "qs": [{"q": "What shape and color are preventive signs?", "o": ["Diamond, yellow background, black symbol", "Circle, white background, red border", "Rectangle, blue background", "Triangle, green background"], "a": 0, "e": "Preventive signs warn of danger."}, {"q": "What do regulatory signs indicate?", "o": ["Limitations and prohibitions", "Places to eat", "Useful trip information only", "Weather"], "a": 0, "e": "If we do not respect them we commit an infraction."}, {"q": "What shape and color are informative signs?", "o": ["Rectangle, blue or green background, white frame", "Diamond, yellow", "Circle, red border", "Octagon, red"], "a": 0, "e": "They guide and inform."}, {"q": "Which sign says: be careful, there may be children crossing?", "o": ["A yellow diamond", "A blue rectangle", "A white circle with a red border", "A green square"], "a": 0, "e": "A preventive sign.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Yellow diamond warning sign: children crossing (school zone)\"><polygon points=\"50,4 96,50 50,96 4,50\" fill=\"#f7c81e\" stroke=\"#111\" stroke-width=\"3\"/><g fill=\"#111\"><circle cx=\"40\" cy=\"32\" r=\"5\"/><path stroke=\"#111\" stroke-width=\"3\" fill=\"none\" d=\"M40 38v18M33 44l7 4 7-4M40 56l-6 14M40 56l6 14\"/><circle cx=\"60\" cy=\"38\" r=\"4\"/><path stroke=\"#111\" stroke-width=\"3\" fill=\"none\" d=\"M60 43v14M54 49l6 3 6-3M60 57l-5 12M60 57l5 12\"/><\/g><\/svg>"}, {"q": "What is the most basic safety measure for a cyclist?", "o": ["The helmet", "A loud horn", "A backpack", "Headphones"], "a": 0, "e": "A helmet protects the head from serious injury."}, {"q": "In which direction should a cyclist travel on the roadway?", "o": ["In the direction of traffic", "Against traffic", "In the middle of the road", "On the sidewalk crowded with people"], "a": 0, "e": "Never against traffic; use the cycle path if there is one."}, {"q": "Which lights should a bicycle have?", "o": ["White in front and red at the back", "Red in front and white at the back", "Blue on both sides", "No lights"], "a": 0, "e": "Regulation lights: white in front, red at the back."}, {"q": "Why should cyclists not use headphones?", "o": ["They reduce hearing and attention", "They are too heavy", "They are expensive", "They damage the bike"], "a": 0, "e": "Cyclists must hear traffic."}, {"q": "What is the BRET?", "o": ["The Student Traffic Regulating Brigades", "A kind of traffic sign", "A cycling race", "A helmet brand"], "a": 0, "e": "BRET help protect students near schools and spread road education."}, {"q": "What does a cyclist do before turning left, turning right or braking?", "o": ["Signal", "Speed up", "Close the eyes", "Honk"], "a": 0, "e": "Signals tell others what you will do."}]}, {"id": "act-signs", "type": "sort", "title": "Sign Categories", "intro": "Look at each sign: is it <b>preventive<\/b> (warning), <b>regulatory<\/b> (rule) or <b>informative<\/b> (information)? (Simplified drawings.)", "choices": [{"k": "P", "label": "⚠ Preventive"}, {"k": "R", "label": "⛔ Regulatory"}, {"k": "I", "label": "ℹ Informative"}], "cards": [["Sign 1", "P", "Yellow diamond: preventive (children crossing).", "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Yellow diamond warning sign: children crossing (school zone)\"><polygon points=\"50,4 96,50 50,96 4,50\" fill=\"#f7c81e\" stroke=\"#111\" stroke-width=\"3\"/><g fill=\"#111\"><circle cx=\"40\" cy=\"32\" r=\"5\"/><path stroke=\"#111\" stroke-width=\"3\" fill=\"none\" d=\"M40 38v18M33 44l7 4 7-4M40 56l-6 14M40 56l6 14\"/><circle cx=\"60\" cy=\"38\" r=\"4\"/><path stroke=\"#111\" stroke-width=\"3\" fill=\"none\" d=\"M60 43v14M54 49l6 3 6-3M60 57l-5 12M60 57l5 12\"/><\/g><\/svg>"], ["Sign 2", "P", "Yellow diamond: preventive (winding road ahead).", "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Yellow diamond warning sign: winding road ahead\"><polygon points=\"50,4 96,50 50,96 4,50\" fill=\"#f7c81e\" stroke=\"#111\" stroke-width=\"3\"/><path d=\"M40 76c0-14 20-14 20-28s-20-14-20-28\" fill=\"none\" stroke=\"#111\" stroke-width=\"7\" stroke-linecap=\"round\"/><\/svg>"], ["Sign 3", "R", "White circle with a red border: regulatory (speed limit).", "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Regulatory sign: speed limit 30\"><circle cx=\"50\" cy=\"50\" r=\"44\" fill=\"#fff\" stroke=\"#c0262d\" stroke-width=\"9\"/><text x=\"50\" y=\"62\" font-size=\"38\" font-weight=\"800\" text-anchor=\"middle\" fill=\"#111\" font-family=\"Arial,sans-serif\">30<\/text><\/svg>"], ["Sign 4", "R", "White circle with a red border: regulatory (no parking).", "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Regulatory sign: no parking\"><circle cx=\"50\" cy=\"50\" r=\"44\" fill=\"#fff\" stroke=\"#c0262d\" stroke-width=\"9\"/><text x=\"50\" y=\"66\" font-size=\"46\" font-weight=\"800\" text-anchor=\"middle\" fill=\"#111\" font-family=\"Arial,sans-serif\">P<\/text><line x1=\"22\" y1=\"78\" x2=\"78\" y2=\"22\" stroke=\"#c0262d\" stroke-width=\"8\"/><\/svg>"], ["Sign 5", "R", "White circle with a red border: regulatory (bicycles prohibited).", "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Regulatory sign: bicycles prohibited\"><circle cx=\"50\" cy=\"50\" r=\"44\" fill=\"#fff\" stroke=\"#c0262d\" stroke-width=\"9\"/><g fill=\"none\" stroke=\"#111\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"32\" cy=\"60\" r=\"10\"/><circle cx=\"68\" cy=\"60\" r=\"10\"/><path d=\"M32 60l12-20h16l8 20M44 40l10 20M40 34h8M58 34l2-6h6\"/><\/g><line x1=\"22\" y1=\"78\" x2=\"78\" y2=\"22\" stroke=\"#c0262d\" stroke-width=\"8\"/><\/svg>"], ["Sign 6", "I", "Blue rectangle: informative (hospital).", "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Informative sign: hospital\"><rect x=\"6\" y=\"14\" width=\"88\" height=\"72\" rx=\"8\" fill=\"#1760b8\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"50\" y=\"68\" font-size=\"52\" font-weight=\"800\" text-anchor=\"middle\" fill=\"#fff\" font-family=\"Arial,sans-serif\">H<\/text><\/svg>"], ["Sign 7", "I", "Blue rectangle: informative (airport).", "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Informative sign: airport\"><rect x=\"4\" y=\"22\" width=\"92\" height=\"56\" rx=\"6\" fill=\"#1760b8\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"50\" y=\"58\" font-size=\"15\" font-weight=\"800\" text-anchor=\"middle\" fill=\"#fff\" font-family=\"Arial,sans-serif\">AIRPORT<\/text><\/svg>"], ["Sign 8", "I", "Blue rectangle: informative (wheelchair-accessible place).", "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Informative sign: wheelchair accessible place\"><rect x=\"6\" y=\"14\" width=\"88\" height=\"72\" rx=\"8\" fill=\"#1760b8\" stroke=\"#fff\" stroke-width=\"3\"/><g fill=\"none\" stroke=\"#fff\" stroke-width=\"5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"46\" cy=\"34\" r=\"3\" fill=\"#fff\"/><path d=\"M46 42v14h14l6 14\"/><circle cx=\"44\" cy=\"64\" r=\"11\"/><\/g><\/svg>"], ["Sign 9", "I", "Blue rectangle: informative (bicycle path).", "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Informative sign: bicycle path\"><rect x=\"6\" y=\"14\" width=\"88\" height=\"72\" rx=\"8\" fill=\"#1760b8\" stroke=\"#fff\" stroke-width=\"3\"/><g fill=\"none\" stroke=\"#fff\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"32\" cy=\"60\" r=\"10\"/><circle cx=\"68\" cy=\"60\" r=\"10\"/><path d=\"M32 60l12-20h16l8 20M44 40l10 20M40 34h8M58 34l2-6h6\"/><\/g><\/svg>"]]}, {"id": "act-read", "type": "quiz", "title": "What Does It Mean?", "intro": "Read each sign and choose its meaning.", "qs": [{"q": "What does this sign mean?", "o": ["Danger: children may be crossing; slow down", "Hospital ahead", "No parking", "Speed limit"], "a": 0, "e": "Yellow diamond with children: preventive.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Yellow diamond warning sign: children crossing (school zone)\"><polygon points=\"50,4 96,50 50,96 4,50\" fill=\"#f7c81e\" stroke=\"#111\" stroke-width=\"3\"/><g fill=\"#111\"><circle cx=\"40\" cy=\"32\" r=\"5\"/><path stroke=\"#111\" stroke-width=\"3\" fill=\"none\" d=\"M40 38v18M33 44l7 4 7-4M40 56l-6 14M40 56l6 14\"/><circle cx=\"60\" cy=\"38\" r=\"4\"/><path stroke=\"#111\" stroke-width=\"3\" fill=\"none\" d=\"M60 43v14M54 49l6 3 6-3M60 57l-5 12M60 57l5 12\"/><\/g><\/svg>"}, {"q": "What does this sign mean?", "o": ["Danger: the road winds ahead; slow down", "Children crossing", "Airport", "No entry"], "a": 0, "e": "A winding road: preventive.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Yellow diamond warning sign: winding road ahead\"><polygon points=\"50,4 96,50 50,96 4,50\" fill=\"#f7c81e\" stroke=\"#111\" stroke-width=\"3\"/><path d=\"M40 76c0-14 20-14 20-28s-20-14-20-28\" fill=\"none\" stroke=\"#111\" stroke-width=\"7\" stroke-linecap=\"round\"/><\/svg>"}, {"q": "What does this sign mean?", "o": ["Do not go faster than 30", "Minimum speed 30", "Parking for 30 cars", "30 minutes of rest"], "a": 0, "e": "A regulatory speed limit.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Regulatory sign: speed limit 30\"><circle cx=\"50\" cy=\"50\" r=\"44\" fill=\"#fff\" stroke=\"#c0262d\" stroke-width=\"9\"/><text x=\"50\" y=\"62\" font-size=\"38\" font-weight=\"800\" text-anchor=\"middle\" fill=\"#111\" font-family=\"Arial,sans-serif\">30<\/text><\/svg>"}, {"q": "What does this sign mean?", "o": ["Parking is not allowed here", "Parking is available", "Taxi stop", "A parking garage is near"], "a": 0, "e": "A regulatory prohibition.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Regulatory sign: no parking\"><circle cx=\"50\" cy=\"50\" r=\"44\" fill=\"#fff\" stroke=\"#c0262d\" stroke-width=\"9\"/><text x=\"50\" y=\"66\" font-size=\"46\" font-weight=\"800\" text-anchor=\"middle\" fill=\"#111\" font-family=\"Arial,sans-serif\">P<\/text><line x1=\"22\" y1=\"78\" x2=\"78\" y2=\"22\" stroke=\"#c0262d\" stroke-width=\"8\"/><\/svg>"}, {"q": "What does this sign mean?", "o": ["Bicycles are not allowed", "Bike lane", "Bike for rent", "Bike repair"], "a": 0, "e": "A regulatory prohibition.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Regulatory sign: bicycles prohibited\"><circle cx=\"50\" cy=\"50\" r=\"44\" fill=\"#fff\" stroke=\"#c0262d\" stroke-width=\"9\"/><g fill=\"none\" stroke=\"#111\" stroke-width=\"4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"32\" cy=\"60\" r=\"10\"/><circle cx=\"68\" cy=\"60\" r=\"10\"/><path d=\"M32 60l12-20h16l8 20M44 40l10 20M40 34h8M58 34l2-6h6\"/><\/g><line x1=\"22\" y1=\"78\" x2=\"78\" y2=\"22\" stroke=\"#c0262d\" stroke-width=\"8\"/><\/svg>"}, {"q": "What does this sign tell you?", "o": ["There is a hospital nearby", "Parking is forbidden", "Danger ahead", "School zone"], "a": 0, "e": "An informative sign.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Informative sign: hospital\"><rect x=\"6\" y=\"14\" width=\"88\" height=\"72\" rx=\"8\" fill=\"#1760b8\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"50\" y=\"68\" font-size=\"52\" font-weight=\"800\" text-anchor=\"middle\" fill=\"#fff\" font-family=\"Arial,sans-serif\">H<\/text><\/svg>"}, {"q": "What does this sign tell you?", "o": ["The way to the airport", "Parking is forbidden", "Danger ahead", "Children crossing"], "a": 0, "e": "An informative sign.", "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Informative sign: airport\"><rect x=\"4\" y=\"22\" width=\"92\" height=\"56\" rx=\"6\" fill=\"#1760b8\" stroke=\"#fff\" stroke-width=\"3\"/><text x=\"50\" y=\"58\" font-size=\"15\" font-weight=\"800\" text-anchor=\"middle\" fill=\"#fff\" font-family=\"Arial,sans-serif\">AIRPORT<\/text><\/svg>"}]}, {"id": "act-match", "type": "match", "title": "Match the Sign Type", "intro": "Tap the feature on the left, then the sign type.", "pairs": [["Diamond, yellow background", "Preventive sign"], ["Circle, white background, red border", "Regulatory sign"], ["Rectangle, blue or green background", "Informative sign"], ["Warns of danger on the road", "Preventive sign (purpose)"], ["Sets limits and prohibitions", "Regulatory sign (purpose)"], ["Guides and gives trip data", "Informative sign (purpose)"]]}, {"id": "act-cyc", "type": "sort", "title": "Cyclist: Safe or Risky?", "intro": "Is each cyclist behavior <b>safe<\/b> or <b>risky<\/b>?", "choices": [{"k": "S", "label": "🟢 Safe"}, {"k": "R", "label": "🔴 Risky"}], "cards": [["Wearing a helmet that fits on every ride.", "S", "The helmet protects the head.", "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"Bicycle helmet\"><path d=\"M14 62a36 36 0 0 1 72 0z\" fill=\"#1f7a8c\" stroke=\"#0b3d4a\" stroke-width=\"3\"/><path d=\"M14 62h72v8H14z\" fill=\"#0b3d4a\"/><path d=\"M30 28v34M50 24v38M70 28v34\" stroke=\"#fff\" stroke-width=\"3\" opacity=\".7\"/><\/svg>"], ["Riding against the direction of traffic.", "R", "Always travel in the direction of traffic."], ["Using a white front light and a red rear light at night.", "S", "Visibility is key."], ["Listening to music with headphones while riding.", "R", "Headphones reduce hearing and attention."], ["Holding on to a moving truck to go faster.", "R", "Never hold on to another vehicle."], ["Signaling before turning left.", "S", "Signals tell others your plan."], ["Zigzagging between cars to impress friends.", "R", "Stunts destabilize you and endanger others."], ["Slowing down and braking carefully on wet pavement.", "S", "Wet pavement is slippery."], ["Checking that the brakes work before leaving.", "S", "Keep the bicycle in good condition."], ["Carrying a friend on the handlebars.", "R", "Avoid carrying passengers."]]}, {"id": "act-multi", "type": "multi", "title": "Select All That Apply", "intro": "Some questions have more than one right answer.", "qs": [{"q": "Which make a cyclist more visible?", "o": ["Light or reflective clothes", "White front light", "Red rear light", "Dark clothes at night"], "a": [0, 1, 2], "e": "Dark clothes at night make you hard to see."}, {"q": "Which are regulatory signs?", "o": ["Speed limit", "No parking", "Bicycles prohibited", "Hospital"], "a": [0, 1, 2], "e": "The hospital sign is informative."}, {"q": "What are the tasks of the BRET?", "o": ["Help students enter and leave school safely", "Share what they learned about safety and prevention", "Cooperate in traffic control near the school", "Fine drivers"], "a": [0, 1, 2], "e": "The BRET are students, not police."}, {"q": "Which should a cyclist avoid?", "o": ["Zigzagging", "Carrying heavy loads", "Using headphones", "Using a cycle path"], "a": [0, 1, 2], "e": "Cycle paths are the safest place to ride."}]}, {"id": "act-seq", "type": "seq", "title": "Getting Ready for a Safe Ride", "intro": "Put the steps in the best order before you start to ride.", "items": [{"t": "Check that the brakes and tires are in good condition", "hint": "Check the bike before anything else.", "why": "A bike in good condition is the base of a safe ride."}, {"t": "Put on a helmet that fits", "hint": "Protect the head.", "why": "The helmet is the most basic safety measure."}, {"t": "Put on light or reflective clothes and turn on the lights", "hint": "Make yourself visible.", "why": "White light in front, red at the back."}, {"t": "Choose the cycle path or the right side of the roadway", "hint": "Choose where to ride.", "why": "Use the cycle path if there is one."}, {"t": "Signal before you turn or brake", "hint": "While riding.", "why": "Signals tell others your plan."}, {"t": "Stop at red lights and give way to pedestrians", "hint": "When you reach a crossing.", "why": "Respect signs and pedestrian priority."}]}, {"id": "act-cloze", "type": "cloze", "title": "Complete the Sentences", "intro": "Choose the word that completes each sentence.", "items": [["Preventive signs are ", ["yellow", "green", "red"], 0, " diamonds.", "Yellow diamond, black symbol."], ["Regulatory signs have a white background and a ", ["red", "blue", "green"], 0, " border.", "They set limits and prohibitions."], ["Informative signs are ", ["rectangular", "round", "triangular"], 0, " with a blue or green background.", "They inform and guide."], ["A cyclist should travel in the ", ["direction", "opposite", "middle"], 0, " of traffic.", "Never against traffic."], ["Bicycles should have a white light in front and a ", ["red", "blue", "yellow"], 0, " light at the back.", "Regulation lights."], ["The BRET help protect ", ["students", "tourists", "drivers"], 0, " near schools.", "Student Traffic Regulating Brigades."]]}, {"id": "act-scen", "type": "scenario", "title": "What Would You Do?", "intro": "Choose the best response in each situation.", "steps": [{"s": "Your friends ride bikes without helmets because “nothing ever happens.” What do you do?", "o": [{"t": "Wear yours and explain that a blow to the head can cause serious injuries that affect thinking and movement.", "p": 2, "f": "You set an example and give a reason."}, {"t": "Take yours off to fit in.", "p": 0, "f": "Peer pressure is not a reason to risk your head."}, {"t": "Wear it but say nothing.", "p": 1, "f": "Good for you, but you could help them too."}]}, {"s": "You see a yellow diamond sign with a curve ahead while riding. What is the best response?", "o": [{"t": "Slow down, stay on the right and be ready for the curve.", "p": 2, "f": "A preventive sign asks us to be careful."}, {"t": "Speed up to pass the curve quickly.", "p": 0, "f": "Speeding on a curve is dangerous."}, {"t": "Ignore it because it is not a rule.", "p": 1, "f": "It is a warning; it is smart to follow it."}]}, {"s": "It is getting dark and your bike has no lights. What do you do?", "o": [{"t": "Do not ride until you have the white front and red rear lights and reflective clothes, or ask an adult to take you.", "p": 2, "f": "Being visible is part of safety."}, {"t": "Ride fast to get there before it is dark.", "p": 0, "f": "Speed does not replace visibility."}, {"t": "Ride very carefully on the road.", "p": 1, "f": "Careful is good but you will still be hard to see."}]}, {"s": "You are a BRET member at the school gate and a student runs to cross outside the crossing. What do you do?", "o": [{"t": "Stop them kindly, guide them to the crossing and remind them of the three looks.", "p": 2, "f": "You use your training to protect them."}, {"t": "Shout at them from far away.", "p": 1, "f": "Calling attention helps, but guiding is better."}, {"t": "Ignore it because the traffic is slow.", "p": 0, "f": "Even slow traffic is risky."}]}]}, {"id": "act-design", "type": "open", "title": "Design a Sign", "rtitle": "Sign design and the safe behavior it teaches", "min": 12, "intro": "Design an <b>informative<\/b> sign for your school or neighborhood and explain the safe behavior it teaches. See Worked Example 4.", "prompts": [{"q": "1. The message of my sign:", "rows": 2}, {"q": "2. Its category, shape, colors and symbol:", "rows": 3}, {"q": "3. The safe behavior it teaches and who needs it:", "rows": 3}]}, {"id": "act-checklist", "type": "open", "title": "Cyclist Safety Checklist", "rtitle": "Cyclist and signs checklist", "min": 12, "intro": "Write a checklist of <b>five safe habits<\/b> for cyclists (or for walking and riding near bicycles) and one sign you will watch for this week.", "prompts": [{"q": "1. Five safe cycling habits:", "rows": 5}, {"q": "2. A sign near your home or school (category and meaning):", "rows": 3}]}, {"id": "act-reflect", "type": "open", "reflect": true, "title": "Five-Line Reflection", "rtitle": "Reflection", "min": 25, "who": true, "intro": "Apply what you learned at home, at school or in your community.", "prompts": [{"q": "Write about five lines. Where do you see traffic signs on your way to school? What do they tell you, and how can you help others follow them?", "rows": 6}]}, {"id": "act-exit", "type": "open", "reflect": true, "title": "Exit Ticket", "rtitle": "Exit ticket", "min": 20, "who": true, "intro": "Answer in your own words before you leave this page.", "prompts": [{"q": "1. Name the three types of vertical signs and describe the shape and color of each.", "rows": 4}, {"q": "2. Write two rules for cyclists and explain why they matter.", "rows": 4}]}]};
+
+</script>
+<script>
+(function(){
+"use strict";
+const G = window.GV;
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+function h(tag, attrs, ...kids){
+  const el = document.createElement(tag);
+  for(const k in (attrs||{})){
+    if(k==='class') el.className = attrs[k];
+    else if(k==='html') el.innerHTML = attrs[k];
+    else if(k.startsWith('on')) el.addEventListener(k.slice(2), attrs[k]);
+    else el.setAttribute(k, attrs[k]);
+  }
+  kids.flat(Infinity).forEach(c => { if(c!=null) el.append(c.nodeType ? c : document.createTextNode(c)); });
+  return el;
+}
+const SLUG = G.slug;
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const plain = s => String(s).replace(/<[^>]*>/g,'').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();
+const studentName = () => (window.LiaSync && LiaSync.name && LiaSync.name()) || '';
+
+/* ---------- saved answers + stable (seeded) answer order ----------
+   Every tap/choice is recorded and replayed on the next visit (localStorage, mirrored to the database by LiaSync).
+   Shuffles are seeded, so the order is the same on every visit; the correct option is spread over all positions.
+   "Try again" starts a new round (new order, that activity's saved answers cleared). */
+const AKEY = 'gv-ans-' + SLUG;
+let AD = store.get(AKEY, {}) || {};
+const asave = () => store.set(AKEY, AD);
+let curAct = null, shufN = 0, CNT = {}, replaying = false; const STARTED = {};
+function rng(seed){ let a = seed>>>0; return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a>>>15), 1 | a); t = (t + Math.imul(t ^ (t>>>7), 61 | t)) ^ t; return ((t ^ (t>>>14))>>>0) / 4294967296; }; }
+function strSeed(s){ let x = 2166136261; for(let i=0;i<s.length;i++){ x ^= s.charCodeAt(i); x = Math.imul(x, 16777619); } return x>>>0; }
+function actRnd(){ shufN++; return rng(strSeed(curAct + '|' + ((AD[curAct] && AD[curAct].round) || 0) + '|' + shufN)); }
+function beginAct(id){ if(STARTED[id]){ AD[id] = {round: ((AD[id] && AD[id].round) || 0) + 1, a: []}; asave(); } STARTED[id] = 1; curAct = id; shufN = 0; CNT = {}; }
+function armAct(id, mount){
+  curAct = null;
+  const d = AD[id] = AD[id] || {round: 0, a: []};
+  const cs = $$('button.opt, button.btn:not(.ghost), select, input[type=checkbox]', mount);
+  cs.forEach((c, i) => c.addEventListener(c.tagName === 'SELECT' ? 'change' : 'click', () => {
+    if(replaying) return;
+    if(d.a.length < 600){ d.a.push(c.tagName === 'SELECT' ? {i, v: c.value} : {i}); asave(); }
+  }));
+  if(d.a.length){
+    replaying = true;
+    d.a.forEach(x => { const c = cs[x.i]; if(!c) return; if(c.tagName === 'SELECT'){ c.value = x.v; c.dispatchEvent(new Event('change')); } else c.click(); });
+    replaying = false;
+  }
+}
+function placeOk(arr){
+  const ok = arr.find(x => x.ok); if(!ok) return shuffle(arr);
+  const n = arr.length, wr = shuffle(arr.filter(x => x !== ok)), k = (CNT[n] = (CNT[n] || 0) + 1) - 1, target = ((k % n) * (n === 4 ? 3 : 2) + Math.floor(k / n)) % n;
+  wr.splice(target, 0, ok); return wr;
+}
+function shuffle(a){ a=a.slice(); const rnd=curAct?actRnd():Math.random; for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function feedback(el, kind, text){ el.className = 'fb show ' + kind; el.textContent = text; }
+
+/* ---------- theme (own toggle: wired here) ---------- */
+(function(){
+  const root = document.documentElement;
+  try{ const t = localStorage.getItem('lia-theme'); if(t==='light'||t==='dark') root.dataset.theme = t; }catch(e){}
+  $('#themeBtn').addEventListener('click', () => {
+    const dark = root.dataset.theme==='dark' || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try{ localStorage.setItem('lia-theme', root.dataset.theme); }catch(e){}
+  });
+})();
+
+/* ---------- progress & scores ---------- */
+const ACTS = G.acts.map(a => [a.id, a.title]);
+const TOTAL = ACTS.length;
+const SKEY = 'gv-scores-' + SLUG;
+const scores = store.get(SKEY, {}) || {};
+function reportProgress(){   // tells the teacher dashboard how far this student is
+  try{ let c=0,t=0,n=0; ACTS.forEach(a=>{ const s=scores[a[0]]; if(s){ n++; c+=s[0]; t+=s[1]; } });
+    if(window.LiaSync && LiaSync.report) LiaSync.report({solved:n,total:TOTAL,score:c,max:t}); }catch(e){}
+}
+function paintProgress(){
+  reportProgress();
+  const n = ACTS.filter(a => scores[a[0]]).length;
+  $('#progText').textContent = n + ' of ' + TOTAL + ' activities';
+  $('#progBar').style.width = (n/TOTAL*100) + '%';
+  $$('.act').forEach(a => a.classList.toggle('done', !!scores[a.id]));
+  $('#summaryCta').style.display = n===TOTAL ? '' : 'none';
+}
+function record(id, correct, total){
+  const was = ACTS.filter(a => scores[a[0]]).length;
+  scores[id] = [correct, total];
+  store.set(SKEY, scores);
+  paintProgress();
+  if(was===TOTAL-1 && ACTS.every(a => scores[a[0]])) setTimeout(openSummary, 900);
+}
+function unrecord(id){ if(scores[id]){ delete scores[id]; store.set(SKEY, scores); paintProgress(); } }
+function openSummary(){
+  let c=0,t=0;
+  const rows = ACTS.map(([id,name]) => { const [a,b]=scores[id]||[0,0]; c+=a; t+=b;
+    return h('tr',{}, h('td',{},name), h('td',{}, b ? a+' / '+b : (scores[id] ? 'Completed ✓' : '—')), h('td',{}, h('div',{class:'meter'}, h('i',{style:'width:'+(b?a/b*100:(scores[id]?100:0))+'%'})))); });
+  const pct = t ? Math.round(c/t*100) : 0;
+  $('#sumBig').innerHTML = pct + '% <small>(' + c + ' of ' + t + ' points on the scored activities)</small>';
+  $('#sumMsg').textContent = pct>=90 ? 'Outstanding! You can explain this week\'s topic and put it into practice.'
+    : pct>=80 ? 'Secure! You have a solid understanding. Review the activities with lower scores to make it even stronger.'
+    : pct>=60 ? 'Good progress. Go back to the Worked Examples, then retry the activities with lower scores.'
+    : 'Keep going! Re-read the key ideas and the Worked Examples, then try the activities again.';
+  const tbl = $('#sumTable'); tbl.innerHTML='';
+  tbl.append(h('tr',{},h('th',{},'Activity'),h('th',{},'Result'),h('th',{},'')), ...rows);
+  $('#overlay').hidden = false; $('#closeSummary').focus();
+}
+function closeSummary(){ $('#overlay').hidden = true; }
+$('#openSummary').addEventListener('click', openSummary);
+$('#closeSummary').addEventListener('click', closeSummary);
+$('#reviewBtn').addEventListener('click', () => { closeSummary(); $('#practice').scrollIntoView(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeSummary(); });
+
+/* ---------- key ideas (tabs) ---------- */
+(function(){
+  const tabs = $('#stageTabs'), panel = $('#stagePanel'); if(!tabs) return;
+  function show(i){
+    $$('.tab', tabs).forEach((b,j) => b.setAttribute('aria-selected', j===i));
+    const s = G.ideas[i];
+    panel.innerHTML = '';
+    panel.append(h('h3', {}, s.title), s.ref ? h('p', {class:'ref'}, s.ref) : null, h('ul', {}, s.pts.map(p => h('li', {html:p}))), h('div', {class:'callout'}, h('strong', {}, 'Key idea: '), s.key));
+  }
+  G.ideas.forEach((s,i) => tabs.append(h('button', {class:'tab', role:'tab', type:'button', 'aria-selected':'false', onclick:()=>show(i)}, s.tab)));
+  show(0);
+})();
+
+/* ---------- vocabulary cards ---------- */
+G.vocab.forEach(([t,d]) => {
+  const b = h('button', {class:'flip', type:'button', 'aria-pressed':'false'}, h('div', {class:'front'}, t), h('div', {class:'hint'}, 'Tap to see the meaning'), h('div', {class:'back'}, d));
+  b.addEventListener('click', () => { const on = b.classList.toggle('on'); b.setAttribute('aria-pressed', on); });
+  $('#flips').append(b);
+});
+
+/* ---------- worked examples (steps shown are saved) ---------- */
+const EKEY = 'gv-ex-' + SLUG, EX = store.get(EKEY, {}) || {};
+G.examples.forEach((ex, ei) => {
+  const list = h('ol', {class:'steps'});
+  const items = ex.steps.map(([t,b,fin]) => { const li = h('li', {class:'step' + (fin?' final':'')}, h('b',{class:'t'}, t), h('span',{html:b})); list.append(li); return li; });
+  let n = Math.min(+EX[ei]||0, items.length);
+  const next = h('button', {class:'btn', type:'button'}, 'Show next step');
+  const all = h('button', {class:'btn ghost', type:'button'}, 'Show all');
+  const reset = h('button', {class:'btn ghost', type:'button'}, 'Hide steps');
+  const status = h('span', {class:'ref', 'aria-live':'polite'}, '');
+  function paint(){ items.forEach((li,i) => li.classList.toggle('show', i<n)); next.disabled = n>=items.length; status.textContent = n + ' of ' + items.length + ' steps shown'; EX[ei] = n; store.set(EKEY, EX); }
+  next.addEventListener('click', () => { if(n<items.length) n++; paint(); items[n-1].scrollIntoView({block:'nearest', behavior:'smooth'}); });
+  all.addEventListener('click', () => { n=items.length; paint(); });
+  reset.addEventListener('click', () => { n=0; paint(); });
+  paint();
+  $('#exampleList').append(h('div', {class:'card'}, h('h3', {}, ex.title), h('div', {class:'problem', html:'<b>Situation:</b> ' + ex.problem}), h('div', {class:'row', style:'margin-top:12px'}, next, all, reset, status), list));
+});
+
+/* ---------- activity engines ---------- */
+const mountOf = id => $('#'+id+' .mount');
+function withRound(id, render0){ const mount = mountOf(id); function render(){ beginAct(id); render0(mount, render); armAct(id, mount); } render(); }
+function againBtn(render){ const b = h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again'); b.addEventListener('click', render); return b; }
+
+/* 1. multiple choice (optional picture per question) */
+function mountQuiz(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    let answered = 0, correct = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = againBtn(render);
+    function paintSummary(){
+      if(answered<a.qs.length){ summary.textContent = 'Answered ' + answered + ' of ' + a.qs.length; return; }
+      summary.textContent = 'Score: ' + correct + ' / ' + a.qs.length + (correct===a.qs.length ? ' – perfect!' : correct/a.qs.length>=.8 ? ' – secure (80% or higher).' : ' – review the explanations and try again.');
+      again.style.display = ''; record(a.id, correct, a.qs.length);
+    }
+    if(a.intro) mount.append(h('p', {html:a.intro}));
+    a.qs.forEach((q,qi) => {
+      const order = placeOk(q.o.map((t,i) => ({t, ok:i===q.a})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const btns = order.map(o => {
+        const b = h('button', {class:'opt', type:'button'}, o.t);
+        b.addEventListener('click', () => {
+          if(b.disabled) return;
+          answered++; btns.forEach(x => x.disabled = true);
+          if(o.ok){ correct++; b.classList.add('good'); feedback(fb,'good','✓ Correct. ' + q.e); }
+          else { b.classList.add('bad','shake'); btns[order.findIndex(x=>x.ok)].classList.add('good'); feedback(fb,'bad','✗ Not quite. ' + q.e); }
+          paintSummary();
+        });
+        return b;
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, (qi+1) + '. ' + q.q), q.svg ? h('div',{class:'fig',html:q.svg}) : null, btns, fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  });
+}
+
+/* 2. select ALL that apply */
+function mountMulti(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    let answered = 0, correct = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = againBtn(render);
+    function paintSummary(){
+      if(answered<a.qs.length){ summary.textContent = 'Answered ' + answered + ' of ' + a.qs.length; return; }
+      summary.textContent = 'Score: ' + correct + ' / ' + a.qs.length + ' (a question counts only when you pick every right choice and no wrong one).';
+      again.style.display = ''; record(a.id, correct, a.qs.length);
+    }
+    if(a.intro) mount.append(h('p', {html:a.intro}));
+    a.qs.forEach((q,qi) => {
+      const order = shuffle(q.o.map((t,i) => ({t, ok:q.a.includes(i)})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const boxes = order.map(o => { const cb = h('input', {type:'checkbox'}); return {cb, o, l:h('label', {class:'opt'}, cb, h('span', {}, o.t))}; });
+      const check = h('button', {class:'btn', type:'button'}, 'Check my answer');
+      check.addEventListener('click', () => {
+        if(check.disabled) return;
+        check.disabled = true; answered++;
+        const ok = boxes.every(b => b.cb.checked === b.o.ok);
+        boxes.forEach(b => { b.cb.disabled = true; if(b.o.ok) b.l.classList.add('good'); else if(b.cb.checked) b.l.classList.add('bad'); });
+        if(ok){ correct++; feedback(fb,'good','✓ Yes, that is every right choice. ' + q.e); } else feedback(fb,'bad','✗ Not quite. The right choices are highlighted. ' + q.e);
+        paintSummary();
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, (qi+1) + '. ' + q.q + '  (select all that apply)'), boxes.map(b => b.l), h('div',{class:'row'}, check), fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  });
+}
+
+/* 3. scenarios: choose the best response (2 = best, 1 = partly, 0 = not helpful) */
+function mountScenario(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    let answered = 0, pts = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = againBtn(render);
+    function paintSummary(){
+      if(answered<a.steps.length){ summary.textContent = 'Answered ' + answered + ' of ' + a.steps.length; return; }
+      summary.textContent = 'Points: ' + pts + ' / ' + (2*a.steps.length) + ' (best response = 2, partly helpful = 1, not helpful = 0).';
+      again.style.display = ''; record(a.id, pts, 2*a.steps.length);
+    }
+    if(a.intro) mount.append(h('p', {html:a.intro}));
+    a.steps.forEach((st,si) => {
+      const order = placeOk(st.o.map(o => ({...o, ok:o.p===2})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const btns = order.map(o => {
+        const b = h('button', {class:'opt', type:'button'}, o.t);
+        b.addEventListener('click', () => {
+          if(b.disabled) return;
+          answered++; pts += o.p; btns.forEach(x => x.disabled = true);
+          b.classList.add(o.p===2 ? 'good' : o.p===1 ? 'sel' : 'bad');
+          if(o.p<2) btns[order.findIndex(x=>x.ok)].classList.add('good');
+          feedback(fb, o.p===2?'good':o.p===1?'info':'bad', (o.p===2?'✓ Best response. ':o.p===1?'◑ Partly helpful. ':'✗ Not helpful. ') + o.f + (o.p<2 ? ' Better: ' + order.find(x=>x.ok).t : ''));
+          paintSummary();
+        });
+        return b;
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, 'Situation ' + (si+1)), h('p',{html:st.s}), btns, fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  });
+}
+
+/* 4. put the steps in order */
+function mountSeq(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const items = a.items; let next = 0, mistakes = 0;
+    const slots = items.map((_,i) => h('div', {class:'slot' + (i===0?' next':'')}, h('small', {}, 'Step ' + (i+1)), h('span', {}, '?')));
+    const fb = h('div', {class:'fb', 'aria-live':'polite'});
+    let pool = shuffle(items.map((it,i) => ({...it, i})));
+    while(items.length>1 && pool.every((p,k) => p.i===k)) pool = shuffle(pool);
+    const poolEl = h('div', {class:'pool'});
+    const again = againBtn(render);
+    pool.forEach(p => {
+      const b = h('button', {class:'opt', type:'button'}, p.t);
+      b.addEventListener('click', () => {
+        if(b.disabled) return;
+        if(p.i===next){
+          b.disabled = true; b.style.display='none';
+          slots[next].classList.remove('next'); slots[next].classList.add('filled'); slots[next].lastChild.textContent = p.t;
+          feedback(fb,'good','✓ Yes! ' + p.why); next++;
+          if(next<items.length) slots[next].classList.add('next');
+          else { feedback(fb,'good','🎉 Complete! ' + (mistakes===0 ? 'No mistakes.' : mistakes + ' mistake' + (mistakes>1?'s':'') + ' along the way.') + ' ' + p.why); again.style.display=''; record(a.id, Math.max(0, items.length-mistakes), items.length); }
+        } else { mistakes++; b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'), 600); feedback(fb,'bad','Not yet. Hint for step ' + (next+1) + ': ' + items[next].hint); }
+      });
+      poolEl.append(b);
+    });
+    mount.append(h('p', {html:a.intro}), h('div', {class:'slots'}, slots), h('p', {class:'ref'}, 'Tap the step that belongs in the next empty box.'), poolEl, fb, h('div', {class:'row', style:'margin-top:10px'}, again));
+  });
+}
+
+/* 5. match pairs */
+function mountMatch(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const pairs = a.pairs; let sel=null, matched=0, mistakes=0;
+    const fb = h('div',{class:'fb','aria-live':'polite'}); const again = againBtn(render);
+    const L = pairs.map((p,i) => h('button',{class:'opt',type:'button','data-i':i},p[0]));
+    const R = shuffle(pairs.map((p,i) => ({i,t:p[1]}))).map(p => h('button',{class:'opt',type:'button','data-i':p.i},p.t));
+    L.forEach(b => b.addEventListener('click',()=>{ if(b.classList.contains('done')) return; L.forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); sel=b; feedback(fb,'info','Now choose the matching item on the right.'); }));
+    R.forEach(b => b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      if(!sel){ feedback(fb,'info','First tap an item on the left.'); return; }
+      if(sel.dataset.i===b.dataset.i){
+        sel.classList.remove('sel'); sel.classList.add('done'); b.classList.add('done'); sel=null; matched++; feedback(fb,'good','✓ Match!');
+        if(matched===pairs.length){ feedback(fb,'good','🎉 All matched' + (mistakes? ' with ' + mistakes + ' miss' + (mistakes>1?'es':'') : ' with no misses') + '.'); again.style.display=''; record(a.id, Math.max(0, pairs.length-mistakes), pairs.length); }
+      } else { mistakes++; b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'),600); feedback(fb,'bad','Not that one. Re-read and try another.'); }
+    }));
+    mount.append(h('p',{html:a.intro}),h('div',{class:'match'},h('div',{},L),h('div',{},R)),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  });
+}
+
+/* 6. sort cards into categories (optional picture per card) */
+function mountSort(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const deck = shuffle(a.cards); let i=0, right=0;
+    const fb = h('div',{class:'fb','aria-live':'polite'}); const card = h('div',{class:'sortcard'});
+    const btns = a.choices.map(c => h('button',{class:'btn',type:'button'},c.label));
+    const count = h('p',{class:'ref'}); const again = againBtn(render);
+    function paint(){
+      if(i>=deck.length){ card.textContent='Finished!'; btns.forEach(b=>b.disabled=true); count.textContent=''; return; }
+      card.innerHTML=''; if(deck[i][3]) card.append(h('div',{class:'fig',html:deck[i][3]})); card.append(h('span',{},deck[i][0])); count.textContent='Card ' + (i+1) + ' of ' + deck.length;
+    }
+    function pick(k){
+      if(i>=deck.length) return;
+      const c=deck[i], ok=c[1]===k; if(ok) right++;
+      const msg=(ok?'✓ Correct. ':'✗ Not quite. ') + c[2]; i++;
+      if(i>=deck.length){ paint(); feedback(fb, right===deck.length?'good':'info', msg + ' — Score: ' + right + ' / ' + deck.length + '.'); again.style.display=''; record(a.id, right, deck.length); }
+      else { feedback(fb, ok?'good':'bad', msg); paint(); }
+    }
+    btns.forEach((b,j) => b.addEventListener('click',()=>pick(a.choices[j].k)));
+    mount.append(h('p',{html:a.intro}),count,card,h('div',{class:'row'},btns),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+    paint();
+  });
+}
+
+/* 7. fill in the blanks (drop-down) */
+function mountCloze(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const S = a.items, ok=new Set(); let wrong=0;
+    const fb = h('div',{class:'fb','aria-live':'polite'}); const again = againBtn(render); const box = h('div',{class:'cloze'});
+    S.forEach((s,k) => {
+      const sel = h('select',{'aria-label':'Choose the word for sentence ' + (k+1)}, h('option',{value:''},'— choose —'), s[1].map((o,j)=>h('option',{value:j},o)));
+      sel.addEventListener('change',()=>{
+        if(sel.value===''){ sel.className=''; return; }
+        if(+sel.value===s[2]){ sel.className='good'; sel.disabled=true; ok.add(k); feedback(fb,'good','✓ ' + s[4]);
+          if(ok.size===S.length){ feedback(fb,'good','🎉 All sentences complete!'); again.style.display=''; record(a.id, Math.max(0, S.length-wrong), S.length); } }
+        else { wrong++; sel.className='bad shake'; setTimeout(()=>sel.classList.remove('shake'),600); feedback(fb,'bad','Not quite – try another word. Think about what you learned this week.'); }
+      });
+      box.append(h('p',{}, s[0], sel, s[3]));
+    });
+    mount.append(h('p',{html:a.intro}),box,fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  });
+}
+
+/* 8. written answers: saved word for word and listed on the teacher's "Student responses" page (resp- key) */
+function mountOpen(a){
+  const mount = mountOf(a.id), key = 'resp-' + SLUG + '-' + a.id, n = a.prompts.length, min = a.min || 12;
+  const qs = a.prompts.map(p => plain(p.q));
+  let R = store.get(key, null);
+  if(!R || !Array.isArray(R.a)) R = {a:[]};
+  R = {title: G.label + ' – ' + (a.rtitle || a.title), q: qs, a: qs.map((_,i) => String(R.a[i] || ''))};
+  const status = h('span', {class:'saved'}, '');
+  function check(){
+    const done = R.a.every(t => t.trim().length >= min);
+    status.textContent = done ? '✓ Saved. Your teacher can read your answers.' : 'Saved automatically as you type. Write at least a full sentence for each answer to complete this activity.';
+    if(done) record(a.id, 0, 0); else unrecord(a.id);
+  }
+  if(a.intro) mount.append(h('p', {html:a.intro}));
+  if(a.who){ const nm = studentName(); mount.append(h('p', {class:'who'}, 'Name: ', h('b', {}, nm || '(sign in to show your name)'), '  ·  Week: ' + G.label)); }
+  a.prompts.forEach((p,i) => {
+    const ta = h('textarea', {id:a.id+'-q'+i, rows:p.rows||4, 'aria-label':plain(p.q)});
+    ta.value = R.a[i];
+    ta.addEventListener('input', () => { R.a[i] = ta.value; store.set(key, R); check(); });
+    ta.addEventListener('blur', () => { R.a[i] = ta.value; store.set(key, R); });
+    mount.append(h('div', {class:'qa'}, h('label', {for:a.id+'-q'+i, html:p.q}), p.hint ? h('div',{class:'ref',style:'margin:0 0 4px'},p.hint) : null, ta));
+  });
+  if(a.model) mount.append(h('details', {class:'acc'}, h('summary', {}, 'See a model answer'), h('div', {class:'body', html:a.model})));
+  mount.append(status);
+  check();
+}
+
+/* 9. share a budget (percent) and explain the choice – saved as written answers */
+function mountAlloc(a){
+  const mount = mountOf(a.id), key = 'resp-' + SLUG + '-' + a.id, names = a.items.map(x => x.n);
+  const qs = names.map(n => 'Share of the budget for: ' + n).concat([plain(a.reason)]);
+  let R = store.get(key, null); if(!R || !Array.isArray(R.a)) R = {a:[]};
+  R = {title: G.label + ' – ' + (a.rtitle || a.title), q: qs, a: qs.map((_,i) => String(R.a[i] == null ? '' : R.a[i]))};
+  const total = a.total || 100, tot = h('span', {class:'pct'}), status = h('span', {class:'saved'}, '');
+  const inputs = a.items.map((it,i) => { const inp = h('input', {class:'amt', type:'number', min:0, max:total, step:1, id:a.id+'-i'+i, 'aria-label':'Percent for ' + it.n});
+    inp.value = R.a[i]; inp.addEventListener('input', () => { R.a[i] = inp.value; store.set(key, R); paint(); }); return inp; });
+  const why = h('textarea', {id:a.id+'-why', rows:4, 'aria-label':plain(a.reason)}); why.value = R.a[names.length];
+  why.addEventListener('input', () => { R.a[names.length] = why.value; store.set(key, R); paint(); });
+  function paint(){
+    const s = inputs.reduce((t,i) => t + (+i.value||0), 0);
+    tot.textContent = 'Total: ' + s + '% of ' + total + '%'; tot.className = 'pct ' + (s===total ? 'ok' : 'no');
+    const done = s===total && why.value.trim().length >= 15;
+    status.textContent = done ? '✓ Saved. Your teacher can read your budget and your reasons.' : (s===total ? 'Now explain your biggest choice (at least a full sentence).' : (s>total ? 'You gave away more than ' + total + '%: lower some numbers.' : 'Share all ' + total + '% of the budget: ' + (total-s) + '% still to assign.'));
+    if(done) record(a.id, 0, 0); else unrecord(a.id);
+  }
+  mount.append(h('p', {html:a.intro}), h('div', {class:'alloc'}, a.items.map((it,i) => [h('label', {for:a.id+'-i'+i, html:'<b>' + it.n + '</b><br><span class="ref">' + (it.hint||'') + '</span>'}), inputs[i]])), h('p', {}, tot),
+    h('div', {class:'qa'}, h('label', {for:a.id+'-why', html:a.reason}), why), status);
+  paint();
+}
+
+/* 10. numbers practice: every student gets their own set of numbers (seeded by the sign-in) */
+function mountCalc(a){
+  const mount = mountOf(a.id), skey = 'gv-calc-' + SLUG + '-' + a.id, rkey = 'resp-' + SLUG + '-' + a.id, gen = (window.GV_GENS||{})[a.gen];
+  let S = store.get(skey, null); if(!S || !Array.isArray(S.t)) S = {seed:'', t:[], d:[]};
+  const sd = (window.LiaSync && LiaSync.seed && LiaSync.seed()) || ''; if(!S.seed && sd) S.seed = sd;
+  const n = a.n || 5, Q = [];
+  for(let k=0;k<n;k++){ Q.push(gen(rng(strSeed((S.seed||'demo') + '|' + a.id + '|' + k)), k)); S.t[k] = S.t[k] || []; S.d[k] = S.d[k] || 0; }
+  store.set(skey, S);
+  function saveResp(){ store.set(rkey, {title: G.label + ' – ' + (a.rtitle||a.title), q: Q.map((q,k) => (k+1) + '. ' + plain(q.q)), a: Q.map((q,k) => S.t[k].length ? 'Tries: ' + S.t[k].join(' → ') + (S.d[k] ? ' (solved)' : '') : '') }); }
+  let first = 0;
+  const summary = h('p', {class:'score', 'aria-live':'polite'});
+  function paint(){
+    const solved = S.d.filter(Boolean).length; first = Q.filter((q,k) => S.d[k] && S.t[k].length===1).length;
+    summary.textContent = solved < n ? 'Solved ' + solved + ' of ' + n : 'Done! Solved on the first try: ' + first + ' of ' + n + '.';
+    if(solved === n) record(a.id, first, n);
+  }
+  mount.append(h('p', {html:a.intro}), h('p', {class:'ref'}, 'Your numbers are your own: classmates get different ones. Type a number, then press Check. Use a calculator if you like.'));
+  Q.forEach((q,k) => {
+    const fb = h('div', {class:'fb', 'aria-live':'polite'}), inp = h('input', {class:'num', type:'text', inputmode:'decimal', 'aria-label':'Answer to question ' + (k+1)}), btn = h('button', {class:'btn', type:'button'}, 'Check');
+    function lock(good){ inp.disabled = true; btn.disabled = true; inp.classList.add(good ? 'good' : 'bad'); }
+    function show(){ if(S.d[k]){ const last = S.t[k][S.t[k].length-1], v = parseFloat(String(last).replace(',', '.')), good = isFinite(v) && Math.abs(v - q.ans) <= (q.tol == null ? 0.01 : q.tol); inp.value = last; lock(good);
+      if(good) feedback(fb,'good','✓ ' + q.e + ' Answer: ' + q.ans + (q.unit ? ' ' + q.unit : '') + '.'); else feedback(fb,'bad','The answer is ' + q.ans + (q.unit ? ' ' + q.unit : '') + '. ' + q.e); } }
+    btn.addEventListener('click', () => {
+      const raw = inp.value.trim(); if(!raw) return;
+      const v = parseFloat(raw.replace(',', '.')); S.t[k].push(raw);
+      if(isFinite(v) && Math.abs(v - q.ans) <= (q.tol == null ? 0.01 : q.tol)){ S.d[k] = 1; lock(true); feedback(fb,'good','✓ ' + q.e + ' Answer: ' + q.ans + (q.unit ? ' ' + q.unit : '') + '.'); }
+      else if(S.t[k].length >= 3){ S.d[k] = 1; lock(false); feedback(fb,'bad','The answer is ' + q.ans + (q.unit ? ' ' + q.unit : '') + '. ' + q.e); }
+      else { inp.classList.add('bad','shake'); setTimeout(()=>inp.classList.remove('bad','shake'),600); feedback(fb,'bad','Not yet. Hint: ' + q.hint); }
+      store.set(skey, S); saveResp(); paint();
+    });
+    mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead', html:(k+1) + '. ' + q.q}), h('div', {class:'row'}, inp, q.unit ? h('span',{class:'ref'},q.unit) : null, btn), fb));
+    show();
+  });
+  mount.append(summary); saveResp(); paint();
+}
+
+const MOUNT = {quiz:mountQuiz, multi:mountMulti, scenario:mountScenario, seq:mountSeq, match:mountMatch, sort:mountSort, cloze:mountCloze, open:mountOpen, alloc:mountAlloc, calc:mountCalc};
+G.acts.forEach(a => MOUNT[a.type](a));
+paintProgress();
+})();
+
+</script>
+</body>
+</html>

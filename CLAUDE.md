@@ -7,13 +7,14 @@ Setup/usage for humans: `supabase/README.md`. This file is the engineering contr
 ## 1. Layout (and what is generated – never hand-edit generated files)
 ```
 index.html                 GENERATED – teacher home (sign-in gate, links to share, master preview code). There is NO public student index.
-faith-formation/  ciencias-sociales/  math/  physics/
+faith-formation/  ciencias-sociales/  math/  physics/  growing-in-values/
     <lesson>.html          one self-contained page each (YOU write these)
     lia-config.js          GENERATED per folder: Supabase url + anon key, area, areaName, pages{slug: label}
 teacher/                   GENERATED from shared/*.template.html: admin.html (students & codes), scores.html, access.html (assign lessons), responses.html (students' saved text answers); index.html only redirects to /
 shared/lia-sync.js         the ONE module every lesson page loads (sign-in, saving, restore, access control, theme toggle)
 shared/*.template.html     sources of the teacher pages – edit these, then run the build
 supabase/schema.sql        the whole database; idempotent (safe to re-run); keep it that way
+tools/gv/                  generator of the Growing in Values weekly pages (weekN.py content + shared engine.js/css); run: python3 tools/gv/make.py, then build_site.py
 tools/make_icons.js        renders favicon.png fallbacks from each favicon.svg (after changing icons)
 tools/build_site.py        run after adding/moving/renaming a page or editing a template/theme: python3 tools/build_site.py
 tools/test/                local test harness (Postgres + Supabase mock + Playwright) – see §8
@@ -38,6 +39,8 @@ links between lessons that a student might not be assigned.
 7. **Browser-tab icon:** every page gets its folder's icon automatically (`<folder>/favicon.svg` + `favicon.png`, linked from the loader block). Never add your own `<link rel="icon">`. To change an icon edit `ICON_GLYPHS`/`ICON_BG` in `tools/build_site.py`, run the build, then `node tools/make_icons.js` to refresh the PNG fallbacks. A new folder needs an entry in both tables.
 8. Run `python3 tools/build_site.py` (adds the loader block to `<head>`, regenerates `lia-config.js` pages map and the root/teacher pages), run the tests, commit.
    The block between `<!--LIA-SYNC-START-->` and `<!--LIA-SYNC-END-->` is owned by the build script – leave it.
+
+**`growing-in-values/` pages are generated** from `tools/gv/weekN.py` (one self-contained .html each, same contract as every page: saved answers, `LiaSync.report`, `resp-` written answers, seeded MCQ order, `LiaSync.seed()` for the per-student numbers). Edit the generator, run `python3 tools/gv/make.py` and `python3 tools/build_site.py`; test with `tools/test/e2e_gv.js`.
 
 ## 3. Progress-saving contract (what every page must do)
 * **Mirror mode:** `lia-sync.js` wraps `Storage.prototype.setItem/removeItem`; every non-`lia-*` localStorage key the page writes is mirrored to
@@ -64,7 +67,7 @@ links between lessons that a student might not be assigned.
 * The signed-in badge (`#liaUser`), the sign-in gate (`#liaGate`) and the "not available for your class" card are drawn by the module – don't restyle or duplicate them.
 
 ## 4. Sign-in, codes and areas
-* Four **areas** = folders: `faith-formation`, `ciencias-sociales`, `math` (Algebra, AP Statistics, Pre-Calculus…) and `physics` (all `physics1-` / `physics2-` pages) (`CFG.area`). One student list + codes per area; **same code works on every page of that folder**,
+* Five **areas** = folders: `faith-formation`, `ciencias-sociales`, `math` (Algebra, AP Statistics, Pre-Calculus…), `physics` (all `physics1-` / `physics2-` pages) and `growing-in-values` (Growing in Values plans, 8th grade: `gv8-q<quarter>-week-<n>-<topic>.html`) (`CFG.area`). One student list + codes per area; **same code works on every page of that folder**,
   different folders = different students. Codes: upper-case letters/digits, ≥4 (shown `XXXX-XXXX`), unique per area, generated 8 chars from an unambiguous alphabet (no 0/O/1/I/L). Never use student IDs as codes.
 * Student fields: `grade` = the number only (`10`), `class_name` = the **subject** (`Physics II`). A student in several subjects lists them separated by ` / ` (`Physics II / Pre-Calculus`). Section ("10 A") and school ID go in `notes`.
 * The anon/publishable key in `lia-config.js` is public by design; all student access goes through three SECURITY DEFINER functions
@@ -102,4 +105,4 @@ you could not verify against production.
 ## 9. Git / delivery
 Develop on the branch the session names; commit with clear messages; push; do not open a PR unless asked. `main` is what GitHub Pages serves, so new work is only live after the branch is merged.
 Run `python3 tools/build_site.py` before committing (generated files must be in sync). Give the user the **full direct link** for any new lesson
-(`https://marlon-netizen.github.io/classes/<folder>/<file>.html`; folder = `math`, `physics`, `ciencias-sociales` or `faith-formation`) and tell them what to run in Supabase, if anything.
+(`https://marlon-netizen.github.io/classes/<folder>/<file>.html`; folder = `math`, `physics`, `ciencias-sociales`, `faith-formation` or `growing-in-values`) and tell them what to run in Supabase, if anything.

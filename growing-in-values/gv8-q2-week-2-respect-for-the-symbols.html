@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Respect and Proper Use of the Symbols | Lincoln International Academy</title>
+<meta name="description" content="Interactive study page for Growing in Values (8th grade, Q02 Week 2): how to respect and use the flag and the national anthem, at school and online, with practice and a class decalogue.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#eef5f4; --surface:#fbfefd; --surface-2:#f1f8f7; --ink:#14292b; --muted:#4f6769;
+  --line:#cfe0de; --primary:#0e6f73; --primary-ink:#ffffff; --accent:#2f8f6f; --accent-soft:#dcf0e8;
+  --blue-soft:#dcefed; --warm:#c47f20; --warm-soft:#fbefd6; --good:#23764f; --good-soft:#dff2e7;
+  --bad:#a8463c; --bad-soft:#f8e3df; --head:#0b3d4a; --shadow:0 1px 2px rgba(10,40,45,.07),0 4px 14px rgba(10,40,45,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1819; --surface:#142324; --surface-2:#192c2d; --ink:#e2f0ef; --muted:#93b0b1;
+    --line:#25403f; --primary:#6fd0d0; --primary-ink:#082326; --accent:#6fcfa4; --accent-soft:#16302a;
+    --blue-soft:#183031; --warm:#e6b266; --warm-soft:#33280f; --good:#5cc08f; --good-soft:#163025;
+    --bad:#e59086; --bad-soft:#341d1b; --head:#0a2c35; --shadow:0 1px 2px rgba(0,0,0,.45);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1819; --surface:#142324; --surface-2:#192c2d; --ink:#e2f0ef; --muted:#93b0b1;
+    --line:#25403f; --primary:#6fd0d0; --primary-ink:#082326; --accent:#6fcfa4; --accent-soft:#16302a;
+    --blue-soft:#183031; --warm:#e6b266; --warm-soft:#33280f; --good:#5cc08f; --good-soft:#163025;
+    --bad:#e59086; --bad-soft:#341d1b; --head:#0a2c35; --shadow:0 1px 2px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Nunito Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3,h4{font-family:"Nunito Sans",system-ui,sans-serif;font-weight:800;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:var(--head);color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:"Nunito Sans",system-ui,sans-serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em;margin:0}
+.crumbs{margin:.25rem 0 0;font-size:1.05rem;color:#d9d3c4}
+.crumbs strong{color:#fff}
+.meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pill{font-size:.8rem;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.12);color:#f3f0e9;border:1px solid rgba(255,255,255,.2)}
+.theme{background:transparent;border:1px solid rgba(255,255,255,.35);color:#f3f0e9;border-radius:8px;padding:4px 10px;font-size:.85rem}
+
+/* nav */
+nav.sticky{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+nav.sticky .wrap{display:flex;gap:4px;align-items:center;overflow-x:auto;padding-top:6px;padding-bottom:6px}
+nav.sticky a{white-space:nowrap;text-decoration:none;color:var(--ink);padding:6px 12px;border-radius:8px;font-size:.92rem}
+nav.sticky a:hover{background:var(--blue-soft)}
+.progress-box{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--muted);white-space:nowrap}
+.bar{width:110px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+
+section.sec{padding:34px 0 6px}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;color:var(--warm);font-weight:700;margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:var(--shadow);margin:0 0 18px}
+.card.soft{background:var(--blue-soft)}
+.card.warm{background:var(--warm-soft)}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 10px 10px 0;margin:0 0 1em}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.ref{font-size:.82rem;color:var(--muted);font-style:italic}
+.tag{display:inline-block;font-size:.75rem;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary);font-weight:600;margin-right:6px}
+
+/* stage explorer */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.tab{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:8px 14px;font-weight:600}
+.tab[aria-selected="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.tabpanel ul{margin:.3em 0 1em;padding-left:1.2em}
+.tabpanel li{margin-bottom:.35em}
+
+/* flip cards */
+.flip{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;min-height:150px;text-align:left;box-shadow:var(--shadow);width:100%}
+.flip .front{font-family:"Nunito Sans",system-ui,sans-serif;font-size:1.3rem;font-weight:700}
+.flip .hint{font-size:.8rem;color:var(--muted);margin-top:6px}
+.flip .back{display:none}
+.flip.on{background:var(--accent-soft);border-color:var(--accent)}
+.flip.on .front{font-size:1.05rem;color:var(--accent)}
+.flip.on .back{display:block;margin-top:8px}
+.flip.on .hint{display:none}
+
+/* accordion */
+details.acc{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-bottom:8px}
+details.acc summary{padding:11px 14px;cursor:pointer;font-weight:600}
+details.acc .body{padding:0 14px 12px}
+
+/* activity shell */
+.act{position:relative}
+.act h3{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.act .done-mark{display:none;font-size:.78rem;background:var(--good-soft);color:var(--good);padding:2px 10px;border-radius:99px;font-weight:700}
+.act.done .done-mark{display:inline-block}
+.btn{background:var(--primary);color:var(--primary-ink);border:0;border-radius:9px;padding:8px 16px;font-weight:600}
+.btn.ghost{background:transparent;color:var(--primary);border:1px solid var(--primary)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn:focus-visible,.opt:focus-visible,.tab:focus-visible,.flip:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+
+.opt{display:block;width:100%;text-align:left;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 14px;margin:0 0 8px}
+.opt:hover:not(:disabled){border-color:var(--primary)}
+.opt.good{background:var(--good-soft);border-color:var(--good);color:var(--ink)}
+.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+.opt.sel{border-color:var(--primary);background:var(--blue-soft)}
+.opt:disabled{cursor:default}
+.fb{min-height:1.4em;margin:8px 0 0;padding:0;border-radius:8px;font-size:.95rem}
+.fb.show{padding:9px 13px}
+.fb.good{background:var(--good-soft);color:var(--ink);border-left:4px solid var(--good)}
+.fb.bad{background:var(--bad-soft);color:var(--ink);border-left:4px solid var(--bad)}
+.fb.info{background:var(--blue-soft);border-left:4px solid var(--primary)}
+.shake{animation:shake .35s}
+@keyframes shake{20%{transform:translateX(-5px)}40%{transform:translateX(5px)}60%{transform:translateX(-3px)}80%{transform:translateX(3px)}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}html{scroll-behavior:auto}.bar i{transition:none}}
+.score{font-weight:700;color:var(--primary)}
+.qhead{font-weight:700;margin-bottom:8px}
+.qblock{border-top:1px dashed var(--line);padding-top:14px;margin-top:14px}
+.qblock:first-of-type{border-top:0;padding-top:0;margin-top:0}
+
+/* worked example */
+.steps{list-style:none;margin:12px 0 0;padding:0}
+.step{display:none;border:1px solid var(--line);border-left:5px solid var(--primary);background:var(--surface-2);border-radius:10px;padding:11px 14px;margin-bottom:9px}
+.step.show{display:block;animation:fade .3s}
+.step b.t{display:block;color:var(--primary);margin-bottom:2px}
+.step.final{border-left-color:var(--good);background:var(--good-soft)}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.problem{background:var(--warm-soft);border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+
+/* sequence */
+.slots{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:10px 0}
+.slot{min-height:78px;border:2px dashed var(--line);border-radius:10px;padding:8px 10px;font-size:.92rem;background:var(--surface-2)}
+.slot small{display:block;color:var(--muted);font-weight:700;margin-bottom:2px}
+.slot.filled{border-style:solid;border-color:var(--good);background:var(--good-soft)}
+.slot.next{border-color:var(--primary)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.pool .opt{width:auto;margin:0}
+
+/* matching / sort */
+.match{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}
+@media(max-width:560px){.match{grid-template-columns:1fr}}
+.match .opt.done{background:var(--good-soft);border-color:var(--good);opacity:.85}
+.sortcard{font-family:"Nunito Sans",system-ui,sans-serif;font-size:1.15rem;text-align:center;background:var(--warm-soft);border-radius:12px;padding:20px 12px;margin:10px 0}
+
+/* cloze */
+.cloze p{line-height:2.2}
+select{font:inherit;padding:4px 8px;border-radius:8px;border:2px solid var(--line);background:var(--surface);color:var(--ink)}
+select.good{border-color:var(--good);background:var(--good-soft)}
+select.bad{border-color:var(--bad);background:var(--bad-soft)}
+textarea{width:100%;min-height:96px;font:inherit;padding:10px;border-radius:10px;border:1px solid var(--line);background:var(--surface);color:var(--ink);resize:vertical}
+.checks{list-style:none;padding:0;margin:8px 0}
+.checks li{padding:4px 0}
+.checks .y{color:var(--good);font-weight:700}
+.checks .n{color:var(--warm);font-weight:700}
+.model{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 14px;border-radius:0 10px 10px 0;margin-top:8px}
+
+table.cmp{width:100%;border-collapse:collapse;font-size:.95rem}
+table.cmp th,table.cmp td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+table.cmp th{background:var(--blue-soft)}
+
+.overlay{position:fixed;inset:0;background:rgba(17,22,29,.6);z-index:50;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:24px 16px}
+.overlay[hidden]{display:none}
+.modal{background:var(--surface);border-radius:16px;max-width:620px;width:100%;padding:24px;box-shadow:0 10px 40px rgba(0,0,0,.35);border-top:5px solid var(--warm)}
+.bigscore{font-family:"Nunito Sans",system-ui,sans-serif;font-size:2.6rem;font-weight:700;color:var(--primary);line-height:1.1;margin:4px 0 8px}
+.bigscore small{font-size:1rem;color:var(--muted);font-weight:400}
+.meter{height:8px;background:var(--line);border-radius:99px;overflow:hidden;min-width:70px}
+.meter i{display:block;height:100%;background:var(--accent)}
+footer{margin-top:40px;border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.88rem}
+.sr{position:absolute;left:-9999px}
+@media print{header.top .theme,nav.sticky,.btn{display:none}.step{display:block}}
+.fig{display:flex;justify-content:center;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:10px;margin:6px 0 10px}
+.fig svg{max-width:100%;height:auto;max-height:150px}
+label.opt{display:flex;gap:10px;align-items:flex-start;cursor:pointer}label.opt input{margin-top:5px}
+label.opt.good{background:var(--good-soft);border-color:var(--good)}label.opt.bad{background:var(--bad-soft);border-color:var(--bad)}
+input.num,input.amt{font:inherit;padding:8px 10px;border-radius:8px;border:2px solid var(--line);background:var(--surface);color:var(--ink);width:9em;max-width:100%}
+input.num.good{border-color:var(--good);background:var(--good-soft)}input.num.bad{border-color:var(--bad);background:var(--bad-soft)}
+.who{font-size:.9rem;color:var(--muted);margin:0 0 8px}.who b{color:var(--ink)}
+.qa{margin:0 0 14px}.qa label{display:block;font-weight:700;margin-bottom:4px}
+.alloc{display:grid;grid-template-columns:1fr 9.5em;gap:8px 12px;align-items:center}
+.pct{font-weight:800;font-size:1.1rem}.pct.ok{color:var(--good)}.pct.no{color:var(--bad)}
+.saved{font-size:.8rem;color:var(--muted)}
+.wk{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0}
+.fact{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.fact>div{background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.fact b.h{display:block;color:var(--primary);margin-bottom:3px}
+
+</style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <p class="school">Lincoln International Academy</p>
+      <p class="crumbs">Class: <strong>Growing in Values</strong> &nbsp;·&nbsp; Teacher: <strong>Nathaly López</strong> &nbsp;·&nbsp; Lesson: <strong>Respect and Proper Use of the Symbols</strong></p>
+    </div>
+    <div class="meta">
+      <span class="pill">8th Grade · Q02 Week 2 of 7</span>
+      <span class="pill">Unit 2: We live in community with respect and responsibility</span>
+      <button class="theme" id="themeBtn" type="button" aria-label="Toggle light or dark theme">Light / Dark</button>
+    </div>
+  </div>
+</header>
+
+<nav class="sticky" aria-label="Page sections">
+  <div class="wrap">
+    <a href="#learn">Learn</a>
+    <a href="#vocab">Vocabulary</a>
+    <a href="#examples">Worked examples</a>
+    <a href="#practice">Practice</a>
+    <a href="#reflect">Write &amp; reflect</a>
+    <div class="progress-box" aria-live="polite"><span id="progText">0 of 12 activities</span><div class="bar"><i id="progBar"></i></div></div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<section class="sec" id="learn">
+  <div class="eyebrow">Identity · Respect for the symbols</div>
+  <h2>Respecting and Using the Symbols Properly</h2>
+  <div class="card soft">
+    <h3>Guiding question</h3>
+    <p><strong>“How can I show respect for the flag and the anthem at school and on screen?”</strong></p>
+    <div class="callout"><strong>Learning target:</strong> I can explain the rules for hoisting, lowering, folding and placing the flag and for using the anthem, judge school acts and digital posts, and write a decalogue of respectful use.</div>
+    <p class="ref" style="margin:0">Unit indicator: Shows respect for the patriotic and national symbols in the family, the school and the community. &nbsp;·&nbsp; Textbook: <em>Creciendo en Valores</em> 8, pp. 90–96</p>
+  </div>
+  
+  <div class="card warm">
+    <h3>Respect is something we do</h3>
+    <p>The law on the <strong>characteristics and use of the patriotic symbols</strong> tells us how to treat the flag and the anthem. But the law is only the minimum. Real respect is an <strong>attitude</strong>: we stand properly, sing with feeling, take care of the symbols and do not use them as a joke or as advertising.</p>
+    <p style="margin:0">This week you will study the rules, practice them, and write a <b>decalogue</b> (ten rules) for the proper use of the symbols at school and online.</p>
+  </div>
+  <div class="card">
+    <h3>The right posture</h3>
+    <div class="fact">
+      <div><b class="h">When the anthem is sung</b>Stand straight and still, sing with feeling, and understand each word. A hand over the heart is a respectful way to salute.<div class="fig" style="margin-top:8px"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="120" role="img" aria-label="A person standing straight with the right hand over the heart"><circle cx="50" cy="20" r="10" fill="#c98f5a"/><rect x="34" y="32" width="32" height="46" rx="8" fill="#2f6b8f"/><path d="M60 46l-10 10" stroke="#c98f5a" stroke-width="8" stroke-linecap="round"/><rect x="38" y="78" width="9" height="16" fill="#333"/><rect x="53" y="78" width="9" height="16" fill="#333"/></svg></div></div>
+      <div><b class="h">When the flag is hoisted or lowered</b>Stop and face the flag. Remove any head covering with the right hand and keep your arms parallel to your body, or place the right hand, palm down, at the height of the heart.</div>
+    </div>
+  </div>
+
+  <h3>Key ideas</h3>
+  <p>Select each tab to read it. Say it in your own words before you move on.</p>
+  <div class="card">
+    <div class="tabs" role="tablist" aria-label="Key ideas" id="stageTabs"></div>
+    <div id="stagePanel" class="tabpanel" role="tabpanel" aria-live="polite"></div>
+  </div>
+</section>
+
+<section class="sec" id="vocab">
+  <div class="eyebrow">Key vocabulary</div>
+  <h2>Words to Know</h2>
+  <p>Tap a card to flip it. Say the meaning in your own words before you flip!</p>
+  <div class="grid g3" id="flips"></div>
+</section>
+
+<section class="sec" id="examples">
+  <div class="eyebrow">Step by step</div>
+  <h2>Worked Examples</h2>
+  <p>Each example shows how to think it through. Press <strong>Show next step</strong> and try to predict the next step before you reveal it. The steps you opened are remembered.</p>
+  <div class="card soft"><b>The three questions for any act or post:</b> (1) Which rule applies? (2) Does the behavior follow it? (3) What would be the respectful alternative?</div>
+  <div id="exampleList"></div>
+</section>
+
+<section class="sec" id="practice">
+  <div class="eyebrow">Your turn</div>
+  <h2>Practice with Instant Feedback</h2>
+  <p>You get feedback right after every answer. Mistakes are part of learning, so use the explanations and try again. Everything you answer is saved to your account, so you can sign in from any device and continue.</p>
+  <div class="card act" id="act-quiz"><h3>1. Mastery Quiz (10 questions) <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-sort"><h3>2. Respectful or Disrespectful? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-seq"><h3>3. Folding the Flag in Order <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-match"><h3>4. Match the Article to the Rule <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-multi"><h3>5. Select All That Apply <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-digital"><h3>6. Digital Posts: Respectful or Not? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-cloze"><h3>7. Complete the Sentences <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-scen"><h3>8. What Would You Do? <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-deca"><h3>9. Our Decalogue of Respect <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-book"><h3>10. Book Review Questions <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card soft" id="summaryCta" style="display:none">
+    <h3>All activities complete!</h3>
+    <p>Great work. See how you did on each activity.</p>
+    <button class="btn" type="button" id="openSummary">View my score summary</button>
+  </div>
+</section>
+
+<section class="sec" id="reflect">
+  <div class="eyebrow">In your own words</div>
+  <h2>Write and Reflect</h2>
+  <div class="callout warm"><strong>Your written answers are saved automatically</strong> and your teacher can read them. Write full sentences and use what you learned this week.</div>
+  <div class="card act" id="act-reflect"><h3>11. Five-Line Reflection <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card act" id="act-exit"><h3>12. Exit Ticket <span class="done-mark">✓ Completed</span></h3><div class="mount"></div></div>
+  <div class="card">
+    <h3>Self-check</h3>
+    <ul><li>I can say when the flag is hoisted and lowered and how people should behave.</li><li>I can explain how to fold the flag and where it goes among other flags.</li><li>I can name two things the law forbids with the anthem.</li><li>I wrote my decalogue and my exit ticket.</li></ul>
+  </div>
+  <p style="text-align:center;font-size:1.3rem;font-weight:800;margin:22px 0"><em>Respect shows in what I do when the flag goes up.</em></p>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    Lincoln International Academy · Growing in Values · Ms. Nathaly López · 8th Grade, Q02 Week 2 (Semester 1, Unit 2).
+    <br>Based on the lesson plan "Respect and proper use of the symbols (S1_U2_C02)" and the textbook <em>Creciendo en Valores</em> 8 (pp. 90–96).
+  </div>
+</footer>
+
+<div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="sumTitle" hidden>
+  <div class="modal">
+    <div class="eyebrow">Growing in Values · Week 2</div>
+    <h2 id="sumTitle">Your Score Summary</h2>
+    <div class="bigscore" id="sumBig"></div>
+    <p id="sumMsg"></p>
+    <table class="cmp" id="sumTable"></table>
+    <p class="ref">Scores count your latest try of each scored activity. Written activities show "Completed" when every answer is filled in.</p>
+    <div class="row"><button class="btn" type="button" id="closeSummary">Close</button><button class="btn ghost" type="button" id="reviewBtn">Practice again</button></div>
+  </div>
+</div>
+
+<script>
+window.GV = {"slug": "gv8-q2-week-2-respect-for-the-symbols", "label": "Q02 Week 2: Respect and Proper Use of the Symbols", "ideas": [{"tab": "1. Hoisting & lowering", "title": "Hoisting and lowering the National Flag", "ref": "Flag law, Articles 5–7", "pts": ["The flag is hoisted at <b>6:00 a.m.<\/b> and lowered at <b>6:00 p.m.<\/b> (Art. 5).", "It is hoisted daily at the Presidential House and at all barracks, with the corresponding honors (Art. 6).", "While it is hoisted or lowered, people nearby <b>stop and face<\/b> the flag. Civilians remove anything on their head with the right hand and keep their arms parallel to the body, or put the right hand, palm down, at heart height (Art. 7).", "<b>Drivers stop their vehicle;<\/b> civilian passengers may stay in their seat.", "On national holidays the flag must be hoisted on public buildings."], "key": "When the flag moves, we stop, face it and show respect with our posture."}, {"tab": "2. Folding the flag", "title": "How to fold the flag", "ref": "A job for two people", "pts": ["You need <b>two people<\/b>.", "Take off the rope hooks and stretch the flag, then <b>shake it<\/b> to remove anything resting on the banner.", "Each person takes it by the two <b>end points<\/b>.", "Fold it <b>in two<\/b>, then <b>in two again<\/b>.", "Then fold it into <b>triangles<\/b> and keep folding triangles until it is completely folded."], "key": "Folding the flag carefully is another way to show respect."}, {"tab": "3. Flag among other flags", "title": "Where does our flag go?", "ref": "Flag law, Articles 8–10", "pts": ["Honors to the National Flag are always made <b>before<\/b> honors to persons, and before the flags of other countries (Art. 8).", "When it is hoisted with other flags, all poles must be the <b>same height<\/b> and the flags the <b>same size<\/b> (Art. 9).", "The National Flag always takes the place of the <b>right<\/b>, which is the <b>left of the observer<\/b> (Art. 10).", "On dates of national <b>mourning<\/b> the flag is flown at <b>half-mast<\/b> with a black crêpe at the top."], "key": "Our flag leads: first honors, the place of the right, equal height."}, {"tab": "4. Using the anthem", "title": "Rules for the National Anthem", "ref": "Anthem law, Articles 59–71", "pts": ["It is played at official ceremonies attended by the President (for example, solemn acts for Independence and the President taking office) and when the flag is hoisted or lowered in solemn acts (Arts. 59, 61).", "If a foreign anthem is also played, <b>ours is played first<\/b> (Art. 62). It is not played more than twice to honor the flag, or twice to honor the President (Art. 63).", "<b>Teaching the anthem is obligatory<\/b> in all schools, and it must be <b>sung daily at the entrance to class<\/b> in public and private schools and colleges (Arts. 64–65).", "Radio stations broadcast it at the start and end of their day without interference (Art. 70)."], "key": "The anthem belongs in schools and solemn acts; we learn it and sing it."}, {"tab": "5. What is forbidden", "title": "What the law forbids with the anthem", "ref": "Anthem law, Articles 67 and 69", "pts": ["It is strictly forbidden to <b>alter the lyrics or the music<\/b> of the anthem, or to use it, in whole or in part, in other compositions or arrangements.", "It is forbidden to sing or play it for <b>advertising purposes<\/b>, or in canteens, vice dens or similar places.", "To make recordings, editions or reproductions, <b>authorization from the Ministry of the Interior<\/b> is required (Art. 69).", "A meme or a joke version that changes the words is therefore not respectful of the anthem."], "key": "The anthem is not a joke or an ad. We never change its words or use it to sell."}, {"tab": "6. Respect online", "title": "Respecting the symbols on screens", "ref": "School acts and digital posts", "pts": ["Before you post a photo or video of a school act, ask: <b>does it show the flag or anthem with respect?<\/b>", "Do not post edited or mocking versions of the symbols or of the anthem's words.", "A caption can show respect too: say what the act commemorates and who took part.", "Remember: what you post represents you <b>and<\/b> your school."], "key": "Respect for the symbols applies in the schoolyard and on the screen."}], "vocab": [["Hoist", "To raise the flag up the pole."], ["Lower", "To bring the flag down from the pole (in Spanish: arriar)."], ["Half-mast", "The flag flown halfway down the pole as a sign of national mourning."], ["Mourning", "A period of public sadness after an important loss."], ["Decalogue", "A set of ten rules."], ["Article", "A numbered rule inside a law, such as Article 7 of the flag law."], ["Honors", "Ceremonial signs of respect given to the flag, the anthem or a person."], ["Authorization", "Official permission to do something."], ["Solemn act", "A formal and serious ceremony, such as an official commemoration."]], "examples": [{"title": "Example 1: A flag ceremony at school", "problem": "<i>The flag is being hoisted during the morning ceremony. Some students keep talking and one wears a cap.<\/i> What should happen?", "steps": [["Recall the rule (Art. 7).", "People nearby <b>stop and face<\/b> the flag."], ["Check each behavior.", "Talking is not respectful. The cap should be removed with the right hand."], ["Choose the posture.", "Arms parallel to the body, or the right hand palm down at heart height."], ["Say it kindly.", "“Please stop talking and take off your cap. The flag is being hoisted.”"], ["Answer.", "Everyone stops, faces the flag, removes head coverings with the right hand and stays quiet until the ceremony ends.", true]]}, {"title": "Example 2: Is this digital post respectful?", "problem": "<i>A student posts a video of the anthem with funny changed lyrics and an advertisement for a snack.<\/i>", "steps": [["Check the anthem rules.", "Art. 67: it is forbidden to <b>alter the lyrics<\/b> and to use the anthem for <b>advertising<\/b>."], ["Identify the problems.", "Changed lyrics (problem 1) and advertising use (problem 2)."], ["Think about the effect.", "It treats a symbol of the whole nation as a joke and as a sales tool."], ["Find a respectful alternative.", "Post the real anthem at a school act with a caption about what it means, with no ads."], ["Answer.", "The post is <b>not respectful<\/b> and breaks the law. A respectful post keeps the lyrics and does not use the anthem to sell.", true]]}, {"title": "Example 3: Flags side by side", "problem": "A school event hoists the National Flag and the flag of a visiting school. Where does our flag go and how should the flags look?", "steps": [["Recall Art. 10.", "Our flag takes the place of the right, which is the <b>left of the observer<\/b>."], ["Recall Art. 9.", "All poles the <b>same height<\/b>; all flags the <b>same size<\/b>."], ["Recall Art. 8.", "Honors to the National Flag come first."], ["Answer.", "Our flag goes on the observer's left (the place of the right), on a pole of equal height, with equal-size flags, and receives honors first.", true]]}, {"title": "Example 4: Write a rule for the decalogue", "problem": "Write one clear rule about the flag for a ten-rule decalogue.", "steps": [["Start with a vague idea.", "“Be nice to the flag.”"], ["Problem: can anyone check it?", "“Be nice” is too general."], ["Name the action and the moment.", "“Stop and face the flag when it is hoisted or lowered.”"], ["Add the reason if it fits.", "“…because the flag represents every Nicaraguan.”"], ["Check it.", "Clear verb ✓ Specific moment ✓ Possible to follow ✓ Based on the law or on respect ✓"], ["Final rule.", "<i>Stop and face the flag whenever it is hoisted or lowered, because it represents every Nicaraguan.<\/i>", true]]}], "acts": [{"id": "act-quiz", "type": "quiz", "title": "Mastery Quiz (10 questions)", "intro": "Ten questions about the rules for the flag and the anthem. Aim for 80% or higher.", "qs": [{"q": "At what times is the National Flag hoisted and lowered?", "o": ["6:00 a.m. and 6:00 p.m.", "8:00 a.m. and 4:00 p.m.", "12:00 noon and midnight", "Only on national holidays"], "a": 0, "e": "Article 5 says it is hoisted at 6:00 a.m. and lowered at 6:00 p.m."}, {"q": "What should people nearby do when the flag is hoisted or lowered?", "o": ["Stop and face the flag", "Keep walking", "Turn their backs to it", "Take photos"], "a": 0, "e": "Article 7: people stop and face the patriotic emblem."}, {"q": "A civilian wearing a cap while the flag is hoisted should…", "o": ["Remove it with the right hand and keep arms parallel to the body (or hand at the heart)", "Pull it lower", "Wear it with pride", "Hold it up high"], "a": 0, "e": "Article 7 describes both postures."}, {"q": "What should drivers do when the flag is hoisted or lowered nearby?", "o": ["Stop their vehicle", "Honk", "Speed up", "Turn off the lights"], "a": 0, "e": "Drivers stop; civilian passengers may remain seated."}, {"q": "Where does the National Flag go when it is flown with foreign flags?", "o": ["The place of the right (the observer's left)", "The far left", "Lower than the others", "It does not matter"], "a": 0, "e": "Article 10: the place of the right, which is the left of the observer."}, {"q": "When several flags are hoisted together, the poles must be…", "o": ["The same height, with flags the same size", "Taller for the strongest country", "Any height", "Taller for the guest"], "a": 0, "e": "Article 9: same height, same size."}, {"q": "How many people are needed to fold the flag?", "o": ["Two", "One", "Four", "Ten"], "a": 0, "e": "Each person takes an end point; they fold in two, in two again, then into triangles."}, {"q": "Which is forbidden with the National Anthem?", "o": ["Changing its lyrics or using it for advertising", "Singing it at school", "Teaching it in class", "Playing it at a solemn act"], "a": 0, "e": "Article 67 forbids altering the lyrics or music and using it for advertising."}, {"q": "According to the law, how often must the anthem be sung at school?", "o": ["Daily at the entrance to class", "Once a year", "Only in September", "Never in private schools"], "a": 0, "e": "Article 65: it is sung daily at the entrance to class in all schools and colleges, public and private."}, {"q": "On a day of national mourning the flag is flown…", "o": ["At half-mast with a black crêpe", "Upside down", "Folded", "At the top with a red ribbon"], "a": 0, "e": "At half-mast with a black crêpe at the top."}]}, {"id": "act-sort", "type": "sort", "title": "Respectful or Disrespectful?", "intro": "Is each action <b>respectful<\/b> or <b>disrespectful<\/b> toward the symbols?", "choices": [{"k": "R", "label": "✅ Respectful"}, {"k": "D", "label": "🚫 Disrespectful"}], "cards": [["Standing straight with the right hand at the heart while the anthem is sung.", "R", "A calm, respectful posture.", "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 100 100\" width=\"120\" role=\"img\" aria-label=\"A person standing straight with the right hand over the heart\"><circle cx=\"50\" cy=\"20\" r=\"10\" fill=\"#c98f5a\"/><rect x=\"34\" y=\"32\" width=\"32\" height=\"46\" rx=\"8\" fill=\"#2f6b8f\"/><path d=\"M60 46l-10 10\" stroke=\"#c98f5a\" stroke-width=\"8\" stroke-linecap=\"round\"/><rect x=\"38\" y=\"78\" width=\"9\" height=\"16\" fill=\"#333\"/><rect x=\"53\" y=\"78\" width=\"9\" height=\"16\" fill=\"#333\"/><\/svg>"], ["Chatting loudly during the flag ceremony.", "D", "While the flag is hoisted we stop, face it and stay quiet."], ["Singing the anthem with feeling, even if your voice is not perfect.", "R", "What matters is what we feel, not how loudly or perfectly we sing."], ["Using the flag as a tablecloth at a picnic.", "D", "The flag is an emblem of the nation, not a household item."], ["Removing your cap with your right hand when the flag is lowered.", "R", "That is exactly what Article 7 describes."], ["Changing the words of the anthem for a funny video.", "D", "Article 67 forbids altering the lyrics."], ["Folding the flag carefully with a partner.", "R", "Folding with care is a form of respect."], ["Letting the flag touch the ground and leaving it there.", "D", "Care for the flag and store it properly."]]}, {"id": "act-seq", "type": "seq", "title": "Folding the Flag in Order", "intro": "Put the steps for folding the National Flag in order.", "items": [{"t": "Get a second person to help", "hint": "Folding needs two people.", "why": "Two people are needed to fold the flag."}, {"t": "Remove the rope hooks and stretch the flag out", "hint": "Free the flag from the pole fittings.", "why": "Unhook it and stretch it."}, {"t": "Shake it to remove anything resting on the banner", "hint": "Clean it before you fold it.", "why": "Shake off anything that rests on the flag."}, {"t": "Each person takes it by the two end points", "hint": "Start to fold with both holding the ends.", "why": "Hold the end points."}, {"t": "Fold it in two, then in two again", "hint": "Two folds in half come before triangles.", "why": "First folds in two, then again in two."}, {"t": "Fold it into triangles until it is completely folded", "hint": "The last stage forms triangles.", "why": "Keep folding triangles until the flag is fully folded."}]}, {"id": "act-match", "type": "match", "title": "Match the Article to the Rule", "intro": "Tap an article on the left, then its rule on the right.", "pairs": [["Flag law, Art. 5", "Hoisted at 6:00 a.m. and lowered at 6:00 p.m."], ["Flag law, Art. 7", "People stop and face the flag; head coverings off"], ["Flag law, Art. 8", "Honors to the flag come before honors to persons"], ["Flag law, Art. 9", "Same pole height and same flag size"], ["Flag law, Art. 10", "Our flag takes the place of the right"], ["Anthem law, Art. 62", "Ours is played first when a foreign anthem is also played"], ["Anthem law, Art. 65", "Sung daily at the entrance to class in every school"], ["Anthem law, Art. 67", "No altering the lyrics and no advertising use"]]}, {"id": "act-multi", "type": "multi", "title": "Select All That Apply", "intro": "Some questions have more than one right answer.", "qs": [{"q": "Which actions are correct while the flag is being hoisted?", "o": ["Stop and face the flag", "Remove a cap with the right hand", "Keep arms parallel to the body", "Run past the flag"], "a": [0, 1, 2], "e": "Stop, face the flag and show a respectful posture."}, {"q": "Which of these are forbidden with the anthem?", "o": ["Changing its lyrics", "Using it in advertising", "Singing it in a bar or canteen", "Singing it at school"], "a": [0, 1, 2], "e": "Article 67 forbids all three. School singing is required."}, {"q": "Which are true about the National Flag?", "o": ["It leads honors before persons", "It takes the place of the right among other flags", "It is flown at half-mast on mourning dates", "It must be smaller than foreign flags"], "a": [0, 1, 2], "e": "All flags are the same size; ours is not smaller."}, {"q": "Which posts show respect for the symbols?", "o": ["A photo of students saluting the flag with a caption about the school act", "A video of the real anthem at a ceremony", "A message explaining what Independence Day commemorates", "A meme that mocks the anthem"], "a": [0, 1, 2], "e": "Respectful posts show and explain; mocking posts do not."}]}, {"id": "act-digital", "type": "sort", "title": "Digital Posts: Respectful or Not?", "intro": "You are a school social-media team. Decide for each post.", "choices": [{"k": "Y", "label": "👍 Post it"}, {"k": "N", "label": "✋ Do not post it"}], "cards": [["A photo of the flag ceremony with the caption “Today we hoisted the flag together.”", "Y", "It shows the act with respect and explains it."], ["A video of students singing the anthem correctly at the entrance to class.", "Y", "Daily singing is required and the post shows it respectfully."], ["A filter that puts funny words over the anthem.", "N", "Altering the anthem is forbidden."], ["An ad for a school snack bar using the anthem as background music.", "N", "Advertising use of the anthem is forbidden."], ["A poster explaining how to fold the flag.", "Y", "It teaches respect for the flag."], ["A joke photo of someone wiping a table with the flag.", "N", "Treating the flag like a rag mocks the symbol."]]}, {"id": "act-cloze", "type": "cloze", "title": "Complete the Sentences", "intro": "Choose the word that completes each sentence.", "items": [["The flag is hoisted at ", ["6:00 a.m.", "9:00 a.m.", "noon"], 0, ".", "Art. 5: 6:00 a.m."], ["At the flag ceremony, people stop and ", ["face", "ignore", "photograph"], 0, " the flag.", "People stop and face the flag."], ["Our flag takes the place of the ", ["right", "left", "back"], 0, " among other flags.", "The place of the right."], ["It is forbidden to ", ["alter", "teach", "learn"], 0, " the lyrics of the anthem.", "Article 67."], ["The anthem is sung daily at the ", ["entrance to class", "end of the year", "market"], 0, " in every school.", "Article 65."], ["On days of mourning the flag is flown at ", ["half-mast", "full height", "night"], 0, ".", "Half-mast with a black crêpe."]]}, {"id": "act-scen", "type": "scenario", "title": "What Would You Do?", "intro": "Choose the best response in each situation.", "steps": [{"s": "During the anthem at school, a friend is laughing and nudging you. What do you do?", "o": [{"t": "Whisper that the anthem is being sung and stand straight so they follow your example.", "p": 2, "f": "You lead by example, kindly."}, {"t": "Laugh quietly with them.", "p": 0, "f": "That joins the disrespect."}, {"t": "Move away without saying anything.", "p": 1, "f": "You avoided it but could have helped."}]}, {"s": "A classmate edits a video of the anthem to make it funny and asks you to share it. What do you say?", "o": [{"t": "“I will not share it: changing the anthem is not respectful and the law forbids it. Let's post the real one at our school act.”", "p": 2, "f": "Clear, polite and constructive."}, {"t": "Share it but write that it is only a joke.", "p": 0, "f": "A joke does not make it respectful or legal."}, {"t": "Ignore the message.", "p": 1, "f": "Not sharing is good, but speaking up helps others."}]}, {"s": "You are driving with your family and you see the flag being lowered at 6:00 p.m. beside the road. What is correct?", "o": [{"t": "The driver stops the vehicle until the flag is lowered; civilian passengers may stay seated.", "p": 2, "f": "Exactly what Article 7 says."}, {"t": "Keep driving but turn the music down.", "p": 1, "f": "Quiet is nice but the driver should stop."}, {"t": "Honk to greet the flag.", "p": 0, "f": "Honking is not a sign of respect during the ceremony."}]}, {"s": "You are in charge of the flag after a school event. What do you do?", "o": [{"t": "Ask a partner to help, fold it properly, and store it in a clean, safe place.", "p": 2, "f": "Folding takes two people and storing it well protects it."}, {"t": "Roll it up quickly and put it in a bag.", "p": 1, "f": "Quick, but not the correct way."}, {"t": "Leave it on a chair.", "p": 0, "f": "Leaving the flag around shows carelessness."}]}]}, {"id": "act-deca", "type": "open", "title": "Our Decalogue of Respect", "rtitle": "Decalogue for the proper use of the symbols", "min": 10, "intro": "Write <b>ten rules<\/b> for using the flag and the anthem respectfully at school and online. Each rule should be clear, possible to follow and, if you can, say why. See Worked Example 4.", "prompts": [{"q": "Rule 1:", "rows": 2}, {"q": "Rule 2:", "rows": 2}, {"q": "Rule 3:", "rows": 2}, {"q": "Rule 4:", "rows": 2}, {"q": "Rule 5:", "rows": 2}, {"q": "Rule 6:", "rows": 2}, {"q": "Rule 7:", "rows": 2}, {"q": "Rule 8:", "rows": 2}, {"q": "Rule 9:", "rows": 2}, {"q": "Rule 10:", "rows": 2}], "model": "1. Stop and face the flag whenever it is hoisted or lowered. 2. Take off any cap with the right hand. 3. Sing the anthem with feeling and understand each word. 4. Never change the lyrics of the anthem. 5. Never use the anthem or the flag to advertise. 6. Fold the flag with a partner and store it carefully. 7. Do not let the flag touch the ground. 8. Post photos of school acts with respectful captions. 9. Do not share jokes that mock the symbols. 10. Explain to others why the symbols deserve respect."}, {"id": "act-book", "type": "open", "title": "Book Review Questions", "rtitle": "Review questions (Creciendo en Valores, p. 96)", "min": 20, "intro": "These are the review questions from your textbook. Answer them with what you learned this week.", "prompts": [{"q": "1. Which values characterize the National Anthem of Nicaragua?", "rows": 3}, {"q": "2. Why should you adopt a correct and respectful attitude when singing the National Anthem?", "rows": 3}, {"q": "3. How is the National Flag hoisted, lowered and folded?", "rows": 4}, {"q": "4. Where is the National Flag placed in relation to other flags?", "rows": 3}]}, {"id": "act-reflect", "type": "open", "reflect": true, "title": "Five-Line Reflection", "rtitle": "Reflection", "min": 25, "who": true, "intro": "Apply what you learned at home, at school or in your community.", "prompts": [{"q": "Write about five lines. Did you see the flag or hear the anthem this week? How did people behave, and what will you do to show respect?", "rows": 6}]}, {"id": "act-exit", "type": "open", "reflect": true, "title": "Exit Ticket", "rtitle": "Exit ticket", "min": 20, "who": true, "intro": "Answer in your own words before you leave this page.", "prompts": [{"q": "1. Explain one rule for hoisting or lowering the flag, and say why it matters.", "rows": 4}, {"q": "2. Which rule from your decalogue will you practice this week, and where?", "rows": 4}]}]};
+
+</script>
+<script>
+(function(){
+"use strict";
+const G = window.GV;
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => Array.from(r.querySelectorAll(s));
+function h(tag, attrs, ...kids){
+  const el = document.createElement(tag);
+  for(const k in (attrs||{})){
+    if(k==='class') el.className = attrs[k];
+    else if(k==='html') el.innerHTML = attrs[k];
+    else if(k.startsWith('on')) el.addEventListener(k.slice(2), attrs[k]);
+    else el.setAttribute(k, attrs[k]);
+  }
+  kids.flat(Infinity).forEach(c => { if(c!=null) el.append(c.nodeType ? c : document.createTextNode(c)); });
+  return el;
+}
+const SLUG = G.slug;
+const store = {
+  get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
+  set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+const plain = s => String(s).replace(/<[^>]*>/g,'').replace(/&nbsp;/g,' ').replace(/\s+/g,' ').trim();
+const studentName = () => (window.LiaSync && LiaSync.name && LiaSync.name()) || '';
+
+/* ---------- saved answers + stable (seeded) answer order ----------
+   Every tap/choice is recorded and replayed on the next visit (localStorage, mirrored to the database by LiaSync).
+   Shuffles are seeded, so the order is the same on every visit; the correct option is spread over all positions.
+   "Try again" starts a new round (new order, that activity's saved answers cleared). */
+const AKEY = 'gv-ans-' + SLUG;
+let AD = store.get(AKEY, {}) || {};
+const asave = () => store.set(AKEY, AD);
+let curAct = null, shufN = 0, CNT = {}, replaying = false; const STARTED = {};
+function rng(seed){ let a = seed>>>0; return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a>>>15), 1 | a); t = (t + Math.imul(t ^ (t>>>7), 61 | t)) ^ t; return ((t ^ (t>>>14))>>>0) / 4294967296; }; }
+function strSeed(s){ let x = 2166136261; for(let i=0;i<s.length;i++){ x ^= s.charCodeAt(i); x = Math.imul(x, 16777619); } return x>>>0; }
+function actRnd(){ shufN++; return rng(strSeed(curAct + '|' + ((AD[curAct] && AD[curAct].round) || 0) + '|' + shufN)); }
+function beginAct(id){ if(STARTED[id]){ AD[id] = {round: ((AD[id] && AD[id].round) || 0) + 1, a: []}; asave(); } STARTED[id] = 1; curAct = id; shufN = 0; CNT = {}; }
+function armAct(id, mount){
+  curAct = null;
+  const d = AD[id] = AD[id] || {round: 0, a: []};
+  const cs = $$('button.opt, button.btn:not(.ghost), select, input[type=checkbox]', mount);
+  cs.forEach((c, i) => c.addEventListener(c.tagName === 'SELECT' ? 'change' : 'click', () => {
+    if(replaying) return;
+    if(d.a.length < 600){ d.a.push(c.tagName === 'SELECT' ? {i, v: c.value} : {i}); asave(); }
+  }));
+  if(d.a.length){
+    replaying = true;
+    d.a.forEach(x => { const c = cs[x.i]; if(!c) return; if(c.tagName === 'SELECT'){ c.value = x.v; c.dispatchEvent(new Event('change')); } else c.click(); });
+    replaying = false;
+  }
+}
+function placeOk(arr){
+  const ok = arr.find(x => x.ok); if(!ok) return shuffle(arr);
+  const n = arr.length, wr = shuffle(arr.filter(x => x !== ok)), k = (CNT[n] = (CNT[n] || 0) + 1) - 1, target = ((k % n) * (n === 4 ? 3 : 2) + Math.floor(k / n)) % n;
+  wr.splice(target, 0, ok); return wr;
+}
+function shuffle(a){ a=a.slice(); const rnd=curAct?actRnd():Math.random; for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function feedback(el, kind, text){ el.className = 'fb show ' + kind; el.textContent = text; }
+
+/* ---------- theme (own toggle: wired here) ---------- */
+(function(){
+  const root = document.documentElement;
+  try{ const t = localStorage.getItem('lia-theme'); if(t==='light'||t==='dark') root.dataset.theme = t; }catch(e){}
+  $('#themeBtn').addEventListener('click', () => {
+    const dark = root.dataset.theme==='dark' || (!root.dataset.theme && matchMedia('(prefers-color-scheme: dark)').matches);
+    root.dataset.theme = dark ? 'light' : 'dark';
+    try{ localStorage.setItem('lia-theme', root.dataset.theme); }catch(e){}
+  });
+})();
+
+/* ---------- progress & scores ---------- */
+const ACTS = G.acts.map(a => [a.id, a.title]);
+const TOTAL = ACTS.length;
+const SKEY = 'gv-scores-' + SLUG;
+const scores = store.get(SKEY, {}) || {};
+function reportProgress(){   // tells the teacher dashboard how far this student is
+  try{ let c=0,t=0,n=0; ACTS.forEach(a=>{ const s=scores[a[0]]; if(s){ n++; c+=s[0]; t+=s[1]; } });
+    if(window.LiaSync && LiaSync.report) LiaSync.report({solved:n,total:TOTAL,score:c,max:t}); }catch(e){}
+}
+function paintProgress(){
+  reportProgress();
+  const n = ACTS.filter(a => scores[a[0]]).length;
+  $('#progText').textContent = n + ' of ' + TOTAL + ' activities';
+  $('#progBar').style.width = (n/TOTAL*100) + '%';
+  $$('.act').forEach(a => a.classList.toggle('done', !!scores[a.id]));
+  $('#summaryCta').style.display = n===TOTAL ? '' : 'none';
+}
+function record(id, correct, total){
+  const was = ACTS.filter(a => scores[a[0]]).length;
+  scores[id] = [correct, total];
+  store.set(SKEY, scores);
+  paintProgress();
+  if(was===TOTAL-1 && ACTS.every(a => scores[a[0]])) setTimeout(openSummary, 900);
+}
+function unrecord(id){ if(scores[id]){ delete scores[id]; store.set(SKEY, scores); paintProgress(); } }
+function openSummary(){
+  let c=0,t=0;
+  const rows = ACTS.map(([id,name]) => { const [a,b]=scores[id]||[0,0]; c+=a; t+=b;
+    return h('tr',{}, h('td',{},name), h('td',{}, b ? a+' / '+b : (scores[id] ? 'Completed ✓' : '—')), h('td',{}, h('div',{class:'meter'}, h('i',{style:'width:'+(b?a/b*100:(scores[id]?100:0))+'%'})))); });
+  const pct = t ? Math.round(c/t*100) : 0;
+  $('#sumBig').innerHTML = pct + '% <small>(' + c + ' of ' + t + ' points on the scored activities)</small>';
+  $('#sumMsg').textContent = pct>=90 ? 'Outstanding! You can explain this week\'s topic and put it into practice.'
+    : pct>=80 ? 'Secure! You have a solid understanding. Review the activities with lower scores to make it even stronger.'
+    : pct>=60 ? 'Good progress. Go back to the Worked Examples, then retry the activities with lower scores.'
+    : 'Keep going! Re-read the key ideas and the Worked Examples, then try the activities again.';
+  const tbl = $('#sumTable'); tbl.innerHTML='';
+  tbl.append(h('tr',{},h('th',{},'Activity'),h('th',{},'Result'),h('th',{},'')), ...rows);
+  $('#overlay').hidden = false; $('#closeSummary').focus();
+}
+function closeSummary(){ $('#overlay').hidden = true; }
+$('#openSummary').addEventListener('click', openSummary);
+$('#closeSummary').addEventListener('click', closeSummary);
+$('#reviewBtn').addEventListener('click', () => { closeSummary(); $('#practice').scrollIntoView(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeSummary(); });
+
+/* ---------- key ideas (tabs) ---------- */
+(function(){
+  const tabs = $('#stageTabs'), panel = $('#stagePanel'); if(!tabs) return;
+  function show(i){
+    $$('.tab', tabs).forEach((b,j) => b.setAttribute('aria-selected', j===i));
+    const s = G.ideas[i];
+    panel.innerHTML = '';
+    panel.append(h('h3', {}, s.title), s.ref ? h('p', {class:'ref'}, s.ref) : null, h('ul', {}, s.pts.map(p => h('li', {html:p}))), h('div', {class:'callout'}, h('strong', {}, 'Key idea: '), s.key));
+  }
+  G.ideas.forEach((s,i) => tabs.append(h('button', {class:'tab', role:'tab', type:'button', 'aria-selected':'false', onclick:()=>show(i)}, s.tab)));
+  show(0);
+})();
+
+/* ---------- vocabulary cards ---------- */
+G.vocab.forEach(([t,d]) => {
+  const b = h('button', {class:'flip', type:'button', 'aria-pressed':'false'}, h('div', {class:'front'}, t), h('div', {class:'hint'}, 'Tap to see the meaning'), h('div', {class:'back'}, d));
+  b.addEventListener('click', () => { const on = b.classList.toggle('on'); b.setAttribute('aria-pressed', on); });
+  $('#flips').append(b);
+});
+
+/* ---------- worked examples (steps shown are saved) ---------- */
+const EKEY = 'gv-ex-' + SLUG, EX = store.get(EKEY, {}) || {};
+G.examples.forEach((ex, ei) => {
+  const list = h('ol', {class:'steps'});
+  const items = ex.steps.map(([t,b,fin]) => { const li = h('li', {class:'step' + (fin?' final':'')}, h('b',{class:'t'}, t), h('span',{html:b})); list.append(li); return li; });
+  let n = Math.min(+EX[ei]||0, items.length);
+  const next = h('button', {class:'btn', type:'button'}, 'Show next step');
+  const all = h('button', {class:'btn ghost', type:'button'}, 'Show all');
+  const reset = h('button', {class:'btn ghost', type:'button'}, 'Hide steps');
+  const status = h('span', {class:'ref', 'aria-live':'polite'}, '');
+  function paint(){ items.forEach((li,i) => li.classList.toggle('show', i<n)); next.disabled = n>=items.length; status.textContent = n + ' of ' + items.length + ' steps shown'; EX[ei] = n; store.set(EKEY, EX); }
+  next.addEventListener('click', () => { if(n<items.length) n++; paint(); items[n-1].scrollIntoView({block:'nearest', behavior:'smooth'}); });
+  all.addEventListener('click', () => { n=items.length; paint(); });
+  reset.addEventListener('click', () => { n=0; paint(); });
+  paint();
+  $('#exampleList').append(h('div', {class:'card'}, h('h3', {}, ex.title), h('div', {class:'problem', html:'<b>Situation:</b> ' + ex.problem}), h('div', {class:'row', style:'margin-top:12px'}, next, all, reset, status), list));
+});
+
+/* ---------- activity engines ---------- */
+const mountOf = id => $('#'+id+' .mount');
+function withRound(id, render0){ const mount = mountOf(id); function render(){ beginAct(id); render0(mount, render); armAct(id, mount); } render(); }
+function againBtn(render){ const b = h('button',{class:'btn ghost',type:'button',style:'display:none'},'Try again'); b.addEventListener('click', render); return b; }
+
+/* 1. multiple choice (optional picture per question) */
+function mountQuiz(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    let answered = 0, correct = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = againBtn(render);
+    function paintSummary(){
+      if(answered<a.qs.length){ summary.textContent = 'Answered ' + answered + ' of ' + a.qs.length; return; }
+      summary.textContent = 'Score: ' + correct + ' / ' + a.qs.length + (correct===a.qs.length ? ' – perfect!' : correct/a.qs.length>=.8 ? ' – secure (80% or higher).' : ' – review the explanations and try again.');
+      again.style.display = ''; record(a.id, correct, a.qs.length);
+    }
+    if(a.intro) mount.append(h('p', {html:a.intro}));
+    a.qs.forEach((q,qi) => {
+      const order = placeOk(q.o.map((t,i) => ({t, ok:i===q.a})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const btns = order.map(o => {
+        const b = h('button', {class:'opt', type:'button'}, o.t);
+        b.addEventListener('click', () => {
+          if(b.disabled) return;
+          answered++; btns.forEach(x => x.disabled = true);
+          if(o.ok){ correct++; b.classList.add('good'); feedback(fb,'good','✓ Correct. ' + q.e); }
+          else { b.classList.add('bad','shake'); btns[order.findIndex(x=>x.ok)].classList.add('good'); feedback(fb,'bad','✗ Not quite. ' + q.e); }
+          paintSummary();
+        });
+        return b;
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, (qi+1) + '. ' + q.q), q.svg ? h('div',{class:'fig',html:q.svg}) : null, btns, fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  });
+}
+
+/* 2. select ALL that apply */
+function mountMulti(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    let answered = 0, correct = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = againBtn(render);
+    function paintSummary(){
+      if(answered<a.qs.length){ summary.textContent = 'Answered ' + answered + ' of ' + a.qs.length; return; }
+      summary.textContent = 'Score: ' + correct + ' / ' + a.qs.length + ' (a question counts only when you pick every right choice and no wrong one).';
+      again.style.display = ''; record(a.id, correct, a.qs.length);
+    }
+    if(a.intro) mount.append(h('p', {html:a.intro}));
+    a.qs.forEach((q,qi) => {
+      const order = shuffle(q.o.map((t,i) => ({t, ok:q.a.includes(i)})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const boxes = order.map(o => { const cb = h('input', {type:'checkbox'}); return {cb, o, l:h('label', {class:'opt'}, cb, h('span', {}, o.t))}; });
+      const check = h('button', {class:'btn', type:'button'}, 'Check my answer');
+      check.addEventListener('click', () => {
+        if(check.disabled) return;
+        check.disabled = true; answered++;
+        const ok = boxes.every(b => b.cb.checked === b.o.ok);
+        boxes.forEach(b => { b.cb.disabled = true; if(b.o.ok) b.l.classList.add('good'); else if(b.cb.checked) b.l.classList.add('bad'); });
+        if(ok){ correct++; feedback(fb,'good','✓ Yes, that is every right choice. ' + q.e); } else feedback(fb,'bad','✗ Not quite. The right choices are highlighted. ' + q.e);
+        paintSummary();
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, (qi+1) + '. ' + q.q + '  (select all that apply)'), boxes.map(b => b.l), h('div',{class:'row'}, check), fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  });
+}
+
+/* 3. scenarios: choose the best response (2 = best, 1 = partly, 0 = not helpful) */
+function mountScenario(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    let answered = 0, pts = 0;
+    const summary = h('p', {class:'score', 'aria-live':'polite'});
+    const again = againBtn(render);
+    function paintSummary(){
+      if(answered<a.steps.length){ summary.textContent = 'Answered ' + answered + ' of ' + a.steps.length; return; }
+      summary.textContent = 'Points: ' + pts + ' / ' + (2*a.steps.length) + ' (best response = 2, partly helpful = 1, not helpful = 0).';
+      again.style.display = ''; record(a.id, pts, 2*a.steps.length);
+    }
+    if(a.intro) mount.append(h('p', {html:a.intro}));
+    a.steps.forEach((st,si) => {
+      const order = placeOk(st.o.map(o => ({...o, ok:o.p===2})));
+      const fb = h('div', {class:'fb', 'aria-live':'polite'});
+      const btns = order.map(o => {
+        const b = h('button', {class:'opt', type:'button'}, o.t);
+        b.addEventListener('click', () => {
+          if(b.disabled) return;
+          answered++; pts += o.p; btns.forEach(x => x.disabled = true);
+          b.classList.add(o.p===2 ? 'good' : o.p===1 ? 'sel' : 'bad');
+          if(o.p<2) btns[order.findIndex(x=>x.ok)].classList.add('good');
+          feedback(fb, o.p===2?'good':o.p===1?'info':'bad', (o.p===2?'✓ Best response. ':o.p===1?'◑ Partly helpful. ':'✗ Not helpful. ') + o.f + (o.p<2 ? ' Better: ' + order.find(x=>x.ok).t : ''));
+          paintSummary();
+        });
+        return b;
+      });
+      mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead'}, 'Situation ' + (si+1)), h('p',{html:st.s}), btns, fb));
+    });
+    mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
+    paintSummary();
+  });
+}
+
+/* 4. put the steps in order */
+function mountSeq(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const items = a.items; let next = 0, mistakes = 0;
+    const slots = items.map((_,i) => h('div', {class:'slot' + (i===0?' next':'')}, h('small', {}, 'Step ' + (i+1)), h('span', {}, '?')));
+    const fb = h('div', {class:'fb', 'aria-live':'polite'});
+    let pool = shuffle(items.map((it,i) => ({...it, i})));
+    while(items.length>1 && pool.every((p,k) => p.i===k)) pool = shuffle(pool);
+    const poolEl = h('div', {class:'pool'});
+    const again = againBtn(render);
+    pool.forEach(p => {
+      const b = h('button', {class:'opt', type:'button'}, p.t);
+      b.addEventListener('click', () => {
+        if(b.disabled) return;
+        if(p.i===next){
+          b.disabled = true; b.style.display='none';
+          slots[next].classList.remove('next'); slots[next].classList.add('filled'); slots[next].lastChild.textContent = p.t;
+          feedback(fb,'good','✓ Yes! ' + p.why); next++;
+          if(next<items.length) slots[next].classList.add('next');
+          else { feedback(fb,'good','🎉 Complete! ' + (mistakes===0 ? 'No mistakes.' : mistakes + ' mistake' + (mistakes>1?'s':'') + ' along the way.') + ' ' + p.why); again.style.display=''; record(a.id, Math.max(0, items.length-mistakes), items.length); }
+        } else { mistakes++; b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'), 600); feedback(fb,'bad','Not yet. Hint for step ' + (next+1) + ': ' + items[next].hint); }
+      });
+      poolEl.append(b);
+    });
+    mount.append(h('p', {html:a.intro}), h('div', {class:'slots'}, slots), h('p', {class:'ref'}, 'Tap the step that belongs in the next empty box.'), poolEl, fb, h('div', {class:'row', style:'margin-top:10px'}, again));
+  });
+}
+
+/* 5. match pairs */
+function mountMatch(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const pairs = a.pairs; let sel=null, matched=0, mistakes=0;
+    const fb = h('div',{class:'fb','aria-live':'polite'}); const again = againBtn(render);
+    const L = pairs.map((p,i) => h('button',{class:'opt',type:'button','data-i':i},p[0]));
+    const R = shuffle(pairs.map((p,i) => ({i,t:p[1]}))).map(p => h('button',{class:'opt',type:'button','data-i':p.i},p.t));
+    L.forEach(b => b.addEventListener('click',()=>{ if(b.classList.contains('done')) return; L.forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); sel=b; feedback(fb,'info','Now choose the matching item on the right.'); }));
+    R.forEach(b => b.addEventListener('click',()=>{
+      if(b.classList.contains('done')) return;
+      if(!sel){ feedback(fb,'info','First tap an item on the left.'); return; }
+      if(sel.dataset.i===b.dataset.i){
+        sel.classList.remove('sel'); sel.classList.add('done'); b.classList.add('done'); sel=null; matched++; feedback(fb,'good','✓ Match!');
+        if(matched===pairs.length){ feedback(fb,'good','🎉 All matched' + (mistakes? ' with ' + mistakes + ' miss' + (mistakes>1?'es':'') : ' with no misses') + '.'); again.style.display=''; record(a.id, Math.max(0, pairs.length-mistakes), pairs.length); }
+      } else { mistakes++; b.classList.add('bad','shake'); setTimeout(()=>b.classList.remove('bad','shake'),600); feedback(fb,'bad','Not that one. Re-read and try another.'); }
+    }));
+    mount.append(h('p',{html:a.intro}),h('div',{class:'match'},h('div',{},L),h('div',{},R)),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  });
+}
+
+/* 6. sort cards into categories (optional picture per card) */
+function mountSort(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const deck = shuffle(a.cards); let i=0, right=0;
+    const fb = h('div',{class:'fb','aria-live':'polite'}); const card = h('div',{class:'sortcard'});
+    const btns = a.choices.map(c => h('button',{class:'btn',type:'button'},c.label));
+    const count = h('p',{class:'ref'}); const again = againBtn(render);
+    function paint(){
+      if(i>=deck.length){ card.textContent='Finished!'; btns.forEach(b=>b.disabled=true); count.textContent=''; return; }
+      card.innerHTML=''; if(deck[i][3]) card.append(h('div',{class:'fig',html:deck[i][3]})); card.append(h('span',{},deck[i][0])); count.textContent='Card ' + (i+1) + ' of ' + deck.length;
+    }
+    function pick(k){
+      if(i>=deck.length) return;
+      const c=deck[i], ok=c[1]===k; if(ok) right++;
+      const msg=(ok?'✓ Correct. ':'✗ Not quite. ') + c[2]; i++;
+      if(i>=deck.length){ paint(); feedback(fb, right===deck.length?'good':'info', msg + ' — Score: ' + right + ' / ' + deck.length + '.'); again.style.display=''; record(a.id, right, deck.length); }
+      else { feedback(fb, ok?'good':'bad', msg); paint(); }
+    }
+    btns.forEach((b,j) => b.addEventListener('click',()=>pick(a.choices[j].k)));
+    mount.append(h('p',{html:a.intro}),count,card,h('div',{class:'row'},btns),fb,h('div',{class:'row',style:'margin-top:10px'},again));
+    paint();
+  });
+}
+
+/* 7. fill in the blanks (drop-down) */
+function mountCloze(a){
+  withRound(a.id, (mount, render) => {
+    mount.innerHTML = '';
+    const S = a.items, ok=new Set(); let wrong=0;
+    const fb = h('div',{class:'fb','aria-live':'polite'}); const again = againBtn(render); const box = h('div',{class:'cloze'});
+    S.forEach((s,k) => {
+      const sel = h('select',{'aria-label':'Choose the word for sentence ' + (k+1)}, h('option',{value:''},'— choose —'), s[1].map((o,j)=>h('option',{value:j},o)));
+      sel.addEventListener('change',()=>{
+        if(sel.value===''){ sel.className=''; return; }
+        if(+sel.value===s[2]){ sel.className='good'; sel.disabled=true; ok.add(k); feedback(fb,'good','✓ ' + s[4]);
+          if(ok.size===S.length){ feedback(fb,'good','🎉 All sentences complete!'); again.style.display=''; record(a.id, Math.max(0, S.length-wrong), S.length); } }
+        else { wrong++; sel.className='bad shake'; setTimeout(()=>sel.classList.remove('shake'),600); feedback(fb,'bad','Not quite – try another word. Think about what you learned this week.'); }
+      });
+      box.append(h('p',{}, s[0], sel, s[3]));
+    });
+    mount.append(h('p',{html:a.intro}),box,fb,h('div',{class:'row',style:'margin-top:10px'},again));
+  });
+}
+
+/* 8. written answers: saved word for word and listed on the teacher's "Student responses" page (resp- key) */
+function mountOpen(a){
+  const mount = mountOf(a.id), key = 'resp-' + SLUG + '-' + a.id, n = a.prompts.length, min = a.min || 12;
+  const qs = a.prompts.map(p => plain(p.q));
+  let R = store.get(key, null);
+  if(!R || !Array.isArray(R.a)) R = {a:[]};
+  R = {title: G.label + ' – ' + (a.rtitle || a.title), q: qs, a: qs.map((_,i) => String(R.a[i] || ''))};
+  const status = h('span', {class:'saved'}, '');
+  function check(){
+    const done = R.a.every(t => t.trim().length >= min);
+    status.textContent = done ? '✓ Saved. Your teacher can read your answers.' : 'Saved automatically as you type. Write at least a full sentence for each answer to complete this activity.';
+    if(done) record(a.id, 0, 0); else unrecord(a.id);
+  }
+  if(a.intro) mount.append(h('p', {html:a.intro}));
+  if(a.who){ const nm = studentName(); mount.append(h('p', {class:'who'}, 'Name: ', h('b', {}, nm || '(sign in to show your name)'), '  ·  Week: ' + G.label)); }
+  a.prompts.forEach((p,i) => {
+    const ta = h('textarea', {id:a.id+'-q'+i, rows:p.rows||4, 'aria-label':plain(p.q)});
+    ta.value = R.a[i];
+    ta.addEventListener('input', () => { R.a[i] = ta.value; store.set(key, R); check(); });
+    ta.addEventListener('blur', () => { R.a[i] = ta.value; store.set(key, R); });
+    mount.append(h('div', {class:'qa'}, h('label', {for:a.id+'-q'+i, html:p.q}), p.hint ? h('div',{class:'ref',style:'margin:0 0 4px'},p.hint) : null, ta));
+  });
+  if(a.model) mount.append(h('details', {class:'acc'}, h('summary', {}, 'See a model answer'), h('div', {class:'body', html:a.model})));
+  mount.append(status);
+  check();
+}
+
+/* 9. share a budget (percent) and explain the choice – saved as written answers */
+function mountAlloc(a){
+  const mount = mountOf(a.id), key = 'resp-' + SLUG + '-' + a.id, names = a.items.map(x => x.n);
+  const qs = names.map(n => 'Share of the budget for: ' + n).concat([plain(a.reason)]);
+  let R = store.get(key, null); if(!R || !Array.isArray(R.a)) R = {a:[]};
+  R = {title: G.label + ' – ' + (a.rtitle || a.title), q: qs, a: qs.map((_,i) => String(R.a[i] == null ? '' : R.a[i]))};
+  const total = a.total || 100, tot = h('span', {class:'pct'}), status = h('span', {class:'saved'}, '');
+  const inputs = a.items.map((it,i) => { const inp = h('input', {class:'amt', type:'number', min:0, max:total, step:1, id:a.id+'-i'+i, 'aria-label':'Percent for ' + it.n});
+    inp.value = R.a[i]; inp.addEventListener('input', () => { R.a[i] = inp.value; store.set(key, R); paint(); }); return inp; });
+  const why = h('textarea', {id:a.id+'-why', rows:4, 'aria-label':plain(a.reason)}); why.value = R.a[names.length];
+  why.addEventListener('input', () => { R.a[names.length] = why.value; store.set(key, R); paint(); });
+  function paint(){
+    const s = inputs.reduce((t,i) => t + (+i.value||0), 0);
+    tot.textContent = 'Total: ' + s + '% of ' + total + '%'; tot.className = 'pct ' + (s===total ? 'ok' : 'no');
+    const done = s===total && why.value.trim().length >= 15;
+    status.textContent = done ? '✓ Saved. Your teacher can read your budget and your reasons.' : (s===total ? 'Now explain your biggest choice (at least a full sentence).' : (s>total ? 'You gave away more than ' + total + '%: lower some numbers.' : 'Share all ' + total + '% of the budget: ' + (total-s) + '% still to assign.'));
+    if(done) record(a.id, 0, 0); else unrecord(a.id);
+  }
+  mount.append(h('p', {html:a.intro}), h('div', {class:'alloc'}, a.items.map((it,i) => [h('label', {for:a.id+'-i'+i, html:'<b>' + it.n + '</b><br><span class="ref">' + (it.hint||'') + '</span>'}), inputs[i]])), h('p', {}, tot),
+    h('div', {class:'qa'}, h('label', {for:a.id+'-why', html:a.reason}), why), status);
+  paint();
+}
+
+/* 10. numbers practice: every student gets their own set of numbers (seeded by the sign-in) */
+function mountCalc(a){
+  const mount = mountOf(a.id), skey = 'gv-calc-' + SLUG + '-' + a.id, rkey = 'resp-' + SLUG + '-' + a.id, gen = (window.GV_GENS||{})[a.gen];
+  let S = store.get(skey, null); if(!S || !Array.isArray(S.t)) S = {seed:'', t:[], d:[]};
+  const sd = (window.LiaSync && LiaSync.seed && LiaSync.seed()) || ''; if(!S.seed && sd) S.seed = sd;
+  const n = a.n || 5, Q = [];
+  for(let k=0;k<n;k++){ Q.push(gen(rng(strSeed((S.seed||'demo') + '|' + a.id + '|' + k)), k)); S.t[k] = S.t[k] || []; S.d[k] = S.d[k] || 0; }
+  store.set(skey, S);
+  function saveResp(){ store.set(rkey, {title: G.label + ' – ' + (a.rtitle||a.title), q: Q.map((q,k) => (k+1) + '. ' + plain(q.q)), a: Q.map((q,k) => S.t[k].length ? 'Tries: ' + S.t[k].join(' → ') + (S.d[k] ? ' (solved)' : '') : '') }); }
+  let first = 0;
+  const summary = h('p', {class:'score', 'aria-live':'polite'});
+  function paint(){
+    const solved = S.d.filter(Boolean).length; first = Q.filter((q,k) => S.d[k] && S.t[k].length===1).length;
+    summary.textContent = solved < n ? 'Solved ' + solved + ' of ' + n : 'Done! Solved on the first try: ' + first + ' of ' + n + '.';
+    if(solved === n) record(a.id, first, n);
+  }
+  mount.append(h('p', {html:a.intro}), h('p', {class:'ref'}, 'Your numbers are your own: classmates get different ones. Type a number, then press Check. Use a calculator if you like.'));
+  Q.forEach((q,k) => {
+    const fb = h('div', {class:'fb', 'aria-live':'polite'}), inp = h('input', {class:'num', type:'text', inputmode:'decimal', 'aria-label':'Answer to question ' + (k+1)}), btn = h('button', {class:'btn', type:'button'}, 'Check');
+    function lock(good){ inp.disabled = true; btn.disabled = true; inp.classList.add(good ? 'good' : 'bad'); }
+    function show(){ if(S.d[k]){ const last = S.t[k][S.t[k].length-1], v = parseFloat(String(last).replace(',', '.')), good = isFinite(v) && Math.abs(v - q.ans) <= (q.tol == null ? 0.01 : q.tol); inp.value = last; lock(good);
+      if(good) feedback(fb,'good','✓ ' + q.e + ' Answer: ' + q.ans + (q.unit ? ' ' + q.unit : '') + '.'); else feedback(fb,'bad','The answer is ' + q.ans + (q.unit ? ' ' + q.unit : '') + '. ' + q.e); } }
+    btn.addEventListener('click', () => {
+      const raw = inp.value.trim(); if(!raw) return;
+      const v = parseFloat(raw.replace(',', '.')); S.t[k].push(raw);
+      if(isFinite(v) && Math.abs(v - q.ans) <= (q.tol == null ? 0.01 : q.tol)){ S.d[k] = 1; lock(true); feedback(fb,'good','✓ ' + q.e + ' Answer: ' + q.ans + (q.unit ? ' ' + q.unit : '') + '.'); }
+      else if(S.t[k].length >= 3){ S.d[k] = 1; lock(false); feedback(fb,'bad','The answer is ' + q.ans + (q.unit ? ' ' + q.unit : '') + '. ' + q.e); }
+      else { inp.classList.add('bad','shake'); setTimeout(()=>inp.classList.remove('bad','shake'),600); feedback(fb,'bad','Not yet. Hint: ' + q.hint); }
+      store.set(skey, S); saveResp(); paint();
+    });
+    mount.append(h('div', {class:'qblock'}, h('div', {class:'qhead', html:(k+1) + '. ' + q.q}), h('div', {class:'row'}, inp, q.unit ? h('span',{class:'ref'},q.unit) : null, btn), fb));
+    show();
+  });
+  mount.append(summary); saveResp(); paint();
+}
+
+const MOUNT = {quiz:mountQuiz, multi:mountMulti, scenario:mountScenario, seq:mountSeq, match:mountMatch, sort:mountSort, cloze:mountCloze, open:mountOpen, alloc:mountAlloc, calc:mountCalc};
+G.acts.forEach(a => MOUNT[a.type](a));
+paintProgress();
+})();
+
+</script>
+</body>
+</html>
