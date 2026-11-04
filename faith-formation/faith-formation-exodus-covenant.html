@@ -384,7 +384,37 @@ function h(tag, attrs, ...kids){
   kids.flat().forEach(c => { if(c!=null) el.append(c.nodeType ? c : document.createTextNode(c)); });
   return el;
 }
-function shuffle(a){ a=a.slice(); for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+/* ---------- saved answers + stable answer order ----------
+   Each tap/choice is recorded and replayed on the next visit (localStorage, mirrored by LiaSync). Shuffles are seeded, so the order is
+   the same on every visit, and the correct option is spread over all positions. "Try again" starts a new round (new order, answers cleared). */
+const AKEY = 'ff-answers-' + location.pathname.split('/').pop().replace(/\.html.*$/, '');
+let AD = {}; try{ AD = JSON.parse(localStorage.getItem(AKEY) || '{}') || {}; }catch(e){ AD = {}; }
+const asave = () => { try{ localStorage.setItem(AKEY, JSON.stringify(AD)); }catch(e){} };
+let curAct = null, shufN = 0, CNT = {}, replaying = false; const STARTED = {};
+function rng(seed){ let a = seed>>>0; return () => { a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a>>>15), 1 | a); t = (t + Math.imul(t ^ (t>>>7), 61 | t)) ^ t; return ((t ^ (t>>>14))>>>0) / 4294967296; }; }
+function strSeed(s){ let h = 2166136261; for(let i=0;i<s.length;i++){ h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h>>>0; }
+function actRnd(){ shufN++; return rng(strSeed(curAct + '|' + ((AD[curAct] && AD[curAct].round) || 0) + '|' + shufN)); }
+function beginAct(id){ if(STARTED[id]){ AD[id] = {round: ((AD[id] && AD[id].round) || 0) + 1, a: []}; asave(); } STARTED[id] = 1; curAct = id; shufN = 0; CNT = {}; }
+function armAct(id, mount){
+  curAct = null;
+  const d = AD[id] = AD[id] || {round: 0, a: []};
+  const cs = $$('button.opt, button.btn:not(.ghost), select', mount);
+  cs.forEach((c, i) => c.addEventListener(c.tagName === 'SELECT' ? 'change' : 'click', () => {
+    if(replaying) return;
+    if(d.a.length < 400){ d.a.push(c.tagName === 'SELECT' ? {i, v: c.value} : {i}); asave(); }
+  }));
+  if(d.a.length){
+    replaying = true;
+    d.a.forEach(x => { const c = cs[x.i]; if(!c) return; if(c.tagName === 'SELECT'){ c.value = x.v; c.dispatchEvent(new Event('change')); } else c.click(); });
+    replaying = false;
+  }
+}
+function placeOk(arr){
+  const ok = arr.find(x => x.ok); if(!ok) return shuffle(arr);
+  const n = arr.length, wr = shuffle(arr.filter(x => !x.ok)), k = (CNT[n] = (CNT[n] || 0) + 1) - 1, target = ((k % n) * (n === 4 ? 3 : 2) + Math.floor(k / n)) % n;
+  wr.splice(target, 0, ok); return wr;
+}
+function shuffle(a){ a=a.slice(); const rnd=curAct?actRnd():Math.random; for(let i=a.length-1;i>0;i--){const j=Math.floor(rnd()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
 const store = {
   get(k,d){ try{ const v=localStorage.getItem(k); return v==null?d:JSON.parse(v); }catch(e){ return d; } },
   set(k,v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} },
@@ -587,7 +617,7 @@ EXAMPLES.forEach(ex => {
 function mountQuiz(id, questions, opts){
   const mount = $('#'+id+' .mount');
   const state = {};
-  function render(){
+  function render0(){
     mount.innerHTML = '';
     let answered = 0, correct = 0;
     const summary = h('p', {class:'score', 'aria-live':'polite'});
@@ -600,7 +630,7 @@ function mountQuiz(id, questions, opts){
       record(id, correct, questions.length);
     }
     questions.forEach((q,qi) => {
-      const order = shuffle(q.o.map((t,i) => ({t, ok:i===q.a})));
+      const order = placeOk(q.o.map((t,i) => ({t, ok:i===q.a})));
       const fb = h('div', {class:'fb', 'aria-live':'polite'});
       const btns = order.map(o => {
         const b = h('button', {class:'opt', type:'button'}, o.t);
@@ -623,6 +653,7 @@ function mountQuiz(id, questions, opts){
     mount.append(h('div', {class:'row', style:'margin-top:16px'}, summary, again));
     paintSummary();
   }
+  function render(){ beginAct(id); render0(); armAct(id, mount); }
   render();
 }
 
@@ -648,7 +679,7 @@ mountQuiz('act-scripture', [
 /* ---------- sequence engine ---------- */
 function mountSequence(id, intro, items){
   const mount = $('#'+id+' .mount');
-  function render(){
+  function render0(){
     mount.innerHTML = '';
     let next = 0, mistakes = 0;
     const slots = items.map((_,i) => h('div', {class:'slot' + (i===0?' next':'')}, h('small', {}, 'Step ' + (i+1)), h('span', {}, '?')));
@@ -683,6 +714,7 @@ function mountSequence(id, intro, items){
     });
     mount.append(h('p', {}, intro), h('div', {class:'slots'}, slots), h('p', {class:'ref'}, 'Tap the event that belongs in the next empty step.'), poolEl, fb, h('div', {class:'row', style:'margin-top:10px'}, again));
   }
+  function render(){ beginAct(id); render0(); armAct(id, mount); }
   render();
 }
 mountSequence('act-seq3', 'Build the three-box sequence strip. Tap the events in the order they happened.', [
@@ -718,7 +750,7 @@ mountSequence('act-journey', 'Put the whole story in order, from slavery to the 
     ['Order','Following the right rules and sequence keeps us safe and free'],
     ['Lamb of God','The title John the Baptist gave to Jesus']
   ];
-  function render(){
+  function render0(){
     mount.innerHTML='';
     let sel=null, matched=0, mistakes=0;
     const fb=h('div',{class:'fb','aria-live':'polite'});
@@ -748,6 +780,7 @@ mountSequence('act-journey', 'Put the whole story in order, from slavery to the 
     }));
     mount.append(h('p',{},'Tap a term, then tap its meaning.'),h('div',{class:'match'},h('div',{},L),h('div',{},R)),fb,h('div',{class:'row',style:'margin-top:10px'},again));
   }
+  function render(){ beginAct(id); render0(); armAct(id, mount); }
   render();
 })();
 
@@ -764,7 +797,7 @@ mountSequence('act-journey', 'Put the whole story in order, from slavery to the 
     ['Do not lie about other people','N','Truthfulness protects others.'],
     ['Do not envy what your neighbor has','N','Not coveting is part of loving our neighbor.']
   ];
-  function render(){
+  function render0(){
     mount.innerHTML='';
     const deck=shuffle(cards); let i=0, right=0;
     const fb=h('div',{class:'fb','aria-live':'polite'});
@@ -793,6 +826,7 @@ mountSequence('act-journey', 'Put the whole story in order, from slavery to the 
     mount.append(h('p',{},'The Law at Sinai has two directions. Decide which each commandment is mostly about.'),count,card,h('div',{class:'row'},bG,bN),fb,h('div',{class:'row',style:'margin-top:10px'},again));
     paint();
   }
+  function render(){ beginAct(id); render0(); armAct(id, mount); }
   render();
 })();
 
@@ -807,7 +841,7 @@ mountSequence('act-journey', 'Put the whole story in order, from slavery to the 
     ['Jesus is the ',['opponent','copy','fulfillment'],2,' of the Old Covenant and established the New Covenant.','Jesus said He came to fulfill the Law, not abolish it (Matthew 5:17).'],
     ['God showed order by giving ',['vague','exact','secret'],1,' instructions for the Passover.','The exact steps protected the people and led them to freedom (Exodus 12).']
   ];
-  function render(){
+  function render0(){
     mount.innerHTML='';
     let ok=new Set(), wrong=0;
     const fb=h('div',{class:'fb','aria-live':'polite'});
@@ -831,6 +865,7 @@ mountSequence('act-journey', 'Put the whole story in order, from slavery to the 
     });
     mount.append(h('p',{},'Choose the word that completes each sentence.'),box,fb,h('div',{class:'row',style:'margin-top:10px'},again));
   }
+  function render(){ beginAct(id); render0(); armAct(id, mount); }
   render();
 })();
 

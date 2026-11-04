@@ -984,6 +984,15 @@ function lessonScore(l){
 function reportUnit(){try{let n=0,m=0,C=0,T=0;[1,2,3,4].forEach(l=>{const S=lessonScore(l);n+=S.n;m+=S.m;C+=S.C;T+=S.T;});if(window.LiaSync)LiaSync.report({solved:n,total:m,score:C,max:T});}catch(e){}}
 setTimeout(reportUnit,0);
 
+/* ---------- saved answers + stable question order ----------
+   Every answer the student gives in a practice set is recorded and replayed on the next visit (kept in localStorage, mirrored by LiaSync).
+   Random picks/shuffles are seeded per lesson + activity, so the same set appears every time; "Restart this set" starts a new round. */
+const AKEY='u3-answers-v1';
+let AD={}; try{AD=JSON.parse(localStorage.getItem(AKEY)||'{}')||{};}catch(e){AD={};}
+const asave=()=>{try{localStorage.setItem(AKEY,JSON.stringify(AD));}catch(e){}};
+const rngSeed=seed=>{let a=seed>>>0;return()=>{a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};};
+const strSeed=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;};
+
 /* ---------- practice factory ---------- */
 function makePractice(l,rootEl){
   const acts=ACT.filter(a=>hasAct(l,a[0]));
@@ -992,7 +1001,26 @@ function makePractice(l,rootEl){
   <div class="quiz"></div>`;
   const quiz=$('.quiz',rootEl);
   let mode='mcq',ans=0,cor=0,tot=0,shown=false;
-  const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  const ctxKey=()=>l+':'+mode; let shufN=0,CNT={},replaying=false;
+  const shuffle=a=>{a=a.slice();shufN++;const r=rngSeed(strSeed(ctxKey()+'|'+((AD[ctxKey()]&&AD[ctxKey()].round)||0)+'|'+shufN));for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  /* shuffled options, with the correct one spread over all positions */
+  const placeOpt=(arr,a)=>{const c=arr.find(x=>x.i===a);if(!c)return shuffle(arr);const n=arr.length,wr=shuffle(arr.filter(x=>x.i!==a)),k=(CNT[n]=(CNT[n]||0)+1)-1,target=((k%n)*(n===4?3:2)+Math.floor(k/n))%n;wr.splice(target,0,c);return wr;};
+  const addr=t=>{const card=t.closest('.q');if(!card)return null;const c=[...quiz.children].indexOf(card);if(c<0)return null;let k,list;
+    if(t.matches('.opt')){k='o';list=$$('.opt',card);}else if(t.matches('.cat')){k='c';list=$$('.cat',card);}else if(t.matches('path.d')){k='p';list=$$('path.d',card);}
+    else if(t.closest('ul.ord')){k='m';list=$$('ul.ord button',card);}else if(t.matches('.btn')){k='b';list=$$('.btn',card);}else return null;
+    const i=list.indexOf(t);return i<0?null:{c,k,i};};
+  const rcd=x=>{if(replaying||!x)return;const d=AD[ctxKey()]=AD[ctxKey()]||{round:0,a:[]};if(d.a.length<600){d.a.push(x);asave();}};
+  quiz.addEventListener('click',e=>{const t=e.target.closest('button,path.d');if(t&&!t.disabled)rcd(addr(t));},true);
+  quiz.addEventListener('keydown',e=>{const t=e.target;if(t.matches&&t.matches('path.d')&&(e.key==='Enter'||e.key===' '))rcd(addr(t));},true);
+  quiz.addEventListener('change',e=>{const t=e.target;if(t.tagName==='SELECT'){const card=t.closest('.q'),c=[...quiz.children].indexOf(card);if(c>=0)rcd({c,k:'s',i:$$('select',card).indexOf(t),v:t.value});}},true);
+  function replayCtx(){
+    const d=AD[ctxKey()];if(!d||!d.a.length)return;replaying=true;
+    d.a.forEach(x=>{const card=quiz.children[x.c];if(!card)return;
+      if(x.k==='s'){const se=$$('select',card)[x.i];if(se&&!se.disabled){se.value=x.v;se.dispatchEvent(new Event('change',{bubbles:true}));}return;}
+      const sel={o:'.opt',c:'.cat',p:'path.d',m:'ul.ord button',b:'.btn'}[x.k];const t=sel&&$$(sel,card)[x.i];
+      if(t&&!t.disabled)t.dispatchEvent(new MouseEvent('click',{bubbles:true}));});
+    replaying=false;
+  }
   function rec(c,m){ans+=m;cor+=c;commit(l,mode,cor,ans);update();}
   function update(){
     $('.scoreTxt',rootEl).textContent=`Score: ${cor} / ${ans}`;
@@ -1003,7 +1031,7 @@ function makePractice(l,rootEl){
   const box=(label,i,body)=>{const c=document.createElement('div');c.className='q';c.innerHTML=`<div class="num">${label} ${i+1}</div>${body}`;return c;};
   function mcCard(item,idx,label,fixed){
     const card=document.createElement('div');card.className='q';
-    const order=(fixed?item.o.map((t,i)=>({t,i})):shuffle(item.o.map((t,i)=>({t,i}))));
+    const order=(fixed?item.o.map((t,i)=>({t,i})):placeOpt(item.o.map((t,i)=>({t,i})),item.a));
     card.innerHTML=`<div class="num">${label} ${idx+1}</div>${item.src?`<div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div>`:''}<p class="stem">${esc(item.q)}</p><div class="opts"></div><div class="fb" role="status"></div>`;
     const bx=$('.opts',card),fb=$('.fb',card);
     order.forEach(op=>{
@@ -1137,7 +1165,7 @@ function makePractice(l,rootEl){
     return [card,1];
   }
   function build(m){
-    mode=m;ans=0;cor=0;shown=false;quiz.innerHTML='';
+    mode=m;ans=0;cor=0;shown=false;quiz.innerHTML='';shufN=0;CNT={};
     let cards=[];
     const one=(f)=>(x,i)=>[f(x,i),1];
     if(m==='mcq')cards=shuffle(pick(MCQ,IDX.mcq[l])).slice(0,6).map((it,i)=>[mcCard(it,i,'Question'),1]);
@@ -1150,10 +1178,10 @@ function makePractice(l,rootEl){
     if(m==='map')cards=shuffle(MAPQ_BY[l]).map((x,i)=>mapCard(x,i));
     if(m==='src')cards=shuffle(pick(SRC,IDX.src[l])).map((x,i)=>[mcCard(x,i,'Analysis'),1]);
     if(m==='wr')cards=shuffle(pick(WR,IDX.wr[l])).slice(0,2).map((x,i)=>wrCard(x,i));
-    tot=cards.reduce((a,c)=>a+c[1],0);cards.forEach(c=>quiz.appendChild(c[0]));update();
+    tot=cards.reduce((a,c)=>a+c[1],0);cards.forEach(c=>quiz.appendChild(c[0]));update();replayCtx();
   }
   $$('.ptab',rootEl).forEach(b=>b.onclick=()=>{$$('.ptab',rootEl).forEach(x=>x.setAttribute('aria-selected',x===b));build(b.dataset.p);});
-  $('.resetBtn',rootEl).onclick=()=>{build(mode);quiz.scrollIntoView({behavior:'smooth',block:'start'});};
+  $('.resetBtn',rootEl).onclick=()=>{const k=l+':'+mode;AD[k]={round:((AD[k]&&AD[k].round)||0)+1,a:[]};asave();build(mode);quiz.scrollIntoView({behavior:'smooth',block:'start'});};
   build('mcq');
 }
 

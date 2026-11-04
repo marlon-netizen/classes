@@ -261,7 +261,7 @@ function $(s,r){ return (r||document).querySelector(s); }
 function $$(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
 function el(tag,cls,html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
 function ic(n){ return '<svg class="ic" aria-hidden="true"><use href="#i-'+n+'"/></svg>'; }
-function shuffle(a,rnd){ a=a.slice(); rnd=rnd||Math.random; for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function shuffle(a,rnd){ a=a.slice(); rnd=rnd||(scopeName?scopeRnd():Math.random); for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 function setFb(b,k,h){ b.className='fb show '+k; b.innerHTML=h; }
 
 /* ====================== registry & reporting ====================== */
@@ -279,12 +279,44 @@ function reportSync(){
 }
 function finish(id,score){ items[id].score=score; updatePill(); reportSync(); }
 
+/* ====================== saved answers + stable answer order ======================
+   Every tap/choice a student makes is recorded and replayed on the next visit (kept in localStorage, mirrored by LiaSync).
+   Shuffles are seeded, so the order is the same on every visit, and the correct option is spread over all positions. */
+var AKEY='ff-answers-'+location.pathname.split('/').pop().replace(/\.html.*$/,''), AD={}, RC={}, CNT={}, scopeName=null, shufN=0, replaying=false;
+try{ AD=JSON.parse(localStorage.getItem(AKEY)||'{}')||{}; }catch(e){ AD={}; }
+function asave(){ try{ localStorage.setItem(AKEY,JSON.stringify(AD)); }catch(e){} }
+function strSeed(s){ var h=2166136261; for(var i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+function scopeRnd(){ shufN++; return rng(strSeed(scopeName+'|'+((AD[scopeName]&&AD[scopeName].round)||0)+'|'+shufN)); }
+function beginScope(sc){ scopeName=sc; shufN=0; CNT={}; }
+function endScope(){ var sc=scopeName; scopeName=null; replay(sc); }
+function restartScope(sc){ AD[sc]={round:((AD[sc]&&AD[sc].round)||0)+1,a:{}}; asave(); }
+function track(fn){ return function(mount,grp,id){
+  var before=mount.childNodes.length, sc=scopeName, r=fn.apply(null,arguments), cs=[];
+  Array.prototype.slice.call(mount.childNodes,before).forEach(function(n){ if(n.nodeType!==1) return; if(/^(BUTTON|SELECT)$/.test(n.tagName)) cs.push(n); cs=cs.concat($$('button,select',n)); });
+  RC[id]=cs;
+  cs.forEach(function(c,i){ c.addEventListener(c.tagName==='SELECT'?'change':'click',function(){
+    if(replaying||!sc) return;
+    var d=AD[sc]=AD[sc]||{round:0,a:{}}; var l=d.a[id]=d.a[id]||[]; if(l.length<400){ l.push(c.tagName==='SELECT'?{i:i,v:c.value}:{i:i}); asave(); }
+  }); });
+  return r;
+}; }
+function replay(sc){
+  var a=(AD[sc]&&AD[sc].a)||{}; replaying=true;
+  Object.keys(a).forEach(function(id){ var cs=RC[id]; if(!cs) return; a[id].forEach(function(x){ var c=cs[x.i]; if(!c) return; if(c.tagName==='SELECT'){ c.value=x.v; c.dispatchEvent(new Event('change')); } else c.click(); }); });
+  replaying=false; updatePill(); reportSync();
+}
+/* put the correct option (first in q.o) at a balanced, stable position among the shuffled wrong ones */
+function placeCorrect(o){
+  var n=o.length, wr=shuffle(o.slice(1)), k=(CNT[n]=(CNT[n]||0)+1)-1, target=((k%n)*(n===4?3:2)+Math.floor(k/n))%n;
+  wr.splice(target,0,o[0]); return wr;
+}
+
 /* ====================== activity builders ====================== */
 function mkChoice(mount,grp,id,q,label,num){
   reg(id,grp,label,1);
   var block=el('div','qblock'), fb=el('div','fb'); fb.setAttribute('aria-live','polite');
   block.appendChild(el('div','qtext',(num?num+'. ':'')+q.q));
-  var opts=q.tf? q.o : shuffle(q.o);
+  var opts=q.tf? q.o : placeCorrect(q.o);
   var btns=opts.map(function(o){
     var b=el('button','opt'); b.type='button'; b.textContent=o[0];
     b.addEventListener('click',function(){
@@ -373,12 +405,14 @@ function mkCloze(mount,grp,id,label,S){
   mount.appendChild(box); mount.appendChild(fb);
 }
 
+mkChoice=track(mkChoice); mkMatch=track(mkMatch); mkSort=track(mkSort); mkSeq=track(mkSeq); mkCloze=track(mkCloze);
+
 /* ====================== page sections ====================== */
 function card(title,tag){ var c=el('div','card act'); c.appendChild(el('h3',null,title+(tag?' <span class="tag">'+tag+'</span>':''))); return c; }
 function section(id,title,icon){ var s=el('section','sec'); s.id=id; s.appendChild(el('h2','sech',ic(icon||'cross')+' '+title)); $('#main').appendChild(s); return s; }
 
 function buildVocab(){
-  var m=$('#vocab-body'); m.innerHTML=''; clearPrefix('v');
+  var m=$('#vocab-body'); m.innerHTML=''; clearPrefix('v'); beginScope('v');
   var a=card('Vocabulary check A: match the terms','<span>'+W.vocab.length+' points</span>');
   a.appendChild(el('p',null,'Tap a term, then tap its meaning.'));
   mkMatch(a,'Vocabulary','v-match','Match the terms',W.vocab); m.appendChild(a);
@@ -389,9 +423,10 @@ function buildVocab(){
     mkChoice(qs,'Vocabulary','v-q'+i,quizToQ(['Which term means: “'+v[1]+'”?',v[0],wrong,'“'+v[0]+'”: '+v[1]+'.']),'Term '+(i+1),i+1);
   });
   m.appendChild(b);
+  endScope();
 }
 function buildPractice(){
-  var m=$('#practice-body'); m.innerHTML=''; clearPrefix('p');
+  var m=$('#practice-body'); m.innerHTML=''; clearPrefix('p'); beginScope('p');
   var n=0;
   function head(label,pts){ n++; return card('Practice '+n+': '+label,pts+' point'+(pts>1?'s':'')); }
   W.practice.forEach(function(p,i){
@@ -407,6 +442,7 @@ function buildPractice(){
   var y=head('Fill in the blanks',W.cloze.length); y.appendChild(el('p',null,'Choose the word that completes each sentence.')); mkCloze(y,'Practice','pcl','Fill in the blanks',W.cloze); m.appendChild(y);
   var z=head('What would you do?',W.scen.length); z.appendChild(el('p',null,'Choose the best response in each situation.')); var q2=el('div','qs'); z.appendChild(q2);
   W.scen.forEach(function(q,k){ mkChoice(q2,'Practice','psc'+k,quizToQ(q),'Situation '+(k+1),k+1); }); m.appendChild(z);
+  endScope();
 }
 
 /* exit ticket: answers are saved in localStorage; LiaSync mirrors them to the student's account */
@@ -537,11 +573,11 @@ function bibProgress(){
   s2.appendChild(cg);
   // vocab
   var s3=section('vocab','Vocabulary check','chalice');
-  var rv=el('button','btn ghost','↻ Try the vocabulary check again'); rv.type='button'; rv.style.marginBottom='12px'; rv.addEventListener('click',function(){ buildVocab(); updatePill(); });
+  var rv=el('button','btn ghost','↻ Try the vocabulary check again'); rv.type='button'; rv.style.marginBottom='12px'; rv.addEventListener('click',function(){ restartScope('v'); buildVocab(); updatePill(); });
   s3.appendChild(rv); var vb=el('div'); vb.id='vocab-body'; s3.appendChild(vb);
   // practice
   var s4=section('practice','Practice','host');
-  var rp=el('button','btn ghost','↻ Restart the practice'); rp.type='button'; rp.style.marginBottom='12px'; rp.addEventListener('click',function(){ buildPractice(); updatePill(); });
+  var rp=el('button','btn ghost','↻ Restart the practice'); rp.type='button'; rp.style.marginBottom='12px'; rp.addEventListener('click',function(){ restartScope('p'); buildPractice(); updatePill(); });
   s4.appendChild(rp); var pb=el('div'); pb.id='practice-body'; s4.appendChild(pb);
   // biblia (Spanish)
   var s5=section('biblia','Prácticas bíblicas','book'); buildBible(s5);

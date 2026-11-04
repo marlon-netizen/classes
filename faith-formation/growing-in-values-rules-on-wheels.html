@@ -468,7 +468,7 @@ function $(s,r){ return (r||document).querySelector(s); }
 function $$(s,r){ return Array.prototype.slice.call((r||document).querySelectorAll(s)); }
 function el(tag,cls,html){ var e=document.createElement(tag); if(cls) e.className=cls; if(html!=null) e.innerHTML=html; return e; }
 function setFb(box,kind,html){ box.className='fb show '+kind; box.innerHTML=html; }
-function shuffle(a){ a=a.slice(); for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+function shuffle(a){ a=a.slice(); var rnd=scopeName?scopeRnd():Math.random; for(var i=a.length-1;i>0;i--){ var j=Math.floor(rnd()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 
 var slides=$$('.slide'), deck=$('#deck'), idx=0;
 var items={};        // id -> {group,label,max,score|null,scored}
@@ -485,6 +485,7 @@ function itemsIn(g){ return order.filter(function(id){ return items[id].group===
 function doneIn(g){ return itemsIn(g).filter(function(id){ return items[id].score!==null; }).length; }
 
 /* ====================== COMPONENTS ====================== */
+/* (saved-answers helpers are defined below the builders) */
 function mkReveal(mount,list,withIcon){
   mount.innerHTML='';
   list.forEach(function(r){
@@ -520,7 +521,8 @@ function mkChoice(mount,group,id,q,num,scored,onDone){
   reg(id,group,q.label||q.tag,1,scored);
   var block=el('div','qblock'), fb=el('div','fb'); fb.setAttribute('aria-live','polite');
   block.appendChild(el('div','qtext','<span class="qtag">'+q.tag+'</span>'+(num?num+'. ':'')+q.q));
-  var btns=q.o.map(function(o){
+  var oo=(scored!==false && q.o.filter(function(o){ return o[1]; }).length===1)? placeQ(q.o) : q.o;
+  var btns=oo.map(function(o){
     var b=el('button','opt'); b.type='button'; b.textContent=o[0];
     b.addEventListener('click',function(){
       if(items[id].score!==null) return;                       // locked: no double scoring
@@ -530,7 +532,7 @@ function mkChoice(mount,group,id,q,num,scored,onDone){
       else if(ok){ b.classList.add('good'); setFb(fb,'good','✓ <b>Correct!</b> '+o[2]); }
       else{
         b.classList.add('bad','shake');
-        for(var k=0;k<q.o.length;k++) if(q.o[k][1]) btns[k].classList.add('good');
+        for(var k=0;k<oo.length;k++) if(oo[k][1]) btns[k].classList.add('good');
         setFb(fb,'bad','✗ <b>Not quite.</b> '+o[2]+' The best answer is highlighted in green.');
       }
       btns.forEach(function(x){ if(!/good|bad|pick/.test(x.className)) x.classList.add('dim'); });
@@ -634,9 +636,46 @@ function mkSeq(mount,group,id,label,seq){
   mount.appendChild(el('p','small','Tap the step that belongs in the next empty box.')); mount.appendChild(poolEl); mount.appendChild(fb);
 }
 
+/* ====================== saved answers + stable answer order ======================
+   Every tap/choice is recorded and replayed on the next visit (localStorage, mirrored by LiaSync). Shuffles are seeded, so the order is
+   the same on every visit, and the correct option is spread over all positions. "Restart activity" starts a new round. */
+var AKEY='ff-answers-'+location.pathname.split('/').pop().replace(/\.html.*$/,''), AD={}, RC={}, CNT={}, scopeName=null, shufN=0, replaying=false;
+try{ AD=JSON.parse(localStorage.getItem(AKEY)||'{}')||{}; }catch(e){ AD={}; }
+function asave(){ try{ localStorage.setItem(AKEY,JSON.stringify(AD)); }catch(e){} }
+function rng(seed){ var a=seed>>>0; return function(){ a=(a+0x6D2B79F5)|0; var t=Math.imul(a^(a>>>15),1|a); t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296; }; }
+function strSeed(s){ var h=2166136261; for(var i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+function scopeRnd(){ shufN++; return rng(strSeed(scopeName+'|'+((AD[scopeName]&&AD[scopeName].round)||0)+'|'+shufN)); }
+function beginScope(sc){ scopeName=sc; shufN=0; CNT={}; }
+function restartScope(sc){ AD[sc]={round:((AD[sc]&&AD[sc].round)||0)+1,a:{}}; asave(); }
+function trackNodes(mount,before,id){
+  var sc=scopeName, cs=[];
+  Array.prototype.slice.call(mount.childNodes,before).forEach(function(n){ if(n.nodeType!==1) return; if(/^(BUTTON|SELECT|INPUT)$/.test(n.tagName)) cs.push(n); cs=cs.concat($$('button,select,input[type=text]',n)); });
+  RC[id]=cs;
+  function push(x){ if(replaying||!sc) return; var d=AD[sc]=AD[sc]||{round:0,a:{}}; var l=d.a[id]=d.a[id]||[]; if(l.length<400){ l.push(x); asave(); } }
+  cs.forEach(function(c,i){
+    if(c.tagName==='SELECT') c.addEventListener('change',function(){ push({i:i,v:c.value}); });
+    else if(c.tagName==='INPUT') c.addEventListener('keydown',function(e){ if(e.key==='Enter') push({i:i,t:c.value}); });
+    else c.addEventListener('click',function(){ var inp=c.parentNode&&c.parentNode.querySelector&&c.parentNode.querySelector('input[type=text]'); push(inp?{i:i,t:inp.value}:{i:i}); });
+  });
+}
+function track(fn){ return function(mount,grp,id){ var before=mount.childNodes.length, r=fn.apply(null,arguments); trackNodes(mount,before,id); return r; }; }
+function replayAll(sc){
+  var a=(AD[sc]&&AD[sc].a)||{}; replaying=true;
+  Object.keys(a).forEach(function(id){ var cs=RC[id]; if(!cs) return; a[id].forEach(function(x){ var c=cs[x.i]; if(!c) return;
+    if(c.tagName==='SELECT'){ c.value=x.v; c.dispatchEvent(new Event('change')); }
+    else if(c.tagName==='INPUT'){ c.value=x.t; c.dispatchEvent(new KeyboardEvent('keydown',{key:'Enter',bubbles:true})); }
+    else { if(x.t!==undefined){ var inp=c.parentNode.querySelector('input[type=text]'); if(inp) inp.value=x.t; } c.click(); } }); });
+  replaying=false; scopeName=null; updateNav(); reportDeck();
+}
+function placeQ(arr){
+  var ok=arr.filter(function(o){ return o[1]; })[0], n=arr.length, wr=shuffle(arr.filter(function(o){ return !o[1]; })), k=(CNT[n]=(CNT[n]||0)+1)-1, target=((k%n)*(n===4?3:2)+Math.floor(k/n))%n;
+  wr.splice(target,0,ok); return wr;
+}
+mkChoice=track(mkChoice); mkTF=track(mkTF); mkFill=track(mkFill); mkSort=track(mkSort); mkSeq=track(mkSeq);
+
 /* ====================== BUILD ALL ====================== */
 function buildAll(){
-  items={}; order=[];
+  items={}; order=[]; beginScope('all');
   mkReveal($('#roles'),ROLES,true);
   mkReveal($('#why'),WHY,false);
   mkStepper($('#m-ex1'),EX1); mkStepper($('#m-ex2'),EX2); mkStepper($('#m-ex3'),EX3);
@@ -667,7 +706,8 @@ function buildAll(){
   /* synthesis (unscored) */
   mkChoice($('#m-syn'),'syn','syn',{tag:'Think',label:'Synthesis',q:SYN.q,o:SYN.o.map(function(x){ return [x[0],1,x[1]+' <br><b>In your notebook:</b> write two or three sentences explaining why this rule matters.']; })},0,false);
 
-  buildCommit($('#m-com'));
+  (function(){ var m=$('#m-com'), b=m.childNodes.length; buildCommit(m); trackNodes(m,b,'com'); })();
+  replayAll('all');
 }
 
 function buildCommit(mount){
@@ -754,7 +794,7 @@ function renderSummary(){
 $('#reviewBtn').addEventListener('click',function(){
   for(var i=0;i<slides.length;i++) if(slides[i].hasAttribute('data-review')){ show(i,true); return; }
 });
-$('#restartBtn').addEventListener('click',function(){ buildAll(); show(0,true); });
+$('#restartBtn').addEventListener('click',function(){ restartScope('all'); buildAll(); show(0,true); });
 
 buildAll();
 show(0,false);
