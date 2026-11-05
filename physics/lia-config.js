@@ -7,6 +7,7 @@ window.LIA_CONFIG={
   area: 'physics',
   areaName: 'Physics',
   pages: {
+    'chemistry-chapter-3-atoms-practice': 'Chemistry – Chapter 3 Atoms: Practice',
     'physics1-lesson-1-2-significant-figures': 'Physics I – Lesson 1.2 Significant Figures, Precision & Accuracy',
     'physics1-lesson-1-3-language-of-physics': 'Physics I – Lesson 1.3 The Language of Physics',
     'physics1-lesson-2-2': 'Physics I – Lesson 2.2 Acceleration',
