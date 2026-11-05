@@ -7,7 +7,7 @@ Setup/usage for humans: `supabase/README.md`. This file is the engineering contr
 ## 1. Layout (and what is generated – never hand-edit generated files)
 ```
 index.html                 GENERATED – teacher home (sign-in gate, links to share, master preview code). There is NO public student index.
-faith-formation/  ciencias-sociales/  math/  physics/  chemistry/  growing-in-values/
+faith-formation/  ciencias-sociales/  math/  physics/  growing-in-values/
     <lesson>.html          one self-contained page each (YOU write these)
     lia-config.js          GENERATED per folder: Supabase url + anon key, area, areaName, pages{slug: label}
 teacher/                   GENERATED from shared/*.template.html: admin.html (students & codes), scores.html, access.html (assign lessons), responses.html (students' saved text answers); index.html only redirects to /
@@ -67,7 +67,7 @@ links between lessons that a student might not be assigned.
 * The signed-in badge (`#liaUser`), the sign-in gate (`#liaGate`) and the "not available for your class" card are drawn by the module – don't restyle or duplicate them.
 
 ## 4. Sign-in, codes and areas
-* Six **areas** = folders: `faith-formation`, `ciencias-sociales`, `math` (Algebra, AP Statistics, Pre-Calculus…), `physics` (all `physics1-` / `physics2-` pages), `chemistry` (`chemistry-chapter-<n>-<topic>.html`) and `growing-in-values` (Growing in Values plans, 8th grade: `gv8-q<quarter>-week-<n>-<topic>.html`) (`CFG.area`). One student list + codes per area; **same code works on every page of that folder**,
+* Five **areas** = folders: `faith-formation`, `ciencias-sociales`, `math` (Algebra, AP Statistics, Pre-Calculus…), `physics` (all `physics1-` / `physics2-` pages, plus the Chemistry practice pages `chemistry-chapter-<n>-<topic>.html`) and `growing-in-values` (Growing in Values plans, 8th grade: `gv8-q<quarter>-week-<n>-<topic>.html`) (`CFG.area`). One student list + codes per area; **same code works on every page of that folder**,
   different folders = different students. Codes: upper-case letters/digits, ≥4 (shown `XXXX-XXXX`), unique per area, generated 8 chars from an unambiguous alphabet (no 0/O/1/I/L). Never use student IDs as codes.
 * Student fields: `grade` = the number only (`10`), `class_name` = the **subject** (`Physics II`). A student in several subjects lists them separated by ` / ` (`Physics II / Pre-Calculus`). Section ("10 A") and school ID go in `notes`.
 * The anon/publishable key in `lia-config.js` is public by design; all student access goes through three SECURITY DEFINER functions
@@ -97,7 +97,7 @@ links between lessons that a student might not be assigned.
 * **Personal data never goes in the repo** (rosters, codes, master code, SQL with names). The repo/site is public. Keep such files outside it and hand them to the user as files.
 
 ## 8. Testing (do this before pushing – there is no CI)
-`tools/test/`: `pg.sh` (local Postgres 16 with `schema.sql`), `mock.js` (Supabase stand-in on :54400 that runs the REAL SQL), Playwright e2e (`e2e_access.js`, `e2e_final.js`, `e2e_practice.js` = per-student generated practice sheet, `e2e_unit3.js` = every answer of the Unit III page saved to Student responses, `e2e_chem.js` = per-student fill-in tables of the Chemistry page).
+`tools/test/`: `pg.sh` (local Postgres 16 with `schema.sql`), `mock.js` (Supabase stand-in on :54400 that runs the REAL SQL), Playwright e2e (`e2e_access.js`, `e2e_final.js`, `e2e_practice.js` = per-student generated practice sheet, `e2e_unit3.js` = every answer of the Unit III page saved to Student responses, `e2e_chem.js` = per-student fill-in tables of the Chemistry practice page in `physics/`).
 Playwright redirects the Supabase host to the mock (`context.route`), Chromium is at `/opt/pw-browsers/chromium`. Pattern: `bash tools/test/pg.sh; node tools/test/mock.js & node tools/test/e2e_final.js`.
 Check at least: sign-in gate on a new page, restore from the DB on a second browser context, wrong/blocked lessons, no page errors, dark mode, `node --check` on inline scripts. The sandbox cannot reach the real Supabase – say that
 you could not verify against production.
@@ -105,4 +105,4 @@ you could not verify against production.
 ## 9. Git / delivery
 Develop on the branch the session names; commit with clear messages; push; do not open a PR unless asked. `main` is what GitHub Pages serves, so new work is only live after the branch is merged.
 Run `python3 tools/build_site.py` before committing (generated files must be in sync). Give the user the **full direct link** for any new lesson
-(`https://marlon-netizen.github.io/classes/<folder>/<file>.html`; folder = `math`, `physics`, `chemistry`, `ciencias-sociales`, `faith-formation` or `growing-in-values`) and tell them what to run in Supabase, if anything.
+(`https://marlon-netizen.github.io/classes/<folder>/<file>.html`; folder = `math`, `physics`, `ciencias-sociales`, `faith-formation` or `growing-in-values`) and tell them what to run in Supabase, if anything.

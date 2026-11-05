@@ -7,11 +7,11 @@ const sql=q=>execSync(`psql -h ${P} -p 54329 -U postgres -At -c "${q.replace(/"/
 let bad=0; const ok=(c,m)=>{ if(!c) bad++; console.log((c?'PASS':'FAIL')+' '+m); };
 async function fetchMock(r,u){ const q=r.request(); const res=await fetch('http://localhost:54400'+u.pathname+u.search,{method:q.method(),headers:q.headers(),body:['GET','HEAD','OPTIONS'].includes(q.method())?undefined:q.postData()}); const hd={}; res.headers.forEach((v,k)=>hd[k]=v); r.fulfill({status:res.status,headers:hd,body:Buffer.from(await res.arrayBuffer())}); }
 async function newCtx(b,w=1200){ const c=await b.newContext({viewport:{width:w,height:900}}); await c.route('https://plctzbzncedwhmwumaaf.supabase.co/**',r=>fetchMock(r,new URL(r.request().url()))); await c.route(/fonts\.(googleapis|gstatic)\.com/,r=>r.abort()); return c; }
-const PAGE=(process.env.LIA_SITE||'file:///home/user/classes/')+'chemistry/chemistry-chapter-3-atoms-practice.html';
+const PAGE=(process.env.LIA_SITE||'file:///home/user/classes/')+'physics/chemistry-chapter-3-atoms-practice.html';
 async function login(pg,code){ await pg.goto(PAGE); await pg.waitForSelector('#liaGate'); await pg.fill('#liaCode',code); await pg.click('#liaGate .lia-btn'); await pg.waitForSelector('#liaUser .lia-name'); await pg.waitForTimeout(2300); }
 (async()=>{
   sql("delete from public.lesson_access; delete from public.progress; delete from public.students");
-  sql("insert into public.students(area,code,full_name,grade,class_name) values ('chemistry','AAAA1111','Ana Pérez','10','Chemistry'),('chemistry','BBBB2222','Luis Mora','10','Chemistry')");
+  sql("insert into public.students(area,code,full_name,grade,class_name) values ('physics','AAAA1111','Ana Pérez','10','Chemistry'),('physics','BBBB2222','Luis Mora','10','Chemistry')");
   const b=await chromium.launch({executablePath:'/opt/pw-browsers/chromium'}); const errs=[];
   try{
   // ---------- 1. offline preview: sufficiency of every generated row over many seeds

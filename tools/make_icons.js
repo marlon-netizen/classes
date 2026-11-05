@@ -2,7 +2,7 @@
 // Run after changing the icons:  node tools/make_icons.js   (needs Playwright + Chromium)
 const { chromium } = require('playwright'); const fs = require('fs'), path = require('path');
 const root = path.resolve(__dirname, '..');
-const dirs = ['faith-formation', 'ciencias-sociales', 'math', 'physics', 'chemistry', 'growing-in-values', 'teacher'];
+const dirs = ['faith-formation', 'ciencias-sociales', 'math', 'physics', 'growing-in-values', 'teacher'];
 (async () => {
   const b = await chromium.launch({ executablePath: process.env.CHROMIUM || '/opt/pw-browsers/chromium' });
   const pg = await b.newPage({ viewport: { width: 64, height: 64 }, deviceScaleFactor: 1 });
