@@ -4,7 +4,7 @@
 Folder layout (each student folder = one "area" with its own student list and codes):
     faith-formation/     lesson pages + lia-config.js + index.html     (student facing)
     ciencias-sociales/   ...
-    math/  physics/  growing-in-values/      ...
+    math/  physics/  chemistry/  growing-in-values/      ...
     teacher/             ALL teacher tools in one place - NOT linked from any student page:
                            index.html (teacher home), admin.html (students & codes), scores.html (scores & progress),
                            responses.html (students' saved text answers), access.html (assign lessons)
@@ -42,6 +42,9 @@ THEMES = {
     "physics": dict(font="Oswald:wght@300;400;500;600;700", family="'Oswald','Arial Narrow',system-ui,sans-serif",
         light=dict(bg="#eef1f5", surface="#fbfcfe", ink="#17212e", muted="#566475", line="#d2d9e3", primary="#1f4e8c", warm="#2b7a76", soft="#e1eaf6", head="#14263f", headink="#eef2f8", eyebrow="#8fd0cb"),
         dark=dict(bg="#0e141c", surface="#161e29", ink="#e5ebf3", muted="#9aa8ba", line="#2a3646", primary="#9dc1f0", warm="#58b5ae", soft="#1a2636")),
+    "chemistry": dict(font="Rubik:wght@400;500;600;700", family="'Rubik',system-ui,sans-serif",
+        light=dict(bg="#f7f1ec", surface="#fffcfa", ink="#2a1a14", muted="#6e5a50", line="#e6d6cb", primary="#a8431b", warm="#b98418", soft="#f6e6dc", head="#4a1f0f", headink="#fbeee4", eyebrow="#f0c08a"),
+        dark=dict(bg="#1a120e", surface="#241a15", ink="#f1e6df", muted="#b8a296", line="#3d2d25", primary="#f0a27d", warm="#e0b060", soft="#2f211a")),
     "growing-in-values": dict(font="Nunito+Sans:wght@400;600;700;800", family="'Nunito Sans',system-ui,sans-serif",
         light=dict(bg="#eef5f4", surface="#fbfefd", ink="#14292b", muted="#4f6769", line="#cfe0de", primary="#0e6f73", warm="#d08a2e", soft="#dcefed", head="#0b3d4a", headink="#ecf6f5", eyebrow="#f0c987"),
         dark=dict(bg="#0d1819", surface="#142324", ink="#e2f0ef", muted="#93b0b1", line="#25403f", primary="#6fd0d0", warm="#e6b266", soft="#183031")),
@@ -58,6 +61,8 @@ AREAS = [
          blurb="Mathematics classes: Advanced Algebra, AP Statistics and Pre-Calculus."),
     dict(folder="physics", name="Physics",
          blurb="Physics I (chapters 1–2) and Physics II (chapters 9–11)."),
+    dict(folder="chemistry", name="Chemistry",
+         blurb="Chemistry practice: atoms, isotopes, ions and the mole."),
     dict(folder="growing-in-values", name="Growing in Values",
          blurb="Growing in Values plans (8th grade): weekly lessons for Q02 (Semester 1, Unit 2)."),
 ]
@@ -69,10 +74,11 @@ ICON_GLYPHS = {
     "ciencias-sociales": '<g fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><circle cx="32" cy="32" r="17"/><ellipse cx="32" cy="32" rx="7.5" ry="17"/><path d="M15.5 32h33M18 22.5h28M18 41.5h28"/></g>',
     "math": '<g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 22h32"/><path d="M25 23v23"/><path d="M39 23v16q0 7 7 7"/></g>',
     "physics": '<g fill="none" stroke="#fff" stroke-width="3"><ellipse cx="32" cy="32" rx="21" ry="8"/><ellipse cx="32" cy="32" rx="21" ry="8" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="21" ry="8" transform="rotate(120 32 32)"/></g><circle cx="32" cy="32" r="5" fill="#fff"/>',
+    "chemistry": '<path d="M26 12h12M29 12v14L17 47a4 4 0 0 0 4 6h22a4 4 0 0 0 4-6L35 26V12" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/><path d="M23 41h18l5 8a2 2 0 0 1-2 3H20a2 2 0 0 1-2-3z" fill="#fff"/>',
     "growing-in-values": '<circle cx="32" cy="32" r="19" fill="none" stroke="#fff" stroke-width="5"/><path d="M32 20l7 12-7 12-7-12z" fill="#fff"/><path d="M32 20l7 12h-14z" fill="#fff"/><circle cx="32" cy="32" r="2.8" fill="#0e6f73"/><path d="M32 8v5M32 51v5M8 32h5M51 32h5" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>',
     "teacher": '<path d="M23 14v32h21" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>',
 }
-ICON_BG = {"faith-formation": "#7a2e3b", "ciencias-sociales": "#2f6b4a", "math": "#4b3f8f", "physics": "#1f4e8c", "growing-in-values": "#0e6f73", "teacher": "#1b2f4b"}
+ICON_BG = {"faith-formation": "#7a2e3b", "ciencias-sociales": "#2f6b4a", "math": "#4b3f8f", "physics": "#1f4e8c", "chemistry": "#a8431b", "growing-in-values": "#0e6f73", "teacher": "#1b2f4b"}
 
 
 def icon_svg(key):
@@ -290,8 +296,8 @@ else { try{ sess=JSON.parse(localStorage.getItem(SK)||'null'); }catch(e){ sess=n
         '.err{margin-top:10px;color:#c0504a;font-weight:600}.who{margin-left:auto;font-size:.85rem;display:flex;gap:10px;align-items:center;color:#cfd8e6}.who button{font:inherit;background:none;color:inherit;border:1px solid rgba(255,255,255,.5);border-radius:8px;padding:2px 10px;cursor:pointer}'
         'header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 20px}header .wrap>.hr{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center}'
         'header .tg{font:inherit;font-weight:600;font-size:.8rem;border-radius:8px;padding:4px 11px;cursor:pointer;background:transparent;color:#f3f0e9;border:1px solid rgba(255,255,255,.5)}'
-        '.wrap{max-width:1560px}.grid{grid-template-columns:repeat(5,minmax(0,1fr));align-items:start}'
-        '@media (max-width:1100px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:640px){.grid{grid-template-columns:1fr}}'
+        '.wrap{max-width:1560px}.grid{grid-template-columns:repeat(6,minmax(0,1fr));align-items:start}'
+        '@media (max-width:1500px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}@media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media (max-width:640px){.grid{grid-template-columns:1fr}}'
         '.card .btn{font-size:.85rem;padding:6px 12px}'
         '.pv{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;background:var(--soft);border-radius:8px;padding:8px 12px;margin:0 0 .8em!important;color:var(--ink)!important;font-size:.9rem}.pv code{font:700 1.05rem ui-monospace,Menlo,Consolas,monospace;letter-spacing:.12em;color:var(--p)}</style>\n</head>\n<body>\n'
         '<header><div class="wrap"><div><div class="eyebrow">Teacher tools</div><div class="school">Lincoln International Academy</div></div>'
