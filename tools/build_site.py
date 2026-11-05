@@ -69,7 +69,7 @@ ICON_GLYPHS = {
     "ciencias-sociales": '<g fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round"><circle cx="32" cy="32" r="17"/><ellipse cx="32" cy="32" rx="7.5" ry="17"/><path d="M15.5 32h33M18 22.5h28M18 41.5h28"/></g>',
     "math": '<g fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 22h32"/><path d="M25 23v23"/><path d="M39 23v16q0 7 7 7"/></g>',
     "physics": '<g fill="none" stroke="#fff" stroke-width="3"><ellipse cx="32" cy="32" rx="21" ry="8"/><ellipse cx="32" cy="32" rx="21" ry="8" transform="rotate(60 32 32)"/><ellipse cx="32" cy="32" rx="21" ry="8" transform="rotate(120 32 32)"/></g><circle cx="32" cy="32" r="5" fill="#fff"/>',
-    "growing-in-values": '<circle cx="32" cy="26" r="15" fill="#fff"/><rect x="29" y="38" width="6" height="15" rx="2" fill="#fff"/><path d="M32 41V29M32 35l-6-5M32 31l5-4" fill="none" stroke="#0e6f73" stroke-width="2.6" stroke-linecap="round"/>',
+    "growing-in-values": '<circle cx="32" cy="32" r="19" fill="none" stroke="#fff" stroke-width="5"/><path d="M32 20l7 12-7 12-7-12z" fill="#fff"/><path d="M32 20l7 12h-14z" fill="#fff"/><circle cx="32" cy="32" r="2.8" fill="#0e6f73"/><path d="M32 8v5M32 51v5M8 32h5M51 32h5" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>',
     "teacher": '<path d="M23 14v32h21" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>',
 }
 ICON_BG = {"faith-formation": "#7a2e3b", "ciencias-sociales": "#2f6b4a", "math": "#4b3f8f", "physics": "#1f4e8c", "growing-in-values": "#0e6f73", "teacher": "#1b2f4b"}
