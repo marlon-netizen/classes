@@ -349,7 +349,8 @@ header.top{position:relative}
   <div class="card" id="part-d">
     <span class="pill">Part D</span>
     <h2>Adding vectors that are not perpendicular</h2>
-    <p>The Pythagorean theorem works only for perpendicular vectors. For any other vectors, <b>add their components</b>:</p>
+    <p>Until now the vector-addition problems used perpendicular vectors. Many objects, however, move in one direction and then turn at an angle. Suppose a plane first travels 5 km at an angle of 35° to the ground, then climbs at only 10° relative to the ground for 22 km. The two displacement vectors do not form a right triangle, so you cannot apply the tangent function or the Pythagorean theorem to the original vectors. Instead, resolve each vector into components; the sums of the components are the two <b>perpendicular components of the resultant</b>.</p>
+    <p>For any vectors that are not perpendicular, <b>add their components</b>:</p>
     <ol>
       <li><b>Resolve</b> every vector into <i>x</i>- and <i>y</i>-components (with signs).</li>
       <li><b>Add</b> all the <i>x</i>-components to get Δ<i>x</i><sub>tot</sub>, and all the <i>y</i>-components to get Δ<i>y</i><sub>tot</sub>.</li>
@@ -358,6 +359,7 @@ header.top{position:relative}
     </ol>
     <div class="fig" id="figAdd"></div>
     <p class="figcap">Two vectors that are not perpendicular, added tip-to-tail; the resultant is the dashed arrow.</p>
+    <div class="callout warm"><b class="t">Tips and tricks</b>Angles measured <b>clockwise</b> from the positive x-axis (for example "35° south of east") are conventionally <b>negative</b>: θ = −35°. With that convention a calculator gives the correct signs for cos θ and sin θ automatically.</div>
     <div class="callout"><b class="t">Check your work</b>The resultant cannot be longer than the sum of the magnitudes of the vectors, and it must point into the quadrant given by the signs of Δ<i>x</i><sub>tot</sub> and Δ<i>y</i><sub>tot</sub>.</div>
   </div>
 
@@ -436,7 +438,7 @@ header.top{position:relative}
 
 <footer>
   <div class="wrap">
-    <div>Lincoln International Academy · Physics I · Mr. Eduardo Vásquez<br>Content adapted from <i>Holt McDougal Physics</i>, Chapter 3 §2 (Vector Operations) (© Houghton Mifflin Harcourt). Additional problems written for this page.</div>
+    <div>Lincoln International Academy · Physics I · Mr. Eduardo Vásquez<br>Content adapted from <i>Holt McDougal Physics</i>, Chapter 3 §2 (Vector Operations): Sample Problems A–C, their Practice problems and the Section 2 Formative Assessment (© Houghton Mifflin Harcourt). Additional problems written for this page.</div>
     <div>Your progress is saved automatically. <button class="linkbtn" id="resetAll" data-lia-reset>Reset my progress</button></div>
   </div>
 </footer>
@@ -659,6 +661,7 @@ const mcAsk=(q,opts,why,wrong)=>({type:'mc',q,opts,correct:0,why,wrong});
 const numAsk=(q,ans,unit,why,extra={})=>Object.assign({type:'num',q,ans,tol:0.01,unit,why},extra);
 const Dx='Δ<i>x</i>', Dy='Δ<i>y</i>';
 const e6A=vec(5.0,30), e6B=vec(4.0,120), e6R={x:e6A.x+e6B.x,y:e6A.y+e6B.y};
+const e8A=vec(27,-35), e8B=vec(41,65), e8R={x:e8A.x+e8B.x,y:e8A.y+e8B.y};
 const e7A=vec(120,25), e7B=vec(80,-70), e7R={x:e7A.x+e7B.x,y:e7A.y+e7B.y};
 const EX=[
  { id:'E1', tag:'Sample Problem A', title:'Climbing the Great Pyramid',
@@ -745,6 +748,23 @@ const EX=[
     {name:'Check your work', html:`<p>Δx is positive and Δy is negative, so the resultant is in quadrant IV (south of east) ✔. The magnitude ${r3(mag(e7R))} m is less than 120 + 80 = 200 m ✔.</p>`,
      ask:mcAsk(`If you used tan⁻¹ with the negative value of Δy, a calculator would give −${r1(Math.atan2(Math.abs(e7R.y),e7R.x)/deg)}°. This means…`,[`${r1(Math.atan2(Math.abs(e7R.y),e7R.x)/deg)}° below the +x axis, that is, south of east`,`${r1(Math.atan2(Math.abs(e7R.y),e7R.x)/deg)}° above the +x axis`,`${r1(Math.atan2(Math.abs(e7R.y),e7R.x)/deg)}° west of north`],'A negative angle from +x means clockwise: below the east line.')}
    ]}
+ ,{ id:'E8', tag:'Sample Problem C', title:'The hiker and the ranger\u2019s tower',
+   problem:'A hiker walks <b>27.0 km</b> from her base camp at <b>35° south of east</b>. The next day, she walks <b>41.0 km</b> in a direction <b>65° north of east</b> and discovers a forest ranger\u2019s tower. Find the magnitude and direction of her resultant displacement between the base camp and the tower.',
+   steps:[
+    {name:'Analyze', html:G('<i>d</i><sub>1</sub> = 27.0 km','<i>θ</i><sub>1</sub> = −35°','<i>d</i><sub>2</sub> = 41.0 km','<i>θ</i><sub>2</sub> = 65°')+G(U('<i>d</i> = ?'),U('<i>θ</i> = ?'))+`<div class="fig">${figTT([{x:e8A.x,y:e8A.y,label:'d₁',c:'var(--accent)',loff:12},{x:e8B.x,y:e8B.y,label:'d₂',c:'var(--warm)',loff:-12}],{rlabel:'d',rloff:-14,aria:'Hiker displacement'})}</div><p><b>Tip:</b> θ<sub>1</sub> is negative because clockwise angles from the positive x-axis are conventionally negative.</p>`,
+     ask:mcAsk('Why is θ₁ written as −35°?',['It is measured clockwise from the +x axis (south of east)','Because the hiker walks backwards','Because 35° is a small angle'],'South of east is below the +x axis: a clockwise angle, so it is negative.')},
+    {name:'Plan', html:`<p>Find the x- and y-components of each displacement with ${'cos θ = Δ<i>x</i>/<i>d</i>'} and ${'sin θ = Δ<i>y</i>/<i>d</i>'}, add them, then use the Pythagorean theorem and the inverse tangent.</p>
+     <div class="tablewrap"><table class="vartable"><thead><tr><th></th><th class="num">Δx (km)</th><th class="num">Δy (km)</th></tr></thead><tbody>
+      <tr><td>Day 1</td><td class="num">27.0 cos(−35°) = ${sg(e8A.x)}</td><td class="num">27.0 sin(−35°) = ${sg(e8A.y)}</td></tr>
+      <tr><td>Day 2</td><td class="num">41.0 cos 65° = ${sg(e8B.x)}</td><td class="num">41.0 sin 65° = ${sg(e8B.y)}</td></tr>
+      <tr class="hl"><td>Total</td><td class="num">${sg(e8R.x)}</td><td class="num">${sg(e8R.y)}</td></tr></tbody></table></div>`,
+     ask:numAsk('Calculate the y-component of day 1: 27.0 × sin(−35°). Keep the sign.',e8A.y,'km','Δy₁ = −15.5 km (south).',{tol:0.02})},
+    {name:'Solve', html:`<div class="eq"><i>d</i> = √((Δ<i>x</i><sub>tot</sub>)<sup>2</sup> + (Δ<i>y</i><sub>tot</sub>)<sup>2</sup>) = √((${sg(e8R.x)} km)<sup>2</sup> + (${sg(e8R.y)} km)<sup>2</sup>) = <span class="boxed">${r3(mag(e8R))} km</span></div><div class="eq"><i>θ</i> = tan<sup>−1</sup>(${F('Δ<i>y</i><sub>tot</sub>','Δ<i>x</i><sub>tot</sub>')}) = tan<sup>−1</sup>(${sg(e8R.y)} ÷ ${sg(e8R.x)}) = <span class="boxed">${r1(Math.atan2(e8R.y,e8R.x)/deg)}° north of east</span></div>`,
+     ask:numAsk('Calculate the angle tan⁻¹(21.7 ÷ 39.5), in degrees.',Math.atan2(e8R.y,e8R.x)/deg,'°','θ ≈ 29° north of east.',{tol:0.02})},
+    {name:'Check your work', html:`<p>The tower lies north of east because both totals are positive ✔. The resultant (45 km) is less than 27.0 + 41.0 = 68.0 km ✔.</p>`,
+     ask:mcAsk('The hiker walked 68.0 km in total. Why is the straight-line displacement only 45 km?',['The two legs point in different directions, so part of one cancels part of the other','The calculator rounds distances','Displacement is always 2/3 of the path length'],'Distance adds all path lengths; displacement is the vector sum, which is shorter when the legs are not in the same direction.')}
+   ]}
+
 ];
 
 /* ---------- answer-position randomizer (deterministic: same order for every student and every visit) ---------- */
@@ -876,6 +896,13 @@ const s2='Resolving vectors';
  [T('East component','m/s',v.x,{tol:0.01}),T('North component','m/s',v.y,{tol:0.01})],['cos 60° = 0.5.'],['East: 20.0 cos 60.0° = 10.0 m/s.','North: 20.0 sin 60.0° = 17.3 m/s.']); }
 { add('co',s2,'A displacement of <b>10.0 m</b> makes an angle of <b>37°</b> with the ground. Its horizontal component is 8.0 m. Check the vertical component with the Pythagorean theorem.',
  [T('Vertical component','m',Math.sqrt(100-64),{tol:0.01})],['d² = Δx² + Δy².'],['Δy = √(10.0² − 8.0²) = 6.0 m (sin 37° = 0.60 gives the same).']); }
+/* textbook practice (Sample Problem B) */
+{ const v=cmp(105,25); add('co','Textbook practice',`How fast must a truck travel to stay beneath an airplane that is moving <b>105 km/h</b> at an angle of <b>25°</b> to the ground? What is the magnitude of the plane\u2019s vertical velocity component?`,
+ [T('Truck speed','km/h',v.x,{tol:0.01}),T('Vertical component of the plane\u2019s velocity','km/h',v.y,{tol:0.01})],['The truck matches the horizontal component.'],['v<sub>x</sub> = 105 cos 25° = 95.2 km/h.','v<sub>y</sub> = 105 sin 25° = 44.4 km/h.']); }
+{ const v=cmp(113,82.4); add('co','Textbook practice','A skyrocket travels <b>113 m</b> at an angle of <b>82.4°</b> with respect to the ground and toward the south. What is the rocket\u2019s horizontal displacement?',
+ [T('Horizontal displacement (south)','m',v.x,{tol:0.015})],['The angle is measured from the ground, so the horizontal component is adjacent: use cosine.'],['Δx = 113 cos 82.4° = 14.8 m (toward the south).','(The vertical component is 113 sin 82.4° = 112 m.)']); }
+{ const v=cmp(55,13); add('co','Textbook practice','A tiger leaps with an initial velocity of <b>55.0 km/h</b> at an angle of <b>13.0°</b> with respect to the horizontal. What are the components of the tiger\u2019s velocity?',
+ [T('Horizontal component','km/h',v.x,{tol:0.01}),T('Vertical component','km/h',v.y,{tol:0.015})],['Horizontal: cosine. Vertical: sine.'],['v<sub>x</sub> = 55.0 cos 13.0° = 53.6 km/h.','v<sub>y</sub> = 55.0 sin 13.0° = 12.4 km/h.']); }
 const s2b='Concept check';
 MC1('co','The angle θ is measured from the x-axis. The x-component of a vector of magnitude d is…',['d cos θ','d sin θ','d tan θ','d ÷ cos θ'],'The x-component is adjacent to θ, so it uses cosine.','Adjacent ÷ hypotenuse.',{sub:s2b});
 MC1('co','A vector of magnitude 10 m points 30° <b>north of east</b>. Which statement is true?',['The east component is larger than the north component','The north component is larger','The components are equal','The east component is 10 m'],'cos 30° = 0.87 and sin 30° = 0.50, so Δx = 8.7 m and Δy = 5.0 m.','Compare cos 30° with sin 30°.',{sub:s2b});
@@ -907,6 +934,25 @@ const s3='Adding vectors by components';
 { const A=cmp(250,0), W=cmp(75,-45), R={x:A.x+W.x,y:A.y+W.y};
   add('ad',s3,'A plane heads <b>east</b> at <b>250 km/h</b> while the wind adds <b>75 km/h toward the southeast</b> (45° south of east). Find the plane’s resultant velocity.',
    magdir(R.x,R.y),['Resolve the wind into east and south parts.'],[`Wind: (${sg(W.x)}, ${sg(W.y)}) km/h.`,`R = (${sg(R.x)}, ${sg(R.y)}).`,`v = ${r3(mag(R))} km/h, θ = ${r1(ref(R.x,R.y))}° ${dword(R.x,R.y)}.`]); }
+/* textbook practice (Sample Problem C) and the opening example of the section */
+{ const A=cmp(5,35), B=cmp(22,10), R={x:A.x+B.x,y:A.y+B.y};
+  add('ad','Textbook practice','A plane initially travels <b>5 km</b> at an angle of <b>35°</b> to the ground, then climbs at only <b>10°</b> relative to the ground for <b>22 km</b>. Find the magnitude and direction of the plane\u2019s total displacement.',
+   [T('Magnitude','km',mag(R),{tol:0.02}),T('Angle (° above the ground)','°',ref(R.x,R.y),{tol:0.03,ang:true})],['The vectors do not form a right triangle: resolve them first.'],[`d₁: (${sg(A.x)}, ${sg(A.y)}) km. d₂: (${sg(B.x)}, ${sg(B.y)}) km.`,`Δx<sub>tot</sub> = ${sg(R.x)} km, Δy<sub>tot</sub> = ${sg(R.y)} km.`,`d = ${r3(mag(R))} km, θ = ${r1(ref(R.x,R.y))}° above the ground.`]); }
+{ const A={x:0,y:35}, B={x:15*Math.sin(25*deg),y:15*Math.cos(25*deg)}, R={x:A.x+B.x,y:A.y+B.y};
+  add('ad','Textbook practice','A football player runs directly down the field for <b>35 m</b> before turning to the right at an angle of <b>25°</b> from his original direction and running an additional <b>15 m</b> before getting tackled. What are the magnitude and direction of the runner\u2019s total displacement? Give the angle measured from the original direction (to the right).',
+   [T('Magnitude','m',mag(R),{tol:0.015}),T('Angle from the original direction (to the right)','°',Math.atan2(R.x,R.y)/deg,{tol:0.04,ang:true})],['Take down the field as +y. The second leg is 25° from +y toward the right (+x).'],[`Leg 2: (15 sin 25°, 15 cos 25°) = (${sg(B.x)}, ${sg(B.y)}) m.`,`Δx = ${sg(R.x)} m, Δy = ${sg(R.y)} m.`,`d = ${r3(mag(R))} m, θ = tan⁻¹(${sg(R.x)} ÷ ${sg(R.y)}) = ${r1(Math.atan2(R.x,R.y)/deg)}° to the right of the original direction.`]); }
+{ const A=cmp(2.5,35), B=cmp(5.2,22), R={x:A.x+B.x,y:A.y+B.y};
+  add('ad','Textbook practice','A plane travels <b>2.5 km</b> at an angle of <b>35°</b> to the ground and then changes direction and travels <b>5.2 km</b> at an angle of <b>22°</b> to the ground. What are the magnitude and direction of the plane\u2019s total displacement?',
+   [T('Magnitude','km',mag(R),{tol:0.015}),T('Angle (° above the ground)','°',ref(R.x,R.y),{tol:0.03,ang:true})],['Resolve both displacements; both angles are measured from the ground.'],[`d₁: (${sg(A.x)}, ${sg(A.y)}) km. d₂: (${sg(B.x)}, ${sg(B.y)}) km.`,`Δx<sub>tot</sub> = ${sg(R.x)} km, Δy<sub>tot</sub> = ${sg(R.y)} km.`,`d = ${r3(mag(R))} km, θ = ${r1(ref(R.x,R.y))}°.`]); }
+{ const A={x:0,y:8}, B=cmp(3.5,55), C={x:5,y:0}, R={x:A.x+B.x+C.x,y:A.y+B.y+C.y};
+  add('ad','Textbook practice','During a rodeo, a clown runs <b>8.0 m north</b>, turns <b>55° north of east</b>, and runs <b>3.5 m</b>. Then, after waiting for the bull to come near, the clown turns due east and runs <b>5.0 m</b> to exit the arena. What is the clown\u2019s total displacement?',
+   magdir(R.x,R.y),['Three legs: add three x-components and three y-components.'],[`Leg 2: (3.5 cos 55°, 3.5 sin 55°) = (${sg(B.x)}, ${sg(B.y)}) m.`,`Δx<sub>tot</sub> = ${sg(R.x)} m, Δy<sub>tot</sub> = ${sg(R.y)} m.`,`d = ${r3(mag(R))} m, θ = ${r1(ref(R.x,R.y))}° ${dword(R.x,R.y)}.`]); }
+{ const A={x:-75*Math.sin(30*deg),y:75*Math.cos(30*deg)}, B={x:155*Math.sin(60*deg),y:155*Math.cos(60*deg)}, R={x:A.x+B.x,y:A.y+B.y};
+  add('ad','Textbook practice','An airplane flying parallel to the ground undergoes two consecutive displacements. The first is <b>75 km, 30.0° west of north</b>, and the second is <b>155 km, 60.0° east of north</b>. What is the total displacement of the airplane? Give the angle <b>east of north</b>.',
+   [T('Magnitude','km',mag(R),{tol:0.015}),T('Angle (° east of north)','°',Math.atan2(R.x,R.y)/deg,{tol:0.03,ang:true})],['Take north as +y, east as +x. "West of north" means a negative x-component.'],[`d₁: (−75 sin 30°, 75 cos 30°) = (${sg(A.x)}, ${sg(A.y)}) km.`,`d₂: (155 sin 60°, 155 cos 60°) = (${sg(B.x)}, ${sg(B.y)}) km.`,`Δx<sub>tot</sub> = ${sg(R.x)} km, Δy<sub>tot</sub> = ${sg(R.y)} km.`,`d = ${r3(mag(R))} km, θ = tan⁻¹(${sg(R.x)} ÷ ${sg(R.y)}) = ${r1(Math.atan2(R.x,R.y)/deg)}° east of north.`]); }
+{ const A=cmp(27,-35), B=cmp(41,65), R={x:A.x+B.x,y:A.y+B.y};
+  add('ad',s3,'A hiker walks <b>27.0 km at 35° south of east</b> and then <b>41.0 km at 65° north of east</b>. Use components to find the total displacement. (Remember that angles measured clockwise from +x are negative.)',
+   magdir(R.x,R.y),['The first leg has a negative y-component: θ₁ = −35°.'],[`d₁: (${sg(A.x)}, ${sg(A.y)}) km. d₂: (${sg(B.x)}, ${sg(B.y)}) km.`,`Δx<sub>tot</sub> = ${sg(R.x)} km, Δy<sub>tot</sub> = ${sg(R.y)} km.`,`d = ${r3(mag(R))} km, θ = ${r1(ref(R.x,R.y))}° north of east.`]); }
 MC1('ad','Three vectors of equal magnitude 5 m point at 0°, 120° and 240°. What is their sum?',['Zero','5 m at 0°','15 m at 0°','5 m at 120°'],'The x-components: 5 + 5cos120° + 5cos240° = 5 − 2.5 − 2.5 = 0. The y-components: 0 + 4.33 − 4.33 = 0. The sum is zero.','Add the x-components, then the y-components.',{sub:s3});
 MC1('ad','Two vectors have magnitudes 6 m and 8 m. Which resultant magnitude is <b>impossible</b>?',['15 m','14 m','10 m (perpendicular)','2 m'],'The resultant ranges from |8 − 6| = 2 m to 6 + 8 = 14 m. 15 m is impossible.','Parallel and antiparallel give the limits.',{sub:s3});
 MC1('ad','To add two vectors that are <b>not</b> perpendicular, you should first…',['resolve each into x- and y-components','use the Pythagorean theorem directly','add their magnitudes','subtract their angles'],'Components along the same axis can be added; the Pythagorean theorem is applied afterwards to the totals.','Break them into perpendicular parts.',{sub:s3});
@@ -924,11 +970,27 @@ add('cs',s4,'A displacement has components Δx = +5.0 m and Δy = −12 m. Find 
 add('cs',s4,'A bird flies at <b>12 m/s</b> at an angle of <b>30°</b> above the horizontal for <b>5.0 s</b>. How far has it moved horizontally and vertically?',
  [T('Horizontal distance','m',12*Math.cos(30*deg)*5,{tol:0.01}),T('Vertical distance','m',12*Math.sin(30*deg)*5,{tol:0.01})],['Resolve the velocity, then multiply each component by the time.'],['v<sub>x</sub> = 12 cos 30° = 10.4 m/s, v<sub>y</sub> = 12 sin 30° = 6.0 m/s.','Δx = 10.4 × 5.0 = 52 m; Δy = 6.0 × 5.0 = 30 m.']);
 
+/* ===== Set 5: Section 2 formative assessment ===== */
+const s5='Section 2 Formative Assessment';
+MC1('sa','<b>1a.</b> Identify a convenient coordinate system for analyzing <b>a dog walking along a sidewalk</b>.',['One axis along the sidewalk (one-dimensional), with + in the direction of walking','Two axes: x horizontal and y vertical','Axes tilted 30° to the horizontal','Three axes: x, y and z'],'The dog moves along a straight line, so a single axis along the sidewalk is enough.','Is the motion along a straight line?',{sub:s5});
+MC1('sa','<b>1b.</b> Identify a convenient coordinate system for analyzing <b>an acrobat walking along a high wire</b>.',['One axis along the wire (one-dimensional)','Two axes: one vertical and one horizontal, with the wire at 45°','Axes pointing north-east and south-west','No coordinate system is possible'],'The acrobat moves along the straight wire, so one axis along the wire is the simplest choice.','The same idea as the dog.',{sub:s5});
+MC1('sa','<b>1c.</b> Identify a convenient coordinate system for analyzing <b>a submarine submerging at an angle of 30° to the horizontal</b>.',['Two axes: x horizontal and y vertical (depth), with the velocity at 30° below the horizontal','One axis along the horizontal only','One axis along the vertical only','Axes rotated 60° from the vertical'],'The motion is two-dimensional: resolving the velocity into horizontal and vertical components makes each part easy to analyze.','The path is not along a horizontal or a vertical line.',{sub:s5});
+add('sa',s5,'<b>2a.</b> A fish swims at <b>3.0 m/s</b> relative to the water straight across a river whose current moves at <b>5.0 m/s</b>. Find the magnitude and direction of the fish\u2019s resultant velocity. Give the angle measured from the direction of the current.',
+ [T('Resultant speed','m/s',Math.hypot(3,5),{tol:0.02}),T('Angle from the current direction','°',Math.atan2(3,5)/deg,{tol:0.04,ang:true})],['The two velocities are perpendicular.'],['v = √(3.0² + 5.0²) = 5.8 m/s.','θ = tan⁻¹(3.0 ÷ 5.0) = 31° from the direction of the current.']);
+add('sa',s5,'<b>2b.</b> A surfer travels at <b>1.0 m/s</b> relative to the water across a wave that is traveling at <b>6.0 m/s</b>. Find the magnitude and direction of the surfer\u2019s resultant velocity. Give the angle from the direction of the wave.',
+ [T('Resultant speed','m/s',Math.hypot(1,6),{tol:0.02}),T('Angle from the wave direction','°',Math.atan2(1,6)/deg,{tol:0.05,ang:true})],['The velocities are perpendicular.'],['v = √(1.0² + 6.0²) = 6.1 m/s.','θ = tan⁻¹(1.0 ÷ 6.0) = 9.5° from the direction of the wave.']);
+{ const v=cmp(10,45); add('sa',s5,'<b>3a.</b> A car is displaced <b>10.0 km</b> at <b>45° north of east</b>. Find the vector components along the north and east directions.',
+ [T('North component','km',v.y,{tol:0.01}),T('East component','km',v.x,{tol:0.01})],['At 45° both components are equal.'],['Δy = 10.0 sin 45° = 7.07 km north.','Δx = 10.0 cos 45° = 7.07 km east.']); }
+{ const v=cmp(2.0,35); add('sa',s5,'<b>3b.</b> A duck accelerates away from a hunter at <b>2.0 m/s²</b> at an angle of <b>35°</b> to the ground. Find the horizontal and vertical components of the acceleration.',
+ [T('Horizontal component','m/s²',v.x,{tol:0.015}),T('Vertical component','m/s²',v.y,{tol:0.02})],['Same method as for any vector.'],['a<sub>x</sub> = 2.0 cos 35° = 1.6 m/s².','a<sub>y</sub> = 2.0 sin 35° = 1.1 m/s².']); }
+MC1('sa','<b>4.</b> Why do nonperpendicular vectors need to be resolved into components before you can add them together?',['Components along the same axis lie on one line, so they can be added like numbers; the totals are perpendicular, so the Pythagorean theorem and tangent can be used','Because nonperpendicular vectors cannot be added','Because components are always larger than the vector','To avoid using the calculator'],'The triangle method with the Pythagorean theorem only works for right triangles. Adding components reduces the problem to two perpendicular totals.','What do the Pythagorean theorem and tangent require?',{sub:s5});
+
 const SETS=[
  {id:'md',name:'Magnitude & direction',desc:'Pythagorean theorem and tangent: perpendicular vectors, including the textbook practice (truck driver, pirate, soccer ball, hummingbird).'},
  {id:'co',name:'Components',desc:'Resolve vectors into x- and y-components with sine and cosine (all four quadrants).'},
  {id:'ad',name:'Adding vectors',desc:'Add vectors that are not perpendicular by adding their components; subtract vectors too.'},
- {id:'cs',name:'Axes & reasoning',desc:'Choosing coordinate systems, angle references and quick checks.'}
+ {id:'cs',name:'Axes & reasoning',desc:'Choosing coordinate systems, angle references and quick checks.'},
+ {id:'sa',name:'Section 2 Assessment',desc:'The Section 2 Formative Assessment: coordinate systems, perpendicular velocities, components and why we resolve vectors.'}
 ];
 
 P.forEach((p,i)=>{ p.id=p.set+(i+1); });
