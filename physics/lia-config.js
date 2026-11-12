@@ -15,6 +15,7 @@ window.LIA_CONFIG={
     'physics1-lesson-2-3': 'Physics I – Lesson 2.3 Falling Objects',
     'physics1-lesson-2-3-practice': 'Physics I – Practice Lesson 2.3',
     'physics1-lesson-3-1': 'Physics I – Lesson 3.1 Introduction to Vectors',
+    'physics1-lesson-3-2': 'Physics I – Lesson 3.2 Vector Operations',
     'physics2-lesson-10-3': 'Physics II – Lesson 10.3 Second Law of Thermodynamics',
     'physics2-lesson-11-2': 'Physics II – Lesson 11.2 Measuring Simple Harmonic Motion',
     'physics2-lesson-11-3': 'Physics II – Lesson 11.3 Properties of Waves'

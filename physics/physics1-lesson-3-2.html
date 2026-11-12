@@ -1,0 +1,1125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Physics I – Lesson 3.2 Vector Operations | Lincoln International Academy</title>
+<meta name="description" content="Interactive study page for Physics I, Lesson 3.2: Vector Operations – coordinate systems, Pythagorean theorem and tangent, components with sine and cosine, adding vectors by components, worked examples and practice.">
+<script>try{var t=localStorage.getItem('lia-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f3f0e9; --surface:#fffdf9; --surface-2:#f8f5ee; --ink:#1e2937; --muted:#5a6575;
+  --line:#ddd6c7; --primary:#1f3a5f; --primary-ink:#ffffff; --accent:#2b7a76; --accent-soft:#e1efed;
+  --blue-soft:#e6edf6; --warm:#b4763a; --warm-soft:#f6ebdb; --good:#2c7a57; --good-soft:#e1f1e8;
+  --bad:#a94a3f; --bad-soft:#f6e4e1; --hot:#c58a4d; --cold:#4f86a8; --work:#2b7a76;
+  --shadow:0 1px 2px rgba(30,41,55,.06),0 4px 14px rgba(30,41,55,.06);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+    --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+    --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+    --bad:#e08a7d; --bad-soft:#331e1c; --hot:#c58a4d; --cold:#6aa3c7; --work:#58b5ae;
+    --shadow:0 1px 2px rgba(0,0,0,.4);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#11161d; --surface:#18202a; --surface-2:#1d2631; --ink:#e5e9ef; --muted:#9aa5b5;
+  --line:#2d3947; --primary:#9dbce6; --primary-ink:#0f1722; --accent:#58b5ae; --accent-soft:#1a2f32;
+  --blue-soft:#1b2838; --warm:#d9a165; --warm-soft:#2d2519; --good:#5cc08f; --good-soft:#183024;
+  --bad:#e08a7d; --bad-soft:#331e1c; --hot:#c58a4d; --cold:#6aa3c7; --work:#58b5ae;
+  --shadow:0 1px 2px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.6 'Oswald','Arial Narrow',sans-serif}
+h1,h2,h3,h4{font-family:'Oswald',sans-serif;font-weight:600;line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h2{font-size:1.6rem} h3{font-size:1.2rem} h4{font-size:1rem}
+p{margin:0 0 1em}
+a{color:var(--accent)}
+.wrap{max-width:1020px;margin:0 auto;padding:0 16px}
+
+/* header */
+header.top{background:#1b2f4b;color:#f3f0e9;border-bottom:4px solid var(--warm)}
+header.top .wrap{padding-top:22px;padding-bottom:20px;display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between}
+.school{font-family:'Oswald',sans-serif;font-size:clamp(1.4rem,3.6vw,2rem);font-weight:700;letter-spacing:.01em}
+.eyebrow{font-size:.78rem;text-transform:uppercase;letter-spacing:.14em;color:#d3b48a;margin-bottom:2px}
+.meta{display:flex;gap:26px;flex-wrap:wrap}
+.meta div{font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;color:#aab7ca}
+.meta b{display:block;font-size:1.05rem;text-transform:none;letter-spacing:0;color:#f3f0e9;font-weight:600}
+.lessonbar{background:var(--surface);border-bottom:1px solid var(--line)}
+.lessonbar .wrap{padding-top:14px;padding-bottom:14px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center}
+.lessonbar h1{font-size:clamp(1.15rem,2.6vw,1.45rem);margin:0}
+.lessonbar small{color:var(--muted)}
+.overall{display:flex;align-items:center;gap:10px;font-size:.88rem;color:var(--muted)}
+.bar{width:150px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);width:0;transition:width .4s}
+
+/* nav */
+nav.tabs{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line)}
+nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:8px}
+nav.tabs button{appearance:none;border:0;background:none;font:inherit;font-weight:600;color:var(--muted);padding:10px 16px;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;border-radius:8px 8px 0 0}
+nav.tabs button:hover{color:var(--ink);background:var(--surface-2)}
+nav.tabs button[aria-selected="true"]{color:var(--primary);border-bottom-color:var(--warm)}
+:root[data-theme="dark"] nav.tabs button[aria-selected="true"]{color:var(--primary)}
+
+main{padding:26px 0 60px}
+section.panel{display:none}
+section.panel.active{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:20px;box-shadow:var(--shadow)}
+.card>h3:first-child,.card>h2:first-child{margin-top:0}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+@media (max-width:760px){.grid2{grid-template-columns:1fr}}
+.callout{border-left:4px solid var(--accent);background:var(--accent-soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:14px 0}
+.callout.warm{border-color:var(--warm);background:var(--warm-soft)}
+.callout.blue{border-color:var(--primary);background:var(--blue-soft)}
+.callout b.t{display:block;font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px;color:var(--muted)}
+.law{font-family:'Oswald',sans-serif;font-size:1.15rem;font-style:italic}
+.pill{display:inline-block;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 9px;border-radius:99px;background:var(--blue-soft);color:var(--primary)}
+.objectives{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.objectives li{display:flex;gap:12px;align-items:flex-start}
+.objectives li span{flex:none;width:26px;height:26px;border-radius:50%;background:var(--primary);color:var(--primary-ink);font-weight:700;font-size:.85rem;display:grid;place-items:center;margin-top:2px}
+
+/* math */
+.eq{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.2rem;text-align:center;padding:10px 6px;overflow-x:auto}
+.eq.big{font-size:1.35rem}
+.eq i,.math i{font-style:italic}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 .15em;line-height:1.15}
+.frac>span:first-child{border-bottom:1.5px solid currentColor;padding:0 .25em .08em}
+.frac>span:last-child{padding:.08em .25em 0}
+sub{font-size:.7em;line-height:0}
+.math{font-family:"Cambria Math",Cambria,Georgia,serif;white-space:nowrap}
+
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:left}
+th{background:var(--surface-2);font-size:.8rem;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+
+/* controls */
+button.btn,.btn{appearance:none;font:inherit;font-weight:600;font-size:.92rem;border-radius:8px;padding:8px 16px;cursor:pointer;border:1px solid var(--primary);background:var(--primary);color:var(--primary-ink);transition:filter .15s,transform .05s}
+button.btn:hover{filter:brightness(1.12)} button.btn:active{transform:translateY(1px)}
+button.btn.ghost{background:transparent;color:var(--primary)}
+button.btn.ghost:hover{background:var(--blue-soft);filter:none}
+button.btn[disabled]{opacity:.45;cursor:not-allowed}
+:root[data-theme="dark"] button.btn.ghost{color:var(--primary)}
+input[type=text]{font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);width:150px}
+input[type=text]:focus,button:focus-visible,input[type=range]:focus-visible,summary:focus-visible{outline:3px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:1px}
+input[type=range]{width:100%;accent-color:var(--accent)}
+.sliderrow{display:grid;grid-template-columns:150px 1fr 90px;gap:12px;align-items:center;margin:8px 0}
+.sliderrow output{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+@media (max-width:560px){.sliderrow{grid-template-columns:1fr 80px}.sliderrow label{grid-column:1/-1}}
+
+details{border:1px solid var(--line);border-radius:8px;padding:2px 14px;margin:10px 0;background:var(--surface-2)}
+summary{cursor:pointer;font-weight:600;padding:8px 0}
+details[open]>summary{margin-bottom:4px}
+
+/* readouts */
+.readouts{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:12px 0}
+.readout{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.readout small{display:block;color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em}
+.readout b{font-size:1.4rem;font-family:'Oswald',sans-serif;font-variant-numeric:tabular-nums}
+.status{padding:9px 14px;border-radius:8px;font-weight:600;font-size:.92rem;margin-top:8px;background:var(--good-soft);color:var(--good)}
+.status.warn{background:var(--warm-soft);color:var(--warm)}
+.status.bad{background:var(--bad-soft);color:var(--bad)}
+svg.flow{width:100%;max-width:440px;height:auto;display:block;margin:0 auto}
+svg.flow text{fill:var(--ink);font:600 12px 'Oswald','Arial Narrow',sans-serif}
+svg.flow .res-t{fill:#fff}
+.effbar{position:relative;height:16px;background:var(--line);border-radius:99px;margin:26px 0 30px}
+.effbar i.fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--accent);transition:width .15s}
+.effbar span.tick{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);opacity:.55}
+.effbar span.tick em{position:absolute;top:22px;left:50%;transform:translateX(-50%);font-style:normal;font-size:.68rem;color:var(--muted);white-space:nowrap}
+.effbar span.tick.hi em{top:-20px}
+
+canvas{width:100%;max-width:520px;height:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface-2);display:block}
+.meter{height:14px;background:var(--line);border-radius:99px;overflow:hidden;margin:6px 0}
+.meter i{display:block;height:100%;background:var(--warm);width:0;transition:width .2s}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0}
+
+/* dice */
+.hist{display:flex;align-items:flex-end;gap:4px;height:170px;border-bottom:2px solid var(--line);padding:0 2px;margin-top:12px}
+.hist div{flex:1;position:relative;background:var(--accent);border-radius:4px 4px 0 0;min-height:1px;transition:height .25s}
+.hist div b{position:absolute;top:-19px;left:0;right:0;text-align:center;font-size:.7rem;color:var(--muted);font-weight:600}
+.hist div.ghost{background:transparent;border:1.5px dashed var(--warm);border-bottom:0}
+.histx{display:flex;gap:4px;font-size:.78rem;color:var(--muted);text-align:center;padding:0 2px}
+.histx span{flex:1}
+.dice{font-size:2.2rem;letter-spacing:.2em;min-height:1.4em}
+
+/* stepper */
+.example{margin-bottom:22px}
+.example header{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:baseline;margin-bottom:6px}
+.problem-box{background:var(--blue-soft);border-radius:10px;padding:14px 16px;margin:10px 0 16px}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s}
+.step{display:none;border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden;background:var(--surface)}
+.step.show{display:block;animation:fade .3s}
+.step>h4{margin:0;padding:9px 16px;background:var(--surface-2);border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;font-family:'Oswald','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:.09em;font-size:.82rem;color:var(--primary)}
+.step>h4 .n{width:24px;height:24px;border-radius:50%;background:var(--primary);color:var(--primary-ink);display:grid;place-items:center;font-size:.8rem;letter-spacing:0}
+.step .body{padding:12px 16px}
+.step .ask{border-top:1px dashed var(--line);padding:12px 16px;background:var(--warm-soft)}
+.step .ask p{margin:0 0 8px;font-weight:600}
+.opt{display:block;width:100%;text-align:left;font:inherit;padding:9px 12px;margin:6px 0;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;cursor:pointer}
+.opt:hover:not([disabled]){border-color:var(--accent);background:var(--accent-soft)}
+.opt.right{border-color:var(--good);background:var(--good-soft);color:var(--ink)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{margin-top:8px;font-size:.93rem}
+.fb.ok{color:var(--good)} .fb.no{color:var(--bad)} .fb.near{color:var(--warm)}
+.fb b{font-weight:700}
+.dots{display:flex;gap:6px;margin:6px 0 14px}
+.dots i{width:28px;height:6px;border-radius:99px;background:var(--line)} .dots i.on{background:var(--accent)}
+.givenlist{display:flex;gap:10px 28px;flex-wrap:wrap;margin:4px 0}
+.givenlist span{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.1rem}
+.unk{color:var(--bad);font-style:italic}
+.boxed{display:inline-block;border:1.5px solid var(--bad);padding:2px 10px;border-radius:4px}
+
+/* practice */
+.setpicker{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.setpicker button{appearance:none;font:inherit;font-weight:600;background:var(--surface);border:1px solid var(--line);color:var(--ink);padding:9px 14px;border-radius:99px;cursor:pointer}
+.setpicker button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink);border-color:var(--primary)}
+.setpicker button small{opacity:.75;font-weight:500;margin-left:4px}
+.prob{border:1px solid var(--line);border-radius:12px;background:var(--surface);padding:16px 20px;margin-bottom:14px;box-shadow:var(--shadow);position:relative}
+.prob.done{border-color:var(--good)}
+.prob .num{font-size:.78rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:700;display:flex;justify-content:space-between}
+.prob .num .badge{color:var(--good)}
+.partrow{display:flex;flex-wrap:wrap;gap:8px 10px;align-items:center;margin:8px 0}
+.partrow label{min-width:210px;font-size:.93rem}
+.partrow .u{color:var(--muted);min-width:34px}
+.partrow .ptag{font-weight:700}
+.prob .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.hintbox,.solbox{margin-top:10px;padding:10px 14px;border-radius:8px;font-size:.95rem}
+.hintbox{background:var(--warm-soft)} .solbox{background:var(--blue-soft)}
+.solbox ol{margin:6px 0 0;padding-left:20px}
+.pnote{color:var(--muted);font-size:.86rem}
+.sethead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.sethead p{margin:0;color:var(--muted)}
+
+footer{border-top:1px solid var(--line);padding:22px 0 40px;color:var(--muted);font-size:.85rem}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+.linkbtn{background:none;border:0;color:var(--accent);font:inherit;text-decoration:underline;cursor:pointer;padding:0}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{appearance:none;border:0;background:none;font:inherit;font-weight:700;padding:8px 18px;cursor:pointer;color:var(--ink);min-width:54px;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--primary);color:var(--primary-ink)}
+.ctlrow{display:flex;flex-wrap:wrap;gap:10px 22px;align-items:center;margin:8px 0}
+.ctlrow label.l{font-weight:600;min-width:100px}
+svg.vt{width:100%;max-width:520px;height:auto;display:block;margin:0 auto}
+svg.vt text{fill:var(--muted);font:600 11px 'Oswald','Arial Narrow',sans-serif}
+svg.vt .lbl{fill:var(--ink)}
+svg.vt .axis{stroke:var(--muted);stroke-width:1.4}
+svg.vt .grid{stroke:var(--line);stroke-width:1}
+select{font:inherit;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink)}
+.vartable{width:100%;max-width:520px}
+.vartable td{padding:6px 10px}
+.vartable td:first-child{font-family:"Cambria Math",Cambria,Georgia,serif;font-size:1.1rem}
+.eqcard{background:var(--blue-soft);border:1px solid var(--line);border-radius:10px;padding:10px 16px;margin-top:10px}
+tr.hl td{background:var(--accent-soft);font-weight:700}
+.subhead{margin:26px 0 10px;font-size:1rem;font-family:'Oswald','Arial Narrow',sans-serif;text-transform:uppercase;letter-spacing:.09em;color:var(--primary);border-bottom:2px solid var(--line);padding-bottom:4px}
+.fig{margin:10px 0 6px}
+.figcap{font-size:.82rem;color:var(--muted);text-align:center}
+.opt input{margin-right:10px}
+
+body{letter-spacing:.015em}
+h1,h2,h3,h4{letter-spacing:.01em}
+.school{font-weight:700;letter-spacing:.02em}
+header.top{position:relative}
+.theme{position:absolute;top:12px;right:max(16px,calc((100vw - 1020px)/2 + 16px));display:inline-flex;border:1px solid rgba(255,255,255,.35);border-radius:99px;overflow:hidden;background:rgba(255,255,255,.08);z-index:5}
+.theme button{display:inline-flex;gap:6px;align-items:center;appearance:none;border:0;background:none;color:#e9e3f0;font:inherit;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;padding:6px 13px;cursor:pointer}
+.theme button:hover{background:rgba(255,255,255,.14)}
+.theme button[aria-pressed="true"]{background:#f3f0e9;color:#1b2f4b}
+.theme button:focus-visible{outline:3px solid #e0b79c;outline-offset:-3px}
+@media (max-width:620px){header.top .wrap{padding-top:56px}}
+.lbl{fill:var(--ink)}
+</style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+
+<header class="top">
+  <div class="theme" role="group" aria-label="Color theme">
+    <button type="button" data-theme-set="light" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3L17 7M7 17l-1.7 1.7"/></g></svg><span>Light</span></button>
+    <button type="button" data-theme-set="dark" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><span>Dark</span></button>
+  </div>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Student Learning Page</div>
+      <div class="school">Lincoln International Academy</div>
+    </div>
+    <div class="meta">
+      <div>Class<b>Physics I</b></div>
+      <div>Teacher<b>Eduardo Vásquez</b></div>
+    </div>
+  </div>
+</header>
+
+<div class="lessonbar">
+  <div class="wrap">
+    <div>
+      <h1>Lesson 3.2 · Vector Operations</h1>
+      <small>Chapter 3 · Two-Dimensional Motion and Vectors · Section 2</small>
+    </div>
+    <div class="overall" aria-live="polite">
+      <span id="overallText">0 of 0 practice problems solved</span>
+      <div class="bar"><i id="overallBar"></i></div>
+    </div>
+  </div>
+</div>
+
+<nav class="tabs" aria-label="Lesson sections">
+  <div class="wrap" role="tablist">
+    <button role="tab" id="t-review" data-tab="review" aria-selected="true">1 · Review</button>
+    <button role="tab" id="t-examples" data-tab="examples" aria-selected="false">2 · Worked Examples</button>
+    <button role="tab" id="t-practice" data-tab="practice" aria-selected="false">3 · Practice</button>
+  </div>
+</nav>
+
+<main>
+<div class="wrap">
+
+<!-- ===================== REVIEW ===================== -->
+
+<section class="panel active" id="review" aria-labelledby="t-review">
+
+  <div class="card">
+    <h2>What you should be able to do</h2>
+    <ul class="objectives">
+      <li><span>1</span><div><b>Identify appropriate coordinate systems</b> for solving problems with vectors.</div></li>
+      <li><span>2</span><div><b>Apply the Pythagorean theorem and the tangent function</b> to calculate the magnitude and direction of a resultant vector.</div></li>
+      <li><span>3</span><div><b>Resolve vectors into components</b> using the sine and cosine functions.</div></li>
+      <li><span>4</span><div><b>Add vectors that are not perpendicular</b> by adding their components.</div></li>
+    </ul>
+    <p class="pnote" style="margin-top:12px">In this lesson: <a href="#part-a">Coordinate systems</a> · <a href="#part-b">Magnitude and direction</a> · <a href="#part-c">Components</a> · <a href="#part-d">Adding vectors</a> · <a href="#lab1">Lab 1</a> · <a href="#lab2">Lab 2</a></p>
+    <p class="pnote"><b>Key term:</b> components of a vector</p>
+  </div>
+
+  <div class="card" id="part-a">
+    <span class="pill">Part A</span>
+    <h2>Coordinate systems in two dimensions</h2>
+    <p>In one dimension a direction is just a plus or minus sign. In two dimensions we use <b>both the x-axis and the y-axis</b> at the same time. The axes point in <b>fixed directions</b>. For example, the positive <i>y</i>-axis points north and the positive <i>x</i>-axis points east. A jet flying at 300 m/s to the northeast can then be described as <b>v</b> = 300 m/s at 45° above the +x axis.</p>
+    <div class="fig" id="figAxes"></div>
+    <p class="figcap">Axes fixed to north and east: a vector can point into any of the four quadrants.</p>
+    <div class="callout warm"><b class="t">Tips and tricks</b>There are no firm rules for choosing axes. As long as you are <b>consistent</b>, the final answer is correct with any system. Choose the one that makes the problem easiest: for objects thrown into the air, put the <i>y</i>-axis along the vertical.</div>
+  </div>
+
+  <div class="card" id="part-b">
+    <span class="pill">Part B</span>
+    <h2>Finding the magnitude and direction of a resultant</h2>
+    <p>Drawing and measuring takes time and depends on how carefully you draw. When two vectors are <b>perpendicular</b> (for example Δ<b>x</b> and Δ<b>y</b>), a calculator is faster and more accurate.</p>
+    <div class="grid2">
+      <div class="callout blue"><b class="t">Pythagorean theorem (magnitude)</b>
+        <div class="eq big"><i>d</i><sup>2</sup> = Δ<i>x</i><sup>2</sup> + Δ<i>y</i><sup>2</sup> &nbsp;→&nbsp; <i>d</i> = √(Δ<i>x</i><sup>2</sup> + Δ<i>y</i><sup>2</sup>)</div>
+        Works for any right triangle: (hypotenuse)<sup>2</sup> = (leg)<sup>2</sup> + (other leg)<sup>2</sup>.</div>
+      <div class="callout blue"><b class="t">Tangent function (direction)</b>
+        <div class="eq big">tan <i>θ</i> = <span class="frac"><span>opposite</span><span>adjacent</span></span> = <span class="frac"><span>Δ<i>y</i></span><span>Δ<i>x</i></span></span></div><div class="eq big"><i>θ</i> = tan<sup>−1</sup>(<span class="frac"><span>Δ<i>y</i></span><span>Δ<i>x</i></span></span>)</div>
+        The angle is measured from a reference line, for example "49.8° north of east".</div>
+    </div>
+    <div class="fig" id="figPyr"></div>
+    <p class="figcap">An archaeologist climbs a pyramid: Δ<i>x</i> = 115 m (half the width) and Δ<i>y</i> = 136 m (the height), so <i>d</i> = 178 m at <i>θ</i> = 49.8°.</p>
+    <div class="callout warm"><b class="t">Tips and tricks</b>Make sure your calculator is set to <b>degrees</b> (not radians or grads). Use the <b>absolute values</b> of Δ<i>x</i> and Δ<i>y</i> in the tangent, then describe the direction in words (north/south of east/west).</div>
+  </div>
+
+  <div class="card" id="part-c">
+    <span class="pill">Part C</span>
+    <h2>Resolving a vector into components</h2>
+    <p>Any vector can be described by a pair of perpendicular <b>components</b>: its projections on the <i>x</i>- and <i>y</i>-axes. The components are <b>scalars with signs</b> (they tell which way along each axis). <b>Resolving</b> a vector lets you study the motion in each direction separately.</p>
+    <div class="grid2">
+      <div class="callout blue"><b class="t">Sine and cosine</b>
+        <div class="eq big">sin <i>θ</i> = <span class="frac"><span>opposite</span><span>hypotenuse</span></span></div><div class="eq big">cos <i>θ</i> = <span class="frac"><span>adjacent</span><span>hypotenuse</span></span></div></div>
+      <div class="callout blue"><b class="t">Components (θ measured from the x-axis)</b>
+        <div class="eq big">Δ<i>x</i> = <i>d</i> cos <i>θ</i> &nbsp;&nbsp; Δ<i>y</i> = <i>d</i> sin <i>θ</i></div></div>
+    </div>
+    <div class="fig" id="figRes"></div>
+    <p class="figcap">A highway segment 53.0 km long at 48.7° north of west: Δ<i>x</i> = 35.0 km (west), Δ<i>y</i> = 39.8 km (north).</p>
+    <div class="callout warm"><b class="t">Tips and tricks</b>Do not assume that cosine is always for <i>x</i> and sine for <i>y</i>. It depends on <b>where the angle is</b>: the component <b>adjacent</b> to the angle uses cosine, the component <b>opposite</b> uses sine. Check your answer with the Pythagorean theorem: Δ<i>x</i><sup>2</sup> + Δ<i>y</i><sup>2</sup> must equal <i>d</i><sup>2</sup>.</div>
+    <div class="tablewrap"><table>
+      <thead><tr><th>Quadrant of the vector</th><th>Sign of Δx</th><th>Sign of Δy</th><th>Example direction</th></tr></thead>
+      <tbody>
+        <tr><td>I (0°–90°)</td><td>+</td><td>+</td><td>north of east</td></tr>
+        <tr><td>II (90°–180°)</td><td>−</td><td>+</td><td>north of west</td></tr>
+        <tr><td>III (180°–270°)</td><td>−</td><td>−</td><td>south of west</td></tr>
+        <tr><td>IV (270°–360°)</td><td>+</td><td>−</td><td>south of east</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card" id="part-d">
+    <span class="pill">Part D</span>
+    <h2>Adding vectors that are not perpendicular</h2>
+    <p>Until now the vector-addition problems used perpendicular vectors. Many objects, however, move in one direction and then turn at an angle. Suppose a plane first travels 5 km at an angle of 35° to the ground, then climbs at only 10° relative to the ground for 22 km. The two displacement vectors do not form a right triangle, so you cannot apply the tangent function or the Pythagorean theorem to the original vectors. Instead, resolve each vector into components; the sums of the components are the two <b>perpendicular components of the resultant</b>.</p>
+    <p>For any vectors that are not perpendicular, <b>add their components</b>:</p>
+    <ol>
+      <li><b>Resolve</b> every vector into <i>x</i>- and <i>y</i>-components (with signs).</li>
+      <li><b>Add</b> all the <i>x</i>-components to get Δ<i>x</i><sub>tot</sub>, and all the <i>y</i>-components to get Δ<i>y</i><sub>tot</sub>.</li>
+      <li>Use the <b>Pythagorean theorem</b> to find the magnitude of the resultant: <i>d</i> = √(Δ<i>x</i><sub>tot</sub><sup>2</sup> + Δ<i>y</i><sub>tot</sub><sup>2</sup>).</li>
+      <li>Use <b>tan<sup>−1</sup>(|Δ<i>y</i><sub>tot</sub>| ÷ |Δ<i>x</i><sub>tot</sub>|)</b> and the signs of the totals to state the direction (which quadrant).</li>
+    </ol>
+    <div class="fig" id="figAdd"></div>
+    <p class="figcap">Two vectors that are not perpendicular, added tip-to-tail; the resultant is the dashed arrow.</p>
+    <div class="callout warm"><b class="t">Tips and tricks</b>Angles measured <b>clockwise</b> from the positive x-axis (for example "35° south of east") are conventionally <b>negative</b>: θ = −35°. With that convention a calculator gives the correct signs for cos θ and sin θ automatically.</div>
+    <div class="callout"><b class="t">Check your work</b>The resultant cannot be longer than the sum of the magnitudes of the vectors, and it must point into the quadrant given by the signs of Δ<i>x</i><sub>tot</sub> and Δ<i>y</i><sub>tot</sub>.</div>
+  </div>
+
+  <div class="card" id="lab1">
+    <span class="pill">Lab 1</span>
+    <h2>Resolve a vector into components</h2>
+    <p>Choose the size of a vector <b>d</b> and its angle <i>θ</i> from the +x axis (counter-clockwise). The dashed arrow is the vector; the solid arrows are its components.</p>
+    <div class="grid2">
+      <div class="sliderrow"><label for="lr_m">Magnitude <i>d</i></label><input type="range" id="lr_m" min="1" max="10" step="0.5" value="8"><output id="lr_mo">8 units</output></div>
+      <div class="sliderrow"><label for="lr_a">Angle <i>θ</i></label><input type="range" id="lr_a" min="0" max="355" step="5" value="35"><output id="lr_ao">35°</output></div>
+    </div>
+    <div class="fig" id="lr_fig"></div>
+    <div class="readouts" id="lr_reads"></div>
+    <div class="status" id="lr_status" aria-live="polite"></div>
+    <p class="pnote">Try: (1) θ = 0°, 90°, 180°, 270°; (2) θ = 45° (the components are equal); (3) θ = 150° and 225° and watch the signs.</p>
+  </div>
+
+  <div class="card" id="lab2">
+    <span class="pill">Lab 2</span>
+    <h2>Add two vectors with components</h2>
+    <p>Set vectors <b>A</b> and <b>B</b>. The table shows the components method step by step, and the diagram shows the same sum tip-to-tail.</p>
+    <div class="grid2">
+      <div>
+        <div class="sliderrow"><label for="l2a_m">Magnitude of <b>A</b></label><input type="range" id="l2a_m" min="1" max="8" step="0.5" value="5"><output id="l2a_mo">5 units</output></div>
+        <div class="sliderrow"><label for="l2a_a">Angle of <b>A</b></label><input type="range" id="l2a_a" min="0" max="355" step="5" value="30"><output id="l2a_ao">30°</output></div>
+      </div>
+      <div>
+        <div class="sliderrow"><label for="l2b_m">Magnitude of <b>B</b></label><input type="range" id="l2b_m" min="1" max="8" step="0.5" value="4"><output id="l2b_mo">4 units</output></div>
+        <div class="sliderrow"><label for="l2b_a">Angle of <b>B</b></label><input type="range" id="l2b_a" min="0" max="355" step="5" value="120"><output id="l2b_ao">120°</output></div>
+      </div>
+    </div>
+    <div class="fig" id="l2_fig"></div>
+    <div class="tablewrap"><table class="vartable" id="l2_tab"></table></div>
+    <div class="status" id="l2_status" aria-live="polite"></div>
+    <p class="pnote">Angles are measured counter-clockwise from the +x axis (east). Try two vectors at 90° (the Pythagorean theorem works), at 0° (they simply add) and at 180° (they subtract).</p>
+  </div>
+
+  <div class="card">
+    <h3>Remember when solving problems</h3>
+    <ol>
+      <li><b>Analyze</b> — draw the vectors on axes; decide which angle is given and from which axis.</li>
+      <li><b>Plan</b> — perpendicular vectors: Pythagorean theorem + tangent. Single vector: sine and cosine for components. Several vectors: add components first.</li>
+      <li><b>Solve</b> — keep the signs of the components; calculator in <b>degrees</b>; state the direction in words.</li>
+      <li><b>Check</b> — d² = Δx² + Δy²; the quadrant matches the signs; the magnitude is not larger than the sum of the magnitudes.</li>
+    </ol>
+    <p class="pnote">Ready? Go to <button class="linkbtn" data-goto="examples">Worked Examples</button>, then <button class="linkbtn" data-goto="practice">Practice</button>.</p>
+  </div>
+</section>
+
+<!-- ===================== EXAMPLES ===================== -->
+<section class="panel" id="examples" aria-labelledby="t-examples">
+  <div class="card">
+    <h2>Step-by-step worked examples</h2>
+    <p>Each example follows <b>Analyze → Plan → Solve → Check</b>. Press <em>Next step</em> to reveal one step at a time. At most steps you'll answer a quick question first — that's where the thinking happens.</p>
+  </div>
+  <div id="exampleList"></div>
+</section>
+
+<!-- ===================== PRACTICE ===================== -->
+<section class="panel" id="practice" aria-labelledby="t-practice">
+  <div class="card">
+    <h2>Practice on your own</h2>
+    <p>Choose an answer or type a number and press <b>Check</b> (or Enter) for immediate feedback. Stuck? Use <b>Hint</b>. After two tries you can open the full <b>Solution</b>.</p>
+    <ul>
+      <li>For problems with a scale drawing, a drawing is accurate to about a few percent, so answers within <b>3–10 %</b> are accepted. Angles are measured from the reference line named in the question.</li>
+      <li>For signed answers, use the direction the problem says is positive (for example "east is +"). Magnitudes (lengths, speeds) are positive.</li>
+      <li>You may enter answers like <span class="math">126</span>, <span class="math">10.3</span> or <span class="math">−50</span>.</li>
+    </ul>
+  </div>
+  <div class="setpicker" id="setPicker" role="group" aria-label="Problem sets"></div>
+  <div id="problemList"></div>
+</section>
+
+</div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>Lincoln International Academy · Physics I · Mr. Eduardo Vásquez<br>Content adapted from <i>Holt McDougal Physics</i>, Chapter 3 §2 (Vector Operations): Sample Problems A–C, their Practice problems and the Section 2 Formative Assessment (© Houghton Mifflin Harcourt). Additional problems written for this page.</div>
+    <div>Your progress is saved automatically. <button class="linkbtn" id="resetAll" data-lia-reset>Reset my progress</button></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+'use strict';
+const $  = (s,e=document)=>e.querySelector(s);
+const $$ = (s,e=document)=>[...e.querySelectorAll(s)];
+const KEY='lia-physics1-lesson-3-2';
+let state={};
+try{ state=JSON.parse(localStorage.getItem(KEY))||{}; }catch(e){ state={}; }
+const save=()=>{ try{ localStorage.setItem(KEY,JSON.stringify(state)); }catch(e){} };
+
+
+/* ---------- notation helpers ---------- */
+const B=x=>`<b>${x}</b>`;
+const F=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const deg=Math.PI/180, rad2=x=>x/deg;
+const vec=(m,a)=>({x:m*Math.cos(a*deg),y:m*Math.sin(a*deg)});
+const mag=v=>Math.hypot(v.x,v.y);
+const ang=v=>{ let a=rad2(Math.atan2(v.y,v.x)); return a<0?a+360:a; };
+const r1=x=>String(+x.toFixed(1)), r3=x=>String(+x.toPrecision(3));
+
+/* ---------- number parsing / judging ---------- */
+function parseNum(raw){
+  if(raw==null) return NaN;
+  let s=String(raw).trim().toLowerCase().replace(/,/g,'').replace(/\s+/g,'').replace(/[−–]/g,'-');
+  if(!s) return NaN;
+  s=s.replace(/(°|degrees|degree|deg|km\/h|kph|m\/s|km|cm|ms|s|m)$/,'');
+  const m=s.match(/^([+-]?(?:\d+\.?\d*|\.\d+))(?:(?:x|×|\*)10\^?\(?([+-]?\d+)\)?|e([+-]?\d+))?$/);
+  if(!m) return NaN;
+  let v=parseFloat(m[1]);
+  const ex=m[2]!==undefined?m[2]:m[3];
+  if(ex!==undefined) v*=Math.pow(10,parseInt(ex,10));
+  return v;
+}
+function judge(v,part){
+  if(!isFinite(v)) return {state:'no',msg:'I couldn\'t read that as a number. Try something like 126 or 10.3.'};
+  const ans=part.ans, tol=part.tol??0.03;
+  if(ans===0){ return Math.abs(v)<=(part.atol??0.05)?{state:'ok',msg:'Correct!'}:{state:'no',msg:'Not quite. Think about what happens when the vectors cancel.'}; }
+  const A_=Math.abs(ans), cmp=part.abs?Math.abs(v):v, tgt=part.abs?A_:ans;
+  const rel=Math.abs(cmp-tgt)/A_;
+  if(rel<=tol) return {state:'ok',msg:'Correct!'};
+  for(const t of (part.traps||[])){ if(Math.abs(v-t.v)/Math.abs(t.v)<=0.02) return {state:'no',msg:t.msg}; }
+  if(!part.abs && Math.abs(v+ans)/A_<=tol) return {state:'near',msg:'Right size, wrong sign. Check which direction you chose as positive (or which way the vector points).'};
+  if(part.ang){
+    if(Math.abs(v-(90-ans))<=Math.max(1,ans*tol)) return {state:'near',msg:'That is the complementary angle (90° − θ). Check which line the angle is measured from.'};
+    if(Math.abs(v-(180-ans))<=Math.max(1,ans*tol)) return {state:'near',msg:'That is 180° − θ: you measured from the opposite end of the reference line.'};
+    if(rel<=0.12) return {state:'near',msg:'Close! Check your rounding or measure the angle again.'};
+    return {state:'no',msg:'Not quite. Re-read which reference line the angle is measured from (use tan θ = opposite ÷ adjacent).'};
+  }
+  const av=Math.abs(v);
+  if(Math.abs(av*2-A_)/A_<=tol||Math.abs(av/2-A_)/A_<=tol) return {state:'near',msg:'Off by a factor of 2 — did you double or halve the right vector?'};
+  if(Math.abs(av*10-A_)/A_<=tol||Math.abs(av/10-A_)/A_<=tol) return {state:'near',msg:'Right digits, wrong power of ten — check your scale (e.g. 10 m = 1 cm).'};
+  if(rel<=0.12) return {state:'near',msg:'Close! Check your rounding or an intermediate value.'};
+  return {state:'no',msg:'Not quite. Re-read the question, draw the vectors tip-to-tail, and try a hint if you need one.'};
+}
+
+/* ---------- vector drawing ---------- */
+function arrow(x1,y1,x2,y2,o={}){
+  const c=o.c||'var(--accent)', w=o.w||2.6, dx=x2-x1, dy=y2-y1, L=Math.hypot(dx,dy)||1, a=Math.atan2(dy,dx), h=Math.min(10,L*.5);
+  const p1=[x2-h*Math.cos(a-.4),y2-h*Math.sin(a-.4)], p2=[x2-h*Math.cos(a+.4),y2-h*Math.sin(a+.4)];
+  const bx=x2-h*.7*Math.cos(a), by=y2-h*.7*Math.sin(a);
+  let s=`<line x1="${x1}" y1="${y1}" x2="${bx}" y2="${by}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"${o.dash?` stroke-dasharray="${o.dash}"`:''}${o.op?` opacity="${o.op}"`:''}/>`;
+  s+=`<polygon points="${x2},${y2} ${p1[0]},${p1[1]} ${p2[0]},${p2[1]}" fill="${c}"${o.op?` opacity="${o.op}"`:''}/>`;
+  if(o.label){
+    const mx=(x1+x2)/2, my=(y1+y2)/2, nx=-dy/L, ny=dx/L, off=o.loff??13;
+    const side=nx*off, an=Math.abs(nx)>0.55?(side>0?'start':'end'):'middle';
+    s+=`<text class="lbl" x="${mx+nx*off*(an==='middle'?1:.5)}" y="${my+ny*off+4}" text-anchor="${an}" style="fill:${o.lc||c};font-weight:700">${o.label}</text>`;
+  }
+  return s;
+}
+/* tip-to-tail figure: path = [{x,y,label,c}], auto-fit; o.result draws resultant; o.ghost = alternative path */
+function figTT(path,o={}){
+  const W=o.W||460,H=o.H||250,pad=o.pad??34;
+  const pts=[{x:0,y:0}]; path.forEach(v=>pts.push({x:pts[pts.length-1].x+v.x,y:pts[pts.length-1].y+v.y}));
+  let gh=null; if(o.ghost){ gh=[{x:0,y:0}]; o.ghost.forEach(v=>gh.push({x:gh[gh.length-1].x+v.x,y:gh[gh.length-1].y+v.y})); }
+  const all=pts.concat(gh||[]);
+  const minx=Math.min(...all.map(p=>p.x)),maxx=Math.max(...all.map(p=>p.x)),miny=Math.min(...all.map(p=>p.y)),maxy=Math.max(...all.map(p=>p.y));
+  const sx=Math.max(maxx-minx,1e-6), sy=Math.max(maxy-miny,1e-6);
+  const sc=Math.min((W-2*pad)/sx,(H-2*pad)/sy,o.maxScale||40);
+  const ox=(W-sc*sx)/2-minx*sc, oy=(H-sc*sy)/2+maxy*sc;
+  const X=x=>ox+x*sc, Y=y=>oy-y*sc;
+  let s=`<svg class="vt" viewBox="0 0 ${W} ${H}" role="img" aria-label="${o.aria||'Vector diagram'}">`;
+  if(o.grid){ const g=o.grid; for(let gx=Math.ceil(minx/g)*g;gx<=maxx+1e-9;gx+=g) s+=`<line class="grid" x1="${X(gx)}" y1="${pad/2}" x2="${X(gx)}" y2="${H-pad/2}"/>`; for(let gy=Math.ceil(miny/g)*g;gy<=maxy+1e-9;gy+=g) s+=`<line class="grid" x1="${pad/2}" y1="${Y(gy)}" x2="${W-pad/2}" y2="${Y(gy)}"/>`; }
+  if(gh){ gh.slice(1).forEach((p,i)=>{ const q=gh[i]; s+=arrow(X(q.x),Y(q.y),X(p.x),Y(p.y),{c:'var(--muted)',w:2,dash:'5 5',op:.55}); }); }
+  path.forEach((v,i)=>{ const q=pts[i],p=pts[i+1]; s+=arrow(X(q.x),Y(q.y),X(p.x),Y(p.y),{c:v.c||['var(--accent)','var(--warm)','var(--primary)','var(--cold)'][i%4],label:v.label,loff:v.loff}); });
+  const last=pts[pts.length-1];
+  if(o.result!==false && path.length>1 && (Math.abs(last.x)+Math.abs(last.y))>1e-9){
+    s+=arrow(X(0),Y(0),X(last.x),Y(last.y),{c:'var(--bad)',w:3,dash:'7 5',label:o.rlabel||'R',loff:o.rloff??-14});
+  }
+  s+=`<circle cx="${X(0)}" cy="${Y(0)}" r="3.5" fill="var(--ink)"/>`;
+  if(o.note) s+=`<text x="${W-8}" y="${H-8}" text-anchor="end">${o.note}</text>`;
+  return s+'</svg>';
+}
+const SIX=['var(--accent)','var(--warm)','var(--primary)','var(--cold)','var(--bad)','var(--good)'];
+
+/* ---------- Lesson 3.2 figures and labs ---------- */
+const dirWord=(x,y)=>(y>=0?'north':'south')+' of '+(x>=0?'east':'west');
+const sg=n=>String(+n.toFixed(2)).replace('-','−');
+/* four quadrants with sample vectors */
+function figAxes(){
+  const W=420,H=250,cx=210,cy=125,s=88;
+  let o=`<svg class="vt" viewBox="0 0 ${W} ${H}" role="img" aria-label="x and y axes with vectors in the four quadrants">`;
+  o+=`<line class="axis" x1="20" y1="${cy}" x2="${W-14}" y2="${cy}"/><line class="axis" x1="${cx}" y1="${H-8}" x2="${cx}" y2="14"/>`;
+  o+=`<text x="${W-12}" y="${cy-8}" text-anchor="end">+x (east)</text><text x="${cx+8}" y="22">+y (north)</text><text x="22" y="${cy-8}">−x (west)</text><text x="${cx+8}" y="${H-12}">−y (south)</text>`;
+  [[45,'I','var(--accent)'],[135,'II','var(--warm)'],[225,'III','var(--primary)'],[315,'IV','var(--cold)']].forEach(([a,q,c])=>{
+    const v=vec(1,a); o+=arrow(cx,cy,cx+v.x*s,cy-v.y*s,{c,w:3});
+    o+=`<text class="lbl" x="${cx+v.x*s*1.28}" y="${cy-v.y*s*1.28+4}" text-anchor="middle" style="font-weight:700">${q}</text>`;
+  });
+  return o+'</svg>';
+}
+/* components figure: vector (dx,dy) with its components */
+const figComp=(dx,dy,o={})=>figTT([{x:dx,y:0,label:o.lx||'Δx',loff:o.lxo??14},{x:0,y:dy,label:o.ly||'Δy',loff:o.lyo??16}],{rlabel:o.rl||'d',rloff:o.rlo??-14,H:o.H||250,aria:o.aria||'A vector and its components',note:o.note});
+
+/* ---------- Lab 1: resolve ---------- */
+(function(){
+  if(!$('#lr_fig')) return;
+  function upd(){
+    const m=+$('#lr_m').value, a=+$('#lr_a').value; $('#lr_mo').textContent=m+' units'; $('#lr_ao').textContent=a+'°';
+    const v=vec(m,a), dx=Math.abs(v.x)<1e-9?0:v.x, dy=Math.abs(v.y)<1e-9?0:v.y;
+    const path=[{x:dx,y:0,label:'Δx',loff:14},{x:0,y:dy,label:'Δy',loff:dx>=0?16:-16}];
+    $('#lr_fig').innerHTML=figTT(path,{rlabel:'d',rloff:-14,H:270,maxScale:36,aria:'Vector resolved into components',grid:2});
+    $('#lr_reads').innerHTML=`<div class="readout"><small>Δx = d cos θ</small><b>${sg(dx)}</b></div><div class="readout"><small>Δy = d sin θ</small><b>${sg(dy)}</b></div><div class="readout"><small>√(Δx² + Δy²)</small><b>${r3(Math.hypot(dx,dy))}</b></div><div class="readout"><small>quadrant</small><b>${a===0||a===180||a===90||a===270?'axis':['I','II','III','IV'][Math.floor(a/90)]}</b></div>`;
+    const xs=dx>1e-9?'east (+)':(dx<-1e-9?'west (−)':'zero'), ys=dy>1e-9?'north (+)':(dy<-1e-9?'south (−)':'zero');
+    $('#lr_status').className='status'; $('#lr_status').textContent=`The x-component points ${xs} and the y-component points ${ys}. The Pythagorean check gives back d = ${r3(Math.hypot(dx,dy))}.`;
+  }
+  ['lr_m','lr_a'].forEach(id=>$('#'+id).addEventListener('input',upd)); upd();
+})();
+
+/* ---------- Lab 2: add by components ---------- */
+(function(){
+  if(!$('#l2_fig')) return;
+  function upd(){
+    const ma=+$('#l2a_m').value, aa=+$('#l2a_a').value, mb=+$('#l2b_m').value, ab=+$('#l2b_a').value;
+    $('#l2a_mo').textContent=ma+' units'; $('#l2a_ao').textContent=aa+'°'; $('#l2b_mo').textContent=mb+' units'; $('#l2b_ao').textContent=ab+'°';
+    const A=vec(ma,aa), Bv=vec(mb,ab), R={x:A.x+Bv.x,y:A.y+Bv.y}, m=mag(R);
+    $('#l2_fig').innerHTML=figTT([{x:A.x,y:A.y,label:'A',c:'var(--accent)',loff:-12},{x:Bv.x,y:Bv.y,label:'B',c:'var(--warm)',loff:-12}],{rlabel:'R',rloff:14,H:270,maxScale:34,aria:'Vector A plus vector B',grid:2});
+    const z=x=>Math.abs(x)<1e-9?0:x;
+    $('#l2_tab').innerHTML=`<thead><tr><th></th><th class="num">x-component</th><th class="num">y-component</th></tr></thead><tbody>
+      <tr><td><b>A</b></td><td class="num">${sg(z(A.x))}</td><td class="num">${sg(z(A.y))}</td></tr>
+      <tr><td><b>B</b></td><td class="num">${sg(z(Bv.x))}</td><td class="num">${sg(z(Bv.y))}</td></tr>
+      <tr class="hl"><td><b>R = A + B</b></td><td class="num">${sg(z(R.x))}</td><td class="num">${sg(z(R.y))}</td></tr></tbody>`;
+    const st=$('#l2_status');
+    if(m<1e-6){ st.className='status warn'; st.textContent='The vectors cancel: the resultant is zero.'; }
+    else{ const th=Math.atan2(Math.abs(R.y),Math.abs(R.x))/deg; st.className='status'; st.textContent=`|R| = √(${sg(z(R.x))}² + ${sg(z(R.y))}²) = ${r3(m)} units, ${r1(th)}° ${dirWord(R.x,R.y)} (tan⁻¹(|Δy| ÷ |Δx|) = ${r1(th)}°).`; }
+  }
+  ['l2a_m','l2a_a','l2b_m','l2b_a'].forEach(id=>$('#'+id).addEventListener('input',upd)); upd();
+})();
+
+/* static review figures */
+(function(){
+  const set=(id,h)=>{ const e=$('#'+id); if(e) e.innerHTML=h; };
+  set('figAxes',figAxes());
+  set('figPyr',figComp(115,136,{lx:'Δx = 115 m',ly:'Δy = 136 m',rl:'d = 178 m',lyo:16,rlo:-14,aria:'Pyramid climb: horizontal 115 m, vertical 136 m'}));
+  set('figRes',figComp(-35.0,39.8,{lx:'Δx = 35.0 km west',ly:'Δy = 39.8 km north',rl:'d = 53.0 km',lyo:-16,lxo:14,rlo:14,aria:'Highway segment resolved into west and north components'}));
+  const A=vec(5,30), Bv=vec(4,120);
+  set('figAdd',figTT([{x:A.x,y:A.y,label:'A',c:'var(--accent)',loff:-12},{x:Bv.x,y:Bv.y,label:'B',c:'var(--warm)',loff:-12}],{rlabel:'R = A + B',rloff:14,H:240,aria:'Two vectors added tip to tail'}));
+})();
+
+/* ---------- tabs ---------- */
+function showTab(name){
+  $$('nav.tabs button').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.tab===name)));
+  $$('section.panel').forEach(p=>p.classList.toggle('active',p.id===name));
+  if(location.hash!=='#'+name) history.replaceState(null,'','#'+name);
+  window.scrollTo({top:0});
+}
+$$('nav.tabs button').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+document.addEventListener('click',e=>{ const g=e.target.closest('[data-goto]'); if(g) showTab(g.dataset.goto); });
+
+/* ---------- theme toggle ---------- */
+(function(){
+  const root=document.documentElement, mq=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+  const eff=()=>root.getAttribute('data-theme')||((mq&&mq.matches)?'dark':'light');
+  function sync(){ const t=eff(); $$('[data-theme-set]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.themeSet===t))); }
+  $$('[data-theme-set]').forEach(b=>b.addEventListener('click',()=>{
+    root.setAttribute('data-theme',b.dataset.themeSet);
+    try{ localStorage.setItem('lia-theme',b.dataset.themeSet); }catch(e){}
+    sync();
+  }));
+  if(mq&&mq.addEventListener) mq.addEventListener('change',sync);
+  sync();
+})();
+/* ---------- ask widgets (worked examples) ---------- */
+function mkMC(host,ask,onDone,saved,onSave){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  ask.opts.forEach((o,i)=>{
+    const b=document.createElement('button'); b.className='opt'; b.type='button'; b.innerHTML=o;
+    b.addEventListener('click',()=>{
+      if(i===ask.correct){ b.classList.add('right'); $$('.opt',host).forEach(x=>x.disabled=true); fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); if(onSave) onSave(i); onDone(); }
+      else { b.classList.add('wrong'); b.disabled=true; fb.className='fb no'; fb.innerHTML=(ask.wrong&&ask.wrong[i])||'Not quite — try another option.'; }
+    });
+    host.appendChild(b);
+  });
+  host.appendChild(fb);
+  if(saved!=null){ const b=$$('.opt',host)[saved]; if(b) b.click(); }
+}
+function mkNum(host,ask,onDone,saved,onSave){
+  host.innerHTML=`<p>${ask.q}</p>`;
+  const row=document.createElement('div'); row.className='row';
+  const inp=document.createElement('input'); inp.type='text'; inp.setAttribute('aria-label','Your answer'); inp.placeholder='your answer'; inp.autocomplete='off';
+  const u=document.createElement('span'); u.className='math'; u.innerHTML=ask.unit||'';
+  const btn=document.createElement('button'); btn.className='btn'; btn.type='button'; btn.textContent='Check';
+  row.append(inp,u,btn); host.appendChild(row);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite'); host.appendChild(fb);
+  const go=()=>{
+    const j=judge(parseNum(inp.value),{ans:ask.ans,tol:ask.tol||0.02,traps:ask.traps,abs:ask.abs});
+    if(j.state==='ok'){ fb.className='fb ok'; fb.innerHTML='<b>Correct.</b> '+(ask.why||''); inp.disabled=true; btn.disabled=true; if(onSave) onSave(inp.value); onDone(); }
+    else { fb.className='fb '+j.state; fb.textContent=j.msg; }
+  };
+  btn.addEventListener('click',go); inp.addEventListener('keydown',e=>{ if(e.key==='Enter') go(); });
+  if(typeof saved==='string' && saved){ inp.value=saved; go(); }
+}
+/* ---------- worked examples ---------- */
+const G=(...items)=>`<div class="givenlist">${items.map(i=>`<span>${i}</span>`).join('')}</div>`;
+const U=(x)=>`<span class="unk">${x}</span>`;
+const mcAsk=(q,opts,why,wrong)=>({type:'mc',q,opts,correct:0,why,wrong});
+const numAsk=(q,ans,unit,why,extra={})=>Object.assign({type:'num',q,ans,tol:0.01,unit,why},extra);
+const Dx='Δ<i>x</i>', Dy='Δ<i>y</i>';
+const e6A=vec(5.0,30), e6B=vec(4.0,120), e6R={x:e6A.x+e6B.x,y:e6A.y+e6B.y};
+const e8A=vec(27,-35), e8B=vec(41,65), e8R={x:e8A.x+e8B.x,y:e8A.y+e8B.y};
+const e7A=vec(120,25), e7B=vec(80,-70), e7R={x:e7A.x+e7B.x,y:e7A.y+e7B.y};
+const EX=[
+ { id:'E1', tag:'Sample Problem A', title:'Climbing the Great Pyramid',
+   problem:'An archaeologist climbs the Great Pyramid in Giza, Egypt. The pyramid is <b>136 m</b> high and <b>2.30 × 10<sup>2</sup> m</b> wide. What are the magnitude and direction of her displacement after she has climbed from the bottom to the top (up the middle of one face)?',
+   steps:[
+    {name:'Analyze', html:G(`${Dy} = 136 m`,`${Dx} = ½(width) = 115 m`)+G(U('d = ?'),U('θ = ?'))+`<div class="fig">${figComp(115,136,{lx:'Δx = 115 m',ly:'Δy = 136 m',rl:'d',aria:'Pyramid triangle'})}</div>`,
+     ask:mcAsk('Why is Δ<i>x</i> only <b>half</b> of the width of the pyramid (115 m, not 230 m)?',['She climbs to the <i>middle</i> of the face, so she moves horizontally only to the center','The pyramid is half as wide at the top','Because the angle is 45°'],'The top is above the middle of the base, so the horizontal displacement is half the width.')},
+    {name:'Plan', html:`<p>The horizontal and vertical displacements are perpendicular, so the Pythagorean theorem gives the magnitude and the tangent gives the direction:</p><div class="eq"><i>d</i> = √(${Dx}<sup>2</sup> + ${Dy}<sup>2</sup>) &nbsp;&nbsp;&nbsp; <i>θ</i> = tan<sup>−1</sup>(${Dy} ÷ ${Dx})</div>`,
+     ask:mcAsk('Which function do you use to find the <b>angle</b> from the two legs?',['The inverse tangent, tan⁻¹(Δy ÷ Δx)','The Pythagorean theorem','The cosine only'],'The tangent relates the opposite and adjacent legs to the angle, so its inverse gives the angle.')},
+    {name:'Solve', html:`<div class="eq"><i>d</i> = √((115 m)<sup>2</sup> + (136 m)<sup>2</sup>) = <span class="boxed">178 m</span></div><div class="eq"><i>θ</i> = tan<sup>−1</sup>(136 ÷ 115) = <span class="boxed">49.8°</span> above the horizontal</div>`,
+     ask:numAsk('Calculate √(115² + 136²).',Math.hypot(115,136),'m','d ≈ 178 m.')},
+    {name:'Check your work', html:`<p><i>d</i> is the hypotenuse, so it must be less than the sum of the legs (115 + 136 = 251 m) ✔. The angle must be more than 45° because the height is greater than half the width ✔.</p>`,
+     ask:mcAsk('If the pyramid were lower than 115 m, the angle would be…',['Less than 45°','More than 45°','Exactly 45°'],'A shorter height makes Δy smaller than Δx, so tan θ < 1 and θ < 45°.')}
+   ]},
+ { id:'E2', tag:'Practice #2', title:'The pirate’s treasure map',
+   problem:'While following a treasure map, a pirate walks <b>45.0 m north</b> and then turns and walks <b>7.5 m east</b>. What single straight-line displacement could the pirate have taken to reach the treasure?',
+   steps:[
+    {name:'Analyze', html:G(`${Dy} = 45.0 m (north)`,`${Dx} = 7.5 m (east)`)+G(U('d = ?'),U('θ = ?'))+`<div class="fig">${figComp(7.5,45,{lx:'7.5 m',ly:'45.0 m',aria:'Pirate walk'})}</div>`,
+     ask:mcAsk('The two legs of the walk are…',['perpendicular (north and east)','parallel','opposite'],'North and east are at 90° to each other, so a right triangle is formed.')},
+    {name:'Solve', html:`<div class="eq"><i>d</i> = √(7.5<sup>2</sup> + 45.0<sup>2</sup>) = <span class="boxed">45.6 m</span></div><div class="eq"><i>θ</i> = tan<sup>−1</sup>(7.5 ÷ 45.0) = <span class="boxed">9.5°</span> east of north</div>`,
+     ask:numAsk('Calculate the angle tan⁻¹(7.5 ÷ 45.0), in degrees.',Math.atan2(7.5,45)/deg,'°','θ ≈ 9.5° east of north.',{tol:0.02})},
+    {name:'Check your work', html:`<p>The treasure is almost due north, so the angle from north must be small ✔. The straight-line distance (45.6 m) is a bit shorter than the walked distance (52.5 m) ✔.</p>`,
+     ask:mcAsk('Which statement describes the direction correctly?',['9.5° east of north','9.5° north of east','9.5° west of north'],'The angle is measured from north toward the east, because the second leg went east.')}
+   ]},
+ { id:'E3', tag:'Sample Problem B', title:'Components of a highway segment',
+   problem:'The straight stretch of Interstate Highway 5 from Mettler, California, to a point near Buttonwillow, California, is <b>53.0 km</b> long and makes an angle of <b>48.7° north of west</b>. What are the northern and western components of this highway segment?',
+   steps:[
+    {name:'Analyze', html:G('<i>d</i> = 53.0 km','<i>θ</i> = 48.7° north of west')+G(U(`${Dx} = ?`),U(`${Dy} = ?`))+`<div class="fig">${figComp(-35.0,39.8,{lx:'Δx (west)',ly:'Δy (north)',rl:'d = 53.0 km',lyo:-16,rlo:14,aria:'Highway'})}</div>`,
+     ask:mcAsk('The 48.7° angle is measured at the <b>southern end</b>, from the west line. Which component is <b>adjacent</b> to the angle?',['The west (x) component, so it uses cosine','The north (y) component, so it uses cosine','Both use sine'],'The component along the reference line (west) is adjacent to the angle, so Δx = d cos θ.')},
+    {name:'Plan', html:`<div class="eq">${Dx} = <i>d</i> cos <i>θ</i> &nbsp;&nbsp;&nbsp; ${Dy} = <i>d</i> sin <i>θ</i></div>`,
+     ask:mcAsk('Why can both components be found from only d and θ?',['The components and d form a right triangle','Because d is measured in km','Because the vector is long'],'The vector is the hypotenuse of the right triangle formed by its components.')},
+    {name:'Solve', html:`<div class="eq">${Dx} = (53.0 km)(cos 48.7°) = <span class="boxed">35.0 km west</span></div><div class="eq">${Dy} = (53.0 km)(sin 48.7°) = <span class="boxed">39.8 km north</span></div>`,
+     ask:numAsk('Calculate 53.0 × cos 48.7°.',53*Math.cos(48.7*deg),'km','Δx ≈ 35.0 km (west).')},
+    {name:'Check your work', html:`<p>Pythagorean check: (35.0)<sup>2</sup> + (39.8)<sup>2</sup> = 1225 + 1584 = 2809 ≈ (53.0)<sup>2</sup> = 2809 ✔. The north component is larger because the angle from west is larger than 45° ✔.</p>`,
+     ask:mcAsk('What would happen to the north component if the angle were increased to 60° north of west?',['It would increase','It would decrease','It would not change'],'sin θ grows as θ increases toward 90°, so Δy increases (and Δx decreases).')}
+   ]},
+ { id:'E4', tag:'Figure 2.6 · The film crew', title:'Keeping the truck beneath the plane',
+   problem:'A stunt plane flies at <b>95 km/h</b> at an angle of <b>20.0°</b> above the ground. A film truck must stay directly beneath the plane. At what speed must the truck travel? What is the plane’s vertical speed?',
+   steps:[
+    {name:'Analyze', html:G('<i>v</i><sub>plane</sub> = 95 km/h','<i>θ</i> = 20.0° above horizontal')+G(U('<i>v</i><sub>x</sub> = ?'),U('<i>v</i><sub>y</sub> = ?'))+`<div class="fig">${figComp(95*Math.cos(20*deg),95*Math.sin(20*deg),{lx:'vₓ',ly:'v_y',rl:'v = 95 km/h',lyo:-16,aria:'Plane velocity components'})}</div>`,
+     ask:mcAsk('To stay beneath the plane, the truck must match which component of the plane’s velocity?',['The horizontal component, <i>v</i><sub>x</sub>','The vertical component, <i>v</i><sub>y</sub>','The full velocity of 95 km/h'],'The truck moves along the ground, so it only needs the plane’s horizontal motion.')},
+    {name:'Solve', html:`<div class="eq"><i>v</i><sub>x</sub> = (95 km/h)(cos 20.0°) = <span class="boxed">89 km/h</span></div><div class="eq"><i>v</i><sub>y</sub> = (95 km/h)(sin 20.0°) = <span class="boxed">32 km/h</span></div>`,
+     ask:numAsk('Calculate 95 × cos 20.0°.',95*Math.cos(20*deg),'km/h','The truck needs about 89 km/h.')},
+    {name:'Check your work', html:`<p>The horizontal component is slightly less than 95 km/h (cos 20° = 0.94) ✔. (89.3)<sup>2</sup> + (32.5)<sup>2</sup> ≈ 9030 ≈ 95<sup>2</sup> ✔.</p>`,
+     ask:numAsk('Calculate the plane’s vertical speed, 95 × sin 20.0°.',95*Math.sin(20*deg),'km/h','v<sub>y</sub> ≈ 32.5 km/h.',{tol:0.02})}
+   ]},
+ { id:'E5', tag:'Signs of components', title:'A vector in the second quadrant',
+   problem:'A rover moves <b>25.0 m</b> in a direction <b>150°</b> counter-clockwise from the +x axis (east). Find its x- and y-components. Which way does each point?',
+   steps:[
+    {name:'Analyze', html:G('<i>d</i> = 25.0 m','<i>θ</i> = 150° from +x')+G(U(`${Dx} = ?`),U(`${Dy} = ?`))+`<div class="fig">${figComp(25*Math.cos(150*deg),25*Math.sin(150*deg),{lx:'Δx',ly:'Δy',rl:'d = 25.0 m',lyo:-16,aria:'Vector at 150 degrees'})}</div>`,
+     ask:mcAsk('In which quadrant does a vector at 150° point, and what are the signs of Δx and Δy?',['Quadrant II: Δx is negative, Δy is positive','Quadrant I: both positive','Quadrant III: both negative'],'Between 90° and 180° the vector points up and to the left: x negative, y positive.')},
+    {name:'Solve', html:`<div class="eq">${Dx} = (25.0)(cos 150°) = <span class="boxed">−21.7 m</span> (west)</div><div class="eq">${Dy} = (25.0)(sin 150°) = <span class="boxed">+12.5 m</span> (north)</div>`,
+     ask:numAsk('Calculate 25.0 × cos 150° (keep the sign).',25*Math.cos(150*deg),'m','Δx = −21.7 m: the x-component points west.',{tol:0.01})},
+    {name:'Check your work', html:`<p>Using the reference angle 30° north of west gives the same sizes: 25.0 cos 30° = 21.7 m west, 25.0 sin 30° = 12.5 m north ✔. A calculator handles the signs automatically when the angle is measured from +x.</p>`,
+     ask:mcAsk('The same vector can be described as…',['30° north of west','30° south of east','150° north of east'],'The line at 150° is 30° from the −x axis, measured toward north: 30° north of west.')}
+   ]},
+ { id:'E6', tag:'Adding non-perpendicular vectors', title:'Two legs of a hike',
+   problem:'A hiker walks <b>5.0 km at 30° north of east</b> and then <b>4.0 km at 60° north of west</b> (that is, 120° from east). What are the magnitude and direction of the hiker’s total displacement?',
+   steps:[
+    {name:'Analyze', html:G('<b>A</b>: 5.0 km at 30° from +x','<b>B</b>: 4.0 km at 120° from +x')+G(U('<b>R</b> = <b>A</b> + <b>B</b> = ?'))+`<div class="fig">${figTT([{x:e6A.x,y:e6A.y,label:'A',c:'var(--accent)',loff:-12},{x:e6B.x,y:e6B.y,label:'B',c:'var(--warm)',loff:-12}],{rlabel:'R',rloff:14,aria:'Two hike legs'})}</div><p>The vectors are <b>not perpendicular</b>, so the Pythagorean theorem cannot be used directly: resolve each vector first.</p>`,
+     ask:mcAsk('Why do we resolve each vector into components first?',['Components along the same axis can simply be added','Because the Pythagorean theorem needs three vectors','Because angles cannot be added'],'Components along the same axis lie on one line, so they add like numbers (with signs).')},
+    {name:'Components', html:`<div class="tablewrap"><table class="vartable"><thead><tr><th></th><th class="num">x-component</th><th class="num">y-component</th></tr></thead><tbody>
+      <tr><td><b>A</b></td><td class="num">5.0 cos 30° = ${sg(e6A.x)}</td><td class="num">5.0 sin 30° = ${sg(e6A.y)}</td></tr>
+      <tr><td><b>B</b></td><td class="num">4.0 cos 120° = ${sg(e6B.x)}</td><td class="num">4.0 sin 120° = ${sg(e6B.y)}</td></tr>
+      <tr class="hl"><td><b>R</b></td><td class="num">${sg(e6R.x)} km</td><td class="num">${sg(e6R.y)} km</td></tr></tbody></table></div>`,
+     ask:numAsk('Add the x-components: 4.33 + (−2.00). Give Δx<sub>tot</sub> in km.',e6R.x,'km','Δx<sub>tot</sub> = +2.33 km (east).',{tol:0.02})},
+    {name:'Solve', html:`<div class="eq"><i>d</i> = √(${sg(e6R.x)}<sup>2</sup> + ${sg(e6R.y)}<sup>2</sup>) = <span class="boxed">${r3(mag(e6R))} km</span></div><div class="eq"><i>θ</i> = tan<sup>−1</sup>(${sg(e6R.y)} ÷ ${sg(e6R.x)}) = <span class="boxed">${r1(Math.atan2(e6R.y,e6R.x)/deg)}°</span> north of east</div>`,
+     ask:numAsk('Calculate the magnitude √(2.33² + 5.96²), in km.',mag(e6R),'km','d ≈ 6.4 km.',{tol:0.01})},
+    {name:'Check your work', html:`<p>Both totals are positive, so the resultant lies in quadrant I (north of east) ✔. 6.4 km is less than 5.0 + 4.0 = 9.0 km ✔ (the legs partly oppose each other in the x-direction).</p>`,
+     ask:mcAsk('Why is the answer closer to north than to east?',['The y-components add (both point north) while the x-components partly cancel','Because B is longer than A','Because the angle of A is 30°'],'Both vectors point north (positive y) but A points east and B points west, so the x-components partly cancel.')}
+   ]},
+ { id:'E7', tag:'Adding vectors in two quadrants', title:'A drone flight',
+   problem:'A drone flies <b>120 m at 25° north of east</b> and then <b>80 m at 70° south of east</b>. How far is it from its starting point, and in what direction?',
+   steps:[
+    {name:'Analyze', html:G('<b>A</b>: 120 m at +25°','<b>B</b>: 80 m at −70° (70° south of east)')+G(U('<b>R</b> = ?'))+`<div class="fig">${figTT([{x:e7A.x,y:e7A.y,label:'A',c:'var(--accent)',loff:-12},{x:e7B.x,y:e7B.y,label:'B',c:'var(--warm)',loff:-12}],{rlabel:'R',rloff:14,aria:'Drone legs'})}</div>`,
+     ask:mcAsk('What are the signs of the components of <b>B</b> (70° south of east)?',['Δx positive, Δy negative','Δx negative, Δy positive','Both negative'],'South of east means the vector points east (+x) and south (−y).')},
+    {name:'Components', html:`<div class="tablewrap"><table class="vartable"><thead><tr><th></th><th class="num">x (east)</th><th class="num">y (north)</th></tr></thead><tbody>
+      <tr><td><b>A</b></td><td class="num">${sg(e7A.x)}</td><td class="num">${sg(e7A.y)}</td></tr>
+      <tr><td><b>B</b></td><td class="num">${sg(e7B.x)}</td><td class="num">${sg(e7B.y)}</td></tr>
+      <tr class="hl"><td><b>R</b></td><td class="num">${sg(e7R.x)} m</td><td class="num">${sg(e7R.y)} m</td></tr></tbody></table></div>`,
+     ask:numAsk('Add the y-components: 50.7 + (−75.2). Give Δy<sub>tot</sub> in m (keep the sign).',e7R.y,'m','Δy<sub>tot</sub> = −24.5 m: the drone ends up south of its start.',{tol:0.02})},
+    {name:'Solve', html:`<div class="eq"><i>d</i> = √(${sg(e7R.x)}<sup>2</sup> + ${sg(e7R.y)}<sup>2</sup>) = <span class="boxed">${r3(mag(e7R))} m</span></div><div class="eq"><i>θ</i> = tan<sup>−1</sup>(24.5 ÷ ${sg(e7R.x)}) = <span class="boxed">${r1(Math.atan2(Math.abs(e7R.y),e7R.x)/deg)}°</span> south of east</div>`,
+     ask:numAsk('Calculate the angle tan⁻¹(|Δy| ÷ Δx), in degrees (use absolute values).',Math.atan2(Math.abs(e7R.y),e7R.x)/deg,'°',`θ ≈ ${r1(Math.atan2(Math.abs(e7R.y),e7R.x)/deg)}° south of east.`,{tol:0.03})},
+    {name:'Check your work', html:`<p>Δx is positive and Δy is negative, so the resultant is in quadrant IV (south of east) ✔. The magnitude ${r3(mag(e7R))} m is less than 120 + 80 = 200 m ✔.</p>`,
+     ask:mcAsk(`If you used tan⁻¹ with the negative value of Δy, a calculator would give −${r1(Math.atan2(Math.abs(e7R.y),e7R.x)/deg)}°. This means…`,[`${r1(Math.atan2(Math.abs(e7R.y),e7R.x)/deg)}° below the +x axis, that is, south of east`,`${r1(Math.atan2(Math.abs(e7R.y),e7R.x)/deg)}° above the +x axis`,`${r1(Math.atan2(Math.abs(e7R.y),e7R.x)/deg)}° west of north`],'A negative angle from +x means clockwise: below the east line.')}
+   ]}
+ ,{ id:'E8', tag:'Sample Problem C', title:'The hiker and the ranger\u2019s tower',
+   problem:'A hiker walks <b>27.0 km</b> from her base camp at <b>35° south of east</b>. The next day, she walks <b>41.0 km</b> in a direction <b>65° north of east</b> and discovers a forest ranger\u2019s tower. Find the magnitude and direction of her resultant displacement between the base camp and the tower.',
+   steps:[
+    {name:'Analyze', html:G('<i>d</i><sub>1</sub> = 27.0 km','<i>θ</i><sub>1</sub> = −35°','<i>d</i><sub>2</sub> = 41.0 km','<i>θ</i><sub>2</sub> = 65°')+G(U('<i>d</i> = ?'),U('<i>θ</i> = ?'))+`<div class="fig">${figTT([{x:e8A.x,y:e8A.y,label:'d₁',c:'var(--accent)',loff:12},{x:e8B.x,y:e8B.y,label:'d₂',c:'var(--warm)',loff:-12}],{rlabel:'d',rloff:-14,aria:'Hiker displacement'})}</div><p><b>Tip:</b> θ<sub>1</sub> is negative because clockwise angles from the positive x-axis are conventionally negative.</p>`,
+     ask:mcAsk('Why is θ₁ written as −35°?',['It is measured clockwise from the +x axis (south of east)','Because the hiker walks backwards','Because 35° is a small angle'],'South of east is below the +x axis: a clockwise angle, so it is negative.')},
+    {name:'Plan', html:`<p>Find the x- and y-components of each displacement with ${'cos θ = Δ<i>x</i>/<i>d</i>'} and ${'sin θ = Δ<i>y</i>/<i>d</i>'}, add them, then use the Pythagorean theorem and the inverse tangent.</p>
+     <div class="tablewrap"><table class="vartable"><thead><tr><th></th><th class="num">Δx (km)</th><th class="num">Δy (km)</th></tr></thead><tbody>
+      <tr><td>Day 1</td><td class="num">27.0 cos(−35°) = ${sg(e8A.x)}</td><td class="num">27.0 sin(−35°) = ${sg(e8A.y)}</td></tr>
+      <tr><td>Day 2</td><td class="num">41.0 cos 65° = ${sg(e8B.x)}</td><td class="num">41.0 sin 65° = ${sg(e8B.y)}</td></tr>
+      <tr class="hl"><td>Total</td><td class="num">${sg(e8R.x)}</td><td class="num">${sg(e8R.y)}</td></tr></tbody></table></div>`,
+     ask:numAsk('Calculate the y-component of day 1: 27.0 × sin(−35°). Keep the sign.',e8A.y,'km','Δy₁ = −15.5 km (south).',{tol:0.02})},
+    {name:'Solve', html:`<div class="eq"><i>d</i> = √((Δ<i>x</i><sub>tot</sub>)<sup>2</sup> + (Δ<i>y</i><sub>tot</sub>)<sup>2</sup>) = √((${sg(e8R.x)} km)<sup>2</sup> + (${sg(e8R.y)} km)<sup>2</sup>) = <span class="boxed">${r3(mag(e8R))} km</span></div><div class="eq"><i>θ</i> = tan<sup>−1</sup>(${F('Δ<i>y</i><sub>tot</sub>','Δ<i>x</i><sub>tot</sub>')}) = tan<sup>−1</sup>(${sg(e8R.y)} ÷ ${sg(e8R.x)}) = <span class="boxed">${r1(Math.atan2(e8R.y,e8R.x)/deg)}° north of east</span></div>`,
+     ask:numAsk('Calculate the angle tan⁻¹(21.7 ÷ 39.5), in degrees.',Math.atan2(e8R.y,e8R.x)/deg,'°','θ ≈ 29° north of east.',{tol:0.02})},
+    {name:'Check your work', html:`<p>The tower lies north of east because both totals are positive ✔. The resultant (45 km) is less than 27.0 + 41.0 = 68.0 km ✔.</p>`,
+     ask:mcAsk('The hiker walked 68.0 km in total. Why is the straight-line displacement only 45 km?',['The two legs point in different directions, so part of one cancels part of the other','The calculator rounds distances','Displacement is always 2/3 of the path length'],'Distance adds all path lengths; displacement is the vector sum, which is shorter when the legs are not in the same direction.')}
+   ]}
+
+];
+
+/* ---------- answer-position randomizer (deterministic: same order for every student and every visit) ---------- */
+const CNT={};
+function rng(seed){ let a=seed>>>0; return ()=>{ a=(a+0x6D2B79F5)|0; let t=Math.imul(a^(a>>>15),1|a); t=(t+Math.imul(t^(t>>>7),61|t))^t; return((t^(t>>>14))>>>0)/4294967296; }; }
+function arrangeOpts(opts,correct,seed){ /* returns {order} so that new[j]=old[order[j]] */
+  const n=opts.length, r=rng(seed);
+  if(opts.every(o=>/^\([a-e]\)/i.test(o))) return {order:opts.map((_,i)=>i)};
+  const idx=opts.map((_,i)=>i);
+  if(correct.length===1){
+    const c=correct[0], rest=idx.filter(i=>i!==c);
+    for(let i=rest.length-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [rest[i],rest[j]]=[rest[j],rest[i]]; }
+    const k=(CNT[n]=(CNT[n]||0)+1)-1, target=((k%n)*(n===4?3:2)+Math.floor(k/n))%n; rest.splice(target,0,c);
+    return {order:rest};
+  }
+  for(let i=n-1;i>0;i--){ const j=Math.floor(r()*(i+1)); [idx[i],idx[j]]=[idx[j],idx[i]]; }
+  return {order:idx};
+}
+function strSeed(s){ let h=2166136261; for(const ch of s){ h^=ch.charCodeAt(0); h=Math.imul(h,16777619); } return h>>>0; }
+EX.forEach(ex=>ex.steps.forEach((s,si)=>{
+  const a=s.ask; if(!a||a.type!=='mc') return;
+  const {order}=arrangeOpts(a.opts,[a.correct],strSeed(ex.id+si));
+  a.opts=order.map(i=>a.opts[i]); a.correct=order.indexOf(a.correct);
+  if(a.wrong){ const w={}; Object.keys(a.wrong).forEach(k=>{ w[order.indexOf(+k)]=a.wrong[k]; }); a.wrong=w; }
+}));
+(function buildExamples(){
+  const host=$('#exampleList');
+  EX.forEach((ex,idx)=>{
+    const card=document.createElement('div'); card.className='card example'; card.id=ex.id;
+    card.innerHTML=`<header><h3 style="margin:0">Example ${idx+1} · ${ex.title}</h3><span class="pill">${ex.tag}</span></header>
+      <div class="problem-box">${ex.problem}</div>
+      <div class="dots"></div><ol class="steps"></ol><div class="row ctrl"></div>`;
+    const dots=$('.dots',card), list=$('.steps',card), ctrl=$('.ctrl',card);
+    const next=document.createElement('button'); next.className='btn'; next.type='button'; next.textContent='Start: reveal step 1';
+    const restart=document.createElement('button'); restart.className='btn ghost'; restart.type='button'; restart.textContent='Restart example'; restart.hidden=true;
+    ctrl.append(next,restart);
+    ex.steps.forEach((s,i)=>{
+      const d=document.createElement('i'); dots.appendChild(d);
+      const li=document.createElement('li'); li.className='step';
+      li.innerHTML=`<h4><span class="n">${i+1}</span>${s.name}</h4><div class="body">${s.html}</div>`;
+      if(s.ask){ const a=document.createElement('div'); a.className='ask'; li.appendChild(a); }
+      list.appendChild(li);
+    });
+    let cur=-1, needAsk=false, replaying=false;
+    const savedAns=((state.exa||{})[ex.id])||[];
+    const keepAns=i=>v=>{ if(replaying) return; state.exa=state.exa||{}; (state.exa[ex.id]=state.exa[ex.id]||[])[i]=v; save(); };
+    function reveal(){
+      cur++; const li=list.children[cur], s=ex.steps[cur];
+      li.classList.add('show'); dots.children[cur].classList.add('on');
+      if(s.ask){
+        needAsk=true; next.disabled=true;
+        const si=cur;
+        (s.ask.type==='num'?mkNum:mkMC)($('.ask',li),s.ask,()=>{ needAsk=false; next.disabled=false; refresh(); },savedAns[si],keepAns(si));
+      }
+      if(!replaying){ state.exn=state.exn||{}; state.exn[ex.id]=cur+1; save(); }
+      refresh(); if(!replaying) li.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    function refresh(){
+      if(cur>=ex.steps.length-1 && !needAsk){ next.hidden=true; restart.hidden=false; if(!state['ex_'+ex.id]){ state['ex_'+ex.id]=1; save(); } }
+      else { next.textContent=needAsk?'Answer the question above to continue':(cur<0?'Start: reveal step 1':`Next step: ${ex.steps[cur+1]?.name||''}`); }
+    }
+    next.addEventListener('click',reveal);
+    restart.addEventListener('click',()=>{
+      cur=-1; needAsk=false; next.hidden=false; next.disabled=false; restart.hidden=true;
+      [...list.children].forEach((li,i)=>{ li.classList.remove('show'); const a=$('.ask',li); if(a) a.innerHTML=''; dots.children[i].classList.remove('on'); });
+      if(state.exn) state.exn[ex.id]=0; if(state.exa) state.exa[ex.id]=[]; savedAns.length=0; save();
+      refresh(); card.scrollIntoView({behavior:'smooth',block:'start'});
+    });
+    host.appendChild(card);
+    const nDone=((state.exn||{})[ex.id])||0;
+    if(nDone){ replaying=true; for(let k=0;k<nDone&&k<ex.steps.length;k++){ if(k>0&&needAsk) break; reveal(); } replaying=false; refresh(); }
+  });
+})();
+/* ---------- practice problems ---------- */
+const T=(label,unit,ans,extra={})=>Object.assign({label,unit,ans},extra);
+const P=[]; const add=(set,sub,text,parts,h,sol,extra={})=>P.push(Object.assign({set,sub,text,parts,h,sol},extra));
+const MC1=(set,text,opts,why,hint,extra={})=>P.push(Object.assign({set,type:'mc',text,opts,correct:[0],why,h:[hint]},extra));
+const MCm=(set,text,opts,correct,why,hint,extra={})=>P.push(Object.assign({set,type:'multi',text,opts,correct,why,h:[hint]},extra));
+const ref=(x,y)=>Math.atan2(Math.abs(y),Math.abs(x))/deg;                 // angle from the x-axis, 0–90°
+const dword=(x,y)=>dirWord(x,y);
+/* magnitude + direction parts for a resultant (x,y) */
+const magdir=(x,y,tolM=0.02,tolA=0.03)=>[T('Magnitude','',mag({x,y}),{tol:tolM}),T(`Angle (° ${dword(x,y)})`,'°',ref(x,y),{tol:tolA,ang:true})];
+const cmp=(m,a)=>vec(m,a);
+
+/* ===== Set 1: magnitude and direction ===== */
+const s1='Pythagorean theorem and tangent';
+add('md',s1,'A truck driver delivers furniture. First he travels <b>8 km east</b>, then he turns around and travels <b>3 km west</b>, and finally he turns again and travels <b>12 km east</b> to his destination. (a) What <b>distance</b> has the driver traveled? (b) What is the driver’s total <b>displacement</b>?',
+ [T('Distance traveled','km',23,{tol:0.01}),T('Displacement (east is +)','km',17,{tol:0.01})],['Distance adds every length. Displacement adds with signs: +8, −3, +12.'],['Distance = 8 + 3 + 12 = 23 km.','Displacement = +8 + (−3) + (+12) = +17 km: 17 km east.']);
+add('md',s1,'While following a treasure map, a pirate walks <b>45.0 m north</b> and then <b>7.5 m east</b>. What single straight-line displacement could the pirate have taken? Give the magnitude and the angle <b>east of north</b>.',
+ [T('Magnitude','m',Math.hypot(45,7.5),{tol:0.01}),T('Angle (° east of north)','°',Math.atan2(7.5,45)/deg,{tol:0.03,ang:true})],['The legs are perpendicular. The angle is measured from north.'],['d = √(45.0² + 7.5²) = 45.6 m.','θ = tan⁻¹(7.5 ÷ 45.0) = 9.5° east of north.']);
+add('md',s1,'Emily passes a soccer ball <b>6.0 m</b> directly across the field to Kara. Kara then kicks the ball <b>14.5 m</b> directly down the field to Luisa. What is the total displacement of the ball between Emily and Luisa? Give the magnitude and the angle from the across-the-field direction.',
+ [T('Magnitude','m',Math.hypot(6,14.5),{tol:0.01}),T('Angle from the across-field line','°',Math.atan2(14.5,6)/deg,{tol:0.03,ang:true})],['Across and down the field are perpendicular.'],['d = √(6.0² + 14.5²) = 15.7 m.','θ = tan⁻¹(14.5 ÷ 6.0) = 67.5° from the across-field direction.']);
+add('md',s1,'A hummingbird flies <b>1.2 m</b> along a horizontal path. Seeing a flower below, it then drops <b>1.4 m</b> straight down. What is the hummingbird’s total displacement? Give the magnitude and the angle <b>below the horizontal</b>.',
+ [T('Magnitude','m',Math.hypot(1.2,1.4),{tol:0.01}),T('Angle (° below horizontal)','°',Math.atan2(1.4,1.2)/deg,{tol:0.03,ang:true})],['Horizontal and vertical legs are perpendicular.'],['d = √(1.2² + 1.4²) = 1.84 m.','θ = tan⁻¹(1.4 ÷ 1.2) = 49.4° below the horizontal.']);
+add('md',s1,'A hiker walks <b>6.0 km east</b> and then <b>8.0 km north</b>. Find the magnitude of the displacement and its angle <b>north of east</b>.',
+ magdir(6,8),['3-4-5 triangle times 2.'],['d = √(6.0² + 8.0²) = 10.0 km.','θ = tan⁻¹(8.0 ÷ 6.0) = 53.1° north of east.']);
+add('md',s1,'A ship sails <b>12 km west</b> and then <b>5.0 km south</b>. Find the magnitude of its displacement and the angle <b>south of west</b>.',
+ magdir(-12,-5),['A 5-12-13 right triangle.'],['d = √(12² + 5.0²) = 13 km.','θ = tan⁻¹(5.0 ÷ 12) = 22.6° south of west.']);
+add('md',s1,'A vector has components Δ<i>x</i> = −3.0 m and Δ<i>y</i> = +4.0 m. Find its magnitude and its angle <b>north of west</b>.',
+ magdir(-3,4),['Use absolute values in the tangent.'],['d = √(3.0² + 4.0²) = 5.0 m.','θ = tan⁻¹(4.0 ÷ 3.0) = 53.1° north of west (x negative, y positive: quadrant II).']);
+add('md',s1,'A ladder reaches <b>4.2 m</b> up a wall while its foot is <b>1.5 m</b> from the wall. How long is the ladder, and what angle does it make with the ground?',
+ [T('Length of the ladder','m',Math.hypot(4.2,1.5),{tol:0.01}),T('Angle with the ground','°',Math.atan2(4.2,1.5)/deg,{tol:0.02,ang:true})],['The ladder is the hypotenuse.'],['L = √(4.2² + 1.5²) = 4.46 m.','θ = tan⁻¹(4.2 ÷ 1.5) = 70.3° with the ground.']);
+const s1b='Concept check';
+MC1('md','Which equation gives the <b>magnitude</b> of a resultant made of two perpendicular vectors Δx and Δy?',['d = √(Δx² + Δy²)','d = Δx + Δy','d = Δy ÷ Δx','d = tan⁻¹(Δy ÷ Δx)'],'The Pythagorean theorem: the resultant is the hypotenuse of the right triangle.','Hypotenuse of a right triangle.',{sub:s1b});
+MC1('md','Which equation gives the <b>direction</b> θ of a resultant made of perpendicular vectors Δx and Δy?',['θ = tan⁻¹(Δy ÷ Δx)','θ = √(Δx² + Δy²)','θ = Δx × Δy','θ = sin(Δy)'],'The tangent of the angle is opposite ÷ adjacent, so θ is the inverse tangent of Δy ÷ Δx.','Opposite over adjacent.',{sub:s1b});
+MC1('md','A calculator shows tan⁻¹(1.00) = 0.785 instead of 45°. What is wrong?',['The calculator is in radian mode and must be set to degrees','The tangent cannot be inverted','The answer is correct in degrees','Δx and Δy must be added first'],'0.785 is 45° expressed in radians. Always check that the calculator is in degree mode.','π/4 = 0.785.',{sub:s1b});
+MC1('md','A displacement is Δx = 3.0 m east and Δy = 3.0 m north. In what direction does it point?',['45° north of east','45° south of east','30° north of east','60° north of east'],'tan θ = 3.0 ÷ 3.0 = 1, so θ = 45°, and both components are positive: north of east.','What is tan⁻¹(1)?',{sub:s1b});
+MC1('md','Why can the Pythagorean theorem be used to add Δx and Δy directly?',['Because they are perpendicular','Because they are scalars','Because they have the same units only','Because they are equal in size'],'The theorem applies to the sides of a right triangle: the two vectors must be at 90° to each other.','What kind of triangle do they form?',{sub:s1b});
+
+/* ===== Set 2: components ===== */
+const s2='Resolving vectors';
+{ const v=cmp(95,20); add('co',s2,'A plane flies at <b>95 km/h</b> at an angle of <b>20°</b> above the ground. A film truck must travel directly beneath the plane. (a) At what speed must the truck travel? (b) What is the plane’s vertical speed?',
+ [T('Truck speed (horizontal component)','km/h',v.x,{tol:0.015}),T('Vertical speed','km/h',v.y,{tol:0.02})],['The truck must match the horizontal component.'],['v<sub>x</sub> = 95 cos 20° = 89.3 km/h.','v<sub>y</sub> = 95 sin 20° = 32.5 km/h.']); }
+{ const v=cmp(61,35); add('co',s2,'A straight road segment is <b>61.0 km</b> long and runs <b>35.0° north of east</b>. What are its eastern and northern components?',
+ [T('East component','km',v.x,{tol:0.01}),T('North component','km',v.y,{tol:0.01})],['The angle is measured from east: x uses cosine, y uses sine.'],['Δx = 61.0 cos 35.0° = 50.0 km.','Δy = 61.0 sin 35.0° = 35.0 km.']); }
+{ const v=cmp(18,35); add('co',s2,'A soccer ball is kicked at <b>18.0 m/s</b> at <b>35.0°</b> above the horizontal. Find the horizontal and vertical components of its initial velocity.',
+ [T('Horizontal component','m/s',v.x,{tol:0.01}),T('Vertical component','m/s',v.y,{tol:0.01})],['Resolve with cosine and sine.'],['v<sub>x</sub> = 18.0 cos 35.0° = 14.7 m/s.','v<sub>y</sub> = 18.0 sin 35.0° = 10.3 m/s.']); }
+{ const v=cmp(250,40); add('co',s2,'A rope pulls a crate with a force of <b>250 N</b> at <b>40.0°</b> above the horizontal. What are the horizontal and vertical components of the force?',
+ [T('Horizontal component','N',v.x,{tol:0.01}),T('Vertical component','N',v.y,{tol:0.01})],['Horizontal uses cos, vertical uses sin.'],['F<sub>x</sub> = 250 cos 40.0° = 192 N.','F<sub>y</sub> = 250 sin 40.0° = 161 N.']); }
+{ const v=cmp(120,-25); add('co',s2,'A skier travels <b>120 m</b> down a slope that is <b>25.0° below the horizontal</b>. Using right as +x and up as +y, find the signed components of the displacement.',
+ [T('Δx (right is +)','m',v.x,{tol:0.01}),T('Δy (up is +)','m',v.y,{tol:0.01,signed:true})],['Going down means Δy is negative.'],['Δx = 120 cos 25.0° = +109 m.','Δy = −120 sin 25.0° = −50.7 m.']); }
+{ const v=cmp(80,210); add('co',s2,'A ship sails <b>80.0 km</b> at <b>30.0° south of west</b>. How far west and how far south has it moved?',
+ [T('Distance west','km',Math.abs(v.x),{tol:0.01}),T('Distance south','km',Math.abs(v.y),{tol:0.01})],['Reference angle from the west line.'],['West: 80.0 cos 30.0° = 69.3 km.','South: 80.0 sin 30.0° = 40.0 km.']); }
+{ const v=cmp(25,150); add('co',s2,'A vector has magnitude <b>25.0 m</b> and points <b>150°</b> counter-clockwise from the +x axis. Find its signed x- and y-components.',
+ [T('Δx','m',v.x,{tol:0.01}),T('Δy','m',v.y,{tol:0.01})],['In quadrant II, x is negative and y is positive.'],['Δx = 25.0 cos 150° = −21.7 m.','Δy = 25.0 sin 150° = +12.5 m.']); }
+{ const v=cmp(40,225); add('co',s2,'A vector has magnitude <b>40.0 m</b> and points <b>225°</b> from the +x axis. Find its signed x- and y-components.',
+ [T('Δx','m',v.x,{tol:0.01}),T('Δy','m',v.y,{tol:0.01})],['Quadrant III: both components negative.'],['Δx = 40.0 cos 225° = −28.3 m.','Δy = 40.0 sin 225° = −28.3 m.']); }
+{ const v=cmp(20,60); add('co',s2,'The wind blows at <b>20.0 m/s</b> toward <b>60.0° north of east</b>. What are the east and north components of the wind velocity?',
+ [T('East component','m/s',v.x,{tol:0.01}),T('North component','m/s',v.y,{tol:0.01})],['cos 60° = 0.5.'],['East: 20.0 cos 60.0° = 10.0 m/s.','North: 20.0 sin 60.0° = 17.3 m/s.']); }
+{ add('co',s2,'A displacement of <b>10.0 m</b> makes an angle of <b>37°</b> with the ground. Its horizontal component is 8.0 m. Check the vertical component with the Pythagorean theorem.',
+ [T('Vertical component','m',Math.sqrt(100-64),{tol:0.01})],['d² = Δx² + Δy².'],['Δy = √(10.0² − 8.0²) = 6.0 m (sin 37° = 0.60 gives the same).']); }
+/* textbook practice (Sample Problem B) */
+{ const v=cmp(105,25); add('co','Textbook practice',`How fast must a truck travel to stay beneath an airplane that is moving <b>105 km/h</b> at an angle of <b>25°</b> to the ground? What is the magnitude of the plane\u2019s vertical velocity component?`,
+ [T('Truck speed','km/h',v.x,{tol:0.01}),T('Vertical component of the plane\u2019s velocity','km/h',v.y,{tol:0.01})],['The truck matches the horizontal component.'],['v<sub>x</sub> = 105 cos 25° = 95.2 km/h.','v<sub>y</sub> = 105 sin 25° = 44.4 km/h.']); }
+{ const v=cmp(113,82.4); add('co','Textbook practice','A skyrocket travels <b>113 m</b> at an angle of <b>82.4°</b> with respect to the ground and toward the south. What is the rocket\u2019s horizontal displacement?',
+ [T('Horizontal displacement (south)','m',v.x,{tol:0.015})],['The angle is measured from the ground, so the horizontal component is adjacent: use cosine.'],['Δx = 113 cos 82.4° = 14.8 m (toward the south).','(The vertical component is 113 sin 82.4° = 112 m.)']); }
+{ const v=cmp(55,13); add('co','Textbook practice','A tiger leaps with an initial velocity of <b>55.0 km/h</b> at an angle of <b>13.0°</b> with respect to the horizontal. What are the components of the tiger\u2019s velocity?',
+ [T('Horizontal component','km/h',v.x,{tol:0.01}),T('Vertical component','km/h',v.y,{tol:0.015})],['Horizontal: cosine. Vertical: sine.'],['v<sub>x</sub> = 55.0 cos 13.0° = 53.6 km/h.','v<sub>y</sub> = 55.0 sin 13.0° = 12.4 km/h.']); }
+const s2b='Concept check';
+MC1('co','The angle θ is measured from the x-axis. The x-component of a vector of magnitude d is…',['d cos θ','d sin θ','d tan θ','d ÷ cos θ'],'The x-component is adjacent to θ, so it uses cosine.','Adjacent ÷ hypotenuse.',{sub:s2b});
+MC1('co','A vector of magnitude 10 m points 30° <b>north of east</b>. Which statement is true?',['The east component is larger than the north component','The north component is larger','The components are equal','The east component is 10 m'],'cos 30° = 0.87 and sin 30° = 0.50, so Δx = 8.7 m and Δy = 5.0 m.','Compare cos 30° with sin 30°.',{sub:s2b});
+MC1('co','Which vector has a <b>negative x-component and a negative y-component</b>?',['25 m at 200° from +x','25 m at 60° from +x','25 m at 120° from +x','25 m at 300° from +x'],'Between 180° and 270° (quadrant III) both components are negative.','Quadrant III.',{sub:s2b});
+MC1('co','The components of a vector are…',['signed scalars (numbers) measured along the axes','vectors that are always positive','the same as the magnitude','measured only in degrees'],'Components are scalars; their sign shows the direction along the axis.','They are numbers with signs.',{sub:s2b});
+MC1('co','If the angle between a vector and the x-axis is increased from 20° to 70°, the x-component…',['decreases','increases','does not change','becomes negative'],'cos θ decreases as θ increases toward 90°, so the x-component gets smaller.','What happens to cos θ?',{sub:s2b});
+MC1('co','The components of a vector are Δx = 6.0 m and Δy = 8.0 m. Which check proves they are consistent with a magnitude of 10.0 m?',['6.0² + 8.0² = 10.0²','6.0 + 8.0 = 10.0','6.0 × 8.0 = 10.0','8.0 ÷ 6.0 = 10.0'],'36 + 64 = 100 = 10.0².','Pythagorean theorem.',{sub:s2b});
+
+/* ===== Set 3: adding vectors ===== */
+const s3='Adding vectors by components';
+{ const A=cmp(6,40), B=cmp(5,-20), R={x:A.x+B.x,y:A.y+B.y};
+  add('ad',s3,'A hiker walks <b>6.0 km at 40° north of east</b> and then <b>5.0 km at 20° south of east</b>. Find the total displacement: magnitude and direction.',
+   magdir(R.x,R.y),['Add the x-components and the y-components separately.'],[`A: (${sg(A.x)}, ${sg(A.y)}). B: (${sg(B.x)}, ${sg(B.y)}).`,`Δx<sub>tot</sub> = ${sg(R.x)} km, Δy<sub>tot</sub> = ${sg(R.y)} km.`,`d = ${r3(mag(R))} km, θ = ${r1(ref(R.x,R.y))}° ${dword(R.x,R.y)}.`]); }
+{ const A=cmp(200,30), B=cmp(150,135), R={x:A.x+B.x,y:A.y+B.y};
+  add('ad',s3,'A plane flies <b>200 km at 30° north of east</b> and then <b>150 km at 45° north of west</b> (135° from east). Find the total displacement.',
+   magdir(R.x,R.y),['The second vector has a negative x-component.'],[`A: (${sg(A.x)}, ${sg(A.y)}). B: (${sg(B.x)}, ${sg(B.y)}).`,`Δx<sub>tot</sub> = ${sg(R.x)} km, Δy<sub>tot</sub> = ${sg(R.y)} km.`,`d = ${r3(mag(R))} km, θ = ${r1(ref(R.x,R.y))}° ${dword(R.x,R.y)}.`]); }
+{ const A={x:10,y:0}, B={x:0,y:6}, C=cmp(4,225), R={x:A.x+B.x+C.x,y:A.y+B.y+C.y};
+  add('ad',s3,'A robot moves <b>10.0 m east</b>, then <b>6.0 m north</b>, then <b>4.0 m at 45° south of west</b>. What is its total displacement?',
+   magdir(R.x,R.y),['Three vectors: add three x-components and three y-components.'],['C: 4.0 cos 225° = −2.83 m, 4.0 sin 225° = −2.83 m.',`Δx<sub>tot</sub> = ${sg(R.x)} m, Δy<sub>tot</sub> = ${sg(R.y)} m.`,`d = ${r3(mag(R))} m, θ = ${r1(ref(R.x,R.y))}° ${dword(R.x,R.y)}.`]); }
+{ const A={x:50,y:0}, B=cmp(30,50), R={x:A.x+B.x,y:A.y+B.y};
+  add('ad',s3,'Two forces act on a cart: <b>50.0 N east</b> and <b>30.0 N at 50.0° north of east</b>. Find the magnitude and direction of the net force.',
+   magdir(R.x,R.y),['Resolve the 30.0 N force.'],[`B: (${sg(B.x)}, ${sg(B.y)}) N.`,`F<sub>x,tot</sub> = ${sg(R.x)} N, F<sub>y,tot</sub> = ${sg(R.y)} N.`,`F = ${r3(mag(R))} N, θ = ${r1(ref(R.x,R.y))}° ${dword(R.x,R.y)}.`]); }
+{ const A=cmp(3,60), B=cmp(5,120), R={x:A.x+B.x,y:A.y+B.y};
+  add('ad',s3,'Vector <b>A</b> is 3.0 m at 60° from the +x axis and <b>B</b> is 5.0 m at 120° from the +x axis. Find <b>A + B</b> (magnitude and direction).',
+   magdir(R.x,R.y),['Angles are from +x: compute the signed components of each.'],[`A: (${sg(A.x)}, ${sg(A.y)}). B: (${sg(B.x)}, ${sg(B.y)}).`,`R = (${sg(R.x)}, ${sg(R.y)}), d = ${r3(mag(R))} m, θ = ${r1(ref(R.x,R.y))}° ${dword(R.x,R.y)}.`]); }
+{ const A=cmp(5,30), B=cmp(3,120), R={x:A.x-B.x,y:A.y-B.y};
+  add('ad',s3,'<b>A</b> = 5.0 m at 30° and <b>B</b> = 3.0 m at 120° (both from +x). Find <b>A − B</b>: magnitude and direction.',
+   magdir(R.x,R.y),['A − B = A + (−B): subtract the components.'],[`A: (${sg(A.x)}, ${sg(A.y)}). B: (${sg(B.x)}, ${sg(B.y)}).`,`A − B = (${sg(R.x)}, ${sg(R.y)}).`,`d = ${r3(mag(R))} m, θ = ${r1(ref(R.x,R.y))}° ${dword(R.x,R.y)}.`]); }
+{ const A=cmp(250,0), W=cmp(75,-45), R={x:A.x+W.x,y:A.y+W.y};
+  add('ad',s3,'A plane heads <b>east</b> at <b>250 km/h</b> while the wind adds <b>75 km/h toward the southeast</b> (45° south of east). Find the plane’s resultant velocity.',
+   magdir(R.x,R.y),['Resolve the wind into east and south parts.'],[`Wind: (${sg(W.x)}, ${sg(W.y)}) km/h.`,`R = (${sg(R.x)}, ${sg(R.y)}).`,`v = ${r3(mag(R))} km/h, θ = ${r1(ref(R.x,R.y))}° ${dword(R.x,R.y)}.`]); }
+/* textbook practice (Sample Problem C) and the opening example of the section */
+{ const A=cmp(5,35), B=cmp(22,10), R={x:A.x+B.x,y:A.y+B.y};
+  add('ad','Textbook practice','A plane initially travels <b>5 km</b> at an angle of <b>35°</b> to the ground, then climbs at only <b>10°</b> relative to the ground for <b>22 km</b>. Find the magnitude and direction of the plane\u2019s total displacement.',
+   [T('Magnitude','km',mag(R),{tol:0.02}),T('Angle (° above the ground)','°',ref(R.x,R.y),{tol:0.03,ang:true})],['The vectors do not form a right triangle: resolve them first.'],[`d₁: (${sg(A.x)}, ${sg(A.y)}) km. d₂: (${sg(B.x)}, ${sg(B.y)}) km.`,`Δx<sub>tot</sub> = ${sg(R.x)} km, Δy<sub>tot</sub> = ${sg(R.y)} km.`,`d = ${r3(mag(R))} km, θ = ${r1(ref(R.x,R.y))}° above the ground.`]); }
+{ const A={x:0,y:35}, B={x:15*Math.sin(25*deg),y:15*Math.cos(25*deg)}, R={x:A.x+B.x,y:A.y+B.y};
+  add('ad','Textbook practice','A football player runs directly down the field for <b>35 m</b> before turning to the right at an angle of <b>25°</b> from his original direction and running an additional <b>15 m</b> before getting tackled. What are the magnitude and direction of the runner\u2019s total displacement? Give the angle measured from the original direction (to the right).',
+   [T('Magnitude','m',mag(R),{tol:0.015}),T('Angle from the original direction (to the right)','°',Math.atan2(R.x,R.y)/deg,{tol:0.04,ang:true})],['Take down the field as +y. The second leg is 25° from +y toward the right (+x).'],[`Leg 2: (15 sin 25°, 15 cos 25°) = (${sg(B.x)}, ${sg(B.y)}) m.`,`Δx = ${sg(R.x)} m, Δy = ${sg(R.y)} m.`,`d = ${r3(mag(R))} m, θ = tan⁻¹(${sg(R.x)} ÷ ${sg(R.y)}) = ${r1(Math.atan2(R.x,R.y)/deg)}° to the right of the original direction.`]); }
+{ const A=cmp(2.5,35), B=cmp(5.2,22), R={x:A.x+B.x,y:A.y+B.y};
+  add('ad','Textbook practice','A plane travels <b>2.5 km</b> at an angle of <b>35°</b> to the ground and then changes direction and travels <b>5.2 km</b> at an angle of <b>22°</b> to the ground. What are the magnitude and direction of the plane\u2019s total displacement?',
+   [T('Magnitude','km',mag(R),{tol:0.015}),T('Angle (° above the ground)','°',ref(R.x,R.y),{tol:0.03,ang:true})],['Resolve both displacements; both angles are measured from the ground.'],[`d₁: (${sg(A.x)}, ${sg(A.y)}) km. d₂: (${sg(B.x)}, ${sg(B.y)}) km.`,`Δx<sub>tot</sub> = ${sg(R.x)} km, Δy<sub>tot</sub> = ${sg(R.y)} km.`,`d = ${r3(mag(R))} km, θ = ${r1(ref(R.x,R.y))}°.`]); }
+{ const A={x:0,y:8}, B=cmp(3.5,55), C={x:5,y:0}, R={x:A.x+B.x+C.x,y:A.y+B.y+C.y};
+  add('ad','Textbook practice','During a rodeo, a clown runs <b>8.0 m north</b>, turns <b>55° north of east</b>, and runs <b>3.5 m</b>. Then, after waiting for the bull to come near, the clown turns due east and runs <b>5.0 m</b> to exit the arena. What is the clown\u2019s total displacement?',
+   magdir(R.x,R.y),['Three legs: add three x-components and three y-components.'],[`Leg 2: (3.5 cos 55°, 3.5 sin 55°) = (${sg(B.x)}, ${sg(B.y)}) m.`,`Δx<sub>tot</sub> = ${sg(R.x)} m, Δy<sub>tot</sub> = ${sg(R.y)} m.`,`d = ${r3(mag(R))} m, θ = ${r1(ref(R.x,R.y))}° ${dword(R.x,R.y)}.`]); }
+{ const A={x:-75*Math.sin(30*deg),y:75*Math.cos(30*deg)}, B={x:155*Math.sin(60*deg),y:155*Math.cos(60*deg)}, R={x:A.x+B.x,y:A.y+B.y};
+  add('ad','Textbook practice','An airplane flying parallel to the ground undergoes two consecutive displacements. The first is <b>75 km, 30.0° west of north</b>, and the second is <b>155 km, 60.0° east of north</b>. What is the total displacement of the airplane? Give the angle <b>east of north</b>.',
+   [T('Magnitude','km',mag(R),{tol:0.015}),T('Angle (° east of north)','°',Math.atan2(R.x,R.y)/deg,{tol:0.03,ang:true})],['Take north as +y, east as +x. "West of north" means a negative x-component.'],[`d₁: (−75 sin 30°, 75 cos 30°) = (${sg(A.x)}, ${sg(A.y)}) km.`,`d₂: (155 sin 60°, 155 cos 60°) = (${sg(B.x)}, ${sg(B.y)}) km.`,`Δx<sub>tot</sub> = ${sg(R.x)} km, Δy<sub>tot</sub> = ${sg(R.y)} km.`,`d = ${r3(mag(R))} km, θ = tan⁻¹(${sg(R.x)} ÷ ${sg(R.y)}) = ${r1(Math.atan2(R.x,R.y)/deg)}° east of north.`]); }
+{ const A=cmp(27,-35), B=cmp(41,65), R={x:A.x+B.x,y:A.y+B.y};
+  add('ad',s3,'A hiker walks <b>27.0 km at 35° south of east</b> and then <b>41.0 km at 65° north of east</b>. Use components to find the total displacement. (Remember that angles measured clockwise from +x are negative.)',
+   magdir(R.x,R.y),['The first leg has a negative y-component: θ₁ = −35°.'],[`d₁: (${sg(A.x)}, ${sg(A.y)}) km. d₂: (${sg(B.x)}, ${sg(B.y)}) km.`,`Δx<sub>tot</sub> = ${sg(R.x)} km, Δy<sub>tot</sub> = ${sg(R.y)} km.`,`d = ${r3(mag(R))} km, θ = ${r1(ref(R.x,R.y))}° north of east.`]); }
+MC1('ad','Three vectors of equal magnitude 5 m point at 0°, 120° and 240°. What is their sum?',['Zero','5 m at 0°','15 m at 0°','5 m at 120°'],'The x-components: 5 + 5cos120° + 5cos240° = 5 − 2.5 − 2.5 = 0. The y-components: 0 + 4.33 − 4.33 = 0. The sum is zero.','Add the x-components, then the y-components.',{sub:s3});
+MC1('ad','Two vectors have magnitudes 6 m and 8 m. Which resultant magnitude is <b>impossible</b>?',['15 m','14 m','10 m (perpendicular)','2 m'],'The resultant ranges from |8 − 6| = 2 m to 6 + 8 = 14 m. 15 m is impossible.','Parallel and antiparallel give the limits.',{sub:s3});
+MC1('ad','To add two vectors that are <b>not</b> perpendicular, you should first…',['resolve each into x- and y-components','use the Pythagorean theorem directly','add their magnitudes','subtract their angles'],'Components along the same axis can be added; the Pythagorean theorem is applied afterwards to the totals.','Break them into perpendicular parts.',{sub:s3});
+
+/* ===== Set 4: coordinate systems and reasoning ===== */
+const s4='Coordinate systems and reasoning';
+MC1('cs','For a ball thrown into the air, which choice of axes simplifies the problem?',['y-axis vertical (up), x-axis horizontal','x-axis vertical, y-axis horizontal tilted 17°','Axes pointing north-east and south-west','There is no good choice'],'Aligning the y-axis with the vertical separates the motion into a horizontal and a vertical part.','Gravity acts along one axis.',{sub:s4});
+MC1('cs','Does the final answer to a vector problem depend on which axes you choose?',['No, as long as you are consistent','Yes, only the axis with north is correct','Yes, axes must always point east and north','Only for components, not for resultants'],'The physical result is the same with any consistent coordinate system; the best choice is the one that makes the solution easiest.','Tips and Tricks box.',{sub:s4});
+MC1('cs','A plane flies 300 m/s to the northeast. With +x east and +y north, the angle from +x is…',['45°','30°','60°','90°'],'Northeast is halfway between east and north: 45°.','Halfway between 0° and 90°.',{sub:s4});
+MC1('cs','The component of a vector along an axis is found by multiplying the magnitude by the cosine of the angle when…',['the angle is measured from that axis','the angle is measured from the other axis','the vector is a scalar','the vector is vertical'],'Cosine gives the side adjacent to the angle; if the angle is measured from the axis, that component is adjacent.','Adjacent = cosine.',{sub:s4});
+MC1('cs','A vector makes an angle of 40° with the <b>y</b>-axis. Its x-component is…',['d sin 40°','d cos 40°','d tan 40°','d ÷ sin 40°'],'The x-component is opposite to an angle measured from the y-axis, so it uses sine.','Opposite = sine.',{sub:s4});
+MC1('cs','Which description gives the same direction as 210° from the +x axis?',['30° south of west','30° south of east','30° north of west','60° south of west'],'210° is 30° beyond 180° (west), toward south: 30° south of west.','Quadrant III.',{sub:s4});
+MCm('cs','Which statements about vector components are true? Select all that apply.',['They are perpendicular to each other','They are scalars with signs','Resolving a vector lets you study motion in each direction separately','The y-component is always found with sine, whatever the angle','Their squares add to the square of the magnitude'],[0,1,2,4],'The assignment of sine/cosine depends on which axis the angle is measured from, so "always sine" is false.','Check each statement against the lesson.',{sub:s4});
+add('cs',s4,'A displacement has components Δx = +5.0 m and Δy = −12 m. Find its magnitude and its angle <b>south of east</b>.',magdir(5,-12),['Quadrant IV: x positive, y negative.'],['d = √(5.0² + 12²) = 13 m.','θ = tan⁻¹(12 ÷ 5.0) = 67.4° south of east.']);
+add('cs',s4,'A bird flies at <b>12 m/s</b> at an angle of <b>30°</b> above the horizontal for <b>5.0 s</b>. How far has it moved horizontally and vertically?',
+ [T('Horizontal distance','m',12*Math.cos(30*deg)*5,{tol:0.01}),T('Vertical distance','m',12*Math.sin(30*deg)*5,{tol:0.01})],['Resolve the velocity, then multiply each component by the time.'],['v<sub>x</sub> = 12 cos 30° = 10.4 m/s, v<sub>y</sub> = 12 sin 30° = 6.0 m/s.','Δx = 10.4 × 5.0 = 52 m; Δy = 6.0 × 5.0 = 30 m.']);
+
+/* ===== Set 5: Section 2 formative assessment ===== */
+const s5='Section 2 Formative Assessment';
+MC1('sa','<b>1a.</b> Identify a convenient coordinate system for analyzing <b>a dog walking along a sidewalk</b>.',['One axis along the sidewalk (one-dimensional), with + in the direction of walking','Two axes: x horizontal and y vertical','Axes tilted 30° to the horizontal','Three axes: x, y and z'],'The dog moves along a straight line, so a single axis along the sidewalk is enough.','Is the motion along a straight line?',{sub:s5});
+MC1('sa','<b>1b.</b> Identify a convenient coordinate system for analyzing <b>an acrobat walking along a high wire</b>.',['One axis along the wire (one-dimensional)','Two axes: one vertical and one horizontal, with the wire at 45°','Axes pointing north-east and south-west','No coordinate system is possible'],'The acrobat moves along the straight wire, so one axis along the wire is the simplest choice.','The same idea as the dog.',{sub:s5});
+MC1('sa','<b>1c.</b> Identify a convenient coordinate system for analyzing <b>a submarine submerging at an angle of 30° to the horizontal</b>.',['Two axes: x horizontal and y vertical (depth), with the velocity at 30° below the horizontal','One axis along the horizontal only','One axis along the vertical only','Axes rotated 60° from the vertical'],'The motion is two-dimensional: resolving the velocity into horizontal and vertical components makes each part easy to analyze.','The path is not along a horizontal or a vertical line.',{sub:s5});
+add('sa',s5,'<b>2a.</b> A fish swims at <b>3.0 m/s</b> relative to the water straight across a river whose current moves at <b>5.0 m/s</b>. Find the magnitude and direction of the fish\u2019s resultant velocity. Give the angle measured from the direction of the current.',
+ [T('Resultant speed','m/s',Math.hypot(3,5),{tol:0.02}),T('Angle from the current direction','°',Math.atan2(3,5)/deg,{tol:0.04,ang:true})],['The two velocities are perpendicular.'],['v = √(3.0² + 5.0²) = 5.8 m/s.','θ = tan⁻¹(3.0 ÷ 5.0) = 31° from the direction of the current.']);
+add('sa',s5,'<b>2b.</b> A surfer travels at <b>1.0 m/s</b> relative to the water across a wave that is traveling at <b>6.0 m/s</b>. Find the magnitude and direction of the surfer\u2019s resultant velocity. Give the angle from the direction of the wave.',
+ [T('Resultant speed','m/s',Math.hypot(1,6),{tol:0.02}),T('Angle from the wave direction','°',Math.atan2(1,6)/deg,{tol:0.05,ang:true})],['The velocities are perpendicular.'],['v = √(1.0² + 6.0²) = 6.1 m/s.','θ = tan⁻¹(1.0 ÷ 6.0) = 9.5° from the direction of the wave.']);
+{ const v=cmp(10,45); add('sa',s5,'<b>3a.</b> A car is displaced <b>10.0 km</b> at <b>45° north of east</b>. Find the vector components along the north and east directions.',
+ [T('North component','km',v.y,{tol:0.01}),T('East component','km',v.x,{tol:0.01})],['At 45° both components are equal.'],['Δy = 10.0 sin 45° = 7.07 km north.','Δx = 10.0 cos 45° = 7.07 km east.']); }
+{ const v=cmp(2.0,35); add('sa',s5,'<b>3b.</b> A duck accelerates away from a hunter at <b>2.0 m/s²</b> at an angle of <b>35°</b> to the ground. Find the horizontal and vertical components of the acceleration.',
+ [T('Horizontal component','m/s²',v.x,{tol:0.015}),T('Vertical component','m/s²',v.y,{tol:0.02})],['Same method as for any vector.'],['a<sub>x</sub> = 2.0 cos 35° = 1.6 m/s².','a<sub>y</sub> = 2.0 sin 35° = 1.1 m/s².']); }
+MC1('sa','<b>4.</b> Why do nonperpendicular vectors need to be resolved into components before you can add them together?',['Components along the same axis lie on one line, so they can be added like numbers; the totals are perpendicular, so the Pythagorean theorem and tangent can be used','Because nonperpendicular vectors cannot be added','Because components are always larger than the vector','To avoid using the calculator'],'The triangle method with the Pythagorean theorem only works for right triangles. Adding components reduces the problem to two perpendicular totals.','What do the Pythagorean theorem and tangent require?',{sub:s5});
+
+const SETS=[
+ {id:'md',name:'Magnitude & direction',desc:'Pythagorean theorem and tangent: perpendicular vectors, including the textbook practice (truck driver, pirate, soccer ball, hummingbird).'},
+ {id:'co',name:'Components',desc:'Resolve vectors into x- and y-components with sine and cosine (all four quadrants).'},
+ {id:'ad',name:'Adding vectors',desc:'Add vectors that are not perpendicular by adding their components; subtract vectors too.'},
+ {id:'cs',name:'Axes & reasoning',desc:'Choosing coordinate systems, angle references and quick checks.'},
+ {id:'sa',name:'Section 2 Assessment',desc:'The Section 2 Formative Assessment: coordinate systems, perpendicular velocities, components and why we resolve vectors.'}
+];
+
+P.forEach((p,i)=>{ p.id=p.set+(i+1); });
+P.forEach(p=>{ if(!p.opts) return; const {order}=arrangeOpts(p.opts,p.correct,strSeed(p.id)); p.opts=order.map(i=>p.opts[i]); p.correct=p.correct.map(c=>order.indexOf(c)); });
+let curSet='md';
+
+function setStats(sid){ const ps=P.filter(p=>p.set===sid); return {done:ps.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length,total:ps.length}; }
+function updateOverall(){
+  const done=P.filter(p=>state['p_'+p.id]&&state['p_'+p.id].done).length;
+  $('#overallText').textContent=`${done} of ${P.length} practice problems solved`;
+  $('#overallBar').style.width=(100*done/P.length)+'%';
+  $$('#setPicker button').forEach(b=>{ const s=setStats(b.dataset.set); $('small',b).textContent=`${s.done}/${s.total}`; });
+}
+function buildPicker(){
+  const pk=$('#setPicker'); pk.innerHTML='';
+  SETS.forEach(s=>{
+    const b=document.createElement('button'); b.type='button'; b.dataset.set=s.id; b.setAttribute('aria-pressed',String(s.id===curSet));
+    b.innerHTML=`${s.name}<small></small>`; b.addEventListener('click',()=>{ curSet=s.id; buildPicker(); renderSet(); }); pk.appendChild(b);
+  });
+  updateOverall();
+}
+function renderSet(){
+  const host=$('#problemList'); host.innerHTML='';
+  const s=SETS.find(x=>x.id===curSet);
+  const head=document.createElement('div'); head.className='sethead'; head.innerHTML=`<p>${s.desc.replace(/_(\w+)/g,'<sub>$1</sub>')}</p>`; host.appendChild(head);
+  let last=null;
+  P.filter(p=>p.set===curSet).forEach((p,i)=>{
+    if(p.sub&&p.sub!==last){ const h=document.createElement('h3'); h.className='subhead'; h.textContent=p.sub; host.appendChild(h); last=p.sub; }
+    host.appendChild(renderProblem(p,i+1));
+  });
+}
+function renderProblem(p,n){
+  const st=state['p_'+p.id]=state['p_'+p.id]||{done:false,tries:0};
+  const el=document.createElement('div'); el.className='prob'+(st.done?' done':'');
+  el.innerHTML=`<div class="num"><span>Problem ${n}</span><span class="badge">${st.done?'✔ Solved':''}</span></div><p style="margin:6px 0 4px">${p.text}</p>`;
+  if(p.figure) el.insertAdjacentHTML('beforeend',p.figure());
+  const body=document.createElement('div'); el.appendChild(body);
+  const fb=document.createElement('div'); fb.className='fb'; fb.setAttribute('aria-live','polite');
+  const hintHost=document.createElement('div'), solHost=document.createElement('div');
+  const acts=document.createElement('div'); acts.className='acts';
+  const check=document.createElement('button'); check.className='btn'; check.type='button'; check.textContent='Check';
+  const hint=document.createElement('button'); hint.className='btn ghost'; hint.type='button'; hint.textContent='Hint';
+  const sol=document.createElement('button'); sol.className='btn ghost'; sol.type='button';
+  let hintN=0, inputs=[], checkFn;
+
+  if(p.opts){
+    const multi=p.type==='multi';
+    p.opts.forEach((o,i)=>{
+      const lab=document.createElement('label'); lab.className='opt'; lab.style.display='block'; lab.style.cursor='pointer';
+      const inp=document.createElement('input'); inp.type=multi?'checkbox':'radio'; inp.name='q_'+p.id; inp.value=i;
+      lab.append(inp); lab.insertAdjacentHTML('beforeend',o); body.appendChild(lab); inputs.push(inp);
+      inp.addEventListener('change',()=>{ st.ans=inputs.filter(x=>x.checked).map(x=>+x.value); save(); });
+    });
+    checkFn=()=>{
+      const sel=inputs.filter(i=>i.checked).map(i=>+i.value);
+      if(!sel.length){ fb.className='fb near'; fb.textContent='Select an answer first.'; return null; }
+      const ok=sel.length===p.correct.length&&p.correct.every(c=>sel.includes(c));
+      inputs.forEach(i=>i.parentElement.classList.remove('right','wrong'));
+      if(ok){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+p.why; return true; }
+      sel.forEach(v=>{ if(!p.correct.includes(v)) inputs[v].parentElement.classList.add('wrong'); });
+      fb.className='fb no'; fb.textContent='Not quite. Re-read the question and think about the magnitude and the direction of each arrow.';
+      return false;
+    };
+  } else {
+    p.parts.forEach((part,i)=>{
+      const row=document.createElement('div'); row.className='partrow';
+      const id=`in_${p.id}_${i}`;
+      row.innerHTML=`<label for="${id}">${part.label}</label>`;
+      const inp=document.createElement('input'); inp.type='text'; inp.id=id; inp.autocomplete='off'; inp.placeholder='your answer';
+      const u=document.createElement('span'); u.className='u'; u.textContent=part.unit;
+      const pf=document.createElement('span'); pf.className='fb'; pf.style.margin='0'; pf.setAttribute('aria-live','polite');
+      row.append(inp,u,pf); body.appendChild(row); inputs.push({inp,pf});
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter') check.click(); });
+      inp.addEventListener('input',()=>{ st.ans=inputs.map(x=>x.inp.value); save(); });
+    });
+    checkFn=()=>{
+      let all=true, any=false;
+      inputs.forEach(({inp,pf},i)=>{
+        if(!inp.value.trim()){ pf.className='fb near'; pf.textContent='Enter a value.'; all=false; return; }
+        any=true;
+        const j=judge(parseNum(inp.value),p.parts[i]);
+        pf.className='fb '+j.state; pf.textContent=(j.state==='ok'?'✔ ':'')+j.msg;
+        if(j.state!=='ok') all=false;
+      });
+      fb.textContent=''; fb.className='fb';
+      return any?all:null;
+    };
+  }
+  function showSol(){
+    solHost.className='solbox';
+    solHost.innerHTML=p.sol?'<b>Worked solution</b><ol>'+p.sol.map(s=>`<li>${s}</li>`).join('')+'</ol>':'<b>Answer explained</b><p style="margin:4px 0 0">'+p.why+'</p>';
+  }
+  function syncSol(){
+    const open=!!solHost.innerHTML;
+    sol.disabled=!(st.done||st.tries>=2);
+    sol.textContent=sol.disabled?'Solution (after 2 tries)':(open?'Hide solution':'Show solution');
+  }
+  check.addEventListener('click',()=>{
+    const r=checkFn(); if(r===null) return;
+    st.tries++;
+    if(r){
+      if(!st.done){ st.done=true; el.classList.add('done'); $('.badge',el).textContent='✔ Solved'; }
+      if(p.parts){ fb.className='fb ok'; fb.innerHTML='<b>Correct!</b> '+(st.tries===1?'First try — nice work.':'Well done for sticking with it.'); }
+    } else if(p.parts && st.tries>=2 && !st.done){ fb.className='fb near'; fb.textContent='Still stuck? Try another hint, or open the worked solution.'; }
+    save(); updateOverall(); syncSol();
+  });
+  hint.addEventListener('click',()=>{
+    const hs=p.h||[]; if(!hs.length) return;
+    hintN=Math.min(hintN+1,hs.length);
+    hintHost.className='hintbox'; hintHost.innerHTML=`<b>Hint ${hintN}${hs.length>1?' of '+hs.length:''}:</b> `+hs.slice(0,hintN).map((h,i)=>i===hintN-1?h:'<span class="pnote">'+h+'</span>').reverse().join('<br>');
+    hint.textContent=hintN<hs.length?'Another hint':'Hint';
+  });
+  sol.addEventListener('click',()=>{ if(sol.disabled) return; if(solHost.innerHTML){ solHost.innerHTML=''; solHost.className=''; } else showSol(); syncSol(); });
+  acts.append(check,hint,sol); el.append(acts,fb,hintHost,solHost);
+  if(st.ans){ /* restore the student's saved answer */
+    if(p.opts){ inputs.forEach(i=>{ i.checked=st.ans.includes(+i.value); }); }
+    else inputs.forEach(({inp},i)=>{ if(st.ans[i]!=null) inp.value=st.ans[i]; });
+    if(st.tries>0||st.done){ const tr=st.tries; checkFn(); st.tries=tr; }
+  }
+  syncSol();
+  return el;
+}
+
+
+$('#resetAll').addEventListener('click',()=>{ if(confirm('Clear all saved progress on this device?')){ state={}; save(); buildPicker(); renderSet(); } });
+buildPicker(); renderSet();
+const h=(location.hash||'').slice(1); if(['review','examples','practice'].includes(h)) showTab(h);
+window.LIA32={P,EX,parseNum,judge,figTT};
+})();
+</script>
+</body>
+</html>
