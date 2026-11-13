@@ -278,13 +278,26 @@
       <span class="lesson-tag">LESSON 3.9</span>
       <h3>Conditions</h3>
       <ul>
-        <li><strong>Independence within each group:</strong> each sample is a random sample (or, in an experiment, subjects are randomly assigned), and when sampling without replacement each sample is at most 10% of its population: <em>n</em><sub>1</sub> &le; 0.10<em>N</em><sub>1</sub> and <em>n</em><sub>2</sub> &le; 0.10<em>N</em><sub>2</sub>.</li>
+        <li><strong>Random:</strong> each sample is a random sample from its population (sample survey).</li>
+        <li><strong>10% condition (two conditions, one for each sample):</strong> when sampling <em>without replacement</em>, <em>n</em><sub>1</sub> &le; 0.10<em>N</em><sub>1</sub> <u>and</u> <em>n</em><sub>2</sub> &le; 0.10<em>N</em><sub>2</sub>. This lets us treat the observations as independent.</li>
+        <li><strong>If the data come from an experiment</strong> instead of a sample survey: the subjects must be <strong>randomly assigned</strong> to the two treatment groups. The condition is fulfilled by using a random process (a random number generator, drawing names, a coin flip) to decide who gets which treatment. In an experiment no sample is drawn from a population, so the 10% condition is not needed.</li>
         <li><strong>Independence between groups:</strong> the two samples (or groups) are independent of each other. <em>Paired</em> or repeated measurements on the same individuals are <em>not</em> independent, so these methods do not apply.</li>
         <li><strong>Normality (large counts), in each group:</strong> <em>n</em><sub>1</sub><em>p</em><sub>1</sub> &ge; 10, <em>n</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>) &ge; 10, <em>n</em><sub>2</sub><em>p</em><sub>2</sub> &ge; 10 and <em>n</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>) &ge; 10.</li>
       </ul>
       <p>When the conditions hold, probabilities come from a Normal model, with a z-score of the form</p>
       <div class="formula"><em>z</em> = <span class="frac"><span>(<span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub>) &minus; (<em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>)</span><span>&sigma;<sub><span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub></sub></span></span></div>
       <p>The <strong>Sampling Sim</strong> tab builds this sampling distribution one pair of samples at a time.</p>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.9</span>
+      <h3>Interpreting the mean, SD and probabilities in context</h3>
+      <p>These numbers describe what happens over <strong>repeated pairs of independent random samples</strong> (or repeated random assignments in an experiment) of the given sizes, so always interpret them in that context:</p>
+      <ul>
+        <li><strong>Mean:</strong> &ldquo;Over repeated pairs of random samples, the difference in the sample proportions of [success] for [group 1] and [group 2] is centered at <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, the true difference.&rdquo;</li>
+        <li><strong>Standard deviation:</strong> &ldquo;The difference in the sample proportions typically varies by about &sigma; from the true difference <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> from one pair of samples to the next.&rdquo;</li>
+        <li><strong>Probability:</strong> &ldquo;About __ % of all possible pairs of independent random samples of these sizes would give a difference [as large as / as small as] the one described.&rdquo;</li>
+      </ul>
     </div>
 
     <div class="card">
@@ -328,14 +341,17 @@
     <div class="card">
       <span class="lesson-tag">LESSON 3.10</span>
       <h3>Conditions and write-up</h3>
-      <ul>
-        <li><strong>Independence:</strong> two independent random samples (or randomized assignment of subjects to two treatments); each sample at most 10% of its population.</li>
-        <li><strong>Normality:</strong> at least 10 successes <em>and</em> at least 10 failures in each sample: <em>n</em><sub>1</sub><span class="hat">p</span><sub>1</sub>, <em>n</em><sub>1</sub>(1 &minus; <span class="hat">p</span><sub>1</sub>), <em>n</em><sub>2</sub><span class="hat">p</span><sub>2</sub> and <em>n</em><sub>2</sub>(1 &minus; <span class="hat">p</span><sub>2</sub>) all &ge; 10.</li>
-      </ul>
+      <p>Four conditions must be met for a two-sample <em>z</em>-interval:</p>
       <ol class="steps">
-        <li><strong>Parameter:</strong> define <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub> in context (which group is 1, which is 2) and the parameter <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>.</li>
+        <li><strong>Random:</strong> two random samples from the two populations, <em>or</em> subjects randomly assigned to two treatments in an experiment.</li>
+        <li><strong>10% condition:</strong> <em>n</em><sub>1</sub> &le; 0.10<em>N</em><sub>1</sub> <u>and</u> <em>n</em><sub>2</sub> &le; 0.10<em>N</em><sub>2</sub> (both samples). <em>Unnecessary in a randomized experiment</em>, where nothing is sampled without replacement from a population.</li>
+        <li><strong>Independent groups:</strong> the two samples (or treatment groups) are independent of each other (not paired).</li>
+        <li><strong>Large counts:</strong> at least 10 successes <em>and</em> 10 failures in each sample: <em>n</em><sub>1</sub><span class="hat">p</span><sub>1</sub>, <em>n</em><sub>1</sub>(1 &minus; <span class="hat">p</span><sub>1</sub>), <em>n</em><sub>2</sub><span class="hat">p</span><sub>2</sub> and <em>n</em><sub>2</sub>(1 &minus; <span class="hat">p</span><sub>2</sub>) all &ge; 10.</li>
+      </ol>
+      <ol class="steps">
+        <li><strong>Parameter:</strong> define <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub> in context, naming each population or treatment group and what counts as a success (which group is 1, which is 2), and state the parameter <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>.</li>
         <li><strong>Procedure:</strong> two-sample <em>z</em>-interval for a difference of two population proportions.</li>
-        <li><strong>Checks:</strong> independence and the four large-counts checks.</li>
+        <li><strong>Checks:</strong> random, 10% for both samples (not needed in an experiment), independent groups, and the four large-counts checks.</li>
         <li><strong>Mechanics:</strong> <span class="hat">p</span><sub>1</sub>, <span class="hat">p</span><sub>2</sub>, SE, ME and the interval (or <code>2-PropZInt</code>).</li>
         <li><strong>Conclusion in context:</strong> &ldquo;We are <em>C</em>% confident that the interval from ___ to ___ captures the true difference in the proportion of [population 1] who [success] and the proportion of [population 2] who [success].&rdquo;</li>
       </ol>
@@ -373,6 +389,7 @@
       <ul>
         <li><strong>The interval:</strong> &ldquo;We are <em>C</em>% confident that the interval from <em>a</em> to <em>b</em> captures the true difference in the proportion of [population 1] who [success] and the proportion of [population 2] who [success].&rdquo; Always state the order of subtraction.</li>
         <li><strong>The confidence level:</strong> if we repeatedly took independent random samples of these sizes from the two populations and built an interval from each pair, about <em>C</em>% of the intervals would capture the true difference <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>.</li>
+        <li><strong>Why can an interval miss the true difference?</strong> Random sampling variability: some pairs of random samples give sample proportions far from the population proportions, so about (100 &minus; <em>C</em>)% of the intervals do not contain the true difference.</li>
         <li><strong>Still wrong:</strong> &ldquo;There is a <em>C</em>% probability that the true difference is in this interval&rdquo;; &ldquo;<em>C</em>% of the sample differences are in this interval&rdquo;.</li>
       </ul>
     </div>
@@ -380,7 +397,7 @@
     <div class="card">
       <span class="lesson-tag">LESSON 3.11</span>
       <h3>What the interval says about a claim</h3>
-      <p>The key value to look for is <strong>0</strong>, which means &ldquo;no difference&rdquo; (<em>p</em><sub>1</sub> = <em>p</em><sub>2</sub>).</p>
+      <p>A confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is a set of <strong>plausible values</strong> for the true difference, so it can be used to evaluate a claim about whether a difference exists. The key value to look for is <strong>0</strong>, which means &ldquo;no difference&rdquo; (<em>p</em><sub>1</sub> = <em>p</em><sub>2</sub>).</p>
       <div class="table-wrap">
         <table class="data" style="text-align:left">
           <tr><th>The interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub></th><th>Conclusion</th></tr>
@@ -1102,6 +1119,71 @@
   "sol": "The mean is <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, which is 0 exactly when the population proportions are equal."
  },
  {
+  "g": "3.9",
+  "q": "Two independent samples are taken <strong>without replacement</strong> from two populations of sizes <em>N</em><sub>1</sub> and <em>N</em><sub>2</sub>. Which two conditions must be met so that the observations can be treated as independent?",
+  "opts": [
+   "<em>n</em><sub>1</sub> &le; 0.10<em>N</em><sub>1</sub> and <em>n</em><sub>2</sub> &le; 0.10<em>N</em><sub>2</sub> (each sample is at most 10% of its own population)",
+   "<em>n</em><sub>1</sub> = <em>n</em><sub>2</sub> and <em>N</em><sub>1</sub> = <em>N</em><sub>2</sub>",
+   "<em>n</em><sub>1</sub> &ge; 30 and <em>n</em><sub>2</sub> &ge; 30",
+   "<em>p</em><sub>1</sub> &lt; 0.5 and <em>p</em><sub>2</sub> &lt; 0.5"
+  ],
+  "ans": 0,
+  "hint": "One 10% check for each sample.",
+  "sol": "The 10% condition must hold for <em>both</em> samples: <em>n</em><sub>1</sub> &le; 0.10<em>N</em><sub>1</sub> and <em>n</em><sub>2</sub> &le; 0.10<em>N</em><sub>2</sub>."
+ },
+ {
+  "g": "3.9",
+  "q": "A random sample of 60 students is taken from a school of 450 students, and an independent random sample of 50 students from a school of 600. Is the 10% condition satisfied for both samples?",
+  "opts": [
+   "Yes: 60 &le; 45 and 50 &le; 60",
+   "No: 60 &gt; 0.10(450) = 45, so the first sample is more than 10% of its population",
+   "No: 50 &gt; 0.10(600) = 60",
+   "Yes, because both samples are random"
+  ],
+  "ans": 1,
+  "hint": "Check each sample against 10% of its own population.",
+  "sol": "10% of 450 is 45 and 60 &gt; 45, so the first sample violates the condition (10% of 600 is 60 and 50 &le; 60 is fine)."
+ },
+ {
+  "g": "3.9",
+  "q": "The data come from an <strong>experiment</strong> (two treatments) rather than from a sample survey. Which condition must be met, and how is it fulfilled?",
+  "opts": [
+   "The subjects must be randomly assigned to the two treatment groups; this is fulfilled by using a random process (for example a random number generator or drawing names) to decide who gets which treatment",
+   "The subjects must be a random sample from a population; this is fulfilled by volunteers",
+   "The groups must have equal sizes; this is fulfilled by counting",
+   "No condition is needed for an experiment"
+  ],
+  "ans": 0,
+  "hint": "What replaces random sampling in an experiment?",
+  "sol": "In an experiment, independence comes from <strong>random assignment</strong> of subjects to treatments, done with a random process. The 10% condition is not needed because no sample is drawn from a population."
+ },
+ {
+  "g": "3.9",
+  "q": "The sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> has mean 0.10. Which is the correct interpretation <strong>in context</strong> (<em>p</em><sub>1</sub> = proportion satisfied at Store 1, <em>p</em><sub>2</sub> at Store 2)?",
+  "opts": [
+   "If we repeatedly took independent random samples from the two stores, the differences between the sample proportions would be centered at 0.10, the true difference in the proportions of satisfied customers",
+   "In every pair of samples, Store 1 is 10% higher than Store 2",
+   "Store 1 has 10% of the customers",
+   "The sample sizes differ by 0.10"
+  ],
+  "ans": 0,
+  "hint": "Interpret it as a long-run center over repeated sampling.",
+  "sol": "The mean of the sampling distribution is the average of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> over all possible pairs of samples, and equals the true difference <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>."
+ },
+ {
+  "g": "3.9",
+  "q": "For samples of size 100 from Store 1 and 120 from Store 2 (<em>p</em><sub>1</sub> = 0.60, <em>p</em><sub>2</sub> = 0.50), P(<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> &lt; 0) &asymp; 0.068. Which is the correct interpretation?",
+  "opts": [
+   "About 6.8% of all possible pairs of independent random samples of these sizes would give a sample proportion for Store 1 that is lower than the one for Store 2",
+   "There is a 6.8% chance that Store 1 is worse than Store 2",
+   "Store 1 is better than Store 2 with probability 0.068",
+   "The samples are too small"
+  ],
+  "ans": 0,
+  "hint": "Probabilities for <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> describe repeated sampling.",
+  "sol": "The probability describes the sampling distribution: how often, across repeated pairs of samples, the sample difference is negative even though the true difference is +0.10."
+ },
+ {
   "g": "3.10",
   "q": "Which procedure is appropriate to estimate the difference between the proportions of two populations using independent random samples?",
   "opts": [
@@ -1515,6 +1597,58 @@
   "sol": "SE = &radic;(SE<sub>1</sub>&sup2; + SE<sub>2</sub>&sup2;) &ge; each of SE<sub>1</sub> and SE<sub>2</sub>."
  },
  {
+  "g": "3.10",
+  "q": "Which list contains <strong>all</strong> the conditions to check for a two-sample <em>z</em>-interval for a difference of two proportions from two random samples?",
+  "opts": [
+   "(1) Random samples; (2) <em>n</em><sub>1</sub> &le; 10% of <em>N</em><sub>1</sub> and <em>n</em><sub>2</sub> &le; 10% of <em>N</em><sub>2</sub>; (3) the two samples are independent of each other; (4) at least 10 successes and 10 failures in each sample",
+   "(1) <em>n</em><sub>1</sub> and <em>n</em><sub>2</sub> are equal; (2) <em>p</em><sub>1</sub> = <em>p</em><sub>2</sub>",
+   "(1) Random samples only",
+   "(1) Both populations are Normal; (2) <em>n</em> &ge; 30"
+  ],
+  "ans": 0,
+  "hint": "Randomness, 10% for both, independent groups, four counts.",
+  "sol": "Check: random (sampling or assignment), the 10% condition for each sample, independence between the groups, and large counts (four counts &ge; 10)."
+ },
+ {
+  "g": "3.10",
+  "q": "In which scenario is the <strong>10% condition unnecessary</strong> for a confidence interval for the difference of two proportions?",
+  "opts": [
+   "When the data come from a randomized experiment in which subjects are randomly assigned to two treatments (no samples are drawn from populations)",
+   "When the sample sizes are both greater than 100",
+   "When the proportions are close to 0.5",
+   "When the samples are very small"
+  ],
+  "ans": 0,
+  "hint": "Where does independence come from in an experiment?",
+  "sol": "The 10% condition protects independence when <em>sampling without replacement</em> from a population. In a randomized experiment, independence comes from random assignment, so it is not needed."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 90 customers (from 2000 customers) and 150 customers (from 1200 customers) are taken. Is the 10% condition satisfied?",
+  "opts": [
+   "Yes, both samples satisfy it",
+   "No: the first sample is more than 10% of its population",
+   "It cannot be checked without the sample proportions",
+   "No: the second sample is more than 10% of its population (150 &gt; 0.10(1200) = 120)"
+  ],
+  "ans": 3,
+  "hint": "Check each sample separately.",
+  "sol": "10% of 2000 is 200 and 90 &le; 200 &#10003;. 10% of 1200 is 120 and 150 &gt; 120 &#10007;, so the condition fails for the second sample."
+ },
+ {
+  "g": "3.10",
+  "q": "Which elements must be referenced when defining the <strong>parameters</strong> for a confidence interval for the difference of two population proportions?",
+  "opts": [
+   "Both populations (or treatments), what counts as a success, and the parameter <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> with the order of subtraction",
+   "Only the sample sizes",
+   "The sample proportions and the margin of error",
+   "Only the confidence level"
+  ],
+  "ans": 0,
+  "hint": "Group 1, group 2, success, order.",
+  "sol": "Define <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub> in context (each population/group and the success), then state that the parameter is <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>."
+ },
+ {
   "g": "3.11",
   "q": "A random sample of 200 adults who used a sleep app and an independent random sample of 220 adults who did not use it were asked whether they sleep better. In the app group 124 said yes; in the other group 110 said yes. Let group 1 be the adults who used the sleep app. A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.026, 0.214). Which is a correct interpretation of the interval?",
   "opts": [
@@ -1852,6 +1986,45 @@
   "ans": 0,
   "hint": "All plausible values must satisfy the claim.",
   "sol": "For the claim &ldquo;more than 0.05&rdquo; every plausible value must be above 0.05. The interval includes 0.03 to 0.05, so the claim is not convincingly supported (although a positive difference is)."
+ },
+ {
+  "g": "3.11",
+  "q": "Why might a computed 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> <strong>fail to contain</strong> the actual difference?",
+  "opts": [
+   "Random sampling variability: some pairs of random samples produce sample proportions far from the population proportions, and about 5% of 95% intervals miss",
+   "The interval was calculated incorrectly",
+   "Because the true difference changes every day",
+   "Because the samples were too large"
+  ],
+  "ans": 0,
+  "hint": "Think of sampling variability.",
+  "sol": "Even with correct methods, chance produces unusual samples. In repeated sampling about 5% of 95% intervals do not capture the true difference."
+ },
+ {
+  "g": "3.11",
+  "q": "When evaluating a claim about whether a difference exists between two populations, a confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> provides&hellip;",
+  "opts": [
+   "a set of plausible values for the true difference; if 0 is not among them, there is convincing evidence of a difference",
+   "the exact value of the true difference",
+   "the probability that the claim is true",
+   "the sample proportions only"
+  ],
+  "ans": 0,
+  "hint": "Plausible values for the difference.",
+  "sol": "The interval is a set of plausible values for the difference. A claim of &ldquo;no difference&rdquo; (0) is supported only if 0 is plausible."
+ },
+ {
+  "g": "3.11",
+  "q": "What is the correct interpretation of a 95% confidence <em>level</em> for an interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>?",
+  "opts": [
+   "If we repeatedly took random samples from the two populations and built an interval each time, about 95% of the intervals would capture the true difference <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>",
+   "The true difference is 95% likely to be in the interval",
+   "About 95% of the data in each sample are in the interval",
+   "The sample difference is 95% accurate"
+  ],
+  "ans": 0,
+  "hint": "Repeated random sampling from two populations.",
+  "sol": "The confidence level is the success rate of the method in repeated random sampling from the two populations."
  }
 ];
 
