@@ -245,8 +245,8 @@ header.top{position:relative}
 
 <header class="top">
   <div class="theme" role="group" aria-label="Color theme">
-    <button type="button" data-theme-set="light" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3L17 7M7 17l-1.7 1.7"/></g></svg><span>Light</span></button>
-    <button type="button" data-theme-set="dark" aria-pressed="false"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><span>Dark</span></button>
+    <button type="button" data-theme-set="light" aria-pressed="false" aria-label="Light theme" title="Light"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5.3 5.3l1.7 1.7M17 17l1.7 1.7M18.7 5.3L17 7M7 17l-1.7 1.7"/></g></svg></button>
+    <button type="button" data-theme-set="dark" aria-pressed="false" aria-label="Dark theme" title="Dark"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg></button>
   </div>
   <div class="wrap">
     <div>
@@ -595,9 +595,9 @@ function strFig(curves,o={}){
 /* ---------- Lab 1: superposition ---------- */
 (function(){
   if(!$('#sp_fig')) return;
-  const w0=.8; let busy=false;
+  const w0=.8; let tc=0;
   function upd(){
-    const a=+$('#sp_a').value,b=+$('#sp_b').value,t=+$('#sp_t').value;
+    const a=+$('#sp_a').value,b=+$('#sp_b').value,t=tc;
     $('#sp_ao').textContent=f2(a,2)+' m'; $('#sp_bo').textContent=f2(b,2)+' m'; $('#sp_to').textContent=f2(t,2);
     const ca=1+8*t, cb=9-8*t, fa=x=>gp(x,ca,a), fb=x=>gp(x,cb,b), fr=x=>fa(x)+fb(x);
     $('#sp_fig').innerHTML=strFig([{f:fa,c:'var(--accent)',w:2,dash:true},{f:fb,c:'var(--warm)',w:2,dash:true},{f:fr,c:'var(--primary)',w:3.5}],{aria:'Two pulses and their resultant',H:190});
@@ -611,18 +611,18 @@ function strFig(curves,o={}){
     else if(a*b<0){ st.className='status'; st.innerHTML=`<b>Destructive interference:</b> opposite sides, so the amplitudes subtract: |${Math.abs(a).toFixed(2)} − ${Math.abs(b).toFixed(2)}| = ${Math.abs(a+b).toFixed(2)} m.`; }
     else { st.className='status'; st.textContent='One of the pulses has zero amplitude, so the other passes alone.'; }
   }
-  const r=runner(dt=>{ const t=Math.min(1,+$('#sp_t').value+dt*.28); $('#sp_t').value=t; upd(); if(t>=1){ r.stop(); $('#sp_play').textContent='▶ Play'; } });
-  $('#sp_play').addEventListener('click',()=>{ if(r.running){ r.stop(); $('#sp_play').textContent='▶ Play'; } else { if(+$('#sp_t').value>=1) $('#sp_t').value=0; r.start(); $('#sp_play').textContent='⏸ Pause'; } });
-  $('#sp_reset').addEventListener('click',()=>{ r.stop(); $('#sp_play').textContent='▶ Play'; $('#sp_t').value=0; upd(); });
-  ['sp_a','sp_b','sp_t'].forEach(id=>$('#'+id).addEventListener('input',upd)); upd();
+  const r=runner(dt=>{ tc=Math.min(1,tc+dt*.28); const t=tc; $('#sp_t').value=t; upd(); if(t>=1){ r.stop(); $('#sp_play').textContent='▶ Play'; } });
+  $('#sp_play').addEventListener('click',()=>{ if(r.running){ r.stop(); $('#sp_play').textContent='▶ Play'; } else { if(tc>=1){ tc=0; } r.start(); $('#sp_play').textContent='⏸ Pause'; } });
+  $('#sp_reset').addEventListener('click',()=>{ r.stop(); $('#sp_play').textContent='▶ Play'; tc=0; $('#sp_t').value=0; upd(); });
+  ['sp_a','sp_b'].forEach(id=>$('#'+id).addEventListener('input',upd)); $('#sp_t').addEventListener('input',()=>{ tc=+$('#sp_t').value; upd(); }); upd();
 })();
 
 /* ---------- Lab 2: reflection ---------- */
 (function(){
   if(!$('#rf_fig')) return;
-  let fixed=true; const SP=5;
+  let fixed=true, tc=1.0; const SP=5;
   function upd(){
-    const t=+$('#rf_t').value; $('#rf_to').textContent=f2(t,2);
+    const t=tc; $('#rf_to').textContent=f2(t,2);
     const c=2+SP*t, cr=20-c, sg=fixed?-1:1, A=.45;
     const inc=x=>gp(x,c,A), refl=x=>sg*gp(x,cr,A);
     const tot=x=>inc(x)+refl(x);
@@ -636,11 +636,11 @@ function strFig(curves,o={}){
     else if(c<=11.2) st.innerHTML=fixed?'<b>Arriving:</b> the end is fixed, so the rope there cannot move (a node). The incident and reflected pulses have opposite signs and cancel at the wall.':'<b>Arriving:</b> the end is free to slide, so the incident and reflected pulses add at the wall: the end moves with twice the amplitude.';
     else st.innerHTML=fixed?'<b>Reflected pulse is inverted</b> (it points the opposite way) with the same amplitude and speed.':'<b>Reflected pulse is upright</b> (not inverted) with the same amplitude and speed.';
   }
-  const r=runner(dt=>{ const t=Math.min(3.2,+$('#rf_t').value+dt*.9); $('#rf_t').value=t; upd(); if(t>=3.2){ r.stop(); $('#rf_play').textContent='▶ Play'; } });
-  $('#rf_play').addEventListener('click',()=>{ if(r.running){ r.stop(); $('#rf_play').textContent='▶ Play'; } else { if(+$('#rf_t').value>=3.2) $('#rf_t').value=0; r.start(); $('#rf_play').textContent='⏸ Pause'; } });
-  $('#rf_reset').addEventListener('click',()=>{ r.stop(); $('#rf_play').textContent='▶ Play'; $('#rf_t').value=0; upd(); });
+  const r=runner(dt=>{ tc=Math.min(3.2,tc+dt*.9); const t=tc; $('#rf_t').value=t; upd(); if(t>=3.2){ r.stop(); $('#rf_play').textContent='▶ Play'; } });
+  $('#rf_play').addEventListener('click',()=>{ if(r.running){ r.stop(); $('#rf_play').textContent='▶ Play'; } else { if(tc>=3.2){ tc=0; } r.start(); $('#rf_play').textContent='⏸ Pause'; } });
+  $('#rf_reset').addEventListener('click',()=>{ r.stop(); $('#rf_play').textContent='▶ Play'; tc=0; $('#rf_t').value=0; upd(); });
   [['rf_fixed',true],['rf_free',false]].forEach(([id,v])=>$('#'+id).addEventListener('click',()=>{ fixed=v; $('#rf_fixed').setAttribute('aria-pressed',String(v)); $('#rf_free').setAttribute('aria-pressed',String(!v)); upd(); }));
-  $('#rf_t').addEventListener('input',upd); upd();
+  $('#rf_t').addEventListener('input',()=>{ tc=+$('#rf_t').value; upd(); }); upd();
 })();
 
 /* ---------- Lab 3: standing waves ---------- */
