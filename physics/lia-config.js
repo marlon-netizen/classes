@@ -18,6 +18,7 @@ window.LIA_CONFIG={
     'physics1-lesson-3-2': 'Physics I – Lesson 3.2 Vector Operations',
     'physics2-lesson-10-3': 'Physics II – Lesson 10.3 Second Law of Thermodynamics',
     'physics2-lesson-11-2': 'Physics II – Lesson 11.2 Measuring Simple Harmonic Motion',
-    'physics2-lesson-11-3': 'Physics II – Lesson 11.3 Properties of Waves'
+    'physics2-lesson-11-3': 'Physics II – Lesson 11.3 Properties of Waves',
+    'physics2-lesson-11-4': 'Physics II – Lesson 11.4 Wave Interactions'
   }
 };
