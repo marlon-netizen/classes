@@ -1,0 +1,2207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AP Statistics – Lessons 3.9–3.11 | Lincoln International Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --ink: #2c3a4a;
+    --muted: #66758a;
+    --primary: #4a6fa5;
+    --primary-dark: #35557f;
+    --primary-soft: #e3ebf5;
+    --accent: #8fb3a0;
+    --ok: #3f8f6b;
+    --ok-bg: #e4f3ec;
+    --warn: #b7791f;
+    --warn-bg: #fbf1dc;
+    --bad: #b5524f;
+    --bad-bg: #f8e6e5;
+    --line: #d9e0e8;
+    --sol-bg: #f7f9fb; --field: #ffffff; --disabled: #eef1f5; --disabled-btn: #b8c3d1;
+    --on-primary: #ffffff; --ok-ink: #276348; --bad-ink: #8a3b39; --warn-ink: #835a14;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif;
+    font-weight: 400;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    letter-spacing: .2px;
+  }
+  header {
+    background: linear-gradient(135deg, #dfe8f3, #eef3f0);
+    border-bottom: 4px solid var(--primary);
+    text-align: center;
+    padding: 2rem 1rem 1.5rem;
+  }
+  header h1 {
+    margin: 0; font-weight: 600;
+    font-size: clamp(1.8rem, 5vw, 2.8rem);
+    color: var(--primary-dark);
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+  header .class-name { margin: .4rem 0 0; font-size: clamp(1.2rem, 3.5vw, 1.6rem); font-weight: 500; }
+  header .details { margin: .2rem 0 0; color: var(--muted); font-weight: 300; font-size: 1.1rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 1.2rem 1rem 3rem; }
+
+  .tabs { display: flex; gap: .5rem; border-bottom: 2px solid var(--line); margin-bottom: 1.2rem; overflow-x: auto; }
+  .tab-btn { white-space: nowrap; }
+  .tab-btn {
+    font: inherit; font-weight: 500; font-size: 1.05rem;
+    padding: .7rem 1.2rem; border: none; border-radius: 8px 8px 0 0;
+    background: transparent; color: var(--muted); cursor: pointer;
+    letter-spacing: 1px; text-transform: uppercase;
+    transition: background .2s, color .2s;
+  }
+  .tab-btn:hover { background: var(--primary-soft); color: var(--primary-dark); }
+  .tab-btn[aria-selected="true"] { background: var(--primary); color: var(--on-primary); }
+  .tab-btn:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #9ab7dd; outline-offset: 2px; }
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 10px; padding: 1.2rem 1.4rem; margin-bottom: 1.2rem;
+    box-shadow: 0 1px 3px rgba(40,60,90,.05);
+  }
+  h2 { margin: 0 0 .6rem; font-weight: 500; color: var(--primary-dark); font-size: 1.5rem; }
+  h3 { margin: 0 0 .5rem; font-weight: 500; color: var(--primary-dark); font-size: 1.2rem; }
+  p { margin: .5rem 0; font-weight: 300; font-size: 1.05rem; }
+  ul { font-weight: 300; font-size: 1.05rem; padding-left: 1.3rem; }
+  .formula {
+    background: var(--primary-soft); border-left: 5px solid var(--primary);
+    padding: .8rem 1rem; margin: .8rem 0; border-radius: 6px;
+    font-size: 1.3rem; font-weight: 500; text-align: center;
+  }
+  .formula { font-family: "Cambria Math", "STIX Two Math", "Latin Modern Math", "Noto Serif", "DejaVu Serif", Georgia, serif; font-weight: 500; }
+  .formula small { font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif; display: block; font-size: .95rem; font-weight: 300; color: var(--muted); margin-top: .2rem; }
+  .note { background: var(--warn-bg); border-left: 5px solid var(--warn); padding: .6rem 1rem; border-radius: 6px; }
+  .frac { display: inline-block; text-align: center; vertical-align: middle; margin: 0 .15rem; }
+  .frac > span { display: block; padding: 0 .25rem; }
+  .frac > span:first-child { border-bottom: 1.5px solid currentColor; }
+  .solution { background: var(--sol-bg); border: 1px dashed var(--line); border-radius: 8px; padding: .6rem 1rem; margin-top: .6rem; }
+  .solution p { margin: .25rem 0; }
+  .example-title { color: var(--primary); font-weight: 500; margin-bottom: .2rem; }
+
+  table.data { border-collapse: collapse; margin: .6rem auto; font-weight: 300; }
+  table.data th, table.data td { border: 1px solid var(--line); padding: .3rem .9rem; text-align: center; }
+  table.data th { background: var(--primary-soft); font-weight: 500; }
+  table.data caption { caption-side: top; font-weight: 500; color: var(--primary-dark); padding-bottom: .3rem; }
+  .table-wrap { overflow-x: auto; }
+
+  .scorebar {
+    display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: .6rem;
+    background: var(--card); border: 1px solid var(--line); border-radius: 10px;
+    padding: .8rem 1.2rem; margin-bottom: 1.2rem;
+  }
+  .scorebar strong { color: var(--primary-dark); font-weight: 500; }
+  .progress { flex: 1 1 160px; height: 10px; background: var(--line); border-radius: 6px; overflow: hidden; }
+  .progress div { height: 100%; width: 0; background: var(--accent); transition: width .3s; }
+  .qtext { margin: .5rem 0; font-weight: 300; font-size: 1.05rem; }
+  .problem .q-num { color: var(--primary); font-weight: 600; letter-spacing: 1px; }
+  .answer-row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: center; margin-top: .7rem; }
+  .answer-row input[type="text"] {
+    font: inherit; padding: .5rem .8rem; width: 190px;
+    border: 2px solid var(--line); border-radius: 8px; background: var(--field); color: var(--ink);
+  }
+  .answer-row input:disabled { background: var(--disabled); color: var(--muted); }
+  .unit-label { color: var(--muted); font-weight: 300; margin-left: -.2rem; }
+  .options { display: grid; gap: .4rem; margin-top: .6rem; }
+  .options label {
+    display: flex; gap: .6rem; align-items: center; padding: .45rem .8rem;
+    border: 2px solid var(--line); border-radius: 8px; cursor: pointer; font-weight: 300; font-size: 1.05rem;
+    background: var(--field); color: var(--ink); transition: background .15s, border-color .15s;
+  }
+  .options label:hover { background: var(--primary-soft); }
+  .options label.disabled { cursor: default; background: var(--disabled); }
+  .options label.picked-wrong { border-color: var(--bad); background: var(--bad-bg); }
+  .options label.picked-right { border-color: var(--ok); background: var(--ok-bg); }
+  .options input { accent-color: var(--primary); }
+  button.btn {
+    font: inherit; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
+    background: var(--primary); color: var(--on-primary); border: none; border-radius: 8px;
+    padding: .55rem 1.2rem; cursor: pointer; transition: background .2s;
+  }
+  button.btn:hover:not(:disabled) { background: var(--primary-dark); }
+  button.btn:disabled { background: var(--disabled-btn); color: var(--muted); cursor: not-allowed; }
+  button.btn.secondary { background: var(--field); color: var(--primary-dark); border: 2px solid var(--primary); }
+  button.btn.secondary:hover { background: var(--primary-soft); }
+  .attempts { margin-left: auto; color: var(--muted); font-weight: 300; }
+  .dots { display: inline-flex; gap: 5px; vertical-align: middle; margin-left: .3rem; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); border: 1px solid #6f9783; }
+  .dot.used { background: var(--line); border-color: var(--line); }
+  .feedback { margin-top: .7rem; padding: .6rem 1rem; border-radius: 8px; display: none; font-weight: 400; }
+  .feedback.show { display: block; }
+  .feedback.ok { background: var(--ok-bg); color: var(--ok-ink); border-left: 5px solid var(--ok); }
+  .feedback.bad { background: var(--bad-bg); color: var(--bad-ink); border-left: 5px solid var(--bad); }
+  .feedback.hint { background: var(--warn-bg); color: var(--warn-ink); border-left: 5px solid var(--warn); }
+  .feedback .sol { font-weight: 300; margin-top: .3rem; }
+  .final { display: none; text-align: center; }
+  .final.show { display: block; }
+  .final h2 { font-size: 1.8rem; }
+  footer { text-align: center; color: var(--muted); font-weight: 300; font-size: .9rem; padding-bottom: 1.5rem; }
+  @media (max-width: 520px) {
+    .tab-btn { padding: .6rem .7rem; font-size: .9rem; flex: 1; }
+    .attempts { margin-left: 0; width: 100%; }
+  }
+  .rad { border-top: 1.5px solid currentColor; padding: 0 3px; margin-left: 1px; display: inline-block; line-height: .95; }
+  .rad:has(.hat) { padding-top: .35em; line-height: 1.1; }
+  .cycle { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; margin: .6rem 0; }
+  .cycle div { background: var(--primary-soft); border-radius: 8px; padding: .4rem 1rem; text-align: center; font-weight: 500; }
+  .cycle small { display: block; font-weight: 300; color: var(--muted); }
+
+  /* dark mode (same variables, switched by the Light/Dark toggle or the device setting) */
+  :root[data-theme="dark"]{ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; --sol-bg:#202b39; --field:#0f1620; --disabled:#243040; --disabled-btn:#3a4757; --on-primary:#0f1722; --ok-ink:#a6e6c3; --bad-ink:#f5bcb6; --warn-ink:#f3d58f; }
+  :root[data-theme="dark"] header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){ --bg:#12171e; --card:#1a222c; --ink:#e4e9ef; --muted:#9ba7b6; --primary:#8fb0dc; --primary-dark:#b5cdee; --primary-soft:#223249; --accent:#6fae94; --ok:#5cc08f; --ok-bg:#183024; --warn:#e0b25c; --warn-bg:#33291a; --bad:#e58c85; --bad-bg:#38201f; --line:#303b49; --sol-bg:#202b39; --field:#0f1620; --disabled:#243040; --disabled-btn:#3a4757; --on-primary:#0f1722; --ok-ink:#a6e6c3; --bad-ink:#f5bcb6; --warn-ink:#f3d58f; }
+    :root:not([data-theme="light"]) header{ background:linear-gradient(135deg,#1b2635,#18262a); }
+  }
+  .hat { position: relative; display: inline-block; font-style: italic; padding: 0 .03em; }
+  .hat::before { content: '^'; position: absolute; left: 50%; top: -.38em; transform: translateX(-50%); font-style: normal; font-size: .9em; }
+  .sym { font-style: italic; }
+  code { background: var(--primary-soft); color: var(--ink); padding: 0 .35em; border-radius: 4px; font-family: Consolas, "DejaVu Sans Mono", monospace; font-size: .92em; }
+  .ref { font-size: .95rem; color: var(--muted); border-top: 1px solid var(--line); margin-top: .8rem; padding-top: .5rem; }
+  .steps { counter-reset: st; list-style: none; padding-left: 0; }
+  .steps li { counter-increment: st; margin: .4rem 0; padding-left: 2.2rem; position: relative; }
+  .steps li::before { content: counter(st); position: absolute; left: 0; top: .1rem; width: 1.6rem; height: 1.6rem; border-radius: 50%; background: var(--primary); color: var(--on-primary); text-align: center; font-size: .9rem; line-height: 1.6rem; font-weight: 500; }
+  .lesson-tag { display: inline-block; background: var(--primary-soft); color: var(--primary-dark); border-radius: 6px; padding: .05rem .6rem; font-weight: 500; letter-spacing: 1px; font-size: .9rem; margin-bottom: .3rem; }
+
+  /* simulation */
+  .sim-ctl select { font: inherit; width: 100%; padding: .4rem .6rem; border: 2px solid var(--line); border-radius: 8px; background: var(--field); color: var(--ink); margin-top: .3rem; }
+  .sim-svg .ci-hit { stroke: var(--ok); stroke-width: 2.2; }
+  .sim-svg .ci-miss { stroke: var(--bad); stroke-width: 2.8; }
+  .sim-svg .dot-hit { fill: var(--ok); }
+  .sim-svg .dot-miss { fill: var(--bad); }
+
+  .sim-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.6rem; }
+  .sim-ctl label { display: flex; justify-content: space-between; font-weight: 500; color: var(--primary-dark); }
+  .sim-ctl output { font-weight: 600; color: var(--ink); }
+  .sim-ctl input[type="range"] { width: 100%; accent-color: var(--primary); margin: .3rem 0 0; }
+  .sim-btns { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+  .sim-btns .btn.sm, .sim-presets .btn.sm { padding: .4rem .9rem; font-size: .9rem; text-transform: none; letter-spacing: .3px; }
+  .sim-presets { margin-top: .8rem; display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; color: var(--muted); font-weight: 300; }
+  .sim-svg { width: 100%; height: auto; display: block; }
+  .sim-svg text { font-family: 'Oswald', 'Arial Narrow', Arial, sans-serif; font-size: 12px; fill: var(--muted); }
+  .sim-svg .axis { stroke: var(--muted); stroke-width: 1; }
+  .sim-svg .grid { stroke: var(--line); stroke-width: 1; }
+  .sim-svg .bar { fill: var(--primary); opacity: .75; stroke: var(--card); stroke-width: .5; }
+  .sim-svg .curve { fill: none; stroke: var(--warn); stroke-width: 2.5; }
+  .sim-svg .truep { stroke: var(--ok); stroke-width: 2; stroke-dasharray: 5 4; }
+  .sim-svg .lab { fill: var(--ink); font-size: 13px; }
+  .legend { display: flex; flex-wrap: wrap; gap: .4rem 1.2rem; justify-content: center; font-weight: 300; font-size: .95rem; margin-top: .3rem; }
+  .legend i { display: inline-block; width: 18px; height: 10px; margin-right: .4rem; border-radius: 2px; vertical-align: middle; }
+  .sim-last { background: var(--primary-soft); border-left: 5px solid var(--primary); border-radius: 6px; padding: .5rem 1rem; margin: .8rem 0; font-weight: 400; }
+  .sim-status { padding: .5rem 1rem; border-radius: 6px; margin-top: .8rem; font-weight: 400; }
+  .sim-status.good { background: var(--ok-bg); color: var(--ok-ink); border-left: 5px solid var(--ok); }
+  .sim-status.warn { background: var(--warn-bg); color: var(--warn-ink); border-left: 5px solid var(--warn); }
+  details.explore { border: 1px solid var(--line); border-radius: 8px; padding: .4rem 1rem; margin: .6rem 0; background: var(--card); }
+  details.explore summary { cursor: pointer; font-weight: 500; color: var(--primary-dark); }
+  details.explore[open] summary { margin-bottom: .3rem; }
+  @media (max-width: 640px) { .sim-grid { grid-template-columns: 1fr; } }
+  .group-title { margin: 1.6rem 0 .8rem; color: var(--primary-dark); font-weight: 500; font-size: 1.3rem; border-bottom: 2px solid var(--line); padding-bottom: .2rem; }
+
+  .sim-svg .a-alpha { fill: var(--bad); opacity: .55; }
+  .sim-svg .a-beta { fill: var(--warn); opacity: .45; }
+  .sim-svg .a-power { fill: var(--ok); opacity: .5; }
+  .sim-svg .c-null { fill: none; stroke: var(--primary); stroke-width: 2.5; }
+  .sim-svg .c-true { fill: none; stroke: var(--warn); stroke-width: 2.5; }
+  .sim-svg .crit { stroke: var(--ink); stroke-width: 1.6; stroke-dasharray: 5 4; }
+
+</style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+
+<header>
+  <h1>Lincoln International Academy</h1>
+  <p class="class-name">AP Statistics &middot; Unit 3: Lessons 3.9&ndash;3.11</p>
+  <p class="details">Inference for the Difference of Two Population Proportions &middot; Teacher: Eduardo Vásquez</p>
+</header>
+
+<main>
+  <div class="tabs" role="tablist" aria-label="Page sections">
+    <button class="tab-btn" role="tab" id="tab-learn" aria-controls="panel-learn" aria-selected="true">Lesson &amp; Examples</button>
+    <button class="tab-btn" role="tab" id="tab-sim" aria-controls="panel-sim" aria-selected="false" tabindex="-1">Sampling Sim</button>
+    <button class="tab-btn" role="tab" id="tab-ci" aria-controls="panel-ci" aria-selected="false" tabindex="-1">CI Sim</button>
+    <button class="tab-btn" role="tab" id="tab-practice" aria-controls="panel-practice" aria-selected="false" tabindex="-1">Practice</button>
+  </div>
+
+  <!-- ============ TAB 1: LESSON ============ -->
+  <section class="panel active" id="panel-learn" role="tabpanel" aria-labelledby="tab-learn">
+    <div class="card">
+      <h2>Comparing Two Population Proportions</h2>
+      <p>So far, Unit 3 has dealt with <em>one</em> population proportion. Many real questions compare <strong>two groups</strong>: Is the proportion of patients who recover higher with Drug A than with Drug B? Do two cities differ in support for a proposal? Lessons 3.9&ndash;3.11 extend what you know to the <strong>difference between two population proportions</strong>, <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>: first its sampling distribution (3.9), then a confidence interval (3.10), and then using the interval to justify claims (3.11).</p>
+      <p><strong>Objectives</strong></p>
+      <ul>
+        <li>Describe the center, spread and shape of the sampling distribution of the difference of two sample proportions, and verify its conditions.</li>
+        <li>Identify the procedure and the parameter, verify conditions, and construct a confidence interval for the difference of two population proportions (standard error and margin of error).</li>
+        <li>Interpret the interval in context and justify a claim about the difference, including what it means when 0 is or is not in the interval.</li>
+      </ul>
+      <div class="formula">
+        &mu;<sub><span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub></sub> = <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>
+        &nbsp;&nbsp;&nbsp;
+        &sigma; = &radic;<span class="rad"><em>p</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>)/<em>n</em><sub>1</sub> + <em>p</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>)/<em>n</em><sub>2</sub></span>
+        <small>Variances add, even though the proportions are subtracted.</small>
+      </div>
+      <p class="ref"><strong>References:</strong> the unit&rsquo;s earlier lessons on one proportion (3.1&ndash;3.8), the course yearly plan for Unit 3, and Barron&rsquo;s <em>AP Statistics</em> &mdash; the chapters on sampling distributions and on inference for the difference of two proportions. Use the topics, not the chapter order, to find the matching sections.</p>
+    </div>
+
+    <!-- ===== 3.9 ===== -->
+    <h2 class="group-title">Lesson 3.9 &mdash; Sampling distribution of a difference in sample proportions</h2>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.9</span>
+      <h3>From one proportion to two</h3>
+      <p>We have two populations (or two treatments) with population proportions <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub>, and we take an independent random sample of size <em>n</em><sub>1</sub> from the first and <em>n</em><sub>2</sub> from the second, getting sample proportions <span class="hat">p</span><sub>1</sub> and <span class="hat">p</span><sub>2</sub>. The statistic of interest is the <strong>difference</strong> <span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub>, and its sampling distribution describes how that difference varies from pair of samples to pair of samples.</p>
+      <div class="table-wrap">
+        <table class="data" style="text-align:left">
+          <tr><th>Feature</th><th>Sampling distribution of <span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub></th></tr>
+          <tr><td><strong>Center</strong></td><td>&mu; = <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>: the difference of sample proportions is an <strong>unbiased</strong> estimator of the difference of population proportions.</td></tr>
+          <tr><td><strong>Spread</strong></td><td>&sigma; = &radic;( <em>p</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>)/<em>n</em><sub>1</sub> + <em>p</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>)/<em>n</em><sub>2</sub> ), valid when the samples are independent.</td></tr>
+          <tr><td><strong>Shape</strong></td><td>approximately Normal when the large counts conditions hold in <em>both</em> groups.</td></tr>
+        </table>
+      </div>
+      <div class="note"><strong>Why variances add:</strong> for independent random variables, Var(<em>X</em> &minus; <em>Y</em>) = Var(<em>X</em>) + Var(<em>Y</em>). The difference of two noisy statistics is <em>noisier</em> than either one, so &sigma;&sup2; = &sigma;<sub>1</sub>&sup2; + &sigma;<sub>2</sub>&sup2; and &sigma; = &radic;(&sigma;<sub>1</sub>&sup2; + &sigma;<sub>2</sub>&sup2;). Standard deviations themselves do not add.</div>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.9</span>
+      <h3>Conditions</h3>
+      <ul>
+        <li><strong>Random:</strong> each sample is a random sample from its population (sample survey).</li>
+        <li><strong>10% condition (two conditions, one for each sample):</strong> when sampling <em>without replacement</em>, <em>n</em><sub>1</sub> &le; 0.10<em>N</em><sub>1</sub> <u>and</u> <em>n</em><sub>2</sub> &le; 0.10<em>N</em><sub>2</sub>. This lets us treat the observations as independent.</li>
+        <li><strong>If the data come from an experiment</strong> instead of a sample survey: the subjects must be <strong>randomly assigned</strong> to the two treatment groups. The condition is fulfilled by using a random process (a random number generator, drawing names, a coin flip) to decide who gets which treatment. In an experiment no sample is drawn from a population, so the 10% condition is not needed.</li>
+        <li><strong>Independence between groups:</strong> the two samples (or groups) are independent of each other. <em>Paired</em> or repeated measurements on the same individuals are <em>not</em> independent, so these methods do not apply.</li>
+        <li><strong>Normality (large counts), in each group:</strong> <em>n</em><sub>1</sub><em>p</em><sub>1</sub> &ge; 10, <em>n</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>) &ge; 10, <em>n</em><sub>2</sub><em>p</em><sub>2</sub> &ge; 10 and <em>n</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>) &ge; 10.</li>
+      </ul>
+      <p>When the conditions hold, probabilities come from a Normal model, with a z-score of the form</p>
+      <div class="formula"><em>z</em> = <span class="frac"><span>(<span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub>) &minus; (<em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>)</span><span>&sigma;<sub><span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub></sub></span></span></div>
+      <p>The <strong>Sampling Sim</strong> tab builds this sampling distribution one pair of samples at a time.</p>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.9</span>
+      <h3>Interpreting the mean, SD and probabilities in context</h3>
+      <p>These numbers describe what happens over <strong>repeated pairs of independent random samples</strong> (or repeated random assignments in an experiment) of the given sizes, so always interpret them in that context:</p>
+      <ul>
+        <li><strong>Mean:</strong> &ldquo;Over repeated pairs of random samples, the difference in the sample proportions of [success] for [group 1] and [group 2] is centered at <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, the true difference.&rdquo;</li>
+        <li><strong>Standard deviation:</strong> &ldquo;The difference in the sample proportions typically varies by about &sigma; from the true difference <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> from one pair of samples to the next.&rdquo;</li>
+        <li><strong>Probability:</strong> &ldquo;About __ % of all possible pairs of independent random samples of these sizes would give a difference [as large as / as small as] the one described.&rdquo;</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 1 &mdash; Mean, standard deviation and a probability</div>
+      <p>The proportion of customers satisfied with service is 0.60 for Store 1 and 0.50 for Store 2. Independent random samples of <em>n</em><sub>1</sub> = 100 and <em>n</em><sub>2</sub> = 120 customers are taken (each far less than 10% of the customers). (a) Describe the sampling distribution of <span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub>. (b) Find the probability that Store 1&rsquo;s sample proportion is <em>less</em> than Store 2&rsquo;s.</p>
+      <div class="solution">
+        <p><strong>Conditions:</strong> independent random samples, under 10% of each population; 100(0.60) = 60, 100(0.40) = 40, 120(0.50) = 60 and 120(0.50) = 60 are all &ge; 10. So the distribution is approximately Normal.</p>
+        <p><strong>(a)</strong> Mean = 0.60 &minus; 0.50 = <strong>0.10</strong>. &sigma; = &radic;(0.60 &middot; 0.40/100 + 0.50 &middot; 0.50/120) = &radic;(0.0024 + 0.002083) = &radic;0.004483 &asymp; <strong>0.0670</strong>.</p>
+        <p><strong>(b)</strong> P(<span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub> &lt; 0): <em>z</em> = (0 &minus; 0.10)/0.0670 &asymp; -1.493, so the probability is <strong>0.0677</strong>. About 6.8% of such pairs of samples would show Store 1 <em>lower</em>, even though Store 1 is really better.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 2 &mdash; Which situation allows the methods?</div>
+      <p>For each study, decide whether the independence between groups condition holds: (a) 40 students are randomly assigned to study with Method A or Method B and their pass/fail results are compared; (b) 60 shoppers are asked &ldquo;Do you like the new logo?&rdquo; before and after seeing an ad, and the proportions of &ldquo;yes&rdquo; are compared.</p>
+      <div class="solution">
+        <p>(a) Random assignment to two separate groups: independent groups, so the two-sample methods apply (check the large counts too: with only 20 per group the counts may be too small).</p>
+        <p>(b) The same people answer twice, so the two proportions are <strong>dependent (paired)</strong>: the two-sample procedures for proportions do <em>not</em> apply.</p>
+      </div>
+    </div>
+
+    <!-- ===== 3.10 ===== -->
+    <h2 class="group-title">Lesson 3.10 &mdash; Confidence interval for a difference of two proportions</h2>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.10</span>
+      <h3>The two-sample z-interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub></h3>
+      <p>We do not know <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub>, so we use the sample proportions in the standard deviation. The estimated standard deviation is the <strong>standard error</strong>, and the interval is <em>point estimate &plusmn; margin of error</em>:</p>
+      <div class="formula">
+        (<span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub>) &plusmn; <em>z</em>* &middot; SE
+        <small>SE = &radic;( <span class="hat">p</span><sub>1</sub>(1 &minus; <span class="hat">p</span><sub>1</sub>)/<em>n</em><sub>1</sub> + <span class="hat">p</span><sub>2</sub>(1 &minus; <span class="hat">p</span><sub>2</sub>)/<em>n</em><sub>2</sub> ) &nbsp;|&nbsp; ME = <em>z</em>* &middot; SE</small>
+      </div>
+      <ul>
+        <li>The calculator command is <code>2-PropZInt</code>: enter <em>x</em><sub>1</sub>, <em>n</em><sub>1</sub>, <em>x</em><sub>2</sub>, <em>n</em><sub>2</sub> and the confidence level.</li>
+        <li>Critical values <em>z</em>*: 90% &rarr; 1.645, 95% &rarr; 1.960, 99% &rarr; 2.576.</li>
+        <li>Use the <strong>sample proportions separately</strong> (no pooling) in an interval.</li>
+        <li>The <strong>order of subtraction matters</strong>: define which group is group 1. Reversing the order flips the signs of both limits.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.10</span>
+      <h3>Conditions and write-up</h3>
+      <p>Four conditions must be met for a two-sample <em>z</em>-interval:</p>
+      <ol class="steps">
+        <li><strong>Random:</strong> two random samples from the two populations, <em>or</em> subjects randomly assigned to two treatments in an experiment.</li>
+        <li><strong>10% condition:</strong> <em>n</em><sub>1</sub> &le; 0.10<em>N</em><sub>1</sub> <u>and</u> <em>n</em><sub>2</sub> &le; 0.10<em>N</em><sub>2</sub> (both samples). <em>Unnecessary in a randomized experiment</em>, where nothing is sampled without replacement from a population.</li>
+        <li><strong>Independent groups:</strong> the two samples (or treatment groups) are independent of each other (not paired).</li>
+        <li><strong>Large counts:</strong> at least 10 successes <em>and</em> 10 failures in each sample: <em>n</em><sub>1</sub><span class="hat">p</span><sub>1</sub>, <em>n</em><sub>1</sub>(1 &minus; <span class="hat">p</span><sub>1</sub>), <em>n</em><sub>2</sub><span class="hat">p</span><sub>2</sub> and <em>n</em><sub>2</sub>(1 &minus; <span class="hat">p</span><sub>2</sub>) all &ge; 10.</li>
+      </ol>
+      <ol class="steps">
+        <li><strong>Parameter:</strong> define <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub> in context, naming each population or treatment group and what counts as a success (which group is 1, which is 2), and state the parameter <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>.</li>
+        <li><strong>Procedure:</strong> two-sample <em>z</em>-interval for a difference of two population proportions.</li>
+        <li><strong>Checks:</strong> random, 10% for both samples (not needed in an experiment), independent groups, and the four large-counts checks.</li>
+        <li><strong>Mechanics:</strong> <span class="hat">p</span><sub>1</sub>, <span class="hat">p</span><sub>2</sub>, SE, ME and the interval (or <code>2-PropZInt</code>).</li>
+        <li><strong>Conclusion in context:</strong> &ldquo;We are <em>C</em>% confident that the interval from ___ to ___ captures the true difference in the proportion of [population 1] who [success] and the proportion of [population 2] who [success].&rdquo;</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 3 &mdash; A 95% interval from two random samples</div>
+      <p>A random sample of 200 adults who used a sleep app and an independent random sample of 220 adults who did not were asked whether they sleep better. In the app group 124 said yes; in the other group 110 said yes. Construct and interpret a 95% confidence interval for the difference in the proportions of all such adults who sleep better.</p>
+      <div class="solution">
+        <p><strong>Parameter:</strong> let <em>p</em><sub>1</sub> = the proportion of all adults who use the app and report better sleep, and <em>p</em><sub>2</sub> = the proportion of all adults who do not use the app and report better sleep. We estimate <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>.</p>
+        <p><strong>Procedure:</strong> two-sample <em>z</em>-interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>.</p>
+        <p><strong>Checks:</strong> independent random samples (we assume each is under 10% of its population); counts 124, 76, 110 and 110 are all &ge; 10.</p>
+        <p><strong>Mechanics:</strong> <span class="hat">p</span><sub>1</sub> = 124/200 = 0.62, <span class="hat">p</span><sub>2</sub> = 110/220 = 0.50, difference = 0.12. SE = &radic;(0.62(0.3800)/200 + 0.50(0.5000)/220) &asymp; 0.0481. ME = 1.96(0.0481) &asymp; 0.0943. Interval = 0.12 &plusmn; 0.0943 = <strong>(0.026, 0.214)</strong>.</p>
+        <p><strong>Conclusion:</strong> we are 95% confident that the interval from 0.026 to 0.214 captures the true difference in the proportion of all adults who use the app and sleep better and the proportion of all adults who do not use the app and sleep better.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 4 &mdash; A 90% interval from a randomized experiment</div>
+      <p>120 patients were randomly assigned to Drug A and 130 to Drug B. In group A 78 recovered; in group B 65 recovered. Construct a 90% confidence interval for the difference in the recovery proportions (A minus B).</p>
+      <div class="solution">
+        <p><strong>Parameter:</strong> <em>p</em><sub>A</sub> &minus; <em>p</em><sub>B</sub>, the difference in the true recovery proportions for patients like these given Drug A and Drug B.</p>
+        <p><strong>Checks:</strong> subjects were randomly assigned to the two treatments; counts 78, 42, 65 and 65 are all &ge; 10.</p>
+        <p><strong>Mechanics:</strong> <span class="hat">p</span><sub>A</sub> = 0.65, <span class="hat">p</span><sub>B</sub> = 0.50, difference = 0.15. SE &asymp; 0.0618, ME = 1.645(0.0618) &asymp; 0.1017. Interval = <strong>(0.048, 0.252)</strong>.</p>
+        <p><strong>Conclusion:</strong> we are 90% confident that the interval from 0.048 to 0.252 captures the true difference in the recovery proportion for patients given Drug A and for those given Drug B.</p>
+      </div>
+    </div>
+
+    <!-- ===== 3.11 ===== -->
+    <h2 class="group-title">Lesson 3.11 &mdash; Justifying a claim from the interval</h2>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.11</span>
+      <h3>Interpreting the interval and the confidence level</h3>
+      <ul>
+        <li><strong>The interval:</strong> &ldquo;We are <em>C</em>% confident that the interval from <em>a</em> to <em>b</em> captures the true difference in the proportion of [population 1] who [success] and the proportion of [population 2] who [success].&rdquo; Always state the order of subtraction.</li>
+        <li><strong>The confidence level:</strong> if we repeatedly took independent random samples of these sizes from the two populations and built an interval from each pair, about <em>C</em>% of the intervals would capture the true difference <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>.</li>
+        <li><strong>Why can an interval miss the true difference?</strong> Random sampling variability: some pairs of random samples give sample proportions far from the population proportions, so about (100 &minus; <em>C</em>)% of the intervals do not contain the true difference.</li>
+        <li><strong>Still wrong:</strong> &ldquo;There is a <em>C</em>% probability that the true difference is in this interval&rdquo;; &ldquo;<em>C</em>% of the sample differences are in this interval&rdquo;.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <span class="lesson-tag">LESSON 3.11</span>
+      <h3>What the interval says about a claim</h3>
+      <p>A confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is a set of <strong>plausible values</strong> for the true difference, so it can be used to evaluate a claim about whether a difference exists. The key value to look for is <strong>0</strong>, which means &ldquo;no difference&rdquo; (<em>p</em><sub>1</sub> = <em>p</em><sub>2</sub>).</p>
+      <div class="table-wrap">
+        <table class="data" style="text-align:left">
+          <tr><th>The interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub></th><th>Conclusion</th></tr>
+          <tr><td>contains 0 (for example (&minus;0.13, 0.07))</td><td>0 is plausible: <strong>not convincing evidence</strong> of a difference between the population proportions. (We do not conclude they are equal.)</td></tr>
+          <tr><td>all values positive (for example (0.03, 0.21))</td><td><strong>Convincing evidence</strong> that <em>p</em><sub>1</sub> &gt; <em>p</em><sub>2</sub>: group 1 has the higher proportion.</td></tr>
+          <tr><td>all values negative (for example (&minus;0.20, &minus;0.04))</td><td><strong>Convincing evidence</strong> that <em>p</em><sub>1</sub> &lt; <em>p</em><sub>2</sub>.</td></tr>
+        </table>
+      </div>
+      <ul>
+        <li>The interval also gives the <strong>plausible size</strong> of the difference: an interval such as (0.002, 0.118) excludes 0 but allows a tiny difference, so judge <em>practical</em> importance from the whole interval.</li>
+        <li><strong>Scope of the conclusion:</strong> random sampling lets us generalize to the populations; <em>random assignment</em> in a randomized experiment lets us conclude that the treatment <em>caused</em> the difference. Without random assignment, do not claim causation.</li>
+        <li><strong>Do not compare two separate intervals</strong> (for <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub>) to judge a difference. Build one interval for the difference.</li>
+      </ul>
+      <div class="table-wrap">
+        <table class="data" style="text-align:left">
+          <caption>What changes the interval?</caption>
+          <tr><th>Change</th><th>Effect on the margin of error / width</th></tr>
+          <tr><td>Higher confidence level (larger <em>z</em>*)</td><td>wider</td></tr>
+          <tr><td>Larger sample sizes <em>n</em><sub>1</sub>, <em>n</em><sub>2</sub></td><td>narrower (ME is divided by &radic; of the multiplier)</td></tr>
+          <tr><td>Proportions closer to 0.5</td><td>wider</td></tr>
+        </table>
+      </div>
+      <p>The <strong>CI Sim</strong> tab shows repeated intervals for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, how often they capture the true difference, and how often they contain 0.</p>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 5 &mdash; Does the interval show a difference?</div>
+      <p>(a) In Example 3, the 95% interval for the difference in the proportions of adults who sleep better (app minus no app) is (0.026, 0.214). (b) Independent random samples of 150 students from School A and 180 from School B are asked whether they walk to school; 48 and 63 walk. A 95% interval for <em>p</em><sub>A</sub> &minus; <em>p</em><sub>B</sub> is (&minus;0.132, 0.072). What does each interval say?</p>
+      <div class="solution">
+        <p><strong>(a)</strong> All plausible values are positive and 0 is not in the interval, so there is convincing evidence that the proportion of adults who sleep better is <em>greater</em> for those who use the app, by roughly 3 to 21 percentage points. (Because these were random samples, not a randomized experiment, we cannot conclude the app <em>caused</em> the improvement.)</p>
+        <p><strong>(b)</strong> The interval (&minus;0.132, 0.072) contains 0, so &ldquo;no difference&rdquo; is plausible: there is <strong>not</strong> convincing evidence that the proportions of students who walk differ between the two schools. We do not conclude the proportions are equal; the data are simply consistent with no difference.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="example-title">Example 6 &mdash; Confidence level, sample size and a claim</div>
+      <p>A 95% interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.03, 0.15). (a) What are the point estimate and the margin of error? (b) A researcher claims the difference is <em>more than 0.05</em>. Is that claim justified? (c) What would happen to the margin of error if both samples were four times as large?</p>
+      <div class="solution">
+        <p><strong>(a)</strong> Point estimate = (0.03 + 0.15)/2 = 0.09; ME = (0.15 &minus; 0.03)/2 = 0.06.</p>
+        <p><strong>(b)</strong> No. Values from 0.03 to 0.05 are plausible, so the interval does not provide convincing evidence that the difference exceeds 0.05 (it does show that the difference is positive).</p>
+        <p><strong>(c)</strong> SE is divided by &radic;4 = 2, so the margin of error becomes 0.06/2 = 0.03.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============ TAB 2: SAMPLING SIMULATION ============ -->
+  <section class="panel" id="panel-sim" role="tabpanel" aria-labelledby="tab-sim" hidden>
+    <div class="card">
+      <h2>Simulation: sampling distribution of <span class="hat">p</span><sub>1</sub> &minus; <span class="hat">p</span><sub>2</sub></h2>
+      <p>Choose the two population proportions and the two sample sizes. Each click draws independent random samples from both populations and records the difference of the sample proportions. Compare the histogram with the Lesson 3.9 predictions: center <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, spread &radic;(<em>p</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>)/<em>n</em><sub>1</sub> + <em>p</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>)/<em>n</em><sub>2</sub>), and an approximately Normal shape when all four large counts are at least 10.</p>
+    </div>
+    <div class="card">
+      <div class="sim-grid">
+        <div class="sim-ctl"><label for="s1P1"><span>Population 1: <em>p</em><sub>1</sub></span> <output id="s1P1Out" for="s1P1">0.60</output></label><input type="range" id="s1P1" min="0.05" max="0.95" step="0.01" value="0.60"></div>
+        <div class="sim-ctl"><label for="s1N1"><span>Sample size <em>n</em><sub>1</sub></span> <output id="s1N1Out" for="s1N1">100</output></label><input type="range" id="s1N1" min="10" max="600" step="1" value="100"></div>
+        <div class="sim-ctl"><label for="s1P2"><span>Population 2: <em>p</em><sub>2</sub></span> <output id="s1P2Out" for="s1P2">0.50</output></label><input type="range" id="s1P2" min="0.05" max="0.95" step="0.01" value="0.50"></div>
+        <div class="sim-ctl"><label for="s1N2"><span>Sample size <em>n</em><sub>2</sub></span> <output id="s1N2Out" for="s1N2">120</output></label><input type="range" id="s1N2" min="10" max="600" step="1" value="120"></div>
+      </div>
+      <div class="sim-btns">
+        <button class="btn" type="button" data-s1="1">Draw 1 pair</button>
+        <button class="btn" type="button" data-s1="10">Draw 10</button>
+        <button class="btn" type="button" data-s1="100">Draw 100</button>
+        <button class="btn" type="button" data-s1="1000">Draw 1000</button>
+        <button class="btn secondary" type="button" id="s1Reset">Clear samples</button>
+      </div>
+      <div class="sim-presets">Try:
+        <button class="btn secondary sm" type="button" data-s1pre="0.6,100,0.5,120">Base case</button>
+        <button class="btn secondary sm" type="button" data-s1pre="0.6,400,0.5,480">4&times; the samples</button>
+        <button class="btn secondary sm" type="button" data-s1pre="0.5,100,0.5,100">No difference (<em>p</em><sub>1</sub> = <em>p</em><sub>2</sub>)</button>
+        <button class="btn secondary sm" type="button" data-s1pre="0.08,40,0.3,50">Small counts</button>
+      </div>
+      <p class="note" style="margin-top:.8rem">Changing a setting clears the samples.</p>
+    </div>
+    <div class="card">
+      <div class="sim-last" id="s1Last" aria-live="polite">Press &ldquo;Draw 1 pair&rdquo; to start.</div>
+      <svg class="sim-svg" id="s1Svg" viewBox="0 0 640 320" role="img" aria-label="Histogram of simulated differences of sample proportions with the Normal curve predicted by theory"></svg>
+      <div class="legend">
+        <span><i style="background:var(--primary);opacity:.75"></i>Simulated differences</span>
+        <span><i style="background:var(--warn)"></i>Normal model (mean and SD from theory)</span>
+        <span><i style="background:var(--ok)"></i>True <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub></span>
+      </div>
+      <div class="table-wrap" style="margin-top:.8rem">
+        <table class="data">
+          <caption>Simulation results vs. theory</caption>
+          <tr><th></th><th>Simulated</th><th>Theory (Lesson 3.9)</th></tr>
+          <tr><th>Number of pairs of samples</th><td id="s1Count">0</td><td>&mdash;</td></tr>
+          <tr><th>Mean of the differences</th><td id="s1Mean">&mdash;</td><td id="s1ThMean">&mdash;</td></tr>
+          <tr><th>SD of the differences</th><td id="s1Sd">&mdash;</td><td id="s1ThSd">&mdash;</td></tr>
+          <tr><th>Within 2 SD of the true difference</th><td id="s1In2">&mdash;</td><td>about 95% if Normal</td></tr>
+        </table>
+      </div>
+      <div class="sim-status" id="s1Status" role="status" aria-live="polite"></div>
+    </div>
+    <div class="card">
+      <h3>Explore (click to check your idea)</h3>
+      <details class="explore"><summary>1. Base case: what are the mean and SD of the simulated differences?</summary><p>The mean is close to 0.10 and the SD is close to 0.067 (&radic;(0.0024 + 0.00208)). About 94&ndash;96% of the differences are within 2 SD of 0.10.</p></details>
+      <details class="explore"><summary>2. What happens to the center and the spread if both sample sizes are multiplied by 4?</summary><p>The center stays at 0.10. The SD is cut in half (0.067 &rarr; 0.034).</p></details>
+      <details class="explore"><summary>3. Set <em>p</em><sub>1</sub> = <em>p</em><sub>2</sub>. Where is the distribution centered? How often is the sample difference negative?</summary><p>It is centered at 0, and about half of the sample differences are negative: with no real difference, the samples differ by chance in either direction.</p></details>
+      <details class="explore"><summary>4. Use &ldquo;Small counts&rdquo;. Is the distribution Normal?</summary><p>No: with <em>n</em><sub>1</sub><em>p</em><sub>1</sub> = 3.2 the distribution is lumpy and skewed, so the Normal model is not appropriate.</p></details>
+    </div>
+  </section>
+
+  <!-- ============ TAB 3: CI SIMULATION ============ -->
+  <section class="panel" id="panel-ci" role="tabpanel" aria-labelledby="tab-ci" hidden>
+    <div class="card">
+      <h2>Simulation: confidence intervals for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub></h2>
+      <p>Each click takes independent random samples from the two populations and builds a two-sample <em>z</em>-interval for the difference. A <span style="color:var(--ok-ink);font-weight:500">green</span> interval captures the true difference (solid line); a <span style="color:var(--bad-ink);font-weight:500">red</span> one misses it. The dashed line marks <strong>0</strong> (no difference): an interval that does not contain 0 would lead us to conclude that the populations differ.</p>
+    </div>
+    <div class="card">
+      <div class="sim-grid">
+        <div class="sim-ctl"><label for="c1P1"><span>Population 1: <em>p</em><sub>1</sub></span> <output id="c1P1Out" for="c1P1">0.60</output></label><input type="range" id="c1P1" min="0.05" max="0.95" step="0.01" value="0.60"></div>
+        <div class="sim-ctl"><label for="c1N1"><span>Sample size <em>n</em><sub>1</sub></span> <output id="c1N1Out" for="c1N1">150</output></label><input type="range" id="c1N1" min="10" max="800" step="1" value="150"></div>
+        <div class="sim-ctl"><label for="c1P2"><span>Population 2: <em>p</em><sub>2</sub></span> <output id="c1P2Out" for="c1P2">0.50</output></label><input type="range" id="c1P2" min="0.05" max="0.95" step="0.01" value="0.50"></div>
+        <div class="sim-ctl"><label for="c1N2"><span>Sample size <em>n</em><sub>2</sub></span> <output id="c1N2Out" for="c1N2">150</output></label><input type="range" id="c1N2" min="10" max="800" step="1" value="150"></div>
+        <div class="sim-ctl"><label for="c1C"><span>Confidence level</span></label>
+          <select id="c1C"><option value="90">90% (z* = 1.645)</option><option value="95" selected>95% (z* = 1.960)</option><option value="99">99% (z* = 2.576)</option></select></div>
+      </div>
+      <div class="sim-btns">
+        <button class="btn" type="button" data-c1="1">Draw 1 interval</button>
+        <button class="btn" type="button" data-c1="20">Draw 20</button>
+        <button class="btn" type="button" data-c1="100">Draw 100</button>
+        <button class="btn" type="button" data-c1="1000">Draw 1000</button>
+        <button class="btn secondary" type="button" id="c1Reset">Clear intervals</button>
+      </div>
+      <div class="sim-presets">Try:
+        <button class="btn secondary sm" type="button" data-c1pre="0.6,150,0.5,150,95">Base case</button>
+        <button class="btn secondary sm" type="button" data-c1pre="0.6,600,0.5,600,95">Larger samples</button>
+        <button class="btn secondary sm" type="button" data-c1pre="0.5,150,0.5,150,95">No real difference</button>
+        <button class="btn secondary sm" type="button" data-c1pre="0.6,150,0.5,150,99">99% level</button>
+      </div>
+      <p class="note" style="margin-top:.8rem">Changing a setting clears the intervals. The picture shows the latest 100 intervals; the table counts all of them.</p>
+    </div>
+    <div class="card">
+      <div class="sim-last" id="c1Last" aria-live="polite">Press &ldquo;Draw 1 interval&rdquo; to start.</div>
+      <svg class="sim-svg" id="c1Svg" viewBox="0 0 640 460" role="img" aria-label="Confidence intervals for the difference of two proportions; green ones capture the true difference and red ones miss it"></svg>
+      <div class="legend">
+        <span><i style="background:var(--ok)"></i>Captures the true difference</span>
+        <span><i style="background:var(--bad)"></i>Misses it</span>
+        <span><i style="background:transparent;border-top:2px solid var(--ink);height:0"></i>True <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub></span>
+        <span><i style="background:transparent;border-top:2px dashed var(--muted);height:0"></i>0 (no difference)</span>
+      </div>
+      <div class="table-wrap" style="margin-top:.8rem">
+        <table class="data">
+          <caption>Results of all intervals drawn</caption>
+          <tr><th>Intervals drawn</th><td id="c1Count">0</td></tr>
+          <tr><th>Intervals that capture the true difference</th><td id="c1Hits">&mdash;</td></tr>
+          <tr><th>Percent that capture it (expected: the confidence level)</th><td id="c1Pct">&mdash;</td></tr>
+          <tr><th>Intervals that contain 0</th><td id="c1Zero">&mdash;</td></tr>
+          <tr><th>Average margin of error</th><td id="c1ME">&mdash;</td></tr>
+        </table>
+      </div>
+      <div class="sim-status" id="c1Status" role="status" aria-live="polite"></div>
+    </div>
+    <div class="card">
+      <h3>Explore (click to check your idea)</h3>
+      <details class="explore"><summary>1. Base case at 95%: what percentage of the intervals capture the true difference? What percentage contain 0?</summary><p>About 95% capture the true difference (0.10). Since the true difference is not 0, intervals that contain 0 are the ones where we would <em>fail</em> to detect it: with samples of 150, roughly half of the intervals contain 0, because the difference is not much larger than the margin of error.</p></details>
+      <details class="explore"><summary>2. Increase both sample sizes to 600. What changes?</summary><p>The intervals are about half as wide and the capture rate is still about 95%. Far fewer intervals contain 0, so we detect the difference much more often.</p></details>
+      <details class="explore"><summary>3. Set <em>p</em><sub>1</sub> = <em>p</em><sub>2</sub> (&ldquo;No real difference&rdquo;). How many intervals contain 0?</summary><p>About 95% of them: the true difference is 0, so &ldquo;contains 0&rdquo; is the same as &ldquo;captures the true difference&rdquo;. The other 5% would wrongly suggest a difference.</p></details>
+      <details class="explore"><summary>4. Change the confidence level to 99%. What happens?</summary><p>Fewer intervals miss the true difference (about 1%), but each interval is wider, and more of them contain 0.</p></details>
+    </div>
+  </section>
+
+
+  <!-- ============ TAB 4: PRACTICE ============ -->
+  <section class="panel" id="panel-practice" role="tabpanel" aria-labelledby="tab-practice" hidden>
+    <div class="card">
+      <h2>Practice Problems</h2>
+      <p>You have <strong>3 attempts</strong> for each problem and you get feedback right away. For multiple-choice problems, select one answer. For numeric problems, type a number (decimals, or a fraction like 3/8; negative answers are allowed). Percent answers should be entered as decimals (0.25, not 25%). Round as the problem says; a small rounding tolerance is allowed. In every problem the difference is <em>group 1 minus group 2</em>. Problems are grouped by lesson (3.9&ndash;3.11) and follow the style of the AP exam: sampling distributions, conditions, standard errors, intervals, interpretations and claims.</p>
+    </div>
+
+    <div class="scorebar">
+      <div>Solved: <strong id="solvedCount">0</strong> / <span id="totalCount"></span></div>
+      <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
+      <div>Points: <strong id="points">0</strong></div>
+    </div>
+
+    <div id="problems"></div>
+
+    <div class="card final" id="finalCard">
+      <h2>Practice complete!</h2>
+      <p id="finalMsg"></p>
+      <button class="btn secondary" id="resetBtn" data-lia-reset type="button">Try again</button>
+    </div>
+  </section>
+</main>
+
+<footer>Lincoln International Academy &middot; AP Statistics &middot; Lessons 3.9&ndash;3.11</footer>
+
+<script>
+/* ---------- Simulations for the difference of two proportions ---------- */
+(function () {
+  var NS = 'http://www.w3.org/2000/svg';
+  var $ = function (id) { return document.getElementById(id); };
+  function el(name, attrs, text) { var e = document.createElementNS(NS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (text !== undefined) e.textContent = text; return e; }
+  function niceStep(maxV, ticks) { var raw = maxV / ticks, mag = Math.pow(10, Math.floor(Math.log(raw) / Math.LN10)); var f = raw / mag, nf = f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10; return nf * mag; }
+  function binom(n, p) { var c = 0; for (var i = 0; i < n; i++) if (Math.random() < p) c++; return c; }
+  function sdiff(p1, n1, p2, n2) { return Math.sqrt(p1 * (1 - p1) / n1 + p2 * (1 - p2) / n2); }
+  function hat() { return 'p̂'; }
+
+  /* ===== Sampling distribution of the difference ===== */
+  (function () {
+    var svg = $('s1Svg'); if (!svg) return;
+    var W = 640, Hh = 320, ML = 48, MR = 14, MT = 14, MB = 44, diffs = [], last = null;
+    function P() { return { p1: parseFloat($('s1P1').value), n1: parseInt($('s1N1').value, 10), p2: parseFloat($('s1P2').value), n2: parseInt($('s1N2').value, 10) }; }
+    function draw(k) {
+      var q = P();
+      for (var i = 0; i < k; i++) { var a = binom(q.n1, q.p1), b = binom(q.n2, q.p2); last = { a: a, b: b }; diffs.push(a / q.n1 - b / q.n2); }
+      render();
+    }
+    function reset() { diffs = []; last = null; render(); }
+    function render() {
+      var q = P(), N = diffs.length, mu = q.p1 - q.p2, sg = sdiff(q.p1, q.n1, q.p2, q.n2);
+      $('s1P1Out').textContent = q.p1.toFixed(2); $('s1P2Out').textContent = q.p2.toFixed(2); $('s1N1Out').textContent = q.n1; $('s1N2Out').textContent = q.n2;
+      var lo = mu - 4.2 * sg, hi = mu + 4.2 * sg, B = 36, w = (hi - lo) / B, bins = []; for (var b = 0; b < B; b++) bins.push(0);
+      diffs.forEach(function (v) { var idx = Math.floor((v - lo) / w); bins[Math.max(0, Math.min(B - 1, idx))]++; });
+      function pdf(x) { return Math.exp(-0.5 * Math.pow((x - mu) / sg, 2)) / (sg * 2.50662827); }
+      var maxBar = Math.max.apply(null, bins), expMax = pdf(mu) * w * Math.max(N, 1);
+      var ymax = Math.max(maxBar, N ? expMax : 0, 5) * 1.12, step = niceStep(ymax, 5); ymax = Math.ceil(ymax / step) * step;
+      function X(v) { return ML + (v - lo) / (hi - lo) * (W - ML - MR); }
+      function Y(v) { return Hh - MB - v / ymax * (Hh - MB - MT); }
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      for (var t = 0; t <= ymax + 1e-9; t += step) {
+        svg.appendChild(el('line', { x1: ML, x2: W - MR, y1: Y(t), y2: Y(t), 'class': 'grid' }));
+        svg.appendChild(el('text', { x: ML - 6, y: Y(t) + 4, 'text-anchor': 'end' }, String(Math.round(t * 100) / 100)));
+      }
+      bins.forEach(function (c, j) { if (!c) return; var x1 = X(lo + j * w), x2 = X(lo + (j + 1) * w); svg.appendChild(el('rect', { x: x1, y: Y(c), width: Math.max(1, x2 - x1), height: Y(0) - Y(c), 'class': 'bar' })); });
+      svg.appendChild(el('line', { x1: ML, x2: W - MR, y1: Y(0), y2: Y(0), 'class': 'axis' }));
+      svg.appendChild(el('line', { x1: ML, x2: ML, y1: MT, y2: Y(0), 'class': 'axis' }));
+      var xs = niceStep(hi - lo, 7), first = Math.ceil(lo / xs - 1e-9) * xs;
+      for (var xv = first; xv <= hi + 1e-9; xv += xs) {
+        svg.appendChild(el('line', { x1: X(xv), x2: X(xv), y1: Y(0), y2: Y(0) + 5, 'class': 'axis' }));
+        svg.appendChild(el('text', { x: X(xv), y: Y(0) + 19, 'text-anchor': 'middle' }, (Math.abs(xv) < 1e-9 ? 0 : xv).toFixed(xs < 0.01 ? 3 : 2)));
+      }
+      svg.appendChild(el('text', { x: (ML + W - MR) / 2, y: Hh - 6, 'text-anchor': 'middle', 'class': 'lab' }, 'Difference of sample proportions ' + hat() + '₁ − ' + hat() + '₂'));
+      svg.appendChild(el('text', { x: 14, y: (MT + Y(0)) / 2, 'text-anchor': 'middle', 'class': 'lab', transform: 'rotate(-90 14 ' + ((MT + Y(0)) / 2) + ')' }, 'Number of pairs'));
+      if (N > 0) {
+        var d = ''; for (var i = 0; i <= 200; i++) { var xx = lo + (hi - lo) * i / 200; d += (i ? 'L' : 'M') + X(xx).toFixed(1) + ',' + Y(pdf(xx) * w * N).toFixed(1); }
+        svg.appendChild(el('path', { d: d, 'class': 'curve' }));
+      }
+      svg.appendChild(el('line', { x1: X(mu), x2: X(mu), y1: MT, y2: Y(0), 'class': 'truep' }));
+      $('s1Count').textContent = N; $('s1ThMean').textContent = mu.toFixed(4); $('s1ThSd').textContent = sg.toFixed(4);
+      if (N > 0) {
+        var m = diffs.reduce(function (a, b) { return a + b; }, 0) / N;
+        $('s1Mean').textContent = m.toFixed(4);
+        if (N > 1) { var v = diffs.reduce(function (a, b) { return a + (b - m) * (b - m); }, 0) / (N - 1); $('s1Sd').textContent = Math.sqrt(v).toFixed(4); } else $('s1Sd').textContent = '—';
+        var inside = diffs.filter(function (x) { return Math.abs(x - mu) <= 2 * sg + 1e-12; }).length; $('s1In2').textContent = (Math.round(inside / N * 1000) / 10) + '%';
+      } else { ['s1Mean', 's1Sd', 's1In2'].forEach(function (id) { $(id).textContent = '—'; }); }
+      $('s1Last').innerHTML = last === null ? 'Press “Draw 1 pair” to start.' :
+        'Last pair: ' + hat() + '₁ = ' + last.a + '/' + q.n1 + ' = <strong>' + (last.a / q.n1).toFixed(3) + '</strong>, ' + hat() + '₂ = ' + last.b + '/' + q.n2 + ' = <strong>' + (last.b / q.n2).toFixed(3) + '</strong> → difference = <strong>' + (last.a / q.n1 - last.b / q.n2).toFixed(3) + '</strong>';
+      var cs = [q.n1 * q.p1, q.n1 * (1 - q.p1), q.n2 * q.p2, q.n2 * (1 - q.p2)], ok = cs.every(function (c) { return c >= 10; });
+      var st = $('s1Status'); st.className = 'sim-status ' + (ok ? 'good' : 'warn');
+      st.innerHTML = 'Large counts: <em>n</em><sub>1</sub><em>p</em><sub>1</sub> = ' + cs[0].toFixed(1) + ', <em>n</em><sub>1</sub>(1 − <em>p</em><sub>1</sub>) = ' + cs[1].toFixed(1) + ', <em>n</em><sub>2</sub><em>p</em><sub>2</sub> = ' + cs[2].toFixed(1) + ', <em>n</em><sub>2</sub>(1 − <em>p</em><sub>2</sub>) = ' + cs[3].toFixed(1) + ' → ' +
+        (ok ? '<strong>all ≥ 10</strong>: the Normal model is appropriate.' : '<strong>not all ≥ 10</strong>: the distribution may be skewed or lumpy; the Normal model is not appropriate.');
+    }
+    ['s1P1', 's1N1', 's1P2', 's1N2'].forEach(function (id) { $(id).addEventListener('input', reset); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-s1]'), function (b) { b.addEventListener('click', function () { draw(parseInt(b.getAttribute('data-s1'), 10)); }); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-s1pre]'), function (b) { b.addEventListener('click', function () { var a = b.getAttribute('data-s1pre').split(','); $('s1P1').value = a[0]; $('s1N1').value = a[1]; $('s1P2').value = a[2]; $('s1N2').value = a[3]; reset(); }); });
+    $('s1Reset').addEventListener('click', reset);
+    render();
+  })();
+
+  /* ===== Confidence intervals for the difference ===== */
+  (function () {
+    var svg = $('c1Svg'); if (!svg) return;
+    var Z = { 90: 1.645, 95: 1.96, 99: 2.576 }, W = 640, Hh = 460, ML = 20, MR = 20, MT = 28, MB = 40, MAXROWS = 100;
+    var shown = [], total = 0, hits = 0, zeros = 0, sumME = 0, last = null;
+    function P() { return { p1: parseFloat($('c1P1').value), n1: parseInt($('c1N1').value, 10), p2: parseFloat($('c1P2').value), n2: parseInt($('c1N2').value, 10), C: parseInt($('c1C').value, 10) }; }
+    function draw(k) {
+      var q = P(), z = Z[q.C], mu = q.p1 - q.p2;
+      for (var i = 0; i < k; i++) {
+        var a = binom(q.n1, q.p1), b = binom(q.n2, q.p2), p1 = a / q.n1, p2 = b / q.n2;
+        var se = Math.sqrt(p1 * (1 - p1) / q.n1 + p2 * (1 - p2) / q.n2), me = z * se, d = p1 - p2;
+        var iv = { d: d, se: se, me: me, lo: d - me, hi: d + me, a: a, b: b };
+        iv.hit = iv.lo <= mu && mu <= iv.hi; iv.zero = iv.lo <= 0 && 0 <= iv.hi;
+        total++; if (iv.hit) hits++; if (iv.zero) zeros++; sumME += me;
+        shown.push(iv); if (shown.length > MAXROWS) shown.shift(); last = iv;
+      }
+      render();
+    }
+    function reset() { shown = []; total = 0; hits = 0; zeros = 0; sumME = 0; last = null; render(); }
+    function render() {
+      var q = P(), z = Z[q.C], mu = q.p1 - q.p2, sg = sdiff(q.p1, q.n1, q.p2, q.n2);
+      $('c1P1Out').textContent = q.p1.toFixed(2); $('c1P2Out').textContent = q.p2.toFixed(2); $('c1N1Out').textContent = q.n1; $('c1N2Out').textContent = q.n2;
+      var lo = mu - 6 * sg, hi = mu + 6 * sg;
+      if (lo > -3 * sg) lo = -3 * sg; if (hi < 3 * sg) hi = 3 * sg;
+      function X(v) { v = Math.max(lo, Math.min(hi, v)); return ML + (v - lo) / (hi - lo) * (W - ML - MR); }
+      var y0 = MT, y1 = Hh - MB, rowH = (y1 - y0) / MAXROWS;
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      var xs = niceStep(hi - lo, 7), first = Math.ceil(lo / xs - 1e-9) * xs;
+      for (var xv = first; xv <= hi + 1e-9; xv += xs) {
+        svg.appendChild(el('line', { x1: X(xv), x2: X(xv), y1: y0, y2: y1, 'class': 'grid' }));
+        svg.appendChild(el('text', { x: X(xv), y: y1 + 18, 'text-anchor': 'middle' }, (Math.abs(xv) < 1e-9 ? 0 : xv).toFixed(xs < 0.01 ? 3 : 2)));
+      }
+      svg.appendChild(el('line', { x1: ML, x2: W - MR, y1: y1, y2: y1, 'class': 'axis' }));
+      svg.appendChild(el('text', { x: (ML + W - MR) / 2, y: Hh - 6, 'text-anchor': 'middle', 'class': 'lab' }, 'Difference in proportions'));
+      shown.forEach(function (iv, i) {
+        var y = y0 + rowH * (i + 0.5);
+        svg.appendChild(el('line', { x1: X(iv.lo), x2: X(iv.hi), y1: y, y2: y, 'class': iv.hit ? 'ci-hit' : 'ci-miss' }));
+        svg.appendChild(el('circle', { cx: X(iv.d), cy: y, r: 1.8, 'class': iv.hit ? 'dot-hit' : 'dot-miss' }));
+      });
+      svg.appendChild(el('line', { x1: X(0), x2: X(0), y1: y0, y2: y1, stroke: 'var(--muted)', 'stroke-width': 1.6, 'stroke-dasharray': '5 4' }));
+      svg.appendChild(el('line', { x1: X(mu), x2: X(mu), y1: y0, y2: y1, stroke: 'var(--ink)', 'stroke-width': 1.8 }));
+      svg.appendChild(el('text', { x: X(mu), y: y0 - 8, 'text-anchor': 'middle', 'class': 'lab' }, 'true difference = ' + mu.toFixed(2)));
+      if (Math.abs(mu) > 1e-9) svg.appendChild(el('text', { x: X(0), y: y1 + 34, 'text-anchor': 'middle', 'class': 'lab' }, '0'));
+      $('c1Count').textContent = total;
+      $('c1Hits').textContent = total ? hits + ' of ' + total : '—';
+      $('c1Pct').textContent = total ? (hits / total * 100).toFixed(1) + '% (expected ' + q.C + '%)' : '—';
+      $('c1Zero').textContent = total ? zeros + ' of ' + total + ' (' + (zeros / total * 100).toFixed(1) + '%)' : '—';
+      $('c1ME').textContent = total ? (sumME / total).toFixed(4) : '—';
+      $('c1Last').innerHTML = last === null ? 'Press “Draw 1 interval” to start.' :
+        'Last pair of samples: ' + hat() + '₁ = ' + last.a + '/' + q.n1 + ', ' + hat() + '₂ = ' + last.b + '/' + q.n2 + '; difference = <strong>' + last.d.toFixed(3) + '</strong>; SE = ' + last.se.toFixed(4) + '; ME = ' + z + ' × ' + last.se.toFixed(4) + ' = ' + last.me.toFixed(4) +
+        '; interval = <strong>(' + last.lo.toFixed(3) + ', ' + last.hi.toFixed(3) + ')</strong> → ' + (last.hit ? '<strong style="color:var(--ok-ink)">captures the true difference ✓</strong>' : '<strong style="color:var(--bad-ink)">misses it ✗</strong>') +
+        (last.zero ? '; contains 0 (no difference is plausible)' : '; does not contain 0 (convincing evidence of a difference)');
+      var st = $('c1Status');
+      if (total < 30) { st.className = 'sim-status warn'; st.innerHTML = 'Draw more intervals (at least 100) to see the long-run capture rate settle near ' + q.C + '%.'; }
+      else {
+        var pct = hits / total * 100, tol = 3 * Math.sqrt(q.C * (100 - q.C) / total) + 0.5, good = Math.abs(pct - q.C) <= tol;
+        var cs = [q.n1 * q.p1, q.n1 * (1 - q.p1), q.n2 * q.p2, q.n2 * (1 - q.p2)];
+        st.className = 'sim-status ' + (good ? 'good' : 'warn');
+        st.innerHTML = good ? 'Capture rate <strong>' + pct.toFixed(1) + '%</strong> is close to the confidence level of ' + q.C + '%: the method works as advertised.'
+          : 'Capture rate <strong>' + pct.toFixed(1) + '%</strong> is far from ' + q.C + '%. Check the conditions: the counts (' + cs.map(function (c) { return c.toFixed(1); }).join(', ') + ') are too small for the <em>z</em>-interval.';
+      }
+    }
+    ['c1P1', 'c1N1', 'c1P2', 'c1N2'].forEach(function (id) { $(id).addEventListener('input', reset); });
+    $('c1C').addEventListener('change', reset);
+    Array.prototype.forEach.call(document.querySelectorAll('[data-c1]'), function (b) { b.addEventListener('click', function () { draw(parseInt(b.getAttribute('data-c1'), 10)); }); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-c1pre]'), function (b) { b.addEventListener('click', function () { var a = b.getAttribute('data-c1pre').split(','); $('c1P1').value = a[0]; $('c1N1').value = a[1]; $('c1P2').value = a[2]; $('c1N2').value = a[3]; $('c1C').value = a[4]; reset(); }); });
+    $('c1Reset').addEventListener('click', reset);
+    render();
+  })();
+})();
+</script>
+<script>
+(function () {
+  /* ---------- Tabs ---------- */
+  var tabs = [document.getElementById('tab-learn'), document.getElementById('tab-sim'), document.getElementById('tab-ci'), document.getElementById('tab-practice')];
+  function showTab(idx) {
+    tabs.forEach(function (t, i) {
+      var panel = document.getElementById(t.getAttribute('aria-controls'));
+      var on = i === idx;
+      t.setAttribute('aria-selected', on);
+      t.tabIndex = on ? 0 : -1;
+      panel.classList.toggle('active', on);
+      panel.hidden = !on;
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener('click', function () { showTab(i); });
+    t.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+        var n = (i + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        showTab(n); tabs[n].focus();
+      }
+    });
+  });
+
+  var MAX_ATTEMPTS = 3;
+  var GROUPS = {
+    '3.9': 'Lesson 3.9 \u2014 Sampling distribution of a difference in sample proportions',
+    '3.10': 'Lesson 3.10 \u2014 Confidence interval for a difference of two proportions',
+    '3.11': 'Lesson 3.11 \u2014 Justifying a claim from the interval'
+  };
+  var problems = [
+ {
+  "g": "3.9",
+  "q": "A researcher compares the proportion of students who walk to school in two different schools, using a random sample from each. Which of the following is a <strong>parameter</strong>?",
+  "opts": [
+   "The difference between the sample proportions <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>",
+   "The difference between the proportions of <em>all</em> students at the two schools who walk, <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>",
+   "The sample sizes <em>n</em><sub>1</sub> and <em>n</em><sub>2</sub>",
+   "The sample proportion <span class=\"hat\">p</span><sub>1</sub>"
+  ],
+  "ans": 1,
+  "hint": "Parameters describe populations; statistics describe samples.",
+  "sol": "A parameter describes a population: <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is the difference in the population proportions. <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> is a statistic."
+ },
+ {
+  "g": "3.9",
+  "q": "The mean of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> is&hellip;",
+  "opts": [
+   "<em>p</em><sub>1</sub> + <em>p</em><sub>2</sub>",
+   "<em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>",
+   "0",
+   "<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>"
+  ],
+  "ans": 1,
+  "hint": "Each <span class=\"hat\">p</span><sub>1</sub> is unbiased for <em>p</em><sub>1</sub>; subtract the means.",
+  "sol": "&mu;<sub><span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub></sub> = <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. The difference of sample proportions is an unbiased estimator of the difference of the population proportions."
+ },
+ {
+  "g": "3.9",
+  "q": "Which formula gives the standard deviation of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> for independent samples?",
+  "opts": [
+   "&radic;(<em>p</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>)/<em>n</em><sub>1</sub>) &minus; &radic;(<em>p</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>)/<em>n</em><sub>2</sub>)",
+   "&radic;(<em>p</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>)/<em>n</em><sub>1</sub> + <em>p</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>)/<em>n</em><sub>2</sub>)",
+   "&radic;(<em>p</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>)/<em>n</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>)/<em>n</em><sub>2</sub>)",
+   "(<em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>)/&radic;(<em>n</em><sub>1</sub> + <em>n</em><sub>2</sub>)"
+  ],
+  "ans": 1,
+  "hint": "Variances add, even when the statistics are subtracted.",
+  "sol": "For independent samples, the <strong>variances</strong> add: &sigma;&sup2; = <em>p</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>)/<em>n</em><sub>1</sub> + <em>p</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>)/<em>n</em><sub>2</sub>; then take the square root."
+ },
+ {
+  "g": "3.9",
+  "q": "Why is the standard deviation of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> found by <strong>adding</strong> the variances (instead of subtracting)?",
+  "opts": [
+   "Because the difference of two independent random quantities varies at least as much as each one alone: variances of independent variables always add",
+   "Because <em>p</em><sub>1</sub> is larger than <em>p</em><sub>2</sub>",
+   "Because standard deviations are always negative for differences",
+   "Because the samples are paired"
+  ],
+  "ans": 0,
+  "hint": "Think of the variability of two independent samples both contributing.",
+  "sol": "For independent random variables, Var(X &minus; Y) = Var(X) + Var(Y). Subtracting does not cancel variability; it adds uncertainty from both samples."
+ },
+ {
+  "g": "3.9",
+  "q": "Which set of conditions is needed to use the Normal model for the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>?",
+  "opts": [
+   "Two independent random samples (or two groups from a randomized experiment); each sample less than 10% of its population; and <em>n</em><sub>1</sub><em>p</em><sub>1</sub>, <em>n</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>), <em>n</em><sub>2</sub><em>p</em><sub>2</sub> and <em>n</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>) all at least 10",
+   "Only that <em>n</em><sub>1</sub> + <em>n</em><sub>2</sub> &ge; 30",
+   "The same people measured twice",
+   "Only that both population proportions are below 0.5"
+  ],
+  "ans": 0,
+  "hint": "Four large-counts checks, two independence checks.",
+  "sol": "Independence within and between the samples (random sampling or random assignment, 10% rule) and large counts in <em>each</em> group for both successes and failures."
+ },
+ {
+  "g": "3.9",
+  "q": "Two independent random samples (small compared with their populations) have <em>n</em><sub>1</sub> = 100, <em>p</em><sub>1</sub> = 0.6 and <em>n</em><sub>2</sub> = 120, <em>p</em><sub>2</sub> = 0.5. Is the large counts condition for the Normal model of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> satisfied?",
+  "opts": [
+   "Yes: all four counts are at least 10",
+   "No: <em>n</em><sub>1</sub><em>p</em><sub>1</sub> is less than 10",
+   "No: the sample sizes must be equal",
+   "Yes, because both samples are random"
+  ],
+  "ans": 0,
+  "hint": "Compute all four counts and compare each with 10.",
+  "sol": "Counts: <em>n</em><sub>1</sub><em>p</em><sub>1</sub> = 60, <em>n</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>) = 40, <em>n</em><sub>2</sub><em>p</em><sub>2</sub> = 60, <em>n</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>) = 60. All are &ge; 10: satisfied."
+ },
+ {
+  "g": "3.9",
+  "q": "Two independent random samples (small compared with their populations) have <em>n</em><sub>1</sub> = 150, <em>p</em><sub>1</sub> = 0.08 and <em>n</em><sub>2</sub> = 200, <em>p</em><sub>2</sub> = 0.3. Is the large counts condition for the Normal model of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> satisfied?",
+  "opts": [
+   "Yes: all four counts are at least 10",
+   "No: <em>n</em><sub>1</sub><em>p</em><sub>1</sub> is less than 10",
+   "No: the sample sizes must be equal",
+   "Yes, because both samples are random"
+  ],
+  "ans": 0,
+  "hint": "Compute all four counts and compare each with 10.",
+  "sol": "Counts: <em>n</em><sub>1</sub><em>p</em><sub>1</sub> = 12, <em>n</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>) = 138, <em>n</em><sub>2</sub><em>p</em><sub>2</sub> = 60, <em>n</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>) = 140. All are &ge; 10: satisfied."
+ },
+ {
+  "g": "3.9",
+  "q": "Two independent random samples (small compared with their populations) have <em>n</em><sub>1</sub> = 80, <em>p</em><sub>1</sub> = 0.4 and <em>n</em><sub>2</sub> = 40, <em>p</em><sub>2</sub> = 0.55. Is the large counts condition for the Normal model of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> satisfied?",
+  "opts": [
+   "Yes: all four counts are at least 10",
+   "No: <em>n</em><sub>1</sub><em>p</em><sub>1</sub> is less than 10",
+   "No: the sample sizes must be equal",
+   "Yes, because both samples are random"
+  ],
+  "ans": 0,
+  "hint": "Compute all four counts and compare each with 10.",
+  "sol": "Counts: <em>n</em><sub>1</sub><em>p</em><sub>1</sub> = 32, <em>n</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>) = 48, <em>n</em><sub>2</sub><em>p</em><sub>2</sub> = 22, <em>n</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>) = 18. All are &ge; 10: satisfied."
+ },
+ {
+  "g": "3.9",
+  "q": "Two independent random samples (small compared with their populations) have <em>n</em><sub>1</sub> = 60, <em>p</em><sub>1</sub> = 0.5 and <em>n</em><sub>2</sub> = 70, <em>p</em><sub>2</sub> = 0.45. Is the large counts condition for the Normal model of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> satisfied?",
+  "opts": [
+   "Yes: all four counts are at least 10",
+   "No: <em>n</em><sub>1</sub><em>p</em><sub>1</sub> is less than 10",
+   "No: the sample sizes must be equal",
+   "Yes, because both samples are random"
+  ],
+  "ans": 0,
+  "hint": "Compute all four counts and compare each with 10.",
+  "sol": "Counts: <em>n</em><sub>1</sub><em>p</em><sub>1</sub> = 30, <em>n</em><sub>1</sub>(1 &minus; <em>p</em><sub>1</sub>) = 30, <em>n</em><sub>2</sub><em>p</em><sub>2</sub> = 31.5, <em>n</em><sub>2</sub>(1 &minus; <em>p</em><sub>2</sub>) = 38.5. All are &ge; 10: satisfied."
+ },
+ {
+  "g": "3.9",
+  "q": "Which of the following situations violates the <strong>independence between the two groups</strong> required for a two-sample procedure for proportions?",
+  "opts": [
+   "The same 50 people are asked a yes/no question before and after a workshop, and the proportions of &ldquo;yes&rdquo; are compared",
+   "Two random samples of voters, one from each of two cities",
+   "Patients randomly assigned to one of two treatments",
+   "Independent random samples of boys and of girls"
+  ],
+  "ans": 0,
+  "hint": "Are the two samples made of different, unrelated individuals?",
+  "sol": "Measuring the same people twice gives paired (dependent) data, so the two sample proportions are not independent. The two-sample methods do not apply."
+ },
+ {
+  "g": "3.9",
+  "q": "In a randomized experiment comparing two treatments, the condition &ldquo;random sample&rdquo; is replaced by&hellip;",
+  "opts": [
+   "random assignment of the subjects to the two treatment groups",
+   "equal group sizes",
+   "a sample size of at least 30",
+   "the 10% rule only"
+  ],
+  "ans": 0,
+  "hint": "What does randomization do in an experiment?",
+  "sol": "In an experiment, subjects are randomly assigned to treatments, which makes the two groups comparable and the results independent."
+ },
+ {
+  "g": "3.9",
+  "q": "If both sample sizes are multiplied by 2 (the population proportions stay the same), by what factor does the standard deviation of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> change? (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.707107,
+  "tol": 0.005,
+  "unit": "&times;",
+  "hint": "Each term p(1 &minus; p)/<em>n</em> is divided by 2 inside the square root.",
+  "sol": "Each variance term has <em>n</em> in the denominator, so the variance is divided by 2 and the SD by &radic;2: factor = 1/&radic;2 &asymp; 0.707."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 100 and <em>n</em><sub>2</sub> = 120 come from populations with <em>p</em><sub>1</sub> = 0.6 and <em>p</em><sub>2</sub> = 0.5. What is the mean of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>?",
+  "type": "num",
+  "ans": 0.1,
+  "tol": 0.0005,
+  "unit": "",
+  "hint": "Subtract the population proportions.",
+  "sol": "&mu; = <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> = 0.6 &minus; 0.5 = 0.100."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 200 and <em>n</em><sub>2</sub> = 250 come from populations with <em>p</em><sub>1</sub> = 0.3 and <em>p</em><sub>2</sub> = 0.25. What is the mean of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>?",
+  "type": "num",
+  "ans": 0.05,
+  "tol": 0.0005,
+  "unit": "",
+  "hint": "Subtract the population proportions.",
+  "sol": "&mu; = <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> = 0.3 &minus; 0.25 = 0.050."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 80 and <em>n</em><sub>2</sub> = 90 come from populations with <em>p</em><sub>1</sub> = 0.45 and <em>p</em><sub>2</sub> = 0.45. What is the mean of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>?",
+  "type": "num",
+  "ans": 0.0,
+  "tol": 0.0005,
+  "unit": "",
+  "hint": "Subtract the population proportions.",
+  "sol": "&mu; = <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> = 0.45 &minus; 0.45 = 0.000."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 100 and <em>n</em><sub>2</sub> = 120 come from populations with <em>p</em><sub>1</sub> = 0.6 and <em>p</em><sub>2</sub> = 0.5. Find the standard deviation of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.066958,
+  "tol": 0.0004,
+  "unit": "",
+  "hint": "Add the two variances p(1 &minus; p)/<em>n</em> and then take the square root.",
+  "sol": "&sigma; = &radic;(0.6 &middot; 0.4/100 + 0.5 &middot; 0.5/120) = &radic;(0.002400 + 0.002083) = &radic;0.004483 = 0.0670."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 200 and <em>n</em><sub>2</sub> = 250 come from populations with <em>p</em><sub>1</sub> = 0.3 and <em>p</em><sub>2</sub> = 0.25. Find the standard deviation of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.042426,
+  "tol": 0.0004,
+  "unit": "",
+  "hint": "Add the two variances p(1 &minus; p)/<em>n</em> and then take the square root.",
+  "sol": "&sigma; = &radic;(0.3 &middot; 0.7/200 + 0.25 &middot; 0.75/250) = &radic;(0.001050 + 0.000750) = &radic;0.001800 = 0.0424."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 80 and <em>n</em><sub>2</sub> = 90 come from populations with <em>p</em><sub>1</sub> = 0.45 and <em>p</em><sub>2</sub> = 0.45. Find the standard deviation of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.076444,
+  "tol": 0.0004,
+  "unit": "",
+  "hint": "Add the two variances p(1 &minus; p)/<em>n</em> and then take the square root.",
+  "sol": "&sigma; = &radic;(0.45 &middot; 0.55/80 + 0.45 &middot; 0.55/90) = &radic;(0.003094 + 0.002750) = &radic;0.005844 = 0.0764."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 100 and <em>n</em><sub>2</sub> = 100 come from populations with <em>p</em><sub>1</sub> = 0.55 and <em>p</em><sub>2</sub> = 0.45. Find the standard deviation of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.070356,
+  "tol": 0.0004,
+  "unit": "",
+  "hint": "Add the two variances p(1 &minus; p)/<em>n</em> and then take the square root.",
+  "sol": "&sigma; = &radic;(0.55 &middot; 0.45/100 + 0.45 &middot; 0.55/100) = &radic;(0.002475 + 0.002475) = &radic;0.004950 = 0.0704."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 150 and <em>n</em><sub>2</sub> = 140 come from populations with <em>p</em><sub>1</sub> = 0.7 and <em>p</em><sub>2</sub> = 0.55. Find the standard deviation of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.056284,
+  "tol": 0.0004,
+  "unit": "",
+  "hint": "Add the two variances p(1 &minus; p)/<em>n</em> and then take the square root.",
+  "sol": "&sigma; = &radic;(0.7 &middot; 0.3/150 + 0.55 &middot; 0.45/140) = &radic;(0.001400 + 0.001768) = &radic;0.003168 = 0.0563."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 300 and <em>n</em><sub>2</sub> = 250 come from populations with <em>p</em><sub>1</sub> = 0.4 and <em>p</em><sub>2</sub> = 0.48. Find the standard deviation of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.042408,
+  "tol": 0.0004,
+  "unit": "",
+  "hint": "Add the two variances p(1 &minus; p)/<em>n</em> and then take the square root.",
+  "sol": "&sigma; = &radic;(0.4 &middot; 0.6/300 + 0.48 &middot; 0.52/250) = &radic;(0.000800 + 0.000998) = &radic;0.001798 = 0.0424."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 100 and <em>n</em><sub>2</sub> = 120 come from populations with <em>p</em><sub>1</sub> = 0.6 and <em>p</em><sub>2</sub> = 0.5 (conditions are met). Find the probability that the sample proportion for group 1 is <strong>less than</strong> the sample proportion for group 2. (Normal model; round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.067656,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use mean <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> and the SD with the variances added; then compute a z-score and use the Normal model.",
+  "sol": "Mean = 0.100, SD = 0.0670. <em>z</em> = &minus;1.493, so P(<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> &lt; 0) &asymp; <strong>0.0677</strong>."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 200 and <em>n</em><sub>2</sub> = 250 come from populations with <em>p</em><sub>1</sub> = 0.3 and <em>p</em><sub>2</sub> = 0.25 (conditions are met). Find P(<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> &gt; 0.1). (Normal model; round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.119296,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use mean <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> and the SD with the variances added; then compute a z-score and use the Normal model.",
+  "sol": "Mean = 0.050, SD = 0.0424. <em>z</em> = 1.179, so P(<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> &gt; 0.1) &asymp; <strong>0.1193</strong>."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 100 and <em>n</em><sub>2</sub> = 100 come from populations with <em>p</em><sub>1</sub> = 0.55 and <em>p</em><sub>2</sub> = 0.45 (conditions are met). Find the probability that the sample proportion for group 1 is <strong>less than</strong> the sample proportion for group 2. (Normal model; round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.077609,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use mean <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> and the SD with the variances added; then compute a z-score and use the Normal model.",
+  "sol": "Mean = 0.100, SD = 0.0704. <em>z</em> = &minus;1.421, so P(<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> &lt; 0) &asymp; <strong>0.0776</strong>."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 150 and <em>n</em><sub>2</sub> = 140 come from populations with <em>p</em><sub>1</sub> = 0.7 and <em>p</em><sub>2</sub> = 0.55 (conditions are met). Find P(<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> &lt; 0.1). (Normal model; round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.187175,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use mean <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> and the SD with the variances added; then compute a z-score and use the Normal model.",
+  "sol": "Mean = 0.150, SD = 0.0563. <em>z</em> = &minus;0.888, so P(<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> &lt; 0.1) &asymp; <strong>0.1872</strong>."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 80 and <em>n</em><sub>2</sub> = 90 come from populations with <em>p</em><sub>1</sub> = 0.45 and <em>p</em><sub>2</sub> = 0.45 (conditions are met). Find the probability that the two sample proportions differ by more than 0.1 in either direction, P(|<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>| &gt; 0.1). (Normal model; round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.190826,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use mean <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> and the SD with the variances added; then compute a z-score and use the Normal model.",
+  "sol": "Mean = 0.000, SD = 0.0764. <em>z</em> = 1.308, so P(|<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>| &gt; 0.1) &asymp; <strong>0.1908</strong>."
+ },
+ {
+  "g": "3.9",
+  "q": "Independent random samples of sizes <em>n</em><sub>1</sub> = 300 and <em>n</em><sub>2</sub> = 250 come from populations with <em>p</em><sub>1</sub> = 0.4 and <em>p</em><sub>2</sub> = 0.48 (conditions are met). Find the probability that the sample proportion for group 1 is <strong>greater than</strong> that for group 2. (Normal model; round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.029617,
+  "tol": 0.004,
+  "unit": "",
+  "hint": "Use mean <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> and the SD with the variances added; then compute a z-score and use the Normal model.",
+  "sol": "Mean = &minus;0.080, SD = 0.0424. <em>z</em> = 1.886, so P(<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> &gt; 0) &asymp; <strong>0.0296</strong>."
+ },
+ {
+  "g": "3.9",
+  "q": "The sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> has mean 0.10 and standard deviation 0.07. Which is the correct interpretation of the standard deviation?",
+  "opts": [
+   "In repeated pairs of independent random samples of these sizes, the difference between the sample proportions typically varies by about 0.07 from the true difference 0.10",
+   "The two population proportions differ by 0.07",
+   "The difference is 0.07 in every pair of samples",
+   "There is a 7% chance that the populations differ"
+  ],
+  "ans": 0,
+  "hint": "The SD describes variation of the statistic across samples.",
+  "sol": "The SD of the sampling distribution measures the typical distance between the statistic <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> and its mean (the true difference) over repeated samples."
+ },
+ {
+  "g": "3.9",
+  "q": "If both conditions are met, the shape of the sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> is&hellip;",
+  "opts": [
+   "approximately Normal",
+   "skewed right",
+   "uniform",
+   "bimodal"
+  ],
+  "ans": 0,
+  "hint": "Difference of two approximately Normal statistics.",
+  "sol": "When the large counts conditions are met for both groups, the sampling distribution of the difference is approximately Normal."
+ },
+ {
+  "g": "3.9",
+  "q": "Two sampling distributions are compared. Both have <em>p</em><sub>1</sub> = 0.5 and <em>p</em><sub>2</sub> = 0.4. In A the sample sizes are 50 and 50; in B they are 200 and 200. Which statement is true?",
+  "opts": [
+   "Both are centered at 0.10, but B has a smaller standard deviation",
+   "A is centered at 0.10 and B at 0.40",
+   "B is centered at 0.10 and has a larger standard deviation",
+   "They have identical standard deviations"
+  ],
+  "ans": 0,
+  "hint": "Center depends on the <em>p</em>&rsquo;s; spread depends on <em>n</em>.",
+  "sol": "The center is <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> = 0.10 in both cases. Larger samples reduce the standard deviation (A: &asymp; 0.0995; B: &asymp; 0.0497)."
+ },
+ {
+  "g": "3.9",
+  "q": "The sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> is centered at 0 when&hellip;",
+  "opts": [
+   "<em>p</em><sub>1</sub> = <em>p</em><sub>2</sub>",
+   "<em>n</em><sub>1</sub> = <em>n</em><sub>2</sub>",
+   "<em>p</em><sub>1</sub> + <em>p</em><sub>2</sub> = 1",
+   "the samples are small"
+  ],
+  "ans": 0,
+  "hint": "What is the mean formula?",
+  "sol": "The mean is <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, which is 0 exactly when the population proportions are equal."
+ },
+ {
+  "g": "3.9",
+  "q": "Two independent samples are taken <strong>without replacement</strong> from two populations of sizes <em>N</em><sub>1</sub> and <em>N</em><sub>2</sub>. Which two conditions must be met so that the observations can be treated as independent?",
+  "opts": [
+   "<em>n</em><sub>1</sub> &le; 0.10<em>N</em><sub>1</sub> and <em>n</em><sub>2</sub> &le; 0.10<em>N</em><sub>2</sub> (each sample is at most 10% of its own population)",
+   "<em>n</em><sub>1</sub> = <em>n</em><sub>2</sub> and <em>N</em><sub>1</sub> = <em>N</em><sub>2</sub>",
+   "<em>n</em><sub>1</sub> &ge; 30 and <em>n</em><sub>2</sub> &ge; 30",
+   "<em>p</em><sub>1</sub> &lt; 0.5 and <em>p</em><sub>2</sub> &lt; 0.5"
+  ],
+  "ans": 0,
+  "hint": "One 10% check for each sample.",
+  "sol": "The 10% condition must hold for <em>both</em> samples: <em>n</em><sub>1</sub> &le; 0.10<em>N</em><sub>1</sub> and <em>n</em><sub>2</sub> &le; 0.10<em>N</em><sub>2</sub>."
+ },
+ {
+  "g": "3.9",
+  "q": "A random sample of 60 students is taken from a school of 450 students, and an independent random sample of 50 students from a school of 600. Is the 10% condition satisfied for both samples?",
+  "opts": [
+   "Yes: 60 &le; 45 and 50 &le; 60",
+   "No: 60 &gt; 0.10(450) = 45, so the first sample is more than 10% of its population",
+   "No: 50 &gt; 0.10(600) = 60",
+   "Yes, because both samples are random"
+  ],
+  "ans": 1,
+  "hint": "Check each sample against 10% of its own population.",
+  "sol": "10% of 450 is 45 and 60 &gt; 45, so the first sample violates the condition (10% of 600 is 60 and 50 &le; 60 is fine)."
+ },
+ {
+  "g": "3.9",
+  "q": "The data come from an <strong>experiment</strong> (two treatments) rather than from a sample survey. Which condition must be met, and how is it fulfilled?",
+  "opts": [
+   "The subjects must be randomly assigned to the two treatment groups; this is fulfilled by using a random process (for example a random number generator or drawing names) to decide who gets which treatment",
+   "The subjects must be a random sample from a population; this is fulfilled by volunteers",
+   "The groups must have equal sizes; this is fulfilled by counting",
+   "No condition is needed for an experiment"
+  ],
+  "ans": 0,
+  "hint": "What replaces random sampling in an experiment?",
+  "sol": "In an experiment, independence comes from <strong>random assignment</strong> of subjects to treatments, done with a random process. The 10% condition is not needed because no sample is drawn from a population."
+ },
+ {
+  "g": "3.9",
+  "q": "The sampling distribution of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> has mean 0.10. Which is the correct interpretation <strong>in context</strong> (<em>p</em><sub>1</sub> = proportion satisfied at Store 1, <em>p</em><sub>2</sub> at Store 2)?",
+  "opts": [
+   "If we repeatedly took independent random samples from the two stores, the differences between the sample proportions would be centered at 0.10, the true difference in the proportions of satisfied customers",
+   "In every pair of samples, Store 1 is 10% higher than Store 2",
+   "Store 1 has 10% of the customers",
+   "The sample sizes differ by 0.10"
+  ],
+  "ans": 0,
+  "hint": "Interpret it as a long-run center over repeated sampling.",
+  "sol": "The mean of the sampling distribution is the average of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> over all possible pairs of samples, and equals the true difference <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>."
+ },
+ {
+  "g": "3.9",
+  "q": "For samples of size 100 from Store 1 and 120 from Store 2 (<em>p</em><sub>1</sub> = 0.60, <em>p</em><sub>2</sub> = 0.50), P(<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> &lt; 0) &asymp; 0.068. Which is the correct interpretation?",
+  "opts": [
+   "About 6.8% of all possible pairs of independent random samples of these sizes would give a sample proportion for Store 1 that is lower than the one for Store 2",
+   "There is a 6.8% chance that Store 1 is worse than Store 2",
+   "Store 1 is better than Store 2 with probability 0.068",
+   "The samples are too small"
+  ],
+  "ans": 0,
+  "hint": "Probabilities for <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> describe repeated sampling.",
+  "sol": "The probability describes the sampling distribution: how often, across repeated pairs of samples, the sample difference is negative even though the true difference is +0.10."
+ },
+ {
+  "g": "3.10",
+  "q": "Which procedure is appropriate to estimate the difference between the proportions of two populations using independent random samples?",
+  "opts": [
+   "One-sample <em>z</em>-interval for a proportion",
+   "Two-sample <em>z</em>-interval for a difference in proportions",
+   "Two-sample <em>t</em>-interval for a difference in means",
+   "Matched-pairs <em>t</em>-interval"
+  ],
+  "ans": 1,
+  "hint": "Two independent groups, categorical response.",
+  "sol": "Two categorical variables measured in independent groups: a two-sample <em>z</em>-interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> (<code>2-PropZInt</code>)."
+ },
+ {
+  "g": "3.10",
+  "q": "The confidence interval for the difference of two population proportions has the form&hellip;",
+  "opts": [
+   "(<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>) &plusmn; <em>z</em>* &radic;(<span class=\"hat\">p</span><sub>1</sub>(1 &minus; <span class=\"hat\">p</span><sub>1</sub>)/<em>n</em><sub>1</sub> + <span class=\"hat\">p</span><sub>2</sub>(1 &minus; <span class=\"hat\">p</span><sub>2</sub>)/<em>n</em><sub>2</sub>)",
+   "<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> &plusmn; <em>z</em>*&radic;(<em>p</em><sub>1</sub><em>p</em><sub>2</sub>/<em>n</em>)",
+   "(<span class=\"hat\">p</span><sub>1</sub> + <span class=\"hat\">p</span><sub>2</sub>) &plusmn; <em>z</em>* &middot; SE",
+   "<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> &plusmn; <em>z</em>*(SE<sub>1</sub> &minus; SE<sub>2</sub>)"
+  ],
+  "ans": 0,
+  "hint": "Estimate &plusmn; critical value &times; standard error.",
+  "sol": "point estimate &plusmn; <em>z</em>* &middot; SE, where the point estimate is <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> and SE = &radic;(<span class=\"hat\">p</span><sub>1</sub>(1 &minus; <span class=\"hat\">p</span><sub>1</sub>)/<em>n</em><sub>1</sub> + <span class=\"hat\">p</span><sub>2</sub>(1 &minus; <span class=\"hat\">p</span><sub>2</sub>)/<em>n</em><sub>2</sub>) (sample proportions replace the unknown <em>p</em>&rsquo;s)."
+ },
+ {
+  "g": "3.10",
+  "q": "To construct a confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, the standard error uses&hellip;",
+  "opts": [
+   "the sample proportions <span class=\"hat\">p</span><sub>1</sub> and <span class=\"hat\">p</span><sub>2</sub> (because the population proportions are unknown)",
+   "a pooled proportion of both samples",
+   "the claimed values <em>p</em><sub>0</sub>",
+   "the population proportions <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub>"
+  ],
+  "ans": 0,
+  "hint": "We do not know <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub>.",
+  "sol": "Intervals use the sample proportions in the standard error (separately for each group, not pooled)."
+ },
+ {
+  "g": "3.10",
+  "q": "A random sample of 200 adults who used a sleep app and an independent random sample of 220 adults who did not are compared on whether they report better sleep. What is the parameter of interest?",
+  "opts": [
+   "<em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, where <em>p</em><sub>1</sub> is the proportion of <em>all</em> adults who use the sleep app and report better sleep, and <em>p</em><sub>2</sub> is the proportion of <em>all</em> adults who do not use the app and report better sleep",
+   "<em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, where <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub> are the proportions in the two samples",
+   "<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> = the difference in the sample proportions",
+   "&mu;<sub>1</sub> &minus; &mu;<sub>2</sub>, the difference in the mean sleep time"
+  ],
+  "ans": 0,
+  "hint": "Parameters describe populations (or the processes behind the groups), not the samples.",
+  "sol": "The parameter is <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, where <em>p</em><sub>1</sub> is the proportion of <em>all</em> adults who use the sleep app and report better sleep, and <em>p</em><sub>2</sub> is the proportion of <em>all</em> adults who do not use the app and report better sleep. Define each population proportion in context, and say which group is group 1."
+ },
+ {
+  "g": "3.10",
+  "q": "Patients were randomly assigned to Drug A (120 patients) or Drug B (130 patients), and recovery was recorded. What is the parameter of interest?",
+  "opts": [
+   "<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>, the difference between the sample recovery proportions",
+   "<em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, where <em>p</em><sub>1</sub> is the true recovery proportion for patients like these who take Drug A and <em>p</em><sub>2</sub> is the true recovery proportion for those who take Drug B",
+   "The proportion of the 250 patients who recovered",
+   "&mu;<sub>A</sub> &minus; &mu;<sub>B</sub>, the difference in mean recovery time"
+  ],
+  "ans": 1,
+  "hint": "Parameters describe populations (or the processes behind the groups), not the samples.",
+  "sol": "The parameter is <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, where <em>p</em><sub>1</sub> is the true recovery proportion for patients like these who take Drug A and <em>p</em><sub>2</sub> is the true recovery proportion for those who take Drug B. Define each population proportion in context, and say which group is group 1."
+ },
+ {
+  "g": "3.10",
+  "q": "To check the large counts condition for a confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, we use&hellip;",
+  "opts": [
+   "at least 10 successes and 10 failures in <em>each</em> sample: <em>n</em><sub>1</sub><span class=\"hat\">p</span><sub>1</sub>, <em>n</em><sub>1</sub>(1 &minus; <span class=\"hat\">p</span><sub>1</sub>), <em>n</em><sub>2</sub><span class=\"hat\">p</span><sub>2</sub>, <em>n</em><sub>2</sub>(1 &minus; <span class=\"hat\">p</span><sub>2</sub>)",
+   "only <em>n</em><sub>1</sub> &ge; 30 and <em>n</em><sub>2</sub> &ge; 30",
+   "<em>n</em><sub>1</sub><span class=\"hat\">p</span><sub>1</sub> + <em>n</em><sub>2</sub><span class=\"hat\">p</span><sub>2</sub> &ge; 10",
+   "nothing: intervals need no conditions"
+  ],
+  "ans": 0,
+  "hint": "Four counts, using the sample proportions.",
+  "sol": "For an interval, the observed numbers of successes and failures in each group should be at least 10 (computed with the sample proportions)."
+ },
+ {
+  "g": "3.10",
+  "q": "A random sample of 60 customers (a) and an independent random sample of 80 customers (b) are compared. In (a) 9 are satisfied; in (b) 20 are satisfied. Can a two-sample <em>z</em>-interval for the difference in proportions be used?",
+  "opts": [
+   "Yes, both samples are random",
+   "No, because group (a) has only 9 successes, fewer than 10",
+   "No, because the sample sizes are different",
+   "Yes, because 60 + 80 &ge; 30"
+  ],
+  "ans": 1,
+  "hint": "Check the success and failure counts in each sample.",
+  "sol": "The counts are 9 and 51 in (a), 20 and 60 in (b). Because 9 &lt; 10, the large counts condition fails for group (a)."
+ },
+ {
+  "g": "3.10",
+  "q": "Which is the correct way to verify <strong>independence</strong> for a two-sample <em>z</em>-interval from two random samples?",
+  "opts": [
+   "Each sample is random, each sample is less than 10% of its population, and the two samples are independent of each other",
+   "The two sample sizes are equal",
+   "Both samples have the same proportion",
+   "The samples are paired"
+  ],
+  "ans": 0,
+  "hint": "Three independence statements.",
+  "sol": "Independence within each sample (random, 10% rule) and between the samples."
+ },
+ {
+  "g": "3.10",
+  "q": "Find the critical value <em>z</em>* for a 95% confidence interval. (3 decimals.)",
+  "type": "num",
+  "ans": 1.96,
+  "tol": 0.006,
+  "unit": "",
+  "hint": "Middle 95% leaves 2.5% in each tail.",
+  "sol": "<em>z</em>* = 1.960."
+ },
+ {
+  "g": "3.10",
+  "q": "Find the critical value <em>z</em>* for a 90% confidence interval. (3 decimals.)",
+  "type": "num",
+  "ans": 1.645,
+  "tol": 0.006,
+  "unit": "",
+  "hint": "Middle 90% leaves 5% in each tail.",
+  "sol": "<em>z</em>* = 1.645."
+ },
+ {
+  "g": "3.10",
+  "q": "When writing the parameter <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, the order of subtraction&hellip;",
+  "opts": [
+   "matters for interpreting the interval, so we must define which group is group 1 and keep that order throughout",
+   "does not matter and need not be stated",
+   "must always put the larger sample first",
+   "must always put the smaller proportion first"
+  ],
+  "ans": 0,
+  "hint": "A negative interval means group 1 is lower.",
+  "sol": "Reversing the order changes the sign of the interval. State which group is group 1 and interpret accordingly."
+ },
+ {
+  "g": "3.10",
+  "q": "A random sample of 200 adults who used a sleep app and an independent random sample of 220 adults who did not use it were asked whether they sleep better. In the app group 124 said yes; in the other group 110 said yes. Let group 1 be the adults who used the sleep app. Find the point estimate <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.12,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "Divide the number of successes by the sample size in each group; subtract in the stated order.",
+  "sol": "<span class=\"hat\">p</span><sub>1</sub> = 124/200 = 0.6200 and <span class=\"hat\">p</span><sub>2</sub> = 110/220 = 0.5000, so <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> = <strong>0.1200</strong>. (Check: counts 124, 76, 110, 110 are all &ge; 10; independent samples.)"
+ },
+ {
+  "g": "3.10",
+  "q": "A random sample of 200 adults who used a sleep app and an independent random sample of 220 adults who did not use it were asked whether they sleep better. In the app group 124 said yes; in the other group 110 said yes. Let group 1 be the adults who used the sleep app. Find the standard error of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.048108,
+  "tol": 0.0004,
+  "unit": "",
+  "hint": "SE = &radic;(<span class=\"hat\">p</span><sub>1</sub>(1 &minus; <span class=\"hat\">p</span><sub>1</sub>)/<em>n</em><sub>1</sub> + <span class=\"hat\">p</span><sub>2</sub>(1 &minus; <span class=\"hat\">p</span><sub>2</sub>)/<em>n</em><sub>2</sub>).",
+  "sol": "SE = &radic;(0.6200 &middot; 0.3800/200 + 0.5000 &middot; 0.5000/220) = &radic;(0.001178 + 0.001136) = <strong>0.0481</strong>."
+ },
+ {
+  "g": "3.10",
+  "q": "A random sample of 200 adults who used a sleep app and an independent random sample of 220 adults who did not use it were asked whether they sleep better. In the app group 124 said yes; in the other group 110 said yes. Let group 1 be the adults who used the sleep app. Find the <strong>lower limit</strong> of a 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.025709,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Lower limit = point estimate &minus; <em>z</em>* &middot; SE, with <em>z</em>* = 1.96.",
+  "sol": "ME = 1.96(0.0481) = 0.0943. Interval: 0.1200 &plusmn; 0.0943 = (<strong>0.026</strong>, 0.214)."
+ },
+ {
+  "g": "3.10",
+  "q": "A random sample of 200 adults who used a sleep app and an independent random sample of 220 adults who did not use it were asked whether they sleep better. In the app group 124 said yes; in the other group 110 said yes. Let group 1 be the adults who used the sleep app. Find the <strong>upper limit</strong> of a 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.214291,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Upper limit = point estimate + <em>z</em>* &middot; SE, with <em>z</em>* = 1.96.",
+  "sol": "ME = 1.96(0.0481) = 0.0943. Interval: 0.1200 &plusmn; 0.0943 = (0.026, <strong>0.214</strong>)."
+ },
+ {
+  "g": "3.10",
+  "q": "A random sample of 200 adults who used a sleep app and an independent random sample of 220 adults who did not use it were asked whether they sleep better. In the app group 124 said yes; in the other group 110 said yes. Let group 1 be the adults who used the sleep app. Find the margin of error for a 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.094291,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "ME = <em>z</em>* &middot; SE.",
+  "sol": "ME = <em>z</em>* &middot; SE = 1.96 &times; 0.0481 = <strong>0.0943</strong>."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 150 students from School A and 180 students from School B were asked whether they walk to school. In School A 48 walk; in School B 63 walk. Let group 1 be the students at School A. Find the point estimate <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": -0.03,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "Divide the number of successes by the sample size in each group; subtract in the stated order.",
+  "sol": "<span class=\"hat\">p</span><sub>1</sub> = 48/150 = 0.3200 and <span class=\"hat\">p</span><sub>2</sub> = 63/180 = 0.3500, so <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> = <strong>&minus;0.0300</strong>. (Check: counts 48, 102, 63, 117 are all &ge; 10; independent samples.)"
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 150 students from School A and 180 students from School B were asked whether they walk to school. In School A 48 walk; in School B 63 walk. Let group 1 be the students at School A. Find the standard error of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.052101,
+  "tol": 0.0004,
+  "unit": "",
+  "hint": "SE = &radic;(<span class=\"hat\">p</span><sub>1</sub>(1 &minus; <span class=\"hat\">p</span><sub>1</sub>)/<em>n</em><sub>1</sub> + <span class=\"hat\">p</span><sub>2</sub>(1 &minus; <span class=\"hat\">p</span><sub>2</sub>)/<em>n</em><sub>2</sub>).",
+  "sol": "SE = &radic;(0.3200 &middot; 0.6800/150 + 0.3500 &middot; 0.6500/180) = &radic;(0.001451 + 0.001264) = <strong>0.0521</strong>."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 150 students from School A and 180 students from School B were asked whether they walk to school. In School A 48 walk; in School B 63 walk. Let group 1 be the students at School A. Find the <strong>lower limit</strong> of a 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": -0.132119,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Lower limit = point estimate &minus; <em>z</em>* &middot; SE, with <em>z</em>* = 1.96.",
+  "sol": "ME = 1.96(0.0521) = 0.1021. Interval: &minus;0.0300 &plusmn; 0.1021 = (<strong>&minus;0.132</strong>, 0.072)."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 150 students from School A and 180 students from School B were asked whether they walk to school. In School A 48 walk; in School B 63 walk. Let group 1 be the students at School A. Find the <strong>upper limit</strong> of a 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.072119,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Upper limit = point estimate + <em>z</em>* &middot; SE, with <em>z</em>* = 1.96.",
+  "sol": "ME = 1.96(0.0521) = 0.1021. Interval: &minus;0.0300 &plusmn; 0.1021 = (&minus;0.132, <strong>0.072</strong>)."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 150 students from School A and 180 students from School B were asked whether they walk to school. In School A 48 walk; in School B 63 walk. Let group 1 be the students at School A. Find the margin of error for a 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.102119,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "ME = <em>z</em>* &middot; SE.",
+  "sol": "ME = <em>z</em>* &middot; SE = 1.96 &times; 0.0521 = <strong>0.1021</strong>."
+ },
+ {
+  "g": "3.10",
+  "q": "In a randomized experiment, 120 patients were randomly assigned to Drug A and 130 to Drug B. In group A 78 recovered; in group B 65 recovered. Let group 1 be the patients given Drug A. Find the point estimate <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.15,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "Divide the number of successes by the sample size in each group; subtract in the stated order.",
+  "sol": "<span class=\"hat\">p</span><sub>1</sub> = 78/120 = 0.6500 and <span class=\"hat\">p</span><sub>2</sub> = 65/130 = 0.5000, so <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> = <strong>0.1500</strong>. (Check: counts 78, 42, 65, 65 are all &ge; 10; independent samples.)"
+ },
+ {
+  "g": "3.10",
+  "q": "In a randomized experiment, 120 patients were randomly assigned to Drug A and 130 to Drug B. In group A 78 recovered; in group B 65 recovered. Let group 1 be the patients given Drug A. Find the standard error of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.061797,
+  "tol": 0.0004,
+  "unit": "",
+  "hint": "SE = &radic;(<span class=\"hat\">p</span><sub>1</sub>(1 &minus; <span class=\"hat\">p</span><sub>1</sub>)/<em>n</em><sub>1</sub> + <span class=\"hat\">p</span><sub>2</sub>(1 &minus; <span class=\"hat\">p</span><sub>2</sub>)/<em>n</em><sub>2</sub>).",
+  "sol": "SE = &radic;(0.6500 &middot; 0.3500/120 + 0.5000 &middot; 0.5000/130) = &radic;(0.001896 + 0.001923) = <strong>0.0618</strong>."
+ },
+ {
+  "g": "3.10",
+  "q": "In a randomized experiment, 120 patients were randomly assigned to Drug A and 130 to Drug B. In group A 78 recovered; in group B 65 recovered. Let group 1 be the patients given Drug A. Find the <strong>lower limit</strong> of a 90% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.048343,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Lower limit = point estimate &minus; <em>z</em>* &middot; SE, with <em>z</em>* = 1.645.",
+  "sol": "ME = 1.645(0.0618) = 0.1017. Interval: 0.1500 &plusmn; 0.1017 = (<strong>0.048</strong>, 0.252)."
+ },
+ {
+  "g": "3.10",
+  "q": "In a randomized experiment, 120 patients were randomly assigned to Drug A and 130 to Drug B. In group A 78 recovered; in group B 65 recovered. Let group 1 be the patients given Drug A. Find the <strong>upper limit</strong> of a 90% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.251657,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Upper limit = point estimate + <em>z</em>* &middot; SE, with <em>z</em>* = 1.645.",
+  "sol": "ME = 1.645(0.0618) = 0.1017. Interval: 0.1500 &plusmn; 0.1017 = (0.048, <strong>0.252</strong>)."
+ },
+ {
+  "g": "3.10",
+  "q": "In a randomized experiment, 120 patients were randomly assigned to Drug A and 130 to Drug B. In group A 78 recovered; in group B 65 recovered. Let group 1 be the patients given Drug A. Find the margin of error for a 90% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.101657,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "ME = <em>z</em>* &middot; SE.",
+  "sol": "ME = <em>z</em>* &middot; SE = 1.645 &times; 0.0618 = <strong>0.1017</strong>."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 400 voters from City X and 400 voters from City Y were polled. In City X 250 favor the proposal; in City Y 210 favor it. Let group 1 be the voters in City X. Find the point estimate <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.1,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "Divide the number of successes by the sample size in each group; subtract in the stated order.",
+  "sol": "<span class=\"hat\">p</span><sub>1</sub> = 250/400 = 0.6250 and <span class=\"hat\">p</span><sub>2</sub> = 210/400 = 0.5250, so <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> = <strong>0.1000</strong>. (Check: counts 250, 150, 210, 190 are all &ge; 10; independent samples.)"
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 400 voters from City X and 400 voters from City Y were polled. In City X 250 favor the proposal; in City Y 210 favor it. Let group 1 be the voters in City X. Find the standard error of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.034776,
+  "tol": 0.0004,
+  "unit": "",
+  "hint": "SE = &radic;(<span class=\"hat\">p</span><sub>1</sub>(1 &minus; <span class=\"hat\">p</span><sub>1</sub>)/<em>n</em><sub>1</sub> + <span class=\"hat\">p</span><sub>2</sub>(1 &minus; <span class=\"hat\">p</span><sub>2</sub>)/<em>n</em><sub>2</sub>).",
+  "sol": "SE = &radic;(0.6250 &middot; 0.3750/400 + 0.5250 &middot; 0.4750/400) = &radic;(0.000586 + 0.000623) = <strong>0.0348</strong>."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 400 voters from City X and 400 voters from City Y were polled. In City X 250 favor the proposal; in City Y 210 favor it. Let group 1 be the voters in City X. Find the <strong>lower limit</strong> of a 99% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.010417,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Lower limit = point estimate &minus; <em>z</em>* &middot; SE, with <em>z</em>* = 2.576.",
+  "sol": "ME = 2.576(0.0348) = 0.0896. Interval: 0.1000 &plusmn; 0.0896 = (<strong>0.010</strong>, 0.190)."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 400 voters from City X and 400 voters from City Y were polled. In City X 250 favor the proposal; in City Y 210 favor it. Let group 1 be the voters in City X. Find the <strong>upper limit</strong> of a 99% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.189583,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Upper limit = point estimate + <em>z</em>* &middot; SE, with <em>z</em>* = 2.576.",
+  "sol": "ME = 2.576(0.0348) = 0.0896. Interval: 0.1000 &plusmn; 0.0896 = (0.010, <strong>0.190</strong>)."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 400 voters from City X and 400 voters from City Y were polled. In City X 250 favor the proposal; in City Y 210 favor it. Let group 1 be the voters in City X. Find the margin of error for a 99% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.089583,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "ME = <em>z</em>* &middot; SE.",
+  "sol": "ME = <em>z</em>* &middot; SE = 2.576 &times; 0.0348 = <strong>0.0896</strong>."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 500 online customers and 600 in-store customers were surveyed. 260 online customers and 330 in-store customers said they are satisfied. Let group 1 be the online customers. Find the point estimate <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": -0.03,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "Divide the number of successes by the sample size in each group; subtract in the stated order.",
+  "sol": "<span class=\"hat\">p</span><sub>1</sub> = 260/500 = 0.5200 and <span class=\"hat\">p</span><sub>2</sub> = 330/600 = 0.5500, so <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> = <strong>&minus;0.0300</strong>. (Check: counts 260, 240, 330, 270 are all &ge; 10; independent samples.)"
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 500 online customers and 600 in-store customers were surveyed. 260 online customers and 330 in-store customers said they are satisfied. Let group 1 be the online customers. Find the standard error of <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.030194,
+  "tol": 0.0004,
+  "unit": "",
+  "hint": "SE = &radic;(<span class=\"hat\">p</span><sub>1</sub>(1 &minus; <span class=\"hat\">p</span><sub>1</sub>)/<em>n</em><sub>1</sub> + <span class=\"hat\">p</span><sub>2</sub>(1 &minus; <span class=\"hat\">p</span><sub>2</sub>)/<em>n</em><sub>2</sub>).",
+  "sol": "SE = &radic;(0.5200 &middot; 0.4800/500 + 0.5500 &middot; 0.4500/600) = &radic;(0.000499 + 0.000412) = <strong>0.0302</strong>."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 500 online customers and 600 in-store customers were surveyed. 260 online customers and 330 in-store customers said they are satisfied. Let group 1 be the online customers. Find the <strong>lower limit</strong> of a 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": -0.089181,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Lower limit = point estimate &minus; <em>z</em>* &middot; SE, with <em>z</em>* = 1.96.",
+  "sol": "ME = 1.96(0.0302) = 0.0592. Interval: &minus;0.0300 &plusmn; 0.0592 = (<strong>&minus;0.089</strong>, 0.029)."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 500 online customers and 600 in-store customers were surveyed. 260 online customers and 330 in-store customers said they are satisfied. Let group 1 be the online customers. Find the <strong>upper limit</strong> of a 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.029181,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Upper limit = point estimate + <em>z</em>* &middot; SE, with <em>z</em>* = 1.96.",
+  "sol": "ME = 1.96(0.0302) = 0.0592. Interval: &minus;0.0300 &plusmn; 0.0592 = (&minus;0.089, <strong>0.029</strong>)."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 500 online customers and 600 in-store customers were surveyed. 260 online customers and 330 in-store customers said they are satisfied. Let group 1 be the online customers. Find the margin of error for a 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 4 decimals.)",
+  "type": "num",
+  "ans": 0.059181,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "ME = <em>z</em>* &middot; SE.",
+  "sol": "ME = <em>z</em>* &middot; SE = 1.96 &times; 0.0302 = <strong>0.0592</strong>."
+ },
+ {
+  "g": "3.10",
+  "q": "A student finds the standard error of a difference in proportions as SE<sub>1</sub> + SE<sub>2</sub>, adding the two single-proportion standard errors. What is wrong?",
+  "opts": [
+   "Nothing is wrong",
+   "Variances add, not standard errors: SE = &radic;(SE<sub>1</sub>&sup2; + SE<sub>2</sub>&sup2;)",
+   "The standard errors should be subtracted",
+   "The standard errors should be multiplied"
+  ],
+  "ans": 1,
+  "hint": "Recall: variances add.",
+  "sol": "SE(<span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>) = &radic;(SE<sub>1</sub>&sup2; + SE<sub>2</sub>&sup2;). Adding the SEs directly overstates the variability."
+ },
+ {
+  "g": "3.10",
+  "q": "In a two-sample <em>z</em>-interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, the standard error&hellip;",
+  "opts": [
+   "is larger than either single-sample standard error (SE<sub>1</sub> or SE<sub>2</sub>)",
+   "is smaller than both single-sample standard errors",
+   "equals SE<sub>1</sub> &minus; SE<sub>2</sub>",
+   "does not depend on the sample sizes"
+  ],
+  "ans": 0,
+  "hint": "Variances add.",
+  "sol": "SE = &radic;(SE<sub>1</sub>&sup2; + SE<sub>2</sub>&sup2;) &ge; each of SE<sub>1</sub> and SE<sub>2</sub>."
+ },
+ {
+  "g": "3.10",
+  "q": "Which list contains <strong>all</strong> the conditions to check for a two-sample <em>z</em>-interval for a difference of two proportions from two random samples?",
+  "opts": [
+   "(1) Random samples; (2) <em>n</em><sub>1</sub> &le; 10% of <em>N</em><sub>1</sub> and <em>n</em><sub>2</sub> &le; 10% of <em>N</em><sub>2</sub>; (3) the two samples are independent of each other; (4) at least 10 successes and 10 failures in each sample",
+   "(1) <em>n</em><sub>1</sub> and <em>n</em><sub>2</sub> are equal; (2) <em>p</em><sub>1</sub> = <em>p</em><sub>2</sub>",
+   "(1) Random samples only",
+   "(1) Both populations are Normal; (2) <em>n</em> &ge; 30"
+  ],
+  "ans": 0,
+  "hint": "Randomness, 10% for both, independent groups, four counts.",
+  "sol": "Check: random (sampling or assignment), the 10% condition for each sample, independence between the groups, and large counts (four counts &ge; 10)."
+ },
+ {
+  "g": "3.10",
+  "q": "In which scenario is the <strong>10% condition unnecessary</strong> for a confidence interval for the difference of two proportions?",
+  "opts": [
+   "When the data come from a randomized experiment in which subjects are randomly assigned to two treatments (no samples are drawn from populations)",
+   "When the sample sizes are both greater than 100",
+   "When the proportions are close to 0.5",
+   "When the samples are very small"
+  ],
+  "ans": 0,
+  "hint": "Where does independence come from in an experiment?",
+  "sol": "The 10% condition protects independence when <em>sampling without replacement</em> from a population. In a randomized experiment, independence comes from random assignment, so it is not needed."
+ },
+ {
+  "g": "3.10",
+  "q": "Independent random samples of 90 customers (from 2000 customers) and 150 customers (from 1200 customers) are taken. Is the 10% condition satisfied?",
+  "opts": [
+   "Yes, both samples satisfy it",
+   "No: the first sample is more than 10% of its population",
+   "It cannot be checked without the sample proportions",
+   "No: the second sample is more than 10% of its population (150 &gt; 0.10(1200) = 120)"
+  ],
+  "ans": 3,
+  "hint": "Check each sample separately.",
+  "sol": "10% of 2000 is 200 and 90 &le; 200 &#10003;. 10% of 1200 is 120 and 150 &gt; 120 &#10007;, so the condition fails for the second sample."
+ },
+ {
+  "g": "3.10",
+  "q": "Which elements must be referenced when defining the <strong>parameters</strong> for a confidence interval for the difference of two population proportions?",
+  "opts": [
+   "Both populations (or treatments), what counts as a success, and the parameter <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> with the order of subtraction",
+   "Only the sample sizes",
+   "The sample proportions and the margin of error",
+   "Only the confidence level"
+  ],
+  "ans": 0,
+  "hint": "Group 1, group 2, success, order.",
+  "sol": "Define <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub> in context (each population/group and the success), then state that the parameter is <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>."
+ },
+ {
+  "g": "3.11",
+  "q": "A random sample of 200 adults who used a sleep app and an independent random sample of 220 adults who did not use it were asked whether they sleep better. In the app group 124 said yes; in the other group 110 said yes. Let group 1 be the adults who used the sleep app. A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.026, 0.214). Which is a correct interpretation of the interval?",
+  "opts": [
+   "We are 95% confident that the interval from 0.026 to 0.214 captures the true difference in the proportion of adults who used the sleep app who report better sleep and the proportion of adults who did not use the app who report better sleep (group 1 minus group 2).",
+   "There is a 95% probability that the true difference is between 0.026 and 0.214.",
+   "In 95% of samples, the sample difference <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> will be between 0.026 and 0.214.",
+   "95% of the individuals in each group are within the interval."
+  ],
+  "ans": 0,
+  "hint": "Mention the confidence level, the interval, the parameter in context, and the order of subtraction.",
+  "sol": "We are C% confident that the interval from a to b captures the true difference in the proportion of [population 1] and the proportion of [population 2] (with the order stated)."
+ },
+ {
+  "g": "3.11",
+  "q": "A random sample of 200 adults who used a sleep app and an independent random sample of 220 adults who did not use it were asked whether they sleep better. In the app group 124 said yes; in the other group 110 said yes. Let group 1 be the adults who used the sleep app. A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.026, 0.214). Does the interval provide convincing evidence of a difference in the population proportions?",
+  "opts": [
+   "No: the sample proportions are different, so the populations must be the same.",
+   "Yes. All plausible values for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> are positive, so there is convincing evidence that the proportion of adults who used the sleep app who report better sleep is greater than the proportion of adults who did not use the app who report better sleep.",
+   "There is no way to use an interval to make a claim about a difference.",
+   "No, because the interval is too wide to say anything."
+  ],
+  "ans": 1,
+  "hint": "Is 0 in the interval? Are all values positive or all negative?",
+  "sol": "0 is not in the interval and every value is positive, so the interval gives convincing evidence of a difference, with group 1 higher."
+ },
+ {
+  "g": "3.11",
+  "q": "Independent random samples of 150 students from School A and 180 students from School B were asked whether they walk to school. In School A 48 walk; in School B 63 walk. Let group 1 be the students at School A. A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (&minus;0.132, 0.072). Which is a correct interpretation of the interval?",
+  "opts": [
+   "There is a 95% probability that the true difference is between &minus;0.132 and 0.072.",
+   "We are 95% confident that the interval from &minus;0.132 to 0.072 captures the true difference in the proportion of students at School A who walk to school and the proportion of students at School B who walk to school (group 1 minus group 2).",
+   "In 95% of samples, the sample difference <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> will be between &minus;0.132 and 0.072.",
+   "95% of the individuals in each group are within the interval."
+  ],
+  "ans": 1,
+  "hint": "Mention the confidence level, the interval, the parameter in context, and the order of subtraction.",
+  "sol": "We are C% confident that the interval from a to b captures the true difference in the proportion of [population 1] and the proportion of [population 2] (with the order stated)."
+ },
+ {
+  "g": "3.11",
+  "q": "Independent random samples of 150 students from School A and 180 students from School B were asked whether they walk to school. In School A 48 walk; in School B 63 walk. Let group 1 be the students at School A. A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (&minus;0.132, 0.072). Does the interval provide convincing evidence of a difference in the population proportions?",
+  "opts": [
+   "Yes: because the sample proportions are different, the population proportions must be different.",
+   "There is no way to use an interval to make a claim about a difference.",
+   "No. 0 is a plausible value for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, so there is not convincing evidence of a difference between the two population proportions.",
+   "Yes, the interval proves the population proportions are different by exactly the point estimate."
+  ],
+  "ans": 2,
+  "hint": "Is 0 in the interval? Are all values positive or all negative?",
+  "sol": "0 is inside the interval (&minus;0.132, 0.072), so &ldquo;no difference&rdquo; is plausible: not convincing evidence of a difference."
+ },
+ {
+  "g": "3.11",
+  "q": "In a randomized experiment, 120 patients were randomly assigned to Drug A and 130 to Drug B. In group A 78 recovered; in group B 65 recovered. Let group 1 be the patients given Drug A. A 90% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.048, 0.252). Which is a correct interpretation of the interval?",
+  "opts": [
+   "There is a 90% probability that the true difference is between 0.048 and 0.252.",
+   "In 90% of samples, the sample difference <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> will be between 0.048 and 0.252.",
+   "We are 90% confident that the interval from 0.048 to 0.252 captures the true difference in the proportion of patients given Drug A who recover and the proportion of patients given Drug B who recover (group 1 minus group 2).",
+   "90% of the individuals in each group are within the interval."
+  ],
+  "ans": 2,
+  "hint": "Mention the confidence level, the interval, the parameter in context, and the order of subtraction.",
+  "sol": "We are C% confident that the interval from a to b captures the true difference in the proportion of [population 1] and the proportion of [population 2] (with the order stated)."
+ },
+ {
+  "g": "3.11",
+  "q": "In a randomized experiment, 120 patients were randomly assigned to Drug A and 130 to Drug B. In group A 78 recovered; in group B 65 recovered. Let group 1 be the patients given Drug A. A 90% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.048, 0.252). Does the interval provide convincing evidence of a difference in the population proportions?",
+  "opts": [
+   "No: the sample proportions are different, so the populations must be the same.",
+   "There is no way to use an interval to make a claim about a difference.",
+   "No, because the interval is too wide to say anything.",
+   "Yes. All plausible values for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> are positive, so there is convincing evidence that the proportion of patients given Drug A who recover is greater than the proportion of patients given Drug B who recover."
+  ],
+  "ans": 3,
+  "hint": "Is 0 in the interval? Are all values positive or all negative?",
+  "sol": "0 is not in the interval and every value is positive, so the interval gives convincing evidence of a difference, with group 1 higher."
+ },
+ {
+  "g": "3.11",
+  "q": "Independent random samples of 400 voters from City X and 400 voters from City Y were polled. In City X 250 favor the proposal; in City Y 210 favor it. Let group 1 be the voters in City X. A 99% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.010, 0.190). Which is a correct interpretation of the interval?",
+  "opts": [
+   "There is a 99% probability that the true difference is between 0.010 and 0.190.",
+   "In 99% of samples, the sample difference <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> will be between 0.010 and 0.190.",
+   "99% of the individuals in each group are within the interval.",
+   "We are 99% confident that the interval from 0.010 to 0.190 captures the true difference in the proportion of voters in City X who favor the proposal and the proportion of voters in City Y who favor the proposal (group 1 minus group 2)."
+  ],
+  "ans": 3,
+  "hint": "Mention the confidence level, the interval, the parameter in context, and the order of subtraction.",
+  "sol": "We are C% confident that the interval from a to b captures the true difference in the proportion of [population 1] and the proportion of [population 2] (with the order stated)."
+ },
+ {
+  "g": "3.11",
+  "q": "Independent random samples of 400 voters from City X and 400 voters from City Y were polled. In City X 250 favor the proposal; in City Y 210 favor it. Let group 1 be the voters in City X. A 99% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.010, 0.190). Does the interval provide convincing evidence of a difference in the population proportions?",
+  "opts": [
+   "Yes. All plausible values for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> are positive, so there is convincing evidence that the proportion of voters in City X who favor the proposal is greater than the proportion of voters in City Y who favor the proposal.",
+   "No: the sample proportions are different, so the populations must be the same.",
+   "There is no way to use an interval to make a claim about a difference.",
+   "No, because the interval is too wide to say anything."
+  ],
+  "ans": 0,
+  "hint": "Is 0 in the interval? Are all values positive or all negative?",
+  "sol": "0 is not in the interval and every value is positive, so the interval gives convincing evidence of a difference, with group 1 higher."
+ },
+ {
+  "g": "3.11",
+  "q": "Independent random samples of 500 online customers and 600 in-store customers were surveyed. 260 online customers and 330 in-store customers said they are satisfied. Let group 1 be the online customers. A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (&minus;0.089, 0.029). Which is a correct interpretation of the interval?",
+  "opts": [
+   "We are 95% confident that the interval from &minus;0.089 to 0.029 captures the true difference in the proportion of online customers who are satisfied and the proportion of in-store customers who are satisfied (group 1 minus group 2).",
+   "There is a 95% probability that the true difference is between &minus;0.089 and 0.029.",
+   "In 95% of samples, the sample difference <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub> will be between &minus;0.089 and 0.029.",
+   "95% of the individuals in each group are within the interval."
+  ],
+  "ans": 0,
+  "hint": "Mention the confidence level, the interval, the parameter in context, and the order of subtraction.",
+  "sol": "We are C% confident that the interval from a to b captures the true difference in the proportion of [population 1] and the proportion of [population 2] (with the order stated)."
+ },
+ {
+  "g": "3.11",
+  "q": "Independent random samples of 500 online customers and 600 in-store customers were surveyed. 260 online customers and 330 in-store customers said they are satisfied. Let group 1 be the online customers. A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (&minus;0.089, 0.029). Does the interval provide convincing evidence of a difference in the population proportions?",
+  "opts": [
+   "Yes: because the sample proportions are different, the population proportions must be different.",
+   "No. 0 is a plausible value for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, so there is not convincing evidence of a difference between the two population proportions.",
+   "There is no way to use an interval to make a claim about a difference.",
+   "Yes, the interval proves the population proportions are different by exactly the point estimate."
+  ],
+  "ans": 1,
+  "hint": "Is 0 in the interval? Are all values positive or all negative?",
+  "sol": "0 is inside the interval (&minus;0.089, 0.029), so &ldquo;no difference&rdquo; is plausible: not convincing evidence of a difference."
+ },
+ {
+  "g": "3.11",
+  "q": "A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> (group 1 = online customers, group 2 = in-store customers, response = satisfied) is (&minus;0.089, 0.029). What is the best conclusion?",
+  "opts": [
+   "There is convincing evidence that online customers are less satisfied",
+   "There is convincing evidence that online customers are more satisfied",
+   "There is not convincing evidence of a difference in the proportions of satisfied online and in-store customers, because 0 is in the interval",
+   "The proportions are exactly equal"
+  ],
+  "ans": 2,
+  "hint": "Does the interval contain 0?",
+  "sol": "0 is a plausible value, so the data do not show a difference. We cannot conclude the proportions are exactly equal."
+ },
+ {
+  "g": "3.11",
+  "q": "A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> (group 1 = Drug A, group 2 = Drug B, response = recovered) is (0.05, 0.25). Which statement is correct?",
+  "opts": [
+   "Drug B has the higher recovery proportion",
+   "There is convincing evidence that the recovery proportion for Drug A is higher than for Drug B, by an amount between 0.05 and 0.25",
+   "The recovery proportions differ by exactly 0.15 in the populations",
+   "The interval means 95% of patients recover"
+  ],
+  "ans": 1,
+  "hint": "Positive interval: group 1 larger.",
+  "sol": "The whole interval is positive and group 1 is Drug A, so Drug A has the higher recovery proportion (plausibly by 5 to 25 percentage points)."
+ },
+ {
+  "g": "3.11",
+  "q": "A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (&minus;0.20, &minus;0.04), where group 1 = School A and group 2 = School B. What does this say?",
+  "opts": [
+   "The proportion for School A is greater than for School B",
+   "The proportion for School A is less than for School B (by about 4 to 20 percentage points)",
+   "There is no difference between the schools",
+   "The sample proportions for the schools are negative"
+  ],
+  "ans": 1,
+  "hint": "Negative interval: group 1 smaller.",
+  "sol": "All plausible values of <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> are negative, so <em>p</em><sub>1</sub> &lt; <em>p</em><sub>2</sub>."
+ },
+ {
+  "g": "3.11",
+  "q": "In a randomized experiment, a 95% interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> (treatment minus control) is (0.06, 0.22). What can be concluded?",
+  "opts": [
+   "Because subjects were randomly assigned, there is convincing evidence that the treatment <em>caused</em> a higher success proportion",
+   "The interval cannot be used because it is an experiment",
+   "The treatment has no effect",
+   "Causation can never be concluded from an interval"
+  ],
+  "ans": 0,
+  "hint": "What does random assignment allow?",
+  "sol": "Random assignment allows a cause-and-effect conclusion when the difference is statistically convincing (the interval excludes 0)."
+ },
+ {
+  "g": "3.11",
+  "q": "In an observational study using two independent random samples, a 95% interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> excludes 0. Which conclusion is justified?",
+  "opts": [
+   "There is convincing evidence of a difference between the population proportions, but not necessarily a cause-and-effect relationship",
+   "One group causes the other to have a higher proportion",
+   "There is no difference between the populations",
+   "Nothing can be concluded"
+  ],
+  "ans": 0,
+  "hint": "Random sampling vs random assignment.",
+  "sol": "Random sampling lets us generalize to the populations, but without random assignment we cannot conclude causation."
+ },
+ {
+  "g": "3.11",
+  "q": "Two separate 95% confidence intervals for <em>p</em><sub>1</sub> and <em>p</em><sub>2</sub> overlap. A student concludes there is no difference between the population proportions. Why is this reasoning risky?",
+  "opts": [
+   "The correct approach is to build one interval for the difference <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> and check whether it contains 0; overlapping separate intervals do not always mean no difference",
+   "Intervals can never be compared",
+   "Overlapping intervals prove the proportions are equal",
+   "The student should use a 100% confidence level"
+  ],
+  "ans": 0,
+  "hint": "Use a single interval for the difference.",
+  "sol": "The standard error of the difference is smaller than the sum of the two margins, so two intervals can overlap even when the interval for the difference excludes 0."
+ },
+ {
+  "g": "3.11",
+  "q": "A student says: &ldquo;The 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.02, 0.14), so 95% of the sample differences are between 0.02 and 0.14.&rdquo; What is wrong?",
+  "opts": [
+   "The interval is about the population difference <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>, not about the distribution of sample differences; the 95% describes the method, i.e. how often such intervals capture the true difference",
+   "Nothing is wrong",
+   "The interval should be (0.02, 0.14) with a 99% level",
+   "The sample size is too small"
+  ],
+  "ans": 0,
+  "hint": "What is the confidence level about?",
+  "sol": "95% refers to the long-run capture rate of the method, not to how many sample differences fall in one particular interval."
+ },
+ {
+  "g": "3.11",
+  "q": "What does the confidence level (such as 95%) mean for the interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>?",
+  "opts": [
+   "If we repeatedly took independent random samples of these sizes from the two populations and computed an interval each time, about 95% of the intervals would capture the true difference <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>",
+   "The probability that this interval contains <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is 0.95",
+   "95% of the first population has a larger proportion",
+   "The difference in sample proportions is 95% accurate"
+  ],
+  "ans": 0,
+  "hint": "Think about many repeated samples.",
+  "sol": "The confidence level is the success rate of the method in repeated sampling."
+ },
+ {
+  "g": "3.11",
+  "q": "Using the same data, how does a 99% interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> compare with a 90% interval?",
+  "opts": [
+   "It is wider, because <em>z</em>* is larger",
+   "It is narrower",
+   "It is the same width",
+   "It is shifted to the right"
+  ],
+  "ans": 0,
+  "hint": "Compare critical values.",
+  "sol": "A higher confidence level uses a larger <em>z</em>* (2.576 vs 1.645), so the margin of error and interval are wider."
+ },
+ {
+  "g": "3.11",
+  "q": "If both sample sizes are increased (same confidence level and about the same <span class=\"hat\">p</span><sub>1</sub> and <span class=\"hat\">p</span><sub>2</sub>), the interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> becomes&hellip;",
+  "opts": [
+   "narrower, because the standard error decreases",
+   "wider",
+   "unchanged",
+   "centered at 0"
+  ],
+  "ans": 0,
+  "hint": "SE has <em>n</em> in the denominators.",
+  "sol": "Larger samples decrease SE, which decreases the margin of error and the width."
+ },
+ {
+  "g": "3.11",
+  "q": "A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.036, 0.204). What is the point estimate <span class=\"hat\">p</span><sub>1</sub> &minus; <span class=\"hat\">p</span><sub>2</sub>?",
+  "type": "num",
+  "ans": 0.12,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "The point estimate is the midpoint of the interval.",
+  "sol": "Midpoint = (0.036 + 0.204)/2 = 0.120."
+ },
+ {
+  "g": "3.11",
+  "q": "A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.036, 0.204). What is the margin of error?",
+  "type": "num",
+  "ans": 0.084,
+  "tol": 0.0006,
+  "unit": "",
+  "hint": "ME is half the width.",
+  "sol": "ME = (0.204 &minus; 0.036)/2 = 0.084."
+ },
+ {
+  "g": "3.11",
+  "q": "A 95% interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> has a margin of error of 0.08. If both sample sizes are multiplied by 4 (same confidence level and sample proportions), what is the new margin of error?",
+  "type": "num",
+  "ans": 0.04,
+  "tol": 0.001,
+  "unit": "",
+  "hint": "SE is divided by the square root of the multiplier.",
+  "sol": "The SE is divided by &radic;4 = 2, so ME = 0.08/2 = 0.04."
+ },
+ {
+  "g": "3.11",
+  "q": "Independent random samples of 150 students from School A and 180 students from School B were asked whether they walk to school. In School A 48 walk; in School B 63 walk. Let group 1 be School A. Find the upper limit of a 90% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>. (Round to 3 decimals.)",
+  "type": "num",
+  "ans": 0.055707,
+  "tol": 0.002,
+  "unit": "",
+  "hint": "Use <em>z</em>* = 1.645.",
+  "sol": "ME = 1.645(0.0521) = 0.0857; interval = &minus;0.0300 &plusmn; 0.0857 = (&minus;0.116, 0.056). It still contains 0."
+ },
+ {
+  "g": "3.11",
+  "q": "Independent random samples of 500 online customers and 600 in-store customers were surveyed. 260 online customers and 330 in-store customers said they are satisfied. Let group 1 be the online customers. At 95%% the interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (&minus;0.089, 0.029). Would a 90% interval for the same data include 0?",
+  "opts": [
+   "Yes: the 90% interval is (&minus;0.080, 0.020), which still contains 0",
+   "No: it would be shifted away from 0",
+   "No: it would be exactly the same",
+   "It cannot be known"
+  ],
+  "ans": 0,
+  "hint": "Compute the narrower interval.",
+  "sol": "At 90%, ME = 1.645(0.0302) = 0.0497 and the interval is (&minus;0.080, 0.020), so 0 is still inside."
+ },
+ {
+  "g": "3.11",
+  "q": "A 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.002, 0.118). A student says that because the interval excludes 0, the difference is large and important. What is a better statement?",
+  "opts": [
+   "The interval excludes 0, so there is convincing evidence of a difference, but the lower end (0.002) suggests the difference could be very small; practical importance should be judged from the plausible sizes in the interval",
+   "The difference is exactly 0.06",
+   "The interval proves the difference is large",
+   "The interval excludes 0, so the sample proportions are equal"
+  ],
+  "ans": 0,
+  "hint": "Look at the whole interval, not just whether 0 is inside.",
+  "sol": "Excluding 0 means a difference is plausible, but the plausible values range from tiny to sizeable; judge practical significance using the whole interval and the context."
+ },
+ {
+  "g": "3.11",
+  "q": "The researchers want to claim that <em>p</em><sub>1</sub> is greater than <em>p</em><sub>2</sub> by <strong>more than 0.05</strong>. A 95% interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> is (0.03, 0.15). Is this claim justified?",
+  "opts": [
+   "No: values below 0.05 (such as 0.03) are plausible, so the interval does not provide convincing evidence that the difference exceeds 0.05",
+   "Yes: 0.15 is greater than 0.05",
+   "Yes: the point estimate is 0.09",
+   "No: the interval contains 0"
+  ],
+  "ans": 0,
+  "hint": "All plausible values must satisfy the claim.",
+  "sol": "For the claim &ldquo;more than 0.05&rdquo; every plausible value must be above 0.05. The interval includes 0.03 to 0.05, so the claim is not convincingly supported (although a positive difference is)."
+ },
+ {
+  "g": "3.11",
+  "q": "Why might a computed 95% confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> <strong>fail to contain</strong> the actual difference?",
+  "opts": [
+   "Random sampling variability: some pairs of random samples produce sample proportions far from the population proportions, and about 5% of 95% intervals miss",
+   "The interval was calculated incorrectly",
+   "Because the true difference changes every day",
+   "Because the samples were too large"
+  ],
+  "ans": 0,
+  "hint": "Think of sampling variability.",
+  "sol": "Even with correct methods, chance produces unusual samples. In repeated sampling about 5% of 95% intervals do not capture the true difference."
+ },
+ {
+  "g": "3.11",
+  "q": "When evaluating a claim about whether a difference exists between two populations, a confidence interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub> provides&hellip;",
+  "opts": [
+   "a set of plausible values for the true difference; if 0 is not among them, there is convincing evidence of a difference",
+   "the exact value of the true difference",
+   "the probability that the claim is true",
+   "the sample proportions only"
+  ],
+  "ans": 0,
+  "hint": "Plausible values for the difference.",
+  "sol": "The interval is a set of plausible values for the difference. A claim of &ldquo;no difference&rdquo; (0) is supported only if 0 is plausible."
+ },
+ {
+  "g": "3.11",
+  "q": "What is the correct interpretation of a 95% confidence <em>level</em> for an interval for <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>?",
+  "opts": [
+   "If we repeatedly took random samples from the two populations and built an interval each time, about 95% of the intervals would capture the true difference <em>p</em><sub>1</sub> &minus; <em>p</em><sub>2</sub>",
+   "The true difference is 95% likely to be in the interval",
+   "About 95% of the data in each sample are in the interval",
+   "The sample difference is 95% accurate"
+  ],
+  "ans": 0,
+  "hint": "Repeated random sampling from two populations.",
+  "sol": "The confidence level is the success rate of the method in repeated random sampling from the two populations."
+ }
+];
+
+  var KEY = 'apstats-u3-3-9-to-3-11';
+  var state = [];
+  var container = document.getElementById('problems');
+  var solvedEl = document.getElementById('solvedCount');
+  var pointsEl = document.getElementById('points');
+  var barEl = document.getElementById('progressBar');
+  var finalCard = document.getElementById('finalCard');
+  document.getElementById('totalCount').textContent = problems.length;
+
+  function freshState() { return problems.map(function () { return { used: 0, done: false, correct: false, points: 0 }; }); }
+  function loadState() {
+    try {
+      var s = JSON.parse(localStorage.getItem(KEY) || 'null');
+      if (Array.isArray(s) && s.length === problems.length) return s.map(function (x) {
+        return { used: x.used | 0, done: !!x.done, correct: !!x.correct, points: x.points | 0, v: x.v == null ? null : x.v };
+      });
+    } catch (e) {}
+    return freshState();
+  }
+  function saveState() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} }
+
+  function parseNumber(raw) {
+    var s = raw.trim().replace(/\s+/g, '').replace(',', '.').replace('−', '-');
+    var m = s.match(/^(-?\d*\.?\d+)\/(-?\d*\.?\d+)$/);
+    if (m) { var d = parseFloat(m[2]); return d === 0 ? NaN : parseFloat(m[1]) / d; }
+    if (/^-?\d*\.?\d+$/.test(s)) return parseFloat(s);
+    return NaN;
+  }
+  function dots(used) {
+    var h = '';
+    for (var i = 0; i < MAX_ATTEMPTS; i++) h += '<span class="dot' + (i < used ? ' used' : '') + '"></span>';
+    return h;
+  }
+
+  function build(restore) {
+    container.innerHTML = '';
+    state = restore ? loadState() : freshState();
+    var lastGroup = '';
+    problems.forEach(function (p, i) {
+      if (p.g !== lastGroup) {
+        lastGroup = p.g;
+        var gt = document.createElement('h3');
+        gt.className = 'group-title';
+        gt.textContent = GROUPS[p.g];
+        container.appendChild(gt);
+      }
+      var isMC = !!p.opts;
+      var div = document.createElement('div');
+      div.className = 'card problem';
+      var optsHTML = '';
+      if (isMC) {
+        optsHTML = '<div class="options" role="radiogroup" aria-label="Choices for problem ' + (i + 1) + '">' +
+          p.opts.map(function (o, k) {
+            return '<label><input type="radio" name="q' + i + '" value="' + k + '"><span>' + o + '</span></label>';
+          }).join('') + '</div>';
+      }
+      div.innerHTML =
+        '<span class="q-num">PROBLEM ' + (i + 1) + '</span>' +
+        '<div class="qtext">' + p.q + '</div>' + optsHTML +
+        '<div class="answer-row">' +
+          (isMC ? '' : '<input type="text" inputmode="decimal" autocomplete="off" aria-label="Answer to problem ' + (i + 1) + '" placeholder="Your answer"><span class="unit-label">' + (p.unit || '') + '</span>') +
+          '<button class="btn" type="button">Check</button>' +
+          '<span class="attempts">Attempts left: <span class="dots">' + dots(state[i].used) + '</span></span>' +
+        '</div>' +
+        '<div class="feedback" role="status" aria-live="polite"></div>';
+      container.appendChild(div);
+
+      var input = div.querySelector('input[type="text"]');
+      var radios = div.querySelectorAll('input[type="radio"]');
+      var btn = div.querySelector('button');
+      var fb = div.querySelector('.feedback');
+      var dotsEl = div.querySelector('.dots');
+
+      function show(cls, html) { fb.className = 'feedback show ' + cls; fb.innerHTML = html; }
+      function lock() {
+        btn.disabled = true;
+        if (input) input.disabled = true;
+        Array.prototype.forEach.call(radios, function (r) { r.disabled = true; r.parentNode.classList.add('disabled'); });
+      }
+      function showFinal() {
+        if (isMC) radios[p.ans].parentNode.classList.add('picked-right');
+        if (state[i].correct) show('ok', '&#10003; Correct! Well done.<div class="sol">' + p.sol + '</div>');
+        else show('bad', '&#10007; Not quite. You used all 3 attempts.<div class="sol"><strong>Solution:</strong> ' + p.sol + '</div>');
+        lock();
+      }
+      // remember what the student selected / typed
+      Array.prototype.forEach.call(radios, function (r, k) { r.addEventListener('change', function () { state[i].v = k; saveState(); }); });
+      if (input) input.addEventListener('input', function () { state[i].v = input.value; saveState(); });
+      if (state[i].v != null) {
+        if (isMC) { if (radios[state[i].v]) radios[state[i].v].checked = true; }
+        else if (input) input.value = state[i].v;
+      }
+      if (state[i].done) showFinal();
+      else if (state[i].used > 0) {
+        var l0 = MAX_ATTEMPTS - state[i].used;
+        show('bad', 'You have ' + l0 + ' attempt' + (l0 > 1 ? 's' : '') + ' left.' +
+          (state[i].used >= 2 ? '<div class="sol"><strong>Hint:</strong> ' + p.hint + '</div>' : ''));
+      }
+
+      function check() {
+        var st = state[i];
+        if (st.done) return;
+        var ok, picked = null;
+        if (isMC) {
+          Array.prototype.forEach.call(radios, function (r) { if (r.checked) picked = r; });
+          if (!picked) { show('hint', 'Please select an answer first. (This did not use an attempt.)'); return; }
+          ok = parseInt(picked.value, 10) === p.ans;
+        } else {
+          var v = parseNumber(input.value);
+          if (isNaN(v)) { show('hint', 'Please enter a number, e.g. 0.0816 or 3/8. (This did not use an attempt.)'); return; }
+          ok = Math.abs(v - p.ans) <= p.tol;
+        }
+        st.used++;
+        dotsEl.innerHTML = dots(st.used);
+        var left = MAX_ATTEMPTS - st.used;
+        if (ok) {
+          st.done = st.correct = true;
+          st.points = MAX_ATTEMPTS - st.used + 1;
+          if (picked) picked.parentNode.classList.add('picked-right');
+          show('ok', '&#10003; Correct! Well done.' + (st.used === 1 ? ' First try!' : '') + '<div class="sol">' + p.sol + '</div>');
+          lock();
+        } else if (left === 0) {
+          st.done = true;
+          if (picked) picked.parentNode.classList.add('picked-wrong');
+          if (isMC) radios[p.ans].parentNode.classList.add('picked-right');
+          show('bad', '&#10007; Not quite. You have used all 3 attempts.<div class="sol"><strong>Solution:</strong> ' + p.sol + '</div>');
+          lock();
+        } else {
+          var msg = '&#10007; Not correct. You have ' + left + ' attempt' + (left > 1 ? 's' : '') + ' left.';
+          if (st.used >= 2) msg += '<div class="sol"><strong>Hint:</strong> ' + p.hint + '</div>';
+          show('bad', msg);
+          if (input) input.select();
+          if (picked) { picked.checked = false; state[i].v = null; }
+        }
+        saveState();
+        update();
+      }
+      btn.addEventListener('click', check);
+      if (input) input.addEventListener('keydown', function (e) { if (e.key === 'Enter') check(); });
+    });
+    update();
+  }
+
+  function update() {
+    var solved = 0, pts = 0, finished = 0;
+    state.forEach(function (s) {
+      if (s.correct) solved++;
+      if (s.done) finished++;
+      pts += s.points;
+    });
+    solvedEl.textContent = solved;
+    pointsEl.textContent = pts + ' / ' + (problems.length * MAX_ATTEMPTS);
+    barEl.style.width = (finished / problems.length * 100) + '%';
+    try { if (window.LiaSync && LiaSync.report) LiaSync.report({ solved: finished, total: problems.length, score: pts, max: problems.length * MAX_ATTEMPTS }); } catch (e) {}
+    if (finished === problems.length) {
+      var pct = Math.round(solved / problems.length * 100);
+      var msg = 'You solved ' + solved + ' of ' + problems.length + ' problems (' + pct + '%) and earned ' + pts + ' points. ';
+      msg += pct === 100 ? 'Excellent work!' : pct >= 70 ? 'Good job! Review the solutions you missed.' : 'Keep practicing — review the lesson and try again.';
+      document.getElementById('finalMsg').textContent = msg;
+      finalCard.classList.add('show');
+    } else {
+      finalCard.classList.remove('show');
+    }
+  }
+
+  var resetBtn = document.getElementById('resetBtn');
+  if (resetBtn) resetBtn.addEventListener('click', function () {
+    try { localStorage.removeItem(KEY); } catch (e) {}
+    build(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  build(true);
+})();
+</script>
+</body>
+</html>
