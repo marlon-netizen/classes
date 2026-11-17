@@ -7,6 +7,7 @@ window.LIA_CONFIG={
   area: 'ciencias-sociales',
   areaName: 'Ciencias Sociales',
   pages: {
+    'social-science-10-unit-3': 'Unit III Independence and Sovereignty',
     'social-science-11-unit-3': 'Unit III Emancipation Philosophy'
   }
 };
