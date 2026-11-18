@@ -1,0 +1,1269 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit III Independence and Sovereignty | 10th Social Science</title>
+<meta name="description" content="Interactive review for 10th grade Social Science, Unit III: Nicaragua from independence to the anti-interventionist struggles. Four lessons with concepts, a map of Nicaragua, practice with instant feedback and written responses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#0067c6; --blue-deep:#0b3d7a; --sky:#e6f1fb; --gold:#f2b705; --gold-soft:#fdf3cf;
+  --terra:#c8553d; --terra-soft:#fbe7e1; --green:#2e8b57; --green-soft:#e2f3e8;
+  --bg:#fbf7ee; --surface:#ffffff; --ink:#22262e; --muted:#5b6270; --line:#e4dccb;
+  --good:#1f7a4d; --good-soft:#def2e6; --bad:#b3372a; --bad-soft:#fae3df;
+  --shadow:0 1px 2px rgba(20,30,50,.07),0 6px 18px rgba(20,30,50,.07);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --blue:#6db3f2; --blue-deep:#0a2a52; --sky:#14283f; --gold:#f5c93a; --gold-soft:#3a3010;
+    --terra:#ee8f78; --terra-soft:#38211b; --green:#6cc795; --green-soft:#17301f;
+    --bg:#10151d; --surface:#18202b; --ink:#e8ebf0; --muted:#a2adbd; --line:#2d3947;
+    --good:#66cc95; --good-soft:#15301f; --bad:#f08a7c; --bad-soft:#38201d; --shadow:0 1px 2px rgba(0,0,0,.5);
+  }
+}
+:root[data-theme="dark"]{
+  --blue:#6db3f2; --blue-deep:#0a2a52; --sky:#14283f; --gold:#f5c93a; --gold-soft:#3a3010;
+  --terra:#ee8f78; --terra-soft:#38211b; --green:#6cc795; --green-soft:#17301f;
+  --bg:#10151d; --surface:#18202b; --ink:#e8ebf0; --muted:#a2adbd; --line:#2d3947;
+  --good:#66cc95; --good-soft:#15301f; --bad:#f08a7c; --bad-soft:#38201d; --shadow:0 1px 2px rgba(0,0,0,.5);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.75 "Merriweather",Georgia,serif}
+h1,h2,h3,h4{font-family:"Merriweather",Georgia,serif;line-height:1.3;margin:0 0 .5em}
+h2{font-size:1.65rem;font-weight:900} h3{font-size:1.2rem;font-weight:700} h4{font-size:1rem;font-weight:700}
+p{margin:0 0 1em} a{color:var(--blue)}
+button{font:inherit;color:inherit;cursor:pointer}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+section{padding:36px 0 8px}
+
+/* Chorotega-style zigzag band */
+.zig{height:14px;background:
+  linear-gradient(135deg,var(--gold) 25%,transparent 25%) -14px 0/28px 14px,
+  linear-gradient(225deg,var(--gold) 25%,transparent 25%) -14px 0/28px 14px,
+  linear-gradient(315deg,var(--terra) 25%,transparent 25%) 0 0/28px 14px,
+  linear-gradient(45deg,var(--terra) 25%,transparent 25%) 0 0/28px 14px,var(--blue-deep)}
+
+header.top{background:linear-gradient(180deg,#0067c6 0%,#0b3d7a 100%);color:#fff;position:relative;overflow:hidden}
+header.top .wrap{display:flex;flex-wrap:wrap;gap:20px;align-items:center;padding-top:30px;padding-bottom:26px;position:relative;z-index:1}
+.crest{flex:0 0 auto;width:120px;height:auto;filter:drop-shadow(0 3px 6px rgba(0,0,0,.35))}
+.titles{flex:1 1 320px}
+.kicker{font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:#ffe08a;margin:0 0 .4rem;font-weight:700}
+h1{font-size:clamp(1.6rem,4.4vw,2.5rem);font-weight:900;color:#fff;margin:0 0 .4rem}
+.sub{margin:0;color:#dbe9fa;font-size:.98rem}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.pill{font-size:.78rem;padding:3px 12px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3)}
+.volcanoes{position:absolute;right:0;bottom:0;width:min(520px,70%);opacity:.22;z-index:0}
+.theme-btn{position:absolute;top:10px;right:12px;z-index:2;background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.4);color:#fff;border-radius:8px;padding:3px 10px;font-size:.78rem}
+
+nav.sticky{position:sticky;top:0;z-index:30;background:var(--surface);border-bottom:1px solid var(--line);box-shadow:var(--shadow)}
+nav.sticky .wrap{display:flex;gap:4px;overflow-x:auto;padding-top:6px;padding-bottom:6px}
+nav.sticky a{white-space:nowrap;text-decoration:none;color:var(--ink);font-size:.85rem;font-weight:700;padding:7px 12px;border-radius:8px}
+nav.sticky a:hover,nav.sticky a.on{background:var(--gold-soft);color:var(--blue-deep)}
+:root[data-theme="dark"] nav.sticky a.on{color:var(--gold)}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:20px 22px;margin-bottom:18px}
+.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.goal{border-top:5px solid var(--gold)} .goal:nth-child(2){border-top-color:var(--terra)} .goal:nth-child(3){border-top-color:var(--green)} .goal:nth-child(4){border-top-color:var(--blue)}
+.goal .n{font-size:1.9rem;font-weight:900;color:var(--blue);line-height:1}
+.lead{font-size:1.02rem;color:var(--muted)}
+
+/* concept tabs */
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.tab{border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 14px;font-weight:700;font-size:.85rem}
+.tab[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+:root[data-theme="dark"] .tab[aria-selected="true"]{color:#0a1626}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .tab[aria-selected="true"]{color:#0a1626}}
+.panel[hidden]{display:none}
+.panel h3{color:var(--blue)}
+.key{background:var(--gold-soft);border-left:5px solid var(--gold);border-radius:8px;padding:12px 16px;margin:14px 0;font-size:.95rem}
+.key b{color:var(--terra)}
+.quote{border-left:4px solid var(--terra);margin:14px 0;padding:6px 16px;font-style:italic;background:var(--terra-soft);border-radius:0 8px 8px 0;font-size:.95rem}
+.quote cite{display:block;font-style:normal;font-size:.8rem;color:var(--muted);margin-top:4px}
+.two{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.mini{background:var(--sky);border-radius:10px;padding:12px 16px;font-size:.92rem}
+.mini h4{color:var(--blue);margin-bottom:.3em}
+ul.tight{margin:.3em 0 1em;padding-left:1.2em} ul.tight li{margin-bottom:.35em}
+.nic{background:var(--green-soft);border:1px dashed var(--green);border-radius:10px;padding:12px 16px;font-size:.93rem;margin-top:12px}
+.nic b{color:var(--green)}
+
+/* timeline */
+.timeline{position:relative;margin:10px 0 0;padding-left:26px;border-left:4px solid var(--blue)}
+.tl{position:relative;margin-bottom:14px;font-size:.92rem}
+.tl:before{content:"";position:absolute;left:-36px;top:5px;width:16px;height:16px;border-radius:50%;background:var(--gold);border:3px solid var(--blue)}
+.tl.nicx:before{background:var(--terra)}
+.tl b{color:var(--blue)}
+
+/* vocab flip */
+.vgrid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.vcard{background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:14px;min-height:112px;text-align:left;transition:.15s}
+.vcard:hover{border-color:var(--blue)}
+.vcard .t{font-weight:900;color:var(--blue);font-size:.98rem}
+.vcard .d{display:none;font-size:.82rem;line-height:1.6;margin-top:6px}
+.vcard.open{background:var(--gold-soft);border-color:var(--gold)} .vcard.open .d{display:block}
+.vcard .hint{font-size:.72rem;color:var(--muted);margin-top:6px}
+.vcard.open .hint{display:none}
+
+/* map */
+.mapbox{display:grid;gap:18px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start}
+@media (max-width:760px){.mapbox{grid-template-columns:1fr}}
+#mapSvg{width:100%;height:auto;background:var(--sky);border-radius:14px;border:1px solid var(--line)}
+.reg{cursor:pointer;stroke:#fff;stroke-width:1.6;stroke-linejoin:round;transition:opacity .15s,filter .15s}
+.reg:hover,.reg:focus{filter:brightness(1.1);outline:none}
+#mapSvg.has-sel .reg:not(.sel){opacity:.45}
+.reg.sel{stroke:#222;stroke-width:1.2}
+.dl{font:700 6.5px "Merriweather",serif;fill:#2b2b2b;pointer-events:none;text-anchor:middle;paint-order:stroke;stroke:rgba(255,255,255,.55);stroke-width:1.5px}
+.rl{font:900 17px "Merriweather",serif;fill:#063d1d;pointer-events:none;text-anchor:middle}
+.mlegend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:.8rem}
+.mlegend i{display:inline-block;width:14px;height:14px;border-radius:3px;margin-right:6px;vertical-align:-2px}
+.pin{cursor:pointer}
+.pin circle{fill:#d6422b;stroke:#fff;stroke-width:1.5}
+.pin text{font:900 9px "Merriweather",serif;fill:#fff;pointer-events:none}
+.pbtn{border:0;cursor:pointer;font-family:inherit}.pbtn:hover{background:var(--gold-soft)}
+.info{min-height:260px}
+.info h3{margin-bottom:.2em}
+.chip{display:inline-block;font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:999px;margin:2px 4px 2px 0;background:var(--sky);color:var(--blue-deep)}
+:root[data-theme="dark"] .chip{color:var(--blue)}
+.toggles{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;font-size:.82rem}
+.toggles label{display:flex;gap:6px;align-items:center;background:var(--surface);border:1px solid var(--line);padding:4px 10px;border-radius:999px;cursor:pointer}
+.legend{font-size:.78rem;color:var(--muted);margin-top:8px}
+
+/* practice */
+.ptabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.ptab{border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:9px 16px;font-weight:700;font-size:.88rem}
+.ptab[aria-selected="true"]{background:var(--terra);border-color:var(--terra);color:#fff}
+:root[data-theme="dark"] .ptab[aria-selected="true"]{color:#1a0d09}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .ptab[aria-selected="true"]{color:#1a0d09}}
+.scorebar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:14px;font-size:.88rem}
+.prog{flex:1 1 180px;height:10px;background:var(--line);border-radius:999px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--green));transition:width .3s}
+.q{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:14px;box-shadow:var(--shadow)}
+.q .num{font-size:.75rem;font-weight:700;color:var(--terra);letter-spacing:.08em;text-transform:uppercase}
+.q p.stem{font-weight:700;margin:.2em 0 .8em}
+.src{background:var(--sky);border-left:4px solid var(--blue);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.9rem;font-style:italic;margin:0 0 .9em}
+.src small{display:block;font-style:normal;color:var(--muted);margin-top:3px}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:9px 14px;margin-bottom:8px;font-size:.9rem;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--blue)}
+.opt:disabled{cursor:default}
+.opt.right{background:var(--good-soft);border-color:var(--good)}
+.opt.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.fb{display:none;margin-top:6px;padding:10px 14px;border-radius:10px;font-size:.88rem}
+.fb.show{display:block}
+.fb.ok{background:var(--good-soft);border-left:5px solid var(--good)}
+.fb.no{background:var(--bad-soft);border-left:5px solid var(--bad)}
+.fb b.h{display:block;margin-bottom:2px}
+textarea{width:100%;min-height:110px;border:2px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit;font-size:.9rem;background:var(--bg);color:var(--ink);resize:vertical}
+.btn{background:var(--blue);color:#fff;border:0;border-radius:10px;padding:9px 18px;font-weight:700;font-size:.88rem}
+:root[data-theme="dark"] .btn{color:#0a1626}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .btn{color:#0a1626}}
+.btn.alt{background:transparent;color:var(--ink);border:2px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.check{list-style:none;padding:0;margin:8px 0}
+.check li{padding:3px 0;font-size:.88rem}
+.summary{display:none;text-align:center;padding:22px}
+.summary.show{display:block}
+.summary .big{font-size:2.4rem;font-weight:900;color:var(--blue)}
+
+.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.82rem}
+.chain span{background:var(--sky);border-radius:8px;padding:5px 10px}
+.chain b{color:var(--terra)}
+.venn{display:grid;gap:0;grid-template-columns:1fr 1.1fr 1fr;margin:8px 0}
+.vn{padding:12px 16px;font-size:.86rem;border:2px solid var(--blue)}
+.vn h4{margin-bottom:.3em}
+.vn.a{background:var(--sky);border-radius:50px 0 0 50px / 40px 0 0 40px}
+.vn.c{background:var(--gold-soft);border-left:0;border-right:0}
+.vn.b{background:var(--green-soft);border-color:var(--green);border-radius:0 50px 50px 0 / 0 40px 40px 0}
+.vn.c{border-color:var(--gold)}
+@media (max-width:760px){.venn{grid-template-columns:1fr}.vn.a,.vn.b{border-radius:12px}.vn.c{border:2px solid var(--gold);border-radius:12px;margin:6px 0}}
+.rf,.cmp{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.rf>div{border-radius:12px;padding:12px 16px;font-size:.9rem}
+.roots{background:var(--terra-soft)}.fruits{background:var(--green-soft)}
+.cmp>div{background:var(--surface);border:1px solid var(--line);border-top:5px solid var(--terra);border-radius:10px;padding:10px 16px;font-size:.9rem}
+.cmp>div:nth-child(2){border-top-color:var(--blue)}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) 28px;gap:10px;align-items:center;margin-bottom:8px;font-size:.88rem}
+@media (max-width:640px){.mrow{grid-template-columns:1fr 28px}.mrow .l{grid-column:1/3}}
+select{width:100%;font:inherit;font-size:.85rem;padding:7px 8px;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink)}
+select.right{border-color:var(--good);background:var(--good-soft)}select.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.mark{font-weight:900;text-align:center}
+.srow{padding:10px 0;border-top:1px dashed var(--line)}
+.srow:first-of-type{border-top:0}
+.srow p{margin:0 0 6px;font-size:.9rem}
+.cats{display:flex;flex-wrap:wrap;gap:6px}
+.cat{border:2px solid var(--line);background:var(--bg);border-radius:999px;padding:4px 12px;font-size:.8rem;font-weight:700}
+.cat:hover:not(:disabled){border-color:var(--blue)}
+.cat.right{background:var(--good-soft);border-color:var(--good)}.cat.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.srow .note{font-size:.8rem;margin-top:4px}
+.ord{list-style:none;margin:0 0 10px;padding:0}
+.ord li{display:flex;gap:8px;align-items:center;background:var(--bg);border:2px solid var(--line);border-radius:10px;padding:8px 10px;margin-bottom:6px;font-size:.88rem}
+.ord li span{flex:1}
+.ord li.right{background:var(--good-soft);border-color:var(--good)}.ord li.wrong{background:var(--bad-soft);border-color:var(--bad)}
+.ord button{border:1px solid var(--line);background:var(--surface);border-radius:6px;width:30px;height:30px}
+.qmap{width:100%;max-width:560px;height:auto;display:block;margin:0 auto 8px;background:var(--sky);border-radius:12px;border:1px solid var(--line)}
+.qmap path.d{fill:#cdd5dc;stroke:#fff;stroke-width:1.4;cursor:pointer}
+.qmap path.d:hover{fill:var(--gold)}
+.qmap path.d.right{fill:#2e9f64}.qmap path.d.wrong{fill:#d6422b}
+.qmap.done path.d{cursor:default}
+.qmap.done path.d:hover:not(.right):not(.wrong){fill:#cdd5dc}
+footer{margin-top:40px;background:var(--blue-deep);color:#cfe0f5;font-size:.82rem;text-align:center}
+footer .wrap{padding:18px 16px}
+.sr{position:absolute;left:-9999px}
+.wrap.wide{max-width:1280px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:26px;align-items:start;padding-bottom:10px}
+.mapcol{position:sticky;top:62px;max-height:calc(100vh - 74px);overflow:auto;padding-top:36px}
+.mapcard{padding:14px 16px}
+.mapcard h3{margin-bottom:.2em}
+.mapcard .tg{display:inline-flex;gap:6px;align-items:center;font-size:.78rem;margin-bottom:8px;cursor:pointer}
+.mapcard .info{margin-top:10px;padding:10px 12px;background:var(--sky);border-radius:10px;min-height:0}
+.mapcard .info h4{margin-bottom:.2em}
+.mapcard .info p{margin:0 0 .6em}
+.mapcard .nic{font-size:.8rem}
+.mapcard .chip{font-size:.66rem}
+.pin.dim{opacity:.3}
+.pbtn.dim{opacity:.45}
+@media (max-width:1000px){.layout{grid-template-columns:1fr}.mapcol{position:static;max-height:none;padding-top:0}}
+nav.sticky button{white-space:nowrap;background:transparent;border:0;color:var(--ink);font-size:.88rem;font-weight:700;padding:8px 14px;border-radius:8px}
+nav.sticky button:hover,nav.sticky button[aria-selected="true"]{background:var(--gold-soft);color:var(--blue-deep)}
+:root[data-theme="dark"] nav.sticky button[aria-selected="true"]{color:var(--gold)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) nav.sticky button[aria-selected="true"]{color:var(--gold)}}
+.tabpanel{padding-top:34px}
+.tabpanel[hidden],.lsub[hidden]{display:none}
+.kicker2{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--terra);font-weight:700;margin:0 0 .3rem}
+.lhead h2{margin-bottom:.4em}
+.subnav{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 18px}
+.subnav button{border:2px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 16px;font-weight:700;font-size:.88rem}
+.subnav button[aria-selected="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+:root[data-theme="dark"] .subnav button[aria-selected="true"]{color:#0a1626}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .subnav button[aria-selected="true"]{color:#0a1626}}
+.goal[role="button"]{cursor:pointer}.goal[role="button"]:hover{border-color:var(--blue)}
+.lcard{display:flex;flex-direction:column;gap:4px;text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);font-size:.88rem}
+.lcard b{color:var(--blue);font-size:1rem}.lcard:hover{border-color:var(--gold)}
+.stbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:.9rem}
+.stbl th,.stbl td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line)}
+.stbl th{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.muted{color:var(--muted)}
+.stot{background:var(--gold-soft);border-left:5px solid var(--gold);border-radius:8px;padding:10px 14px;margin:10px 0;font-size:.92rem}
+.namel{display:block;font-weight:700;font-size:.88rem;margin:8px 0}
+.nameIn{display:block;width:100%;max-width:420px;margin-top:4px;font:inherit;padding:9px 12px;border:2px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink)}
+.copyline{background:var(--sky);border-radius:8px;padding:8px 12px;font-size:.88rem;word-break:break-word}
+
+
+
+
+.layout>main{min-width:0}
+.tw{max-width:100%;overflow-x:auto}
+.stbl td,.stbl th{overflow-wrap:break-word}
+@media(max-width:560px){.stbl{font-size:.82rem}.stbl th,.stbl td{padding:6px 6px}}
+.fish{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.fish .head{grid-column:1/-1;background:var(--gold-soft);border:2px solid var(--gold);border-radius:10px;padding:10px 14px;font-weight:700;text-align:center;font-size:.92rem}
+.fish .bone{background:var(--sky);border-left:5px solid var(--blue);border-radius:8px;padding:10px 14px;font-size:.9rem}
+.fish .bone.low{background:var(--terra-soft);border-left-color:var(--terra)}
+@media(max-width:560px){.fish{grid-template-columns:1fr}}
+.stbl td,.stbl th{vertical-align:top}
+</style>
+<!--LIA-SYNC-START--><link rel="icon" type="image/svg+xml" href="favicon.svg"><link rel="alternate icon" type="image/png" href="favicon.png"><script src="lia-config.js"></script><script src="../shared/lia-sync.js"></script><!--LIA-SYNC-END-->
+</head>
+<body>
+
+<header class="top">
+  <button class="theme-btn" id="themeBtn" type="button" aria-label="Toggle dark mode">☾ Theme</button>
+  <svg class="volcanoes" viewBox="0 0 520 120" aria-hidden="true">
+    <path d="M0 120 L70 50 L90 64 L120 20 L150 60 L190 40 L240 90 L290 30 L320 52 L360 12 L400 70 L440 44 L520 120Z" fill="#fff"/>
+  </svg>
+  <div class="wrap">
+    <svg class="crest" viewBox="0 0 465 471" role="img" aria-label="Silhouette of Nicaragua">
+      <path d="M458 19L444 16L439 19L431 17L425 26L412 30L406 36L400 36L396 41L390 41L388 43L371 42L366 47L360 47L356 44L355 53L344 51L334 58L330 58L325 54L306 52L298 37L291 38L286 44L283 44L279 48L278 53L282 57L281 65L267 65L267 72L263 77L265 89L260 93L249 94L240 104L239 109L235 113L230 114L227 120L223 120L213 128L208 129L207 142L196 141L192 134L186 134L174 123L174 120L170 120L151 140L150 146L144 151L136 151L124 147L120 149L106 148L103 150L103 155L105 156L104 167L108 180L106 187L109 189L109 200L111 201L109 207L105 207L104 203L98 200L92 200L87 206L87 221L74 232L45 231L41 234L39 239L35 239L18 223L10 230L8 238L22 248L28 249L31 252L31 256L44 270L58 282L66 284L66 290L95 310L101 316L107 330L114 333L119 347L130 357L130 363L137 368L143 376L151 379L158 385L162 385L163 390L183 405L196 419L203 430L207 431L210 428L220 428L239 431L249 429L250 432L266 432L267 438L287 446L292 446L307 436L316 434L325 436L327 439L332 439L338 445L348 443L353 451L363 457L363 464L370 464L372 466L383 464L386 470L402 470L406 465L417 463L415 451L411 451L404 440L400 438L395 413L396 396L400 393L405 393L407 383L417 378L417 369L412 352L410 351L409 356L405 356L399 351L399 346L406 340L405 329L412 328L414 331L415 327L414 313L416 305L415 301L409 299L409 286L405 285L405 278L417 273L422 268L422 262L417 255L417 250L420 248L429 249L432 241L429 227L425 226L425 222L428 221L425 206L425 183L429 170L431 144L439 119L454 102L461 85L460 70L457 69L453 60L452 48L450 44L444 45L437 36L437 32L444 23L450 22L454 26Z" fill="#f2b705" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+    </svg>
+
+    <div class="titles">
+      <p class="kicker">Lincoln International Academy · 10th Grade Social Science</p>
+      <h1>Unit III: Nicaragua from Independence to the Anti-Interventionist Struggles</h1>
+      <p class="sub">Teacher: Ms. Kathya López · Study guide and practice · MINED 2026 curriculum · 21 class hours</p>
+      <div class="pills"><span class="pill">Independence</span><span class="pill">Formation of the State</span><span class="pill">José Santos Zelaya</span><span class="pill">Benjamín Zeledón</span></div>
+    </div>
+  </div>
+  <div class="zig" aria-hidden="true"></div>
+</header>
+
+<nav class="sticky" id="mainNav" aria-label="Lessons"><div class="wrap wide" role="tablist">
+  <button type="button" role="tab" data-t="home" aria-selected="true">🏠 Home</button>
+  <button type="button" role="tab" data-t="l1" aria-selected="false">Lesson 1</button>
+  <button type="button" role="tab" data-t="l2" aria-selected="false">Lesson 2</button>
+  <button type="button" role="tab" data-t="l3" aria-selected="false">Lesson 3</button>
+  <button type="button" role="tab" data-t="l4" aria-selected="false">Lesson 4</button>
+</div></nav>
+
+<div class="wrap wide layout">
+<main id="panels">
+
+<section class="tabpanel" id="p-home">
+<div id="overview">
+  <h2>What you will learn</h2>
+  <p class="lead">Between 1811 and 1912 Nicaragua left Spanish rule, built a State of its own, and faced foreign pressure and intervention. This unit follows those changes and the people who defended the nation's sovereignty.</p>
+  <div class="grid">
+    <div class="card goal" role="button" tabindex="0" data-goto="l1:study"><div class="n">1</div><h4>Independence</h4><p style="font-size:.9rem;margin:0">Characteristics of the process, the próceres and the impact on the economy.</p></div>
+    <div class="card goal" role="button" tabindex="0" data-goto="l2:study"><div class="n">2</div><h4>Formation of the State</h4><p style="font-size:.9rem;margin:0">Political and economic features, social consequences and the heroes of the National War.</p></div>
+    <div class="card goal" role="button" tabindex="0" data-goto="l3:study"><div class="n">3</div><h4>Zelaya, 1893–1909</h4><p style="font-size:.9rem;margin:0">Anti-interventionist policies, the canal question and the Knox Note.</p></div>
+    <div class="card goal" role="button" tabindex="0" data-goto="l4:study"><div class="n">4</div><h4>Zeledón, 1910–1912</h4><p style="font-size:.9rem;margin:0">The fight against U.S. intervention: context, geography and legacy.</p></div>
+  </div>
+  <div class="key"><b>Skills you will practice:</b> (1) <i>Conceptual</i>, explain the political, social and economic features of each period; (2) <i>Procedural</i>, build a comparative chart, a fishbone diagram, a Legacy Sheet and a critical essay supported by evidence; (3) <i>Attitudinal</i>, value the national heritage and respect other viewpoints in discussion by paraphrasing a classmate before you respond.</div>
+</div>
+<section style="padding-top:12px"><h2>Lessons</h2>
+  <div class="grid">
+    <button class="lcard" type="button" data-goto="l1:study"><b>Lesson 1</b><span>Nicaragua during the independence process</span></button>
+    <button class="lcard" type="button" data-goto="l2:study"><b>Lesson 2</b><span>The formation of the Nicaraguan State</span></button>
+    <button class="lcard" type="button" data-goto="l3:study"><b>Lesson 3</b><span>Anti-interventionist policies, 1893–1909</span></button>
+    <button class="lcard" type="button" data-goto="l4:study"><b>Lesson 4</b><span>Struggles against the U.S. interventions, 1910–1912</span></button>
+  </div>
+</section>
+<div id="timeline">
+  <h2>Timeline of the unit</h2>
+  <div class="card">
+    <div class="timeline">
+      <div class="tl nicx"><b>1811–1812</b> · Uprisings against Spanish authority in Granada and other towns.</div>
+      <div class="tl"><b>15 Sept 1821</b> · Central America declares independence from Spain.</div>
+      <div class="tl nicx"><b>1822–1823</b> · Annexation to the Mexican Empire. <b>1823–1838</b> · Central American Federation.</div>
+      <div class="tl nicx"><b>1838</b> · Nicaragua declares itself sovereign, free and independent.</div>
+      <div class="tl nicx"><b>1852</b> · Managua becomes the capital.</div>
+      <div class="tl nicx"><b>1855–1857</b> · National War against William Walker: Rivas (April 1856), San Jacinto (14 Sept 1856), surrender (May 1857).</div>
+      <div class="tl nicx"><b>1881</b> · Indigenous uprising in Matagalpa against forced labor and land loss.</div>
+      <div class="tl nicx"><b>1893</b> · Zelaya's Liberal Revolution. <b>1894</b> · Reincorporation of the Mosquito Reserve.</div>
+      <div class="tl"><b>1903</b> · The United States chooses Panama for its canal.</div>
+      <div class="tl nicx"><b>Dec 1909</b> · Knox Note; Zelaya resigns.</div>
+      <div class="tl nicx"><b>1910–1912</b> · Marines land at Bluefields (1910) and again in Aug 1912.</div>
+      <div class="tl nicx"><b>3–4 Oct 1912</b> · Coyotepe and La Barranca; Benjamín Zeledón is executed.</div>
+      <div class="tl nicx"><b>1927</b> · Sandino begins his struggle for national sovereignty.</div>
+    </div>
+    <p class="legend">Gold dots mark world and regional events. Terracotta dots mark Nicaraguan events.</p>
+  </div>
+</div>
+</section>
+
+
+<section class="tabpanel" id="p-l1" hidden>
+  <div class="lhead"><p class="kicker2">Lesson 1 of 4</p><h2>Nicaragua during the independence process</h2>
+    <div class="subnav" role="tablist" aria-label="Lesson 1 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button></div>
+  </div>
+  <div class="lsub" data-sub="study">
+<div class="card" id="t1">
+    <h3>Nicaragua during the independence process: the end of Spanish rule</h3>
+    <p>For about three centuries Nicaragua belonged to the Spanish Empire as a province of the <b>Captaincy General of Guatemala</b>, with its capital in <b>León</b>. Between 1811 and 1838 the country moved from colony to independent state. This lesson looks at <i>what Nicaragua was like</i> in that process (political, social and economic characteristics), <i>who led it</i> (the próceres), and <i>how it changed the economy</i>.</p>
+    <h4>1.1 Political, social and economic characteristics</h4>
+    <div class="two">
+      <div class="mini"><h4>Political</h4>Top offices were held by <b>peninsulares</b> (Spain-born officials); <b>criollos</b> were excluded from the highest posts. León (administrative and Church center) and Granada (merchant city on Lake Nicaragua) became rivals, a rivalry that outlived the colony.</div>
+      <div class="mini"><h4>Social</h4>A hierarchy of origin and caste: peninsulares, criollos, mestizos, Indigenous communities (who paid tribute) and Afro-descendants, including enslaved people. Slavery was abolished by the Central American Federation in 1824.</div>
+      <div class="mini"><h4>Economic</h4>Agriculture and cattle (cacao, <b>indigo</b>, hides) plus timber. Trade went through Spain's <b>monopoly</b>, with smuggling on the Caribbean coast. Coins were scarce and the economy was small and regional.</div>
+      <div class="mini"><h4>Ideas and events</h4>Enlightenment ideas, the 1812 Cádiz Constitution and the collapse of Spanish authority after Napoleon's invasion (1808) encouraged criollo elites to demand more power.</div>
+    </div>
+    <h4 style="margin-top:18px">From colony to sovereign state</h4>
+    <div class="chain">
+      <span>1811–1812 uprisings in Granada, León, Masaya and other towns</span><b>→</b><span>15 Sept 1821: independence declared in Guatemala</span><b>→</b><span>1822–1823: annexed to Iturbide's Mexican Empire</span><b>→</b><span>1823–1838: United Provinces of Central America</span><b>→</b><span>1838: Nicaragua declares itself sovereign, free and independent</span>
+    </div>
+    <p style="margin-top:12px">Nicaraguan leaders were divided about the path: some wanted union with Mexico, others a Central American union, others a state of their own. The disagreement fed civil wars in the 1820s.</p>
+    <h4>1.2 Próceres of the independence</h4>
+    <p>A <b>prócer</b> is a leading figure of a nation's independence. Use these cards as the start of your "historical album" (check dates and details in your textbook).</p>
+    <div class="two">
+      <div class="mini"><h4>Miguel Larreynaga</h4>Jurist, scholar and educator from León. He represented Nicaragua when the Act of Independence was signed in Guatemala (1821) and later served the new state in its institutions.</div>
+      <div class="mini"><h4>Cleto Ordóñez</h4>Military officer from Granada, remembered for his role in the 1811–1812 uprisings against Spanish authority.</div>
+      <div class="mini"><h4>Telésforo Orozco and the Granada patriots</h4>Leaders of the first rebellions of 1811 who demanded changes in colonial government and trade.</div>
+      <div class="mini"><h4>Manuel Antonio de la Cerda</h4>First Head of State of Nicaragua within the Federation (1825). He died in the civil wars that followed, a sign of how unstable the new state was.</div>
+    </div>
+    <div class="key"><b>Older roots of resistance:</b> In 1762 the young <b>Rafaela Herrera</b> helped defend the fortress of the Immaculate Conception on the San Juan River against a British attack. Defending the homeland did not begin with independence.</div>
+    <h4>1.3 Impact on the economy</h4>
+    <p><b>Comparative chart:</b> what changed and how it affected the national economy.</p>
+    <div class="tw"><table class="stbl">
+      <thead><tr><th>Characteristic of the process</th><th>Effect on the economy</th></tr></thead>
+      <tbody>
+        <tr><td><b>End of Spain's trade monopoly</b></td><td>Open access to the world market (especially Britain), but also competition from imports for local artisans.</td></tr>
+        <tr><td><b>Break with the Crown</b></td><td>Royal taxes and administration disappeared; the new governments struggled to collect revenue (taxes, customs).</td></tr>
+        <tr><td><b>León–Granada conflicts</b></td><td>Civil wars interrupted production, destroyed estates, and led to forced loans.</td></tr>
+        <tr><td><b>Criollo elites take power</b></td><td>Land and trade stayed concentrated in a few families, the "new owners of wealth."</td></tr>
+        <tr><td><b>War costs and the debt of the Federation</b></td><td>Foreign debt and military spending left little for roads, schools or production.</td></tr>
+      </tbody></table></div>
+    <h4>Fishbone diagram: the economic effect of independence</h4>
+    <div class="fish">
+      <div class="head">Head (the effect): Crisis and transformation of the Nicaraguan economy after independence</div>
+      <div class="bone"><b>Upper bone:</b> End of the Spanish monopoly, opening to the world market.</div>
+      <div class="bone"><b>Upper bone:</b> Criollo elite takes power, the new owners of wealth.</div>
+      <div class="bone low"><b>Lower bone:</b> Foreign debt and war expenses, the cost of freedom.</div>
+      <div class="bone low"><b>Lower bone:</b> Unstable production: abandoned haciendas and scarcity of coin.</div>
+    </div>
+    <div class="nic"><b>Nicaraguan connection:</b> Every September the <i>Fiestas Patrias</i> remember 15 September 1821. Schools, towns and families honor the próceres while recalling that independence was only the first step toward a stable, sovereign state.</div>
+    <div class="key"><b>Your teacher will look for (checklist):</b> (1) you master the political and social characteristics of the independence process; (2) you analyze the economic impact (foreign debt, production) after independence; (3) you identify the changes that shaped the new national economic structure.</div>
+  </div>
+
+    <h3 style="margin-top:22px">Key vocabulary</h3>
+    <p class="lead">Tap a card to reveal its meaning.</p>
+    <div class="vgrid"></div>
+    <p style="margin-top:20px"><button class="btn" type="button" data-goto="l1:practice">Ready? Go to the practice →</button></p>
+  </div>
+  <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
+</section>
+<section class="tabpanel" id="p-l2" hidden>
+  <div class="lhead"><p class="kicker2">Lesson 2 of 4</p><h2>The formation of the Nicaraguan State</h2>
+    <div class="subnav" role="tablist" aria-label="Lesson 2 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button></div>
+  </div>
+  <div class="lsub" data-sub="study">
+<div class="card" id="t2">
+    <h3>The formation of the Nicaraguan State</h3>
+    <p>Independence did not create a strong state overnight. From 1838 to the 1890s Nicaragua built its institutions amid rivalry between elites, foreign interests and war. In this lesson you will study the <b>characteristics</b> of that process, its <b>socioeconomic consequences</b>, and the <b>legacy of the heroes</b> who defended national sovereignty and identity.</p>
+    <h4>2.1 Political and economic characteristics</h4>
+    <div class="two">
+      <div class="mini"><h4>Political</h4>Constitutions and governments changed often. <b>Liberals</b> (centered in León) and <b>Conservatives</b> (centered in Granada) struggled for power. <b>Managua</b> became the capital in 1852 as a compromise between the two cities. After 1857 Conservative governments ruled for about thirty years.</div>
+      <div class="mini"><h4>Economic</h4>An <b>agro-export economy</b> based on the primary sector: first indigo and cattle, then <b>coffee</b> from the mid-1800s. Estates (haciendas) and exports were controlled by a small elite.</div>
+      <div class="mini"><h4>Foreign interest</h4>Britain held influence on the Caribbean coast (the Mosquito Reserve) and the United States sought a canal route. In 1851–1856 the <b>Transit route</b> (San Juan River and Lake Nicaragua) carried travelers heading to California.</div>
+      <div class="mini"><h4>Institutions</h4>Congresses, courts, an army and tax systems were slowly built, often disrupted by civil war.</div>
+    </div>
+    <h4 style="margin-top:16px">Graphic organizer: from export to export</h4>
+    <div class="chain">
+      <span>Colonial: cacao, indigo, cattle</span><b>→</b><span>Early republic: indigo and cattle, local trade</span><b>→</b><span>From the 1850s: coffee in the Pacific and central highlands</span><b>→</b><span>Land ownership becomes the basis of political power</span>
+    </div>
+    <p style="margin-top:12px">Owning land meant controlling workers, harvests and local politics. That is why <b>land tenure</b> became the base of the elites' political power.</p>
+    <h4>2.2 Socioeconomic consequences</h4>
+    <ul class="tight">
+      <li><b>Concentration of land:</b> coffee growers acquired land, often taking communal lands of Indigenous and peasant communities.</li>
+      <li><b>Forced labor and resistance:</b> in 1881 Indigenous communities in Matagalpa rose up against forced labor and the loss of their land.</li>
+      <li><b>Dependence:</b> the economy relied on one main export and on foreign markets and merchants.</li>
+      <li><b>Instability and interference:</b> the elites' rivalry opened the door to foreign adventurers, as the next section shows.</li>
+    </ul>
+    <h4>2.3 The National War (1856–1857) and the legacy of heroes</h4>
+    <p>In 1855 a Liberal faction in León invited the American adventurer <b>William Walker</b> to help in a civil war. Walker and his <b>filibusters</b> took Granada, and in 1856 he declared himself president and restored slavery. Conservatives, Liberals and the other Central American countries united against him.</p>
+    <div class="chain">
+      <span>1855: Walker arrives</span><b>→</b><span>11 Apr 1856: Battle of Rivas</span><b>→</b><span>14 Sept 1856: Battle of San Jacinto</span><b>→</b><span>Dec 1856: Granada burned by the filibusters</span><b>→</b><span>1 May 1857: Walker surrenders at Rivas</span>
+    </div>
+    <div class="two" style="margin-top:12px">
+      <div class="mini"><h4>José Dolores Estrada</h4>Commander of the Nicaraguan force that defeated Walker's filibusters at the hacienda San Jacinto (14 September 1856). He is a national hero.</div>
+      <div class="mini"><h4>Andrés Castro</h4>A soldier at San Jacinto. Tradition says that when his ammunition ran out he fought with a stone. He became a symbol of ordinary Nicaraguans defending the nation.</div>
+    </div>
+    <div class="key"><b>Beyond soldiers:</b> Estrada and Castro are not remembered only as military men but as defenders of the idea of <b>Nicaragua as a sovereign state</b> against foreign threats.</div>
+    <h4 style="margin-top:14px">Model "Legacy Sheet" (Ficha de Legado Histórico)</h4>
+    <div class="tw"><table class="stbl">
+      <tbody>
+        <tr><th>Hero</th><td>José Dolores Estrada</td></tr>
+        <tr><th>Period</th><td>National War, 1856–1857</td></tr>
+        <tr><th>Political and economic characteristics</th><td>Divided elites (León and Granada), weak state, economy based on agro-export and foreign transit interests.</td></tr>
+        <tr><th>Socioeconomic consequences of his actions</th><td>Defeat of the filibusters preserved Nicaragua's independence; it opened the Conservative era, which favored the land-owning and coffee-growing elite.</td></tr>
+        <tr><th>Contribution to sovereignty and identity</th><td>Victory at San Jacinto showed that Nicaraguans and Central Americans could defend the homeland together. 14 September is still celebrated every year.</td></tr>
+      </tbody></table></div>
+    <div class="nic"><b>Nicaraguan connection:</b> The Battle of San Jacinto is remembered on 14 September, part of the national <i>Fiestas Patrias</i>. The hacienda San Jacinto is near Tipitapa, in the department of Managua.</div>
+    <div class="key"><b>Your teacher will look for (checklist):</b> (1) you describe clearly the political and economic characteristics of the State; (2) you explain the socioeconomic consequences of its formation; (3) you value how the heroes' legacy helped defend sovereignty and national identity.</div>
+  </div>
+
+    <h3 style="margin-top:22px">Key vocabulary</h3>
+    <p class="lead">Tap a card to reveal its meaning.</p>
+    <div class="vgrid"></div>
+    <p style="margin-top:20px"><button class="btn" type="button" data-goto="l2:practice">Ready? Go to the practice →</button></p>
+  </div>
+  <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
+</section>
+<section class="tabpanel" id="p-l3" hidden>
+  <div class="lhead"><p class="kicker2">Lesson 3 of 4</p><h2>Anti-interventionist policies, 1893–1909</h2>
+    <div class="subnav" role="tablist" aria-label="Lesson 3 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button></div>
+  </div>
+  <div class="lsub" data-sub="study">
+<div class="card" id="t3">
+    <h3>Anti-interventionist policies in Nicaragua, 1893–1909</h3>
+    <p><b>José Santos Zelaya</b> (born in Managua, 1853) led the <b>Liberal Revolution of 1893</b> and governed Nicaragua until 1909. His government is one of the most debated in Nicaraguan history: admired for defending national sovereignty and modernizing the country, criticized for concentrating power.</p>
+    <h4>3.1 Political, social and economic characteristics</h4>
+    <div class="two">
+      <div class="mini"><h4>Political</h4>A new Liberal constitution (1893, nicknamed <i>La Libérrima</i>) separated Church and State and recognized civil liberties. Power became highly centralized in the president.</div>
+      <div class="mini"><h4>Social</h4>Expansion of public secular education, civil marriage and civil registry. Opponents and some press suffered restrictions.</div>
+      <div class="mini"><h4>Economic</h4>Coffee exports financed railways, telegraph lines, ports, roads and a stronger state. Foreign companies were active on the Caribbean coast.</div>
+      <div class="mini"><h4>International</h4>Zelaya resisted foreign pressure, especially from the United States, over canal rights and the control of the country's resources.</div>
+    </div>
+    <h4 style="margin-top:18px">Action and consequence</h4>
+    <div class="tw"><table class="stbl">
+      <thead><tr><th>Policy or characteristic</th><th>Consequence</th><th>How it defended sovereignty</th></tr></thead>
+      <tbody>
+        <tr><td><b>Reincorporation of the Mosquito Reserve (1894)</b></td><td>The Caribbean coast, under British-protected autonomy, came under full Nicaraguan law (the Department of Zelaya).</td><td>Established national control over the whole territory. (Debate: Indigenous and Creole communities lost the self-government of the Reserve.)</td></tr>
+        <tr><td><b>Refusing humiliating canal terms</b></td><td>Tension with the United States, which preferred a canal under its own control.</td><td>Defended Nicaragua's right to decide about its own resources and territory.</td></tr>
+        <tr><td><b>Modernization with national revenue</b></td><td>Railways, telegraph, ports and schools expanded.</td><td>Reduced reliance on foreign powers and strengthened the national State.</td></tr>
+        <tr><td><b>Liberal constitution and education</b></td><td>Secular State, wider civil rights, more public schools.</td><td>Built a modern, national citizenship.</td></tr>
+        <tr><td><b>Central American union projects (1895–1898)</b></td><td>Short-lived "Greater Republic of Central America."</td><td>Sought regional strength against outside powers. (Critics: it also meddled in neighbors' affairs.)</td></tr>
+      </tbody></table></div>
+    <h4>The 1909 crisis and the Knox Note</h4>
+    <div class="chain">
+      <span>Oct 1909: Conservative revolt starts in Bluefields</span><b>→</b><span>Nov 1909: two Americans who joined the rebels are executed</span><b>→</b><span>Dec 1909: U.S. Secretary of State Knox sends the Knox Note</span><b>→</b><span>Dec 1909: Zelaya resigns</span>
+    </div>
+    <ul class="tight" style="margin-top:12px">
+      <li>The <b>Knox Note</b> (December 1909) condemned Zelaya's government and broke diplomatic relations. It also implied that the rebels represented the Nicaraguan people better than the government did.</li>
+      <li><b>What the United States wanted:</b> a government friendly to its commercial and strategic interests and, above all, control over a possible canal route.</li>
+      <li><b>Why it violated sovereignty:</b> one country decided which government was legitimate for another, ignoring Nicaragua's right to <b>self-determination</b>.</li>
+      <li>In 1903 the U.S. had already chosen Panama for its canal. Nicaragua's route remained an alternative, and Zelaya refused to grant it on terms he saw as humiliating.</li>
+    </ul>
+    <h4>3.2 The legacy of Zelaya</h4>
+    <div class="cmp">
+      <div><h4>Arguments for his legacy</h4><p>Defended national sovereignty, reincorporated the Caribbean coast, modernized the state and economy, and refused to hand over the canal under humiliating conditions.</p></div>
+      <div><h4>Arguments of critics</h4><p>Ruled as a strongman, limited opposition and press, used monopolies and forced loans, and also interfered in neighboring countries.</p></div>
+    </div>
+    <h4 style="margin-top:14px">Guide for a critical essay</h4>
+    <ol class="tight">
+      <li><b>Introduction:</b> state your thesis (for example, "Zelaya's policies defended Nicaraguan sovereignty even though his rule was authoritarian").</li>
+      <li><b>Argument 1:</b> how the U.S. intervened (canal, support for rebels, the Knox Note).</li>
+      <li><b>Argument 2:</b> why Zelaya did not give the canal under humiliating conditions.</li>
+      <li><b>Counterargument:</b> criticisms of his government, and your answer to them.</li>
+      <li><b>Conclusion:</b> your nationalist, evidence-based position.</li>
+    </ol>
+    <div class="nic"><b>Nicaraguan connection:</b> Zelaya's name remains on the Caribbean coast, where the former Department of Zelaya covered much of today's RACCN and RACCS. The debate between sovereignty and autonomy is still alive in the region.</div>
+    <div class="key"><b>Your teacher will look for (checklist):</b> (1) you identify precisely Zelaya's economic reforms and policies; (2) you argue about nationalism, the defense of sovereignty and Nicaragua's position toward foreign powers.</div>
+  </div>
+
+    <h3 style="margin-top:22px">Key vocabulary</h3>
+    <p class="lead">Tap a card to reveal its meaning.</p>
+    <div class="vgrid"></div>
+    <p style="margin-top:20px"><button class="btn" type="button" data-goto="l3:practice">Ready? Go to the practice →</button></p>
+  </div>
+  <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
+</section>
+<section class="tabpanel" id="p-l4" hidden>
+  <div class="lhead"><p class="kicker2">Lesson 4 of 4</p><h2>Struggles for liberation against the U.S. interventions, 1910–1912</h2>
+    <div class="subnav" role="tablist" aria-label="Lesson 4 sections"><button type="button" role="tab" data-s="study" aria-selected="true">📖 Study</button><button type="button" role="tab" data-s="practice" aria-selected="false">✏️ Practice</button></div>
+  </div>
+  <div class="lsub" data-sub="study">
+<div class="card" id="t4">
+    <h3>Struggles for liberation against the U.S. interventions, 1910–1912</h3>
+    <p>After Zelaya's fall the country entered a period of dependence and war. In 1912 <b>General Benjamín Zeledón</b> (1879–1912) led the resistance against the government of Adolfo Díaz and the U.S. Marines. His last stand, his final letter and his death made him a <b>National Hero</b> of Nicaragua.</p>
+    <h4>4.1 Historical, political and socio-geographic context</h4>
+    <div class="chain">
+      <span>Dec 1909: Zelaya resigns</span><b>→</b><span>1910: U.S. Marines land at Bluefields; Madriz resigns</span><b>→</b><span>1910–1911: Conservative governments with U.S. backing</span><b>→</b><span>1911: Adolfo Díaz becomes president</span><b>→</b><span>1912: Revolt of General Mena; Díaz asks for U.S. troops</span><b>→</b><span>Aug 1912: Marines land</span><b>→</b><span>Oct 1912: Coyotepe and La Barranca</span>
+    </div>
+    <ul class="tight" style="margin-top:12px">
+      <li><b>Political context:</b> the governments after 1909 depended on U.S. support, money and arms. Díaz, who had worked for a U.S.-owned mining company, asked for the Marines when his government was threatened.</li>
+      <li><b>Historical context:</b> U.S. expansion in the Caribbean and Central America, interest in the canal route, and loans controlled by foreign banks.</li>
+      <li><b>What came after:</b> the Marines stayed in Nicaragua for years, and in 1914 the Bryan–Chamorro Treaty gave the U.S. exclusive canal rights. That is the background of Sandino's struggle in the 1920s.</li>
+    </ul>
+    <h4>Socio-geographic context: Masaya</h4>
+    <div class="two">
+      <div class="mini"><h4>Where?</h4>The department of <b>Masaya</b>, in the Pacific region, between Managua and Granada, a densely populated area of towns, peasants and artisans.</div>
+      <div class="mini"><h4>The hills</h4><b>Coyotepe</b> and <b>La Barranca</b> are hills above Masaya. They overlook the city and the road and railway between the capital and Granada.</div>
+      <div class="mini"><h4>Why they mattered</h4>Whoever held them controlled the passage toward the capital and had a strong view of the attackers.</div>
+      <div class="mini"><h4>Relief and resistance</h4>The steep slopes favored the defenders against a better-armed force, though Marine artillery and infantry finally prevailed.</div>
+    </div>
+    <h4 style="margin-top:16px">4.2 The heroic legacy of Benjamín Zeledón</h4>
+    <ul class="tight">
+      <li><b>The man:</b> a lawyer, born in Managua, and a Liberal general. Liberal ideas, respect for international law and a deep patriotism shaped him.</li>
+      <li><b>The resistance:</b> in 1912 he led the opposition to the Díaz government and to foreign troops. On 3–4 October 1912 his forces defended Coyotepe and La Barranca.</li>
+      <li><b>His death:</b> he was captured and executed on <b>4 October 1912</b> (in the area of Niquinohomo and Catarina) and was buried in Catarina.</li>
+      <li><b>The last letter to his wife, Esther:</b> expresses <i>patriotism, sacrifice and honor</i>. He chose not to surrender even though he knew he would probably die.</li>
+    </ul>
+    <div class="key"><b>Why he matters:</b> he stood for the principle that <i>sovereignty is not negotiable</i>. He preferred sacrifice to bargaining away the independence of the country.</div>
+    <div class="cmp">
+      <div><h4>Díaz government and U.S. forces</h4><p>Held power with foreign military support; saw intervention as a way to keep order.</p></div>
+      <div><h4>Zeledón's resistance</h4><p>Defended national self-determination against a government sustained by foreign troops.</p></div>
+    </div>
+    <h4 style="margin-top:14px">Impact on Sandino</h4>
+    <p>The young <b>Augusto Nicolás Calderón Sandino</b> (born in 1895 in Niquinohomo) saw Zeledón's body in 1912. That memory became the seed of the struggle for national liberation that Sandino would lead years later, in the Army in Defense of National Sovereignty.</p>
+    <h4>Guide for a classroom conversation</h4>
+    <ul class="tight">
+      <li>Which <b>values</b> appear in Zeledón's last letter (patriotism, sacrifice, honor)? Quote or paraphrase.</li>
+      <li>Why did he decide <b>not to surrender</b>, knowing he would likely die?</li>
+      <li>Before you answer a classmate, <b>paraphrase</b> what they said: "If I understand you, you think that…"</li>
+    </ul>
+    <div class="nic"><b>Nicaraguan connection:</b> Coyotepe is now a historic fortress near Masaya and the town of Catarina keeps Zeledón's tomb. His anniversary, 4 October, is a day of remembrance.</div>
+    <div class="key"><b>Your teacher will look for (checklist):</b> (1) you explain the struggles against the U.S. interventions of 1910–1912; (2) you describe the socio-geographic context of the resistance (Coyotepe and La Barranca); (3) you recognize Zeledón's heroic legacy in the defense of sovereignty.</div>
+  </div>
+
+    <h3 style="margin-top:22px">Key vocabulary</h3>
+    <p class="lead">Tap a card to reveal its meaning.</p>
+    <div class="vgrid"></div>
+    <p style="margin-top:20px"><button class="btn" type="button" data-goto="l4:practice">Ready? Go to the practice →</button></p>
+  </div>
+  <div class="lsub" data-sub="practice" hidden><div class="practiceRoot"></div></div>
+</section>
+
+</main>
+
+<aside class="mapcol" aria-label="Map of Nicaragua">
+  <div class="card mapcard">
+    <h3>Map of Nicaragua</h3>
+    <p class="legend" style="margin:0 0 6px">Tap a department for its region, or a numbered marker for a place from this unit.</p>
+    <label class="tg"><input type="checkbox" id="tgPins" checked> Show places from this unit</label>
+    <svg id="mapSvg" viewBox="-12 -8 495 492" role="img" aria-label="Map of Nicaragua showing the Pacific, Central and Caribbean regions with their departments"></svg>
+    <div class="mlegend"><span><i style="background:#f4c20d"></i>Pacific</span><span><i style="background:#b8c81a"></i>Central</span><span><i style="background:#00903f"></i>Caribbean</span></div>
+    <div id="pinList" style="margin-top:8px"></div>
+    <div class="info" id="info" aria-live="polite">
+      <h4>Select a region</h4>
+      <p style="font-size:.85rem">Nicaragua has three regions: the <b>Pacific</b>, the <b>Central</b> and the <b>Caribbean Coast</b>. Politically it has 15 departments and 2 autonomous regions.</p>
+    </div>
+    <p class="legend">Shapes simplified from a regional climate map. Light blue: Lake Managua and Lake Nicaragua.</p>
+  </div>
+</aside>
+</div>
+
+<footer><div class="zig" aria-hidden="true"></div><div class="wrap">Lincoln International Academy · Social Science 10th · Based on the MINED 2026 curriculum (V Pedagogical Unit, 10th and 11th grade), Unit III · Prepared with Ms. Kathya López's curriculum map</div></footer>
+
+
+<script>
+(function(){
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+
+/* theme */
+const root=document.documentElement;
+$('#themeBtn').onclick=()=>{
+  const dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme=dark?'light':'dark';
+};
+
+
+const VOC=[
+ ["Prócer","A leading figure of a nation's independence, honored for his or her role in it."],
+ ["Peninsular","A Spain-born official or settler who held the highest posts in the colony."],
+ ["Criollo","A person of Spanish descent born in the Americas."],
+ ["Trade monopoly","Exclusive control of a colony's commerce by the mother country, as Spain had over its colonies."],
+ ["Free trade","Commerce with any country without a single power's monopoly."],
+ ["Indigo (añil)","A plant that gives a blue dye; a major export of colonial and early independent Central America."],
+ ["Federation","A union of states under a common government, such as the United Provinces of Central America (1823–1838)."],
+ ["Foreign debt","Money owed to lenders abroad; for new states it was a heavy burden."],
+ ["Sovereignty","A nation's right to govern itself without outside control."],
+ ["Filibuster","A foreign adventurer who invades a country with a private armed force, such as William Walker."],
+ ["Liberals","In 19th-century Nicaragua, the political group centered in León that favored reform, secular government and free trade."],
+ ["Conservatives","In 19th-century Nicaragua, the political group centered in Granada that favored tradition, the Church and elite merchants."],
+ ["Agro-export economy","An economy that depends mainly on exporting farm products, such as indigo and coffee."],
+ ["Land tenure","The way land is owned and distributed; in Nicaragua it became the base of the elites' political power."],
+ ["Constitution","The fundamental law that organizes a State and protects rights."],
+ ["Legacy","What a person or generation leaves behind for later generations: ideas, values and achievements."],
+ ["Liberal Revolution","The 1893 uprising led by José Santos Zelaya that began a Liberal government lasting until 1909."],
+ ["Mosquito Reserve","A coastal territory under British-protected autonomy, reincorporated into Nicaragua in 1894."],
+ ["Reincorporation","Bringing a territory back under the full authority of the State."],
+ ["Interoceanic canal","A waterway linking the Atlantic and Pacific oceans; Nicaragua was one of the possible routes."],
+ ["Diplomatic note","An official written message from one government to another, such as the Knox Note."],
+ ["Self-determination","The right of a people to decide freely its own political status and future."],
+ ["Anti-interventionism","Opposition to one state interfering in the internal affairs of another."],
+ ["Intervention","One state's use of force or pressure in the affairs of another, e.g., the Marines in 1912."],
+ ["Marines","U.S. naval infantry; their landings in Nicaragua began in 1910 and 1912."],
+ ["Patriotism","Love for and willingness to serve and defend one's homeland."],
+ ["Anti-imperialism","Opposition to one country dominating another politically, militarily or economically."],
+ ["National hero","A person officially honored for extraordinary service and sacrifice for the nation."]
+];
+
+const NS='http://www.w3.org/2000/svg';
+const MAP={lakes:["M188 329L188 350L189 352L195 354L195 358L190 360L188 364L188 370L191 372L191 379L198 387L198 393L202 402L210 411L219 416L219 423L213 424L215 428L239 431L249 429L250 432L271 431L286 434L288 436L298 435L300 433L300 415L298 411L292 408L288 397L274 383L270 376L267 375L266 371L258 362L252 359L242 349L232 349L219 332L208 330L200 324Z", "M116 294L118 299L124 303L124 309L125 304L132 308L135 308L140 304L145 304L147 306L147 310L145 313L146 318L164 316L164 299L158 304L155 302L154 294L150 291L147 281L143 281L141 285L131 289L127 294L120 294L118 292Z"],d:[{"n":"Chinandega","r":"pacific","d":"M105 202L99 199L91 199L86 205L86 218L87 219L83 222L81 226L73 231L44 230L40 233L40 236L36 238L29 233L28 229L22 223L17 222L13 227L9 229L7 233L7 239L21 249L27 250L30 253L30 257L34 260L38 266L57 283L60 284L71 283L76 281L81 276L88 265L99 254L106 254L110 251L111 236L104 219Z","l":[80,245]},{"n":"León","r":"pacific","d":"M130 217L125 217L116 221L109 221L109 227L113 237L112 252L106 256L98 257L75 284L65 287L65 291L94 311L100 317L108 333L111 333L111 328L114 325L120 325L126 319L124 311L124 304L118 300L116 294L118 292L122 294L127 294L134 287L142 284L141 275L143 271L149 266L150 246L140 243L135 240L134 235L136 232L136 225Z","l":[121,261]},{"n":"Managua","r":"pacific","d":"M165 319L156 319L151 321L146 320L144 318L146 313L145 306L141 306L135 311L130 308L126 308L126 311L128 314L127 321L122 326L114 328L113 338L116 345L126 357L135 355L150 339L150 335L143 336L139 334L132 335L127 334L126 332L127 331L150 332L152 336L155 338L159 338L160 337L159 328L164 324ZM145 271L143 279L150 283L151 289L156 295L158 301L162 301L163 299L166 298L170 304L168 312L169 320L182 318L193 311L193 306L186 299L185 293L181 288L180 281L176 280L169 273L153 269Z","l":[131,331]},{"n":"Masaya","r":"pacific","d":"M165 331L163 332L163 337L159 341L159 344L166 348L171 348L177 338L177 332ZM185 320L166 323L166 327L167 328L182 328L185 323Z","l":[172,327]},{"n":"Granada","r":"pacific","d":"M189 359L185 358L169 359L169 366L167 368L168 375L169 376L174 375L178 369L185 370L189 363ZM199 320L193 319L187 322L184 327L184 330L181 333L172 350L172 354L174 356L188 356L186 344L184 341L185 336L191 327L198 325Z","l":[181,356]},{"n":"Carazo","r":"pacific","d":"M149 343L135 357L129 359L129 364L136 369L142 377L150 380L157 386L160 386L165 378L165 368L167 365L168 351L161 346L153 343Z","l":[150,362]},{"n":"Rivas","r":"pacific","d":"M209 383L208 389L210 391L213 392L221 391L224 399L233 399L233 392L230 390L224 390L221 381L213 380ZM177 372L177 374L173 378L167 379L162 385L162 391L171 397L176 403L182 406L195 420L202 431L208 432L215 422L216 417L202 403L198 395L198 390L196 385L190 379L191 374L189 372L181 373Z","l":[190,401]},{"n":"Nueva Segovia","r":"central","d":"M201 141L197 140L194 137L193 133L187 133L175 122L175 119L169 119L160 128L159 131L150 139L149 145L143 150L137 150L135 148L129 149L125 146L121 146L119 148L113 149L110 147L105 147L102 149L102 156L112 158L119 165L134 164L140 166L150 166L152 168L157 168L157 165L160 162L163 162L171 170L172 175L181 174L185 177L189 177L197 172L196 165L197 159L200 153Z","l":[175,150]},{"n":"Madriz","r":"central","d":"M104 159L103 168L105 171L105 178L107 181L105 188L109 192L108 201L111 201L115 198L118 189L125 182L130 182L133 184L141 184L148 180L153 180L156 182L163 182L170 179L169 171L163 165L160 165L156 171L153 171L151 169L138 168L132 166L121 168L112 160Z","l":[134,176]},{"n":"Estelí","r":"central","d":"M125 184L120 189L116 199L105 209L105 214L111 219L116 219L124 215L131 215L139 227L136 238L140 241L151 242L152 237L156 234L162 233L165 227L165 222L152 209L155 204L156 184L153 182L148 182L141 186L133 186L130 184Z","l":[136,203]},{"n":"Jinotega","r":"central","d":"M277 65L266 64L266 71L262 76L262 80L265 85L261 91L248 93L239 103L238 108L234 112L229 113L226 119L222 119L212 127L207 128L206 130L207 140L202 143L202 151L198 159L198 172L191 176L189 179L187 179L184 176L178 175L173 177L167 182L162 182L157 189L158 202L155 207L155 210L167 222L172 223L178 228L183 228L187 226L206 209L218 193L226 191L227 185L238 173L238 165L236 162L239 160L239 157L242 153L250 153L264 144L271 148L274 148L278 144L291 121L290 107L294 99L294 91L287 90L282 86L279 80L280 68Z","l":[222,148]},{"n":"Matagalpa","r":"central","d":"M270 213L263 215L255 215L247 209L241 208L229 193L219 195L208 209L187 228L179 231L173 226L168 226L162 235L156 236L154 238L152 246L151 266L164 270L168 270L177 278L182 278L198 267L211 264L219 264L226 259L235 259L239 256L247 260L251 264L255 264L257 267L262 267L266 262L269 250L262 249L258 245L257 231L260 228L263 228L269 221Z","l":[232,240]},{"n":"Boaco","r":"central","d":"M278 257L273 252L270 252L266 266L261 270L257 270L255 267L250 266L249 264L241 259L237 259L234 262L227 261L220 266L203 268L190 273L184 278L183 287L187 293L188 299L196 307L196 311L193 313L195 320L209 329L213 329L213 323L218 312L218 306L222 301L230 298L249 298L256 296L263 290L272 289L275 286L277 277L282 270L282 266L278 260Z","l":[228,277]},{"n":"Chontales","r":"central","d":"M286 271L283 271L281 273L278 285L272 291L264 292L259 296L250 300L245 301L232 300L222 303L220 313L216 320L215 331L219 331L224 335L233 349L238 348L244 350L252 358L260 362L268 372L271 372L278 367L282 366L288 358L294 356L301 349L319 349L322 346L322 342L313 339L306 333L305 323L299 310L301 306L301 302L299 299L297 299L294 296L292 291L293 281Z","l":[254,334]},{"n":"Río San Juan","r":"central","d":"M272 373L273 380L290 398L291 404L295 407L295 409L301 413L303 418L302 421L303 433L299 437L291 440L287 437L283 437L281 435L266 434L266 439L286 447L293 447L308 437L315 435L318 437L324 437L326 440L331 440L337 446L341 446L346 443L352 452L358 454L362 458L362 465L368 464L371 467L377 467L382 465L387 470L400 470L407 466L413 466L418 464L416 450L412 450L405 439L394 437L391 431L378 433L375 429L366 428L358 418L351 413L346 413L344 411L345 407L342 403L334 400L330 396L324 393L323 383L327 378L327 373L323 367L324 359L320 351L301 351L294 358L287 361L282 368Z","l":[329,418]},{"n":"RACCN","r":"caribbean","d":"M459 18L455 18L452 16L447 17L445 15L441 15L438 18L430 16L429 20L424 25L421 25L418 29L417 28L411 29L405 35L399 35L399 37L395 40L389 40L387 42L370 41L365 46L361 46L358 43L355 43L354 52L343 50L339 54L333 57L329 56L326 53L319 53L316 51L307 51L299 36L290 37L285 43L282 43L278 47L277 54L281 58L280 65L284 70L282 73L283 83L286 87L298 89L296 99L293 105L294 119L289 128L289 132L283 138L279 146L274 151L266 147L262 147L251 155L242 157L240 161L241 173L229 186L229 189L234 197L242 206L246 206L254 212L260 212L262 209L272 208L275 211L274 216L286 217L290 214L301 211L303 206L306 203L325 200L348 200L352 196L360 197L368 194L387 198L406 199L408 207L407 212L411 212L419 216L423 222L429 222L426 205L427 177L425 176L428 175L430 171L430 168L428 166L431 163L432 155L431 149L440 120L447 114L448 111L455 103L462 86L461 69L458 68L454 59L453 47L451 43L445 44L438 35L438 33L447 23L449 23L452 27L455 27L457 22L459 21Z","l":[355,132]},{"n":"RACCS","r":"caribbean","d":"M420 276L419 281L423 290L421 292L421 295L435 293L435 286L430 275ZM267 222L263 226L262 229L259 229L257 231L257 234L259 237L258 245L259 248L269 249L278 257L278 261L280 265L289 274L289 277L293 283L293 295L301 303L299 307L299 312L303 318L307 335L314 340L322 343L320 347L320 353L324 360L323 368L327 374L327 377L324 380L323 385L324 394L328 395L333 400L341 403L345 408L345 412L350 413L356 417L365 428L373 428L377 433L381 433L389 430L392 433L393 437L401 436L396 412L396 400L399 395L406 394L407 386L411 381L418 379L418 368L413 351L409 350L409 355L407 356L399 348L407 341L407 333L405 330L408 329L409 327L412 330L412 332L415 332L416 328L416 318L413 316L416 313L417 304L416 300L412 300L410 298L410 285L406 285L405 283L408 277L416 275L423 269L423 261L418 254L418 251L421 249L427 250L431 249L433 239L430 226L422 224L418 218L412 215L405 214L403 203L399 201L389 201L370 197L362 198L360 200L352 199L348 203L323 203L315 205L308 205L305 207L304 211L301 214L293 218L290 218L286 221L278 220L273 223Z","l":[352,278]}]};
+const COL={pacific:'#f4c20d',central:'#b8c81a',caribbean:'#00903f'};
+const REG={
+ pacific:{name:"Pacific Region",
+  chips:["Chinandega","León","Managua","Masaya","Granada","Carazo","Rivas"],
+  txt:"Dry tropical lowlands with about six months of rain, a chain of volcanoes, fertile soils and the two great lakes. It is the smallest region in area but home to most of the population, and it holds the capital, Managua, and the colonial cities of León and Granada.",
+  unit:"Unit III link: León and Granada were the rival centers after independence; Rivas and San Jacinto (near Tipitapa) saw the National War; Managua is the capital and Zelaya's and Zeledón's birthplace; Masaya holds Coyotepe and La Barranca."},
+ central:{name:"Central Region",
+  chips:["Nueva Segovia","Madriz","Estelí","Jinotega","Matagalpa","Boaco","Chontales","Río San Juan"],
+  txt:"Pre-mountain climate with seven to eight rainy months. Cooler highlands and valleys known for coffee, cattle and tobacco, with a long tradition of peasant life. Río San Juan, along the southern border, is also grouped here.",
+  unit:"Unit III link: the coffee boom of the late 1800s reshaped land ownership here, and in 1881 Indigenous communities of Matagalpa rose against forced labor and land loss. The San Juan River was part of the Transit route."},
+ caribbean:{name:"Caribbean Coast",
+  chips:["North Caribbean Coast Autonomous Region (RACCN)","South Caribbean Coast Autonomous Region (RACCS)"],
+  txt:"The largest region, about half the national territory, with tropical rainforest, rivers, lagoons and the Bosawás reserve. It is home to Miskitu, Mayangna, Rama, Creole and Garífuna communities. Two autonomous regions, created by the 1987 Autonomy Statute, govern their own affairs within Nicaragua.",
+  unit:"Unit III link: the Mosquito Reserve, a British-protected territory, was reincorporated into Nicaragua in 1894 under Zelaya. Bluefields, in the RACCS, was the base of the 1909 revolt and of the 1910 Marine landing."}
+};
+const PINS=[
+ {n:"León",l:[1,2],xy:[104,276],t:"Capital of the colonial Province of Nicaragua and Liberal stronghold. Home of Miguel Larreynaga, signer of the Act of Independence. Its elites rivaled Granada's and, in 1855, a Liberal faction here invited William Walker."},
+ {n:"Granada",l:[1,2],xy:[182,354],t:"Merchant city on Lake Nicaragua and Conservative stronghold; one of the places of the 1811–1812 uprisings. William Walker took it in 1855 and the filibusters burned it in 1856."},
+ {n:"Managua",l:[3,4],xy:[136,328],t:"Capital since 1852 as a compromise between León and Granada. Birthplace of José Santos Zelaya (1853) and of Benjamín Zeledón (1879)."},
+ {n:"San Jacinto (Tipitapa)",l:[2],xy:[172,308],t:"Hacienda near Tipitapa where José Dolores Estrada's force, with soldiers such as Andrés Castro, defeated Walker's filibusters on 14 September 1856."},
+ {n:"Rivas",l:[2],xy:[196,406],t:"Site of the Battle of Rivas (11 April 1856), where the Costa Rican army and Juan Santamaría fought Walker. Walker surrendered here on 1 May 1857."},
+ {n:"Bluefields",l:[3,4],xy:[398,334],t:"Caribbean port of the former Mosquito Reserve (reincorporated 1894). The 1909 Conservative revolt against Zelaya began here, and U.S. Marines landed here in 1910."},
+ {n:"Masaya · Coyotepe · Niquinohomo · Catarina",l:[4],xy:[172,334],t:"Zeledón's last stand at Coyotepe and La Barranca (3–4 Oct 1912). He was executed on 4 Oct 1912 in the area of Niquinohomo and Catarina, where he is buried. Sandino, born in Niquinohomo, saw his body."}
+];
+
+const svg=$('#mapSvg');
+const mk=(t,a,p)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);(p||svg).appendChild(e);return e;};
+// lakes first (islands of Rivas are drawn later, on top)
+MAP.lakes.forEach(d=>mk('path',{d,fill:'#7cc0f5',stroke:'#fff','stroke-width':1,'pointer-events':'none'}));
+const paths=[];
+MAP.d.forEach(dep=>{
+  const p=mk('path',{d:dep.d,fill:COL[dep.r],class:'reg',tabindex:0,role:'button','aria-label':dep.n+', '+REG[dep.r].name});
+  p.dataset.r=dep.r;
+  const ti=document.createElementNS(NS,'title');ti.textContent=dep.n;p.appendChild(ti);
+  const go=()=>selReg(dep.r,dep.n);
+  p.onclick=go;p.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}};
+  paths.push(p);
+});
+const hide=['Managua','Masaya','Granada'];
+MAP.d.forEach(dep=>{
+  if(hide.includes(dep.n))return;
+  const r=dep.r==='caribbean';
+  const t=mk('text',{x:dep.l[0],y:dep.l[1]+(r?0:2.5),class:r?'rl':'dl'});t.textContent=dep.n;
+});
+const outer=(txt,x,y,rot=0)=>{const t=mk('text',{x,y,'text-anchor':'middle','pointer-events':'none',transform:rot?`rotate(${rot} ${x} ${y})`:''});t.textContent=txt;t.setAttribute('style','font:italic 700 9px Merriweather,serif;fill:var(--muted)');};
+outer('HONDURAS',60,14);outer('Pacific Ocean',38,350,-40);outer('Caribbean Sea',472,262,-90);outer('COSTA RICA',330,470);
+// pins
+const pinG=mk('g',{id:'pinG'});
+const pinList=$('#pinList');
+PINS.forEach((pn,i)=>{
+  const g=mk('g',{class:'pin',tabindex:0,role:'button','aria-label':pn.n,transform:`translate(${pn.xy[0]},${pn.xy[1]})`},pinG);
+  mk('circle',{r:6.5},g);g.dataset.l=(pn.l||[]).join(',');
+  const t=mk('text',{x:0,y:3.2,'text-anchor':'middle'},g);t.textContent=i+1;
+  const show=e=>{e.stopPropagation();selPin(pn);};
+  g.onclick=show;g.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(e);}};
+  const li=document.createElement('button');li.type='button';li.className='chip pbtn';li.dataset.l=(pn.l||[]).join(',');li.textContent=(i+1)+' · '+pn.n;li.onclick=()=>selPin(pn);pinList.appendChild(li);
+});
+$('#tgPins').onchange=e=>{pinG.style.display=e.target.checked?'':'none';pinList.style.display=e.target.checked?'':'none';};
+function selReg(k,dep){
+  paths.forEach(p=>p.classList.toggle('sel',p.dataset.r===k));
+  svg.classList.add('has-sel');
+  const r=REG[k];
+  $('#info').innerHTML=`<h3>${esc(r.name)}</h3>${dep?`<p style="font-size:.85rem;margin:0 0 .4rem;color:var(--muted)">You selected: <b>${esc(dep)}</b></p>`:''}<div>${r.chips.map(c=>`<span class="chip" style="${c.startsWith(dep||'§')?'background:var(--gold);color:#222':''}">${esc(c)}</span>`).join('')}</div><p style="margin-top:10px">${esc(r.txt)}</p><div class="nic"><b>${esc(r.unit.split(':')[0])}:</b>${esc(r.unit.slice(r.unit.indexOf(':')+1))}</div>`;
+}
+function selPin(pn){
+  $('#info').innerHTML=`<h3>📍 ${esc(pn.n)}</h3><p>${esc(pn.t)}</p><p class="legend">Tap a department to see its region.</p>`;
+}
+
+
+/* ---------- practice banks (each lesson adds its own items; IDX records which items belong to which lesson) ---------- */
+const MCQ=[],TF=[],CLOZE=[],SRC=[],WR=[],IDX={mcq:{},tf:{},cloze:{},src:{},wr:{}};
+const add=(bank,key,l,items)=>{IDX[key][l]=IDX[key][l]||[];items.forEach(it=>{IDX[key][l].push(bank.length);bank.push(it);});};
+
+/* ===== Lesson 1 · independence ===== */
+add(MCQ,'mcq',1,[
+ {q:"In 1821 Nicaragua was part of which Spanish colonial unit?",o:["Viceroyalty of Peru","Captaincy General of Guatemala","Viceroyalty of New Granada","Viceroyalty of the Río de la Plata"],a:1,w:"Nicaragua belonged to the Captaincy General of Guatemala, whose independence was declared on 15 September 1821."},
+ {q:"On which date do Central Americans celebrate independence from Spain?",o:["11 July 1893","15 September 1821","14 September 1856","4 October 1912"],a:1,w:"The Act of Independence was signed in Guatemala on 15 September 1821."},
+ {q:"Which two cities became political rivals during and after the independence process?",o:["León and Granada","Managua and Masaya","Rivas and Bluefields","Chinandega and Estelí"],a:0,w:"León (administrative and Liberal) and Granada (merchant and Conservative) competed for power."},
+ {q:"Who were the peninsulares?",o:["Indigenous leaders of the Pacific coast","American-born people of Spanish descent","Spain-born officials who held the highest posts","Enslaved people who bought their freedom"],a:2,w:"Peninsulares were born in Spain and held top offices; criollos were born in America."},
+ {q:"Which change most directly followed the end of Spain's trade monopoly?",o:["All foreign trade stopped permanently","Spain began to pay for Nicaragua's exports","Nicaraguan producers could sell to other countries, such as Britain","Every farm was handed to the Church"],a:2,w:"Open access to the world market was one of the main economic changes after independence."},
+ {q:"Which export was important in colonial and early independent Nicaragua?",o:["Petroleum","Bananas","Indigo (añil)","Automobile parts"],a:2,w:"Indigo, cacao and cattle products were key before coffee grew in importance."},
+ {q:"Why were war expenses and foreign debt a problem for the new states?",o:["They made roads and schools unnecessary","They drained resources that could have supported production and public works","They ended the need for taxes","They guaranteed lasting peace"],a:1,w:"Debt and military spending left little for infrastructure, and they added to instability."},
+ {q:"Who signed the Act of Independence in Guatemala as a representative of Nicaragua (León)?",o:["José Dolores Estrada","Miguel Larreynaga","Benjamín Zeledón","José Santos Zelaya"],a:1,w:"Miguel Larreynaga, jurist and scholar from León, represented Nicaragua. The others belong to later periods."},
+ {q:"Between 1822 and 1823 Nicaragua briefly formed part of...",o:["Gran Colombia","The Mexican Empire of Agustín de Iturbide","The United States","A restored Spanish colony"],a:1,w:"After independence, Central America was annexed to Iturbide's Mexican Empire before joining the Federation."},
+ {q:"In which year did Nicaragua declare itself a sovereign, free and independent State?",o:["1821","1838","1856","1893"],a:1,w:"In 1838 Nicaragua left the Central American Federation as a separate sovereign State."}
+]);
+add(TF,'tf',1,[
+ ["Under Spanish rule criollos held most of the highest government posts.",false,"Peninsulares held the top posts; criollos were largely excluded."],
+ ["After independence, Nicaragua could trade freely with countries other than Spain.",true,"The Spanish trade monopoly ended, opening the world market."],
+ ["León and Granada were rival centers of power.",true,"This rivalry shaped politics and caused civil wars."],
+ ["Nicaragua was briefly annexed to the Mexican Empire (1822–1823).",true,"Iturbide's empire annexed Central America before the Federation was formed."],
+ ["Independence immediately brought stable peace and a strong national government.",false,"Civil wars and debt followed independence, and a stable State took decades to form."]
+]);
+add(CLOZE,'cloze',1,[
+ ["Spain-born officials who held the highest posts were called ___.",["peninsulares","criollos","mestizos","próceres"],0,"Peninsulares were born in Spain; criollos were born in America."],
+ ["Central America declared independence from Spain in ___.",["1821","1838","1856","1893"],0,"The Act of Independence is dated 15 September 1821."],
+ ["After independence the political rivalry between León and ___ continued.",["Granada","Managua","Rivas","Matagalpa"],0,"León and Granada led the Liberal and Conservative camps."],
+ ["The ___ of Central America (1823–1838) joined the former provinces in one State.",["Federation","Viceroyalty","Protectorate","Empire"],0,"Nicaragua left the Federation in 1838."]
+]);
+add(SRC,'src',1,[
+ {src:"Scenario: A Granada merchant now sells indigo directly to British buyers, without sending it through Spanish ports.",cite:"Discussion case",
+  q:"Which change does this scenario illustrate?",o:["The end of the colonial trade monopoly","The start of the coffee boom","The Knox Note","Nicaragua's annexation to Mexico"],a:0,w:"Direct trade with other countries became possible when Spain's monopoly ended."},
+ {src:"Scenario: After fighting between León and Granada armies, an estate owner abandons his hacienda and his workers leave. Production falls.",cite:"Discussion case",
+  q:"What does this scenario show?",o:["Political instability can damage the economy","Civil wars helped production","Land was equally shared by all","Independence caused immediate prosperity"],a:0,w:"Civil wars disrupted production, destroyed estates and pushed governments toward forced loans."},
+ {src:"Fact: In 1821 some Nicaraguan leaders wanted union with Mexico, others preferred a Central American union, and others wanted a separate state.",cite:"Historical summary",
+  q:"What does this reveal about the independence process?",o:["Everyone agreed on the new State","Elites disagreed about what form the new State should take","Spain decided the outcome without local input","Only the Indigenous communities took part"],a:1,w:"Elite divisions about the form of the new State fed instability."},
+ {src:"Scenario: A new government must pay soldiers and officials, but the old royal taxes have disappeared and coins are scarce.",cite:"Discussion case",
+  q:"Which problem is described?",o:["Weak State finances after the break with the Crown","Excess of public money","A trade surplus with Spain","The success of a national bank"],a:0,w:"Building a tax system and obtaining money were major challenges of the new State."}
+]);
+add(WR,'wr',1,[
+ {src:"Fishbone diagram: the head is the \"Crisis and transformation of the Nicaraguan economy after independence.\"",cite:"Prompt",
+  q:"Explain how independence affected Nicaragua's economy. Mention one positive change and one problem, and say who benefited. Use at least three sentences.",
+  keys:[["Positive change: end of the monopoly or opening to the world market",["monopoly","free trade","open","market","trade","britain","export"]],
+        ["Problem: debt, war, instability, abandoned haciendas or scarce money",["debt","war","instability","abandon","coin","money","civil","loan","tax"]],
+        ["Who benefited: criollo elites, owners of land and trade",["elite","criollo","owner","land","merchant","few families","wealth"]]],
+  model:"Independence ended Spain's trade monopoly, so Nicaraguan producers could sell to other markets such as Britain. At the same time, civil wars, war expenses and foreign debt, together with abandoned haciendas and the scarcity of coin, caused a crisis. The criollo elites, who now owned the land and controlled trade, benefited most."},
+ {src:"Your historical album includes Miguel Larreynaga, Cleto Ordóñez and Manuel Antonio de la Cerda.",cite:"Prompt",
+  q:"Choose ONE prócer and explain his legacy and what the independence process meant for the economy of Nicaragua. Use at least three sentences.",
+  keys:[["Names a prócer and his role",["larreynaga","ordóñez","ordonez","cerda","orozco","prócer","procer"]],
+        ["Legacy: independence, institutions, defense of the homeland",["independence","act","signed","uprising","head of state","legacy","state","homeland"]],
+        ["Economic impact: trade, debt, production, monopoly",["trade","monopoly","debt","economy","production","land","tax"]]],
+  model:"Miguel Larreynaga, a jurist from León, represented Nicaragua when the Act of Independence was signed and later served the new State. His legacy is the founding of Nicaragua's institutions. For the economy, independence ended the trade monopoly but also brought debt and instability that the young State had to face."}
+]);
+
+/* ===== Lesson 2 · formation of the State ===== */
+add(MCQ,'mcq',2,[
+ {q:"The National War (1856–1857) was fought mainly against...",o:["British troops on the Caribbean coast","The filibusters of William Walker","Troops of the Mexican Empire","U.S. Marines"],a:1,w:"Central Americans united to expel the filibusters led by William Walker."},
+ {q:"On what date was the Battle of San Jacinto fought?",o:["14 September 1856","11 April 1856","15 September 1821","4 October 1912"],a:0,w:"San Jacinto, 14 September 1856, is remembered each year in the Fiestas Patrias."},
+ {q:"Who commanded the Nicaraguan force at San Jacinto?",o:["Benjamín Zeledón","José Santos Zelaya","José Dolores Estrada","Miguel Larreynaga"],a:2,w:"José Dolores Estrada led the victorious force at the hacienda San Jacinto."},
+ {q:"Andrés Castro is remembered for...",o:["Founding the city of Managua","Fighting with a stone at San Jacinto when ammunition ran out","Signing the Act of Independence","Leading the 1893 revolution"],a:1,w:"Tradition says he fought with a stone, a symbol of the courage of ordinary Nicaraguans."},
+ {q:"Which two groups competed for power after 1838?",o:["Liberals of León and Conservatives of Granada","Masaya artisans and Matagalpa farmers","British and Spanish merchants","Marines and filibusters"],a:0,w:"Liberals (León) and Conservatives (Granada) struggled for control of the State."},
+ {q:"Why did Central American leaders unite against Walker?",o:["He restored slavery and threatened the independence of the region","He wanted to pay off Nicaragua's debts","He supported free elections","He promised to leave voluntarily"],a:0,w:"Walker proclaimed himself president and restored slavery, a threat to sovereignty and identity."},
+ {q:"Which crop expanded most in the second half of the 1800s and concentrated land ownership?",o:["Coffee","Cotton","Bananas","Wheat"],a:0,w:"Coffee growers acquired land, often at the expense of communal lands."},
+ {q:"Why did land tenure become the base of the elites' political power?",o:["Owners of land controlled workers, harvests and local politics","Land had no value in the economy","The Church distributed land equally","Foreign governments owned all land"],a:0,w:"In an agro-export economy, land was wealth and power."},
+ {q:"In the 1850s the Transit route crossed Nicaragua using...",o:["The San Juan River and Lake Nicaragua","A railway to the Atlantic","The Panama isthmus","The Pan-American Highway"],a:0,w:"Travelers heading to California used the river and lake route."},
+ {q:"Managua became the capital in 1852 as...",o:["A compromise between León and Granada","The seat of the Spanish colony","A military victory over Walker","A British gift"],a:0,w:"Choosing Managua eased the rivalry between the two cities."}
+]);
+add(TF,'tf',2,[
+ ["William Walker was invited to Nicaragua by a Liberal faction from León.",true,"He arrived in 1855 to help in a civil war and then seized power."],
+ ["The Battle of San Jacinto took place on 14 September 1856.",true,"It is remembered during the national Fiestas Patrias."],
+ ["After 1838 Nicaraguan politics were calm, with no conflict between elites.",false,"León–Granada rivalry caused repeated conflicts."],
+ ["The growth of coffee helped concentrate land in fewer hands.",true,"Many communal lands were lost to growers."],
+ ["Walker won the National War and ruled Nicaragua for decades.",false,"He was defeated and surrendered in May 1857."]
+]);
+add(CLOZE,'cloze',2,[
+ ["The ___ War (1856–1857) united Central Americans against William Walker.",["National","Civil","Pacific","Independence"],0,"It is known as the National War in Nicaragua."],
+ ["The Battle of ___ was fought on 14 September 1856 under José Dolores Estrada.",["San Jacinto","Rivas","Coyotepe","Granada"],0,"San Jacinto is near Tipitapa."],
+ ["Managua was chosen as capital as a compromise between León and ___.",["Granada","Masaya","Rivas","Estelí"],0,"It lies between the two rival cities."],
+ ["Late in the 1800s a boom in ___ reshaped land ownership.",["coffee","oil","sugar","wheat"],0,"Coffee became the main export."]
+]);
+add(SRC,'src',2,[
+ {src:"Fact: In 1856 Walker declared himself president of Nicaragua and decreed that slavery was legal again.",cite:"Historical summary",
+  q:"Why did this alarm Central American leaders?",o:["It showed that he planned to rule Nicaragua permanently, threatening sovereignty and identity","It lowered taxes in every Central American country","It ended the rivalry between León and Granada","It created a federation with Mexico"],a:0,w:"The threat to the independence of the whole region helped unite the Central American armies."},
+ {src:"Scenario: A peasant community loses its communal lands to coffee growers who obtain private titles.",cite:"Discussion case",
+  q:"Which consequence of the State's formation does this illustrate?",o:["Concentration of land and social inequality","Equal distribution of wealth","The end of agro-export","Elimination of forced labor"],a:0,w:"Coffee expansion concentrated land and affected peasant and Indigenous communities."},
+ {src:"Tradition: Andrés Castro, with no ammunition left, struck a filibuster with a stone at San Jacinto.",cite:"National tradition",
+  q:"Why is this story important in national memory?",o:["It shows ordinary Nicaraguans defending the homeland","It proves that the filibusters had no weapons","It explains the origin of coffee exports","It is a symbol of surrender"],a:0,w:"Castro became a symbol of courage and popular defense of sovereignty."},
+ {src:"Scenario: Liberals from León and Conservatives from Granada fight on the same side in 1856–1857.",cite:"Discussion case",
+  q:"What does this show?",o:["A common threat to sovereignty can unite rival groups","Rivalry between elites disappeared forever","The elites supported Walker unanimously","The war was fought only by Costa Rica"],a:0,w:"Facing the filibusters, rival groups cooperated, though rivalry returned later."}
+]);
+add(WR,'wr',2,[
+ {src:"Model: Legacy Sheet of José Dolores Estrada.",cite:"Prompt",
+  q:"Choose a national hero from the independence or State formation period (for example Estrada or Castro). Write the main points of a Legacy Sheet: political and economic features of the period, socioeconomic consequences, and contribution to sovereignty and identity. Use at least four sentences.",
+  keys:[["Hero named and period",["estrada","castro","larreynaga","herrera","san jacinto","1856","walker"]],
+        ["Political and economic characteristics",["political","economic","economy","elite","liberal","conservative","coffee","war"]],
+        ["Contribution to sovereignty and identity",["sovereign","identity","independence","defense","defend","homeland","nation"]]],
+  model:"José Dolores Estrada led the force that defeated Walker's filibusters at San Jacinto in 1856. The period was marked by rivalry between Liberals and Conservatives and an agro-export economy controlled by elites. His victory preserved national independence and became a symbol of the defense of Nicaragua's sovereignty and identity."},
+ {src:"Coffee expansion and land concentration marked the second half of the 1800s.",cite:"Prompt",
+  q:"Explain two socioeconomic consequences of the formation of the Nicaraguan State and how land tenure supported elite power. Use at least three sentences.",
+  keys:[["Land concentration or loss of communal lands",["concentrat","communal","land","lost","peasant","indigenous"]],
+        ["Forced labor, dependence or resistance (e.g., Matagalpa 1881)",["forced labor","depend","resist","matagalpa","1881","export"]],
+        ["Link between land and political power",["political","power","control","elite","base","owners"]]],
+  model:"The formation of the State and the coffee boom concentrated land in few hands and took communal lands from peasant and Indigenous communities, who sometimes resisted, as in Matagalpa in 1881. The economy also depended on one export and foreign markets. Owning land meant controlling workers and local politics, so land tenure became the basis of the elites' power."}
+]);
+
+/* ===== Lesson 3 · Zelaya 1893–1909 ===== */
+add(MCQ,'mcq',3,[
+ {q:"In which year did Zelaya's Liberal Revolution begin?",o:["1856","1893","1909","1912"],a:1,w:"The Liberal Revolution of 1893 brought Zelaya to power."},
+ {q:"Zelaya governed Nicaragua until...",o:["1893","1903","1909","1927"],a:2,w:"He resigned in December 1909 after the Knox Note."},
+ {q:"What happened in 1894?",o:["Nicaragua reincorporated the Mosquito Reserve","Walker surrendered at Rivas","The Marines landed at Bluefields","The Act of Independence was signed"],a:0,w:"The Caribbean coast came under full Nicaraguan law, creating the Department of Zelaya."},
+ {q:"Why was an interoceanic canal so important in this period?",o:["It would join the two oceans and was a strategic interest of the great powers","It would replace coffee as the main export","It was a tool to unite Nicaragua with Mexico","It would end the need for roads"],a:0,w:"Control of a canal route was a major concern of the United States."},
+ {q:"The Knox Note (December 1909) was sent by...",o:["The Mexican president","The King of Spain","The U.S. Secretary of State","The British Navy"],a:2,w:"Philander Knox, U.S. Secretary of State, sent it to the Nicaraguan representative."},
+ {q:"What did the Knox Note mainly do?",o:["Condemned Zelaya's government and broke diplomatic relations","Praised Zelaya's canal policy","Gave Nicaragua a loan","Recognized Nicaragua's neutrality"],a:0,w:"It condemned his government and implied that the rebels represented Nicaraguans better."},
+ {q:"Which November 1909 event did the United States use against Zelaya?",o:["The execution of two Americans who had joined the Conservative rebels","The creation of a national bank","The reincorporation of the Mosquito Reserve","The signing of the Panama treaty"],a:0,w:"The U.S. protested the execution of Leonard Groce and Lee Roy Cannon."},
+ {q:"The 1893 Constitution, nicknamed La Libérrima, was notable for...",o:["Separating Church and State and recognizing civil liberties","Restoring Spanish rule","Making slavery legal again","Ending public education"],a:0,w:"It was a liberal, secular constitution."},
+ {q:"Where did the Conservative revolt against Zelaya begin in 1909?",o:["Bluefields","León","Estelí","Chinandega"],a:0,w:"Juan J. Estrada raised the revolt in Bluefields, on the Caribbean coast."},
+ {q:"Which statement offers a balanced evaluation of Zelaya?",o:["He defended sovereignty and modernized the country, but also concentrated power","He was perfect and had no critics","He had no influence on Nicaraguan history","He was only a foreign puppet"],a:0,w:"A critical analysis weighs achievements and criticisms."}
+]);
+add(TF,'tf',3,[
+ ["The Liberal Revolution of 1893 brought José Santos Zelaya to power.",true,"He governed until 1909."],
+ ["The Mosquito Reserve was reincorporated into Nicaragua in 1894.",true,"It became the Department of Zelaya."],
+ ["The Knox Note defended Zelaya's government.",false,"It condemned his government and broke relations."],
+ ["Zelaya refused to concede the canal under humiliating conditions.",true,"He defended Nicaragua's right to decide about its resources."],
+ ["Zelaya's government was fully democratic and had no critics.",false,"Critics point to concentration of power and limits on opponents and press."]
+]);
+add(CLOZE,'cloze',3,[
+ ["Zelaya's Liberal Revolution began in ___.",["1893","1856","1909","1912"],0,"It began in 1893."],
+ ["In 1894 Nicaragua reincorporated the ___ Reserve.",["Mosquito","Pacific","Central","Transit"],0,"The Caribbean coast came under national law."],
+ ["The U.S. message of December 1909 is called the ___ Note.",["Knox","Monroe","Dawes","Hay"],0,"Philander Knox was U.S. Secretary of State."],
+ ["Zelaya refused to give up the ___ on humiliating terms.",["canal","coffee","railway only","army"],0,"The canal route was a question of sovereignty."]
+]);
+add(SRC,'src',3,[
+ {src:"Scenario: A government uses coffee revenue to build railways and telegraph lines and to train public school teachers.",cite:"Discussion case",
+  q:"Which policy goal does this reflect?",o:["Modernization that strengthens the national State","Return to colonial rule","Reliance on foreign loans only","Closing the ports"],a:0,w:"Modernization with national resources was part of Zelaya's project."},
+ {src:"Fact: The Knox Note said that the rebels represented the Nicaraguan people better than Zelaya's government did.",cite:"Historical summary",
+  q:"Why is this considered a violation of sovereignty?",o:["A foreign power decided which government was legitimate for Nicaragua","It gave Nicaragua control of the canal","It respected self-determination","It ended Nicaragua's debt"],a:0,w:"Self-determination means a people decides its own government."},
+ {src:"Scenario: In 1894 the State takes full control of a coastal territory that had been governed under British-protected autonomy.",cite:"Discussion case",
+  q:"Which statement is the most balanced?",o:["It strengthened national sovereignty, but local communities lost some self-government","It had no effect on anyone","It reduced national territory","It ended all foreign interest"],a:0,w:"Historians weigh national sovereignty against the rights of coastal communities."},
+ {src:"Scenario: Supporters say a president defended the nation; opponents say he silenced newspapers.",cite:"Discussion case",
+  q:"What is the best approach for a historian?",o:["Weigh both perspectives with evidence","Accept only the supporters","Accept only the opponents","Ignore both"],a:0,w:"Critical thinking requires evidence from several viewpoints."}
+]);
+add(WR,'wr',3,[
+ {src:"Action and consequence table: choose three anti-interventionist policies or economic characteristics of Zelaya's government.",cite:"Prompt",
+  q:"Name three policies or characteristics (for example the Mosquito Reserve, canal terms, modernization) and explain how each defended sovereignty. Use at least four sentences.",
+  keys:[["Mosquito Reserve or Caribbean coast",["mosquito","reserve","caribbean","1894","coast"]],
+        ["Canal, foreign pressure or negotiation",["canal","foreign","united states","u.s.","pressure","negotiat"]],
+        ["Modernization or national resources (railways, education, coffee)",["railway","telegraph","education","school","coffee","modern","revenue"]]],
+  model:"First, the reincorporation of the Mosquito Reserve in 1894 put the whole Caribbean coast under Nicaraguan authority. Second, Zelaya refused to give canal control on humiliating terms and resisted U.S. pressure. Third, he used coffee revenue to build railways, telegraph lines and schools, which strengthened the State and reduced dependence on outside powers."},
+ {src:"Critical essay: Zelaya, the canal and the Knox Note.",cite:"Prompt",
+  q:"Argue how the United States intervened and why Zelaya refused to hand over the canal under humiliating conditions. Include one criticism of his government. Use at least four sentences.",
+  keys:[["How the U.S. intervened (support for rebels, Knox Note)",["knox","rebel","support","intervene","interven","note","recognize","pressure"]],
+        ["Why he refused: sovereignty, national resources, dignity",["sovereign","self-determination","dignity","resource","humiliat","decide","independence"]],
+        ["Balanced view: criticism of his rule",["authoritarian","strongman","press","opponent","critic","monopol","power"]]],
+  model:"The United States intervened by backing the Conservative rebels and by issuing the Knox Note, which condemned Zelaya's government and denied its legitimacy. Zelaya refused to give the canal under humiliating conditions because he believed Nicaragua had the right to decide about its own resources and territory. His government can still be criticized for concentrating power and limiting opponents and the press."}
+]);
+
+/* ===== Lesson 4 · Zeledón 1910–1912 ===== */
+add(MCQ,'mcq',4,[
+ {q:"Which president asked the United States for military help in 1912?",o:["José Santos Zelaya","Adolfo Díaz","Benjamín Zeledón","Augusto Sandino"],a:1,w:"Díaz, whose government depended on U.S. support, requested troops."},
+ {q:"Where did Zeledón make his last stand in October 1912?",o:["Coyotepe and La Barranca, near Masaya","Bluefields","Estelí","León"],a:0,w:"The hills overlooked the route between Managua and Granada."},
+ {q:"Why were Coyotepe and La Barranca strategic?",o:["They overlooked the city and the road and railway between the capital and Granada","They were the only coffee farms in Masaya","They marked the Honduran border","They were ports on the Pacific"],a:0,w:"Their relief gave defenders a strong position."},
+ {q:"On what date was Zeledón executed?",o:["4 October 1912","15 September 1821","14 September 1856","1 December 1909"],a:0,w:"He died on 4 October 1912 after the battle."},
+ {q:"To whom did Zeledón write his famous last letter?",o:["His wife, Esther","President Díaz","General Mena","Augusto Sandino"],a:0,w:"The last letter to Esther expresses patriotism, sacrifice and honor."},
+ {q:"Which values appear in Zeledón's last letter?",o:["Patriotism, sacrifice and honor","Greed and fear","Neutrality and comfort","Loyalty to foreign armies"],a:0,w:"He chose not to surrender even though he expected to die."},
+ {q:"Who saw Zeledón's body in 1912 and later led the national liberation struggle?",o:["Augusto C. Sandino","Rubén Darío","Adolfo Díaz","José Dolores Estrada"],a:0,w:"Sandino, then 17, saw the body in Niquinohomo; the memory marked him."},
+ {q:"What principle did Zeledón defend?",o:["National sovereignty and self-determination against foreign intervention","Annexation to a foreign country","Rule of the strongest","Silence in the face of occupation"],a:0,w:"He opposed a government sustained by foreign troops."},
+ {q:"Which description fits the political situation of 1910–1912?",o:["Governments sustained by U.S. support after Zelaya's fall","A strong, fully independent State without foreign influence","A return to Spanish colonial rule","A peaceful Federation with Mexico"],a:0,w:"Conservative governments depended on U.S. support and arms."},
+ {q:"Why is Zeledón's legacy called heroic?",o:["He refused to surrender and sacrificed his life for national sovereignty","He sold the canal to a foreign power","He obtained great personal wealth","He stayed neutral in the conflict"],a:0,w:"Sacrifice for the homeland is the core of his legacy."}
+]);
+add(TF,'tf',4,[
+ ["Zeledón fought against the Díaz government and the U.S. intervention.",true,"He led the resistance in 1912."],
+ ["Coyotepe and La Barranca are hills near Masaya.",true,"They overlook the road toward the capital."],
+ ["Zeledón surrendered voluntarily and was pardoned.",false,"He did not surrender and was executed on 4 October 1912."],
+ ["The young Sandino saw Zeledón's body in Niquinohomo.",true,"The memory became the seed of his own struggle."],
+ ["Zeledón's death had no influence on Sandino's later struggle.",false,"It is considered a seed of Sandino's fight for sovereignty."]
+]);
+add(CLOZE,'cloze',4,[
+ ["Zeledón's last stand was at Coyotepe and La ___ near Masaya.",["Barranca","Cumbre","Laguna","Pradera"],0,"The two hills are in the department of Masaya."],
+ ["Zeledón wrote his last letter to his wife, ___.",["Esther","María","Rafaela","Josefa"],0,"The letter expresses patriotism, sacrifice and honor."],
+ ["Zeledón was executed in 1912 and is buried in ___.",["Catarina","Bluefields","Estelí","Rivas"],0,"Catarina keeps his tomb."],
+ ["Augusto C. Sandino was born in the town of ___.",["Niquinohomo","Bluefields","Rivas","Estelí"],0,"Niquinohomo is in the department of Masaya."]
+]);
+add(SRC,'src',4,[
+ {src:"Scenario: A force of defenders occupies a hill above a city, with a clear view of the road and railway leading to the capital.",cite:"Discussion case",
+  q:"Why would defenders choose this position?",o:["Height and control of the route give a strategic advantage","The hill has no military value","It lies far from the road","It belongs to the enemy"],a:0,w:"Relief and control of the route favored resistance, as at Coyotepe."},
+ {src:"Scenario: In a last letter, a general writes to his wife that he will not surrender even though he expects to die.",cite:"Discussion case (Zeledón and Esther)",
+  q:"Which values does the letter express?",o:["Patriotism, sacrifice and honor","Fear and greed","Neutrality and comfort","Loyalty to foreign powers"],a:0,w:"The letter shows that he placed the nation above his own safety."},
+ {src:"Fact: In 1912 President Díaz's government depended on U.S. Marines to stay in power.",cite:"Historical summary",
+  q:"Which principle does a general who resists this government defend?",o:["Self-determination","Foreign tutelage","Colonial monopoly","Absolute monarchy"],a:0,w:"Self-determination means a people decides its own political future."},
+ {src:"Scenario: A teenager sees a national hero's body after his execution; years later he organizes an army to defend the country's sovereignty.",cite:"Discussion case (Zeledón and Sandino)",
+  q:"Which historical relationship does this describe?",o:["Zeledón's example inspired Sandino","Zelaya's example inspired Walker","Darío founded the Federation","Estrada led the Marines"],a:0,w:"Sandino saw Zeledón's body in Niquinohomo; the memory became the seed of his struggle."}
+]);
+add(WR,'wr',4,[
+ {src:"Conversation guide: the last letter to his wife, Esther.",cite:"Prompt",
+  q:"Explain which values Zeledón expresses in his last letter and why he decided not to surrender. Use at least three sentences.",
+  keys:[["Values: patriotism, sacrifice, honor",["patriot","sacrific","honor","dignity","duty"]],
+        ["Decision not to surrender, even knowing he would die",["surrender","die","death","expected","knew","resist"]],
+        ["Sovereignty or the homeland as the reason",["sovereign","homeland","nation","independence","self-determination","country"]]],
+  model:"In his last letter to his wife Esther, Zeledón expresses patriotism, sacrifice and honor. He decided not to surrender, even though he knew he would probably die, because for him the sovereignty of the homeland was more important than his own life."},
+ {src:"Geography and legacy: Coyotepe, La Barranca and Sandino.",cite:"Prompt",
+  q:"Describe the socio-geographic context of the resistance at Coyotepe and La Barranca and explain the impact of Zeledón's death on Sandino. Use at least four sentences.",
+  keys:[["Geography: hills above Masaya, route to the capital, relief",["masaya","hill","route","road","railway","capital","relief","overlook"]],
+        ["Marines or the 1912 intervention",["marine","intervention","u.s.","american","díaz","diaz","united states"]],
+        ["Impact on Sandino",["sandino","niquinohomo","body","seed","inspired","years later","sovereignty"]]],
+  model:"Coyotepe and La Barranca are hills near Masaya that overlook the road and railway toward the capital. Their relief helped the defenders against a stronger force of Marines and government troops. When Sandino, then a teenager, saw Zeledón's body in Niquinohomo, the memory became the seed of the struggle for sovereignty that he would lead years later."},
+ {src:"Zeledón's legacy for Nicaragua today.",cite:"Prompt",
+  q:"Explain why Zeledón is considered a National Hero and how his legacy defends sovereignty today. Use at least three sentences.",
+  keys:[["National hero: sacrifice, resistance, 1912",["hero","sacrific","resist","1912","coyotepe","die","life"]],
+        ["Sovereignty and anti-intervention",["sovereign","intervention","interven","self-determination","independence","foreign"]],
+        ["Today: remembered, relevance",["today","still","remember","anniversary","monument","catarina","relevan","nicaragua"]]],
+  model:"Zeledón is a National Hero because he resisted foreign intervention in 1912 and gave his life rather than surrender. His legacy defends the principle that national sovereignty cannot be negotiated, and it is still remembered every 4 October and at sites like Coyotepe and Catarina."}
+]);
+
+const MATCH_BY={
+ 1:[{t:"Match each term with its meaning.",p:[["Peninsular","Spain-born official"],["Criollo","American-born person of Spanish descent"],["Indigo (añil)","Blue dye, a key export"],["Trade monopoly","Exclusive control of commerce by Spain"],["Federation","Union of states, 1823–1838"]]},
+    {t:"Match each person or event with its role.",p:[["Miguel Larreynaga","Signed the Act of Independence for Nicaragua"],["Cleto Ordóñez","Granada militia officer in the 1811–1812 uprisings"],["Agustín de Iturbide","Emperor to whom Central America was annexed in 1822"],["Rafaela Herrera","Defended the San Juan River fortress in 1762"]]}],
+ 2:[{t:"Match each person with his role.",p:[["José Dolores Estrada","Commander at San Jacinto, 1856"],["Andrés Castro","Soldier remembered for the stone at San Jacinto"],["William Walker","American filibuster who proclaimed himself president in 1856"],["Juan Santamaría","Costa Rican hero of the Battle of Rivas"]]},
+    {t:"Match each date with the event.",p:[["1838","Nicaragua declares itself sovereign"],["1852","Managua becomes the capital"],["14 Sept 1856","Battle of San Jacinto"],["1 May 1857","Walker surrenders at Rivas"]]}],
+ 3:[{t:"Match each date with the event.",p:[["1893","Zelaya's Liberal Revolution"],["1894","Reincorporation of the Mosquito Reserve"],["1 Dec 1909","The Knox Note"],["Dec 1909","Zelaya resigns"]]},
+    {t:"Match each concept with its meaning.",p:[["Self-determination","A people's right to decide its own future"],["Sovereignty","A nation's right to govern itself without outside control"],["Reincorporation","Bringing a territory back under State authority"],["Diplomatic note","Official written message between governments"]]}],
+ 4:[{t:"Match each place with its connection to Zeledón's story.",p:[["Coyotepe and La Barranca","Hills where his last stand took place (Masaya)"],["Niquinohomo","Sandino's hometown; where Zeledón's body was seen"],["Catarina","Burial place"],["Managua","Birthplace of Zeledón"]]},
+    {t:"Match each date with the event.",p:[["Dec 1909","Zelaya resigns"],["1910","U.S. Marines land at Bluefields"],["1911","Adolfo Díaz becomes president"],["4 Oct 1912","Zeledón is executed"]]}]
+};
+const SORT_BY={
+ 1:[{t:"Political, social or economic characteristic of the independence period?",c:["Political","Social","Economic"],i:[
+  ["Rivalry between León and Granada for control of the government",0],["Joining the Mexican Empire, then the Federation",0],
+  ["Hierarchy that placed peninsulares above criollos, mestizos and Indigenous people",1],["Abolition of slavery by the Federation in 1824",1],
+  ["Exports of indigo, cacao and cattle",2],["Scarcity of coins and war debts",2],["End of the Spanish trade monopoly",2]]}],
+ 2:[{t:"Liberals (León), Conservatives (Granada) or both?",c:["Liberals","Conservatives","Both"],i:[
+  ["Elite centered in León",0],["Elite centered in Granada, linked to the Lake Nicaragua merchants",1],["A Liberal faction invited William Walker in 1855",0],
+  ["Governed during the \"Thirty Years\" (1857–1893)",1],["Fought Walker in the National War",2],["Accepted Managua as a compromise capital",2]]}],
+ 3:[{t:"Zelaya's government: a defense of sovereignty, modernization or a criticism?",c:["Defense of sovereignty","Modernization","Criticism"],i:[
+  ["Reincorporation of the Mosquito Reserve (1894)",0],["Refusing humiliating canal terms",0],["Railways and telegraph lines",1],["Expansion of secular public education",1],
+  ["Limits on the press and opponents",2],["Concentration of power in the president",2]]}],
+ 4:[{t:"Which side? Zeledón's resistance or the Díaz government and U.S. forces?",c:["Zeledón's resistance","Díaz government and U.S. forces"],i:[
+  ["Held Coyotepe and La Barranca",0],["Asked for U.S. troops in 1912",1],["Defended national sovereignty",0],["Relied on U.S. military support to stay in power",1],
+  ["Leader executed on 4 October 1912",0],["Attacked the hills with artillery and infantry",1]]}]
+};
+const ORDER_BY={
+ 1:[{t:"Order these events from earliest to latest (use ↑ and ↓).",e:[["1811","Uprising in Granada"],["1821","Act of Independence in Guatemala"],["1822","Annexation to the Mexican Empire"],["1823","United Provinces of Central America"],["1838","Nicaragua declares itself sovereign"]]}],
+ 2:[{t:"Order these events from earliest to latest (use ↑ and ↓).",e:[["1838","Nicaragua becomes a separate sovereign State"],["1852","Managua becomes the capital"],["1855","William Walker arrives"],["14 Sept 1856","Battle of San Jacinto"],["1857","Walker surrenders"],["1893","Liberal Revolution ends the Conservative era"]]}],
+ 3:[{t:"Order these events from earliest to latest (use ↑ and ↓).",e:[["1893","Liberal Revolution begins"],["1894","Mosquito Reserve reincorporated"],["1903","The U.S. chooses Panama for its canal"],["Oct 1909","Conservative revolt begins in Bluefields"],["1 Dec 1909","Knox Note"],["Dec 1909","Zelaya resigns"]]}],
+ 4:[{t:"Order these events from earliest to latest (use ↑ and ↓).",e:[["Dec 1909","Zelaya resigns"],["1910","U.S. Marines land at Bluefields"],["1911","Adolfo Díaz becomes president"],["Aug 1912","Marines land at Díaz's request"],["4 Oct 1912","Zeledón is executed"],["1927","Sandino begins his struggle"]]}]
+};
+const MAPQ_BY={
+ 1:[{q:"Tap the department whose city was the capital of the colonial Province of Nicaragua.",a:"León",w:"León was the colonial capital and the Liberal stronghold."},
+    {q:"Tap the department of the merchant city on Lake Nicaragua that rivaled León.",a:"Granada",w:"Granada was the Conservative stronghold."}],
+ 2:[{q:"Tap the department where Walker surrendered in 1857 and where the Battle of Rivas took place.",a:"Rivas",w:"The Battle of Rivas (1856) and Walker's surrender (1857) took place at Rivas."},
+    {q:"Tap the department that contains Tipitapa and the hacienda San Jacinto.",a:"Managua",w:"San Jacinto is near Tipitapa, in the department of Managua."}],
+ 3:[{q:"Tap the department of the capital, where Zelaya was born.",a:"Managua",w:"José Santos Zelaya was born in Managua in 1853."},
+    {q:"Tap the autonomous region that contains Bluefields, where the 1909 revolt began.",a:"RACCS",w:"Bluefields is on the southern Caribbean coast (RACCS)."}],
+ 4:[{q:"Tap the department where Zeledón made his last stand at Coyotepe and La Barranca.",a:"Masaya",w:"The hills overlook Masaya and the route toward the capital."},
+    {q:"Tap the department where Zeledón was born.",a:"Managua",w:"Benjamín Zeledón was born in Managua."}]
+};
+const LN={1:"Independence and the economy",2:"Formation of the State",3:"Zelaya and anti-interventionism",4:"Zeledón and the U.S. interventions"};
+const ACT=[['mcq','Concept MCQs'],['tf','True / False'],['cloze','Fill in the blank'],['voc','Vocabulary check'],['match','Matching'],['sort','Sort it'],['order','Timeline order'],['map','Map challenge'],['src','Source analysis'],['wr','Written response']];
+const VLES={
+ 1:["Prócer","Peninsular","Criollo","Trade monopoly","Free trade","Indigo (añil)","Federation","Foreign debt"],
+ 2:["Sovereignty","Filibuster","Liberals","Conservatives","Agro-export economy","Land tenure","Constitution","Legacy"],
+ 3:["Liberal Revolution","Mosquito Reserve","Reincorporation","Interoceanic canal","Diplomatic note","Self-determination","Anti-interventionism","Sovereignty"],
+ 4:["Intervention","Marines","Patriotism","Anti-imperialism","Legacy","Self-determination","Sovereignty","National hero"]
+};
+
+const pick=(a,ix)=>ix.map(i=>a[i]);
+const vocFor=l=>VLES[l].map(t=>VOC.find(v=>v[0]===t));
+const hasAct=(l,t)=>t!=='map'||!!MAPQ_BY[l];
+
+/* ---------- storage and scoring ---------- */
+const KEY='ss10-u3-progress-v1';
+let state={name:'',scores:{}};
+try{const r=localStorage.getItem(KEY);if(r){const o=JSON.parse(r);if(o&&typeof o==='object'){state.name=String(o.name||'');state.scores=(o.scores&&typeof o.scores==='object')?o.scores:{};}}}catch(e){}
+const signedName=()=>{try{return (window.LiaSync&&LiaSync.live&&LiaSync.name())||'';}catch(e){return '';}};   // registered name from the sign-in
+if(signedName()) state.name=signedName();
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state));}catch(e){}};
+const pctOf=(c,t)=>t?Math.round(c/t*100):0;
+const sum=a=>a.reduce((x,y)=>x+y,0);
+function maxPts(l,t){
+  switch(t){
+    case'mcq':return Math.min(6,IDX.mcq[l].length);
+    case'tf':return IDX.tf[l].length;
+    case'cloze':return IDX.cloze[l].length;
+    case'voc':return Math.min(8,VLES[l].length);
+    case'match':return sum(MATCH_BY[l].map(x=>x.p.length));
+    case'sort':return sum(SORT_BY[l].map(x=>x.i.length));
+    case'order':return sum(ORDER_BY[l].map(x=>x.e.length));
+    case'map':return MAPQ_BY[l]?MAPQ_BY[l].length:0;
+    case'src':return IDX.src[l].length;
+    case'wr':return Math.min(2,IDX.wr[l].length);
+  }
+  return 0;
+}
+function commit(l,t,c,a){
+  const k=l+':'+t,p=state.scores[k];
+  if(!p||c>=p.c){state.scores[k]={c,a};save();reportUnit();}
+}
+/* ---------- every answer is saved for the teacher ----------
+   Each activity keeps its questions and the student's answers under a key that starts with "resp-"
+   ({title, q:[...], a:[...]}); the teacher's "Student responses" page reads exactly this. */
+function respKey(l,mode){const ai=ACT.findIndex(a=>a[0]===mode);return {key:'resp-ss10u3-l'+l+'-'+String(ai+1).padStart(2,'0')+'-'+mode,label:ai>=0?ACT[ai][1]:mode};}
+function readResp(key){try{const o=JSON.parse(localStorage.getItem(key)||'null');if(o&&Array.isArray(o.q)&&Array.isArray(o.a))return o;}catch(e){}return null;}
+function logResp(l,mode,q,a,raw){
+  try{
+    const {key,label}=respKey(l,mode);
+    const o=readResp(key)||{title:'10th Unit III · Lesson '+l+' ('+LN[l]+') – '+label,q:[],a:[]};
+    const i=o.q.indexOf(q); if(i<0){o.q.push(q);o.a.push(a);}else o.a[i]=a;
+    if(raw!==undefined){o.raw=o.raw||{};o.raw[q]=raw;}
+    localStorage.setItem(key,JSON.stringify(o));
+  }catch(e){}
+}
+function savedRaw(l,mode,q){const o=readResp(respKey(l,mode).key);return o&&o.raw&&typeof o.raw[q]==='string'?o.raw[q]:'';}
+const mark=(ok,right)=>ok?'✔':'✘ (correct: '+right+')';
+
+function lessonScore(l){
+  const rows=ACT.filter(x=>hasAct(l,x[0])).map(([k,lab])=>{const t=maxPts(l,k),p=state.scores[l+':'+k];return {k,lab,t,c:p?p.c:0,done:!!p&&p.a>0};});
+  const C=sum(rows.map(r=>r.c)),T=sum(rows.map(r=>r.t));
+  return {rows,C,T,n:rows.filter(r=>r.done).length,m:rows.length};
+}
+
+/* tell the teacher dashboard how far the student is (all four lessons together) */
+function reportUnit(){try{let n=0,m=0,C=0,T=0;[1,2,3,4].forEach(l=>{const S=lessonScore(l);n+=S.n;m+=S.m;C+=S.C;T+=S.T;});if(window.LiaSync)LiaSync.report({solved:n,total:m,score:C,max:T});}catch(e){}}
+setTimeout(reportUnit,0);
+
+/* ---------- saved answers + stable question order ----------
+   Every answer the student gives in a practice set is recorded and replayed on the next visit (kept in localStorage, mirrored by LiaSync).
+   Random picks/shuffles are seeded per lesson + activity, so the same set appears every time; "Restart this set" starts a new round. */
+const AKEY='ss10-u3-answers-v1';
+let AD={}; try{AD=JSON.parse(localStorage.getItem(AKEY)||'{}')||{};}catch(e){AD={};}
+const asave=()=>{try{localStorage.setItem(AKEY,JSON.stringify(AD));}catch(e){}};
+const rngSeed=seed=>{let a=seed>>>0;return()=>{a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296;};};
+const strSeed=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619);}return h>>>0;};
+
+/* ---------- practice factory ---------- */
+function makePractice(l,rootEl){
+  const acts=ACT.filter(a=>hasAct(l,a[0]));
+  rootEl.innerHTML=`<div class="ptabs" role="tablist" aria-label="Activity type">${acts.map((a,i)=>`<button class="ptab" role="tab" aria-selected="${i===0}" data-p="${a[0]}">${a[1]}</button>`).join('')}</div>
+  <div class="scorebar"><b class="scoreTxt">Score: 0 / 0</b><div class="prog" aria-hidden="true"><i class="progBar"></i></div><span class="progTxt"></span><button class="btn alt resetBtn" type="button">Restart this set</button></div>
+  <div class="quiz"></div>`;
+  const quiz=$('.quiz',rootEl);
+  let mode='mcq',ans=0,cor=0,tot=0,shown=false;
+  const ctxKey=()=>l+':'+mode; let shufN=0,CNT={},replaying=false;
+  const shuffle=a=>{a=a.slice();shufN++;const r=rngSeed(strSeed(ctxKey()+'|'+((AD[ctxKey()]&&AD[ctxKey()].round)||0)+'|'+shufN));for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+  /* shuffled options, with the correct one spread over all positions */
+  const placeOpt=(arr,a)=>{const c=arr.find(x=>x.i===a);if(!c)return shuffle(arr);const n=arr.length,wr=shuffle(arr.filter(x=>x.i!==a)),k=(CNT[n]=(CNT[n]||0)+1)-1,target=((k%n)*(n===4?3:2)+Math.floor(k/n))%n;wr.splice(target,0,c);return wr;};
+  const addr=t=>{const card=t.closest('.q');if(!card)return null;const c=[...quiz.children].indexOf(card);if(c<0)return null;let k,list;
+    if(t.matches('.opt')){k='o';list=$$('.opt',card);}else if(t.matches('.cat')){k='c';list=$$('.cat',card);}else if(t.matches('path.d')){k='p';list=$$('path.d',card);}
+    else if(t.closest('ul.ord')){k='m';list=$$('ul.ord button',card);}else if(t.matches('.btn')){k='b';list=$$('.btn',card);}else return null;
+    const i=list.indexOf(t);return i<0?null:{c,k,i};};
+  const rcd=x=>{if(replaying||!x)return;const d=AD[ctxKey()]=AD[ctxKey()]||{round:0,a:[]};if(d.a.length<600){d.a.push(x);asave();}};
+  quiz.addEventListener('click',e=>{const t=e.target.closest('button,path.d');if(t&&!t.disabled)rcd(addr(t));},true);
+  quiz.addEventListener('keydown',e=>{const t=e.target;if(t.matches&&t.matches('path.d')&&(e.key==='Enter'||e.key===' '))rcd(addr(t));},true);
+  quiz.addEventListener('change',e=>{const t=e.target;if(t.tagName==='SELECT'){const card=t.closest('.q'),c=[...quiz.children].indexOf(card);if(c>=0)rcd({c,k:'s',i:$$('select',card).indexOf(t),v:t.value});}},true);
+  function replayCtx(){
+    const d=AD[ctxKey()];if(!d||!d.a.length)return;replaying=true;
+    d.a.forEach(x=>{const card=quiz.children[x.c];if(!card)return;
+      if(x.k==='s'){const se=$$('select',card)[x.i];if(se&&!se.disabled){se.value=x.v;se.dispatchEvent(new Event('change',{bubbles:true}));}return;}
+      const sel={o:'.opt',c:'.cat',p:'path.d',m:'ul.ord button',b:'.btn'}[x.k];const t=sel&&$$(sel,card)[x.i];
+      if(t&&!t.disabled)t.dispatchEvent(new MouseEvent('click',{bubbles:true}));});
+    replaying=false;
+  }
+  function rec(c,m){ans+=m;cor+=c;commit(l,mode,cor,ans);update();}
+  function update(){
+    $('.scoreTxt',rootEl).textContent=`Score: ${cor} / ${ans}`;
+    $('.progTxt',rootEl).textContent=`${ans} of ${tot} answered`;
+    $('.progBar',rootEl).style.width=(tot?ans/tot*100:0)+'%';
+    if(tot&&ans===tot&&!shown){shown=true;$('.progTxt',rootEl).textContent=`${ans} of ${tot} answered · saved automatically`;}
+  }
+  const box=(label,i,body)=>{const c=document.createElement('div');c.className='q';c.innerHTML=`<div class="num">${label} ${i+1}</div>${body}`;return c;};
+  function mcCard(item,idx,label,fixed){
+    const card=document.createElement('div');card.className='q';
+    const order=(fixed?item.o.map((t,i)=>({t,i})):placeOpt(item.o.map((t,i)=>({t,i})),item.a));
+    card.innerHTML=`<div class="num">${label} ${idx+1}</div>${item.src?`<div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div>`:''}<p class="stem">${esc(item.q)}</p><div class="opts"></div><div class="fb" role="status"></div>`;
+    const bx=$('.opts',card),fb=$('.fb',card);
+    order.forEach(op=>{
+      const b=document.createElement('button');b.type='button';b.className='opt';b.textContent=op.t;
+      b.onclick=()=>{
+        const ok=op.i===item.a;
+        logResp(l,mode,(item.src?item.src+' — ':'')+item.q,op.t+' '+mark(ok,item.o[item.a]));
+        $$('.opt',bx).forEach((x,k)=>{x.disabled=true;if(order[k].i===item.a)x.classList.add('right');});
+        if(!ok)b.classList.add('wrong');
+        fb.className='fb show '+(ok?'ok':'no');
+        fb.innerHTML=`<b class="h">${ok?'✔ Correct!':'✘ Not quite.'}</b>${esc(item.w)}`;
+        rec(ok?1:0,1);
+      };
+      bx.appendChild(b);
+    });
+    return card;
+  }
+  function matchCard(set,idx){
+    const rights=shuffle(set.p.map(p=>p[1]));
+    const card=box('Matching',idx,`<p class="stem">${esc(set.t)}</p><div class="rows"></div><p style="margin:8px 0 0"><button type="button" class="btn">Check my matches</button></p><div class="fb" role="status"></div>`);
+    const rows=$('.rows',card);
+    set.p.forEach(([lft])=>{
+      const r=document.createElement('div');r.className='mrow';
+      r.innerHTML=`<div class="l"><b>${esc(lft)}</b></div><select aria-label="${esc(lft)}"><option value="">Choose…</option>${rights.map(x=>`<option>${esc(x)}</option>`).join('')}</select><div class="mark"></div>`;
+      rows.appendChild(r);
+    });
+    const btn=$('.btn',card),fb=$('.fb',card);
+    btn.onclick=()=>{
+      const sels=$$('select',card);
+      if(sels.some(x=>!x.value)){fb.className='fb show no';fb.innerHTML='<b class="h">Almost there</b>Choose an answer for every row first.';return;}
+      let n=0;const wrong=[];
+      sels.forEach((se,i)=>{const ok=se.value===set.p[i][1];if(ok)n++;else wrong.push(`<li><b>${esc(set.p[i][0])}</b> → ${esc(set.p[i][1])}</li>`);se.disabled=true;se.classList.add(ok?'right':'wrong');se.nextElementSibling.textContent=ok?'✔':'✘';});
+      logResp(l,mode,set.t+' ['+set.p.map(p=>p[0]).join(', ')+']',sels.map((se,i)=>set.p[i][0]+' → '+se.value+' '+mark(se.value===set.p[i][1],set.p[i][1])).join(' | '));
+      btn.disabled=true;const all=n===set.p.length;
+      fb.className='fb show '+(all?'ok':'no');
+      fb.innerHTML=`<b class="h">${n} of ${set.p.length} correct</b>${all?'Great matching!':'Correct matches for the ones you missed:<ul class="check">'+wrong.join('')+'</ul>'}`;
+      rec(n,set.p.length);
+    };
+    return [card,set.p.length];
+  }
+  function sortCard(set,idx){
+    const card=box('Sort it',idx,`<p class="stem">${esc(set.t)}</p><div class="rows"></div><div class="fb" role="status"></div>`);
+    const rows=$('.rows',card);let done=0,good=0;
+    set.i.forEach(([txt,c])=>{
+      const r=document.createElement('div');r.className='srow';
+      r.innerHTML=`<p>${esc(txt)}</p><div class="cats">${set.c.map((n,k)=>`<button type="button" class="cat" data-k="${k}">${esc(n)}</button>`).join('')}</div><div class="note"></div>`;
+      $$('.cat',r).forEach(b=>b.onclick=()=>{
+        const k=+b.dataset.k,ok=k===c;
+        logResp(l,mode,set.t+' — '+txt,set.c[k]+' '+mark(ok,set.c[c]));
+        $$('.cat',r).forEach(x=>{x.disabled=true;if(+x.dataset.k===c)x.classList.add('right');});
+        if(!ok)b.classList.add('wrong');
+        $('.note',r).innerHTML=ok?'<b style="color:var(--good)">✔ Correct</b>':`<b style="color:var(--bad)">✘ It belongs under “${esc(set.c[c])}”.</b>`;
+        done++;if(ok)good++;
+        if(done===set.i.length){const fb=$('.fb',card);fb.className='fb show '+(good===done?'ok':'no');fb.innerHTML=`<b class="h">${good} of ${done} sorted correctly</b>`;}
+        rec(ok?1:0,1);
+      });
+      rows.appendChild(r);
+    });
+    return [card,set.i.length];
+  }
+  function orderCard(set,idx){
+    let arr=set.e.map((e,i)=>({i,t:e[1],y:e[0]}));
+    do{arr=shuffle(arr);}while(arr.every((x,k)=>x.i===k));
+    const card=box('Timeline',idx,`<p class="stem">${esc(set.t)}</p><ul class="ord"></ul><p style="margin:0"><button type="button" class="btn">Check order</button></p><div class="fb" role="status"></div>`);
+    const ul=$('.ord',card),btn=$('.btn',card),fb=$('.fb',card);
+    let locked=false;
+    const draw=()=>{
+      ul.innerHTML='';
+      arr.forEach((x,k)=>{
+        const li=document.createElement('li');
+        li.innerHTML=`<span>${locked?`<b>${esc(x.y)}</b> · `:''}${esc(x.t)}</span>${locked?'':'<button type="button" aria-label="Move up">↑</button><button type="button" aria-label="Move down">↓</button>'}`;
+        if(locked)li.classList.add(x.i===k?'right':'wrong');
+        if(!locked){const [u,d]=$$('button',li);u.onclick=()=>{if(k>0){[arr[k-1],arr[k]]=[arr[k],arr[k-1]];draw();}};d.onclick=()=>{if(k<arr.length-1){[arr[k+1],arr[k]]=[arr[k],arr[k+1]];draw();}};}
+        ul.appendChild(li);
+      });
+    };
+    draw();
+    btn.onclick=()=>{
+      locked=true;btn.disabled=true;const n=arr.filter((x,k)=>x.i===k).length;draw();
+      logResp(l,mode,set.t,'Student\'s order: '+arr.map(x=>x.y+' '+x.t).join(' → ')+' · '+n+' of '+arr.length+' in the right place');
+      const ok=n===arr.length;fb.className='fb show '+(ok?'ok':'no');
+      fb.innerHTML=`<b class="h">${n} of ${arr.length} in the right place</b>${ok?'Perfect timeline!':'Correct order: '+set.e.map(e=>esc(e[0])).join(' → ')}`;
+      rec(n,arr.length);
+    };
+    return [card,arr.length];
+  }
+  function mapCard(item,idx){
+    const card=box('Map',idx,`<p class="stem">${esc(item.q)}</p><svg class="qmap" viewBox="-12 -8 495 492" role="group" aria-label="Map of Nicaragua"></svg><div class="fb" role="status"></div>`);
+    const sv=$('svg',card),fb=$('.fb',card);
+    MAP.lakes.forEach(d=>{const p=document.createElementNS(NS,'path');p.setAttribute('d',d);p.setAttribute('fill','#7cc0f5');sv.appendChild(p);});
+    const ps=[];
+    MAP.d.forEach(dep=>{
+      const p=document.createElementNS(NS,'path');p.setAttribute('d',dep.d);p.setAttribute('class','d');p.setAttribute('tabindex',0);p.setAttribute('role','button');p.setAttribute('aria-label',dep.n);
+      const ti=document.createElementNS(NS,'title');ti.textContent=dep.n;p.appendChild(ti);
+      const go=()=>{
+        if(sv.classList.contains('done'))return;
+        sv.classList.add('done');const ok=dep.n===item.a;
+        logResp(l,mode,item.q,dep.n+' '+mark(ok,item.a));
+        p.classList.add(ok?'right':'wrong');
+        if(!ok)ps.forEach(q=>{if(q.dep===item.a)q.el.classList.add('right');});
+        fb.className='fb show '+(ok?'ok':'no');
+        fb.innerHTML=`<b class="h">${ok?'✔ Correct!':'✘ That was '+esc(dep.n)+'.'}</b>${ok?'':`The answer is <b>${esc(item.a)}</b>. `}${esc(item.w)}`;
+        rec(ok?1:0,1);
+      };
+      p.onclick=go;p.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}};
+      sv.appendChild(p);ps.push({el:p,dep:dep.n});
+    });
+    return [card,1];
+  }
+  function wrCard(item,idx){
+    const card=document.createElement('div');card.className='q';
+    card.innerHTML=`<div class="num">Written ${idx+1}</div><div class="src">${esc(item.src)}${item.cite?`<small>${esc(item.cite)}</small>`:''}</div><p class="stem">${esc(item.q)}</p><textarea aria-label="Your answer" placeholder="Write your answer here..."></textarea><p style="margin:8px 0 0"><button type="button" class="btn">Check my answer</button> <span class="legend wc"></span></p><div class="fb" role="status"></div>`;
+    const ta=$('textarea',card),btn=$('.btn',card),fb=$('.fb',card),wc=$('.wc',card);
+    let done=false;
+    const prev=savedRaw(l,mode,item.q); if(prev){ta.value=prev;}
+    const count=()=>{wc.textContent=(ta.value.trim().split(/\s+/).filter(Boolean).length)+' words';};
+    let tmr=0; const keep=(note)=>{const t=ta.value.trim();if(t)logResp(l,mode,item.q,t+(note?'  ['+note+']':'  [not checked yet]'),ta.value);};
+    ta.oninput=()=>{count();clearTimeout(tmr);tmr=setTimeout(()=>keep(),500);};   // saved while the student types
+    ta.onblur=()=>{clearTimeout(tmr);keep();};
+    count();
+    btn.onclick=()=>{
+      const txt=ta.value.toLowerCase();
+      if(txt.trim().split(/\s+/).filter(Boolean).length<15){fb.className='fb show no';fb.innerHTML='<b class="h">Add more detail</b>Write at least 15 words so we can check your key ideas.';return;}
+      const hits=item.keys.map(([lab,ws])=>[lab,ws.some(w=>txt.includes(w))]);
+      const n=hits.filter(h=>h[1]).length,ok=n===item.keys.length;
+      clearTimeout(tmr);keep('Key ideas found: '+n+' of '+item.keys.length+' — '+hits.map(([lb,h])=>(h?'✔ ':'✘ ')+lb).join('; '));
+      fb.className='fb show '+(ok?'ok':'no');
+      fb.innerHTML=`<b class="h">${n} of ${item.keys.length} key ideas found</b><ul class="check">${hits.map(([lb,h])=>`<li>${h?'✔':'✘'} ${esc(lb)}</li>`).join('')}</ul><b>Model answer:</b> ${esc(item.model)}<br><small>This keyword check is a guide. Compare meaning with the model and ask your teacher if unsure.</small>`;
+      if(!done){done=true;rec(n>=2?1:0,1);}
+    };
+    return [card,1];
+  }
+  function build(m){
+    mode=m;ans=0;cor=0;shown=false;quiz.innerHTML='';shufN=0;CNT={};
+    let cards=[];
+    const one=(f)=>(x,i)=>[f(x,i),1];
+    if(m==='mcq')cards=shuffle(pick(MCQ,IDX.mcq[l])).slice(0,6).map((it,i)=>[mcCard(it,i,'Question'),1]);
+    if(m==='tf')cards=shuffle(pick(TF,IDX.tf[l])).map((t,i)=>[mcCard({q:t[0],o:['True','False'],a:t[1]?0:1,w:t[2]},i,'True or false?',true),1]);
+    if(m==='cloze')cards=shuffle(pick(CLOZE,IDX.cloze[l])).map((c,i)=>[mcCard({q:c[0],o:c[1],a:c[2],w:c[3]},i,'Fill in the blank'),1]);
+    if(m==='voc'){const terms=vocFor(l);cards=shuffle(terms).slice(0,8).map((v,i)=>{const dist=shuffle(VOC.filter(x=>x[0]!==v[0])).slice(0,3).map(x=>x[0]);return [mcCard({q:`Which term matches this definition? “${v[1]}”`,o:[v[0],...dist],a:0,w:`“${v[0]}”: ${v[1]}`},i,'Term'),1];});}
+    if(m==='match')cards=MATCH_BY[l].map((x,i)=>matchCard(x,i));
+    if(m==='sort')cards=SORT_BY[l].map((x,i)=>sortCard(x,i));
+    if(m==='order')cards=ORDER_BY[l].map((x,i)=>orderCard(x,i));
+    if(m==='map')cards=shuffle(MAPQ_BY[l]).map((x,i)=>mapCard(x,i));
+    if(m==='src')cards=shuffle(pick(SRC,IDX.src[l])).map((x,i)=>[mcCard(x,i,'Analysis'),1]);
+    if(m==='wr')cards=shuffle(pick(WR,IDX.wr[l])).slice(0,2).map((x,i)=>wrCard(x,i));
+    tot=cards.reduce((a,c)=>a+c[1],0);cards.forEach(c=>quiz.appendChild(c[0]));update();replayCtx();
+  }
+  $$('.ptab',rootEl).forEach(b=>b.onclick=()=>{$$('.ptab',rootEl).forEach(x=>x.setAttribute('aria-selected',x===b));build(b.dataset.p);});
+  $('.resetBtn',rootEl).onclick=()=>{const k=l+':'+mode;AD[k]={round:((AD[k]&&AD[k].round)||0)+1,a:[]};asave();build(mode);quiz.scrollIntoView({behavior:'smooth',block:'start'});};
+  build('mcq');
+}
+
+/* ---------- tabs ---------- */
+const TABS=['home','l1','l2','l3','l4'];
+function showTab(id,sub){
+  if(!TABS.includes(id))id='home';
+  TABS.forEach(t=>{$('#p-'+t).hidden=t!==id;});
+  $$('#mainNav button').forEach(b=>b.setAttribute('aria-selected',b.dataset.t===id));
+  const l=id[0]==='l'?+id[1]:0;
+  $$('.pin').forEach(p=>{const ls=(p.dataset.l||'').split(',');p.classList.toggle('dim',!!l&&!ls.includes(String(l)));});
+  $$('#pinList .pbtn').forEach(b=>{const ls=(b.dataset.l||'').split(',');b.classList.toggle('dim',!!l&&!ls.includes(String(l)));});
+  if(l)showSub(l,sub||'study');
+  try{history.replaceState(null,'','#'+id);}catch(e){}
+  scrollTo({top:0});
+}
+function showSub(l,sub){
+  const p=$('#p-l'+l);
+  $$('.lsub',p).forEach(s=>s.hidden=s.dataset.sub!==sub);
+  $$('.subnav button',p).forEach(b=>b.setAttribute('aria-selected',b.dataset.s===sub));
+}
+$$('#mainNav button').forEach(b=>b.onclick=()=>showTab(b.dataset.t));
+$$('[data-goto]').forEach(b=>b.onclick=()=>{const [t,s]=b.dataset.goto.split(':');showTab(t,s);});
+[1,2,3,4].forEach(l=>{
+  const p=$('#p-l'+l);
+  $$('.subnav button',p).forEach(b=>b.onclick=()=>{showSub(l,b.dataset.s);});
+  $('.vgrid',p).innerHTML=vocFor(l).map(([t,d])=>`<button type="button" class="vcard"><div class="t">${esc(t)}</div><div class="d">${esc(d)}</div><div class="hint">Tap to flip</div></button>`).join('');
+  $$('.vcard',p).forEach(c=>c.onclick=()=>c.classList.toggle('open'));
+  makePractice(l,$('.practiceRoot',p));
+});
+showTab((location.hash||'').slice(1)||'home');
+
+})();
+</script>
+</body>
+</html>
