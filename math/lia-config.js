@@ -26,6 +26,7 @@ window.LIA_CONFIG={
     'business-stats-week-5-session-2': 'Business Statistics – Week 5 Session 2: Confidence Intervals',
     'business-stats-week-6-session-1': 'Business Statistics – Week 6 Session 1: Introduction to Hypothesis Testing',
     'business-stats-week-6-session-2': 'Business Statistics – Week 6 Session 2: Tests for Means and Proportions',
-    'complex-numbers': 'Complex Numbers – Advanced Algebra'
+    'complex-numbers': 'Complex Numbers – Advanced Algebra',
+    'pre-ap-algebra-1-semester-1-exam-practice': 'Pre-AP Algebra I – Semester I Exam Practice'
   }
 };
